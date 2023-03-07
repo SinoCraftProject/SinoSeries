@@ -1,0 +1,168 @@
+plugins {
+    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'dev.architectury.loom' version '1.1-SNAPSHOT'
+}
+
+println "Java: ${System.getProperty 'java.version'}, " +
+        "JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), " +
+        "Arch: ${System.getProperty 'os.arch'}"
+
+repositories {
+}
+
+dependencies {
+    implementation project(path: ':sinocore', configuration: 'namedElements')
+}
+
+loom {
+    forge {
+    }
+
+    runs {
+        client {
+            client()
+        }
+
+        server {
+            server()
+        }
+
+        data {
+            data()
+        }
+    }
+}
+
+allprojects {
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'dev.architectury.loom'
+
+    group 'games.moegirl.sinocraft'
+    version "${project.minecraft_version}-${project.sinoseries_version}"
+
+    if (System.getenv('JITPACK') == 'true') {
+        version += "-${System.getenv('VERSION')}"
+    }
+
+    var release = false
+    if (release || (System.getenv('SINOSERIES_RELEASE') == 'true')) {
+        version += '-release'
+    } else {
+        version += '-dev'
+    }
+
+    architectury {
+        platformSetupLoomIde()
+        forge()
+    }
+
+    loom {
+        silentMojangMappingsLicense()
+
+        forge {
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
+
+        maven {
+            name = 'Jitpack'
+            url = 'https://jitpack.io'
+        }
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+        }
+    }
+
+    configurations.configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven-publish'
+
+    println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
+
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+        withSourcesJar()
+    }
+
+    sourceSets.main.resources {
+        srcDir 'src/generated/resources'
+    }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    jar {
+        manifest {
+            attributes([
+                    "Specification-Title"     : project.mod_name,
+                    "Specification-Vendor"    : project.sinoseries_authors,
+                    "Specification-Version"   : "1", // We are version 1 of ourselves
+                    "Implementation-Title"    : project.mod_name,
+                    "Implementation-Version"  : project.jar.archiveVersion,
+                    "Implementation-Vendor"   : project.sinoseries_authors,
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            ])
+        }
+    }
+
+    loom {
+        forge {
+            for (File dir : sourceSets.main.resources.srcDirs) {
+                var configFileName = "${project.modid}.mixins.json"
+                if (new File(dir, configFileName).exists()) {
+                    mixinConfig configFileName
+                }
+            }
+        }
+
+        runs {
+            data {
+                data()
+                programArgs '--all', '--mod', "${project.modid}",
+                        '--output', file('src/generated/resources').absolutePath,
+                        '--existing', file('src/main/resources').absolutePath
+            }
+        }
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = project.modid
+                from components.java
+            }
+        }
+
+        repositories {
+            mavenLocal()
+
+            flatDir {
+                dir 'publish'
+            }
+        }
+    }
+}

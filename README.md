@@ -1,2 +1,3 @@
 # SinoSeries
-A repository for hosting discussions and issues.
+Main repository of SinoSeries mods.  
+All rights reserved.
