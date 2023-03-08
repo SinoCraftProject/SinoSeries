@@ -8,7 +8,7 @@ loom {
     silentMojangMappingsLicense()
 
     forge {
-        mixinConfig 'sinocore.mixins.json'
+//        mixinConfig 'sinocore.mixins.json'
     }
 
     runs {
@@ -19,4 +19,8 @@ loom {
                     '--existing', file('src/main/resources').absolutePath
         }
     }
+}
+
+dependencies {
+    implementation project(path: ':SinoCore', configuration: 'namedElements')
 }

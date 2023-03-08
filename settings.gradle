@@ -9,4 +9,5 @@ pluginManagement {
 
 rootProject.name = 'SinoSeries'
 
-include ':sinocore'
+include ':SinoCore'
+include ':SinoCalligraphy'

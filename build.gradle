@@ -1,4 +1,7 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
+    id 'maven-publish'
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'dev.architectury.loom' version '1.1-SNAPSHOT'
 }
@@ -11,26 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(path: ':sinocore', configuration: 'namedElements')
-}
-
-loom {
-    forge {
-    }
-
-    runs {
-        client {
-            client()
-        }
-
-        server {
-            server()
-        }
-
-        data {
-            data()
-        }
-    }
+//    implementation project(path: ':sinocore', configuration: 'namedElements')
 }
 
 allprojects {
@@ -93,7 +77,6 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
-    apply plugin: 'maven-publish'
 
     println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
 
@@ -109,6 +92,8 @@ subprojects {
 
     processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        expand(project.properties)
     }
 
     tasks.withType(JavaCompile).configureEach {
@@ -128,41 +113,21 @@ subprojects {
             ])
         }
     }
+}
 
-    loom {
-        forge {
-            for (File dir : sourceSets.main.resources.srcDirs) {
-                var configFileName = "${project.modid}.mixins.json"
-                if (new File(dir, configFileName).exists()) {
-                    mixinConfig configFileName
-                }
-            }
-        }
-
-        runs {
-            data {
-                data()
-                programArgs '--all', '--mod', "${project.modid}",
-                        '--output', file('src/generated/resources').absolutePath,
-                        '--existing', file('src/main/resources').absolutePath
-            }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = project.modid
+            from components.java
         }
     }
 
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                artifactId = project.modid
-                from components.java
-            }
-        }
+    repositories {
+        mavenLocal()
 
-        repositories {
-            mavenLocal()
-
-            flatDir {
-                dir 'publish'
-            }
+        flatDir {
+            dir 'publish'
         }
     }
 }
