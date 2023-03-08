@@ -15,7 +15,7 @@ license = "All Rights Reserved"
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId = "sinocalligraphy" #mandatory
+modId = "sinofoundation" #mandatory
 # qyl27: Comments removed, it causes copy fail.
 version = "${version}" #mandatory
 # A display name for the mod
@@ -40,11 +40,11 @@ authors = "${sinoseries_authors}" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description = '''
-The painting that used color to depict all walks of life, while retained black and white to render the beauty of ages.
-丹青描绘浮生，云墨书尽芳华。
+Foundation contents of SinoSeries mods.
+华夏系列基础内容。
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.sinocalligraphy]] #optional
+[[dependencies.sinofoundation]] #optional
 # the modid of the dependency
 modId = "forge" #mandatory
 # Does this dependency have to exist - if not, ordering below must be specified
@@ -56,15 +56,15 @@ ordering = "NONE"
 # Side this dependency is applied on - BOTH, CLIENT or SERVER
 side = "BOTH"
 # Here's another dependency
-[[dependencies.sinocalligraphy]]
+[[dependencies.sinofoundation]]
 modId = "minecraft"
 mandatory = true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
 versionRange = "[1.19.3,1.20)"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.sinocalligraphy]]
-modId = "sinofoundation"
+[[dependencies.sinofoundation]]
+modId = "sinocore"
 mandatory = true
 versionRange = "[1.19.3-1.4.0,1.20)"
 ordering = "NONE"

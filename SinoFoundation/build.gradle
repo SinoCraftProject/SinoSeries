@@ -23,5 +23,5 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
+    implementation project(path: ':SinoCore', configuration: 'namedElements')
 }

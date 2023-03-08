@@ -7,10 +7,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'SinoSeries'
-
-include ':SinoCore'
-include ':SinoFoundation'
-include ':SinoFeast'
-include ':SinoDivination'
-include ':SinoCalligraphy'
+rootProject.name = 'SinoFoundation'

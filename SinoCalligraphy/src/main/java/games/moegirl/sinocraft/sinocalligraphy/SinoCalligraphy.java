@@ -10,6 +10,5 @@ public class SinoCalligraphy {
     public SinoCalligraphy() {
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        System.out.println("Hello sca!");
     }
 }
