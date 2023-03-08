@@ -12,6 +12,8 @@ public class SinoCore {
     public static final String MODID = "sinocore";
 
     public SinoCore() {
+        LOGGER.info("Loading SinoCore.");
+
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
     }
 }

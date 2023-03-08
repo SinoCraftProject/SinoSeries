@@ -19,6 +19,12 @@ dependencies {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
     }
+
+    implementation project(path: ':SinoCore', configuration: 'namedElements')
+    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
+    implementation project(path: ':SinoFeast', configuration: 'namedElements')
+    implementation project(path: ':SinoDivination', configuration: 'namedElements')
+    implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
 }
 
 evaluationDependsOn ':SinoCore'
