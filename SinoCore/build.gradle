@@ -24,4 +24,16 @@ loom {
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+    }
+}
+
+repositories {
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
 }

@@ -12,50 +12,95 @@ repositories {
 }
 
 dependencies {
-    implementation project(path: ':SinoCore', configuration: 'namedElements')
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
-    implementation project(path: ':SinoFeast', configuration: 'namedElements')
-    implementation project(path: ':SinoDivination', configuration: 'namedElements')
-    implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+    }
 }
 
-// XXX: qyl27: this is a temp resolution for architectury/architectury-loom#120. remember to change it in future.
+evaluationDependsOn ':SinoCore'
+evaluationDependsOn ':SinoFoundation'
+evaluationDependsOn ':SinoFeast'
+evaluationDependsOn ':SinoDivination'
+evaluationDependsOn ':SinoCalligraphy'
+
 loom {
+    silentMojangMappingsLicense()
 
     forge {
+        // XXX: qyl27: this is a temp resolution for architectury/architectury-loom#120. remember to change it in future.
         mixinConfig new File(project(':SinoCore').projectDir, 'src/main/resources/sinocore.mixins.json').toString()
     }
 
-    var modClasses = ''
-    subprojects.forEach {
-        modClasses += "${it.name}%%${projectDir}\\${it.name}\\build\\resources\\main;${it.name}%%${projectDir}\\${it.name}\\build\\classes\\java\\main;"
+    mods {
+        sinocore {
+            sourceSet project(':SinoCore').sourceSets.main
+        }
+
+        sinofoundation {
+            sourceSet project(':SinoFoundation').sourceSets.main
+        }
+
+        sinofeast {
+            sourceSet project(':SinoFeast').sourceSets.main
+        }
+
+        sinodivination {
+            sourceSet project(':SinoDivination').sourceSets.main
+        }
+
+        sinocalligraphy {
+            sourceSet project(':SinoCalligraphy').sourceSets.main
+        }
     }
 
     runs {
-        client {
-            client()
-
-            environmentVariable 'MOD_CLASSES', modClasses
-        }
-
-        server {
-            server()
-
-            environmentVariable 'MOD_CLASSES', modClasses
-        }
-
-        data {
+        sinoCoreData {
             data()
 
-            environmentVariable 'MOD_CLASSES', modClasses
+            programArgs '--all', '--mod', "sinocore",
+                '--output', file('SinoCore/src/generated/resources').absolutePath,
+                '--existing', file('SinoCore/src/main/resources').absolutePath
+        }
+
+        sinoFoundationData {
+            data()
+
+            programArgs '--all', '--mod', "sinofoundation",
+                    '--output', file('SinoFoundation/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
+        }
+
+        sinoFeastData {
+            data()
+
+            programArgs '--all', '--mod', "sinofeast",
+                    '--output', file('SinoFeast/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFeast/src/main/resources').absolutePath
+        }
+
+        sinoDivinationData {
+            data()
+
+            programArgs '--all', '--mod', "sinodivination",
+                    '--output', file('SinoDivination/src/generated/resources').absolutePath,
+                    '--existing', file('SinoDivination/src/main/resources').absolutePath
+        }
+
+        sinoCalligraphyData {
+            data()
+
+            programArgs '--all', '--mod', "sinocalligraphy",
+                    '--output', file('SinoCalligraphy/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCalligraphy/src/main/resources').absolutePath
         }
     }
 }
 
 allprojects {
-    apply plugin: 'architectury-plugin'
-    apply plugin: 'dev.architectury.loom'
-
     group 'games.moegirl.sinocraft'
     version "${project.minecraft_version}-${project.sinoseries_version}"
 
@@ -75,13 +120,6 @@ allprojects {
         forge()
     }
 
-    loom {
-        silentMojangMappingsLicense()
-
-        forge {
-        }
-    }
-
     repositories {
         maven {
             name = 'ParchmentMC'
@@ -92,20 +130,6 @@ allprojects {
             name = 'Jitpack'
             url = 'https://jitpack.io'
         }
-    }
-
-    dependencies {
-        minecraft "com.mojang:minecraft:${project.minecraft_version}"
-        forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-        mappings loom.layered() {
-            officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
-        }
-    }
-
-    configurations.configureEach {
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 }
 
@@ -148,6 +172,9 @@ subprojects {
             ])
         }
     }
+
+    remapJar.destinationDir = file("${rootProject.projectDir}/output")
+    remapSourcesJar.destinationDir = file("${rootProject.projectDir}/output")
 }
 
 publishing {
