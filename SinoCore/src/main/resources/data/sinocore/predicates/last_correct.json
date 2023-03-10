@@ -1,0 +1,5 @@
+{
+    "condition": "sinocore:quiz_succeed",
+    "isSucceed": false,
+    "lastCorrect": true
+}

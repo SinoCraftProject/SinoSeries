@@ -2,11 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "games.moegirl.sinocraft.sinocore.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MixinBlockLoot",
+    "MixinBlockProperties"
   ],
   "client": [
-    "MinecraftMixin"
+    "MixinMinecraft"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,4 @@
+{
+    "condition": "sinocore:parity_days",
+    "isEven": false
+}
