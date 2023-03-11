@@ -1,8 +1,5 @@
 package games.moegirl.sinocraft.sinocore;
 
-import games.moegirl.sinocraft.sinocore.old.api.ApiLoader;
-import games.moegirl.sinocraft.sinocore.old.api.impl.Crafting;
-import games.moegirl.sinocraft.sinocore.old.api.impl.Network;
 import games.moegirl.sinocraft.sinocore.old.block.SCBlockItems;
 import games.moegirl.sinocraft.sinocore.old.block.SCBlocks;
 import games.moegirl.sinocraft.sinocore.old.block.blockentity.SCBlockEntities;
@@ -11,7 +8,7 @@ import games.moegirl.sinocraft.sinocore.old.config.model.QuizModel;
 import games.moegirl.sinocraft.sinocore.old.gui.SCMenus;
 import games.moegirl.sinocraft.sinocore.old.item.SCItems;
 import games.moegirl.sinocraft.sinocore.old.network.SCNetworks;
-import games.moegirl.sinocraft.sinocore.old.utility.SCConstants;
+import games.moegirl.sinocraft.sinocore.old.utility.json.JsonUtils;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.FluidStackSerializer;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.IngredientSerializer;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.ItemStackSerializer;
@@ -30,11 +27,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ThreadPoolExecutor;
-
 @Mod(SinoCore.MODID)
 public class SinoCore {
-    private static final Logger LOGGER = LoggerFactory.getLogger("SinoCore");
+    public static final Logger LOGGER = LoggerFactory.getLogger("SinoCore");
+    public static final boolean DEBUG = "true".equalsIgnoreCase(System.getProperty("forge.enableGameTest", "false"));
 
     public static final String MODID = "sinocore";
     public static final String VERSION = "@version@";
@@ -59,7 +55,6 @@ public class SinoCore {
 
         bus.addListener(this::onSetup);
         bus.addListener(this::onClientSetup);
-        SinoCoreAPI._loadCoreApi(this::registerApi);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QuizModelConfig.SPEC, "sinoseries/sinocore/quiz.toml");
 
@@ -83,17 +78,9 @@ public class SinoCore {
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
-        if (SCConstants.IS_DEV) {
+        if (DEBUG) {
             // Fixme: qyl27: Not working for debug show highlighted block shape box.
 //            MinecraftForge.EVENT_BUS.register(new DebugBlockHighlighter());
         }
-    }
-
-    private void registerApi(ApiLoader loader) {
-        loader.loadAll(MODID, Crafting.INSTANCE, Network.INSTANCE);
-    }
-
-    public static Logger getLogger() {
-        return LOGGER;
     }
 }

@@ -5,16 +5,14 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import games.moegirl.sinocraft.sinocore.api.command.CommandBuilder;
-import games.moegirl.sinocraft.sinocore.api.utility.texture.TextureMap;
-import games.moegirl.sinocraft.sinocore.api.utility.texture.TextureParser;
+import games.moegirl.sinocraft.sinocore.old.utility.texture.TextureMap;
+import games.moegirl.sinocraft.sinocore.old.utility.texture.TextureParser;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
@@ -41,10 +39,10 @@ public class ReloadTextureCommand {
         ResourceLocation name = ResourceLocationArgument.getId(context, "texture_name");
         TextureMap map = TextureParser.get(name);
         if (map == null) {
-            context.getSource().sendFailure(new TextComponent("Not found texture map named " + name));
+            context.getSource().sendFailure(Component.literal("Not found texture map named " + name));
         } else {
             map.reload();
-            context.getSource().sendSuccess(new TextComponent("Reload succeed"), false);
+            context.getSource().sendSuccess(Component.literal("Reload succeed"), false);
         }
         return Command.SINGLE_SUCCESS;
     }

@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocore.old.command;
 
-import cn.hutool.core.thread.ThreadUtil;
 import com.google.gson.Gson;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -9,19 +8,21 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import games.moegirl.sinocraft.sinocore.SinoCore;
-import games.moegirl.sinocraft.sinocore.api.capability.IQuizzingPlayer;
-import games.moegirl.sinocraft.sinocore.api.capability.SCCapabilities;
-import games.moegirl.sinocraft.sinocore.capability.QuizzingPlayer;
-import games.moegirl.sinocraft.sinocore.config.QuizModelConfig;
-import games.moegirl.sinocraft.sinocore.config.model.*;
+import games.moegirl.sinocraft.sinocore.old.ThreadUtil;
+import games.moegirl.sinocraft.sinocore.old.capability.IQuizzingPlayer;
+import games.moegirl.sinocraft.sinocore.old.capability.QuizzingPlayer;
+import games.moegirl.sinocraft.sinocore.old.capability.SCCapabilities;
+import games.moegirl.sinocraft.sinocore.old.config.QuizModelConfig;
+import games.moegirl.sinocraft.sinocore.old.config.model.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.selector.EntitySelector;
+import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.OutgoingChatMessage;
+import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.world.entity.player.Player;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -88,18 +89,17 @@ public class QuizCommand {
         var selector = context.getArgument("player", EntitySelector.class);
         var player = selector.findSinglePlayer(context.getSource());
 
-        context.getSource().sendSuccess(new TranslatableComponent(MESSAGE_FETCHING)
+        context.getSource().sendSuccess(Component.translatable(MESSAGE_FETCHING)
                 .withStyle(ChatFormatting.AQUA), false);
         try {
             var model = doFetchRank(player.getGameProfile().getName());
 
-            context.getSource().sendSuccess(new TranslatableComponent(MESSAGE_RANK_MY_BEST,
-                    model.best).withStyle(ChatFormatting.GREEN), false);
+            context.getSource().sendSuccess(Component.translatable(MESSAGE_RANK_MY_BEST, model.best).withStyle(ChatFormatting.GREEN), false);
         } catch (Exception ex) {
-            context.getSource().sendFailure(new TranslatableComponent(MESSAGE_RANK_FETCH_FAILED)
+            context.getSource().sendFailure(Component.translatable(MESSAGE_RANK_FETCH_FAILED)
                     .withStyle(ChatFormatting.AQUA));
 
-            SinoCore.getLogger().warn("Fetch rank list failed, did the URL is correct?");
+            SinoCore.LOGGER.warn("Fetch rank list failed, did the URL is correct?");
             ex.printStackTrace();
 
             return 0;
@@ -115,13 +115,13 @@ public class QuizCommand {
 
         var source = context.getSource();
 
-        context.getSource().sendSuccess(new TranslatableComponent(MESSAGE_FETCHING)
+        context.getSource().sendSuccess(Component.translatable(MESSAGE_FETCHING)
                 .withStyle(ChatFormatting.AQUA), false);
 
         try {
             var model = doFetchRank(withBest);
 
-            var msg = new TranslatableComponent(MESSAGE_RANK_TITLE).withStyle(ChatFormatting.AQUA).append("\n");
+            var msg = Component.translatable(MESSAGE_RANK_TITLE).withStyle(ChatFormatting.AQUA).append("\n");
             var count = 5;
             if (withCount) {
                 count = context.getArgument("count", Integer.class);
@@ -133,18 +133,18 @@ public class QuizCommand {
 
             for (var i = 1; i <= count; i++) {
                 var m = model.ranks[i - 1];
-                msg.append(new TranslatableComponent(MESSAGE_RANK_BODY, m.rank, m.player.id,
+                msg.append(Component.translatable(MESSAGE_RANK_BODY, m.rank, m.player.id,
                         m.timeUsed, m.tries)).withStyle(ChatFormatting.GREEN).append("\n");
             }
-            msg.append(new TranslatableComponent(MESSAGE_RANK_FOOTER).withStyle(ChatFormatting.AQUA));
+            msg.append(Component.translatable(MESSAGE_RANK_FOOTER).withStyle(ChatFormatting.AQUA));
 
             source.sendSuccess(msg, false);
 
         } catch (Exception ex) {
-            context.getSource().sendFailure(new TranslatableComponent(MESSAGE_RANK_FETCH_FAILED)
+            context.getSource().sendFailure(Component.translatable(MESSAGE_RANK_FETCH_FAILED)
                     .withStyle(ChatFormatting.AQUA));
 
-            SinoCore.getLogger().warn("Fetch rank list failed, did the URL is correct?");
+            SinoCore.LOGGER.warn("Fetch rank list failed, did the URL is correct?");
             ex.printStackTrace();
 
             return 0;
@@ -154,7 +154,7 @@ public class QuizCommand {
     }
 
     private static RankBoardModel.BestModel doFetchRank(String me) throws Exception {
-        SinoCore.getLogger().info("Fetching rank list.");
+        SinoCore.LOGGER.info("Fetching rank list.");
 
         var dataUrl = QuizModelConfig.CONFIG.RANK_URL.get();
         if (me != null) {
@@ -173,12 +173,12 @@ public class QuizCommand {
 
         var model = GSON.fromJson(data.get(), RankBoardModel.BestModel.class);
 
-        SinoCore.getLogger().info("Fetch best rank successfully!");
+        SinoCore.LOGGER.info("Fetch best rank successfully!");
         return model;
     }
 
     private static RankBoardModel doFetchRank(boolean withBest) throws Exception {
-        SinoCore.getLogger().info("Fetching rank list.");
+        SinoCore.LOGGER.info("Fetching rank list.");
 
         var dataUrl = QuizModelConfig.CONFIG.RANK_URL.get();
         if (withBest) {
@@ -197,7 +197,7 @@ public class QuizCommand {
 
         var model = GSON.fromJson(data.get(), RankBoardModel.class);
 
-        SinoCore.getLogger().info("Fetch rank list successfully!");
+        SinoCore.LOGGER.info("Fetch rank list successfully!");
         return model;
     }
 
@@ -241,11 +241,11 @@ public class QuizCommand {
     }
 
     public static int onReload(CommandContext<CommandSourceStack> context) {
-        context.getSource().sendSuccess(new TextComponent("Reloading...")
+        context.getSource().sendSuccess(Component.literal("Reloading...")
                 .withStyle(ChatFormatting.DARK_AQUA), true);
 
         if (!QuizModelConfig.CONFIG.ENABLED.get()) {
-            context.getSource().sendSuccess(new TextComponent("Not enabled feature."), true);
+            context.getSource().sendSuccess(Component.literal("Not enabled feature."), true);
             return 0;
         }
 
@@ -256,8 +256,8 @@ public class QuizCommand {
     public static int onLoad(CommandContext<CommandSourceStack> context) {
         var url = context.getArgument("url", String.class);
 
-        context.getSource().sendSuccess(new TextComponent("Temporarily set Quiz URL to: " + url)
-                        .withStyle(ChatFormatting.DARK_AQUA), true);
+        context.getSource().sendSuccess(Component.literal("Temporarily set Quiz URL to: " + url)
+                .withStyle(ChatFormatting.DARK_AQUA), true);
 
         QuizConstants.URL = url;
 
@@ -464,71 +464,71 @@ public class QuizCommand {
 
 
     public static void makeNotPlayer(CommandSourceStack source) {
-        source.sendFailure(new TranslatableComponent(MESSAGE_NOT_PLAYER).withStyle(ChatFormatting.RED));
+        source.sendFailure(Component.translatable(MESSAGE_NOT_PLAYER).withStyle(ChatFormatting.RED));
     }
 
     public static void makeNotStarted(Player player) {
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_NOT_STARTED)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_NOT_STARTED)
                 .withStyle(ChatFormatting.RED), false);
     }
 
     public static void makeSucceed(Player player) {
-        broadcast(player, new TranslatableComponent(MESSAGE_BROADCAST_SUCCEED, player.getDisplayName())
+        broadcast(player, Component.translatable(MESSAGE_BROADCAST_SUCCEED, player.getDisplayName())
                 .withStyle(ChatFormatting.GREEN)
                 .withStyle(ChatFormatting.BOLD));
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_SUCCEED)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_SUCCEED)
                 .withStyle(ChatFormatting.GREEN)
                 .withStyle(ChatFormatting.BOLD), false);
     }
 
     public static void makeFetchError(CommandSourceStack source) {
-        source.sendFailure(new TranslatableComponent(MESSAGE_RANK_FETCH_FAILED).withStyle(ChatFormatting.RED));
+        source.sendFailure(Component.translatable(MESSAGE_RANK_FETCH_FAILED).withStyle(ChatFormatting.RED));
     }
 
     public static void makeFail(Player player) {
-        player.createCommandSourceStack().sendFailure(new TranslatableComponent(MESSAGE_FAIL)
+        player.createCommandSourceStack().sendFailure(Component.translatable(MESSAGE_FAIL)
                 .withStyle(ChatFormatting.RED));
     }
 
     public static void makeWrongState(Player player) {
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_WRONG_STATE)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_WRONG_STATE)
                 .withStyle(ChatFormatting.RED), false);
     }
 
     public static void makeWrongAnswer(Player player) {
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_ANSWER_WRONG)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_ANSWER_WRONG)
                 .withStyle(ChatFormatting.RED), false);
     }
 
     public static void makeNotEnabled(Player player) {
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_NOT_ENABLED)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_NOT_ENABLED)
                 .withStyle(ChatFormatting.RED), false);
     }
 
     public static void makeNotEnabled(CommandSourceStack stack) {
-        stack.sendSuccess(new TranslatableComponent(MESSAGE_NOT_ENABLED)
+        stack.sendSuccess(Component.translatable(MESSAGE_NOT_ENABLED)
                 .withStyle(ChatFormatting.RED), false);
     }
 
     public static void makeCorrectAnswer(Player player) {
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_ANSWER_RIGHT)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_ANSWER_RIGHT)
                 .withStyle(ChatFormatting.LIGHT_PURPLE), false);
     }
 
     public static void makeStarted(Player player) {
-        player.createCommandSourceStack().sendSuccess(new TranslatableComponent(MESSAGE_STARTED)
+        player.createCommandSourceStack().sendSuccess(Component.translatable(MESSAGE_STARTED)
                 .withStyle(ChatFormatting.LIGHT_PURPLE), false);
     }
 
     public static void makeQuestion(Player player, IQuizzingPlayer quiz) {
-        var component = new TranslatableComponent(MESSAGE_QUESTION, quiz.getQuestion()).withStyle(ChatFormatting.AQUA).append("\n");
+        var component = Component.translatable(MESSAGE_QUESTION, quiz.getQuestion()).withStyle(ChatFormatting.AQUA).append("\n");
 
         for (var q : quiz.getAnswers()) {
-            component.append(new TranslatableComponent(MESSAGE_ANSWER_MARKED, q.getA()).withStyle(ChatFormatting.YELLOW))
-                    .append(new TextComponent(q.getB()).withStyle(ChatFormatting.GREEN)).append("\n");
+            component.append(Component.translatable(MESSAGE_ANSWER_MARKED, q.getA()).withStyle(ChatFormatting.YELLOW))
+                    .append(Component.literal(q.getB()).withStyle(ChatFormatting.GREEN)).append("\n");
         }
 
-        component.append(new TranslatableComponent(MESSAGE_QUESTION_LAST).withStyle(ChatFormatting.AQUA));
+        component.append(Component.translatable(MESSAGE_QUESTION_LAST).withStyle(ChatFormatting.AQUA));
 
         player.createCommandSourceStack().sendSuccess(component, false);
     }
@@ -546,7 +546,8 @@ public class QuizCommand {
             if (p.getUUID().equals(self.getUUID())) {
                 continue;
             }
-            p.sendMessage(message, Util.NIL_UUID);
+            // todo fix message ???
+            //p.sendMessage(message, Util.NIL_UUID);
         }
     }
 }

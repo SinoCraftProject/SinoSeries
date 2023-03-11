@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.old.handler;
 
 import games.moegirl.sinocraft.sinocore.SinoCore;
-import games.moegirl.sinocraft.sinocore.api.utility.ModFiles;
+import games.moegirl.sinocraft.sinocore.old.utility.ModFiles;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

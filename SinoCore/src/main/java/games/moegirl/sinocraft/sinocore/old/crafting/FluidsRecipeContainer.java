@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocore.old.crafting;
 
-import games.moegirl.sinocraft.sinocore.api.crafting.RecipeContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

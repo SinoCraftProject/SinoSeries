@@ -1,10 +1,10 @@
 package games.moegirl.sinocraft.sinocore.old.config.model;
 
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.cron.CronUtil;
 import com.google.gson.Gson;
 import games.moegirl.sinocraft.sinocore.SinoCore;
-import games.moegirl.sinocraft.sinocore.config.QuizModelConfig;
+import games.moegirl.sinocraft.sinocore.old.CronUtil;
+import games.moegirl.sinocraft.sinocore.old.ThreadUtil;
+import games.moegirl.sinocraft.sinocore.old.config.QuizModelConfig;
 import org.apache.commons.io.IOUtils;
 
 import java.net.URL;
@@ -74,13 +74,13 @@ public class QuizModel {
             ret.reFetch(false);
             return ret;
         } catch (Exception ex) {
-            SinoCore.getLogger().warn("Cannot fetch URL from config file, don't forget to use /sinocore quiz load <URL> to set a new URL.");
+            SinoCore.LOGGER.warn("Cannot fetch URL from config file, don't forget to use /sinocore quiz load <URL> to set a new URL.");
         } finally {
             if (INSTANCE == null) {
                 INSTANCE = new QuizModel();
             }
 
-            CronUtil.schedule("* 2 * * *", (Runnable) () -> INSTANCE.reFetch(true));
+            CronUtil.schedule("* 2 * * *", () -> INSTANCE.reFetch(true));
         }
 
         return INSTANCE;
@@ -95,15 +95,15 @@ public class QuizModel {
         url = QuizConstants.URL;
 
         if (!QuizModelConfig.CONFIG.ENABLED.get()) {
-            SinoCore.getLogger().warn("Quiz is not enabled!");
+            SinoCore.LOGGER.warn("Quiz is not enabled!");
             return;
         }
 
-        SinoCore.getInstance().getPool().execute(() -> INSTANCE.doReFetch(reload));
+        ThreadUtil.execute(() -> INSTANCE.doReFetch(reload));
     }
 
     public void doReFetch(boolean reload) {
-        SinoCore.getLogger().info("Re-fetching quiz data.");
+        SinoCore.LOGGER.info("Re-fetching quiz data.");
 
         if (!reload) {
             if (url == null || url.equals("")) {
@@ -130,9 +130,9 @@ public class QuizModel {
             date = model.date;
             questions = model.questions;
 
-            SinoCore.getLogger().info("Fetch successfully!");
+            SinoCore.LOGGER.info("Fetch successfully!");
         } catch (Exception ex) {
-            SinoCore.getLogger().warn("Re-fetch failed, did you set the URL?");
+            SinoCore.LOGGER.warn("Re-fetch failed, did you set the URL?");
             ex.printStackTrace();
         }
     }

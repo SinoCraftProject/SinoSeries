@@ -4,7 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import games.moegirl.sinocraft.sinocore.api.utility.json.BaseSerializer;
+import games.moegirl.sinocraft.sinocore.old.utility.json.BaseSerializer;
 import net.minecraft.core.NonNullList;
 
 import java.lang.reflect.ParameterizedType;

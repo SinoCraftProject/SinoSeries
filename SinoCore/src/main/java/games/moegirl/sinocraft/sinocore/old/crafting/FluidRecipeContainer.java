@@ -1,12 +1,10 @@
 package games.moegirl.sinocraft.sinocore.old.crafting;
 
-import games.moegirl.sinocraft.sinocore.api.crafting.RecipeContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.Set;
 

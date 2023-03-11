@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ConfigLoad {
+
     @SubscribeEvent
     public static void onConfigLoading(ModConfigEvent.Loading event) {
         var config = event.getConfig().getConfigData();

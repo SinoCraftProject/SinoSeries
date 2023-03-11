@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.old.utility.json.serializer;
 
 import com.google.gson.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import games.moegirl.sinocraft.sinocore.api.utility.json.BaseSerializer;
+import games.moegirl.sinocraft.sinocore.old.utility.json.BaseSerializer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
@@ -45,7 +45,7 @@ public class FluidStackSerializer implements BaseSerializer<FluidStack> {
     @Override
     public JsonElement serialize(FluidStack src, Type typeOfSrc, JsonSerializationContext context) {
         var result = new JsonObject();
-        result.addProperty("fluid", src.getFluid().getRegistryName().toString());
+        result.addProperty("fluid", ForgeRegistries.FLUIDS.getKey(src.getFluid()).toString());
         result.addProperty("amount", src.getAmount());
 
         if (src.getTag() != null) {

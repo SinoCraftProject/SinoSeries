@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.old.event;
 
 import games.moegirl.sinocraft.sinocore.SinoCore;
-import games.moegirl.sinocraft.sinocore.api.capability.IQuizzingPlayer;
-import games.moegirl.sinocraft.sinocore.capability.QuizzingPlayerProvider;
+import games.moegirl.sinocraft.sinocore.old.capability.IQuizzingPlayer;
+import games.moegirl.sinocraft.sinocore.old.capability.QuizzingPlayerProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

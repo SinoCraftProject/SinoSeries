@@ -2,9 +2,7 @@ package games.moegirl.sinocraft.sinocore.old.capability;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import games.moegirl.sinocraft.sinocore.api.capability.IQuizzingPlayer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.nbt.ListTag;
 import oshi.util.tuples.Pair;
 

@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.old.event;
 
 import games.moegirl.sinocraft.sinocore.SinoCore;
-import games.moegirl.sinocraft.sinocore.api.capability.SCCapabilities;
-import games.moegirl.sinocraft.sinocore.capability.QuizzingPlayer;
+import games.moegirl.sinocraft.sinocore.old.capability.QuizzingPlayer;
+import games.moegirl.sinocraft.sinocore.old.capability.SCCapabilities;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +15,7 @@ public class ReSyncDataOnPlayerClone {
 //            return;
 //        }
 
-        var cap = event.getPlayer().getCapability(SCCapabilities.QUIZZING_PLAYER_CAPABILITY);
+        var cap = event.getOriginal().getCapability(SCCapabilities.QUIZZING_PLAYER_CAPABILITY);
         if (!cap.isPresent()) {
             return;
         }

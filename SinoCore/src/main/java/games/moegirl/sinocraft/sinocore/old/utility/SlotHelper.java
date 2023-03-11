@@ -120,7 +120,8 @@ public class SlotHelper {
         }
     }
 
+    // todo fix: add slot
     public static void addSlotToContainer(AbstractContainerMenu menu, Slot slot) {
-        menu.addSlot(slot);
+//        menu.addSlot(slot);
     }
 }
