@@ -195,7 +195,9 @@ subprojects {
     processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-        expand(project.properties)
+        filesMatching("*/**/*.toml") {
+            expand(project.properties)
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {
