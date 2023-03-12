@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.old.block;
+package games.moegirl.sinocraft.sinocore.block;
 
+import games.moegirl.sinocraft.sinocore.old.block.ITreeBlock;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -21,7 +22,7 @@ public class BlockTreeLeaves extends LeavesBlock implements ITreeBlock {
         this(tree, Properties.of(Material.LEAVES)
                 .randomTicks()
                 .noOcclusion()
-                .sound(tree.properties().sound())
+                .sound(tree.properties().leavesSound())
                 .strength(tree.properties().strengthModifier().apply(.2f), .2f)
                 .isValidSpawn((_1, _2, _3, entity) -> entity == EntityType.OCELOT || entity == EntityType.PARROT)
                 .isSuffocating((_1, _2, _3) -> false)

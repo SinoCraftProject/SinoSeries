@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sinotest:block/stripped_test_log",
+    "side": "sinotest:block/stripped_test_log"
+  }
+}

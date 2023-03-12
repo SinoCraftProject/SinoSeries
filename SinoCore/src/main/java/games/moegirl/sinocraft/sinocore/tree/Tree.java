@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.old.utility.FloatModifier;
+import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -10,6 +10,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -20,9 +22,13 @@ import java.util.function.Supplier;
 /**
  * 树，主要包括：<br>
  * 1. 树苗及其世界生成；<br>
- * 2. 原木，木板，树叶等附属方块；<br>
- * <br><br>
- * 使用 {@link Tree#builder(ResourceLocation)} 创建，同时需要 {@link TreeRegister} 注册相关内容
+ * 2. 原木（Log）及其去皮方块，木（Wood）及其去皮方块，树叶等附属方块及其 Tag；<br>
+ * 3. 盆栽的对应树苗版本；<br>
+ *
+ * <p>使用 {@link Tree#builder(ResourceLocation)} 创建，同时需要 {@link TreeRegister} 注册相关内容</p>
+ *
+ * @see TreeBuilder
+ * @see games.moegirl.sinocraft.sinocore.old.woodwork.Woodwork
  */
 public class Tree {
 
@@ -42,28 +48,45 @@ public class Tree {
         return Objects.requireNonNull(TREE_BY_NAME.get(name));
     }
 
+    /**
+     * 获取对应 Tree
+     */
     public static Tree get(String name) {
         return get(new ResourceLocation(name));
     }
 
+    /**
+     * 创建 Tree
+     */
     public static TreeBuilder builder(ResourceLocation name) {
         return new TreeBuilder(name);
     }
 
+    /**
+     * 创建 Tree
+     */
     public static TreeBuilder builder(String modid, String name) {
         return builder(new ResourceLocation(modid, name));
+    }
+
+    /**
+     * 创建 Tree
+     * <p>modid 使用当前正在加载的 mod</p>
+     *
+     * @see ModLoadingContext#get()
+     */
+    public static TreeBuilder builder(String name) {
+        return builder(new ResourceLocation(ModLoadingContext.get().getActiveNamespace(), name));
     }
 
     public final RegistryObject<SaplingBlock> sapling;
     public final RegistryObject<RotatedPillarBlock> log;
     public final RegistryObject<RotatedPillarBlock> strippedLog;
     public final RegistryObject<RotatedPillarBlock> wood;
-    public final RegistryObject<RotatedPillarBlock> strippedWoods;
+    public final RegistryObject<RotatedPillarBlock> strippedWood;
     public final RegistryObject<LeavesBlock> leaves;
     public final RegistryObject<FlowerPotBlock> pottedSapling;
-
     private final Set<Block> allBlocks = new HashSet<>();
-
     private final Set<Item> allItems = new HashSet<>();
 
     TagKey<Block> tagLogs;
@@ -72,18 +95,14 @@ public class Tree {
     private final BuilderProperties properties;
 
     Tree(TreeBuilder builder, DeferredRegister<Block> blocks, DeferredRegister<Item> items) {
-        properties = new BuilderProperties(
-                builder.name,
-                builder.tab,
-                builder.sound,
-                builder.topLogColor,
-                builder.topStrippedLogColor,
-                builder.barkLogColor,
-                builder.barkStrippedLogColor,
-                builder.grower,
-                builder.woodColor,
-                builder.strippedWoodColor,
-                builder.strengthModifier);
+        properties = new BuilderProperties(builder.name, builder.grower, builder.strengthModifier,
+                builder.saplingTabs, builder.leavesTabs,
+                builder.logTabs, builder.strippedLogTabs,
+                builder.woodTabs, builder.strippedWoodTabs,
+                builder.saplingSound, builder.leavesSound,
+                builder.topLogColor, builder.barkLogColor,
+                builder.topStrippedLogColor, builder.barkStrippedLogColor,
+                builder.woodColor, builder.strippedWoodColor);
 
         if (builder.grower instanceof TreeSaplingGrower tsg) {
             tsg.setTree(this);
@@ -94,14 +113,14 @@ public class Tree {
         log = register(blocks, "log", asSupplier(builder.log, allBlocks));
         strippedLog = register(blocks, "stripped", "log", asSupplier(builder.strippedLog, allBlocks));
         wood = register(blocks, "wood", asSupplier(builder.wood, allBlocks));
-        strippedWoods = register(blocks, "stripped", "wood", asSupplier(builder.strippedWoods, allBlocks));
+        strippedWood = register(blocks, "stripped", "wood", asSupplier(builder.strippedWood, allBlocks));
         leaves = register(blocks, "leaves", asSupplier(builder.leaves, allBlocks));
 
         register(items, sapling, asSupplier(builder.saplingItem, allItems));
         register(items, log, asSupplier(builder.logItem, allItems));
         register(items, strippedLog, asSupplier(builder.strippedLogItem, allItems));
         register(items, wood, asSupplier(builder.woodItem, allItems));
-        register(items, strippedWoods, asSupplier(builder.strippedWoodsItem, allItems));
+        register(items, strippedWood, asSupplier(builder.strippedWoodItem, allItems));
         register(items, leaves, asSupplier(builder.leavesItem, allItems));
 
         tagLogs = BlockTags.create(new ResourceLocation(properties.name.getNamespace(),
@@ -147,8 +166,8 @@ public class Tree {
         return wood.get();
     }
 
-    public RotatedPillarBlock strippedWoods() {
-        return strippedWoods.get();
+    public RotatedPillarBlock strippedWood() {
+        return strippedWood.get();
     }
 
     public FlowerPotBlock pottedSapling() {
@@ -183,20 +202,22 @@ public class Tree {
         return register;
     }
 
+    public void registerAll(IEventBus bus) {
+        register().registerEvents(bus);
+        new TreeDataProvider().register(bus, register());
+    }
+
     public BuilderProperties properties() {
         return properties;
     }
 
-    public record BuilderProperties(ResourceLocation name,
-                                    CreativeModeTab tab,
-                                    SoundType sound,
-                                    MaterialColor topLogColor,
-                                    MaterialColor topStrippedLogColor,
-                                    MaterialColor barkLogColor,
-                                    MaterialColor barkStrippedLogColor,
-                                    AbstractTreeGrower grower,
-                                    MaterialColor woodColor,
-                                    MaterialColor strippedWoodColor,
-                                    FloatModifier strengthModifier) {
+    public record BuilderProperties(ResourceLocation name, AbstractTreeGrower grower, FloatModifier strengthModifier,
+                                    List<CreativeModeTab> saplingTabs, List<CreativeModeTab> leavesTabs,
+                                    List<CreativeModeTab> logTabs, List<CreativeModeTab> strippedLogTabs,
+                                    List<CreativeModeTab> woodTabs, List<CreativeModeTab> strippedWoodTabs,
+                                    SoundType saplingSound, SoundType leavesSound,
+                                    MaterialColor topLogColor, MaterialColor barkLogColor,
+                                    MaterialColor topStrippedLogColor, MaterialColor barkStrippedLogColor,
+                                    MaterialColor woodColor, MaterialColor strippedWoodColor) {
     }
 }

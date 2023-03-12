@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.old.data.base;
 
-import games.moegirl.sinocraft.sinocore.old.block.ILootableBlock;
-import games.moegirl.sinocraft.sinocore.old.utility.BlockLootables;
+import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
+import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;

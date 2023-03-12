@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.old.block;
+package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.old.utility.BlockLootables;
+import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 /**

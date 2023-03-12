@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.old.block;
+package games.moegirl.sinocraft.sinocore.block;
 
+import games.moegirl.sinocraft.sinocore.old.block.ITreeBlock;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -23,7 +24,7 @@ public class BlockTreeSapling extends SaplingBlock implements ITreeBlock {
                 .noCollission()
                 .randomTicks()
                 .strength(tree.properties().strengthModifier().apply(0), 0)
-                .sound(SoundType.GRASS), tree);
+                .sound(tree.properties().saplingSound()), tree);
     }
 
     @Override

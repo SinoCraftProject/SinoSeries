@@ -1,14 +1,14 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import games.moegirl.sinocraft.sinocore.mixin_inter.IIntrinsicHolderTagsProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.recipes.*;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -16,61 +16,44 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
-import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
-/**
- * * RegisterXxx methods means you must call in the mod, but addXxx is optional.
- */
-@SuppressWarnings({"JavadocReference", "unused"})
+@SuppressWarnings("JavadocReference")
 public record TreeRegister(Tree tree) {
 
     /**
-     * call this method in {@link LanguageProvider#addTranslations()} or other equivalent method, add chinese name
-     *
-     * @param provider language provider
-     * @param chinese  tree chinese name
+     * 用于事件注册
      */
-    public void addLanguagesZh(LanguageProvider provider, String chinese) {
-        provider.addBlock(tree.sapling, chinese + "树苗");
-        provider.addBlock(tree.log, chinese + "原木");
-        provider.addBlock(tree.strippedLog, "去皮" + chinese + "原木");
-        provider.addBlock(tree.wood, chinese + "木");
-        provider.addBlock(tree.strippedWoods, "去皮" + chinese + "木");
-        provider.addBlock(tree.leaves, chinese + "树叶");
-        provider.addBlock(tree.pottedSapling, chinese + "树苗盆栽");
+    public void registerEvents(IEventBus bus) {
+        new TreeClientModEventRegister(tree, bus);
     }
 
     /**
-     * call this method in {@link LanguageProvider#addTranslations()} or other equivalent method, for english language
-     *
-     * @param provider language provider
-     * @param english  tree english name
+     * 注册中文名 DataProvider
+     * <p>应当在 {@link LanguageProvider#addTranslations()} 或与之等价的方法中调用</p>
+     * @param name 树名
+     */
+    public void addLanguagesZh(LanguageProvider provider, String name) {
+        String woodName = name.endsWith("树") ? name.substring(0, name.length() - 1) : name;
+        provider.addBlock(tree.sapling, name + "树苗");
+        provider.addBlock(tree.log, name + "原木");
+        provider.addBlock(tree.strippedLog, "去皮" + name + "原木");
+        provider.addBlock(tree.wood, woodName + "木");
+        provider.addBlock(tree.strippedWood, "去皮" + woodName + "木");
+        provider.addBlock(tree.leaves, name + "树叶");
+        provider.addBlock(tree.pottedSapling, name + "树苗盆栽");
+    }
+
+    /**
+     * 注册英文名 DataProvider
+     * <p>应当在 {@link LanguageProvider#addTranslations()} 或与之等价的方法中调用</p>
+     * <p>树名根据注册名推断。取 Tree 注册名以空格替换 _ 获得</p>
      */
     public void addLanguagesEn(LanguageProvider provider) {
-        addLanguagesEn(provider, defaultEnglishName());
-    }
-
-    /**
-     * call this method in {@link LanguageProvider#addTranslations()} or other equivalent method, for english language
-     *
-     * @param provider language provider
-     */
-    public void addLanguagesEn(LanguageProvider provider, String english) {
-        provider.addBlock(tree.sapling, english + " Sapling");
-        provider.addBlock(tree.log, english + " Log");
-        provider.addBlock(tree.strippedLog, "Stripped" + english + " Stripped");
-        provider.addBlock(tree.wood, english + " Wood");
-        provider.addBlock(tree.strippedWoods, "Stripped " + english + " Wood");
-        provider.addBlock(tree.leaves, english + " Leaves");
-        provider.addBlock(tree.pottedSapling, "Potted " + english + " Sapling");
-    }
-
-    private String defaultEnglishName() {
         StringBuilder sb = new StringBuilder();
         for (String s : tree.name().getPath().split("_")) {
             if (s.isEmpty()) continue;
@@ -78,13 +61,27 @@ public record TreeRegister(Tree tree) {
             sb.append(Character.toUpperCase(s1.charAt(0)));
             sb.append(s1.substring(1));
         }
-        return sb.toString();
+        addLanguagesEn(provider, sb.toString());
     }
 
     /**
-     * call this method in {@link BlockStateProvider#registerStatesAndModels} or other equivalent method.
-     *
-     * @param provider block model provider
+     * 注册英文名 DataProvider
+     * <p>应当在 {@link LanguageProvider#addTranslations()} 或与之等价的方法中调用</p>
+     * @param name 树名
+     */
+    public void addLanguagesEn(LanguageProvider provider, String name) {
+        provider.addBlock(tree.sapling, name + " Sapling");
+        provider.addBlock(tree.log, name + " Log");
+        provider.addBlock(tree.strippedLog, "Stripped" + name + " Stripped");
+        provider.addBlock(tree.wood, name + " Wood");
+        provider.addBlock(tree.strippedWood, "Stripped " + name + " Wood");
+        provider.addBlock(tree.leaves, name + " Leaves");
+        provider.addBlock(tree.pottedSapling, "Potted " + name + " Sapling");
+    }
+
+    /**
+     * 注册方块模型 DataProvider
+     * <p>应当在 {@link BlockStateProvider#registerStatesAndModels} 或与之等价的方法中调用</p>
      */
     public void addBlockModels(BlockStateProvider provider) {
         provider.simpleBlock(tree.sapling(),
@@ -94,7 +91,7 @@ public record TreeRegister(Tree tree) {
         provider.simpleBlock(tree.wood(), provider.models().cubeColumn(tree.wood.getId().getPath(),
                 provider.blockTexture(tree.log()),
                 provider.blockTexture(tree.log())));
-        provider.simpleBlock(tree.strippedWoods(), provider.models().cubeColumn(tree.strippedWoods.getId().getPath(),
+        provider.simpleBlock(tree.strippedWood(), provider.models().cubeColumn(tree.strippedWood.getId().getPath(),
                 provider.blockTexture(tree.strippedLog()),
                 provider.blockTexture(tree.strippedLog())));
         provider.simpleBlock(tree.leaves(), provider.models().singleTexture(
@@ -108,17 +105,15 @@ public record TreeRegister(Tree tree) {
     }
 
     /**
-     * call this method in {@link ItemModelProvider#registerModels} or other equivalent method.
-     *
-     * @param provider item model provider
+     * 注册物品模型 DataProvider
+     * <p>应当在 {@link ItemModelProvider#registerModels} 或与之等价的方法中调用</p>
      */
     public void addItemModels(ItemModelProvider provider) {
         addItem(tree.sapling, provider);
-        
         addBlockItem(tree.log, provider);
         addBlockItem(tree.strippedLog, provider);
-        addBlockItem(tree.strippedWoods, provider);
         addBlockItem(tree.wood, provider);
+        addBlockItem(tree.strippedWood, provider);
         addBlockItem(tree.leaves, provider);
     }
 
@@ -134,24 +129,10 @@ public record TreeRegister(Tree tree) {
     }
 
     /**
-     * call this method in {@link RecipeProvider#buildCraftingRecipes}
-     * or other equivalent method.
-     *
-     * @param consumer save consumer
-     * @param plank plank name, if not null, will add recipe: log -> 4*planks
+     * 注册配方 DataProvider
+     * <p>应当在 {@link RecipeProvider#buildRecipes(Consumer)} 或与之等效的方法中调用</p>
      */
-    @SuppressWarnings("JavadocReference")
-    public void addRecipes(Consumer<FinishedRecipe> consumer, @Nullable Block planks) {
-        // planksFromLog
-        if (planks != null) {
-            InventoryChangeTrigger.TriggerInstance hasLogs = InventoryChangeTrigger.TriggerInstance
-                    .hasItems(ItemPredicate.Builder.item().of(ItemTags.LOGS).build());
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, planks, 4).group("planks")
-                    .requires(tree.log())
-                    .unlockedBy("has_log", hasLogs)
-                    .save(consumer);
-        }
-
+    public void addRecipes(Consumer<FinishedRecipe> writer) {
         InventoryChangeTrigger.TriggerInstance hasLog = InventoryChangeTrigger.TriggerInstance
                 .hasItems(ItemPredicate.Builder.item().of(tree.log()).build());
         // woodFromLogs
@@ -160,51 +141,68 @@ public record TreeRegister(Tree tree) {
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_log", hasLog)
-                .save(consumer);
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tree.strippedWoods(), 3).group("bark")
+                .save(writer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tree.strippedWood(), 3).group("bark")
                 .define('#', tree.strippedLog())
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_log", hasLog)
-                .save(consumer);
+                .save(writer);
     }
 
     /**
-     * call this method in {@link TagsProvider#addTags} or other equivalent method.
-     *
-     * @param tag tag appender creator, use {@link TagsProvider#tag}
+     * 注册配方 DataProvider
+     * <p>应当在 {@link RecipeProvider#buildRecipes(Consumer)} 或与之等效的方法中调用</p>
+     * <p>该版本会额外添加 1*log -> 4*planks 配方</p>
      */
-    public void addBlockTags(Function<TagKey<Block>, IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> tag) {
-        tag.apply(tree.tagLogs).add(tree.log(), tree.strippedLog(), tree.wood(), tree.strippedLog());
-        tag.apply(BlockTags.SAPLINGS).add(tree.sapling());
-        tag.apply(BlockTags.LOGS).addTag(tree.tagLogs);
-        tag.apply(BlockTags.LOGS_THAT_BURN).addTag(tree.tagLogs);
-        tag.apply(BlockTags.FLOWER_POTS).add(tree.pottedSapling());
-        tag.apply(BlockTags.LEAVES).add(tree.leaves());
+    public void addRecipes(Consumer<FinishedRecipe> writer, Block planks) {
+        // planksFromLog
+        InventoryChangeTrigger.TriggerInstance hasLogs = InventoryChangeTrigger.TriggerInstance
+                .hasItems(ItemPredicate.Builder.item().of(ItemTags.LOGS).build());
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, planks, 4).group("planks")
+                .requires(tree.log())
+                .unlockedBy("has_log", hasLogs)
+                .save(writer);
+
+        addRecipes(writer);
     }
 
     /**
-     * call this method in {@link TagsProvider#addTags} or other equivalent method.
-     *
-     * @param tag tag appender creator, use {@link TagsProvider#tag}
+     * 注册方块 Tag 的 DataProvider
+     * <p>应当在 {@link IntrinsicHolderTagsProvider#addTags(HolderLookup.Provider)} 或与之等效的方法中调用</p>
      */
-    public void addItemTags(Function<TagKey<Item>, IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item>> tag) {
-        tag.apply(tree.tagItemLogs)
+    public void addBlockTags(IntrinsicHolderTagsProvider<Block> provider) {
+        IIntrinsicHolderTagsProvider<Block> p = (IIntrinsicHolderTagsProvider<Block>) provider;
+        p.sinocoreTag(tree.tagLogs).add(tree.log(), tree.strippedLog(), tree.wood(), tree.strippedLog());
+        p.sinocoreTag(BlockTags.SAPLINGS).add(tree.sapling());
+        p.sinocoreTag(BlockTags.LOGS).addTag(tree.tagLogs);
+        p.sinocoreTag(BlockTags.LOGS_THAT_BURN).addTag(tree.tagLogs);
+        p.sinocoreTag(BlockTags.FLOWER_POTS).add(tree.pottedSapling());
+        p.sinocoreTag(BlockTags.LEAVES).add(tree.leaves());
+    }
+
+    /**
+     * 注册物品 Tag 的 DataProvider
+     * <p>应当在 {@link IntrinsicHolderTagsProvider#addTags(HolderLookup.Provider)} 或与之等效的方法中调用</p>
+     */
+    public void addItemTags(IntrinsicHolderTagsProvider<Item> provider) {
+        IIntrinsicHolderTagsProvider<Item> p = (IIntrinsicHolderTagsProvider<Item>) provider;
+        p.sinocoreTag(tree.tagItemLogs)
                 .add(tree.log().asItem(), tree.strippedLog().asItem(), tree.wood().asItem(), tree.strippedLog().asItem());
-        tag.apply(ItemTags.SAPLINGS).add(tree.sapling().asItem());
-        tag.apply(ItemTags.LOGS_THAT_BURN).addTag(tree.tagItemLogs);
-        tag.apply(ItemTags.LEAVES).add(tree.leaves().asItem());
+        p.sinocoreTag(ItemTags.SAPLINGS).add(tree.sapling().asItem());
+        p.sinocoreTag(ItemTags.LOGS_THAT_BURN).addTag(tree.tagItemLogs);
+        p.sinocoreTag(ItemTags.LEAVES).add(tree.leaves().asItem());
     }
 
     /**
-     * call this method in {@link LootTableProvider#getTables()} or other equivalent method.
+     * 注册方块的掉落 DataProvider
+     * <p>在 {@link LootTableProvider#getTables()} 方法中调用</p>
      *
-     * @param consumer consumer to collect table builder
-     * @return block loot for add tree
+     * @param writer 该方法用于处理接收到的
      */
-    public TreeBlockLoot addLoots(Consumer<LootTableProvider.SubProviderEntry> consumer) {
+    public TreeBlockLoot addLoots(Consumer<LootTableProvider.SubProviderEntry> writer) {
         TreeBlockLoot loot = new TreeBlockLoot(tree);
-        consumer.accept(new LootTableProvider.SubProviderEntry(() -> loot, LootContextParamSets.BLOCK));
+        writer.accept(new LootTableProvider.SubProviderEntry(() -> loot, LootContextParamSets.BLOCK));
         return loot;
     }
 }

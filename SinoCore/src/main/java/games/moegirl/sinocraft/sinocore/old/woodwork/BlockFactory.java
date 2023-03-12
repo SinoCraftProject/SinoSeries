@@ -1,10 +1,7 @@
 package games.moegirl.sinocraft.sinocore.old.woodwork;
 
-import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.old.IBlockProperties;
-import games.moegirl.sinocraft.sinocore.old.utility.FloatModifier;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

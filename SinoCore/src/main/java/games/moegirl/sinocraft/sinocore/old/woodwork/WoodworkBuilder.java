@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.woodwork;
 
-import games.moegirl.sinocraft.sinocore.old.utility.FloatModifier;
+import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 
