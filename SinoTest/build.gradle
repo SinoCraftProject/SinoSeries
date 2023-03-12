@@ -1,0 +1,39 @@
+plugins {
+    id 'dev.architectury.loom' version '1.1-SNAPSHOT'
+}
+
+archivesBaseName = "${project.modid}"
+
+loom {
+    silentMojangMappingsLicense()
+
+    forge {}
+
+    runs {
+        data {
+            data()
+            programArgs '--all', '--mod', "${project.modid}",
+                    '--output', file('src/generated/resources').absolutePath,
+                    '--existing', file('src/main/resources').absolutePath
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+    }
+
+    implementation project(path: ':SinoCore', configuration: "namedElements")
+}
+
+repositories {
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
+}

@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[${fmlloader_version},${next_fmlloader_version})"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "sinotest"
+
+version = "${version}"
+displayName = "${mod_name}"
+displayURL = "${sinoseries_url}"
+credits = "${sinoseries_credits}"
+authors = "${sinoseries_authors}"
+
+description = '''
+A test mod for this series.
+本系列 mod 的测试 mod
+'''
+
+[[dependencies.sinotest]]
+modId = "forge"
+mandatory = true
+versionRange = "[${fmlloader_version},${next_fmlloader_version})"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.sinotest]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraft_version},${next_minecraft_version})"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.sinotest]]
+modId = "sinofoundation"
+mandatory = true
+versionRange = "[${sinoseries_full_version},${next_sinoseries_full_version})"
+ordering = "NONE"
+side = "BOTH"

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.tree;
+package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.old.block.ILootableBlock;
 import games.moegirl.sinocraft.sinocore.old.utility.BlockLootables;

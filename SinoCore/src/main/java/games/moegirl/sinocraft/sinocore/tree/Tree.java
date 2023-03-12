@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.tree;
+package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.old.utility.FloatModifier;
 import net.minecraft.resources.ResourceLocation;
@@ -18,17 +18,31 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * A set of elements about a tree, contains items, blocks, tags, recipes ... and more.
+ * 树，主要包括：<br>
+ * 1. 树苗及其世界生成；<br>
+ * 2. 原木，木板，树叶等附属方块；<br>
+ * <br><br>
+ * 使用 {@link Tree#builder(ResourceLocation)} 创建，同时需要 {@link TreeRegister} 注册相关内容
  */
 public class Tree {
 
     private static final Map<ResourceLocation, Tree> TREE_BY_NAME = new HashMap<>();
 
-    public static Optional<Tree> get(ResourceLocation name) {
-        return Optional.ofNullable(TREE_BY_NAME.get(name));
+    /**
+     * 检查该 key 是否存在
+     */
+    public static boolean exist(ResourceLocation name) {
+        return TREE_BY_NAME.containsKey(name);
     }
 
-    public static Optional<Tree> get(String name) {
+    /**
+     * 获取对应 Tree
+     */
+    public static Tree get(ResourceLocation name) {
+        return Objects.requireNonNull(TREE_BY_NAME.get(name));
+    }
+
+    public static Tree get(String name) {
         return get(new ResourceLocation(name));
     }
 

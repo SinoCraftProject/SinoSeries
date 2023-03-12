@@ -25,6 +25,7 @@ dependencies {
     implementation project(path: ':SinoFeast', configuration: 'namedElements')
     implementation project(path: ':SinoDivination', configuration: 'namedElements')
     implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
+    implementation project(path: ':SinoTest', configuration: 'namedElements')
 }
 
 evaluationDependsOn ':SinoCore'
@@ -32,6 +33,7 @@ evaluationDependsOn ':SinoFoundation'
 evaluationDependsOn ':SinoFeast'
 evaluationDependsOn ':SinoDivination'
 evaluationDependsOn ':SinoCalligraphy'
+evaluationDependsOn ':SinoTest'
 
 loom {
     silentMojangMappingsLicense()
@@ -60,6 +62,10 @@ loom {
 
         sinocalligraphy {
             sourceSet project(':SinoCalligraphy').sourceSets.main
+        }
+
+        sinotest {
+            sourceSet project(':SinoTest').sourceSets.main
         }
     }
 
@@ -102,6 +108,14 @@ loom {
             programArgs '--all', '--mod', "sinocalligraphy",
                     '--output', file('SinoCalligraphy/src/generated/resources').absolutePath,
                     '--existing', file('SinoCalligraphy/src/main/resources').absolutePath
+        }
+
+        sinoTestData {
+            data()
+
+            programArgs '--all', '--mod', "sinotest",
+                    '--output', file('SinoTest/src/generated/resources').absolutePath,
+                    '--existing', file('SinoTest/src/main/resources').absolutePath
         }
     }
 }

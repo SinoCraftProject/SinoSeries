@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.tree;
+package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.old.block.BlockTreeLeaves;
 import games.moegirl.sinocraft.sinocore.old.block.BlockTreeLog;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.tree;
+package games.moegirl.sinocraft.sinocore.tree;
 
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -9,7 +9,6 @@ import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
-import java.util.Random;
 import java.util.function.Function;
 
 public class TreeSaplingGrower extends AbstractTreeGrower {

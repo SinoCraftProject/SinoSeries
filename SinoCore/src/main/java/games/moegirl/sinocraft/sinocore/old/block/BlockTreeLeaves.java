@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.block;
 
-import games.moegirl.sinocraft.sinocore.old.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.material.Material;

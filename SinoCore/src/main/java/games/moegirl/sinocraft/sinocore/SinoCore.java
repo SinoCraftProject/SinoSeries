@@ -1,12 +1,8 @@
 package games.moegirl.sinocraft.sinocore;
 
-import games.moegirl.sinocraft.sinocore.old.block.SCBlockItems;
-import games.moegirl.sinocraft.sinocore.old.block.SCBlocks;
-import games.moegirl.sinocraft.sinocore.old.block.blockentity.SCBlockEntities;
 import games.moegirl.sinocraft.sinocore.old.config.QuizModelConfig;
 import games.moegirl.sinocraft.sinocore.old.config.model.QuizModel;
 import games.moegirl.sinocraft.sinocore.old.gui.SCMenus;
-import games.moegirl.sinocraft.sinocore.old.item.SCItems;
 import games.moegirl.sinocraft.sinocore.old.network.SCNetworks;
 import games.moegirl.sinocraft.sinocore.old.utility.json.JsonUtils;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.FluidStackSerializer;
@@ -46,11 +42,6 @@ public class SinoCore {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         SCNetworks.register();
-        SCItems.register(bus);
-        SCBlocks.register(bus);
-        SCBlockItems.register(bus);
-        SCBlockEntities.register(bus);
-
         SCMenus.register(bus);
 
         bus.addListener(this::onSetup);

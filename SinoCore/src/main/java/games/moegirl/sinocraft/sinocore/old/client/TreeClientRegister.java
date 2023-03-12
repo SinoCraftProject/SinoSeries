@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.client;
 
-import games.moegirl.sinocraft.sinocore.old.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;

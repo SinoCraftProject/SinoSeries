@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.block;
+package games.moegirl.sinocraft.sinocore.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.block;
 
-import games.moegirl.sinocraft.sinocore.old.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
