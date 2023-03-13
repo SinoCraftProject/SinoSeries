@@ -1,12 +1,14 @@
-package games.moegirl.sinocraft.sinocore.old.client.screen;
+package games.moegirl.sinocraft.sinocore.client.screen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import games.moegirl.sinocraft.sinocore.old.woodwork.*;
-import games.moegirl.sinocraft.sinocore.old.client.render.ModSignRenderer;
-import games.moegirl.sinocraft.sinocore.old.woodwork.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
+import games.moegirl.sinocraft.sinocore.woodwork.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.woodwork.ModSignBlockWall;
+import games.moegirl.sinocraft.sinocore.woodwork.SignTextUpdateC2SPacket;
+import games.moegirl.sinocraft.sinocore.woodwork.WoodworkManager;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.font.TextFieldHelper;
 import net.minecraft.client.gui.screens.Screen;

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.old.block;
 
-import games.moegirl.sinocraft.sinocore.old.woodwork.IWoodwork;
-import games.moegirl.sinocraft.sinocore.old.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.woodwork.IWoodwork;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;

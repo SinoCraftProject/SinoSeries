@@ -1,13 +1,13 @@
-package games.moegirl.sinocraft.sinocore.old.client.render;
+package games.moegirl.sinocraft.sinocore.client.render;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import games.moegirl.sinocraft.sinocore.old.woodwork.ModSignBlockEntity;
-import games.moegirl.sinocraft.sinocore.old.woodwork.ModSignBlockStanding;
-import games.moegirl.sinocraft.sinocore.old.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.woodwork.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.woodwork.ModSignBlockStanding;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.Model;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.woodwork;
+package games.moegirl.sinocraft.sinocore.woodwork;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

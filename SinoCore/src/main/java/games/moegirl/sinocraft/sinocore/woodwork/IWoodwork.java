@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.woodwork;
+package games.moegirl.sinocraft.sinocore.woodwork;
 
 import net.minecraft.world.level.block.state.properties.WoodType;
 

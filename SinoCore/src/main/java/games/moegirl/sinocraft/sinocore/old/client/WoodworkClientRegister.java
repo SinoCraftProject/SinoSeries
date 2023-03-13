@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.old.client;
 
-import games.moegirl.sinocraft.sinocore.old.client.render.ModSignRenderer;
-import games.moegirl.sinocraft.sinocore.old.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.woodwork;
+package games.moegirl.sinocraft.sinocore.woodwork;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSource;

@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -28,7 +29,7 @@ import java.util.function.Supplier;
  * <p>使用时需要在主类中使用 {@link Tree#register(String, IEventBus)} 注册</p>
  *
  * @see TreeBuilder
- * @see games.moegirl.sinocraft.sinocore.old.woodwork.Woodwork
+ * @see Woodwork
  */
 public class Tree {
 

@@ -1,9 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.data.base;
 
-import games.moegirl.sinocraft.sinocore.old.IBlockLoot;
-import games.moegirl.sinocraft.sinocore.old.data.base.SimpleBlockLootTables;
-import games.moegirl.sinocraft.sinocore.old.data.base.SimpleEntityLootTables;
-import games.moegirl.sinocraft.sinocore.old.data.base.SimpleLootTables;
+import games.moegirl.sinocraft.sinocore.mixin_inter.IBlockLoot;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;

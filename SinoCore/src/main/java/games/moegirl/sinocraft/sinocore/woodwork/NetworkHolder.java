@@ -1,6 +1,5 @@
-package games.moegirl.sinocraft.sinocore.old.woodwork;
+package games.moegirl.sinocraft.sinocore.woodwork;
 
-import games.moegirl.sinocraft.sinocore.old.utility.Id;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -8,6 +7,7 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -32,7 +32,7 @@ public interface NetworkHolder {
         });
     }
 
-    static NetworkHolder simple(SimpleChannel channel, Id id) {
+    static NetworkHolder simple(SimpleChannel channel, AtomicInteger id) {
         return new NetworkHolder() {
 
             @Override
@@ -50,7 +50,7 @@ public interface NetworkHolder {
                                      boolean toClient, Consumer<T> handleClient,
                                      boolean toServer, BiConsumer<T, ServerPlayer> handleServer) {
                 if (toClient && toServer) {
-                    channel.registerMessage(id.nextId(), type, encoder, decoder, (value, c) -> c.get().enqueueWork(() -> {
+                    channel.registerMessage(id.getAndIncrement(), type, encoder, decoder, (value, c) -> c.get().enqueueWork(() -> {
                         NetworkEvent.Context context = c.get();
                         if (context.getDirection().getReceptionSide().isClient()) {
                             handleClient.accept(value);
@@ -60,7 +60,7 @@ public interface NetworkHolder {
                         context.setPacketHandled(true);
                     }));
                 } else if (toServer) {
-                    channel.registerMessage(id.nextId(), type, encoder, decoder, (value, c) -> c.get().enqueueWork(() -> {
+                    channel.registerMessage(id.getAndIncrement(), type, encoder, decoder, (value, c) -> c.get().enqueueWork(() -> {
                         NetworkEvent.Context context = c.get();
                         if (context.getDirection().getReceptionSide().isServer()) {
                             handleServer.accept(value, context.getSender());
@@ -68,7 +68,7 @@ public interface NetworkHolder {
                         context.setPacketHandled(true);
                     }), Optional.of(NetworkDirection.PLAY_TO_SERVER));
                 } else if (toClient) {
-                    channel.registerMessage(id.nextId(), type, encoder, decoder, (value, c) -> c.get().enqueueWork(() -> {
+                    channel.registerMessage(id.getAndIncrement(), type, encoder, decoder, (value, c) -> c.get().enqueueWork(() -> {
                         NetworkEvent.Context context = c.get();
                         if (context.getDirection().getReceptionSide().isClient()) {
                             handleClient.accept(value);

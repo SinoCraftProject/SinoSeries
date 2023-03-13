@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.network;
 
 import games.moegirl.sinocraft.sinocore.SinoCore;
-import games.moegirl.sinocraft.sinocore.old.utility.Id;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;

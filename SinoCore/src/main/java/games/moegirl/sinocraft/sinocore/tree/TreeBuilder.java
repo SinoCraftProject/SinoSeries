@@ -126,6 +126,16 @@ public class TreeBuilder {
         return this;
     }
 
+    public TreeBuilder tab(CreativeModeTab tab) {
+        saplingTabs = List.of(tab);
+        leavesTabs = List.of(tab);
+        logTabs = List.of(tab);
+        strippedLogTabs = List.of(tab);
+        woodTabs = List.of(tab);
+        strippedWoodTabs = List.of(tab);
+        return this;
+    }
+
     public TreeBuilder saplingSound(SoundType sound) {
         this.saplingSound = sound;
         return this;
@@ -255,7 +265,7 @@ public class TreeBuilder {
         regTypes.remove(type);
         switch (type) {
             case ALL_MODELS -> regTypes.removeIf(t -> t.model);
-            case ALL_TAGS ->  regTypes.removeIf(t -> t.tag);
+            case ALL_TAGS -> regTypes.removeIf(t -> t.tag);
             case ALL_PROVIDERS -> regTypes.removeIf(t -> t.provider);
             case ALL_EVENTS -> regTypes.removeIf(t -> t.event);
             case ALL_DATA -> regTypes.removeIf(t -> t.data);

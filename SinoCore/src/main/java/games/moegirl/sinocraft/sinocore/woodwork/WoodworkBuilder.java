@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.woodwork;
+package games.moegirl.sinocraft.sinocore.woodwork;
 
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import net.minecraft.sounds.SoundEvents;
