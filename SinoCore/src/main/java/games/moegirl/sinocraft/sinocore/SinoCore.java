@@ -26,16 +26,16 @@ import org.slf4j.LoggerFactory;
 @Mod(SinoCore.MODID)
 public class SinoCore {
     public static final Logger LOGGER = LoggerFactory.getLogger("SinoCore");
+
+    // Todo: qyl27: use sinoseries.debug instead.
     public static final boolean DEBUG = "true".equalsIgnoreCase(System.getProperty("forge.enableGameTest", "false"));
 
     public static final String MODID = "sinocore";
-    public static final String VERSION = "@version@";
 
     private static SinoCore INSTANCE = null;
 
     public SinoCore() {
         LOGGER.info("Loading SinoCore.");
-        LOGGER.info("Loading SinoCore. Ver: " + VERSION);
 
         INSTANCE = this;
 
