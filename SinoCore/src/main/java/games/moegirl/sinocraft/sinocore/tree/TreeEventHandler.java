@@ -18,6 +18,9 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * 树相关事件注册
+ */
 public class TreeEventHandler {
 
     private static final Map<String, TreeEventHandler> PROVIDERS = new HashMap<>();

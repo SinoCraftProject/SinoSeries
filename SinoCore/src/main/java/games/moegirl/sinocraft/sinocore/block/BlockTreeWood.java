@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.old.block.ITreeBlock;
+import games.moegirl.sinocraft.sinocore.tree.ITreeBlock;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A class for wood with tree
+ * 木 与 去皮木（？）
  */
 public class BlockTreeWood extends RotatedPillarBlock implements ITreeBlock {
 

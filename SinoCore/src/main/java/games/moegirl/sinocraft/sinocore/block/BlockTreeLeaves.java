@@ -1,13 +1,13 @@
 package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.old.block.ITreeBlock;
+import games.moegirl.sinocraft.sinocore.tree.ITreeBlock;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.material.Material;
 
 /**
- * A class for leaves with tree
+ * 树叶
  */
 public class BlockTreeLeaves extends LeavesBlock implements ITreeBlock {
 

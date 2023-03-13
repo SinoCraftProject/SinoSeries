@@ -18,16 +18,20 @@ import java.lang.reflect.ParameterizedType;
 import java.util.function.Supplier;
 
 /**
- * A block with {@link  BlockEntity}.
- * <p>Base on {@link  BaseEntityBlock}, use model render and impl getTicker method</p>
- * <p>If entity need update, impl {@link  BlockEntityTicker} on BlockEntity.</p>
+ * 带有 {@link  BlockEntity} 的方块
+ * <p>可根据泛型获取 BlockEntity 类型</p>
+ * <p>实现 getTicker 与 getListener 方法，只需 BlockEntity 实现相关接口即可生效</p>
+ * <p>渲染模式默认 {@link RenderShape#MODEL}</p>
+ *
+ * @see BlockEntity
+ * @see BlockEntityTicker
+ * @see GameEventListener
  */
 public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEntityBlock {
 
     protected final Lazy<BlockEntityType<T>> entityType;
     private final Class<?> typeClass;
 
-    @SuppressWarnings("unchecked")
     public AbstractEntityBlock(Properties properties, Supplier<BlockEntityType<T>> entityType) {
         super(properties);
         this.entityType = Lazy.of(entityType);
@@ -54,7 +58,6 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
 
     @Nullable
     @Override
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public <T2 extends BlockEntity> BlockEntityTicker<T2> getTicker(Level pLevel, BlockState pState, BlockEntityType<T2> pBlockEntityType) {
         return BlockEntityTicker.class.isAssignableFrom(typeClass) ? ((pLevel1, pPos, pState1, pBlockEntity) -> {
             if (pBlockEntity instanceof BlockEntityTicker ticker) {

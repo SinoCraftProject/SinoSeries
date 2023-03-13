@@ -34,37 +34,22 @@ public class Tree {
 
     private static final Map<ResourceLocation, Tree> TREE_BY_NAME = new HashMap<>();
 
-    /**
-     * 检查该 key 是否存在
-     */
     public static boolean exist(ResourceLocation name) {
         return TREE_BY_NAME.containsKey(name);
     }
 
-    /**
-     * 获取对应 Tree
-     */
     public static Tree get(ResourceLocation name) {
         return Objects.requireNonNull(TREE_BY_NAME.get(name));
     }
 
-    /**
-     * 获取对应 Tree
-     */
     public static Tree get(String name) {
         return get(new ResourceLocation(name));
     }
 
-    /**
-     * 创建 Tree
-     */
     public static TreeBuilder builder(ResourceLocation name, String enName, String zhName) {
         return new TreeBuilder(name, enName, zhName);
     }
 
-    /**
-     * 创建 Tree
-     */
     public static TreeBuilder builder(ResourceLocation name, String zhName) {
         return new TreeBuilder(name, zhName);
     }

@@ -29,6 +29,9 @@ import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * 如何构造一棵树
+ */
 public class TreeBuilder {
 
     final ResourceLocation name;

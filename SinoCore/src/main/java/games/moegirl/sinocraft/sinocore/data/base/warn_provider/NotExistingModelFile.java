@@ -8,6 +8,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 
+/**
+ * 这个表示已存在的资源文件类指向一个不存在的资源文件
+ */
 public class NotExistingModelFile extends ModelFile.ExistingModelFile {
 
     public static ModelFile.ExistingModelFile notExisting(ModelProvider<?> provider, ResourceLocation path, String folder,

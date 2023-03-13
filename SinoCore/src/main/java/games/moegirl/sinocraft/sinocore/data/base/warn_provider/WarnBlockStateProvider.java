@@ -10,6 +10,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * 一个 BlockStateProvider，但当遇到材质不存在时不会产生 Exception
+ */
 public abstract class WarnBlockStateProvider extends BlockStateProvider {
 
     private final String modid;

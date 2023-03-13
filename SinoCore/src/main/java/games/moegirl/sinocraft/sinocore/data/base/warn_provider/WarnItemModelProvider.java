@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * 一个 ItemModelProvider，但当遇到材质不存在时不会产生 Exception
+ */
 public abstract class WarnItemModelProvider extends ItemModelProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WarnItemModelProvider.class);

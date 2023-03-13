@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * 掉落物~~~
+ * 树的掉落物~~~
  */
 public class TreeBlockLoot extends BlockLootSubProvider {
     private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};

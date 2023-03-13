@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * 一个 BlockModelProvider，但当遇到材质不存在时不会产生 Exception
+ */
 public abstract class WarnBlockModelProvider extends BlockModelProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WarnBlockModelProvider.class);

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.old.block.ITreeBlock;
+import games.moegirl.sinocraft.sinocore.tree.ITreeBlock;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.UseOnContext;
@@ -14,7 +14,7 @@ import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A class for log and stripped log with tree
+ * 原木与去皮原木
  */
 public class BlockTreeLog extends RotatedPillarBlock implements ITreeBlock {
 

@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocore.tree;
 import games.moegirl.sinocraft.sinocore.data.base.BaseCodecProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
-import games.moegirl.sinocraft.sinocore.mixin_inter.IIntrinsicHolderTagsProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
@@ -36,6 +35,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * 树的 data generator 注册
+ */
 public class TreeDataHandler {
 
     private static final Map<String, TreeDataHandler> PROVIDERS = new HashMap<>();
