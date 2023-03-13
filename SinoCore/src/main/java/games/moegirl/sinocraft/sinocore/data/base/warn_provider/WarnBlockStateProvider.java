@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.data.base;
+package games.moegirl.sinocraft.sinocore.data.base.warn_provider;
 
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;

@@ -10,8 +10,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  * 2. 原木（Log）及其去皮方块，木（Wood）及其去皮方块，树叶等附属方块及其 Tag；<br>
  * 3. 盆栽的对应树苗版本；<br>
  *
- * <p>使用 {@link Tree#builder(ResourceLocation)} 创建，同时需要 {@link TreeRegister} 注册相关内容</p>
+ * <p>使用时需要在主类中使用 {@link Tree#register(String, IEventBus)} 注册</p>
  *
  * @see TreeBuilder
  * @see games.moegirl.sinocraft.sinocore.old.woodwork.Woodwork
@@ -58,25 +58,20 @@ public class Tree {
     /**
      * 创建 Tree
      */
-    public static TreeBuilder builder(ResourceLocation name) {
-        return new TreeBuilder(name);
+    public static TreeBuilder builder(ResourceLocation name, String enName, String zhName) {
+        return new TreeBuilder(name, enName, zhName);
     }
 
     /**
      * 创建 Tree
      */
-    public static TreeBuilder builder(String modid, String name) {
-        return builder(new ResourceLocation(modid, name));
+    public static TreeBuilder builder(ResourceLocation name, String zhName) {
+        return new TreeBuilder(name, zhName);
     }
 
-    /**
-     * 创建 Tree
-     * <p>modid 使用当前正在加载的 mod</p>
-     *
-     * @see ModLoadingContext#get()
-     */
-    public static TreeBuilder builder(String name) {
-        return builder(new ResourceLocation(ModLoadingContext.get().getActiveNamespace(), name));
+    public static void register(String modid, IEventBus bus) {
+        TreeDataHandler.obtain(modid).register(bus);
+        TreeEventHandler.obtain(modid).register(bus);
     }
 
     public final RegistryObject<SaplingBlock> sapling;
@@ -89,13 +84,15 @@ public class Tree {
     private final Set<Block> allBlocks = new HashSet<>();
     private final Set<Item> allItems = new HashSet<>();
 
-    TagKey<Block> tagLogs;
-    TagKey<Item> tagItemLogs;
-    TreeRegister register = new TreeRegister(this);
+    final TagKey<Block> tagLogs;
+    final TagKey<Item> tagItemLogs;
     private final BuilderProperties properties;
 
     Tree(TreeBuilder builder, DeferredRegister<Block> blocks, DeferredRegister<Item> items) {
-        properties = new BuilderProperties(builder.name, builder.grower, builder.strengthModifier,
+        properties = new BuilderProperties(builder.name,
+                builder.enName == null ? "@null" : builder.enName,
+                builder.zhName == null ? "@null" : builder.zhName,
+                builder.grower, builder.strengthModifier,
                 builder.saplingTabs, builder.leavesTabs,
                 builder.logTabs, builder.strippedLogTabs,
                 builder.woodTabs, builder.strippedWoodTabs,
@@ -126,6 +123,23 @@ public class Tree {
         tagLogs = BlockTags.create(new ResourceLocation(properties.name.getNamespace(),
                 (properties.name.getPath() + "_logs").toLowerCase(Locale.ROOT)));
         tagItemLogs = ItemTags.create(tagLogs().location());
+
+        Lazy<TreeDataHandler> dataHandler = Lazy.of(() -> TreeDataHandler.obtain(name().getNamespace()));
+        Lazy<TreeEventHandler> eventHandler = Lazy.of(() -> TreeEventHandler.obtain(name().getNamespace()));
+        if (builder.enName != null) dataHandler.get().langEn.add(this);
+        if (builder.zhName != null) dataHandler.get().langZh.add(this);
+        for (RegType type : builder.regTypes) {
+            switch (type) {
+                case BLOCK_MODELS -> dataHandler.get().mBlock.add(this);
+                case ITEM_MODELS -> dataHandler.get().mItem.add(this);
+                case RECIPES -> dataHandler.get().recipe.add(this);
+                case BLOCK_TAGS -> dataHandler.get().blockTags.add(this);
+                case ITEM_TAGS -> dataHandler.get().itemTags.add(this);
+                case LOOT_TABLES -> dataHandler.get().lootTable.add(this);
+                case TAB_CONTENTS -> eventHandler.get().tabs.add(this);
+                case RENDER_TYPE -> eventHandler.get().render.add(this);
+            }
+        }
 
         TREE_BY_NAME.put(properties.name, this);
     }
@@ -198,20 +212,12 @@ public class Tree {
         return Objects.requireNonNull(tagItemLogs);
     }
 
-    public TreeRegister register() {
-        return register;
-    }
-
-    public void registerAll(IEventBus bus) {
-        register().registerEvents(bus);
-        new TreeDataProvider().register(bus, register());
-    }
-
     public BuilderProperties properties() {
         return properties;
     }
 
-    public record BuilderProperties(ResourceLocation name, AbstractTreeGrower grower, FloatModifier strengthModifier,
+    public record BuilderProperties(ResourceLocation name, String enName, String zhName,
+                                    AbstractTreeGrower grower, FloatModifier strengthModifier,
                                     List<CreativeModeTab> saplingTabs, List<CreativeModeTab> leavesTabs,
                                     List<CreativeModeTab> logTabs, List<CreativeModeTab> strippedLogTabs,
                                     List<CreativeModeTab> woodTabs, List<CreativeModeTab> strippedWoodTabs,
@@ -219,5 +225,34 @@ public class Tree {
                                     MaterialColor topLogColor, MaterialColor barkLogColor,
                                     MaterialColor topStrippedLogColor, MaterialColor barkStrippedLogColor,
                                     MaterialColor woodColor, MaterialColor strippedWoodColor) {
+    }
+
+    public enum RegType {
+        BLOCK_MODELS(true, false, true, false, false, true),
+        ITEM_MODELS(true, false, true, false, false, true),
+        RECIPES(false, false, true, false, true, false),
+        BLOCK_TAGS(false, true, true, false, true, false),
+        ITEM_TAGS(false, true, true, false, true, false),
+        LOOT_TABLES(false, false, true, false, true, false),
+
+        TAB_CONTENTS(false, false, false, true, false, false),
+        RENDER_TYPE(false, false, false, true, false, false),
+
+        ALL_MODELS, ALL_TAGS, ALL_PROVIDERS, ALL_EVENTS, ALL_DATA, ALL_RES, ALL;
+
+        final boolean model, tag, provider, event, data, res;
+
+        RegType() {
+            this(false, false, false, false, false, false);
+        }
+
+        RegType(boolean model, boolean tag, boolean provider, boolean event, boolean data, boolean res) {
+            this.model = model;
+            this.tag = tag;
+            this.provider = provider;
+            this.event = event;
+            this.data = data;
+            this.res = res;
+        }
     }
 }

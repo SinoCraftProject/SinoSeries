@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinotest.sinocore;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinotest.SinoTest;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,11 +21,14 @@ public class TestSinoCore {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 
-    Tree tree = Tree.builder("test").build(BLOCKS, ITEMS);
+    public static Tree tree = Tree.builder(new ResourceLocation(SinoTest.MODID, "test"), "测试树")
+            .grower(new ResourceLocation(SinoTest.MODID, "test_tree"))
+            .build(BLOCKS, ITEMS);
 
     public void register(IEventBus bus) {
-        tree.registerAll(bus);
+        Tree.register(SinoTest.MODID, bus);
         for (Field field : getClass().getFields()) {
+            if (field.getType() != DeferredRegister.class) continue;
             try {
                 ((DeferredRegister<?>) field.get(null)).register(bus);
             } catch (IllegalAccessException e) {

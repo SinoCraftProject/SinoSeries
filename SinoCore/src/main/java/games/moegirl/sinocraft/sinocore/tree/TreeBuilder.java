@@ -5,7 +5,10 @@ import games.moegirl.sinocraft.sinocore.block.BlockTreeLog;
 import games.moegirl.sinocraft.sinocore.block.BlockTreeSapling;
 import games.moegirl.sinocraft.sinocore.block.BlockTreeWood;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -14,16 +17,23 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.grower.OakTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class TreeBuilder {
 
     final ResourceLocation name;
+    @Nullable
+    final String enName, zhName;
 
     List<CreativeModeTab> saplingTabs = List.of(CreativeModeTabs.NATURAL_BLOCKS);
     List<CreativeModeTab> leavesTabs = List.of(CreativeModeTabs.NATURAL_BLOCKS);
@@ -61,9 +71,26 @@ public class TreeBuilder {
 
     AbstractTreeGrower grower = new OakTreeGrower();
     FloatModifier strengthModifier = new FloatModifier();
+    EnumSet<Tree.RegType> regTypes = EnumSet.allOf(Tree.RegType.class);
 
-    public TreeBuilder(ResourceLocation name) {
+    public TreeBuilder(ResourceLocation name, @Nullable String enName, @Nullable String zhName) {
         this.name = name;
+        this.enName = enName;
+        this.zhName = zhName;
+    }
+
+    public TreeBuilder(ResourceLocation name, @Nullable String zhName) {
+        this.name = name;
+        this.zhName = zhName;
+
+        StringBuilder sb = new StringBuilder();
+        for (String s : name.getPath().split("_")) {
+            if (s.isEmpty()) continue;
+            String s1 = s.toLowerCase(Locale.ROOT);
+            sb.append(Character.toUpperCase(s1.charAt(0)));
+            sb.append(s1.substring(1));
+        }
+        this.enName = sb.toString();
     }
 
     public TreeBuilder saplingTabs(CreativeModeTab... tabs) {
@@ -198,11 +225,40 @@ public class TreeBuilder {
         return this;
     }
 
+    public TreeBuilder grower(ResourceLocation name) {
+        this.grower = new TreeSaplingGrower() {
+            @Override
+            protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean hasFlowers) {
+                return FeatureUtils.createKey(name.toString());
+            }
+        };
+        return this;
+    }
+
+    public TreeBuilder grower(Supplier<ConfiguredFeature<?, ?>> builder) {
+        TreeDataHandler.obtain(name.getNamespace()).features.put(name, builder);
+        return grower(name);
+    }
+
     /**
      * 对所有木方块进行的硬度调整
      */
     public TreeBuilder blockStrengthModifier(FloatModifier modifier) {
         strengthModifier = modifier;
+        return this;
+    }
+
+    public TreeBuilder disableRegister(Tree.RegType type) {
+        regTypes.remove(type);
+        switch (type) {
+            case ALL_MODELS -> regTypes.removeIf(t -> t.model);
+            case ALL_TAGS ->  regTypes.removeIf(t -> t.tag);
+            case ALL_PROVIDERS -> regTypes.removeIf(t -> t.provider);
+            case ALL_EVENTS -> regTypes.removeIf(t -> t.event);
+            case ALL_DATA -> regTypes.removeIf(t -> t.data);
+            case ALL_RES -> regTypes.removeIf(t -> t.res);
+            case ALL -> regTypes.clear();
+        }
         return this;
     }
 
