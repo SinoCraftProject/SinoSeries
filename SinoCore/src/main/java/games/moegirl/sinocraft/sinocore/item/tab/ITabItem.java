@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.item.tab;
+package games.moegirl.sinocraft.sinocore.item.tab;
 
 import net.minecraft.resources.ResourceLocation;
 
