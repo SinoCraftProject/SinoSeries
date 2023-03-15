@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.packet;
 
+import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,9 +12,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public record SignTextUpdateC2SPacket(BlockPos pos, String[] lines) {
+public record SignTextUpdateC2SPacket(BlockPos pos, String[] lines) implements Consumer<ServerPlayer> {
 
     public static SignTextUpdateC2SPacket read(FriendlyByteBuf buf) {
         BlockPos pos = buf.readBlockPos();
@@ -41,7 +43,8 @@ public record SignTextUpdateC2SPacket(BlockPos pos, String[] lines) {
         if (lines[3] != null) buf.writeUtf(lines[3]);
     }
 
-    public void handleServer(ServerPlayer sender) {
+    @Override
+    public void accept(ServerPlayer sender) {
         ServerLevel level = sender.getLevel();
         if (level.hasChunkAt(pos) && level.getBlockEntity(pos) instanceof ModSignBlockEntity sign) {
             List<String> messages = Arrays.stream(lines)

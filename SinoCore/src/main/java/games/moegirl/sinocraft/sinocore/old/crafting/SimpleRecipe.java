@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.crafting;
 
-import games.moegirl.sinocraft.sinocore.old.utility.Self;
+import games.moegirl.sinocraft.sinocore.utility.Self;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.tree;
+package games.moegirl.sinocraft.sinocore.handler;
 
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,10 +30,10 @@ public class TreeEventHandler {
         return PROVIDERS.computeIfAbsent(modid, __ -> new TreeEventHandler());
     }
 
-    final List<Tree> tabs = new ArrayList<>();
-    final List<Tree> render = new ArrayList<>();
+    public final List<Tree> tabs = new ArrayList<>();
+    public final List<Tree> render = new ArrayList<>();
 
-    void register(IEventBus bus) {
+    public void register(IEventBus bus) {
         if (tabs.isEmpty() && render.isEmpty()) return;
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             if (!tabs.isEmpty()) {

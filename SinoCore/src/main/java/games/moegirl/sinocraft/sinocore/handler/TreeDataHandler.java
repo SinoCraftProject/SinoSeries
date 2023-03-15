@@ -1,8 +1,10 @@
-package games.moegirl.sinocraft.sinocore.tree;
+package games.moegirl.sinocraft.sinocore.handler;
 
 import games.moegirl.sinocraft.sinocore.data.base.BaseCodecProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockLoot;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
@@ -46,15 +48,15 @@ public class TreeDataHandler {
         return PROVIDERS.computeIfAbsent(modid, TreeDataHandler::new);
     }
 
-    final List<Tree> langEn = new ArrayList<>();
-    final List<Tree> langZh = new ArrayList<>();
-    final List<Tree> mBlock = new ArrayList<>();
-    final List<Tree> mItem = new ArrayList<>();
-    final List<Tree> recipe = new ArrayList<>();
-    final List<Tree> blockTags = new ArrayList<>();
-    final List<Tree> itemTags = new ArrayList<>();
-    final List<Tree> lootTable = new ArrayList<>();
-    final Map<ResourceLocation, Supplier<ConfiguredFeature<?, ?>>> features = new HashMap<>();
+    public final List<Tree> langEn = new ArrayList<>();
+    public final List<Tree> langZh = new ArrayList<>();
+    public final List<Tree> mBlock = new ArrayList<>();
+    public final List<Tree> mItem = new ArrayList<>();
+    public final List<Tree> recipe = new ArrayList<>();
+    public final List<Tree> blockTags = new ArrayList<>();
+    public final List<Tree> itemTags = new ArrayList<>();
+    public final List<Tree> lootTable = new ArrayList<>();
+    public final Map<ResourceLocation, Supplier<ConfiguredFeature<?, ?>>> features = new HashMap<>();
 
     final String modid;
     PackOutput output;
@@ -87,7 +89,7 @@ public class TreeDataHandler {
         if (!features.isEmpty()) generator.addProvider(true, new TFeatureProvider());
     }
 
-    void register(IEventBus bus) {
+    public void register(IEventBus bus) {
         if (features.isEmpty() && langEn.isEmpty() && langZh.isEmpty() && mBlock.isEmpty() && mItem.isEmpty()
                 && recipe.isEmpty() && blockTags.isEmpty() && itemTags.isEmpty() && lootTable.isEmpty()) return;
         bus.register(this);

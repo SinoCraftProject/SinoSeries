@@ -1,18 +1,19 @@
 package games.moegirl.sinocraft.sinocore.woodwork;
 
+import games.moegirl.sinocraft.sinocore.utility.Self;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.properties.WoodType;
 
-public interface IWoodworkEntity {
+/**
+ * Mod 木制品方块中的 BlockEntity 接口
+ */
+public interface IWoodworkEntity<T extends BlockEntity> extends Self<T> {
 
-    default WoodType getWoodType() {
-        if (this instanceof BlockEntity be) {
-            Block block = be.getBlockState().getBlock();
-            if (block instanceof IWoodwork woodwork) {
-                return woodwork.getWoodType();
-            }
+    default Woodwork getWoodwork() {
+        Block block = self().getBlockState().getBlock();
+        if (block instanceof IWoodworkBlock woodwork) {
+            return woodwork.getWoodwork();
         }
-        return WoodType.OAK;
+        throw new RuntimeException("Not found woodwork in " + self().getClass());
     }
 }

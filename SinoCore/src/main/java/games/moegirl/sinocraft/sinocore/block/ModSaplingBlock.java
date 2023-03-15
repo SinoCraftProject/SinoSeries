@@ -9,16 +9,16 @@ import net.minecraft.world.level.material.Material;
 /**
  * 树苗
  */
-public class BlockTreeSapling extends SaplingBlock implements ITreeBlock {
+public class ModSaplingBlock extends SaplingBlock implements ITreeBlock {
 
     private final Tree tree;
 
-    public BlockTreeSapling(AbstractTreeGrower pTreeGrower, Properties pProperties, Tree tree) {
+    public ModSaplingBlock(AbstractTreeGrower pTreeGrower, Properties pProperties, Tree tree) {
         super(pTreeGrower, pProperties);
         this.tree = tree;
     }
 
-    public BlockTreeSapling(Tree tree) {
+    public ModSaplingBlock(Tree tree) {
         this(tree.properties().grower(), Properties.of(Material.PLANT)
                 .noCollission()
                 .randomTicks()

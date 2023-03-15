@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.block;
 
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;

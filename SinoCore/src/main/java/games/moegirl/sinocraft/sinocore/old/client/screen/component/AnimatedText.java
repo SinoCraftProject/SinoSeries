@@ -8,6 +8,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 
@@ -23,7 +24,7 @@ public class AnimatedText extends AbstractWidget {
     private Font font;
 
     public AnimatedText(int pX, int pY, int pWidth, int pHeight, Font font) {
-        super(pX, pY, pWidth, pHeight, Component.empty());
+        super(pX, pY, pWidth, pHeight, CommonComponents.EMPTY);
         this.font = font;
     }
 
@@ -33,7 +34,7 @@ public class AnimatedText extends AbstractWidget {
 
     public void begin(Duration duration, int repeat, int r, int g, int b, Component message) {
         Verify.verify(duration.toNanos() > 0, "duration must not 0, your is " + duration);
-        Verify.verify(!Component.empty().equals(message), "message must not empty");
+        Verify.verify(!CommonComponents.EMPTY.equals(message), "message must not empty");
 
         setMessage(message);
         this.beginTime = System.nanoTime();
@@ -53,7 +54,7 @@ public class AnimatedText extends AbstractWidget {
     }
 
     public void stop() {
-        setMessage(Component.empty());
+        setMessage(CommonComponents.EMPTY);
         beginTime = 0;
         duration = 0;
         repeat = 0;
@@ -73,7 +74,7 @@ public class AnimatedText extends AbstractWidget {
     @Override
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         Component message = getMessage();
-        if (!Component.empty().equals(message) && duration > 0) {
+        if (!CommonComponents.EMPTY.equals(message) && duration > 0) {
             long delta = System.nanoTime() - beginTime;
             if (delta >= duration) {
                 if (repeat != 0) {

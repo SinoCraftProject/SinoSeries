@@ -1,5 +1,9 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.block;
 
+import games.moegirl.sinocraft.sinocore.woodwork.IWoodworkBlock;
+import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.packet.SignEditOpenS2CPacket;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,10 +21,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
 
-public abstract class ModSignBlock extends SignBlock implements IWoodwork {
+public abstract class ModSignBlock extends SignBlock implements IWoodworkBlock {
 
     private final Woodwork woodwork;
 
@@ -39,7 +42,7 @@ public abstract class ModSignBlock extends SignBlock implements IWoodwork {
         ItemStack itemstack = player.getItemInHand(pHand);
         if (!world.isClientSide && itemstack.isEmpty() && player instanceof ServerPlayer sp) {
             if (world.getBlockEntity(pPos) instanceof ModSignBlockEntity sign && sign.canPlayerEdit(player)) {
-                woodwork.manager().network().sendToClient(new SignEditOpenS2CPacket(pPos), sp);
+                Woodwork.network(woodwork.name.getNamespace()).sendToClient(new SignEditOpenS2CPacket(pPos), sp);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -88,11 +91,4 @@ public abstract class ModSignBlock extends SignBlock implements IWoodwork {
         return woodwork;
     }
 
-    public static Woodwork getWoodwork(BlockState state) {
-        return ((ModSignBlock) state.getBlock()).woodwork;
-    }
-
-    public static WoodType getWoodType(BlockState state) {
-        return getWoodwork(state).type;
-    }
 }

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.world;
 
-import games.moegirl.sinocraft.sinocore.old.utility.Self;
+import games.moegirl.sinocraft.sinocore.utility.Self;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;

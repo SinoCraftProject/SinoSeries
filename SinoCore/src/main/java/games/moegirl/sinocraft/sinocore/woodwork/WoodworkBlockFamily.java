@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-public interface BlockFamilyRegister {
+public interface WoodworkBlockFamily {
 
     Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> shapeBuilders = ImmutableMap.<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>>builder()
             .put(BlockFamily.Variant.BUTTON, (out, in) -> buttonBuilder(out, Ingredient.of(in)))

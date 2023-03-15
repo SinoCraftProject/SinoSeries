@@ -34,7 +34,7 @@ public class SCTabs {
                 for (var registryItem : deferredRegister.getEntries()) {
                     var item = registryItem.get();
                     if (item instanceof ITabItem tabItem) {
-                        addToList(tabItem.getTab(), item);
+                        tabItem.getTabs().forEach(id -> addToList(id, item));
                     } else {
                         addToList(deferredRegisters.getKey(), item);
                     }

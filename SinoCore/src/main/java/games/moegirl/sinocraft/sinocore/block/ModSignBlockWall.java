@@ -1,6 +1,8 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.block;
 
 import com.google.common.collect.Maps;
+import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

@@ -1,6 +1,9 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import games.moegirl.sinocraft.sinocore.handler.TreeDataHandler;
+import games.moegirl.sinocraft.sinocore.handler.TreeEventHandler;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
+import games.moegirl.sinocraft.sinocore.utility.RegType;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -70,8 +73,8 @@ public class Tree {
     private final Set<Block> allBlocks = new HashSet<>();
     private final Set<Item> allItems = new HashSet<>();
 
-    final TagKey<Block> tagLogs;
-    final TagKey<Item> tagItemLogs;
+    public final TagKey<Block> tagLogs;
+    public final TagKey<Item> tagItemLogs;
     private final BuilderProperties properties;
 
     Tree(TreeBuilder builder, DeferredRegister<Block> blocks, DeferredRegister<Item> items) {
@@ -211,34 +214,5 @@ public class Tree {
                                     MaterialColor topLogColor, MaterialColor barkLogColor,
                                     MaterialColor topStrippedLogColor, MaterialColor barkStrippedLogColor,
                                     MaterialColor woodColor, MaterialColor strippedWoodColor) {
-    }
-
-    public enum RegType {
-        BLOCK_MODELS(true, false, true, false, false, true),
-        ITEM_MODELS(true, false, true, false, false, true),
-        RECIPES(false, false, true, false, true, false),
-        BLOCK_TAGS(false, true, true, false, true, false),
-        ITEM_TAGS(false, true, true, false, true, false),
-        LOOT_TABLES(false, false, true, false, true, false),
-
-        TAB_CONTENTS(false, false, false, true, false, false),
-        RENDER_TYPE(false, false, false, true, false, false),
-
-        ALL_MODELS, ALL_TAGS, ALL_PROVIDERS, ALL_EVENTS, ALL_DATA, ALL_RES, ALL;
-
-        final boolean model, tag, provider, event, data, res;
-
-        RegType() {
-            this(false, false, false, false, false, false);
-        }
-
-        RegType(boolean model, boolean tag, boolean provider, boolean event, boolean data, boolean res) {
-            this.model = model;
-            this.tag = tag;
-            this.provider = provider;
-            this.event = event;
-            this.data = data;
-            this.res = res;
-        }
     }
 }

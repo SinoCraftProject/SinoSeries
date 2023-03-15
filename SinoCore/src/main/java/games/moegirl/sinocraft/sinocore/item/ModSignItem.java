@@ -1,5 +1,8 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.item;
 
+import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.packet.SignEditOpenS2CPacket;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
@@ -10,7 +13,6 @@ import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 
@@ -30,9 +32,8 @@ public class ModSignItem extends StandingAndWallBlockItem {
             if (!pLevel.isClientSide && !flag && pPlayer instanceof ServerPlayer sp && pLevel.getBlockEntity(pPos) instanceof ModSignBlockEntity sign) {
                 sign.setPlayerWhoMayEdit(pPlayer.getUUID());
                 sp.connection.send(new ClientboundBlockUpdatePacket(pLevel, pPos));
-                WoodworkManager.getManager(ForgeRegistries.BLOCK_ENTITY_TYPES.getKey(sign.getType()))
-                        .map(WoodworkManager::network)
-                        .ifPresent(wn -> wn.sendToClient(new SignEditOpenS2CPacket(pPos), sp));
+                Woodwork.network(sign.getWoodwork().name.getNamespace())
+                        .sendToClient(new SignEditOpenS2CPacket(pPos), sp);
             }
         }
 

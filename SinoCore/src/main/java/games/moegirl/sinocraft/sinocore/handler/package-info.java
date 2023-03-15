@@ -1,7 +1,10 @@
+/**
+ * Tree blocks and items base on access t
+ */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-package games.moegirl.sinocraft.sinocore.old.client.render;
+package games.moegirl.sinocraft.sinocore.handler;
 
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;

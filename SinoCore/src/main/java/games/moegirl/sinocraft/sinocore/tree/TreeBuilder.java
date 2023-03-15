@@ -1,10 +1,12 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.block.BlockTreeLeaves;
-import games.moegirl.sinocraft.sinocore.block.BlockTreeLog;
-import games.moegirl.sinocraft.sinocore.block.BlockTreeSapling;
-import games.moegirl.sinocraft.sinocore.block.BlockTreeWood;
+import games.moegirl.sinocraft.sinocore.block.ModLeavesBlock;
+import games.moegirl.sinocraft.sinocore.block.ModLogBlock;
+import games.moegirl.sinocraft.sinocore.block.ModSaplingBlock;
+import games.moegirl.sinocraft.sinocore.block.ModWoodBlock;
+import games.moegirl.sinocraft.sinocore.handler.TreeDataHandler;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
+import games.moegirl.sinocraft.sinocore.utility.RegType;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -55,12 +57,12 @@ public class TreeBuilder {
     MaterialColor woodColor = MaterialColor.WOOD;
     MaterialColor strippedWoodColor = MaterialColor.WOOD;
 
-    Function<Tree, SaplingBlock> sapling = BlockTreeSapling::new;
-    Function<Tree, RotatedPillarBlock> log = tree -> new BlockTreeLog(tree, false);
-    Function<Tree, RotatedPillarBlock> strippedLog = tree -> new BlockTreeLog(tree, true);
-    Function<Tree, RotatedPillarBlock> wood = tree -> new BlockTreeWood(tree, false);
-    Function<Tree, RotatedPillarBlock> strippedWood = tree -> new BlockTreeWood(tree, true);
-    Function<Tree, LeavesBlock> leaves = BlockTreeLeaves::new;
+    Function<Tree, SaplingBlock> sapling = ModSaplingBlock::new;
+    Function<Tree, RotatedPillarBlock> log = tree -> new ModLogBlock(tree, false);
+    Function<Tree, RotatedPillarBlock> strippedLog = tree -> new ModLogBlock(tree, true);
+    Function<Tree, RotatedPillarBlock> wood = tree -> new ModWoodBlock(tree, false);
+    Function<Tree, RotatedPillarBlock> strippedWood = tree -> new ModWoodBlock(tree, true);
+    Function<Tree, LeavesBlock> leaves = ModLeavesBlock::new;
     Function<Tree, FlowerPotBlock> pottedSapling = tree -> new FlowerPotBlock(
             () -> (FlowerPotBlock) Blocks.FLOWER_POT, tree.sapling,
             BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion());
@@ -74,7 +76,7 @@ public class TreeBuilder {
 
     AbstractTreeGrower grower = new OakTreeGrower();
     FloatModifier strengthModifier = new FloatModifier();
-    EnumSet<Tree.RegType> regTypes = EnumSet.allOf(Tree.RegType.class);
+    EnumSet<RegType> regTypes = EnumSet.allOf(RegType.class);
 
     public TreeBuilder(ResourceLocation name, @Nullable String enName, @Nullable String zhName) {
         this.name = name;
@@ -126,13 +128,17 @@ public class TreeBuilder {
         return this;
     }
 
-    public TreeBuilder tab(CreativeModeTab tab) {
-        saplingTabs = List.of(tab);
-        leavesTabs = List.of(tab);
-        logTabs = List.of(tab);
-        strippedLogTabs = List.of(tab);
-        woodTabs = List.of(tab);
-        strippedWoodTabs = List.of(tab);
+    public TreeBuilder tab(CreativeModeTab... tabs) {
+        return tab(List.of(tabs));
+    }
+
+    public TreeBuilder tab(List<CreativeModeTab> tabs) {
+        saplingTabs = tabs;
+        leavesTabs = tabs;
+        logTabs = tabs;
+        strippedLogTabs = tabs;
+        woodTabs = tabs;
+        strippedWoodTabs = tabs;
         return this;
     }
 
@@ -261,7 +267,7 @@ public class TreeBuilder {
         return this;
     }
 
-    public TreeBuilder disableRegister(Tree.RegType type) {
+    public TreeBuilder disableRegister(RegType type) {
         regTypes.remove(type);
         switch (type) {
             case ALL_MODELS -> regTypes.removeIf(t -> t.model);

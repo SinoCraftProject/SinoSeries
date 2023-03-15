@@ -9,16 +9,16 @@ import net.minecraft.world.level.material.Material;
 /**
  * 树叶
  */
-public class BlockTreeLeaves extends LeavesBlock implements ITreeBlock {
+public class ModLeavesBlock extends LeavesBlock implements ITreeBlock {
 
     private final Tree tree;
 
-    public BlockTreeLeaves(Tree tree, Properties properties) {
+    public ModLeavesBlock(Tree tree, Properties properties) {
         super(properties);
         this.tree = tree;
     }
 
-    public BlockTreeLeaves(Tree tree) {
+    public ModLeavesBlock(Tree tree) {
         this(tree, Properties.of(Material.LEAVES)
                 .randomTicks()
                 .noOcclusion()

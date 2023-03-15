@@ -12,9 +12,9 @@ public abstract class MixinBlockProperties implements IBlockProperties {
 
     @Override
     @Accessor
-    public abstract float sinocoreGetDestroyTime();
+    public abstract float getDestroyTime();
 
     @Override
     @Accessor
-    public abstract float sinocoreGetExplosionResistance();
+    public abstract float getExplosionResistance();
 }
