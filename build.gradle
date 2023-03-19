@@ -1,7 +1,7 @@
 plugins {
     id 'maven-publish'
-    id 'architectury-plugin' version '3.4-SNAPSHOT'
-    id 'dev.architectury.loom' version '1.1-SNAPSHOT'
+    id 'architectury-plugin' version "${architectury_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
 }
 
 println "Java: ${System.getProperty 'java.version'}, " +
@@ -25,6 +25,10 @@ dependencies {
     implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
     implementation project(path: ':SinoTest', configuration: 'namedElements')
 
+    // Add compile only api to any subproject.
+//    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+//    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 }
 
 evaluationDependsOn ':SinoCore'
@@ -149,10 +153,24 @@ allprojects {
             name = 'Jitpack'
             url = 'https://jitpack.io'
         }
+
+        maven {
+            // location of the maven that hosts JEI files before January 2023
+            name = "Progwml6's maven"
+            url = "https://dvs1.progwml6.com/files/maven/"
+        }
+
+        maven {
+            // location of a maven mirror for JEI files, as a fallback
+            name = "ModMaven"
+            url = "https://modmaven.dev"
+        }
     }
 }
 
 subprojects {
+    apply plugin: 'dev.architectury.loom'
+
     apply plugin: 'java'
     apply plugin: 'eclipse'
 
@@ -162,6 +180,12 @@ subprojects {
         toolchain.languageVersion = JavaLanguageVersion.of(17)
 
         withSourcesJar()
+    }
+
+    loom {
+        silentMojangMappingsLicense()
+
+        forge {}
     }
 
     sourceSets.main.resources {
@@ -194,8 +218,21 @@ subprojects {
         }
     }
 
-    remapJar.destinationDir = file("${rootProject.projectDir}/output")
-    remapSourcesJar.destinationDir = file("${rootProject.projectDir}/output")
+    remapJar {
+        onlyIf {
+            modid != 'sinotest' || modid != 'sinoseries'
+        }
+
+        destinationDir = file("${rootProject.projectDir}/output")
+    }
+
+    remapSourcesJar {
+        onlyIf {
+            modid != 'sinotest' || modid != 'sinoseries'
+        }
+
+        destinationDir = file("${rootProject.projectDir}/output")
+    }
 }
 
 publishing {
