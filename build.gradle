@@ -127,7 +127,9 @@ allprojects {
     group 'games.moegirl.sinocraft'
     version "${project.minecraft_version}-${project.sinoseries_version}"
 
-    if (System.getenv('JITPACK') == 'true') {
+    if (System.getenv('GITHUB_SHA') != null) {
+        version += "-${System.getenv('GITHUB_SHA').substring(0, 6)}"
+    } else if (System.getenv('JITPACK') == 'true') {
         version += "-${System.getenv('VERSION')}"
     }
 
@@ -177,7 +179,7 @@ subprojects {
     println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
 
     java {
-        toolchain.languageVersion = JavaLanguageVersion.of(17)
+//        toolchain.languageVersion = JavaLanguageVersion.of(17)
 
         withSourcesJar()
     }
@@ -219,19 +221,11 @@ subprojects {
     }
 
     remapJar {
-        onlyIf {
-            modid != 'sinotest' || modid != 'sinoseries'
-        }
-
-        destinationDir = file("${rootProject.projectDir}/output")
+        destinationDirectory.set(file("${rootProject.projectDir}/output"))
     }
 
     remapSourcesJar {
-        onlyIf {
-            modid != 'sinotest' || modid != 'sinoseries'
-        }
-
-        destinationDir = file("${rootProject.projectDir}/output")
+        destinationDirectory.set(file("${rootProject.projectDir}/output"))
     }
 }
 
