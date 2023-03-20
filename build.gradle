@@ -26,9 +26,7 @@ dependencies {
     implementation project(path: ':SinoTest', configuration: 'namedElements')
 
     // Add compile only api to any subproject.
-//    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-//    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
 }
 
 evaluationDependsOn ':SinoCore'
@@ -157,16 +155,24 @@ allprojects {
         }
 
         maven {
-            // location of the maven that hosts JEI files before January 2023
-            name = "Progwml6's maven"
-            url = "https://dvs1.progwml6.com/files/maven/"
+            name = 'Curse Maven'
+            url = 'https://cursemaven.com'
+            content {
+                includeGroup 'curse.maven'
+            }
         }
 
-        maven {
-            // location of a maven mirror for JEI files, as a fallback
-            name = "ModMaven"
-            url = "https://modmaven.dev"
-        }
+//        maven {
+//            // location of the maven that hosts JEI files before January 2023
+//            name = "Progwml6's maven"
+//            url = "https://dvs1.progwml6.com/files/maven/"
+//        }
+//
+//        maven {
+//            // location of a maven mirror for JEI files, as a fallback
+//            name = "ModMaven"
+//            url = "https://modmaven.dev"
+//        }
     }
 }
 
