@@ -25,9 +25,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -37,8 +35,6 @@ import java.util.function.Supplier;
 public class TreeBuilder {
 
     final ResourceLocation name;
-    @Nullable
-    final String enName, zhName;
 
     List<CreativeModeTab> saplingTabs = List.of(CreativeModeTabs.NATURAL_BLOCKS);
     List<CreativeModeTab> leavesTabs = List.of(CreativeModeTabs.NATURAL_BLOCKS);
@@ -77,16 +73,10 @@ public class TreeBuilder {
     AbstractTreeGrower grower = new OakTreeGrower();
     FloatModifier strengthModifier = new FloatModifier();
     EnumSet<RegType> regTypes = EnumSet.allOf(RegType.class);
+    Map<String, String> languages = new HashMap<>();
 
-    public TreeBuilder(ResourceLocation name, @Nullable String enName, @Nullable String zhName) {
+    public TreeBuilder(ResourceLocation name) {
         this.name = name;
-        this.enName = enName;
-        this.zhName = zhName;
-    }
-
-    public TreeBuilder(ResourceLocation name, @Nullable String zhName) {
-        this.name = name;
-        this.zhName = zhName;
 
         StringBuilder sb = new StringBuilder();
         for (String s : name.getPath().split("_")) {
@@ -95,7 +85,7 @@ public class TreeBuilder {
             sb.append(Character.toUpperCase(s1.charAt(0)));
             sb.append(s1.substring(1));
         }
-        this.enName = sb.toString();
+        languages.put("en_us", sb.toString());
     }
 
     public TreeBuilder saplingTabs(CreativeModeTab... tabs) {
@@ -257,6 +247,20 @@ public class TreeBuilder {
     public TreeBuilder grower(Supplier<ConfiguredFeature<?, ?>> builder) {
         TreeDataHandler.obtain(name.getNamespace()).features.put(name, builder);
         return grower(name);
+    }
+
+    public TreeBuilder lang(String local, @Nullable String name) {
+        if (name == null) languages.remove(local);
+        else languages.put(local, name);
+        return this;
+    }
+
+    public TreeBuilder zh_cn(String name) {
+        return lang("zh_cn", name);
+    }
+
+    public TreeBuilder en_us(@Nullable String name) {
+        return lang("en_us", name);
     }
 
     /**

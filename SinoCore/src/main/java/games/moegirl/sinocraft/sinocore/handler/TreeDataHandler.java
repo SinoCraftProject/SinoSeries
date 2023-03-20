@@ -50,8 +50,7 @@ public class TreeDataHandler {
         return PROVIDERS.computeIfAbsent(modid, TreeDataHandler::new);
     }
 
-    public final List<Tree> langEn = new ArrayList<>();
-    public final List<Tree> langZh = new ArrayList<>();
+    public final List<Tree> lang = new ArrayList<>();
     public final List<Tree> mBlock = new ArrayList<>();
     public final List<Tree> mItem = new ArrayList<>();
     public final List<Tree> recipe = new ArrayList<>();
@@ -76,8 +75,10 @@ public class TreeDataHandler {
         helper = event.getExistingFileHelper();
         provider = event.getLookupProvider();
 
-        if (!langEn.isEmpty()) generator.addProvider(true, new TEnLangProvider());
-        if (!langZh.isEmpty()) generator.addProvider(true, new TZhLangProvider());
+        if (!lang.isEmpty()) {
+            generator.addProvider(true, new TEnLangProvider());
+            generator.addProvider(true, new TZhLangProvider());
+        }
         if (!mBlock.isEmpty()) generator.addProvider(true, new TBlockStateProvider());
         if (!mItem.isEmpty()) generator.addProvider(true, new TItemModelProvider());
         if (!recipe.isEmpty()) generator.addProvider(true, new TRecipeProvider());
@@ -94,8 +95,8 @@ public class TreeDataHandler {
     }
 
     public void register(IEventBus bus) {
-        if (features.isEmpty() && langEn.isEmpty() && langZh.isEmpty() && mBlock.isEmpty() && mItem.isEmpty()
-                && recipe.isEmpty() && blockTags.isEmpty() && itemTags.isEmpty() && lootTable.isEmpty()) return;
+        if (features.isEmpty() && lang.isEmpty() && mBlock.isEmpty() && mItem.isEmpty() && recipe.isEmpty()
+                && blockTags.isEmpty() && itemTags.isEmpty() && lootTable.isEmpty()) return;
         bus.register(this);
     }
 
@@ -107,16 +108,18 @@ public class TreeDataHandler {
 
         @Override
         protected void addTranslations() {
-            langEn.forEach(tree -> {
-                String name = tree.properties().enName();
-                addBlock(tree.sapling, name + " Sapling");
-                addBlock(tree.log, name + " Log");
-                addBlock(tree.strippedLog, "Stripped" + name + " Stripped");
-                addBlock(tree.wood, name + " Wood");
-                addBlock(tree.strippedWood, "Stripped " + name + " Wood");
-                addBlock(tree.leaves, name + " Leaves");
-                addBlock(tree.pottedSapling, "Potted " + name + " Sapling");
-            });
+            for (Tree tree : lang) {
+                if (tree.properties().langs().containsKey("en_us")) {
+                    String name = tree.properties().langs().get("en_us");
+                    addBlock(tree.sapling, name + " Sapling");
+                    addBlock(tree.log, name + " Log");
+                    addBlock(tree.strippedLog, "Stripped" + name + " Stripped");
+                    addBlock(tree.wood, name + " Wood");
+                    addBlock(tree.strippedWood, "Stripped " + name + " Wood");
+                    addBlock(tree.leaves, name + " Leaves");
+                    addBlock(tree.pottedSapling, "Potted " + name + " Sapling");
+                }
+            }
         }
 
         @Override
@@ -133,17 +136,19 @@ public class TreeDataHandler {
 
         @Override
         protected void addTranslations() {
-            langZh.forEach(tree -> {
-                String name = tree.properties().zhName();
-                String woodName = name.endsWith("树") ? name.substring(0, name.length() - 1) : name;
-                addBlock(tree.sapling, name + "树苗");
-                addBlock(tree.log, name + "原木");
-                addBlock(tree.strippedLog, "去皮" + name + "原木");
-                addBlock(tree.wood, woodName + "木");
-                addBlock(tree.strippedWood, "去皮" + woodName + "木");
-                addBlock(tree.leaves, name + "树叶");
-                addBlock(tree.pottedSapling, name + "树苗盆栽");
-            });
+            for (Tree tree : lang) {
+                if (tree.properties().langs().containsKey("zh_cn")) {
+                    String name = tree.properties().langs().get("zh_cn");
+                    String woodName = name.endsWith("树") ? name.substring(0, name.length() - 1) : name;
+                    addBlock(tree.sapling, name + "树苗");
+                    addBlock(tree.log, name + "原木");
+                    addBlock(tree.strippedLog, "去皮" + name + "原木");
+                    addBlock(tree.wood, woodName + "木");
+                    addBlock(tree.strippedWood, "去皮" + woodName + "木");
+                    addBlock(tree.leaves, name + "树叶");
+                    addBlock(tree.pottedSapling, name + "树苗盆栽");
+                }
+            }
         }
 
         @Override

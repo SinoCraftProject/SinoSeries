@@ -50,12 +50,12 @@ public class Tree {
         return get(new ResourceLocation(name));
     }
 
-    public static TreeBuilder builder(ResourceLocation name, String enName, String zhName) {
-        return new TreeBuilder(name, enName, zhName);
+    public static TreeBuilder builder(ResourceLocation name) {
+        return new TreeBuilder(name);
     }
 
-    public static TreeBuilder builder(ResourceLocation name, String zhName) {
-        return new TreeBuilder(name, zhName);
+    public static TreeBuilder builder(String modid, String name) {
+        return new TreeBuilder(new ResourceLocation(modid, name));
     }
 
     public static void register(String modid, IEventBus bus) {
@@ -78,9 +78,7 @@ public class Tree {
     private final BuilderProperties properties;
 
     Tree(TreeBuilder builder, DeferredRegister<Block> blocks, DeferredRegister<Item> items) {
-        properties = new BuilderProperties(builder.name,
-                builder.enName == null ? "@null" : builder.enName,
-                builder.zhName == null ? "@null" : builder.zhName,
+        properties = new BuilderProperties(builder.name, builder.languages,
                 builder.grower, builder.strengthModifier,
                 builder.saplingTabs, builder.leavesTabs,
                 builder.logTabs, builder.strippedLogTabs,
@@ -115,8 +113,7 @@ public class Tree {
 
         Lazy<TreeDataHandler> dataHandler = Lazy.of(() -> TreeDataHandler.obtain(name().getNamespace()));
         Lazy<TreeEventHandler> eventHandler = Lazy.of(() -> TreeEventHandler.obtain(name().getNamespace()));
-        if (builder.enName != null) dataHandler.get().langEn.add(this);
-        if (builder.zhName != null) dataHandler.get().langZh.add(this);
+        if (!builder.languages.isEmpty()) dataHandler.get().lang.add(this);
         for (RegType type : builder.regTypes) {
             switch (type) {
                 case BLOCK_MODELS -> dataHandler.get().mBlock.add(this);
@@ -205,7 +202,7 @@ public class Tree {
         return properties;
     }
 
-    public record BuilderProperties(ResourceLocation name, String enName, String zhName,
+    public record BuilderProperties(ResourceLocation name, Map<String, String> langs,
                                     AbstractTreeGrower grower, FloatModifier strengthModifier,
                                     List<CreativeModeTab> saplingTabs, List<CreativeModeTab> leavesTabs,
                                     List<CreativeModeTab> logTabs, List<CreativeModeTab> strippedLogTabs,

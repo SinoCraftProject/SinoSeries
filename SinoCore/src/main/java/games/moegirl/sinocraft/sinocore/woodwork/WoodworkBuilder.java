@@ -16,13 +16,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * 若使用自定义方块，请为其正确添加对应辅助接口以便可以正确生成对应功能
@@ -34,10 +34,9 @@ import java.util.function.Supplier;
 public class WoodworkBuilder {
 
     final ResourceLocation name;
-    @Nullable
-    final String zhName, enName;
     MaterialColor plankColor = MaterialColor.WOOD;
     EnumSet<RegType> regTypes = EnumSet.allOf(RegType.class);
+    Map<String, String> languages = new HashMap<>();
 
     Function<Woodwork, Item.Properties> defaultItemProperties = w -> new Item.Properties();
 
@@ -136,10 +135,12 @@ public class WoodworkBuilder {
 
     FloatModifier strengthModifier = new FloatModifier();
 
-    public WoodworkBuilder(ResourceLocation name, @Nullable String zhName, @Nullable String enName) {
+    public WoodworkBuilder(ResourceLocation name) {
         this.name = name;
-        this.enName = enName;
-        this.zhName = zhName;
+        this.languages.put("en_us", Arrays.stream(name.getPath().split("_"))
+                .filter(s -> !s.isEmpty())
+                .map(s -> s.length() == 1 ? s.toUpperCase(Locale.ROOT) : Character.toUpperCase(s.charAt(0)) + s.substring(1))
+                .collect(Collectors.joining(" ")));
     }
 
     public WoodworkBuilder plankColor(MaterialColor color) {
@@ -585,6 +586,20 @@ public class WoodworkBuilder {
 
     private BiFunction<Item.Properties, Woodwork, BlockItem> defaultBlockItem(Function<Woodwork, Block> block) {
         return (prop, woodwork) -> new BlockItem(block.apply(woodwork), prop);
+    }
+
+    public WoodworkBuilder lang(String local, @org.jetbrains.annotations.Nullable String name) {
+        if (name == null) languages.remove(local);
+        else languages.put(local, name);
+        return this;
+    }
+
+    public WoodworkBuilder zh_cn(String name) {
+        return lang("zh_cn", name);
+    }
+
+    public WoodworkBuilder en_us(@Nullable String name) {
+        return lang("en_us", name);
     }
 
     public WoodworkBuilder disableRegister(RegType type) {

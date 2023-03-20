@@ -25,7 +25,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 /**
  * 木制品，包括木板，告示牌，楼梯，半砖，按钮，压力板，门等
@@ -57,15 +56,12 @@ public class Woodwork {
         return NETS.get(modid);
     }
 
-    public static WoodworkBuilder builder(ResourceLocation name, String enName, String zhName) {
-        return new WoodworkBuilder(name, enName, zhName);
+    public static WoodworkBuilder builder(ResourceLocation name) {
+        return new WoodworkBuilder(name);
     }
 
-    public static WoodworkBuilder builder(ResourceLocation name, String zhName) {
-        return new WoodworkBuilder(name, zhName, Arrays.stream(name.getPath().split("_"))
-                .filter(s -> !s.isEmpty())
-                .map(s -> s.length() == 1 ? s.toUpperCase(Locale.ROOT) : Character.toUpperCase(s.charAt(0)) + s.substring(1))
-                .collect(Collectors.joining(" ")));
+    public static WoodworkBuilder builder(String modid, String name) {
+        return new WoodworkBuilder(new ResourceLocation(modid, name));
     }
 
     public static void register(String modid, IEventBus bus, NetworkHolder network) {
@@ -80,6 +76,7 @@ public class Woodwork {
     public final MaterialColor plankColor;
     public final WoodType type;
     public final ResourceLocation name;
+    public final Map<String, String> lang;
 
     // blocks
     public final RegistryObject<Block> planks;
@@ -113,6 +110,7 @@ public class Woodwork {
         this.plankColor = builder.plankColor;
         this.name = builder.name;
         this.type = WoodType.register(WoodType.create(name.toString()));
+        this.lang = builder.languages;
 
         this.planks = addBlock(items, blocks, builder, builder.planks, true);
         this.sign = addBlock(items, blocks, builder, builder.sign, true);
@@ -136,8 +134,7 @@ public class Woodwork {
 
         Lazy<WoodworkDataHandler> dataHandler = Lazy.of(() -> WoodworkDataHandler.obtain(name().getNamespace()));
         Lazy<WoodworkEventHandler> eventHandler = Lazy.of(() -> WoodworkEventHandler.obtain(name().getNamespace()));
-        if (builder.enName != null) dataHandler.get().langEn.add(Pair.of(this, builder.enName));
-        if (builder.zhName != null) dataHandler.get().langZh.add(Pair.of(this, builder.zhName));
+        if (!builder.languages.isEmpty()) dataHandler.get().lang.add(this);
         for (RegType type : builder.regTypes) {
             switch (type) {
                 case BLOCK_MODELS -> dataHandler.get().mBlock.add(this);

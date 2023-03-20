@@ -61,8 +61,7 @@ public class WoodworkDataHandler {
         return PROVIDERS.computeIfAbsent(modid, WoodworkDataHandler::new);
     }
 
-    public final List<Pair<Woodwork, String>> langEn = new ArrayList<>();
-    public final List<Pair<Woodwork, String>> langZh = new ArrayList<>();
+    public final List<Woodwork> lang = new ArrayList<>();
     public final List<Woodwork> mBlock = new ArrayList<>();
     public final List<Woodwork> mItem = new ArrayList<>();
     public final List<Pair<Woodwork, Supplier<? extends ItemLike>>> recipe = new ArrayList<>();
@@ -86,8 +85,10 @@ public class WoodworkDataHandler {
         helper = event.getExistingFileHelper();
         provider = event.getLookupProvider();
 
-        if (!langEn.isEmpty()) generator.addProvider(true, new WEnLangProvider());
-        if (!langZh.isEmpty()) generator.addProvider(true, new WZhLangProvider());
+        if (!lang.isEmpty()) {
+            generator.addProvider(true, new WEnLangProvider());
+            generator.addProvider(true, new WZhLangProvider());
+        }
         if (!mBlock.isEmpty()) generator.addProvider(true, new WBlockStateProvider());
         if (!mItem.isEmpty()) generator.addProvider(true, new WItemModelProvider());
         if (!recipe.isEmpty()) generator.addProvider(true, new WRecipeProvider());
@@ -115,8 +116,8 @@ public class WoodworkDataHandler {
     }
 
     public void register(IEventBus bus) {
-        if (langEn.isEmpty() && langZh.isEmpty() && mBlock.isEmpty() && mItem.isEmpty() && recipe.isEmpty()
-                && blockTags.isEmpty() && itemTags.isEmpty() && lootTable.isEmpty()) return;
+        if (lang.isEmpty() && mBlock.isEmpty() && mItem.isEmpty() && recipe.isEmpty() && blockTags.isEmpty()
+                && itemTags.isEmpty() && lootTable.isEmpty()) return;
         bus.register(this);
     }
 
@@ -128,21 +129,22 @@ public class WoodworkDataHandler {
 
         @Override
         protected void addTranslations() {
-            langEn.forEach(p -> {
-                Woodwork woodwork = p.getKey();
-                String name = p.getValue();
-                addBlock(woodwork.planks, name + " Planks");
-                addBlock(woodwork.sign, name + " Sign");
-                add(Util.makeDescriptionId("block", woodwork.wallSign.getId()), name + " Wall Sign");
-                addBlock(woodwork.pressurePlate, name + " Pressure Plate");
-                addBlock(woodwork.trapdoor, name + " Trap Trapdoor");
-                addBlock(woodwork.stairs, name + " Stairs");
-                addBlock(woodwork.button, name + " Button");
-                addBlock(woodwork.slab, name + " Slab");
-                addBlock(woodwork.fenceGate, name + " Fence Gate");
-                addBlock(woodwork.fence, name + " Fence");
-                addBlock(woodwork.door, name + " Door");
-            });
+            for (Woodwork woodwork : lang) {
+                if (woodwork.lang.containsKey("en_us")) {
+                    String name = woodwork.lang.get("en_us");
+                    addBlock(woodwork.planks, name + " Planks");
+                    addBlock(woodwork.sign, name + " Sign");
+                    add(Util.makeDescriptionId("block", woodwork.wallSign.getId()), name + " Wall Sign");
+                    addBlock(woodwork.pressurePlate, name + " Pressure Plate");
+                    addBlock(woodwork.trapdoor, name + " Trap Trapdoor");
+                    addBlock(woodwork.stairs, name + " Stairs");
+                    addBlock(woodwork.button, name + " Button");
+                    addBlock(woodwork.slab, name + " Slab");
+                    addBlock(woodwork.fenceGate, name + " Fence Gate");
+                    addBlock(woodwork.fence, name + " Fence");
+                    addBlock(woodwork.door, name + " Door");
+                }
+            }
         }
 
         @Override
@@ -159,21 +161,22 @@ public class WoodworkDataHandler {
 
         @Override
         protected void addTranslations() {
-            langZh.forEach(p -> {
-                Woodwork woodwork = p.getKey();
-                String name = p.getValue();
-                addBlock(woodwork.planks, name + "木板");
-                addBlock(woodwork.sign, name + "木告示牌");
-                add(Util.makeDescriptionId("block", woodwork.wallSign.getId()), "墙上的" + name + "木告示牌");
-                addBlock(woodwork.pressurePlate, name + "木压力板");
-                addBlock(woodwork.trapdoor, name + "木活板门");
-                addBlock(woodwork.stairs, name + "木楼梯");
-                addBlock(woodwork.button, name + "木按钮");
-                addBlock(woodwork.slab, name + "木台阶");
-                addBlock(woodwork.fenceGate, name + "木栅栏门");
-                addBlock(woodwork.fence, name + "木栅栏");
-                addBlock(woodwork.door, name + "木门");
-            });
+            for (Woodwork woodwork : lang) {
+                if (woodwork.lang.containsKey("zh_cn")) {
+                    String name = woodwork.lang.get("zh_cn");
+                    addBlock(woodwork.planks, name + "木板");
+                    addBlock(woodwork.sign, name + "木告示牌");
+                    add(Util.makeDescriptionId("block", woodwork.wallSign.getId()), "墙上的" + name + "木告示牌");
+                    addBlock(woodwork.pressurePlate, name + "木压力板");
+                    addBlock(woodwork.trapdoor, name + "木活板门");
+                    addBlock(woodwork.stairs, name + "木楼梯");
+                    addBlock(woodwork.button, name + "木按钮");
+                    addBlock(woodwork.slab, name + "木台阶");
+                    addBlock(woodwork.fenceGate, name + "木栅栏门");
+                    addBlock(woodwork.fence, name + "木栅栏");
+                    addBlock(woodwork.door, name + "木门");
+                }
+            }
         }
 
         @Override
