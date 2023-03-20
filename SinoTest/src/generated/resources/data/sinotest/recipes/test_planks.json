@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "item": "sinotest:test_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "sinotest:test_planks"
+  }
+}

@@ -162,7 +162,6 @@ public class Woodwork {
                     eventHandler.get().tabs.add(Pair.of(door, builder.door.tabs));
                 }
                 case RENDER_TYPE -> eventHandler.get().render.add(this);
-                case LAYER -> eventHandler.get().definitions.add(this);
                 case RENDERER -> {
                     if (useDefaultSignEntity() || useDefaultWallSignEntity()) eventHandler.get().renderer.add(this);
                 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "sinotest:block/test_planks",
+    "side": "sinotest:block/test_planks",
+    "top": "sinotest:block/test_planks"
+  }
+}

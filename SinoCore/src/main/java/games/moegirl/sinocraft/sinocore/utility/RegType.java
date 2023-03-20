@@ -14,7 +14,6 @@ public enum RegType {
     TAB_CONTENTS(false, false, false, true, false, false),
     RENDER_TYPE(false, false, false, true, false, false),
     RENDERER(false, false, false, true, false, false),
-    LAYER(false, false, false, true, false, false),
 
     ALL_MODELS, ALL_TAGS, ALL_PROVIDERS, ALL_EVENTS, ALL_DATA, ALL_RES, ALL;
 

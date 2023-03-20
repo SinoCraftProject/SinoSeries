@@ -3,6 +3,8 @@ package games.moegirl.sinocraft.sinocore.handler;
 import games.moegirl.sinocraft.sinocore.data.base.BaseCodecProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.mixin_inter.IDataGenerator;
+import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockLoot;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -87,6 +89,8 @@ public class TreeDataHandler {
         }
         if (!lootTable.isEmpty()) generator.addProvider(true, new TLootProvider());
         if (!features.isEmpty()) generator.addProvider(true, new TFeatureProvider());
+
+        ((IDataGenerator) generator).sinocoreSetPost(modid, output, helper);
     }
 
     public void register(IEventBus bus) {
@@ -98,7 +102,7 @@ public class TreeDataHandler {
     class TEnLangProvider extends LanguageProvider {
 
         public TEnLangProvider() {
-            super(output, modid, "en_us");
+            super(output, modid, "[tree]en_us");
         }
 
         @Override
@@ -117,14 +121,14 @@ public class TreeDataHandler {
 
         @Override
         public String getName() {
-            return "  Tree " + super.getName();
+            return super.getName() + " Tree " + modid;
         }
     }
 
     class TZhLangProvider extends LanguageProvider {
 
         public TZhLangProvider() {
-            super(output, modid, "zh_cn");
+            super(output, modid, "[tree]zh_cn");
         }
 
         @Override
@@ -144,7 +148,7 @@ public class TreeDataHandler {
 
         @Override
         public String getName() {
-            return "  Tree " + super.getName();
+            return super.getName() + " Tree " + modid;
         }
     }
 
@@ -169,7 +173,7 @@ public class TreeDataHandler {
 
         @Override
         public String getName() {
-            return "  Tree " + super.getName();
+            return super.getName() + " Tree " + modid;
         }
     }
 
@@ -203,11 +207,11 @@ public class TreeDataHandler {
 
         @Override
         public String getName() {
-            return "  Tree " + super.getName();
+            return super.getName() + " Tree " + modid;
         }
     }
 
-    class TRecipeProvider extends RecipeProvider {
+    class TRecipeProvider extends RecipeProvider implements INamedProvider {
 
         public TRecipeProvider() {
             super(output);
@@ -233,6 +237,11 @@ public class TreeDataHandler {
                         .save(writer);
             });
         }
+
+        @Override
+        public String sinocoreGetName() {
+            return "Recipes Tree " + modid;
+        }
     }
 
     class TBlockTagsProvider extends BlockTagsProvider {
@@ -255,7 +264,7 @@ public class TreeDataHandler {
 
         @Override
         public String getName() {
-            return "  Tree " + super.getName();
+            return super.getName() + " Tree " + modid;
         }
     }
 
@@ -277,11 +286,11 @@ public class TreeDataHandler {
 
         @Override
         public String getName() {
-            return "  Tree " + super.getName();
+            return super.getName() + " Tree " + modid;
         }
     }
 
-    class TLootProvider extends LootTableProvider {
+    class TLootProvider extends LootTableProvider implements INamedProvider {
 
         public TLootProvider() {
             super(output, new HashSet<>(), new ArrayList<>());
@@ -294,6 +303,11 @@ public class TreeDataHandler {
                     .map(loot -> new SubProviderEntry(() -> loot, LootContextParamSets.BLOCK))
                     .toList();
         }
+
+        @Override
+        public String sinocoreGetName() {
+            return "Loot Tables Tree " + modid;
+        }
     }
 
     class TFeatureProvider extends BaseCodecProvider {
@@ -305,6 +319,11 @@ public class TreeDataHandler {
         @Override
         public void addAll() {
             features.forEach((k, s) -> add(k, s.get()));
+        }
+
+        @Override
+        public String getName() {
+            return super.getName() + " Tree " + modid;
         }
     }
 }

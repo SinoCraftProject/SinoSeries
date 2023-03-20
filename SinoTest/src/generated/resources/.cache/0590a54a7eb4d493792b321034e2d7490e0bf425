@@ -1,0 +1,11 @@
+// 1.19.3	2023-03-19T17:47:17.6398226	Loot Tables Woodwork sinotest
+96cf37285f2b29562184dfb3cfcbb21da526e87d data/sinotest/loot_tables/blocks/test_button.json
+0a627204ac50f0457ccb3d92ef6c31704012f2d5 data/sinotest/loot_tables/blocks/test_door.json
+51f8ae2bd077038a1dc207e13d86a345bf352eda data/sinotest/loot_tables/blocks/test_fence.json
+e7535a4af27c484b43e22d1e23b192190efef56d data/sinotest/loot_tables/blocks/test_fence_gate.json
+2e1152594ea89e2bfe9f5ec0a7fabcd109d9555d data/sinotest/loot_tables/blocks/test_planks.json
+d8c4048cacc9832d07d5dc47a79b2f35ad6c4d6b data/sinotest/loot_tables/blocks/test_pressure_plate.json
+b6d1d54880f8e54194422bc3b09c27cada968b27 data/sinotest/loot_tables/blocks/test_sign.json
+9b34a830b472ce65226c04c508d10cbb005c669a data/sinotest/loot_tables/blocks/test_slab.json
+4e24dc0ed5b91be2a53580dd4cb412a36240f125 data/sinotest/loot_tables/blocks/test_stairs.json
+5a75d1d3dd540de2615099b4f82d54f39b7d51b7 data/sinotest/loot_tables/blocks/test_trapdoor.json

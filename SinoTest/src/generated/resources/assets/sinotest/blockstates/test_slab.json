@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sinotest:block/test_slab"
+    },
+    "type=double": {
+      "model": "sinotest:block/test_planks"
+    },
+    "type=top": {
+      "model": "sinotest:block/test_slab_top"
+    }
+  }
+}

@@ -2,6 +2,8 @@ package games.moegirl.sinocraft.sinocore.handler;
 
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.mixin_inter.IDataGenerator;
+import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import games.moegirl.sinocraft.sinocore.woodwork.WoodworkBlockFamily;
 import games.moegirl.sinocraft.sinocore.woodwork.WoodworkBlockLoot;
@@ -100,10 +102,16 @@ public class WoodworkDataHandler {
         for (Woodwork woodwork : mBlock) {
             ResourceLocation woodName = new ResourceLocation(woodwork.type.name());
             ResourceLocation tex = new ResourceLocation(woodName.getNamespace(), "textures/entity/signs/" + woodName.getPath() + ".png");
+            ResourceLocation tex2 = new ResourceLocation(woodName.getNamespace(), "textures/entity/signs/hanging/" + woodName.getPath() + ".png");
             if (!helper.exists(tex, PackType.CLIENT_RESOURCES)) {
-                throw new RuntimeException("Not found sign skin at " + tex);
+                LOGGER.error("Not found sign skin at {}", tex);
+            }
+            if (!helper.exists(tex2, PackType.CLIENT_RESOURCES)) {
+                LOGGER.error("Not found sign skin at {}", tex2);
             }
         }
+
+        ((IDataGenerator) generator).sinocoreSetPost(modid, output, helper);
     }
 
     public void register(IEventBus bus) {
@@ -115,7 +123,7 @@ public class WoodworkDataHandler {
     class WEnLangProvider extends LanguageProvider {
 
         public WEnLangProvider() {
-            super(output, modid, "en_us");
+            super(output, modid, "[woodwork]en_us");
         }
 
         @Override
@@ -139,14 +147,14 @@ public class WoodworkDataHandler {
 
         @Override
         public String getName() {
-            return "  Woodwork " + super.getName();
+            return super.getName() + " Woodwork " + modid;
         }
     }
 
     class WZhLangProvider extends LanguageProvider {
 
         public WZhLangProvider() {
-            super(output, modid, "zh_cn");
+            super(output, modid, "[woodwork]zh_cn");
         }
 
         @Override
@@ -170,7 +178,7 @@ public class WoodworkDataHandler {
 
         @Override
         public String getName() {
-            return "  Woodwork " + super.getName();
+            return super.getName() + " Woodwork " + modid;
         }
     }
 
@@ -229,7 +237,7 @@ public class WoodworkDataHandler {
 
         @Override
         public String getName() {
-            return "  Woodwork " + super.getName();
+            return super.getName() + " Woodwork " + modid;
         }
     }
 
@@ -273,11 +281,11 @@ public class WoodworkDataHandler {
 
         @Override
         public String getName() {
-            return "  Woodwork " + super.getName();
+            return super.getName() + " Woodwork " + modid;
         }
     }
 
-    class WRecipeProvider extends RecipeProvider {
+    class WRecipeProvider extends RecipeProvider implements INamedProvider {
 
         public WRecipeProvider() {
             super(output);
@@ -315,6 +323,11 @@ public class WoodworkDataHandler {
                         .getFamily());
             });
         }
+
+        @Override
+        public String sinocoreGetName() {
+            return "Recipes Woodwork " + modid;
+        }
     }
 
     class WBlockTagsProvider extends BlockTagsProvider {
@@ -343,7 +356,7 @@ public class WoodworkDataHandler {
 
         @Override
         public String getName() {
-            return "  Woodwork " + super.getName();
+            return super.getName() + " Woodwork " + modid;
         }
     }
 
@@ -370,11 +383,11 @@ public class WoodworkDataHandler {
 
         @Override
         public String getName() {
-            return "  Woodwork " + super.getName();
+            return super.getName() + " Woodwork " + modid;
         }
     }
 
-    class WLootProvider extends LootTableProvider {
+    class WLootProvider extends LootTableProvider implements INamedProvider {
 
         public WLootProvider() {
             super(output, new HashSet<>(), new ArrayList<>());
@@ -386,6 +399,11 @@ public class WoodworkDataHandler {
                     .map(WoodworkBlockLoot::new)
                     .map(loot -> new SubProviderEntry(() -> loot, LootContextParamSets.BLOCK))
                     .toList();
+        }
+
+        @Override
+        public String sinocoreGetName() {
+            return "Loot Tables Woodwork " + modid;
         }
     }
 }

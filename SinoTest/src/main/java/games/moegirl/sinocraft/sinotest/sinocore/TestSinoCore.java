@@ -1,39 +1,27 @@
 package games.moegirl.sinocraft.sinotest.sinocore;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.utility.NetworkHolder;
+import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import games.moegirl.sinocraft.sinotest.SinoTest;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.lang.reflect.Field;
-
-import static games.moegirl.sinocraft.sinotest.SinoTest.MODID;
+import static games.moegirl.sinocraft.sinotest.SinoTest.*;
 
 public class TestSinoCore {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    public static final DeferredRegister<Item> BLOCK_ITEM = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
+    public static final NetworkHolder NETWORK = NetworkHolder.simple(CHANNEL, NET_ID);
 
-    public static Tree tree = Tree.builder(new ResourceLocation(SinoTest.MODID, "test"), "测试树")
+    public static Tree tree = Tree.builder(new ResourceLocation(MODID, "test"), "测试树")
             .grower(new ResourceLocation(SinoTest.MODID, "test_tree"))
             .build(BLOCKS, ITEMS);
 
+    public static Woodwork woodwork = Woodwork.builder(new ResourceLocation(MODID, "test"), "测试")
+            .build(tree.log, ITEMS, BLOCKS, BLOCK_ENTITIES);
+
     public void register(IEventBus bus) {
-        Tree.register(SinoTest.MODID, bus);
-        for (Field field : getClass().getFields()) {
-            if (field.getType() != DeferredRegister.class) continue;
-            try {
-                ((DeferredRegister<?>) field.get(null)).register(bus);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        Tree.register(MODID, bus);
+        Woodwork.register(MODID, bus, NETWORK);
     }
 }

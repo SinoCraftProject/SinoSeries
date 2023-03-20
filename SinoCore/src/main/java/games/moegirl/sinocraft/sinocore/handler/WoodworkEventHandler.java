@@ -2,12 +2,6 @@ package games.moegirl.sinocraft.sinocore.handler;
 
 import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -44,7 +38,6 @@ public class WoodworkEventHandler {
     public final List<Pair<Supplier<? extends ItemLike>, List<CreativeModeTab>>> tabs = new ArrayList<>();
     public final List<Woodwork> render = new ArrayList<>();
     public final List<Woodwork> renderer = new ArrayList<>();
-    public final List<Woodwork> definitions = new ArrayList<>();
 
     public void register(IEventBus bus) {
         if (tabs.isEmpty() && render.isEmpty()) return;
@@ -67,7 +60,6 @@ public class WoodworkEventHandler {
                 });
             }
             if (!renderer.isEmpty()) bus.register(new WRegisterRendererHandler());
-            if (!definitions.isEmpty()) bus.register(new WLayerDefinitionsRegister());
         });
     }
 
@@ -95,21 +87,6 @@ public class WoodworkEventHandler {
                     event.registerBlockEntityRenderer(woodwork.signEntity(), ModSignRenderer::new);
                 if (woodwork.useDefaultWallSignEntity())
                     event.registerBlockEntityRenderer(woodwork.wallSignEntity(), ModSignRenderer::new);
-            }
-        }
-    }
-
-    public class WLayerDefinitionsRegister {
-
-        @SubscribeEvent
-        public void onDefinitionRegister(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            for (Woodwork woodwork : definitions) {
-                MeshDefinition meshdefinition = new MeshDefinition();
-                PartDefinition partdefinition = meshdefinition.getRoot();
-                partdefinition.addOrReplaceChild("sign", CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, -14.0F, -1.0F, 24.0F, 12.0F, 2.0F), PartPose.ZERO);
-                partdefinition.addOrReplaceChild("stick", CubeListBuilder.create().texOffs(0, 14).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 14.0F, 2.0F), PartPose.ZERO);
-                LayerDefinition layer = LayerDefinition.create(meshdefinition, 64, 32);
-                event.registerLayerDefinition(ModelLayers.createSignModelName(woodwork.type), () -> layer);
             }
         }
     }
