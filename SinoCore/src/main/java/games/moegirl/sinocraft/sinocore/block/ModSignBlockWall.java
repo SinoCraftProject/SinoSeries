@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.block;
 
 import com.google.common.collect.Maps;
 import games.moegirl.sinocraft.sinocore.block.entity.ModSignBlockEntity;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

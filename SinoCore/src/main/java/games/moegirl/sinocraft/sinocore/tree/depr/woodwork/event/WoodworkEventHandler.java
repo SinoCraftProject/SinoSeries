@@ -1,7 +1,7 @@
-package games.moegirl.sinocraft.sinocore.woodwork.event;
+package games.moegirl.sinocraft.sinocore.tree.depr.woodwork.event;
 
 import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;

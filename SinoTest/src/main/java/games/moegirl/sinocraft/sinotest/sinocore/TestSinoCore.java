@@ -1,10 +1,6 @@
 package games.moegirl.sinocraft.sinotest.sinocore;
 
-import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.utility.NetworkHolder;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
-import games.moegirl.sinocraft.sinotest.SinoTest;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import static games.moegirl.sinocraft.sinotest.SinoTest.*;

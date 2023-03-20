@@ -1,7 +1,5 @@
 package games.moegirl.sinocraft.sinocore.data;
 
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
-import games.moegirl.sinocraft.sinocore.woodwork.event.WoodworkDataHandler;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.woodwork.IWoodworkBlock;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.IWoodworkBlock;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
 import net.minecraft.world.level.block.Block;
 
 /**

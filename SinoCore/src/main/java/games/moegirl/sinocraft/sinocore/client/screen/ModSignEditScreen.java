@@ -7,7 +7,7 @@ import com.mojang.blaze3d.vertex.*;
 import games.moegirl.sinocraft.sinocore.block.entity.ModSignBlockEntity;
 import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
 import games.moegirl.sinocraft.sinocore.packet.SignTextUpdateC2SPacket;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.font.TextFieldHelper;
 import net.minecraft.client.gui.screens.Screen;

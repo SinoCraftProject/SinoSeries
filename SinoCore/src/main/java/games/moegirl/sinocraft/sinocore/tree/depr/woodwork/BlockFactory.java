@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.tree.depr.woodwork;
 
 import games.moegirl.sinocraft.sinocore.mixin_inter.IBlockProperties;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;

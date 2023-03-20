@@ -1,10 +1,11 @@
-package games.moegirl.sinocraft.sinocore.tree;
+package games.moegirl.sinocraft.sinocore.tree.depr;
 
 import games.moegirl.sinocraft.sinocore.block.ModLeavesBlock;
 import games.moegirl.sinocraft.sinocore.block.ModLogBlock;
 import games.moegirl.sinocraft.sinocore.block.ModSaplingBlock;
 import games.moegirl.sinocraft.sinocore.block.ModWoodBlock;
-import games.moegirl.sinocraft.sinocore.tree.event.TreeDataHandler;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.depr.event.TreeDataHandler;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import games.moegirl.sinocraft.sinocore.utility.RegType;
 import net.minecraft.data.worldgen.features.FeatureUtils;

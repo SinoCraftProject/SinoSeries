@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.tree;
+package games.moegirl.sinocraft.sinocore.tree.depr;
 
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 
 import javax.annotation.Nonnull;

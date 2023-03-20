@@ -1,6 +1,7 @@
-package games.moegirl.sinocraft.sinocore.tree;
+package games.moegirl.sinocraft.sinocore.tree.depr;
 
 import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;

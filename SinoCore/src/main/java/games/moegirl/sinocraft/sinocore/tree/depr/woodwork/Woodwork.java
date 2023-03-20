@@ -1,8 +1,8 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.tree.depr.woodwork;
 
 import games.moegirl.sinocraft.sinocore.block.entity.ModSignBlockEntity;
-import games.moegirl.sinocraft.sinocore.woodwork.event.WoodworkDataHandler;
-import games.moegirl.sinocraft.sinocore.woodwork.event.WoodworkEventHandler;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.event.WoodworkDataHandler;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.event.WoodworkEventHandler;
 import games.moegirl.sinocraft.sinocore.packet.SignEditOpenS2CPacket;
 import games.moegirl.sinocraft.sinocore.packet.SignTextUpdateC2SPacket;
 import games.moegirl.sinocraft.sinocore.utility.NetworkHolder;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.woodwork;
+package games.moegirl.sinocraft.sinocore.tree.depr.woodwork;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.advancements.critereon.EntityPredicate;

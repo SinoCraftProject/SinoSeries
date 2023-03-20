@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.tree.ITreeBlock;
+import games.moegirl.sinocraft.sinocore.tree.depr.ITreeBlock;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;

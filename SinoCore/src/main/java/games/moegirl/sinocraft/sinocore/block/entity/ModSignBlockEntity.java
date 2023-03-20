@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.block.entity;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import games.moegirl.sinocraft.sinocore.woodwork.IWoodworkEntity;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.IWoodworkEntity;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;

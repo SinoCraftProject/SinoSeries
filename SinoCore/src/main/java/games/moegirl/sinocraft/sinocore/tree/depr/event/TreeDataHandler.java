@@ -1,11 +1,11 @@
-package games.moegirl.sinocraft.sinocore.tree.event;
+package games.moegirl.sinocraft.sinocore.tree.depr.event;
 
 import games.moegirl.sinocraft.sinocore.data.BaseCodecProvider;
 import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnItemModelProvider;
 import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
-import games.moegirl.sinocraft.sinocore.tree.TreeBlockLoot;
+import games.moegirl.sinocraft.sinocore.tree.depr.TreeBlockLoot;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;

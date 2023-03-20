@@ -1,11 +1,11 @@
-package games.moegirl.sinocraft.sinocore.woodwork.event;
+package games.moegirl.sinocraft.sinocore.tree.depr.woodwork.event;
 
 import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnItemModelProvider;
 import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
-import games.moegirl.sinocraft.sinocore.woodwork.WoodworkBlockFamily;
-import games.moegirl.sinocraft.sinocore.woodwork.WoodworkBlockLoot;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.WoodworkBlockFamily;
+import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.WoodworkBlockLoot;
 import net.minecraft.Util;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
