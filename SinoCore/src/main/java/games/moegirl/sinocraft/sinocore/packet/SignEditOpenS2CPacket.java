@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.packet;
 
-import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.block.entity.ModSignBlockEntity;
 import games.moegirl.sinocraft.sinocore.client.screen.ModSignEditScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

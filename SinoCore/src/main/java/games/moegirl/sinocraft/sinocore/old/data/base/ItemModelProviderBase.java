@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.old.data.base;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnItemModelProvider;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;

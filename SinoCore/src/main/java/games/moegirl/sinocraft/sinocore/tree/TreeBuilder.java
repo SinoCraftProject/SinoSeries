@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocore.block.ModLeavesBlock;
 import games.moegirl.sinocraft.sinocore.block.ModLogBlock;
 import games.moegirl.sinocraft.sinocore.block.ModSaplingBlock;
 import games.moegirl.sinocraft.sinocore.block.ModWoodBlock;
-import games.moegirl.sinocraft.sinocore.handler.TreeDataHandler;
+import games.moegirl.sinocraft.sinocore.tree.event.TreeDataHandler;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import games.moegirl.sinocraft.sinocore.utility.RegType;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -73,19 +72,10 @@ public class TreeBuilder {
     AbstractTreeGrower grower = new OakTreeGrower();
     FloatModifier strengthModifier = new FloatModifier();
     EnumSet<RegType> regTypes = EnumSet.allOf(RegType.class);
-    Map<String, String> languages = new HashMap<>();
+    Map<Locale, String> languages = new HashMap<>();
 
     public TreeBuilder(ResourceLocation name) {
         this.name = name;
-
-        StringBuilder sb = new StringBuilder();
-        for (String s : name.getPath().split("_")) {
-            if (s.isEmpty()) continue;
-            String s1 = s.toLowerCase(Locale.ROOT);
-            sb.append(Character.toUpperCase(s1.charAt(0)));
-            sb.append(s1.substring(1));
-        }
-        languages.put("en_us", sb.toString());
     }
 
     public TreeBuilder saplingTabs(CreativeModeTab... tabs) {
@@ -249,18 +239,9 @@ public class TreeBuilder {
         return grower(name);
     }
 
-    public TreeBuilder lang(String local, @Nullable String name) {
-        if (name == null) languages.remove(local);
-        else languages.put(local, name);
+    public TreeBuilder lang(Locale locale, String name) {
+        languages.put(locale, name);
         return this;
-    }
-
-    public TreeBuilder zh_cn(String name) {
-        return lang("zh_cn", name);
-    }
-
-    public TreeBuilder en_us(@Nullable String name) {
-        return lang("en_us", name);
     }
 
     /**

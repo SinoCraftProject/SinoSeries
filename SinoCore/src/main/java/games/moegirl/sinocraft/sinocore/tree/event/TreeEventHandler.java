@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.handler;
+package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;

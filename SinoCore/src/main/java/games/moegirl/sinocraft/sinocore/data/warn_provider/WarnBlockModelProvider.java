@@ -1,17 +1,14 @@
-package games.moegirl.sinocraft.sinocore.data.base.warn_provider;
+package games.moegirl.sinocraft.sinocore.data.warn_provider;
 
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
+import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,15 +18,15 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * 一个 ItemModelProvider，但当遇到材质不存在时不会产生 Exception
+ * 一个 BlockModelProvider，但当遇到材质不存在时不会产生 Exception
  */
-public abstract class WarnItemModelProvider extends ItemModelProvider {
+public abstract class WarnBlockModelProvider extends BlockModelProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WarnItemModelProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WarnBlockModelProvider.class);
 
     private final List<Pair<ResourceLocation, ResourceLocation>> errModels = new ArrayList<>();
 
-    public WarnItemModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+    public WarnBlockModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
         super(output, modid, helper);
     }
 
@@ -43,12 +40,12 @@ public abstract class WarnItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    public ItemModelBuilder getBuilder(String path) {
+    public BlockModelBuilder getBuilder(String path) {
         Preconditions.checkNotNull(path, "Path must not be null");
         ResourceLocation rl = path.contains(":") ? new ResourceLocation(path) : new ResourceLocation(modid, path);
         ResourceLocation outputLoc = rl.getPath().contains("/") ? rl : new ResourceLocation(rl.getNamespace(), folder + "/" + rl.getPath());
         this.existingFileHelper.trackGenerated(outputLoc, MODEL);
-        return generatedModels.computeIfAbsent(outputLoc, (p) -> new UnexceptionalItemModelBuilder(p, existingFileHelper));
+        return generatedModels.computeIfAbsent(outputLoc, (p) -> new UnexceptionalBlockModelBuilder(p, existingFileHelper));
     }
 
     @Override
@@ -59,7 +56,7 @@ public abstract class WarnItemModelProvider extends ItemModelProvider {
     @Override
     @Nonnull
     public String getName() {
-        return "ItemModels: " + modid;
+        return "BlockModels: " + modid;
     }
 
     public void printAllExceptions() {
@@ -68,7 +65,7 @@ public abstract class WarnItemModelProvider extends ItemModelProvider {
             errModels.forEach(pair -> LOGGER.warn("  Key: {}, Path: {}", pair.getFirst(), pair.getSecond()));
         }
         generatedModels.forEach((key, builder) -> {
-            if (builder instanceof UnexceptionalItemModelBuilder b && !b.notExistingTexture.isEmpty()) {
+            if (builder instanceof UnexceptionalBlockModelBuilder b && !b.notExistingTexture.isEmpty()) {
                 LOGGER.warn("Not found texture in {} -> {}", getName(), key);
                 b.notExistingTexture.forEach(pair ->
                         LOGGER.warn("  Texture: {}, Path: {}", pair.getFirst(), pair.getSecond()));
@@ -76,25 +73,15 @@ public abstract class WarnItemModelProvider extends ItemModelProvider {
         });
     }
 
-    public ItemModelBuilder block(Item item) {
-        String name = ForgeRegistries.ITEMS.getKey(item).getPath();
-        return withExistingParent(name, modLoc(BLOCK_FOLDER + "/" + name));
-    }
-
-    public ItemModelBuilder block(RegistryObject<Item> item) {
-        String name = item.getId().getPath();
-        return withExistingParent(name, modLoc(BLOCK_FOLDER + "/" + name));
-    }
-
-    static class UnexceptionalItemModelBuilder extends ItemModelBuilder {
+    static class UnexceptionalBlockModelBuilder extends BlockModelBuilder {
         final List<Pair<String, ResourceLocation>> notExistingTexture = new ArrayList<>();
 
-        public UnexceptionalItemModelBuilder(ResourceLocation outputLocation, ExistingFileHelper existingFileHelper) {
+        public UnexceptionalBlockModelBuilder(ResourceLocation outputLocation, ExistingFileHelper existingFileHelper) {
             super(outputLocation, existingFileHelper);
         }
 
         @Override
-        public ItemModelBuilder texture(String key, ResourceLocation texture) {
+        public BlockModelBuilder texture(String key, ResourceLocation texture) {
             try {
                 return super.texture(key, texture);
             } catch (IllegalArgumentException e) {

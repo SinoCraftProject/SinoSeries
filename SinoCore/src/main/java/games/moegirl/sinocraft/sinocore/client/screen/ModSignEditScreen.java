@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.block.entity.ModSignBlockEntity;
 import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
 import games.moegirl.sinocraft.sinocore.packet.SignTextUpdateC2SPacket;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.data.base;
+package games.moegirl.sinocraft.sinocore.data;
 
 import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;

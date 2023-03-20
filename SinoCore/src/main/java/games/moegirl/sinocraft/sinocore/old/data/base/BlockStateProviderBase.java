@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.data.base;
 
-import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnBlockStateProvider;
+import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnBlockStateProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;

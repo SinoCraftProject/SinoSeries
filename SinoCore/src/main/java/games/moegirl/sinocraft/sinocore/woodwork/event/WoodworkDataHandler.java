@@ -1,8 +1,7 @@
-package games.moegirl.sinocraft.sinocore.handler;
+package games.moegirl.sinocraft.sinocore.woodwork.event;
 
-import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnBlockStateProvider;
-import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
-import games.moegirl.sinocraft.sinocore.mixin_inter.IDataGenerator;
+import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnBlockStateProvider;
+import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnItemModelProvider;
 import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import games.moegirl.sinocraft.sinocore.woodwork.WoodworkBlockFamily;
@@ -111,8 +110,6 @@ public class WoodworkDataHandler {
                 LOGGER.error("Not found sign skin at {}", tex2);
             }
         }
-
-        ((IDataGenerator) generator).sinocoreSetPost(modid, output, helper);
     }
 
     public void register(IEventBus bus) {

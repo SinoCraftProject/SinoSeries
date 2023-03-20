@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.block;
 
 import games.moegirl.sinocraft.sinocore.woodwork.IWoodworkBlock;
-import games.moegirl.sinocraft.sinocore.blockentity.ModSignBlockEntity;
+import games.moegirl.sinocraft.sinocore.block.entity.ModSignBlockEntity;
 import games.moegirl.sinocraft.sinocore.packet.SignEditOpenS2CPacket;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.advancements.CriteriaTriggers;

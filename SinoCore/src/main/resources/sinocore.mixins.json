@@ -7,8 +7,7 @@
     "MixinBlockLootSubProvider",
     "MixinBlockProperties",
     "MixinRecipeProvider",
-    "MixinLootTableProvider",
-    "MixinDataGenerator"
+    "MixinLootTableProvider"
   ],
   "client": [
     "MixinMinecraft"

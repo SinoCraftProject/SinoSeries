@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.data.base.warn_provider;
+package games.moegirl.sinocraft.sinocore.data.warn_provider;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;

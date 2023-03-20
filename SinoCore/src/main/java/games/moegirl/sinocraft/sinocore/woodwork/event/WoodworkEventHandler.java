@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.handler;
+package games.moegirl.sinocraft.sinocore.woodwork.event;
 
 import games.moegirl.sinocraft.sinocore.client.render.ModSignRenderer;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;

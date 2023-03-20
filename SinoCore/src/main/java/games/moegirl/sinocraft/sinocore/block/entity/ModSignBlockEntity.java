@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.blockentity;
+package games.moegirl.sinocraft.sinocore.block.entity;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import games.moegirl.sinocraft.sinocore.woodwork.IWoodworkEntity;

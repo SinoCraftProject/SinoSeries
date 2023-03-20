@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.handler.TreeDataHandler;
-import games.moegirl.sinocraft.sinocore.handler.TreeEventHandler;
+import games.moegirl.sinocraft.sinocore.tree.event.TreeDataHandler;
+import games.moegirl.sinocraft.sinocore.tree.event.TreeEventHandler;
 import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
 import games.moegirl.sinocraft.sinocore.utility.RegType;
 import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
@@ -34,8 +34,10 @@ import java.util.function.Supplier;
  * @see TreeBuilder
  * @see Woodwork
  */
-public class Tree {
+public final class Tree {
 
+    private static final Map<ResourceLocation, TreeType> TREE_REGISTRY = new HashMap<>();
+/*
     private static final Map<ResourceLocation, Tree> TREE_BY_NAME = new HashMap<>();
 
     public static boolean exist(ResourceLocation name) {
@@ -202,7 +204,7 @@ public class Tree {
         return properties;
     }
 
-    public record BuilderProperties(ResourceLocation name, Map<String, String> langs,
+    public record BuilderProperties(ResourceLocation name, Map<Locale, String> languages,
                                     AbstractTreeGrower grower, FloatModifier strengthModifier,
                                     List<CreativeModeTab> saplingTabs, List<CreativeModeTab> leavesTabs,
                                     List<CreativeModeTab> logTabs, List<CreativeModeTab> strippedLogTabs,
@@ -212,4 +214,5 @@ public class Tree {
                                     MaterialColor topStrippedLogColor, MaterialColor barkStrippedLogColor,
                                     MaterialColor woodColor, MaterialColor strippedWoodColor) {
     }
+ */
 }
