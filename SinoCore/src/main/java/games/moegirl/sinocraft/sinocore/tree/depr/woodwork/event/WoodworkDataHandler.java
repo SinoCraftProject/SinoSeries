@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree.depr.woodwork.event;
 
-import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnBlockStateProvider;
-import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockStateProvider;
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
 import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
 import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.WoodworkBlockFamily;
@@ -40,6 +40,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -182,66 +183,7 @@ public class WoodworkDataHandler {
         }
     }
 
-    class WBlockStateProvider extends WarnBlockStateProvider {
-
-        public WBlockStateProvider() {
-            super(output, modid, helper);
-        }
-
-        @Override
-        protected void registerStatesAndModels() {
-            mBlock.forEach(woodwork -> {
-                ExistingFileHelper helper = models().existingFileHelper;
-                ExistingFileHelper.ResourceType texType =
-                        new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, ".png", "textures");
-
-                ResourceLocation texPlank = blockTexture(woodwork.planks());
-
-                simpleBlock(woodwork.planks());
-                // sign block
-                // provider.signBlock(woodwork.sign(), woodwork.wallSign(), texPlank);
-                ModelFile sign = models().sign(woodwork.sign.getId().getPath(), texPlank);
-                simpleBlock(woodwork.sign(), sign);
-                simpleBlock(woodwork.wallSign(), sign);
-
-                pressurePlateBlock(woodwork.pressurePlate(), texPlank);
-                // orientable?
-                trapdoorBlock(woodwork.trapdoor(), texPlank, true);
-                stairsBlock(woodwork.stairs(), texPlank);
-                // button
-                models().singleTexture(woodwork.button.getId().getPath() + "_inventory",
-                        mcLoc(ModelProvider.BLOCK_FOLDER + "/button_inventory"), texPlank);
-                buttonBlock(woodwork.button(), texPlank);
-                slabBlock(woodwork.slab(), texPlank, texPlank);
-                fenceGateBlock(woodwork.fenceGate(), texPlank);
-                fenceBlock(woodwork.fence(), texPlank);
-
-                DoorBlock door = woodwork.door();
-                ResourceLocation doorName = woodwork.door.getId();
-                ResourceLocation doorTop = new ResourceLocation(doorName.getNamespace(),
-                        ModelProvider.BLOCK_FOLDER + "/" + doorName.getPath() + "_top");
-                ResourceLocation doorBottom = new ResourceLocation(doorName.getNamespace(),
-                        ModelProvider.BLOCK_FOLDER + "/" + doorName.getPath() + "_bottom");
-                if (!helper.exists(doorTop, texType)) {
-                    LOGGER.warn(doorTop + " not exist, use " + texPlank);
-                    doorTop = texPlank;
-                }
-                if (!helper.exists(doorBottom, texType)) {
-                    LOGGER.warn(doorBottom + " not exist, use " + texPlank);
-                    doorBottom = texPlank;
-                }
-                doorBlock(door, doorBottom, doorTop);
-                models().fenceInventory(woodwork.fence.getId().getPath() + "_inventory", texPlank);
-            });
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " Woodwork " + modid;
-        }
-    }
-
-    class WItemModelProvider extends WarnItemModelProvider {
+    class WItemModelProvider extends AbstractItemModelProvider {
 
         public WItemModelProvider() {
             super(WoodworkDataHandler.this.output, WoodworkDataHandler.this.modid, helper);
@@ -280,7 +222,7 @@ public class WoodworkDataHandler {
         }
 
         @Override
-        public String getName() {
+        public @NotNull String getName() {
             return super.getName() + " Woodwork " + modid;
         }
     }

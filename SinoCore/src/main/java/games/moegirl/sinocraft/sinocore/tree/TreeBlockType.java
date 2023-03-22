@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import net.minecraft.resources.ResourceLocation;
+
 public enum TreeBlockType {
     LOG("log", true, false, true),
     STRIPPED_LOG("stripped_log", true, false, true),
@@ -62,5 +64,9 @@ public enum TreeBlockType {
 
     public String makeRegistryName(String name) {
         return name + "_" + getName();
+    }
+
+    public ResourceLocation makeRegistryName(ResourceLocation name) {
+        return new ResourceLocation(name.getNamespace(), name.getPath() + "_" + getName());
     }
 }

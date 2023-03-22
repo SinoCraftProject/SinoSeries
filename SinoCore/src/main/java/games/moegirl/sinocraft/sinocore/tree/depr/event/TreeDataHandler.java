@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.tree.depr.event;
 
 import games.moegirl.sinocraft.sinocore.data.BaseCodecProvider;
-import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnBlockStateProvider;
-import games.moegirl.sinocraft.sinocore.data.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockStateProvider;
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.mixin_inter.INamedProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.depr.TreeBlockLoot;
@@ -32,6 +32,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -156,32 +157,7 @@ public class TreeDataHandler {
         }
     }
 
-    class TBlockStateProvider extends WarnBlockStateProvider {
-
-        public TBlockStateProvider() {
-            super(output, modid, helper);
-        }
-
-        @Override
-        protected void registerStatesAndModels() {
-            mBlock.forEach(tree -> {
-                simpleBlock(tree.sapling(), models().cross(tree.sapling.getId().getPath(), blockTexture(tree.sapling())));
-                logBlock(tree.log());
-                logBlock(tree.strippedLog());
-                simpleBlock(tree.wood(), models().cubeColumn(tree.wood.getId().getPath(), blockTexture(tree.log()), blockTexture(tree.log())));
-                simpleBlock(tree.strippedWood(), models().cubeColumn(tree.strippedWood.getId().getPath(), blockTexture(tree.strippedLog()), blockTexture(tree.strippedLog())));
-                simpleBlock(tree.leaves(), models().singleTexture(tree.leaves.getId().getPath(), mcLoc(ModelProvider.BLOCK_FOLDER + "/leaves"), "all", blockTexture(tree.leaves())));
-                simpleBlock(tree.pottedSapling(), models().singleTexture(tree.pottedSapling.getId().getPath(), mcLoc(ModelProvider.BLOCK_FOLDER + "/flower_pot_cross"), "plant", modLoc(ModelProvider.BLOCK_FOLDER + "/" + tree.sapling.getId().getPath())));
-            });
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " Tree " + modid;
-        }
-    }
-
-    class TItemModelProvider extends WarnItemModelProvider {
+    class TItemModelProvider extends AbstractItemModelProvider {
 
         public TItemModelProvider() {
             super(TreeDataHandler.this.output, TreeDataHandler.this.modid, helper);
@@ -199,18 +175,8 @@ public class TreeDataHandler {
             });
         }
 
-        private void addItem(RegistryObject<? extends Block> sapling) {
-            String path = sapling.getId().getPath();
-            withExistingParent(path, mcLoc("item/handheld")).texture("layer0", modLoc("block/" + path));
-        }
-
-        private void addBlockItem(RegistryObject<? extends Block> block) {
-            String path = block.getId().getPath();
-            withExistingParent(path, modLoc("block/" + path));
-        }
-
         @Override
-        public String getName() {
+        public @NotNull String getName() {
             return super.getName() + " Tree " + modid;
         }
     }

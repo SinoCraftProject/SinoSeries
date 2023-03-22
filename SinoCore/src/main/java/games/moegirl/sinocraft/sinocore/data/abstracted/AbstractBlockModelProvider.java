@@ -1,7 +1,8 @@
-package games.moegirl.sinocraft.sinocore.data.warn_provider;
+package games.moegirl.sinocraft.sinocore.data.abstracted;
 
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
+import games.moegirl.sinocraft.sinocore.data.model.WeakCheckModelFile;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -12,30 +13,42 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * 一个 BlockModelProvider，但当遇到材质不存在时不会产生 Exception
+ * A base class of BlockModelProvider.
  */
-public abstract class WarnBlockModelProvider extends BlockModelProvider {
+public abstract class AbstractBlockModelProvider extends BlockModelProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WarnBlockModelProvider.class);
+    private final boolean strict;
+
+    private final Logger logger;
 
     private final List<Pair<ResourceLocation, ResourceLocation>> errModels = new ArrayList<>();
 
-    public WarnBlockModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+    public AbstractBlockModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+        this(output, modid, helper, false);
+    }
+
+    public AbstractBlockModelProvider(PackOutput output, String modid, ExistingFileHelper helper, boolean strict) {
         super(output, modid, helper);
+
+        this.strict = strict;
+        this.logger = LoggerFactory.getLogger(getName());
     }
 
     @Override
     public ModelFile.ExistingModelFile getExistingFile(ResourceLocation path) {
         try {
             return super.getExistingFile(path);
-        } catch (IllegalStateException e) {
-            return NotExistingModelFile.notExisting(this, path, folder, errModels);
+        } catch (IllegalStateException ex) {
+            if (isStrict()) {
+                throw ex;
+            } else {
+                return weakCheckModel(path);
+            }
         }
     }
 
@@ -50,30 +63,40 @@ public abstract class WarnBlockModelProvider extends BlockModelProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput output) {
-        return super.run(output).thenRun(this::printAllExceptions);
+        return super.run(output).thenRun(this::printExceptions);
     }
 
-    @Override
-    @Nonnull
-    public String getName() {
-        return "BlockModels: " + modid;
-    }
-
-    public void printAllExceptions() {
+    public void printExceptions() {
         if (!errModels.isEmpty()) {
-            LOGGER.warn("Not found model in {}", getName());
-            errModels.forEach(pair -> LOGGER.warn("  Key: {}, Path: {}", pair.getFirst(), pair.getSecond()));
+            logger.warn("Not found model in {}", getName());
+            errModels.forEach(pair -> logger.warn("  Key: {}, Path: {}", pair.getFirst(), pair.getSecond()));
         }
         generatedModels.forEach((key, builder) -> {
             if (builder instanceof UnexceptionalBlockModelBuilder b && !b.notExistingTexture.isEmpty()) {
-                LOGGER.warn("Not found texture in {} -> {}", getName(), key);
+                logger.warn("Not found texture in {} -> {}", getName(), key);
                 b.notExistingTexture.forEach(pair ->
-                        LOGGER.warn("  Texture: {}, Path: {}", pair.getFirst(), pair.getSecond()));
+                        logger.warn("  Texture: {}, Path: {}", pair.getFirst(), pair.getSecond()));
             }
         });
     }
 
-    static class UnexceptionalBlockModelBuilder extends BlockModelBuilder {
+    protected boolean isStrict() {
+        return strict;
+    }
+
+    protected ModelFile.ExistingModelFile weakCheckModel(ResourceLocation path) {
+        return new WeakCheckModelFile(path, existingFileHelper, strict, resourceLocation -> {
+            errModels.add(new Pair<>(resourceLocation, foldedLoc(resourceLocation)));
+            return true;
+        });
+    }
+
+    protected ResourceLocation foldedLoc(ResourceLocation path) {
+        return path.getPath().contains("/") ? path :
+                new ResourceLocation(path.getNamespace(), folder + "/" + path.getPath());
+    }
+
+    protected static class UnexceptionalBlockModelBuilder extends BlockModelBuilder {
         final List<Pair<String, ResourceLocation>> notExistingTexture = new ArrayList<>();
 
         public UnexceptionalBlockModelBuilder(ResourceLocation outputLocation, ExistingFileHelper existingFileHelper) {
