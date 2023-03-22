@@ -28,7 +28,7 @@ public class SinoCore {
     public static final Logger LOGGER = LoggerFactory.getLogger("SinoCore");
 
     // Todo: qyl27: use sinoseries.debug instead.
-    public static final boolean DEBUG = "true".equalsIgnoreCase(System.getProperty("forge.enableGameTest", "false"));
+    public static final boolean DEBUG = System.getProperty("sinoseries.debug", "false").equalsIgnoreCase("true");
 
     public static final String MODID = "sinocore";
 
