@@ -6,14 +6,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraftforge.eventbus.api.IEventBus;
 
 import javax.annotation.Nullable;
 import java.util.*;
+
+import static games.moegirl.sinocraft.sinocore.tree.TreeBlockUtilities.*;
 
 public class TreeType {
 
@@ -36,17 +37,135 @@ public class TreeType {
                        Map<TreeBlockType, Block> customBlocks,
                        Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties,
                        Map<TreeBlockType, Item> customBlockItems,
-                       Map<TreeBlockType, List<CreativeModeTab>> customItemsTabs,
+                       Map<TreeBlockType, List<CreativeModeTab>> customItemTabs,
                        @Nullable AbstractTreeGrower grower) {
         this.name = name;
 
         this.translator = new TreeBlockNameTranslator(name, translateRoots, customTranslates, customLiteralTranslates);
 
-        // Todo: make blocks and items.
-
         this.grower = Objects.requireNonNullElseGet(grower, () -> new DefaultTreeGrower(this));
 
         woodType = WoodType.create(name.toString());
+        WoodType.register(woodType);
+
+        fillBlocks(customBlocks, customBlockProperties);
+        fillItems(customBlockItems);
+        fillCreativeTabs(customItemTabs);
+    }
+
+    private void fillBlocks(Map<TreeBlockType, Block> customBlocks,
+            Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties) {
+        blocks.putAll(customBlocks);
+
+        for (var entry : customBlockProperties.entrySet()) {
+            var type = entry.getKey();
+            if (type.isGeneralBlock()) {
+                blocks.put(type, makeGeneralBlock(type, entry.getValue()));
+            }
+        }
+
+        var blockTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(t -> !t.hasNoBlock())
+                .filter(t -> !customBlocks.containsKey(t))
+                .filter(t -> !customBlockProperties.containsKey(t))
+                .toList();
+
+        // Add block stage 1.
+        for (var it = blockTypesRemain.iterator(); it.hasNext(); ) {
+            var type = it.next();
+
+            var block = switch (type) {
+                case LOG, STRIPPED_LOG -> makeGeneralBlock(type, logProp());
+                case LOG_WOOD, STRIPPED_LOG_WOOD -> makeGeneralBlock(type, woodProp());
+                case PLANKS -> makeGeneralBlock(type, planksProp());
+                case LEAVES -> makeGeneralBlock(type, leavesProp());
+                case SLAB -> makeGeneralBlock(type, slabProp());
+                case BUTTON -> makeGeneralBlock(type, buttonProp());
+                case DOOR -> makeGeneralBlock(type, doorProp());
+                case TRAPDOOR -> makeGeneralBlock(type, trapdoorProp());
+                case FENCE, FENCE_GATE -> makeGeneralBlock(type, fenceProp());
+                case PRESSURE_PLATE -> makeGeneralBlock(type, pressurePlateProp());
+                default -> null;
+            };
+
+            if (block != null) {
+                blocks.put(type, block);
+                it.remove();
+            }
+        }
+
+        // Add block stage 2.
+        for (var it = blockTypesRemain.iterator(); it.hasNext(); ) {
+            var type = it.next();
+            Block block = null;
+
+            if (type == TreeBlockType.SAPLING) {
+                block = sapling(grower, saplingProp());
+            } else if (type == TreeBlockType.STAIRS) {
+                block = stairs(blocks.get(TreeBlockType.PLANKS));
+            } else if (type == TreeBlockType.SIGN) {
+                block = makeSignBlock(type, signProp(), getWoodType());
+            } else if (type == TreeBlockType.HANGING_SIGN) {
+                block = makeSignBlock(type, hangingSignProp(), getWoodType());
+            }
+
+            if (block != null) {
+                blocks.put(type, block);
+                it.remove();
+            }
+        }
+
+        // Add block stage 3.
+        for (var it = blockTypesRemain.iterator(); it.hasNext(); ) {
+            var type = it.next();
+
+            Block block = null;
+            if (type == TreeBlockType.POTTED_SAPLING) {
+                block = pottedSapling((SaplingBlock) blocks.get(TreeBlockType.SAPLING), pottedSaplingProp());
+            } else if (type == TreeBlockType.WALL_SIGN) {
+                block = makeSignBlock(type, wallSignProp(blocks.get(TreeBlockType.WALL_SIGN)), getWoodType());
+            } else if (type == TreeBlockType.WALL_HANGING_SIGN) {
+                block = makeSignBlock(type, wallHangingSignProp(blocks.get(TreeBlockType.WALL_SIGN)), getWoodType());
+            }
+
+            if (block != null) {
+                blocks.put(type, block);
+                it.remove();
+            }
+        }
+    }
+
+    private void fillItems(Map<TreeBlockType, Item> customBlockItems) {
+        items.putAll(customBlockItems);
+
+        var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(TreeBlockType::hasItem)
+                .filter(t -> !customBlockItems.containsKey(t))
+                .toList();
+
+        for (var type : itemTypesRemain) {
+            if (type == TreeBlockType.DOOR) {
+                items.put(type, doubleBlockItem(blocks.get(type)));
+            } else {
+                items.put(type, blockItem(blocks.get(type)));
+            }
+        }
+    }
+
+    private void fillCreativeTabs(Map<TreeBlockType, List<CreativeModeTab>> customItemTabs) {
+        itemCreativeTabs.putAll(customItemTabs);
+
+        var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(TreeBlockType::hasItem)
+                .filter(t -> !customItemTabs.containsKey(t))
+                .toList();
+
+        for (var type : itemTypesRemain) {
+            itemCreativeTabs.put(type, getDefaultTabs(type));
+        }
     }
 
     public WoodType getWoodType() {
@@ -57,8 +176,16 @@ public class TreeType {
         return ImmutableMap.<TreeBlockType, Block>builder().putAll(blocks).build();
     }
 
+    public Map<TreeBlockType, Item> getItems() {
+        return ImmutableMap.<TreeBlockType, Item>builder().putAll(items).build();
+    }
+
+    public Map<TreeBlockType, List<CreativeModeTab>> getItemTabs() {
+        return ImmutableMap.<TreeBlockType, List<CreativeModeTab>>builder().putAll(itemCreativeTabs).build();
+    }
+
+
     //    protected void register(IEventBus bus) {
-//        WoodType.register(woodType);
 //
 //        // Todo: register.
 //    }
