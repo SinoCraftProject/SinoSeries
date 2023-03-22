@@ -1,11 +1,12 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-public enum TreeFamily {
+public enum TreeBlockType {
     LOG("log"),
     STRIPPED_LOG("stripped_log"),
     LOG_BARK("log_bark"),
     STRIPPED_LOG_BARK("stripped_log_bark"),
 
+    SAPLING("sapling"),
     PLANKS("planks"),
     LEAVES("leaves"),
 
@@ -17,15 +18,17 @@ public enum TreeFamily {
     FENCE("fence"),
     FENCE_GATE("fence_gate"),
     PRESSURE_PLATE("pressure_gate"),
-    SIGN("sign"),
-    WALL_SIGN("wall_sign"),
 
-    SAPLING("sapling")
+    SIGN("sign"),
+    HANGING_SIGN("hanging_sign"),
+
+    BOAT("boat"),
+    CHEST_BOAT("chest_boat"),
     ;
 
     private final String name;
 
-    private TreeFamily(String name) {
+    private TreeBlockType(String name) {
         this.name = name;
     }
 

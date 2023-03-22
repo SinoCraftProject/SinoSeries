@@ -21,7 +21,24 @@ import java.util.*;
 public final class Tree {
 
     private static final Map<ResourceLocation, TreeType> TREE_REGISTRY = new HashMap<>();
-/*
+
+    public static Map<ResourceLocation, TreeType> getRegistry() {
+        return TREE_REGISTRY;
+    }
+
+    public static void register(String modid, IEventBus bus) {
+        for (var treeEntry : getRegistry().entrySet()) {
+            if (treeEntry.getKey().getNamespace().equals(modid)) {
+                registerInternal(modid, bus, treeEntry.getValue());
+            }
+        }
+    }
+
+    private static void registerInternal(String modid, IEventBus bus, TreeType treeType) {
+        // Todo: register trees.
+    }
+
+    /*
     private static final Map<ResourceLocation, Tree> TREE_BY_NAME = new HashMap<>();
 
     public static boolean exist(ResourceLocation name) {

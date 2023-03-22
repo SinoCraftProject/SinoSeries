@@ -1,35 +1,233 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import com.google.common.collect.ImmutableMap;
+import games.moegirl.sinocraft.sinocore.utility.decorator.StringDecorator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraftforge.eventbus.api.IEventBus;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class TreeType {
 
     public final ResourceLocation name;
 
-    protected Map<String, String> translates;
+    protected WoodType woodType;
 
-    protected TreeType(ResourceLocation name, Map<String, String> translates) {
+    protected Map<TreeBlockType, Block> blocks = new HashMap<>();
+    protected Map<TreeBlockType, Item> items = new HashMap<>();
+    protected Map<TreeBlockType, List<CreativeModeTab>> itemCreativeTabs = new HashMap<>();
+
+    protected TreeBlockNameTranslator translator;
+
+    protected AbstractTreeGrower grower;
+
+    protected TreeType(ResourceLocation name,
+                       Map<String, String> translateRoots,
+                       Map<String, Map<TreeBlockType, StringDecorator>> customTranslates,
+                       Map<String, Map<TreeBlockType, String>> customLiteralTranslates,
+                       Map<TreeBlockType, Block> customBlocks,
+                       Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties,
+                       Map<TreeBlockType, Item> customBlockItems,
+                       Map<TreeBlockType, List<CreativeModeTab>> customItemsTabs,
+                       @Nullable AbstractTreeGrower grower) {
         this.name = name;
-        this.translates = translates;
+
+        this.translator = new TreeBlockNameTranslator(name, translateRoots, customTranslates, customLiteralTranslates);
+
+        // Todo: make blocks and items.
+
+        this.grower = Objects.requireNonNullElseGet(grower, () -> new DefaultTreeGrower(this));
+
+        woodType = WoodType.create(name.toString());
     }
 
+    public WoodType getWoodType() {
+        return woodType;
+    }
 
-    public class Builder {
+    public Map<TreeBlockType, Block> getBlocks() {
+        return ImmutableMap.<TreeBlockType, Block>builder().putAll(blocks).build();
+    }
+
+    //    protected void register(IEventBus bus) {
+//        WoodType.register(woodType);
+//
+//        // Todo: register.
+//    }
+
+    public ResourceLocation getName() {
+        return name;
+    }
+
+    public Block getBlock(TreeBlockType treeBlockType) {
+        return blocks.get(treeBlockType);
+    }
+
+    public Item getItem(TreeBlockType treeBlockType) {
+        return items.get(treeBlockType);
+    }
+
+    /**
+     * Make translates map.
+     * @return Map &lt;String locale, Map&lt;String key, String value&gt; translateMap&gt;
+     */
+    public Map<String, Map<String, String>> makeTranslates() {
+        return translator.makeTranslates();
+    }
+
+    /**
+     * Make translates map for specific locale. <br />
+     * @return Map&lt;String key, String value&gt;
+     */
+    public Map<String, String> makeTranslatesForLocale(String locale) {
+        return translator.makeTranslatesForLocale(locale);
+    }
+
+    public static class Builder {
         protected ResourceLocation name;
 
-        protected Map<String, String> translates = new HashMap<>();
+        protected Map<String, String> translateRoots = new HashMap<>();
+        protected Map<String, Map<TreeBlockType, StringDecorator>> translates = new HashMap<>();
+        protected Map<String, Map<TreeBlockType, String>> literalTranslates = new HashMap<>();
 
+        protected Map<TreeBlockType, Block> customBlocks = new HashMap<>();
+        protected Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties = new HashMap<>();
+        protected Map<TreeBlockType, Item> customBlockItems = new HashMap<>();
+        protected Map<TreeBlockType, List<CreativeModeTab>> customItemTabs = new HashMap<>();
+
+        @Nullable
+        protected AbstractTreeGrower grower;
+
+        /**
+         * New builder.
+         * @param name ResourceLocation of tree.
+         */
         public Builder(ResourceLocation name) {
             this.name = name;
         }
 
-        // Todo: qyl27: custom translates for a specific block/item.
-        public Builder translate(String locale, String translate) {
+        /**
+         * Translate root for a locale.
+         * @param locale Locale of translation, like en_us or zh_cn.
+         * @param translateRoot Translate root value, like Oak, Spruce.
+         * @return Builder
+         */
+        public Builder translate(String locale, String translateRoot) {
+            translateRoots.put(locale, translateRoot);
+            return this;
+        }
+
+        /**
+         * Translate decorators for a locale.
+         * @param locale Locale of translation, like en_us or zh_cn.
+         * @param translate Translate value.
+         * @return Builder
+         */
+        public Builder translate(String locale, Map<TreeBlockType, StringDecorator> translate) {
             translates.put(locale, translate);
             return this;
+        }
+
+        /**
+         * Custom literal translates for a specific block/item.
+         * @param locale Locale of translation, like en_us or zh_cn.
+         * @param treeBlockType Specific block.
+         * @param literalTranslate Literal translate value.
+         * @return Builder
+         */
+        public Builder translate(String locale, TreeBlockType treeBlockType, String literalTranslate) {
+            if (!literalTranslates.containsKey(locale)) {
+                literalTranslates.put(locale, new HashMap<>());
+            }
+
+            var map = literalTranslates.get(locale);
+            map.put(treeBlockType, literalTranslate);
+
+            return this;
+        }
+
+        /**
+         * Custom block instead of auto generate.
+         * @param treeBlockType Specific block.
+         * @param block Block.
+         * @return Builder
+         */
+        public Builder block(TreeBlockType treeBlockType, Block block) {
+            customBlocks.put(treeBlockType, block);
+            return this;
+        }
+
+        /**
+         * Custom block Property instead of auto generate.
+         * @param treeBlockType Specific block Property.
+         * @param blockProperty Block property.
+         * @return Builder
+         */
+        public Builder blockProperty(TreeBlockType treeBlockType, BlockBehaviour.Properties blockProperty) {
+            customBlockProperties.put(treeBlockType, blockProperty);
+            return this;
+        }
+
+        /**
+         * Custom block item instead of auto generate.
+         * @param treeBlockType Specific block item.
+         * @param blockItem Block item.
+         * @return Builder
+         */
+        public Builder blockItem(TreeBlockType treeBlockType, BlockItem blockItem) {
+            customBlockItems.put(treeBlockType, blockItem);
+            return this;
+        }
+
+        /**
+         * Custom creative mode tab instead of auto generate.
+         * @param treeBlockType Specific block item.
+         * @param tab Item tab.
+         * @return Builder
+         */
+        public Builder blockItemTab(TreeBlockType treeBlockType, CreativeModeTab tab) {
+            if (!customItemTabs.containsKey(treeBlockType)) {
+                customItemTabs.put(treeBlockType, new ArrayList<>());
+            }
+
+            customItemTabs.get(treeBlockType).add(tab);
+            return this;
+        }
+
+        /**
+         * Custom creative mode tabs instead of auto generate.
+         * Will replace previous sets.
+         * @param treeBlockType Specific block item.
+         * @param tabs Item tabs.
+         * @return Builder
+         */
+        public Builder blockItemTabs(TreeBlockType treeBlockType, List<CreativeModeTab> tabs) {
+            customItemTabs.put(treeBlockType, tabs);
+            return this;
+        }
+
+        /**
+         * Set grower for sapling.
+         * @param grower Grower.
+         * @return Builder
+         */
+        public Builder grower(AbstractTreeGrower grower) {
+            this.grower = grower;
+            return this;
+        }
+
+        public TreeType build() {
+            return new TreeType(name, translateRoots, translates, literalTranslates,
+                    customBlocks, customBlockProperties,
+                    customBlockItems, customItemTabs, grower);
         }
     }
 }
