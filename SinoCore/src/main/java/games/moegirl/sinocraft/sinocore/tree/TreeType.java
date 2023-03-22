@@ -25,6 +25,7 @@ public class TreeType {
     protected Map<TreeBlockType, Block> blocks = new HashMap<>();
     protected Map<TreeBlockType, Item> items = new HashMap<>();
     protected Map<TreeBlockType, List<CreativeModeTab>> itemCreativeTabs = new HashMap<>();
+    protected Map<CreativeModeTab, List<Item>> creativeTabItems = new HashMap<>();
 
     protected TreeBlockNameTranslator translator;
 
@@ -166,6 +167,17 @@ public class TreeType {
         for (var type : itemTypesRemain) {
             itemCreativeTabs.put(type, getDefaultTabs(type));
         }
+
+        for (var entry : itemCreativeTabs.entrySet()) {
+            var item = items.get(entry.getKey());
+            for (var tab : entry.getValue()) {
+                if (!creativeTabItems.containsKey(tab)) {
+                    creativeTabItems.put(tab, new ArrayList<>());
+                }
+
+                creativeTabItems.get(tab).add(item);
+            }
+        }
     }
 
     public WoodType getWoodType() {
@@ -184,11 +196,9 @@ public class TreeType {
         return ImmutableMap.<TreeBlockType, List<CreativeModeTab>>builder().putAll(itemCreativeTabs).build();
     }
 
-
-    //    protected void register(IEventBus bus) {
-//
-//        // Todo: register.
-//    }
+    public Map<CreativeModeTab, List<Item>> getTabItems() {
+        return ImmutableMap.<CreativeModeTab, List<Item>>builder().putAll(creativeTabItems).build();
+    }
 
     public ResourceLocation getName() {
         return name;

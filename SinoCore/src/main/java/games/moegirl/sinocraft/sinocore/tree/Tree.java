@@ -1,8 +1,12 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import com.google.common.collect.ImmutableMap;
 import games.moegirl.sinocraft.sinocore.tree.depr.TreeBuilder;
 import games.moegirl.sinocraft.sinocore.tree.depr.woodwork.Woodwork;
+import games.moegirl.sinocraft.sinocore.tree.event.SCTreeTabsBuildListener;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.*;
@@ -34,8 +38,34 @@ public final class Tree {
         }
     }
 
+    private static Map<CreativeModeTab, List<Item>> getTabItems(String modid) {
+        var map = new HashMap<CreativeModeTab, List<Item>>();
+        getRegistry().entrySet()
+                .stream()
+                .filter(e -> e.getKey().getNamespace().equals(modid))
+                .forEach(e -> {
+                    for (var en : e.getValue().getTabItems().entrySet()) {
+                        var tab = en.getKey();
+
+                        if (!map.containsKey(tab)) {
+                            map.put(tab, new ArrayList<>());
+                        }
+
+                        map.get(tab).addAll(en.getValue());
+                    }
+                });
+        return map;
+    }
+
+    private static void registerInternal(String modid, IEventBus bus) {
+        bus.register(new SCTreeTabsBuildListener(getTabItems(modid)));
+
+    }
+
     private static void registerInternal(String modid, IEventBus bus, TreeType treeType) {
         // Todo: register trees.
+
+
     }
 
     /*
