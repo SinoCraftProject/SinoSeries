@@ -29,6 +29,11 @@ import java.util.stream.IntStream;
 
 import static net.minecraft.client.gui.screens.inventory.SignEditScreen.MAGIC_TEXT_SCALE;
 
+/**
+ * 告示牌编辑界面
+ *
+ * @author luqin2007
+ */
 public class ModSignEditScreen extends Screen {
 
     private static final Vector3f TEXT_SCALE = new Vector3f(MAGIC_TEXT_SCALE, MAGIC_TEXT_SCALE, MAGIC_TEXT_SCALE);
@@ -149,7 +154,8 @@ public class ModSignEditScreen extends Screen {
                 builder.vertex(pose, selectionX1, cursorY, 0).color(0, 0, 255, 255).endVertex();
                 BufferUploader.drawWithShader(builder.end());
                 RenderSystem.disableColorLogicOp();
-                RenderSystem.enableTexture();;
+                RenderSystem.enableTexture();
+                ;
             }
         }
         stack.popPose();

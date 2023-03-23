@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * 木 与 去皮木（？）
+ * @author luqin2007
  */
 public class ModWoodBlock extends RotatedPillarBlock implements ITreeBlock {
 

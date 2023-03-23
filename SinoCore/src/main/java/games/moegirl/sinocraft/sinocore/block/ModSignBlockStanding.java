@@ -18,6 +18,9 @@ import net.minecraft.world.level.material.Fluids;
 
 import static net.minecraft.world.level.block.StandingSignBlock.ROTATION;
 
+/**
+ * @author luqin2007
+ */
 public class ModSignBlockStanding extends ModSignBlock {
 
     public ModSignBlockStanding(Properties properties, Woodwork woodwork) {

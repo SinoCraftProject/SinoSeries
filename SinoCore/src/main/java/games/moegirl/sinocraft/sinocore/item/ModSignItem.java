@@ -16,6 +16,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
+/**
+ * 告示牌方块物品
+ *
+ * @author luqin2007
+ */
 public class ModSignItem extends StandingAndWallBlockItem {
 
     public ModSignItem(Properties pProperties, Block pStandingBlock, Block pWallBlock) {

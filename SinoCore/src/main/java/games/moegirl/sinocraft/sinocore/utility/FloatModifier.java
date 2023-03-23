@@ -5,6 +5,9 @@ import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 用于修改基准 float 值并产生新值的工具类
+ */
 public final class FloatModifier {
 
     private final List<Float2FloatFunction> calcBefore;

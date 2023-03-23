@@ -30,7 +30,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 /**
  * A helper for create lootable table
  *
- * @author luqin
+ * @author luqin2007
  */
 public enum BlockLootables {
 

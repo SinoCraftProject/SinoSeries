@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.*;
@@ -10,6 +10,11 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiPredicate;
 
+/**
+ * 匹配无序配方的工具类
+ *
+ * @author luqin2007
+ */
 public class CraftHelper {
 
     @Nullable
@@ -27,6 +32,13 @@ public class CraftHelper {
         return matchShapeless(inputs, Arrays.asList(ingredients), checker);
     }
 
+    /**
+     * @param <T>         判定类型，通常为 Ingredient
+     * @param inputs      输入对象
+     * @param ingredients 匹配对象
+     * @param checker     匹配函数
+     * @return 匹配失败返回 null，否则返回每个 slot 对应的匹配对象
+     */
     @Nullable
     public static <T> Int2ObjectMap<T> matchShapeless(Container inputs, Collection<T> ingredients, BiPredicate<T, ItemStack> checker) {
         List<T> notFound = new LinkedList<>(ingredients);

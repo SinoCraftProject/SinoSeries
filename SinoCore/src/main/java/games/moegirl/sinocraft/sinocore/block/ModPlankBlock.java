@@ -5,7 +5,8 @@ import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
 import net.minecraft.world.level.block.Block;
 
 /**
- * A class for plank with tree
+ * 木板
+ * @author luqin2007
  */
 public class ModPlankBlock extends Block implements IWoodworkBlock {
 

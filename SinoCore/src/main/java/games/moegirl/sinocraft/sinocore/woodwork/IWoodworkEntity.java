@@ -6,6 +6,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
  * Mod 木制品方块中的 BlockEntity 接口
+ *
+ * @author luqin2007
  */
 public interface IWoodworkEntity<T extends BlockEntity> extends Self<T> {
 

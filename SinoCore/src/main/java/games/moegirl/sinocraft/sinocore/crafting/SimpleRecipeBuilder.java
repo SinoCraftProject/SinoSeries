@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import games.moegirl.sinocraft.sinocore.utility.Self;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -11,6 +11,11 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
+/**
+ * 简化版 RecipeBuilder
+ *
+ * @author luqin2007
+ */
 public abstract class SimpleRecipeBuilder<R extends SimpleRecipe<?, R, ?>, SELF extends SimpleRecipeBuilder<R, SELF>> implements RecipeBuilder, Self<SELF> {
 
     protected final ResourceLocation id;

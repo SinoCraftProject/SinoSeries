@@ -91,7 +91,7 @@ public class TreeDataHandler {
         if (!lootTable.isEmpty()) generator.addProvider(true, new TLootProvider());
         if (!features.isEmpty()) generator.addProvider(true, new TFeatureProvider());
 
-        ((IDataGenerator) generator).sinocoreSetPost(modid, output, helper);
+        ((IDataGenerator) generator).sinocoreSetPost(modid, output);
     }
 
     public void register(IEventBus bus) {

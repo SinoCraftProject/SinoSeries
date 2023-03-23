@@ -1,9 +1,13 @@
-package games.moegirl.sinocraft.sinocore.old.client;
+package games.moegirl.sinocraft.sinocore.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import org.lwjgl.opengl.GL11;
 
-@SuppressWarnings("unused")
+/**
+ * 控制打开或关闭 OpenGL 功能
+ *
+ * @author luqin2007
+ */
 public abstract class GLSwitcher {
 
     private final boolean isEnabled;
@@ -21,14 +25,6 @@ public abstract class GLSwitcher {
             enableInternal();
         } else {
             disableInternal();
-        }
-        return this;
-    }
-
-    public GLSwitcher set(State state) {
-        switch (state) {
-            case ENABLE -> set(true);
-            case DISABLE -> set(false);
         }
         return this;
     }
@@ -78,9 +74,5 @@ public abstract class GLSwitcher {
                 RenderSystem.disableDepthTest();
             }
         };
-    }
-
-    public enum State {
-        ENABLE, DISABLE, IGNORE
     }
 }

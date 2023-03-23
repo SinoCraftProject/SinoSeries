@@ -19,6 +19,11 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
+/**
+ * 创建 BlockFamily 用于生成配方
+ *
+ * @author luqin2007
+ */
 public interface WoodworkBlockFamily {
 
     Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> shapeBuilders = ImmutableMap.<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>>builder()

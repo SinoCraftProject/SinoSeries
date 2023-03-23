@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 /**
  * 若使用自定义方块，请为其正确添加对应辅助接口以便可以正确生成对应功能
  *
+ * @author luqin2007
  * @see IWoodworkBlock
  * @see IWoodworkEntity
  * @see games.moegirl.sinocraft.sinocore.block.ILootableBlock

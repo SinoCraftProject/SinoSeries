@@ -13,6 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LootTableProvider.class)
 public abstract class MixinLootTableProvider {
 
+    /**
+     * 对于实现了 {@link INamedProvider} 的 LootTableProvider，允许 getName() 方法返回其他值以防冲突
+     */
     @Inject(method = "getName", at = @At("HEAD"), cancellable = true)
     private void injectGetName(CallbackInfoReturnable<String> cancel) {
         if (((LootTableProvider) (Object) this) instanceof INamedProvider provider) {

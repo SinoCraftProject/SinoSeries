@@ -31,6 +31,7 @@ import java.util.function.Supplier;
  *
  * <p>使用时需要在主类中使用 {@link Tree#register(String, IEventBus)} 注册</p>
  *
+ * @author luqin2007
  * @see TreeBuilder
  * @see Woodwork
  */

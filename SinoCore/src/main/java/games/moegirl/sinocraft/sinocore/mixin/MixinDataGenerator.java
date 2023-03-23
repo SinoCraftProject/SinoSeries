@@ -3,11 +3,10 @@ package games.moegirl.sinocraft.sinocore.mixin;
 import com.google.common.base.Stopwatch;
 import games.moegirl.sinocraft.sinocore.data.PostProvider;
 import games.moegirl.sinocraft.sinocore.mixin_inter.IDataGenerator;
+import games.moegirl.sinocraft.sinocore.utility.Functions;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,17 +24,19 @@ import java.util.concurrent.TimeUnit;
 @Mixin(DataGenerator.class)
 public abstract class MixinDataGenerator implements IDataGenerator {
 
-    @Shadow @Final private static Logger LOGGER;
-
-    @Shadow public abstract <T extends DataProvider> T addProvider(boolean run, T provider);
+    @Shadow
+    @Final
+    private static Logger LOGGER;
 
     private PostProvider sinocorePostProvider = null;
 
     @Override
-    public void sinocoreSetPost(String modid, PackOutput output, ExistingFileHelper helper) {
+    public void sinocoreSetPost(String modid, PackOutput output) {
         if (sinocorePostProvider == null) {
-            sinocorePostProvider = new PostProvider(modid, output);
-            addProvider(false, sinocorePostProvider);
+            sinocorePostProvider = Functions
+                    .constructor(PostProvider.class, String.class, PackOutput.class)
+                    .apply(modid, output);
+            ((DataGenerator) (Object) this).addProvider(false, sinocorePostProvider);
         }
     }
 

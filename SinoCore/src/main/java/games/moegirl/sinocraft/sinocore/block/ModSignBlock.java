@@ -23,6 +23,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+/**
+ * 告示牌
+ * todo：告示牌 be 还有问题
+ *
+ * @author luqin2007
+ */
 public abstract class ModSignBlock extends SignBlock implements IWoodworkBlock {
 
     private final Woodwork woodwork;

@@ -19,16 +19,22 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * 在 DataProvider 最后运行，处理 SinoCore 注册的某些 DataProvider 产生的中间产物
+ * <p><b>该类无需，也不应在任何地方手动实例化</b></p>
+ *
  * @author luqin2007
+ * @see games.moegirl.sinocraft.sinocore.mixin_inter.IDataGenerator
+ * @see games.moegirl.sinocraft.sinocore.handler.TreeDataHandler
+ * @see games.moegirl.sinocraft.sinocore.handler.WoodworkDataHandler
  */
-public class PostProvider implements DataProvider {
+public final class PostProvider implements DataProvider {
 
     private final String modid;
     private final PackOutput output;
     private final List<Pair<? extends JsonElement, Path>> out = new ArrayList<>();
     private final List<Path> remove = new ArrayList<>();
 
-    public PostProvider(String modid, PackOutput output) {
+    private PostProvider(String modid, PackOutput output) {
         this.modid = modid;
         this.output = output;
     }

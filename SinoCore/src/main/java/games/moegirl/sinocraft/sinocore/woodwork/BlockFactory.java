@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * @author luqin2007
+ */
 public class BlockFactory<B extends Block, I extends BlockItem> {
 
     final WoodworkBuilder builder;

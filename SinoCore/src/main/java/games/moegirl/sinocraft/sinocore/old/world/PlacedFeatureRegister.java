@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.old.world;
 
-import games.moegirl.sinocraft.sinocore.old.utility.Functions;
+import games.moegirl.sinocraft.sinocore.utility.Functions;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;

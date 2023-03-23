@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * 原木与去皮原木
+ * @author luqin2007
  */
 public class ModLogBlock extends RotatedPillarBlock implements ITreeBlock {
 

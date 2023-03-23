@@ -29,6 +29,8 @@ import java.util.function.Supplier;
 /**
  * 木制品，包括木板，告示牌，楼梯，半砖，按钮，压力板，门等
  * <p>使用时应在 mod 主类中使用 {@link Woodwork#register(String, IEventBus, NetworkHolder)} 注册</p>
+ *
+ * @author luqin2007
  */
 public class Woodwork {
 

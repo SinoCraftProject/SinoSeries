@@ -1,14 +1,16 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import net.minecraft.world.Container;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import java.util.Set;
-
-public class FluidsRecipeContainer implements RecipeContainer {
+/**
+ * 同时存储物品和多种流体的只读容器
+ *
+ * @author luqin2007
+ */
+public class FluidsRecipeContainer implements ReadonlyItemFluidContainer {
 
     private final Container items;
     private final IFluidHandler fluids;
@@ -31,16 +33,6 @@ public class FluidsRecipeContainer implements RecipeContainer {
     @Override
     public ItemStack getItem(int index) {
         return items.getItem(index);
-    }
-
-    @Override
-    public int countItem(Item item) {
-        return items.countItem(item);
-    }
-
-    @Override
-    public boolean hasAnyOf(Set<Item> set) {
-        return items.hasAnyOf(set);
     }
 
     @Override

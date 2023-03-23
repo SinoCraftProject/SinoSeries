@@ -1,14 +1,15 @@
-package games.moegirl.sinocraft.sinocore.old.capability;
+package games.moegirl.sinocraft.sinocore.capability;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public abstract class TagCapabilitySerializable<C extends INBTSerializable<CompoundTag>>
@@ -42,9 +43,8 @@ public abstract class TagCapabilitySerializable<C extends INBTSerializable<Compo
         opt.ifPresent(p -> p.deserializeNBT(nbt));
     }
 
-    // todo: throw more message in the exception
     @Override
     public C get() {
-        return opt.orElseThrow(RuntimeException::new);
+        return opt.orElseThrow(() -> new NullPointerException("Not found existed " + cap.getName() + " capability."));
     }
 }

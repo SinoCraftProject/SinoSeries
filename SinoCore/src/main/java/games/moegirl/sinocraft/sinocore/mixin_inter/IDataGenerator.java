@@ -8,5 +8,5 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  */
 public interface IDataGenerator {
 
-    void sinocoreSetPost(String modid, PackOutput output, ExistingFileHelper helper);
+    void sinocoreSetPost(String modid, PackOutput output);
 }

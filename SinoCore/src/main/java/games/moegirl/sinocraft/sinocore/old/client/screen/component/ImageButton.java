@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import games.moegirl.sinocraft.sinocore.old.utility.texture.ButtonEntry;
 import games.moegirl.sinocraft.sinocore.old.utility.texture.TextureEntry;
 import games.moegirl.sinocraft.sinocore.old.utility.texture.TextureMap;
-import games.moegirl.sinocraft.sinocore.old.client.GLSwitcher;
+import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.GuiComponent;

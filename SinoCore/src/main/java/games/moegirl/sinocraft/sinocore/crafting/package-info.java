@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

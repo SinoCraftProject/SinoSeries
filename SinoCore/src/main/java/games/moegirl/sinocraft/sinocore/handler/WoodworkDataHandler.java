@@ -112,7 +112,7 @@ public class WoodworkDataHandler {
             }
         }
 
-        ((IDataGenerator) generator).sinocoreSetPost(modid, output, helper);
+        ((IDataGenerator) generator).sinocoreSetPost(modid, output);
     }
 
     public void register(IEventBus bus) {

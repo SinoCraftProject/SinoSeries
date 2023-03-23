@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.old.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import games.moegirl.sinocraft.sinocore.old.client.GLSwitcher;
+import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.old.client.screen.component.ImageButton;
 import games.moegirl.sinocraft.sinocore.old.utility.texture.*;
 import net.minecraft.client.Minecraft;

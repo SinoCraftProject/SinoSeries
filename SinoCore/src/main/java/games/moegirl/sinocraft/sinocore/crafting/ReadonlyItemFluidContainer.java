@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -8,30 +8,27 @@ import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 /**
- * A readonly container for recipe, allowed items and fluids
- *
- * <p>Warning: The Container is read-only!!!</p>
+ * 只读的流体和物品容器，常用于合成表查询
  */
-public interface RecipeContainer extends Container {
+public interface ReadonlyItemFluidContainer extends Container {
 
-    static RecipeContainer create(Container items, IFluidHandler fluids) {
+    static ReadonlyItemFluidContainer create(Container items, IFluidHandler fluids) {
         return new FluidsRecipeContainer(items, fluids);
     }
 
-    static RecipeContainer createTank(Container items, IFluidTank tank) {
+    static ReadonlyItemFluidContainer create(Container items, IFluidTank tank) {
         return new FluidRecipeContainer(items, tank);
     }
 
-    /**
-     * Get input fluid by index.
-     * Use for the item handler that contains inputs and outputs
-     */
+    // fluid ===========================================================================================================
+
     FluidStack getFluid(int index);
 
-    /**
-     * Get the input fluids count.
-     */
     int getFluidCount();
+
+    default boolean isFluidEmpty() {
+        return getFluidCount() == 0;
+    }
 
     // ban =============================================================================================================
 

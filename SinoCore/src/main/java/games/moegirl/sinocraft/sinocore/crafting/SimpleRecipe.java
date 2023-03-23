@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import games.moegirl.sinocraft.sinocore.utility.Self;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -8,7 +8,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 
-public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, S extends AbstractRecipeSerializer<SELF>> implements Recipe<C>, Self<SELF> {
+/**
+ * 简化版 Recipe Serializer
+ *
+ * @author luqin2007
+ */
+public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, S extends AbstractRecipeSerializer<SELF>>
+        implements Recipe<C>, Self<SELF> {
 
     final RecipeType<SELF> type;
     final S serializer;

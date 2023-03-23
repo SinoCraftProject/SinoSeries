@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -7,6 +7,11 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * 简化版的 FinishedRecipe
+ *
+ * @author luqin2007
+ */
 public class SimpleFinishedRecipe<S extends AbstractRecipeSerializer<R>, R extends Recipe<?>> implements FinishedRecipe {
 
     private final S serializer;

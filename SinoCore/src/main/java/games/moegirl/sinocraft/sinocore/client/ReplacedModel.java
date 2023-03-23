@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.client;
+package games.moegirl.sinocraft.sinocore.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -15,6 +15,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 用于替换已存在的 BakedModel，禁止某些情况下的默认绘制
+ *
+ * @param model    已存在的模型
+ * @param replaced 不绘制的情况
+ * @author luqin2007
+ */
 public record ReplacedModel(BakedModel model, ItemTransforms.TransformType... replaced) implements BakedModel {
 
     @Override
@@ -51,14 +58,6 @@ public record ReplacedModel(BakedModel model, ItemTransforms.TransformType... re
     public ItemOverrides getOverrides() {
         return model.getOverrides();
     }
-
-//    @Override
-//    public BakedModel handlePerspective(ItemTransforms.TransformType cameraTransformType, PoseStack poseStack) {
-//        if (ArrayUtils.contains(replaced, cameraTransformType)) {
-//            return this;
-//        }
-//        return this.model.handlePerspective(cameraTransformType, poseStack);
-//    }
 
     @Override
     public BakedModel applyTransform(ItemTransforms.TransformType transformType, PoseStack poseStack, boolean applyLeftHandTransform) {

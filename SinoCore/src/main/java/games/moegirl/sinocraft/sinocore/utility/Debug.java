@@ -3,6 +3,11 @@ package games.moegirl.sinocraft.sinocore.utility;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 为调试提供一个暂时保存变量的地方
+ *
+ * @author luqin2007
+ */
 public interface Debug {
 
     Map<String, Object> MAP = new HashMap<>();

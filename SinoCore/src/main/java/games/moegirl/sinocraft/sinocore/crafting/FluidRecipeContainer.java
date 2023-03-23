@@ -1,14 +1,16 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import net.minecraft.world.Container;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 
-import java.util.Set;
-
-public class FluidRecipeContainer implements RecipeContainer {
+/**
+ * 同时存储物品和一种流体的只读容器
+ *
+ * @author luqin2007
+ */
+public class FluidRecipeContainer implements ReadonlyItemFluidContainer {
 
     private final Container items;
     private final IFluidTank fluid;
@@ -34,16 +36,6 @@ public class FluidRecipeContainer implements RecipeContainer {
     }
 
     @Override
-    public int countItem(Item item) {
-        return items.countItem(item);
-    }
-
-    @Override
-    public boolean hasAnyOf(Set<Item> set) {
-        return items.hasAnyOf(set);
-    }
-
-    @Override
     public FluidStack getFluid(int index) {
         return index == 0 ? fluid.getFluid() : FluidStack.EMPTY;
     }
@@ -51,5 +43,10 @@ public class FluidRecipeContainer implements RecipeContainer {
     @Override
     public int getFluidCount() {
         return 1;
+    }
+
+    @Override
+    public boolean isFluidEmpty() {
+        return fluid.getFluid().isEmpty();
     }
 }

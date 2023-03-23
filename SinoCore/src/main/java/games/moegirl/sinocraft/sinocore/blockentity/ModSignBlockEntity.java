@@ -24,6 +24,11 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Function;
 
+/**
+ * 告示牌
+ * todo 仍有问题，无法打开编辑界面
+ * @author luqin2007
+ */
 public class ModSignBlockEntity extends BlockEntity implements IWoodworkEntity<ModSignBlockEntity> {
     private static final int MAX_TEXT_LINE_WIDTH = 90;
     private static final int TEXT_LINE_HEIGHT = 10;

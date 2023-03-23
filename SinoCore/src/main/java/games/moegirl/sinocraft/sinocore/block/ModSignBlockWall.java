@@ -26,6 +26,9 @@ import java.util.Map;
 
 import static net.minecraft.world.level.block.HorizontalDirectionalBlock.FACING;
 
+/**
+ * @author luqin2007
+ */
 public class ModSignBlockWall extends ModSignBlock {
 
     private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(Map.of(

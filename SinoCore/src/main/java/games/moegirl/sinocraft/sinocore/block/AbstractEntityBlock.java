@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.block;
 
+import games.moegirl.sinocraft.sinocore.utility.IGenericClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -14,7 +15,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.ParameterizedType;
 import java.util.function.Supplier;
 
 /**
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
  * @see BlockEntityTicker
  * @see GameEventListener
  */
-public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEntityBlock {
+public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEntityBlock implements IGenericClass {
 
     protected final Lazy<BlockEntityType<T>> entityType;
     private final Class<?> typeClass;
@@ -35,7 +35,7 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
     public AbstractEntityBlock(Properties properties, Supplier<BlockEntityType<T>> entityType) {
         super(properties);
         this.entityType = Lazy.of(entityType);
-        this.typeClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.typeClass = getGenericClass(0);
     }
 
     public AbstractEntityBlock(Supplier<BlockEntityType<T>> entityType) {

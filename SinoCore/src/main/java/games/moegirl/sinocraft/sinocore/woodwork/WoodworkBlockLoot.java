@@ -13,7 +13,9 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * A loot table for tree blocks
+ * 用于生成木制品的掉落物
+ *
+ * @author luqin2007
  */
 public class WoodworkBlockLoot extends BlockLootSubProvider {
     private final Map<Block, Function<Block, LootTable.Builder>> loots = new HashMap<>();

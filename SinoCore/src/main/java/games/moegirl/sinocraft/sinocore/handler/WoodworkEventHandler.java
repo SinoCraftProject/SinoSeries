@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * 树相关事件注册
+ * 木制品相关事件注册
  */
 public class WoodworkEventHandler {
 

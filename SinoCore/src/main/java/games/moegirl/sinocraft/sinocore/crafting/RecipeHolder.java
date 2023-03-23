@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.crafting;
+package games.moegirl.sinocraft.sinocore.crafting;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,27 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * 用于保存注册某个配方类型的注册结果
+ *
+ * @param <C> Container 类型
+ * @param <T> Recipe 类型
+ * @param <S> Serializer 类型
+ * @author luqin2007
+ */
 public final class RecipeHolder<C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> {
+
+    public static <C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> RecipeHolder<C, T, S> register(
+            DeferredRegister<RecipeSerializer<?>> registry, RegistryObject<? extends ItemLike> sign, S serializer) {
+        ResourceLocation id = sign.getId();
+        RecipeHolder<C, T, S> holder = new RecipeHolder<>(id, Suppliers.memoize(() -> sign.get().asItem()), serializer, serializer.recipeClass());
+        registry.register(id.getPath(), () -> {
+            holder.recipeType = RecipeType.register(id.toString());
+            return serializer;
+        });
+        return holder;
+    }
+
     private final ResourceLocation name;
     private final Supplier<? extends Item> sign;
     private RecipeType<T> recipeType;
@@ -29,17 +49,6 @@ public final class RecipeHolder<C extends Container, T extends Recipe<C>, S exte
         this.sign = sign;
         this.serializer = serializer;
         this.type = type;
-    }
-
-    public static <C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> RecipeHolder<C, T, S> register(
-            DeferredRegister<RecipeSerializer<?>> registry, RegistryObject<? extends ItemLike> sign, S serializer) {
-        ResourceLocation id = sign.getId();
-        RecipeHolder<C, T, S> holder = new RecipeHolder<>(id, Suppliers.memoize(() -> sign.get().asItem()), serializer, serializer.recipeClass());
-        registry.register(id.getPath(), () -> {
-            holder.recipeType = RecipeType.register(id.toString());
-            return serializer;
-        });
-        return holder;
     }
 
     public Optional<T> match(Level level, C container) {

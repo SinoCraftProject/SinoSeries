@@ -8,6 +8,7 @@ import net.minecraft.world.level.material.Material;
 
 /**
  * 树叶
+ * @author luqin2007
  */
 public class ModLeavesBlock extends LeavesBlock implements ITreeBlock {
 

@@ -11,10 +11,5 @@ import net.minecraft.world.level.storage.loot.LootTable;
  */
 public interface ILootableBlock {
 
-    /**
-     * Get the custom loot table builder
-     *
-     * @return builder
-     */
     LootTable.Builder createLootBuilder(BlockLootables helper);
 }

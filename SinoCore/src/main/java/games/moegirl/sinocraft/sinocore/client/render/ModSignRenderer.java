@@ -35,6 +35,11 @@ import java.util.function.Function;
 import static net.minecraft.world.level.block.StandingSignBlock.ROTATION;
 import static net.minecraft.world.level.block.WallSignBlock.FACING;
 
+/**
+ * 告示牌渲染
+ *
+ * @author luqin2007
+ */
 public class ModSignRenderer implements BlockEntityRenderer<ModSignBlockEntity> {
     private static final int OUTLINE_RENDER_DISTANCE = Mth.square(16);
     private static final int BLACK_TEXT_OUTLINE_COLOR = -988212; // #FFF0EBCC
