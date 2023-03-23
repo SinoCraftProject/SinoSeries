@@ -20,9 +20,9 @@ public enum TreeBlockType {
     FENCE_GATE("fence_gate", true, false, true),
     PRESSURE_PLATE("pressure_gate", true, false, true),
     SIGN("sign", true, false, false),
-    WALL_SIGN("wall_sign", true, false, false),
+    WALL_SIGN("wall_sign", false, false, false),
     HANGING_SIGN("hanging_sign", true, false, false),
-    WALL_HANGING_SIGN("wall_hanging_sign", true, false, false),
+    WALL_HANGING_SIGN("wall_hanging_sign", false, false, false),
     BOAT("boat", true, true, false),
     CHEST_BOAT("chest_boat", true, true, false),
     ;

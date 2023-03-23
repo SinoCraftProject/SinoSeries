@@ -24,6 +24,7 @@ public class SCTreeData {
         var generator = event.getGenerator();
         var output = generator.getPackOutput();
         var exHelper = event.getExistingFileHelper();
+        var lookupProvider = event.getLookupProvider();
 
         var trees = Tree.getRegistry().entrySet()
                 .stream()
@@ -33,9 +34,17 @@ public class SCTreeData {
 
         if (event.includeClient()) {
             generator.addProvider(true, new SCTreeBlockStateProvider(output, modid, exHelper, trees));
+            generator.addProvider(true, new SCTreeItemModelProvider(output, modid, exHelper, trees));
         }
 
-        if (!mItem.isEmpty()) generator.addProvider(true, new TreeDataHandler.TItemModelProvider());
+        if (event.includeServer()) {
+            var blockTagsProvider = new SCTreeBlockTagsProvider(output, lookupProvider, modid, exHelper, trees);
+            generator.addProvider(true, blockTagsProvider);
+            generator.addProvider(true, new SCTreeItemTagsProvider(output, lookupProvider, blockTagsProvider, modid, exHelper, trees));
+        }
+
+        // Todo.
+
         if (!recipe.isEmpty()) generator.addProvider(true, new TreeDataHandler.TRecipeProvider());
         if (!(blockTags.isEmpty() && itemTags.isEmpty())) {
             BlockTagsProvider b;

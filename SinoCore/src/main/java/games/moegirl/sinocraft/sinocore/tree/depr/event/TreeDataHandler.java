@@ -79,15 +79,7 @@ public class TreeDataHandler {
             generator.addProvider(true, new TEnLangProvider());
             generator.addProvider(true, new TZhLangProvider());
         }
-        if (!mBlock.isEmpty()) generator.addProvider(true, new TBlockStateProvider());
-        if (!mItem.isEmpty()) generator.addProvider(true, new TItemModelProvider());
         if (!recipe.isEmpty()) generator.addProvider(true, new TRecipeProvider());
-        if (!(blockTags.isEmpty() && itemTags.isEmpty())) {
-            BlockTagsProvider b;
-            generator.addProvider(true, b = new TBlockTagsProvider());
-            if (!itemTags.isEmpty())
-                generator.addProvider(true, new TItemTagsProvider(b));
-        }
         if (!lootTable.isEmpty()) generator.addProvider(true, new TLootProvider());
         if (!features.isEmpty()) generator.addProvider(true, new TFeatureProvider());
 
@@ -157,30 +149,6 @@ public class TreeDataHandler {
         }
     }
 
-    class TItemModelProvider extends AbstractItemModelProvider {
-
-        public TItemModelProvider() {
-            super(TreeDataHandler.this.output, TreeDataHandler.this.modid, helper);
-        }
-
-        @Override
-        protected void registerModels() {
-            mItem.forEach(tree -> {
-                addItem(tree.sapling);
-                addBlockItem(tree.log);
-                addBlockItem(tree.strippedLog);
-                addBlockItem(tree.wood);
-                addBlockItem(tree.strippedWood);
-                addBlockItem(tree.leaves);
-            });
-        }
-
-        @Override
-        public @NotNull String getName() {
-            return super.getName() + " Tree " + modid;
-        }
-    }
-
     class TRecipeProvider extends RecipeProvider implements INamedProvider {
 
         public TRecipeProvider() {
@@ -211,52 +179,6 @@ public class TreeDataHandler {
         @Override
         public String sinocoreGetName() {
             return "Recipes Tree " + modid;
-        }
-    }
-
-    class TBlockTagsProvider extends BlockTagsProvider {
-
-        public TBlockTagsProvider() {
-            super(output, provider, modid, helper);
-        }
-
-        @Override
-        protected void addTags(HolderLookup.Provider provider) {
-            blockTags.forEach(tree -> {
-                tag(tree.tagLogs).add(tree.log(), tree.strippedLog(), tree.wood(), tree.strippedLog());
-                tag(BlockTags.SAPLINGS).add(tree.sapling());
-                tag(BlockTags.LOGS).addTag(tree.tagLogs);
-                tag(BlockTags.LOGS_THAT_BURN).addTag(tree.tagLogs);
-                tag(BlockTags.FLOWER_POTS).add(tree.pottedSapling());
-                tag(BlockTags.LEAVES).add(tree.leaves());
-            });
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " Tree " + modid;
-        }
-    }
-
-    class TItemTagsProvider extends ItemTagsProvider {
-
-        public TItemTagsProvider(TagsProvider<Block> b) {
-            super(output, provider, b, modid, helper);
-        }
-
-        @Override
-        protected void addTags(HolderLookup.Provider provider) {
-            itemTags.forEach(tree -> {
-                tag(tree.tagItemLogs).add(tree.log().asItem(), tree.strippedLog().asItem(), tree.wood().asItem(), tree.strippedLog().asItem());
-                tag(ItemTags.SAPLINGS).add(tree.sapling().asItem());
-                tag(ItemTags.LOGS_THAT_BURN).addTag(tree.tagItemLogs);
-                tag(ItemTags.LEAVES).add(tree.leaves().asItem());
-            });
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " Tree " + modid;
         }
     }
 

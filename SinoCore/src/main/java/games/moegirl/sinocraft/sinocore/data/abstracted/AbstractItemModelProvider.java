@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinocore.data.model.WeakCheckModelFile;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -127,6 +128,16 @@ public abstract class AbstractItemModelProvider extends ItemModelProvider {
         return withExistingParent(name.getPath(), blockLoc(name));
     }
 
+    protected void generated(ItemLike item) {
+        String path = ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+        withExistingParent(path, mcLoc("item/generated")).texture("layer0", modLoc("item/" + path));
+    }
+
+    protected void handheld(ItemLike item) {
+        String path = ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+        withExistingParent(path, mcLoc("item/handheld")).texture("layer0", modLoc("item/" + path));
+    }
+
     protected void handheld(Block block) {
         String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
         withExistingParent(path, mcLoc("item/handheld")).texture("layer0", modLoc("block/" + path));
@@ -135,6 +146,11 @@ public abstract class AbstractItemModelProvider extends ItemModelProvider {
     protected void blockItem(Block block) {
         String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
         withExistingParent(path, modLoc("block/" + path));
+    }
+
+    protected void blockItem(Block block, String statedModel) {
+        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        withExistingParent(path, modLoc("block/" + path + "_" + statedModel));
     }
 
     protected static class UnexceptionalItemModelBuilder extends ItemModelBuilder {

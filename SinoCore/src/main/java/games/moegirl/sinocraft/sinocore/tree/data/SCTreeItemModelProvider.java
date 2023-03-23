@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocore.tree.data;
 
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockModelProvider;
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.TreeType;
@@ -36,7 +35,16 @@ public class SCTreeItemModelProvider extends AbstractItemModelProvider {
             blockItem(tree.getBlock(TreeBlockType.PLANKS));
             blockItem(tree.getBlock(TreeBlockType.LEAVES));
 
-            // Todo.
+            blockItem(tree.getBlock(TreeBlockType.STAIRS));
+            blockItem(tree.getBlock(TreeBlockType.SLAB));
+            blockItem(tree.getBlock(TreeBlockType.PRESSURE_PLATE));
+            blockItem(tree.getBlock(TreeBlockType.FENCE_GATE));
+            blockItem(tree.getBlock(TreeBlockType.FENCE), "inventory");
+            blockItem(tree.getBlock(TreeBlockType.BUTTON), "inventory");
+            blockItem(tree.getBlock(TreeBlockType.TRAPDOOR), "bottom");
+
+            generated(tree.getBlock(TreeBlockType.DOOR));
+            generated(tree.getBlock(TreeBlockType.SIGN));
         }
     }
 }

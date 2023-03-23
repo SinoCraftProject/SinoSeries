@@ -89,15 +89,7 @@ public class WoodworkDataHandler {
             generator.addProvider(true, new WEnLangProvider());
             generator.addProvider(true, new WZhLangProvider());
         }
-        if (!mBlock.isEmpty()) generator.addProvider(true, new WBlockStateProvider());
-        if (!mItem.isEmpty()) generator.addProvider(true, new WItemModelProvider());
         if (!recipe.isEmpty()) generator.addProvider(true, new WRecipeProvider());
-        if (!(blockTags.isEmpty() && itemTags.isEmpty())) {
-            BlockTagsProvider b;
-            generator.addProvider(true, b = new WBlockTagsProvider());
-            if (!itemTags.isEmpty())
-                generator.addProvider(true, new WItemTagsProvider(b));
-        }
         if (!lootTable.isEmpty()) generator.addProvider(true, new WLootProvider());
 
         for (Woodwork woodwork : mBlock) {
@@ -183,50 +175,6 @@ public class WoodworkDataHandler {
         }
     }
 
-    class WItemModelProvider extends AbstractItemModelProvider {
-
-        public WItemModelProvider() {
-            super(WoodworkDataHandler.this.output, WoodworkDataHandler.this.modid, helper);
-        }
-
-        @Override
-        protected void registerModels() {
-            mItem.forEach(woodwork -> {
-                addBlockItem(woodwork.planks);
-                addBlockItem(woodwork.slab);
-                addBlockItem(woodwork.fence, "inventory");
-                addBlockItem(woodwork.stairs);
-                addBlockItem(woodwork.button, "inventory");
-                addBlockItem(woodwork.pressurePlate);
-                addBlockItem(woodwork.trapdoor, "bottom");
-                addBlockItem(woodwork.fenceGate);
-
-                addItem(woodwork.door);
-                addItem(woodwork.sign);
-            });
-        }
-
-        private void addBlockItem(RegistryObject<? extends Block> block) {
-            String path = block.getId().getPath();
-            withExistingParent(path, modLoc("block/" + path));
-        }
-
-        private void addBlockItem(RegistryObject<? extends Block> block, String postfix) {
-            String path = block.getId().getPath();
-            withExistingParent(path, modLoc("block/" + path + "_" + postfix));
-        }
-
-        private void addItem(RegistryObject<? extends ItemLike> item) {
-            ResourceLocation name = ForgeRegistries.ITEMS.getKey(item.get().asItem());
-            singleTexture(name.getPath(), mcLoc("item/generated"), "layer0", modLoc("item/" + name.getPath()));
-        }
-
-        @Override
-        public @NotNull String getName() {
-            return super.getName() + " Woodwork " + modid;
-        }
-    }
-
     class WRecipeProvider extends RecipeProvider implements INamedProvider {
 
         public WRecipeProvider() {
@@ -269,63 +217,6 @@ public class WoodworkDataHandler {
         @Override
         public String sinocoreGetName() {
             return "Recipes Woodwork " + modid;
-        }
-    }
-
-    class WBlockTagsProvider extends BlockTagsProvider {
-
-        public WBlockTagsProvider() {
-            super(output, provider, modid, helper);
-        }
-
-        @Override
-        protected void addTags(HolderLookup.Provider provider) {
-            blockTags.forEach(woodwork -> {
-                tag(BlockTags.PLANKS).add(woodwork.planks());
-                tag(BlockTags.WOODEN_BUTTONS).add(woodwork.button());
-                tag(BlockTags.WOODEN_DOORS).add(woodwork.door());
-                tag(BlockTags.WOODEN_STAIRS).add(woodwork.stairs());
-                tag(BlockTags.WOODEN_SLABS).add(woodwork.slab());
-                tag(BlockTags.WOODEN_FENCES).add(woodwork.fence());
-                tag(BlockTags.WOODEN_PRESSURE_PLATES).add(woodwork.pressurePlate());
-                tag(BlockTags.WOODEN_TRAPDOORS).add(woodwork.trapdoor());
-                tag(BlockTags.STANDING_SIGNS).add(woodwork.sign());
-                tag(BlockTags.WALL_SIGNS).add(woodwork.wallSign());
-                tag(BlockTags.FENCE_GATES).add(woodwork.fenceGate());
-                tag(Tags.Blocks.FENCE_GATES_WOODEN).add(woodwork.fenceGate());
-            });
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " Woodwork " + modid;
-        }
-    }
-
-    class WItemTagsProvider extends ItemTagsProvider {
-
-        public WItemTagsProvider(TagsProvider<Block> b) {
-            super(output, provider, b, modid, helper);
-        }
-
-        @Override
-        protected void addTags(HolderLookup.Provider provider) {
-            itemTags.forEach(woodwork -> {
-                tag(ItemTags.PLANKS).add(woodwork.planks().asItem());
-                tag(ItemTags.WOODEN_BUTTONS).add(woodwork.button().asItem());
-                tag(ItemTags.WOODEN_DOORS).add(woodwork.door().asItem());
-                tag(ItemTags.WOODEN_STAIRS).add(woodwork.stairs().asItem());
-                tag(ItemTags.WOODEN_SLABS).add(woodwork.slab().asItem());
-                tag(ItemTags.WOODEN_FENCES).add(woodwork.fence().asItem());
-                tag(ItemTags.WOODEN_PRESSURE_PLATES).add(woodwork.pressurePlate().asItem());
-                tag(ItemTags.WOODEN_TRAPDOORS).add(woodwork.trapdoor().asItem());
-                tag(Tags.Items.FENCE_GATES_WOODEN).add(woodwork.fenceGate().asItem());
-            });
-        }
-
-        @Override
-        public String getName() {
-            return super.getName() + " Woodwork " + modid;
         }
     }
 
