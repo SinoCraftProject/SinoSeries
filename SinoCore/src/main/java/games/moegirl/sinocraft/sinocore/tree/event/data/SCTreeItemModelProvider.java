@@ -28,6 +28,7 @@ public class SCTreeItemModelProvider extends AbstractItemModelProvider {
     protected void registerModels() {
         for (var tree : treeTypes) {
             handheld(tree.getBlock(TreeBlockType.SAPLING));
+
             blockItem(tree.getBlock(TreeBlockType.LOG));
             blockItem(tree.getBlock(TreeBlockType.STRIPPED_LOG));
             blockItem(tree.getBlock(TreeBlockType.LOG_WOOD));

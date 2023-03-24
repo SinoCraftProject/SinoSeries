@@ -32,21 +32,29 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         for (var tree : treeTypes) {
-            simpleBlock(tree.getBlock(TreeBlockType.SAPLING));
-
             logBlock((RotatedPillarBlock) tree.getBlock(TreeBlockType.LOG));
             logBlock((RotatedPillarBlock) tree.getBlock(TreeBlockType.STRIPPED_LOG));
 
             simpleBlock(tree.getBlock(TreeBlockType.LOG_WOOD));
             simpleBlock(tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD));
 
-            simpleBlock(tree.getBlock(TreeBlockType.LEAVES));
+            simpleBlock(tree.getBlock(TreeBlockType.LEAVES), models()
+                    .cubeAll(TreeBlockType.LEAVES.makeResourceLoc(tree.getName()).getPath(),
+                            blockLoc(TreeBlockType.LEAVES.makeResourceLoc(tree.getName())))
+                    .renderType("cutout_mipped"));
+
             simpleBlock(tree.getBlock(TreeBlockType.PLANKS));
 
-            simpleBlock(tree.getBlock(TreeBlockType.POTTED_SAPLING),
-                    models().singleTexture(TreeBlockType.POTTED_SAPLING.makeResourceLoc(tree.getName()).getPath(),
-                            blockLoc(mcLoc("/flower_pot_cross")),
-                            blockLoc(TreeBlockType.SAPLING.makeResourceLoc(tree.getName()))));
+            simpleBlock(tree.getBlock(TreeBlockType.SAPLING), models()
+                    .cross(TreeBlockType.SAPLING.makeResourceLoc(tree.getName()).getPath(),
+                            blockLoc(TreeBlockType.SAPLING.makeResourceLoc(tree.getName())))
+                    .renderType("cutout"));
+
+            simpleBlock(tree.getBlock(TreeBlockType.POTTED_SAPLING), models()
+                    .singleTexture(TreeBlockType.POTTED_SAPLING.makeResourceLoc(tree.getName()).getPath(),
+                            blockLoc(mcLoc("flower_pot_cross")),
+                            blockLoc(TreeBlockType.SAPLING.makeResourceLoc(tree.getName())))
+                    .renderType("cutout"));
 
             ResourceLocation planksTextures = blockTexture(tree.getBlock(TreeBlockType.PLANKS));
 
@@ -83,7 +91,7 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             }
             doorBlock(door, doorBottom, doorTop);
 
-            models().singleTexture(TreeBlockType.BUTTON.makeResourceLoc(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("/button_inventory")), planksTextures);
+            models().singleTexture(TreeBlockType.BUTTON.makeResourceLoc(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("button_inventory")), planksTextures);
             models().fenceInventory(TreeBlockType.FENCE.makeResourceLoc(tree.getName()).getPath() + "_inventory", planksTextures);
         }
     }

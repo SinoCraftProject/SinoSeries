@@ -37,7 +37,6 @@ public class Tree {
 
     protected final TreeBlockNameTranslator translator;
 
-    @Nullable
     protected ModTreeGrowerBase grower;
 
     @Nullable
@@ -56,7 +55,7 @@ public class Tree {
 
         this.translator = new TreeBlockNameTranslator(name, translateRoots, customTranslates, customLiteralTranslates);
 
-        this.grower = grower;
+        this.grower = Objects.requireNonNullElse(grower, new ModTreeGrowerBase(name));
         this.configuration = configuration;
 
         woodType = WoodType.create(name.toString());
@@ -210,17 +209,21 @@ public class Tree {
                 .toList();
 
         for (var type : itemTypesRemain) {
-            itemCreativeTabs.put(type, getDefaultTabs(type));
+            if (getItems().containsKey(type)) {
+                itemCreativeTabs.put(type, getDefaultTabs(type));
+            }
         }
 
         for (var entry : itemCreativeTabs.entrySet()) {
             var item = items.get(entry.getKey());
-            for (var tab : entry.getValue()) {
-                if (!creativeTabItems.containsKey(tab)) {
-                    creativeTabItems.put(tab, new ArrayList<>());
-                }
+            if (item != null) {
+                for (var tab : entry.getValue()) {
+                    if (!creativeTabItems.containsKey(tab)) {
+                        creativeTabItems.put(tab, new ArrayList<>());
+                    }
 
-                creativeTabItems.get(tab).add(item);
+                    creativeTabItems.get(tab).add(item);
+                }
             }
         }
     }

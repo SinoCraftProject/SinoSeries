@@ -33,7 +33,7 @@ public final class TreeRegistry {
     /**
      * Register mod trees.
      * @param modid ModId
-     * @param bus IEventBus
+     * @param bus Mod Event Bus {@code FMLModContainer#getModEventBus()}
      */
     public static void register(String modid, IEventBus bus) {
         registerListeners(modid, bus);
@@ -56,29 +56,14 @@ public final class TreeRegistry {
         getRegistry().get(modid).add(tree);
     }
 
-    private static Map<CreativeModeTab, List<Item>> getTabItems(String modid) {
-        var map = new HashMap<CreativeModeTab, List<Item>>();
-        getRegistry().get(modid)
-                .forEach(tree -> {
-                    for (var entry : tree.getTabItems().entrySet()) {
-                        var tab = entry.getKey();
 
-                        if (!map.containsKey(tab)) {
-                            map.put(tab, new ArrayList<>());
-                        }
-
-                        map.get(tab).addAll(entry.getValue().stream().map(Supplier::get).toList());
-                    }
-                });
-        return map;
-    }
 
     private static void registerListeners(String modid, IEventBus bus) {
         var blockRegister = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
         var itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
         MOD_DEFERRED_REGISTERS.put(modid, Pair.of(blockRegister, itemRegister));
 
-        bus.register(new SCTreeTabsBuildListener(getTabItems(modid)));
+        bus.register(new SCTreeTabsBuildListener(modid));
         bus.register(new SCTreeGatherDataListener(modid));
 
         blockRegister.register(bus);
