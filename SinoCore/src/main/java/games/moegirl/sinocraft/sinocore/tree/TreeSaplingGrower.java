@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import javax.annotation.Nonnull;
 
 /**
- * 树苗 如何成长成一棵树？
+ * 如何长成一棵树？
  *
  * @author luqin2007
  */

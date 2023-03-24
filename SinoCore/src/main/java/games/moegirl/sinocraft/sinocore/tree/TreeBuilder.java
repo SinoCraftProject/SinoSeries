@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.grower.OakTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * 如何构造一棵树
@@ -246,9 +247,21 @@ public class TreeBuilder {
         return this;
     }
 
-    public TreeBuilder grower(Supplier<ConfiguredFeature<?, ?>> builder) {
-        TreeDataHandler.obtain(name.getNamespace()).features.put(name, builder);
-        return grower(name);
+    public TreeBuilder grower(Function<Tree, TreeConfiguration> builder) {
+        return grower(new TreeSaplingGrower() {
+            @Override
+            protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean hasFlowers) {
+                return FeatureUtils.createKey(tree.name()                                                                                                                                       .toString());
+            }
+
+            @Override
+            void setTree(Tree tree) {
+                super.setTree(tree);
+                ResourceLocation name = tree.name();
+                TreeDataHandler.obtain(name.getNamespace()).features.put(name,
+                        () -> new ConfiguredFeature<>(Feature.TREE, builder.apply(tree)));
+            }
+        });
     }
 
     public TreeBuilder lang(String local, @Nullable String name) {

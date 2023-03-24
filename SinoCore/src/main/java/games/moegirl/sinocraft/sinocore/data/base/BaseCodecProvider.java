@@ -55,6 +55,7 @@ public abstract class BaseCodecProvider implements DataProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput output) {
+        addAll();
         return provider.thenCompose(p -> {
             RegistryOps<JsonElement> jsonOps = RegistryOps.create(JsonOps.INSTANCE, p);
             return CompletableFuture.allOf(map.entrySet().stream()
