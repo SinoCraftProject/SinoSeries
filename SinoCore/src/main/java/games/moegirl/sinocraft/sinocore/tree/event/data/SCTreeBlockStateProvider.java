@@ -61,6 +61,8 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             ModelFile sign = models().sign(TreeBlockType.SIGN.makeResourceLoc(tree.getName()).getPath(), planksTextures);
             signBlock((StandingSignBlock) tree.getBlock(TreeBlockType.SIGN),
                     (WallSignBlock) tree.getBlock(TreeBlockType.WALL_SIGN), sign);
+            simpleBlock(tree.getBlock(TreeBlockType.HANGING_SIGN), sign);
+            simpleBlock(tree.getBlock(TreeBlockType.WALL_HANGING_SIGN), sign);
 
             trapdoorBlock((TrapDoorBlock) tree.getBlock(TreeBlockType.TRAPDOOR), planksTextures, true);
             slabBlock((SlabBlock) tree.getBlock(TreeBlockType.SLAB), planksTextures, planksTextures);

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(BlockBehaviour.Properties.class)
 @Unrealized
-public abstract class MixinBlockProperties implements IBlockProperties {
+public abstract class BlockPropertiesMixin implements IBlockProperties {
 
     @Override
     @Accessor

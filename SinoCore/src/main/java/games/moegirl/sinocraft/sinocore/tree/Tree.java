@@ -183,6 +183,10 @@ public class Tree {
             RegistryObject<Item> item;
             if (type == TreeBlockType.DOOR) {
                 item = itemRegister.register(type.makeRegistryName(getName()), () -> doubleBlockItem(getBlock(type)));
+            } else if (type == TreeBlockType.SIGN) {
+                item = itemRegister.register(type.makeRegistryName(getName()), () -> signBlockItem(getBlock(TreeBlockType.SIGN), getBlock(TreeBlockType.WALL_SIGN)));
+            } else if (type == TreeBlockType.HANGING_SIGN) {
+                item = itemRegister.register(type.makeRegistryName(getName()), () -> hangingSignBlockItem(getBlock(TreeBlockType.HANGING_SIGN), getBlock(TreeBlockType.WALL_HANGING_SIGN)));
             } else {
                 item = itemRegister.register(type.makeRegistryName(getName()), () -> blockItem(getBlock(type)));
             }

@@ -1,8 +1,9 @@
-// 1.19.3	2023-03-24T17:13:35.9238824	Tree Block States: sinotest
+// 1.19.3	2023-03-24T20:40:49.4983834	Tree Block States: sinotest
 f86e12856defa5dd93bd290a42b4d624b5f59bb0 assets/sinotest/blockstates/test_button.json
 00d51f7ff2d727b99bb9294821c0a00620d095b4 assets/sinotest/blockstates/test_door.json
 0c4fccc849c2c59d11638b9693992d9188933886 assets/sinotest/blockstates/test_fence.json
 b9aa3ed87b3e9f596815aa79d221d1b64ebdc7b5 assets/sinotest/blockstates/test_fence_gate.json
+77879e41fb232891ba5fe8e55b6c8bbb8056d94f assets/sinotest/blockstates/test_hanging_sign.json
 b6e468560fe0f2f9e04b1b41e418d812b57a6bd2 assets/sinotest/blockstates/test_leaves.json
 ed613e5642b7e5322b2be8a3c3c9e27a90aeeed0 assets/sinotest/blockstates/test_log.json
 59a2d35405df9b8efb4632d0530ad86baff3a613 assets/sinotest/blockstates/test_log_wood.json
@@ -16,6 +17,7 @@ d86071a623c6082a8be3fdf2627720868d413113 assets/sinotest/blockstates/test_slab.j
 f509a4c5465189dbba360408ab4b960b91b58e74 assets/sinotest/blockstates/test_stripped_log.json
 a0855b47b61f249ee6fa5f2ac4a1a34846a532f9 assets/sinotest/blockstates/test_stripped_log_wood.json
 078ba0883f148f3a825a5d178a075d1d8ccdaeca assets/sinotest/blockstates/test_trapdoor.json
+77879e41fb232891ba5fe8e55b6c8bbb8056d94f assets/sinotest/blockstates/test_wall_hanging_sign.json
 77879e41fb232891ba5fe8e55b6c8bbb8056d94f assets/sinotest/blockstates/test_wall_sign.json
 c13a69c808b3e3ba95817f9b4a0b7c79be912b85 assets/sinotest/models/block/test_button.json
 10612b2ee792d26d93eaa0b8d3798deded632da0 assets/sinotest/models/block/test_button_inventory.json

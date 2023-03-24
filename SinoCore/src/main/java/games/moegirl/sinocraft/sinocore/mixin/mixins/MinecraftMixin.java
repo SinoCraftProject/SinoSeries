@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
-public abstract class MixinMinecraft {
+public abstract class MinecraftMixin {
 
     /**
      * Add ": SinoSeries Dev" when debugging, ensure mixin is loading

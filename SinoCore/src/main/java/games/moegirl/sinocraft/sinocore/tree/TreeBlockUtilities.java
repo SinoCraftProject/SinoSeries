@@ -263,6 +263,14 @@ public class TreeBlockUtilities {
         return doubleBlockItem(block, itemProp());
     }
 
+    public static Item signBlockItem(Block standingBlock, Block wallBlock) {
+        return new SignItem(itemProp(), standingBlock, wallBlock);
+    }
+
+    public static Item hangingSignBlockItem(Block hangingBlock, Block wallBlock) {
+        return new HangingSignItem(hangingBlock, wallBlock, itemProp());
+    }
+
     public static Item doubleBlockItem(Block block, Item.Properties properties) {
         return new DoubleHighBlockItem(block, properties);
     }
