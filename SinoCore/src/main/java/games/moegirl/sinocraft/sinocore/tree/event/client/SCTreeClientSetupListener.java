@@ -1,13 +1,8 @@
 package games.moegirl.sinocraft.sinocore.tree.event.client;
 
-import games.moegirl.sinocraft.sinocore.tree.Tree;
-import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-
-import java.util.Map;
 
 public class SCTreeClientSetupListener {
     private String modid;
@@ -18,11 +13,7 @@ public class SCTreeClientSetupListener {
 
     @SubscribeEvent
     public void onClientSetup(FMLClientSetupEvent event) {
-        var trees = Tree.getRegistry().entrySet()
-                .stream()
-                .filter(e -> e.getKey().getNamespace().equals(modid))
-                .map(Map.Entry::getValue)
-                .toList();
+        var trees = TreeRegistry.getRegistry().get(modid);
 
         for (var tree : trees) {
             // Deprecated! It was moved to model json file.

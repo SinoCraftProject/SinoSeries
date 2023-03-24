@@ -66,7 +66,11 @@ public enum TreeBlockType {
         return name + "_" + getName();
     }
 
-    public ResourceLocation makeRegistryName(ResourceLocation name) {
+    public String makeRegistryName(ResourceLocation name) {
+        return makeRegistryName(name.getPath());
+    }
+
+    public ResourceLocation makeResourceLoc(ResourceLocation name) {
         return new ResourceLocation(name.getNamespace(), name.getPath() + "_" + getName());
     }
 }

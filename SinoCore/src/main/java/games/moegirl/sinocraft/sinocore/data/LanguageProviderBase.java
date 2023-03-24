@@ -1,10 +1,8 @@
 package games.moegirl.sinocraft.sinocore.data;
 
-import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
-
-import java.util.Map;
 
 public abstract class LanguageProviderBase extends LanguageProvider {
     protected String modid;
@@ -27,12 +25,7 @@ public abstract class LanguageProviderBase extends LanguageProvider {
     public abstract void translate();
 
     protected void addTreeTranslates() {
-        var trees = Tree.getRegistry()
-                .entrySet()
-                .stream()
-                .filter(e -> e.getKey().getNamespace().equals(modid))
-                .map(Map.Entry::getValue)
-                .toList();
+        var trees = TreeRegistry.getRegistry().get(modid);
 
         for (var tree : trees) {
             var translates = tree.makeTranslatesForLocale(locale);
