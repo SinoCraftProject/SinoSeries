@@ -1,0 +1,16 @@
+// 1.19.3	2023-03-24T15:50:27.1759636	Tree Tags for minecraft:item mod id sinotest
+bbce45ca46c04f43c4fb4f8ad77d9062741142b5 data/forge/tags/items/fence_gates/wooden.json
+b6aa7906e017d0db83fb3d9e084281e2e53aa909 data/minecraft/tags/items/hanging_signs.json
+de76a7dbd95f620d41955eda86cdd69219e58e9d data/minecraft/tags/items/leaves.json
+41616c72379df7572985739ccecae0725692c5c1 data/minecraft/tags/items/logs_that_burn.json
+1dc564db609231bb2869bfd58358aa2b6d37fd1b data/minecraft/tags/items/planks.json
+3a15285da080a05811ceb4107b8a1124b6fda58e data/minecraft/tags/items/saplings.json
+763965283792fb05ee7ac4a77595d3f9bd48f31d data/minecraft/tags/items/signs.json
+41a74632ab6717ac63fd259c94ab3321dd112301 data/minecraft/tags/items/wooden_buttons.json
+b37f59ff5db1ed06e71249a12ea529cefbe01b10 data/minecraft/tags/items/wooden_doors.json
+92b03a3886eb0831e9086732554ffcb2fcf6dde5 data/minecraft/tags/items/wooden_fences.json
+c9ffbec112f13f960cf45bd4eb4a2004ae0fbb2f data/minecraft/tags/items/wooden_pressure_plates.json
+ccbe311f6f52ae72d13717b5049125ae0759cbbf data/minecraft/tags/items/wooden_slabs.json
+0051a1460c9add04ed93da37fb6bf9cba8890442 data/minecraft/tags/items/wooden_stairs.json
+39aa28e2ecdbf6d989e4ba1317dc960f0ab2643c data/minecraft/tags/items/wooden_trapdoors.json
+02e5863f2e534a70e2077a52037c1f09c3ed8f6a data/sinotest/tags/items/test_logs.json

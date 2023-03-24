@@ -12,6 +12,8 @@ public class SinoTest {
 
     public static Tree TREE = Tree.builder(new ResourceLocation(MODID, "test"))
             .translate("zh_cn", "测试")
+            .translate("zh_tw", "測試")
+            .translate("en_us", "Test")
             .build();
 
     static {

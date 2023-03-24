@@ -13,5 +13,7 @@ public class TestData {
         var output = generator.getPackOutput();
 
         generator.addProvider(true, new TestZhCnLanguageProvider(output, SinoTest.MODID, "zh_cn"));
+        generator.addProvider(true, new TestZhTwLanguageProvider(output, SinoTest.MODID, "zh_tw"));
+        generator.addProvider(true, new TestEnUsLanguageProvider(output, SinoTest.MODID, "en_us"));
     }
 }

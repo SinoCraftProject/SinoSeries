@@ -18,6 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static games.moegirl.sinocraft.sinocore.tree.TreeBlockUtilities.*;
 
@@ -70,6 +71,7 @@ public class Tree {
 
     public void register(DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister) {
         makeDefaultBlocks(blockRegister);
+        makeDefaultBlockItems(itemRegister);
         makeDefaultItems(itemRegister);
 
         fillCreativeTabs();
@@ -89,10 +91,11 @@ public class Tree {
                 .filter(t -> !t.hasNoBlock())
                 .filter(t -> !blocks.containsKey(t))
                 .filter(t -> !customBlockProperties.containsKey(t))
-                .toList();
+                .collect(Collectors.toList());  // qyl27: Use Collectors but not toList, in order to get a mutable ArrayList.
 
         // Add block stage 1.
-        for (var it = blockTypesRemain.iterator(); it.hasNext(); ) {
+        var it = blockTypesRemain.iterator();
+        while (it.hasNext()) {
             var type = it.next();
 
             Supplier<Block> blockSupplier = () -> switch (type) {
@@ -106,38 +109,60 @@ public class Tree {
                 case TRAPDOOR -> makeGeneralBlock(type, trapdoorProp());
                 case FENCE, FENCE_GATE -> makeGeneralBlock(type, fenceProp());
                 case PRESSURE_PLATE -> makeGeneralBlock(type, pressurePlateProp());
-                default -> throw new IllegalArgumentException("Bad type: " + type);
+                default -> null;
             };
 
-            var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
-            blocks.put(type, block);
-            it.remove();
+            if (type == TreeBlockType.LOG
+                    || type == TreeBlockType.STRIPPED_LOG
+                    || type == TreeBlockType.LOG_WOOD
+                    || type == TreeBlockType.STRIPPED_LOG_WOOD
+                    || type == TreeBlockType.PLANKS
+                    || type == TreeBlockType.LEAVES
+                    || type == TreeBlockType.SLAB
+                    || type == TreeBlockType.BUTTON
+                    || type == TreeBlockType.DOOR
+                    || type == TreeBlockType.TRAPDOOR
+                    || type == TreeBlockType.FENCE
+                    || type == TreeBlockType.FENCE_GATE
+                    || type == TreeBlockType.PRESSURE_PLATE) {
+                var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
+                blocks.put(type, block);
+                it.remove();
+            }
         }
 
         // Add block stage 2.
-        for (var it = blockTypesRemain.iterator(); it.hasNext(); ) {
+        it = blockTypesRemain.iterator();
+        while (it.hasNext()) {
             var type = it.next();
+
             Supplier<Block> blockSupplier = () -> switch (type) {
                 case SAPLING -> sapling(grower, saplingProp());
                 case STAIRS -> stairs(getBlock(TreeBlockType.PLANKS));
                 case SIGN -> makeSignBlock(type, signProp(), getWoodType());
                 case HANGING_SIGN -> makeSignBlock(type, hangingSignProp(), getWoodType());
-                default -> throw new IllegalArgumentException("Bad type: " + type);
+                default -> null;
             };
 
-            var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
-            blocks.put(type, block);
-            it.remove();
+            if (type == TreeBlockType.SAPLING
+                    || type == TreeBlockType.STAIRS
+                    || type == TreeBlockType.SIGN
+                    || type == TreeBlockType.HANGING_SIGN) {
+                var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
+                blocks.put(type, block);
+                it.remove();
+            }
         }
 
         // Add block stage 3.
-        for (var it = blockTypesRemain.iterator(); it.hasNext(); ) {
+        it = blockTypesRemain.iterator();
+        while (it.hasNext()) {
             var type = it.next();
 
             Supplier<Block> blockSupplier = () -> switch (type) {
                 case POTTED_SAPLING -> pottedSapling((SaplingBlock) getBlock(TreeBlockType.SAPLING), pottedSaplingProp());
-                case WALL_SIGN -> makeSignBlock(type, wallSignProp(getBlock(TreeBlockType.WALL_SIGN)), getWoodType());
-                case HANGING_SIGN -> makeSignBlock(type, wallHangingSignProp(getBlock(TreeBlockType.WALL_SIGN)), getWoodType());
+                case WALL_SIGN -> makeSignBlock(type, wallSignProp(getBlock(TreeBlockType.SIGN)), getWoodType());
+                case WALL_HANGING_SIGN -> makeSignBlock(type, wallHangingSignProp(getBlock(TreeBlockType.HANGING_SIGN)), getWoodType());
                 default -> throw new IllegalArgumentException("Bad type: " + type);
             };
 
@@ -147,11 +172,12 @@ public class Tree {
         }
     }
 
-    private void makeDefaultItems(DeferredRegister<Item> itemRegister) {
+    private void makeDefaultBlockItems(DeferredRegister<Item> itemRegister) {
         var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
                 .stream()
                 .filter(TreeBlockType::hasItem)
-                .filter(t -> !items.containsKey(t))
+                .filter(t -> getBlocks().containsKey(t))
+                .filter(t -> !getItems().containsKey(t))
                 .toList();
 
         for (var type : itemTypesRemain) {
@@ -163,6 +189,17 @@ public class Tree {
             }
             items.put(type, item);
         }
+    }
+
+    private void makeDefaultItems(DeferredRegister<Item> itemRegister) {
+        var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(TreeBlockType::hasItem)
+                .filter(TreeBlockType::hasNoBlock)
+                .filter(t -> !getItems().containsKey(t))
+                .toList();
+
+        // Todo: qyl27: supports boat or other item without block.
     }
 
     private void fillCreativeTabs() {

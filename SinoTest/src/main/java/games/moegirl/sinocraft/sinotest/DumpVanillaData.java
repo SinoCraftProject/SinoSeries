@@ -12,9 +12,9 @@ public class DumpVanillaData {
 
     @SubscribeEvent
     public static void onGatherData(GatherDataEvent event) {
-        event.getGenerator().addProvider(true, new DatapackBuiltinEntriesProvider(
-                event.getGenerator().getPackOutput(),
-                event.getLookupProvider(),
-                Set.of("minecraft")));
+//        event.getGenerator().addProvider(true, new DatapackBuiltinEntriesProvider(
+//                event.getGenerator().getPackOutput(),
+//                event.getLookupProvider(),
+//                Set.of("minecraft")));
     }
 }

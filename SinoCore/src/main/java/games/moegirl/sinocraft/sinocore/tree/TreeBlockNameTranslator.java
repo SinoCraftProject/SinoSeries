@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableMap;
 import games.moegirl.sinocraft.sinocore.utility.decorator.StringDecorator;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TreeBlockNameTranslator {
@@ -203,17 +205,19 @@ public class TreeBlockNameTranslator {
 
         if (customTranslates.containsKey(locale)) {
             for (var translateEntry : customTranslates.get(locale).entrySet()) {
-                var translateKey = makeTranslateKey(translateEntry.getKey());
-                var translateDecorator = translateEntry.getValue();
-                map.put(translateKey, translateDecorator.apply(translateRoot));
+                var decorator = translateEntry.getValue();
+                for (var key : makeTranslateKey(translateEntry.getKey())) {
+                    map.put(key, decorator.apply(translateRoot));
+                }
             }
         }
 
         if (customLiteralTranslates.containsKey(locale)) {
             for (var literalEntry : customLiteralTranslates.get(locale).entrySet()) {
-                var translateKey = makeTranslateKey(literalEntry.getKey());
-                var literalTranslate = literalEntry.getValue();
-                map.put(translateKey, literalTranslate);
+                var translate = literalEntry.getValue();
+                for (var key : makeTranslateKey(literalEntry.getKey())) {
+                    map.put(key, translate);
+                }
             }
         }
 
@@ -248,13 +252,27 @@ public class TreeBlockNameTranslator {
         }
 
         for (var entry : translators.entrySet()) {
-            map.put(makeTranslateKey(entry.getKey()), entry.getValue().apply(root));
+            for (var key : makeTranslateKey(entry.getKey())) {
+                map.put(key, entry.getValue().apply(root));
+            }
         }
 
         return map;
     }
 
-    private String makeTranslateKey(TreeBlockType treeBlockType) {
-        return name.getPath() + treeBlockType.getName();
+    private List<String> makeTranslateKey(TreeBlockType type) {
+        var list = new ArrayList<String>();
+
+        var registryName = type.makeResourceLoc(name);
+
+        if (!type.hasNoBlock()) {
+            list.add("block." + registryName.getNamespace() + "." + registryName.getPath());
+        }
+
+        if (type.hasItem()) {
+            list.add("item." + registryName.getNamespace() + "." + registryName.getPath());
+        }
+
+        return list;
     }
 }
