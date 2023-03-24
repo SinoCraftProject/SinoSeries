@@ -79,8 +79,7 @@ public class TreeDataHandler {
             generator.addProvider(true, new TEnLangProvider());
             generator.addProvider(true, new TZhLangProvider());
         }
-        if (!recipe.isEmpty()) generator.addProvider(true, new TRecipeProvider());
-        if (!lootTable.isEmpty()) generator.addProvider(true, new TLootProvider());
+
         if (!features.isEmpty()) generator.addProvider(true, new TFeatureProvider());
 
         ((IDataGenerator) generator).sinocoreSetPost(modid, output, helper);
@@ -146,59 +145,6 @@ public class TreeDataHandler {
         @Override
         public String getName() {
             return super.getName() + " Tree " + modid;
-        }
-    }
-
-    class TRecipeProvider extends RecipeProvider implements INamedProvider {
-
-        public TRecipeProvider() {
-            super(output);
-        }
-
-        @Override
-        protected void buildRecipes(Consumer<FinishedRecipe> writer) {
-            recipe.forEach(tree -> {
-                InventoryChangeTrigger.TriggerInstance hasLog = InventoryChangeTrigger.TriggerInstance
-                        .hasItems(ItemPredicate.Builder.item().of(tree.log()).build());
-                // woodFromLogs
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tree.wood(), 3).group("bark")
-                        .define('#', tree.log())
-                        .pattern("##")
-                        .pattern("##")
-                        .unlockedBy("has_log", hasLog)
-                        .save(writer);
-                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tree.strippedWood(), 3).group("bark")
-                        .define('#', tree.strippedLog())
-                        .pattern("##")
-                        .pattern("##")
-                        .unlockedBy("has_log", hasLog)
-                        .save(writer);
-            });
-        }
-
-        @Override
-        public String sinocoreGetName() {
-            return "Recipes Tree " + modid;
-        }
-    }
-
-    class TLootProvider extends LootTableProvider implements INamedProvider {
-
-        public TLootProvider() {
-            super(output, new HashSet<>(), new ArrayList<>());
-        }
-
-        @Override
-        public List<SubProviderEntry> getTables() {
-            return lootTable.stream()
-                    .map(TreeBlockLoot::new)
-                    .map(loot -> new SubProviderEntry(() -> loot, LootContextParamSets.BLOCK))
-                    .toList();
-        }
-
-        @Override
-        public String sinocoreGetName() {
-            return "Loot Tables Tree " + modid;
         }
     }
 

@@ -34,22 +34,23 @@ public abstract class BaseCodecProvider implements DataProvider {
 
     private Map<ResourceKey<Registry>, List<Triple<ResourceLocation, Codec, Object>>> map = new HashMap<>();
 
-    public BaseCodecProvider(CompletableFuture<HolderLookup.Provider> provider, PackOutput output, String modid) {
+    public BaseCodecProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modid) {
         this.provider = provider;
         this.packOutput = output;
         this.modid = modid;
     }
 
-    public abstract void addAll();
+    protected abstract void addAll();
 
-    public void add(String name, ConfiguredFeature<?, ?> feature) {
+    protected void add(String name, ConfiguredFeature<?, ?> feature) {
         add(new ResourceLocation(modid, name), feature);
     }
-    public void add(ResourceLocation name, ConfiguredFeature<?, ?> feature) {
+
+    protected void add(ResourceLocation name, ConfiguredFeature<?, ?> feature) {
         add(Registries.CONFIGURED_FEATURE, ConfiguredFeature.DIRECT_CODEC, name, feature);
     }
 
-    public <T> void add(ResourceKey<Registry<T>> type, Codec<T> codec, ResourceLocation name, T value) {
+    protected <T> void add(ResourceKey<Registry<T>> type, Codec<T> codec, ResourceLocation name, T value) {
         map.computeIfAbsent((ResourceKey) type, k -> new ArrayList<>()).add(Triple.of(name, codec, value));
     }
 

@@ -25,6 +25,11 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
     }
 
     @Override
+    public @NotNull String getName() {
+        return "Tree " + super.getName();
+    }
+
+    @Override
     protected void registerStatesAndModels() {
         for (var tree : treeTypes) {
             simpleBlock(tree.getBlock(TreeBlockType.SAPLING));
@@ -81,10 +86,5 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             models().singleTexture(TreeBlockType.BUTTON.makeRegistryName(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("/button_inventory")), planksTextures);
             models().fenceInventory(TreeBlockType.FENCE.makeRegistryName(tree.getName()).getPath() + "_inventory", planksTextures);
         }
-    }
-
-    @Override
-    public @NotNull String getName() {
-        return super.getName() + " Tree BlockStates";
     }
 }

@@ -21,7 +21,7 @@ public class SCTreeItemModelProvider extends AbstractItemModelProvider {
 
     @Override
     public @NotNull String getName() {
-        return super.getName() + " Tree ItemModels";
+        return "Tree " + super.getName();
     }
 
     @Override

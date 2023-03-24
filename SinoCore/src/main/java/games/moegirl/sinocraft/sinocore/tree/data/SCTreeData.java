@@ -41,18 +41,12 @@ public class SCTreeData {
             var blockTagsProvider = new SCTreeBlockTagsProvider(output, lookupProvider, modid, exHelper, trees);
             generator.addProvider(true, blockTagsProvider);
             generator.addProvider(true, new SCTreeItemTagsProvider(output, lookupProvider, blockTagsProvider, modid, exHelper, trees));
+
+            generator.addProvider(true, new SCTreeRecipeProvider(output, trees));
+            generator.addProvider(true, new SCTreeLootTableProvider(output, trees));
         }
 
         // Todo.
-
-        if (!recipe.isEmpty()) generator.addProvider(true, new TreeDataHandler.TRecipeProvider());
-        if (!(blockTags.isEmpty() && itemTags.isEmpty())) {
-            BlockTagsProvider b;
-            generator.addProvider(true, b = new TreeDataHandler.TBlockTagsProvider());
-            if (!itemTags.isEmpty())
-                generator.addProvider(true, new TreeDataHandler.TItemTagsProvider(b));
-        }
-        if (!lootTable.isEmpty()) generator.addProvider(true, new TreeDataHandler.TLootProvider());
         if (!features.isEmpty()) generator.addProvider(true, new TreeDataHandler.TFeatureProvider());
     }
 }

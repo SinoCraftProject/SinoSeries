@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -34,8 +35,8 @@ public class SCTreeItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    public String getName() {
-        return super.getName() + " Tree ItemTags";
+    public @NotNull String getName() {
+        return "Tree " + super.getName();
     }
 
     @Override

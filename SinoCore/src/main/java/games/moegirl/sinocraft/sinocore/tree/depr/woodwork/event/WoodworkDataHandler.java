@@ -89,9 +89,6 @@ public class WoodworkDataHandler {
             generator.addProvider(true, new WEnLangProvider());
             generator.addProvider(true, new WZhLangProvider());
         }
-        if (!recipe.isEmpty()) generator.addProvider(true, new WRecipeProvider());
-        if (!lootTable.isEmpty()) generator.addProvider(true, new WLootProvider());
-
         for (Woodwork woodwork : mBlock) {
             ResourceLocation woodName = new ResourceLocation(woodwork.type.name());
             ResourceLocation tex = new ResourceLocation(woodName.getNamespace(), "textures/entity/signs/" + woodName.getPath() + ".png");
@@ -175,69 +172,5 @@ public class WoodworkDataHandler {
         }
     }
 
-    class WRecipeProvider extends RecipeProvider implements INamedProvider {
-
-        public WRecipeProvider() {
-            super(output);
-        }
-
-        @Override
-        protected void buildRecipes(Consumer<FinishedRecipe> writer) {
-            recipe.forEach(p -> {
-                Woodwork woodwork = p.getKey();
-                ItemLike log = p.getValue().get();
-                InventoryChangeTrigger.TriggerInstance hasLogs = InventoryChangeTrigger.TriggerInstance
-                        .hasItems(ItemPredicate.Builder.item().of(ItemTags.LOGS).build());
-                InventoryChangeTrigger.TriggerInstance hasPlank = InventoryChangeTrigger.TriggerInstance
-                        .hasItems(ItemPredicate.Builder.item().of(woodwork.planks()).build());
-                // planksFromLog
-                ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, woodwork.planks(), 4)
-                        .group("planks")
-                        .requires(log)
-                        .unlockedBy("has_log", hasLogs)
-                        .save(writer);
-
-                WoodworkBlockFamily.generateRecipes(writer, new BlockFamily.Builder(woodwork.planks())
-                        .button(woodwork.button())
-                        .fence(woodwork.fence())
-                        .fenceGate(woodwork.fenceGate())
-                        .pressurePlate(woodwork.pressurePlate())
-                        .sign(woodwork.sign(), woodwork.wallSign())
-                        .slab(woodwork.slab())
-                        .stairs(woodwork.stairs())
-                        .door(woodwork.door())
-                        .trapdoor(woodwork.trapdoor())
-                        .recipeGroupPrefix("wooden")
-                        .recipeUnlockedBy("has_planks")
-                        .dontGenerateModel()
-                        .getFamily());
-            });
-        }
-
-        @Override
-        public String sinocoreGetName() {
-            return "Recipes Woodwork " + modid;
-        }
-    }
-
-    class WLootProvider extends LootTableProvider implements INamedProvider {
-
-        public WLootProvider() {
-            super(output, new HashSet<>(), new ArrayList<>());
-        }
-
-        @Override
-        public List<SubProviderEntry> getTables() {
-            return lootTable.stream()
-                    .map(WoodworkBlockLoot::new)
-                    .map(loot -> new SubProviderEntry(() -> loot, LootContextParamSets.BLOCK))
-                    .toList();
-        }
-
-        @Override
-        public String sinocoreGetName() {
-            return "Loot Tables Woodwork " + modid;
-        }
-    }
 }
 

@@ -34,7 +34,7 @@ public class SCTreeBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     public String getName() {
-        return super.getName() + " Tree BlockTags";
+        return "Tree " + super.getName();
     }
 
     @Override
