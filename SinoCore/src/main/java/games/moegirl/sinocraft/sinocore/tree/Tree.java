@@ -1,216 +1,459 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.handler.TreeDataHandler;
-import games.moegirl.sinocraft.sinocore.handler.TreeEventHandler;
-import games.moegirl.sinocraft.sinocore.utility.FloatModifier;
-import games.moegirl.sinocraft.sinocore.utility.RegType;
-import games.moegirl.sinocraft.sinocore.woodwork.Woodwork;
+import com.google.common.collect.ImmutableMap;
+import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
+import games.moegirl.sinocraft.sinocore.utility.decorator.StringDecorator;
+import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
-import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-/**
- * 树，主要包括：<br>
- * 1. 树苗及其世界生成；<br>
- * 2. 原木（Log）及其去皮方块，木（Wood）及其去皮方块，树叶等附属方块及其 Tag；<br>
- * 3. 盆栽的对应树苗版本；<br>
- *
- * <p>使用时需要在主类中使用 {@link Tree#register(String, IEventBus)} 注册</p>
- *
- * @author luqin2007
- * @see TreeBuilder
- * @see Woodwork
- */
+import static games.moegirl.sinocraft.sinocore.tree.TreeBlockUtilities.*;
+
 public class Tree {
 
-    private static final Map<ResourceLocation, Tree> TREE_BY_NAME = new HashMap<>();
+    public final ResourceLocation name;
 
-    public static boolean exist(ResourceLocation name) {
-        return TREE_BY_NAME.containsKey(name);
+    protected final WoodType woodType;
+
+    protected final Map<TreeBlockType, RegistryObject<? extends Block>> blocks = new HashMap<>();
+    protected final Map<TreeBlockType, RegistryObject<? extends Item>> items = new HashMap<>();
+    protected final Map<TreeBlockType, List<CreativeModeTab>> itemCreativeTabs = new HashMap<>();
+    protected final Map<CreativeModeTab, List<RegistryObject<? extends Item>>> creativeTabItems = new HashMap<>();
+
+    protected final Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties;
+
+    protected final TreeBlockNameTranslator translator;
+
+    protected ModTreeGrowerBase grower;
+
+    @Nullable
+    protected TreeConfiguration configuration;
+
+    protected Tree(ResourceLocation name,
+                   Map<String, String> translateRoots,
+                   Map<String, Map<TreeBlockType, StringDecorator>> customTranslates,
+                   Map<String, Map<TreeBlockType, String>> customLiteralTranslates,
+                   Map<TreeBlockType, RegistryObject<? extends Block>> customBlocks,
+                   Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties,
+                   Map<TreeBlockType, RegistryObject<? extends Item>> customBlockItems,
+                   Map<TreeBlockType, List<CreativeModeTab>> customItemTabs,
+                   @Nullable ModTreeGrowerBase grower, @Nullable TreeConfiguration configuration) {
+        this.name = name;
+
+        this.translator = new TreeBlockNameTranslator(name, translateRoots, customTranslates, customLiteralTranslates);
+
+        this.grower = Objects.requireNonNullElse(grower, new ModTreeGrowerBase(name));
+        this.configuration = configuration;
+
+        woodType = WoodType.create(name.toString());
+        WoodType.register(woodType);
+
+        this.customBlockProperties = customBlockProperties;
+
+        blocks.putAll(customBlocks);
+        items.putAll(customBlockItems);
+        itemCreativeTabs.putAll(customItemTabs);
     }
 
-    public static Tree get(ResourceLocation name) {
-        return Objects.requireNonNull(TREE_BY_NAME.get(name));
+    public void register(DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister) {
+        makeDefaultBlocks(blockRegister);
+        makeDefaultBlockItems(itemRegister);
+        makeDefaultItems(itemRegister);
+
+        fillCreativeTabs();
     }
 
-    public static Tree get(String name) {
-        return get(new ResourceLocation(name));
-    }
-
-    public static TreeBuilder builder(ResourceLocation name) {
-        return new TreeBuilder(name);
-    }
-
-    public static TreeBuilder builder(String modid, String name) {
-        return new TreeBuilder(new ResourceLocation(modid, name));
-    }
-
-    public static void register(String modid, IEventBus bus) {
-        TreeDataHandler.obtain(modid).register(bus);
-        TreeEventHandler.obtain(modid).register(bus);
-    }
-
-    public final RegistryObject<SaplingBlock> sapling;
-    public final RegistryObject<RotatedPillarBlock> log;
-    public final RegistryObject<RotatedPillarBlock> strippedLog;
-    public final RegistryObject<RotatedPillarBlock> wood;
-    public final RegistryObject<RotatedPillarBlock> strippedWood;
-    public final RegistryObject<LeavesBlock> leaves;
-    public final RegistryObject<FlowerPotBlock> pottedSapling;
-    private final Set<Block> allBlocks = new HashSet<>();
-    private final Set<Item> allItems = new HashSet<>();
-
-    public final TagKey<Block> tagLogs;
-    public final TagKey<Item> tagItemLogs;
-    private final BuilderProperties properties;
-
-    Tree(TreeBuilder builder, DeferredRegister<Block> blocks, DeferredRegister<Item> items) {
-        properties = new BuilderProperties(builder.name, builder.languages,
-                builder.grower, builder.strengthModifier,
-                builder.saplingTabs, builder.leavesTabs,
-                builder.logTabs, builder.strippedLogTabs,
-                builder.woodTabs, builder.strippedWoodTabs,
-                builder.saplingSound, builder.leavesSound,
-                builder.topLogColor, builder.barkLogColor,
-                builder.topStrippedLogColor, builder.barkStrippedLogColor,
-                builder.woodColor, builder.strippedWoodColor);
-
-        if (builder.grower instanceof TreeSaplingGrower tsg) {
-            tsg.setTree(this);
-        }
-
-        sapling = register(blocks, "sapling", asSupplier(builder.sapling, allBlocks));
-        pottedSapling = register(blocks, "potted", "sapling", asSupplier(builder.pottedSapling, allBlocks));
-        log = register(blocks, "log", asSupplier(builder.log, allBlocks));
-        strippedLog = register(blocks, "stripped", "log", asSupplier(builder.strippedLog, allBlocks));
-        wood = register(blocks, "wood", asSupplier(builder.wood, allBlocks));
-        strippedWood = register(blocks, "stripped", "wood", asSupplier(builder.strippedWood, allBlocks));
-        leaves = register(blocks, "leaves", asSupplier(builder.leaves, allBlocks));
-
-        register(items, sapling, asSupplier(builder.saplingItem, allItems));
-        register(items, log, asSupplier(builder.logItem, allItems));
-        register(items, strippedLog, asSupplier(builder.strippedLogItem, allItems));
-        register(items, wood, asSupplier(builder.woodItem, allItems));
-        register(items, strippedWood, asSupplier(builder.strippedWoodItem, allItems));
-        register(items, leaves, asSupplier(builder.leavesItem, allItems));
-
-        tagLogs = BlockTags.create(new ResourceLocation(properties.name.getNamespace(),
-                (properties.name.getPath() + "_logs").toLowerCase(Locale.ROOT)));
-        tagItemLogs = ItemTags.create(tagLogs().location());
-
-        Lazy<TreeDataHandler> dataHandler = Lazy.of(() -> TreeDataHandler.obtain(name().getNamespace()));
-        Lazy<TreeEventHandler> eventHandler = Lazy.of(() -> TreeEventHandler.obtain(name().getNamespace()));
-        if (!builder.languages.isEmpty()) dataHandler.get().lang.add(this);
-        for (RegType type : builder.regTypes) {
-            switch (type) {
-                case BLOCK_MODELS -> dataHandler.get().mBlock.add(this);
-                case ITEM_MODELS -> dataHandler.get().mItem.add(this);
-                case RECIPES -> dataHandler.get().recipe.add(this);
-                case BLOCK_TAGS -> dataHandler.get().blockTags.add(this);
-                case ITEM_TAGS -> dataHandler.get().itemTags.add(this);
-                case LOOT_TABLES -> dataHandler.get().lootTable.add(this);
-                case TAB_CONTENTS -> eventHandler.get().tabs.add(this);
-                case RENDER_TYPE -> eventHandler.get().render.add(this);
+    private void makeDefaultBlocks(DeferredRegister<Block> blockRegister) {
+        for (var entry : customBlockProperties.entrySet()) {
+            var type = entry.getKey();
+            if (type.isGeneralBlock()) {
+                var block = blockRegister.register(type.makeRegistryName(getName()), () -> makeGeneralBlock(type, entry.getValue()));
+                blocks.put(type, block);
             }
         }
 
-        TREE_BY_NAME.put(properties.name, this);
+        var blockTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(t -> !t.hasNoBlock())
+                .filter(t -> !blocks.containsKey(t))
+                .filter(t -> !customBlockProperties.containsKey(t))
+                .collect(Collectors.toList());  // qyl27: Use Collectors but not toList, in order to get a mutable ArrayList.
+
+        // Add block stage 1.
+        var it = blockTypesRemain.iterator();
+        while (it.hasNext()) {
+            var type = it.next();
+
+            Supplier<Block> blockSupplier = () -> switch (type) {
+                case LOG, STRIPPED_LOG -> makeGeneralBlock(type, logProp());
+                case LOG_WOOD, STRIPPED_LOG_WOOD -> makeGeneralBlock(type, woodProp());
+                case PLANKS -> makeGeneralBlock(type, planksProp());
+                case LEAVES -> makeGeneralBlock(type, leavesProp());
+                case SLAB -> makeGeneralBlock(type, slabProp());
+                case BUTTON -> makeGeneralBlock(type, buttonProp());
+                case DOOR -> makeGeneralBlock(type, doorProp());
+                case TRAPDOOR -> makeGeneralBlock(type, trapdoorProp());
+                case FENCE, FENCE_GATE -> makeGeneralBlock(type, fenceProp());
+                case PRESSURE_PLATE -> makeGeneralBlock(type, pressurePlateProp());
+                default -> null;
+            };
+
+            if (type == TreeBlockType.LOG
+                    || type == TreeBlockType.STRIPPED_LOG
+                    || type == TreeBlockType.LOG_WOOD
+                    || type == TreeBlockType.STRIPPED_LOG_WOOD
+                    || type == TreeBlockType.PLANKS
+                    || type == TreeBlockType.LEAVES
+                    || type == TreeBlockType.SLAB
+                    || type == TreeBlockType.BUTTON
+                    || type == TreeBlockType.DOOR
+                    || type == TreeBlockType.TRAPDOOR
+                    || type == TreeBlockType.FENCE
+                    || type == TreeBlockType.FENCE_GATE
+                    || type == TreeBlockType.PRESSURE_PLATE) {
+                var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
+                blocks.put(type, block);
+                it.remove();
+            }
+        }
+
+        // Add block stage 2.
+        it = blockTypesRemain.iterator();
+        while (it.hasNext()) {
+            var type = it.next();
+
+            Supplier<Block> blockSupplier = () -> switch (type) {
+                case SAPLING -> sapling(grower, saplingProp());
+                case STAIRS -> stairs(getBlock(TreeBlockType.PLANKS));
+                case SIGN -> makeSignBlock(type, signProp(), getWoodType());
+                case HANGING_SIGN -> makeSignBlock(type, hangingSignProp(), getWoodType());
+                default -> null;
+            };
+
+            if (type == TreeBlockType.SAPLING
+                    || type == TreeBlockType.STAIRS
+                    || type == TreeBlockType.SIGN
+                    || type == TreeBlockType.HANGING_SIGN) {
+                var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
+                blocks.put(type, block);
+                it.remove();
+            }
+        }
+
+        // Add block stage 3.
+        it = blockTypesRemain.iterator();
+        while (it.hasNext()) {
+            var type = it.next();
+
+            Supplier<Block> blockSupplier = () -> switch (type) {
+                case POTTED_SAPLING -> pottedSapling((SaplingBlock) getBlock(TreeBlockType.SAPLING), pottedSaplingProp());
+                case WALL_SIGN -> makeSignBlock(type, wallSignProp(getBlock(TreeBlockType.SIGN)), getWoodType());
+                case WALL_HANGING_SIGN -> makeSignBlock(type, wallHangingSignProp(getBlock(TreeBlockType.HANGING_SIGN)), getWoodType());
+                default -> throw new IllegalArgumentException("Bad type: " + type);
+            };
+
+            var block = blockRegister.register(type.makeRegistryName(getName()), blockSupplier);
+            blocks.put(type, block);
+            it.remove();
+        }
     }
 
-    private <T> Supplier<T> asSupplier(Function<Tree, T> factory, Set<? super T> collector) {
-        return () -> {
-            T value = factory.apply(this);
-            collector.add(value);
-            return value;
-        };
+    private void makeDefaultBlockItems(DeferredRegister<Item> itemRegister) {
+        var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(TreeBlockType::hasItem)
+                .filter(t -> getBlocks().containsKey(t))
+                .filter(t -> !getItems().containsKey(t))
+                .toList();
+
+        for (var type : itemTypesRemain) {
+            RegistryObject<Item> item;
+            if (type == TreeBlockType.DOOR) {
+                item = itemRegister.register(type.makeRegistryName(getName()), () -> doubleBlockItem(getBlock(type)));
+            } else if (type == TreeBlockType.SIGN) {
+                item = itemRegister.register(type.makeRegistryName(getName()), () -> signBlockItem(getBlock(TreeBlockType.SIGN), getBlock(TreeBlockType.WALL_SIGN)));
+            } else if (type == TreeBlockType.HANGING_SIGN) {
+                item = itemRegister.register(type.makeRegistryName(getName()), () -> hangingSignBlockItem(getBlock(TreeBlockType.HANGING_SIGN), getBlock(TreeBlockType.WALL_HANGING_SIGN)));
+            } else {
+                item = itemRegister.register(type.makeRegistryName(getName()), () -> blockItem(getBlock(type)));
+            }
+            items.put(type, item);
+        }
     }
 
-    private <T, V extends T> RegistryObject<V> register(DeferredRegister<T> register, String prefix, String postfix, Supplier<V> supplier) {
-        return register.register(prefix + "_" + properties.name.getPath() + "_" + postfix, supplier);
+    private void makeDefaultItems(DeferredRegister<Item> itemRegister) {
+        var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(TreeBlockType::hasItem)
+                .filter(TreeBlockType::hasNoBlock)
+                .filter(t -> !getItems().containsKey(t))
+                .toList();
+
+        // Todo: qyl27: supports boat or other item without block.
     }
 
-    private <T, V extends T> RegistryObject<V> register(DeferredRegister<T> register, String postfix, Supplier<V> supplier) {
-        return register.register(properties.name.getPath() + "_" + postfix, supplier);
+    private void fillCreativeTabs() {
+        var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
+                .stream()
+                .filter(TreeBlockType::hasItem)
+                .filter(t -> !itemCreativeTabs.containsKey(t))
+                .toList();
+
+        for (var type : itemTypesRemain) {
+            if (getItems().containsKey(type)) {
+                itemCreativeTabs.put(type, getDefaultTabs(type));
+            }
+        }
+
+        for (var entry : itemCreativeTabs.entrySet()) {
+            var item = items.get(entry.getKey());
+            if (item != null) {
+                for (var tab : entry.getValue()) {
+                    if (!creativeTabItems.containsKey(tab)) {
+                        creativeTabItems.put(tab, new ArrayList<>());
+                    }
+
+                    creativeTabItems.get(tab).add(item);
+                }
+            }
+        }
     }
 
-    private void register(DeferredRegister<Item> item, RegistryObject<? extends Block> block, Supplier<? extends Item> supplier) {
-        item.register(block.getId().getPath(), supplier);
+    public WoodType getWoodType() {
+        return woodType;
     }
 
-    public SaplingBlock sapling() {
-        return sapling.get();
+    public Map<TreeBlockType, RegistryObject<? extends Block>> getBlocks() {
+        return ImmutableMap.<TreeBlockType, RegistryObject<? extends Block>>builder().putAll(blocks).build();
     }
 
-    public RotatedPillarBlock log() {
-        return log.get();
+    public Map<TreeBlockType, RegistryObject<? extends Item>> getItems() {
+        return ImmutableMap.<TreeBlockType, RegistryObject<? extends Item>>builder().putAll(items).build();
     }
 
-    public RotatedPillarBlock strippedLog() {
-        return strippedLog.get();
+    public Map<TreeBlockType, List<CreativeModeTab>> getItemTabs() {
+        return ImmutableMap.<TreeBlockType, List<CreativeModeTab>>builder().putAll(itemCreativeTabs).build();
     }
 
-    public RotatedPillarBlock wood() {
-        return wood.get();
+    public Map<CreativeModeTab, List<RegistryObject<? extends Item>>> getTabItems() {
+        return ImmutableMap.<CreativeModeTab, List<RegistryObject<? extends Item>>>builder().putAll(creativeTabItems).build();
     }
 
-    public RotatedPillarBlock strippedWood() {
-        return strippedWood.get();
+    public ResourceLocation getName() {
+        return name;
     }
 
-    public FlowerPotBlock pottedSapling() {
-        return pottedSapling.get();
+    public Block getBlock(TreeBlockType treeBlockType) {
+        return blocks.get(treeBlockType).get();
     }
 
-    public LeavesBlock leaves() {
-        return leaves.get();
+    public Item getItem(TreeBlockType treeBlockType) {
+        return items.get(treeBlockType).get();
     }
 
-    public Set<Block> allBlocks() {
-        return Set.copyOf(allBlocks);
+    public ModTreeGrowerBase getGrower() {
+        if (grower == null) {
+            grower = new ModTreeGrowerBase(getName());
+        }
+
+        return grower;
     }
 
-    public Set<Item> allItems() {
-        return Set.copyOf(allItems);
+    public TreeConfiguration getFeaturedConfiguration() {
+        if (configuration == null) {
+            configuration = ModConfiguredFeatures.defaultTree(getBlock(TreeBlockType.LOG), getBlock(TreeBlockType.LEAVES));
+        }
+
+        return configuration;
     }
 
-    public ResourceLocation name() {
-        return properties.name;
+    /**
+     * Make translates map.
+     * @return Map &lt;String locale, Map&lt;String key, String value&gt; translateMap&gt;
+     */
+    public Map<String, Map<String, String>> makeTranslates() {
+        return translator.makeTranslates();
     }
 
-    public TagKey<Block> tagLogs() {
-        return Objects.requireNonNull(tagLogs);
+    /**
+     * Make translates map for specific locale. <br />
+     * @return Map&lt;String key, String value&gt;
+     */
+    public Map<String, String> makeTranslatesForLocale(String locale) {
+        return translator.makeTranslatesForLocale(locale);
     }
 
-    public TagKey<Item> tagItemLogs() {
-        return Objects.requireNonNull(tagItemLogs);
+    public static Builder builder(ResourceLocation name) {
+        return new Builder(name);
     }
 
-    public BuilderProperties properties() {
-        return properties;
-    }
+    public static class Builder {
+        protected ResourceLocation name;
 
-    public record BuilderProperties(ResourceLocation name, Map<String, String> langs,
-                                    AbstractTreeGrower grower, FloatModifier strengthModifier,
-                                    List<CreativeModeTab> saplingTabs, List<CreativeModeTab> leavesTabs,
-                                    List<CreativeModeTab> logTabs, List<CreativeModeTab> strippedLogTabs,
-                                    List<CreativeModeTab> woodTabs, List<CreativeModeTab> strippedWoodTabs,
-                                    SoundType saplingSound, SoundType leavesSound,
-                                    MaterialColor topLogColor, MaterialColor barkLogColor,
-                                    MaterialColor topStrippedLogColor, MaterialColor barkStrippedLogColor,
-                                    MaterialColor woodColor, MaterialColor strippedWoodColor) {
+        protected Map<String, String> translateRoots = new HashMap<>();
+        protected Map<String, Map<TreeBlockType, StringDecorator>> translates = new HashMap<>();
+        protected Map<String, Map<TreeBlockType, String>> literalTranslates = new HashMap<>();
+
+        protected Map<TreeBlockType, RegistryObject<? extends Block>> customBlocks = new HashMap<>();
+        protected Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties = new HashMap<>();
+        protected Map<TreeBlockType, RegistryObject<? extends Item>> customBlockItems = new HashMap<>();
+        protected Map<TreeBlockType, List<CreativeModeTab>> customItemTabs = new HashMap<>();
+
+        @Nullable
+        protected ModTreeGrowerBase grower;
+
+        @Nullable
+        protected TreeConfiguration configuration;
+
+        /**
+         * New builder.
+         * @param name ResourceLocation of tree.
+         */
+        public Builder(ResourceLocation name) {
+            this.name = name;
+        }
+
+        /**
+         * Translate root for a locale.
+         * @param locale Locale of translation, like en_us or zh_cn.
+         * @param translateRoot Translate root value, like Oak, Spruce.
+         * @return Builder
+         */
+        public Builder translate(String locale, String translateRoot) {
+            translateRoots.put(locale, translateRoot);
+            return this;
+        }
+
+        /**
+         * Translate decorators for a locale.
+         * @param locale Locale of translation, like en_us or zh_cn.
+         * @param translate Translate value.
+         * @return Builder
+         */
+        public Builder translate(String locale, Map<TreeBlockType, StringDecorator> translate) {
+            translates.put(locale, translate);
+            return this;
+        }
+
+        /**
+         * Custom literal translates for a specific block/item.
+         * @param locale Locale of translation, like en_us or zh_cn.
+         * @param treeBlockType Specific block.
+         * @param literalTranslate Literal translate value.
+         * @return Builder
+         */
+        public Builder translate(String locale, TreeBlockType treeBlockType, String literalTranslate) {
+            if (!literalTranslates.containsKey(locale)) {
+                literalTranslates.put(locale, new HashMap<>());
+            }
+
+            var map = literalTranslates.get(locale);
+            map.put(treeBlockType, literalTranslate);
+
+            return this;
+        }
+
+        /**
+         * Custom block instead of auto generate.
+         * @param treeBlockType Specific block.
+         * @param block Block.
+         * @return Builder
+         */
+        public Builder block(TreeBlockType treeBlockType, RegistryObject<Block> block) {
+            customBlocks.put(treeBlockType, block);
+            return this;
+        }
+
+        /**
+         * Custom block Property instead of auto generate.
+         * @param treeBlockType Specific block Property.
+         * @param blockProperty Block property.
+         * @return Builder
+         */
+        public Builder blockProperty(TreeBlockType treeBlockType, BlockBehaviour.Properties blockProperty) {
+            customBlockProperties.put(treeBlockType, blockProperty);
+            return this;
+        }
+
+        /**
+         * Custom block item instead of auto generate.
+         * @param treeBlockType Specific block item.
+         * @param blockItem Block item.
+         * @return Builder
+         */
+        public Builder blockItem(TreeBlockType treeBlockType, RegistryObject<BlockItem> blockItem) {
+            customBlockItems.put(treeBlockType, blockItem);
+            return this;
+        }
+
+        /**
+         * Custom creative mode tab instead of auto generate.
+         * @param treeBlockType Specific block item.
+         * @param tab Item tab.
+         * @return Builder
+         */
+        public Builder blockItemTab(TreeBlockType treeBlockType, CreativeModeTab tab) {
+            if (!customItemTabs.containsKey(treeBlockType)) {
+                customItemTabs.put(treeBlockType, new ArrayList<>());
+            }
+
+            customItemTabs.get(treeBlockType).add(tab);
+            return this;
+        }
+
+        /**
+         * Custom creative mode tabs instead of auto generate.
+         * Will replace previous sets.
+         * @param treeBlockType Specific block item.
+         * @param tabs Item tabs.
+         * @return Builder
+         */
+        public Builder blockItemTabs(TreeBlockType treeBlockType, List<CreativeModeTab> tabs) {
+            customItemTabs.put(treeBlockType, tabs);
+            return this;
+        }
+
+        /**
+         * Set grower for sapling.
+         * @param grower Grower.
+         * @return Builder
+         */
+        public Builder grower(ModTreeGrowerBase grower, TreeConfiguration configuration) {
+            this.grower = grower;
+            this.configuration = configuration;
+            return this;
+        }
+
+        /**
+         * Set grower for sapling.
+         * @param grower Grower.
+         * @return Builder
+         */
+        public Builder grower(ModTreeGrowerBase grower) {
+            this.grower = grower;
+            return this;
+        }
+
+        // Todo: generate trees in wild.
+
+        public Tree build() {
+            return new Tree(name, translateRoots, translates, literalTranslates,
+                    customBlocks, customBlockProperties,
+                    customBlockItems, customItemTabs,
+                    grower, configuration);
+        }
     }
 }

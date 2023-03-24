@@ -1,17 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "games.moegirl.sinocraft.sinocore.mixin",
+  "package": "games.moegirl.sinocraft.sinocore.mixin.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinBlockLootSubProvider",
-    "MixinBlockProperties",
-    "MixinRecipeProvider",
-    "MixinLootTableProvider",
-    "MixinDataGenerator"
+    "BlockPropertiesMixin",
+    "BlockEntityTypeMixin"
   ],
   "client": [
-    "MixinMinecraft"
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1

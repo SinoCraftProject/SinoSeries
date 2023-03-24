@@ -1,0 +1,21 @@
+// 1.19.3	2023-03-24T15:50:27.1784479	Tree Tags for minecraft:block mod id sinotest
+bbce45ca46c04f43c4fb4f8ad77d9062741142b5 data/forge/tags/blocks/fence_gates/wooden.json
+b6aa7906e017d0db83fb3d9e084281e2e53aa909 data/minecraft/tags/blocks/ceiling_hanging_signs.json
+bbce45ca46c04f43c4fb4f8ad77d9062741142b5 data/minecraft/tags/blocks/fence_gates.json
+db9adfe8ee6e5bfad5c3b8a6301a857859422a54 data/minecraft/tags/blocks/flower_pots.json
+de76a7dbd95f620d41955eda86cdd69219e58e9d data/minecraft/tags/blocks/leaves.json
+41616c72379df7572985739ccecae0725692c5c1 data/minecraft/tags/blocks/logs.json
+41616c72379df7572985739ccecae0725692c5c1 data/minecraft/tags/blocks/logs_that_burn.json
+1dc564db609231bb2869bfd58358aa2b6d37fd1b data/minecraft/tags/blocks/planks.json
+3a15285da080a05811ceb4107b8a1124b6fda58e data/minecraft/tags/blocks/saplings.json
+763965283792fb05ee7ac4a77595d3f9bd48f31d data/minecraft/tags/blocks/standing_signs.json
+faf74ad1212e7cc0e5e6c005a5be906d930d5b44 data/minecraft/tags/blocks/wall_hanging_signs.json
+b5cdcb3b4f3f3312a85030ce8c309b364fa3727f data/minecraft/tags/blocks/wall_signs.json
+41a74632ab6717ac63fd259c94ab3321dd112301 data/minecraft/tags/blocks/wooden_buttons.json
+b37f59ff5db1ed06e71249a12ea529cefbe01b10 data/minecraft/tags/blocks/wooden_doors.json
+92b03a3886eb0831e9086732554ffcb2fcf6dde5 data/minecraft/tags/blocks/wooden_fences.json
+c9ffbec112f13f960cf45bd4eb4a2004ae0fbb2f data/minecraft/tags/blocks/wooden_pressure_plates.json
+ccbe311f6f52ae72d13717b5049125ae0759cbbf data/minecraft/tags/blocks/wooden_slabs.json
+0051a1460c9add04ed93da37fb6bf9cba8890442 data/minecraft/tags/blocks/wooden_stairs.json
+39aa28e2ecdbf6d989e4ba1317dc960f0ab2643c data/minecraft/tags/blocks/wooden_trapdoors.json
+02e5863f2e534a70e2077a52037c1f09c3ed8f6a data/sinotest/tags/blocks/test_logs.json

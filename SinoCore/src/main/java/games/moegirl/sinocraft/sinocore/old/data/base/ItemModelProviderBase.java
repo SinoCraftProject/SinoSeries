@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.old.data.base;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import games.moegirl.sinocraft.sinocore.data.base.warn_provider.WarnItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemModelProvider;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -28,7 +28,7 @@ import java.util.stream.Stream;
  *
  * @author skyinr
  */
-public abstract class ItemModelProviderBase extends WarnItemModelProvider {
+public abstract class ItemModelProviderBase extends AbstractItemModelProvider {
     public static final ResourceLocation GENERATED = new ResourceLocation("item/generated");
     public static final ResourceLocation HANDHELD = new ResourceLocation("item/handheld");
 
