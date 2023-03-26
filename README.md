@@ -17,6 +17,6 @@ Main repository of SinoSeries mods.
 See [LICENSE](https://github.com/SinoCraftProject/SinoSeries/blob/main/LICENSE) of this repository.  
 参见本仓库的  [LICENSE](https://github.com/SinoCraftProject/SinoSeries/blob/main/LICENSE) 文件。
 
-## Discuss & Issues
-[GitHub Discussions](https://github.com/orgs/SinoCraftProject/discussions)  
-[Issues](https://github.com/SinoCraftProject/SinoSeries/issues)
+## Discuss & Issues / 讨论和问题
+讨论：[GitHub Discussions](https://github.com/orgs/SinoCraftProject/discussions)  
+问题：[Issues](https://github.com/SinoCraftProject/SinoSeries/issues)
