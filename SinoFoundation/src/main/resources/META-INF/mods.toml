@@ -1,6 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[${fmlloader_version},${next_fmlloader_version})"
-license = "All Rights Reserved"
+license = "${sinoseries_license}"
+issueTrackerURL = "${sinoseries_issues}"
 
 [[mods]]
 modId = "sinofoundation"
