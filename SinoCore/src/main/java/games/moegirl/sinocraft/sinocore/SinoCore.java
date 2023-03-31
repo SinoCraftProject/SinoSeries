@@ -1,7 +1,5 @@
 package games.moegirl.sinocraft.sinocore;
 
-import games.moegirl.sinocraft.sinocore.old.config.QuizModelConfig;
-import games.moegirl.sinocraft.sinocore.old.config.model.QuizModel;
 import games.moegirl.sinocraft.sinocore.old.gui.SCMenus;
 import games.moegirl.sinocraft.sinocore.old.utility.json.JsonUtils;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.FluidStackSerializer;
@@ -45,7 +43,7 @@ public class SinoCore {
         bus.addListener(this::onSetup);
         bus.addListener(this::onClientSetup);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QuizModelConfig.SPEC, "sinoseries/sinocore/quiz.toml");
+//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QuizModelConfig.SPEC, "sinoseries/sinocore/quiz.toml");
 
         JsonUtils.INSTANCE
                 .registerAdapter(Ingredient.class, new IngredientSerializer())
@@ -61,9 +59,9 @@ public class SinoCore {
     }
 
     private void onSetup(FMLCommonSetupEvent event) {
-        if (QuizModelConfig.CONFIG.ENABLED.get()) {
-            QuizModel.fetch();
-        }
+//        if (QuizModelConfig.CONFIG.ENABLED.get()) {
+//            QuizModel.fetch();
+//        }
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
