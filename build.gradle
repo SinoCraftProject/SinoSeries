@@ -128,7 +128,7 @@ allprojects {
     version "${project.minecraft_version}-${project.sinoseries_version}"
 
     if (System.getenv('GITHUB_SHA') != null) {
-        version += "-${System.getenv('GITHUB_SHA').substring(0, 6)}"
+        version += "-${System.getenv('GITHUB_SHA').substring(0, 7)}"
     } else if (System.getenv('JITPACK') == 'true') {
         version += "-${System.getenv('VERSION')}"
     }
