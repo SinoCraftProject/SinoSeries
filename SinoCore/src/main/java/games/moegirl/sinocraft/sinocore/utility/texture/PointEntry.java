@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility.texture;
+package games.moegirl.sinocraft.sinocore.utility.texture;
 
 public record PointEntry(String name, int x, int y) {
 

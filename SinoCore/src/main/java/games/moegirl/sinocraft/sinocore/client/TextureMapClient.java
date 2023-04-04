@@ -1,11 +1,11 @@
-package games.moegirl.sinocraft.sinocore.old.client.screen;
+package games.moegirl.sinocraft.sinocore.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
-import games.moegirl.sinocraft.sinocore.old.client.screen.component.ImageButton;
-import games.moegirl.sinocraft.sinocore.old.utility.texture.*;
+import games.moegirl.sinocraft.sinocore.client.component.ImageButton;
+import games.moegirl.sinocraft.sinocore.mixin.interfaces.IScreen;
+import games.moegirl.sinocraft.sinocore.utility.texture.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
@@ -18,9 +18,7 @@ import org.joml.Matrix4f;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.function.Function;
 
-@SuppressWarnings("unused")
 public class TextureMapClient {
 
     private final TextureMap texture;
@@ -34,17 +32,15 @@ public class TextureMapClient {
     public Optional<Button> placeButton(String name,
                                         AbstractContainerScreen<?> parent,
                                         Button.OnPress onPress,
-                                        @Nullable Button.OnPress onRightPress,
-                                        Function<Button, Button> addRenderableWidget) {
-        return texture.buttons().get(name)
-                .map(e -> addRenderableWidget.apply(new ImageButton(parent, texture, e, onPress, onRightPress, null/*todo fix: parent::renderWithTooltip*/)));
+                                        @Nullable Button.OnPress onRightPress) {
+        return texture.buttons().get(name).map(e -> ((IScreen) parent)
+                .sinocoreAddRenderableWidget(new ImageButton(parent, texture, e, onPress, onRightPress)));
     }
 
     public Optional<Button> placeButton(String name,
                                         AbstractContainerScreen<?> parent,
-                                        Button.OnPress onPress,
-                                        Function<Button, Button> addRenderableWidget) {
-        return placeButton(name, parent, onPress, null, addRenderableWidget);
+                                        Button.OnPress onPress) {
+        return placeButton(name, parent, onPress, null);
     }
 
     public void renderText(PoseStack stack, String name) {
@@ -163,12 +159,14 @@ public class TextureMapClient {
                         y += (1 - progress) * p.y();
                     }
                     th = (int) (th * progress);
+                    h = (int) (h * progress);
                 } else {
                     if (entry.isOpposite()) {
                         tu += (1 - progress) * p.tw();
                         x += (1 - progress) * p.w();
                     }
                     tw = (int) (tw * progress);
+                    w = (int) (w * progress);
                 }
                 blitTexture(stack, x, y, w, h, tu, tv, tw, th);
             }

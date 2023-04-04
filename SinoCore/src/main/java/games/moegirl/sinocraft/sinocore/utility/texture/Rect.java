@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility.texture;
+package games.moegirl.sinocraft.sinocore.utility.texture;
 
 public record Rect(float x0, float y0, float z0,
                    float x1, float y1, float z1,

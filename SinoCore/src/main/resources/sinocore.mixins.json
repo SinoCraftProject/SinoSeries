@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "BlockPropertiesMixin",
-    "BlockEntityTypeMixin"
+    "BlockEntityTypeMixin",
+    "AbstractContainerMenuMixin"
   ],
   "client": [
-    "MinecraftMixin"
+    "MinecraftMixin",
+    "ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,13 +1,14 @@
-package games.moegirl.sinocraft.sinocore.old.utility.texture;
+package games.moegirl.sinocraft.sinocore.utility.texture;
 
 import com.google.common.collect.Iterators;
+import games.moegirl.sinocraft.sinocore.mixin.interfaces.IContainerMenu;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Function;
 
 @SuppressWarnings("unused")
 public final class TextureMap {
@@ -34,23 +35,23 @@ public final class TextureMap {
         return TextureParser.parse(new ResourceLocation(modid, "textures/" + path + "/" + name + ".png"));
     }
 
-    public <T extends Slot, C extends Container> Optional<T> placeSlot(C container, String name, int index, Function<Slot, Slot> addSlot, SlotStrategy<T, C> slot) {
+    public <T extends Slot, C extends Container> Optional<T> placeSlot(AbstractContainerMenu menu, C container, String name, int index, SlotStrategy<T, C> slot) {
         return this.slot.get(name)
-                .map(entry -> placeSlot(container, entry, index, addSlot, slot));
+                .map(entry -> placeSlot(menu, container, entry, index, slot));
     }
 
-    public void placeSlots(Container container, String name, int beginIndex, Function<Slot, Slot> addSlot, SlotStrategy<Slot, Container> slot) {
+    public void placeSlots(AbstractContainerMenu menu, Container container, String name, int beginIndex, SlotStrategy<Slot, Container> slot) {
         this.slots.get(name).ifPresent(slotsEntry -> {
             int i = beginIndex;
             for (SlotEntry entry : slotsEntry.entries()) {
-                placeSlot(container, entry, i++, addSlot, slot);
+                placeSlot(menu, container, entry, i++, slot);
             }
         });
     }
 
-    private <T extends Slot, C extends Container> T placeSlot(C container, SlotEntry entry, int index, Function<Slot, Slot> addSlot, SlotStrategy<T, C> slot) {
+    private <T extends Slot, C extends Container> T placeSlot(AbstractContainerMenu menu, C container, SlotEntry entry, int index, SlotStrategy<T, C> slot) {
         T s = slot.createSlot(container, index, entry.x(), entry.y());
-        addSlot.apply(s);
+        ((IContainerMenu) menu).sinocoreAddSlot(s);
         return s;
     }
 

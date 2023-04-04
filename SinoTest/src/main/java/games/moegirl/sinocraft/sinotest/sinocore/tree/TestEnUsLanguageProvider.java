@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinotest.sinocore;
+package games.moegirl.sinocraft.sinotest.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.data.LanguageProviderBase;
 import net.minecraft.data.PackOutput;

@@ -1,14 +1,15 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import com.google.common.collect.ImmutableMap;
-import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import games.moegirl.sinocraft.sinocore.utility.decorator.StringDecorator;
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
+import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -66,6 +67,8 @@ public class Tree {
         blocks.putAll(customBlocks);
         items.putAll(customBlockItems);
         itemCreativeTabs.putAll(customItemTabs);
+
+        TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
     }
 
     public void register(DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister) {
@@ -159,9 +162,11 @@ public class Tree {
             var type = it.next();
 
             Supplier<Block> blockSupplier = () -> switch (type) {
-                case POTTED_SAPLING -> pottedSapling((SaplingBlock) getBlock(TreeBlockType.SAPLING), pottedSaplingProp());
+                case POTTED_SAPLING ->
+                        pottedSapling((SaplingBlock) getBlock(TreeBlockType.SAPLING), pottedSaplingProp());
                 case WALL_SIGN -> makeSignBlock(type, wallSignProp(getBlock(TreeBlockType.SIGN)), getWoodType());
-                case WALL_HANGING_SIGN -> makeSignBlock(type, wallHangingSignProp(getBlock(TreeBlockType.HANGING_SIGN)), getWoodType());
+                case WALL_HANGING_SIGN ->
+                        makeSignBlock(type, wallHangingSignProp(getBlock(TreeBlockType.HANGING_SIGN)), getWoodType());
                 default -> throw new IllegalArgumentException("Bad type: " + type);
             };
 
@@ -282,6 +287,7 @@ public class Tree {
 
     /**
      * Make translates map.
+     *
      * @return Map &lt;String locale, Map&lt;String key, String value&gt; translateMap&gt;
      */
     public Map<String, Map<String, String>> makeTranslates() {
@@ -290,6 +296,7 @@ public class Tree {
 
     /**
      * Make translates map for specific locale. <br />
+     *
      * @return Map&lt;String key, String value&gt;
      */
     public Map<String, String> makeTranslatesForLocale(String locale) {
@@ -320,6 +327,7 @@ public class Tree {
 
         /**
          * New builder.
+         *
          * @param name ResourceLocation of tree.
          */
         public Builder(ResourceLocation name) {
@@ -328,7 +336,8 @@ public class Tree {
 
         /**
          * Translate root for a locale.
-         * @param locale Locale of translation, like en_us or zh_cn.
+         *
+         * @param locale        Locale of translation, like en_us or zh_cn.
          * @param translateRoot Translate root value, like Oak, Spruce.
          * @return Builder
          */
@@ -339,7 +348,8 @@ public class Tree {
 
         /**
          * Translate decorators for a locale.
-         * @param locale Locale of translation, like en_us or zh_cn.
+         *
+         * @param locale    Locale of translation, like en_us or zh_cn.
          * @param translate Translate value.
          * @return Builder
          */
@@ -350,8 +360,9 @@ public class Tree {
 
         /**
          * Custom literal translates for a specific block/item.
-         * @param locale Locale of translation, like en_us or zh_cn.
-         * @param treeBlockType Specific block.
+         *
+         * @param locale           Locale of translation, like en_us or zh_cn.
+         * @param treeBlockType    Specific block.
          * @param literalTranslate Literal translate value.
          * @return Builder
          */
@@ -368,8 +379,9 @@ public class Tree {
 
         /**
          * Custom block instead of auto generate.
+         *
          * @param treeBlockType Specific block.
-         * @param block Block.
+         * @param block         Block.
          * @return Builder
          */
         public Builder block(TreeBlockType treeBlockType, RegistryObject<Block> block) {
@@ -379,6 +391,7 @@ public class Tree {
 
         /**
          * Custom block Property instead of auto generate.
+         *
          * @param treeBlockType Specific block Property.
          * @param blockProperty Block property.
          * @return Builder
@@ -390,8 +403,9 @@ public class Tree {
 
         /**
          * Custom block item instead of auto generate.
+         *
          * @param treeBlockType Specific block item.
-         * @param blockItem Block item.
+         * @param blockItem     Block item.
          * @return Builder
          */
         public Builder blockItem(TreeBlockType treeBlockType, RegistryObject<BlockItem> blockItem) {
@@ -401,8 +415,9 @@ public class Tree {
 
         /**
          * Custom creative mode tab instead of auto generate.
+         *
          * @param treeBlockType Specific block item.
-         * @param tab Item tab.
+         * @param tab           Item tab.
          * @return Builder
          */
         public Builder blockItemTab(TreeBlockType treeBlockType, CreativeModeTab tab) {
@@ -417,8 +432,9 @@ public class Tree {
         /**
          * Custom creative mode tabs instead of auto generate.
          * Will replace previous sets.
+         *
          * @param treeBlockType Specific block item.
-         * @param tabs Item tabs.
+         * @param tabs          Item tabs.
          * @return Builder
          */
         public Builder blockItemTabs(TreeBlockType treeBlockType, List<CreativeModeTab> tabs) {
@@ -428,6 +444,7 @@ public class Tree {
 
         /**
          * Set grower for sapling.
+         *
          * @param grower Grower.
          * @return Builder
          */
@@ -439,6 +456,7 @@ public class Tree {
 
         /**
          * Set grower for sapling.
+         *
          * @param grower Grower.
          * @return Builder
          */

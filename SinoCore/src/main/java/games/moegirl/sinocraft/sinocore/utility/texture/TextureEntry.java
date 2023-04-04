@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility.texture;
+package games.moegirl.sinocraft.sinocore.utility.texture;
 
 public record TextureEntry(String name, int x, int y, int w, int h, float u, float v, int tw, int th) {
 

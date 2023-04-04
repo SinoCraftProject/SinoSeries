@@ -1,9 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@FieldsAreNonnullByDefault
-package games.moegirl.sinocraft.sinocore.old.client.screen;
+package games.moegirl.sinocraft.sinocore.utility.texture;
 
-import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

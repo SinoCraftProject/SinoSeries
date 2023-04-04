@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.tree.event.SCTreeGatherDataListener;
 import games.moegirl.sinocraft.sinocore.tree.event.SCTreeTabsBuildListener;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,8 +9,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Registry of Tree.
@@ -42,21 +42,6 @@ public final class TreeRegistry {
             registerInternal(modid, tree);
         }
     }
-
-    /**
-     * Add a TreeType by TreeType.Builder.
-     * @param tree TreeType
-     */
-    public static void addTree(Tree tree) {
-        var modid = tree.getName().getNamespace();
-        if (!getRegistry().containsKey(modid)) {
-            getRegistry().put(modid, new ArrayList<>());
-        }
-
-        getRegistry().get(modid).add(tree);
-    }
-
-
 
     private static void registerListeners(String modid, IEventBus bus) {
         var blockRegister = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);

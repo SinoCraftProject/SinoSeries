@@ -1,14 +1,16 @@
-package games.moegirl.sinocraft.sinocore.old.client.screen.component;
+package games.moegirl.sinocraft.sinocore.client.component;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import games.moegirl.sinocraft.sinocore.old.utility.texture.ButtonEntry;
-import games.moegirl.sinocraft.sinocore.old.utility.texture.TextureEntry;
-import games.moegirl.sinocraft.sinocore.old.utility.texture.TextureMap;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
+import games.moegirl.sinocraft.sinocore.mixin.interfaces.IScreen;
+import games.moegirl.sinocraft.sinocore.utility.texture.ButtonEntry;
+import games.moegirl.sinocraft.sinocore.utility.texture.TextureEntry;
+import games.moegirl.sinocraft.sinocore.utility.texture.TextureMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 
 import javax.annotation.Nullable;
@@ -28,9 +30,10 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
     private final String texPressed;
     @Nullable
     private final String texDisable;
-    private RenderTooltip renderTooltip;
 
-    public ImageButton(AbstractContainerScreen<?> parent, TextureMap texture, ButtonEntry entry, OnPress onPress, @Nullable OnPress onRightClick, RenderTooltip renderTooltip) {
+    private final Screen parent;
+
+    public ImageButton(AbstractContainerScreen<?> parent, TextureMap texture, ButtonEntry entry, OnPress onPress, @Nullable OnPress onRightClick) {
         super(entry.x() + parent.getGuiLeft(), entry.y() + parent.getGuiTop(), entry.w(), entry.h(), entry.buildTooltip(), onPress, Supplier::get);
         this.onRightClick = onRightClick;
         this.map = texture;
@@ -38,7 +41,7 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
         this.texHover = entry.textureHover();
         this.texPressed = entry.texturePressed();
         this.texDisable = entry.textureDisable();
-        this.renderTooltip = renderTooltip;
+        this.parent = parent;
     }
 
     @Override
@@ -62,7 +65,7 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
         }
         String texture;
         if (this.isHovered) {
-            renderTooltip.renderTooltip(pPoseStack, pMouseX, pMouseY);
+            ((IScreen) parent).sinocoreRenderTooltip(pPoseStack, getMessage(), pMouseX, pMouseY);
             MouseHandler mouse = Minecraft.getInstance().mouseHandler;
             if (mouse.isLeftPressed() || mouse.isMiddlePressed() || mouse.isRightPressed()) {
                 texture = texPressed;

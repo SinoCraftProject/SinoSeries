@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility.texture;
+package games.moegirl.sinocraft.sinocore.utility.texture;
 
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;

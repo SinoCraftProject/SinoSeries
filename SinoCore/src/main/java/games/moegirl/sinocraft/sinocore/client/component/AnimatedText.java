@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.client.screen.component;
+package games.moegirl.sinocraft.sinocore.client.component;
 
 import com.google.common.base.Verify;
 import com.mojang.blaze3d.vertex.PoseStack;
