@@ -1,22 +1,19 @@
 package games.moegirl.sinocraft.sinotest;
 
-import com.mojang.blaze3d.platform.ScreenManager;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureItem;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureMenu;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -42,7 +39,7 @@ public class SinoTest {
             .build();
 
     public static RegistryObject<MenuType<TestTextureMenu>> TEST_TEXTURE_MENU =
-            MENUS.register("texture_test", () -> new MenuType<>(TestTextureMenu::new));
+            MENUS.register("texture_test", () -> new MenuType<>(TestTextureMenu::new, FeatureFlagSet.of()));
     public static RegistryObject<Item> TEST_TEXTURE_ITEM = ITEMS.register("texture_test_item", TestTextureItem::new);
 
     public SinoTest() {
