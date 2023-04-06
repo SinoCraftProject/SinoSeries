@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.crafting;
 
 import games.moegirl.sinocraft.sinocore.utility.Self;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -31,7 +32,7 @@ public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, 
     }
 
     @Override
-    public ItemStack assemble(C pContainer) {
+    public ItemStack assemble(C arg, RegistryAccess access) {
         return output.copy();
     }
 
@@ -41,7 +42,7 @@ public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, 
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess arg) {
         return output;
     }
 

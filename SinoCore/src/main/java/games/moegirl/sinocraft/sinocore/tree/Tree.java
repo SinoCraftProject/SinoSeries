@@ -5,12 +5,15 @@ import games.moegirl.sinocraft.sinocore.utility.decorator.StringDecorator;
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.DeferredRegister;
@@ -28,6 +31,7 @@ public class Tree {
     public final ResourceLocation name;
 
     protected final WoodType woodType;
+    protected final BlockSetType blockSetType;
 
     protected final Map<TreeBlockType, RegistryObject<? extends Block>> blocks = new HashMap<>();
     protected final Map<TreeBlockType, RegistryObject<? extends Item>> items = new HashMap<>();
@@ -59,7 +63,13 @@ public class Tree {
         this.grower = Objects.requireNonNullElse(grower, new ModTreeGrowerBase(name));
         this.configuration = configuration;
 
-        woodType = WoodType.create(name.toString());
+        blockSetType = new BlockSetType(name.toString(), SoundType.WOOD,
+                SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN,
+                SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN,
+                SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON,
+                SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
+        BlockSetType.register(blockSetType);
+        woodType = new WoodType(name.toString(), blockSetType);
         WoodType.register(woodType);
 
         this.customBlockProperties = customBlockProperties;
@@ -83,7 +93,7 @@ public class Tree {
         for (var entry : customBlockProperties.entrySet()) {
             var type = entry.getKey();
             if (type.isGeneralBlock()) {
-                var block = blockRegister.register(type.makeRegistryName(getName()), () -> makeGeneralBlock(type, entry.getValue()));
+                var block = blockRegister.register(type.makeRegistryName(getName()), () -> makeGeneralBlock(type, blockSetType, entry.getValue()));
                 blocks.put(type, block);
             }
         }
@@ -101,16 +111,16 @@ public class Tree {
             var type = it.next();
 
             Supplier<Block> blockSupplier = () -> switch (type) {
-                case LOG, STRIPPED_LOG -> makeGeneralBlock(type, logProp());
-                case LOG_WOOD, STRIPPED_LOG_WOOD -> makeGeneralBlock(type, woodProp());
-                case PLANKS -> makeGeneralBlock(type, planksProp());
-                case LEAVES -> makeGeneralBlock(type, leavesProp());
-                case SLAB -> makeGeneralBlock(type, slabProp());
-                case BUTTON -> makeGeneralBlock(type, buttonProp());
-                case DOOR -> makeGeneralBlock(type, doorProp());
-                case TRAPDOOR -> makeGeneralBlock(type, trapdoorProp());
-                case FENCE, FENCE_GATE -> makeGeneralBlock(type, fenceProp());
-                case PRESSURE_PLATE -> makeGeneralBlock(type, pressurePlateProp());
+                case LOG, STRIPPED_LOG -> makeGeneralBlock(type, blockSetType, logProp());
+                case LOG_WOOD, STRIPPED_LOG_WOOD -> makeGeneralBlock(type, blockSetType, woodProp());
+                case PLANKS -> makeGeneralBlock(type, blockSetType, planksProp());
+                case LEAVES -> makeGeneralBlock(type, blockSetType, leavesProp());
+                case SLAB -> makeGeneralBlock(type, blockSetType, slabProp());
+                case BUTTON -> makeGeneralBlock(type, blockSetType, buttonProp());
+                case DOOR -> makeGeneralBlock(type, blockSetType, doorProp());
+                case TRAPDOOR -> makeGeneralBlock(type, blockSetType, trapdoorProp());
+                case FENCE, FENCE_GATE -> makeGeneralBlock(type, blockSetType, fenceProp());
+                case PRESSURE_PLATE -> makeGeneralBlock(type, blockSetType, pressurePlateProp());
                 default -> null;
             };
 

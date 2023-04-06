@@ -72,7 +72,7 @@ public class AnimatedText extends AbstractWidget {
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         Component message = getMessage();
         if (!CommonComponents.EMPTY.equals(message) && duration > 0) {
             long delta = System.nanoTime() - beginTime;

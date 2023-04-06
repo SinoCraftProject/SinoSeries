@@ -11,40 +11,40 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class TreeBlockUtilities {
 
     // <editor-fold desc="Blocks">
 
-    public static @Nullable Block makeGeneralBlock(TreeBlockType type, BlockBehaviour.Properties properties) {
+    public static Block makeGeneralBlock(TreeBlockType type, BlockSetType setType, BlockBehaviour.Properties properties) {
         return switch (type) {
             case LOG, LOG_WOOD, STRIPPED_LOG, STRIPPED_LOG_WOOD -> new RotatedPillarBlock(properties);
             case PLANKS -> new Block(properties);
             case LEAVES -> new LeavesBlock(properties);
             case SLAB -> new SlabBlock(properties);
-            case BUTTON -> new ButtonBlock(properties, 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
-            case DOOR -> new DoorBlock(properties, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN);
-            case TRAPDOOR -> new TrapDoorBlock(properties, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN);
+            case BUTTON -> new ButtonBlock(properties, setType, 30, true);
+            case DOOR -> new DoorBlock(properties, setType);
+            case TRAPDOOR -> new TrapDoorBlock(properties, setType);
             case FENCE -> new FenceBlock(properties);
             case FENCE_GATE -> new FenceGateBlock(properties, SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN);
-            case PRESSURE_PLATE -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, properties, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON);
-            default -> null;
+            case PRESSURE_PLATE -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, properties, setType);
+            default -> throw new IllegalArgumentException("Unknown tree block type " + type);
         };
     }
 
-    public static @Nullable Block makeSignBlock(TreeBlockType type, BlockBehaviour.Properties properties, WoodType woodType) {
+    public static Block makeSignBlock(TreeBlockType type, BlockBehaviour.Properties properties, WoodType woodType) {
         return switch (type) {
             case SIGN -> new StandingSignBlock(properties, woodType);
             case WALL_SIGN -> new WallSignBlock(properties, woodType);
             case HANGING_SIGN -> new CeilingHangingSignBlock(properties, woodType);
             case WALL_HANGING_SIGN -> new WallHangingSignBlock(properties, woodType);
-            default -> null;
+            default -> throw new IllegalArgumentException("Block type " + type + " is not a sign block");
         };
     }
 

@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +23,7 @@ import java.util.List;
  * @param replaced 不绘制的情况
  * @author luqin2007
  */
-public record ReplacedModel(BakedModel model, ItemTransforms.TransformType... replaced) implements BakedModel {
+public record ReplacedModel(BakedModel model, ItemDisplayContext... replaced) implements BakedModel {
 
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
@@ -60,7 +61,7 @@ public record ReplacedModel(BakedModel model, ItemTransforms.TransformType... re
     }
 
     @Override
-    public BakedModel applyTransform(ItemTransforms.TransformType transformType, PoseStack poseStack, boolean applyLeftHandTransform) {
+    public BakedModel applyTransform(ItemDisplayContext transformType, PoseStack poseStack, boolean applyLeftHandTransform) {
         if (ArrayUtils.contains(replaced, transformType)) {
             return this;
         }

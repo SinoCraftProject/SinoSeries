@@ -63,9 +63,7 @@ public class ModTabs {
                 var translationKey = makeTranslateKey(entry.getKey());
                 builder.title(Component.translatable(translationKey))
                         .icon(() -> new ItemStack(Items.APPLE))
-                        .displayItems((flagSet, output, hasPermission) ->
-                                output.acceptAll(new ArrayList<>(entry.getValue())));
-
+                        .displayItems((flagSet, output) -> output.acceptAll(new ArrayList<>(entry.getValue())));
                 var result = builder.build();
                 CREATIVE_MODE_TABS.put(key, new Tuple<>(result, translationKey));
             });

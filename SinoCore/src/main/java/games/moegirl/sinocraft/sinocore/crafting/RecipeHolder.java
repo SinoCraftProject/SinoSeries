@@ -56,7 +56,7 @@ public final class RecipeHolder<C extends Container, T extends Recipe<C>, S exte
     }
 
     public Optional<ItemStack> matchResult(Level level, C container) {
-        return match(level, container).map(recipe -> recipe.assemble(container));
+        return match(level, container).map(recipe -> recipe.assemble(container, level.registryAccess()));
     }
 
     public ResourceLocation name() {

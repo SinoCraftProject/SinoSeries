@@ -27,7 +27,7 @@ public class SCTreeItemTagsProvider extends ItemTagsProvider {
                                   TagsProvider<Block> blockTagsProvider, String modid,
                                   @Nullable ExistingFileHelper existingFileHelper,
                                   List<Tree> treeTypes) {
-        super(output, lookupProvider, blockTagsProvider, modid, existingFileHelper);
+        super(output, lookupProvider, blockTagsProvider.contentsGetter(), modid, existingFileHelper);
 
         this.treeTypes = treeTypes;
     }

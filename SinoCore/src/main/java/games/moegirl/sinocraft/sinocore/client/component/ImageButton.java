@@ -59,7 +59,7 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
     }
 
     @Override
-    public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float partialTick) {
         if (!visible) {
             return;
         }
