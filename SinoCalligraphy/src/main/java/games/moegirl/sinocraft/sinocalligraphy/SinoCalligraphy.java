@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy;
 
+import games.moegirl.sinocraft.sinocalligraphy.gui.SCAMenus;
+import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -20,6 +22,8 @@ public class SinoCalligraphy {
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        SCAItems.register(bus);
+        SCAMenus.register(bus);
 
         LOGGER.info("I'll give you a little color.");
     }

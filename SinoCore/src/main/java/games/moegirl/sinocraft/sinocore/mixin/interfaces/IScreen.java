@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public interface IScreen {
 
-    <T extends GuiEventListener & Renderable& NarratableEntry> T sinocoreAddRenderableWidget(T widget);
+    <T extends GuiEventListener & Renderable& NarratableEntry> T sinocore$addRenderableWidget(T widget);
 
-    void sinocoreRenderTooltip(PoseStack poseStack, Component text, int mouseX, int mouseY);
+    void sinocore$renderTooltip(PoseStack poseStack, Component text, int mouseX, int mouseY);
 }

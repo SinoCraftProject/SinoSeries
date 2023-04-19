@@ -22,12 +22,12 @@ public abstract class ScreenMixin implements IScreen {
     @Shadow public abstract void renderTooltip(PoseStack poseStack, Component text, int mouseX, int mouseY);
 
     @Override
-    public <T extends GuiEventListener & Renderable& NarratableEntry> T sinocoreAddRenderableWidget(T widget) {
+    public <T extends GuiEventListener & Renderable& NarratableEntry> T sinocore$addRenderableWidget(T widget) {
         return addRenderableWidget(widget);
     }
 
     @Override
-    public void sinocoreRenderTooltip(PoseStack poseStack, Component text, int mouseX, int mouseY) {
+    public void sinocore$renderTooltip(PoseStack poseStack, Component text, int mouseX, int mouseY) {
         renderTooltip(poseStack, text, mouseX, mouseY);
     }
 }

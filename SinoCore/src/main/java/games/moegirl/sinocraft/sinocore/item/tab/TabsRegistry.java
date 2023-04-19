@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModTabs {
+public class TabsRegistry {
 
     /**
      * Map<ResourceLocation resourceLocation, Tuple<CreativeModeTab tab, String translationKey> tuple>.

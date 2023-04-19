@@ -65,7 +65,7 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
         }
         String texture;
         if (this.isHovered) {
-            ((IScreen) parent).sinocoreRenderTooltip(pPoseStack, getMessage(), pMouseX, pMouseY);
+            ((IScreen) parent).sinocore$renderTooltip(pPoseStack, getMessage(), pMouseX, pMouseY);
             MouseHandler mouse = Minecraft.getInstance().mouseHandler;
             if (mouse.isLeftPressed() || mouse.isMiddlePressed() || mouse.isRightPressed()) {
                 texture = texPressed;

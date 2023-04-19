@@ -51,7 +51,7 @@ public final class TextureMap {
 
     private <T extends Slot, C extends Container> T placeSlot(AbstractContainerMenu menu, C container, SlotEntry entry, int index, SlotStrategy<T, C> slot) {
         T s = slot.createSlot(container, index, entry.x(), entry.y());
-        ((IContainerMenu) menu).sinocoreAddSlot(s);
+        ((IContainerMenu) menu).sinocore$addSlot(s);
         return s;
     }
 

@@ -11,26 +11,30 @@ import org.jetbrains.annotations.Nullable;
 
 public class BrushMenu extends AbstractContainerMenu {
     protected Inventory playerInv;
+    protected Player player;
     protected ItemStack brush;
 
-    public BrushMenu(int id, Inventory playerInv, ItemStack brush) {
+    public BrushMenu(int id, Inventory playerInv, Player player, ItemStack brush) {
         super(SCAMenus.BRUSH.get(), id);
 
         this.playerInv = playerInv;
+        this.player = player;
         this.brush = brush;
     }
 
     public BrushMenu(int id, Inventory playerInv, FriendlyByteBuf buf) {
-        this(id, playerInv, buf.readItem());
+        this(id, playerInv, playerInv.player, buf.readItem());
     }
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
+        // Todo: qyl27.
         return null;
     }
 
     @Override
     public boolean stillValid(Player player) {
+        // Todo: qyl27.
         return false;
     }
 }

@@ -1,0 +1,75 @@
+width = 512
+height = 256
+
+selected = [22, 127]
+
+[background]
+type = "texture"
+size = [212, 236]
+
+[color_selector]
+type = "texture"
+size = [18, 138]
+uv = [472, 0]
+position = [13, 60]
+
+[color]
+type = "texture"
+size = [8, 8]
+uv = [0, 236]
+
+[paper]
+type = "slot"
+position = [14, 17]
+
+[ink]
+type = "slot"
+position = [14, 39]
+
+[result]
+type = "slot"
+position = [14, 203]
+
+[inventory]
+type = "slots"
+count = [3, 9]
+position = [45, 155]
+
+[selection]
+type = "slots"
+count = 9
+position = [45, 213]
+
+[canvas]
+type = "texture"
+size = [130, 130]
+uv = [212, 0]
+position = [58, 11]
+
+[shadow]
+type = "texture"
+size = [130, 130]
+uv = [342, 0]
+position = [58, 11]
+
+[output_normal]
+type = "texture"
+size = [12, 14]
+uv = [66, 236]
+
+[copy_normal]
+type = "texture"
+size = [12, 14]
+uv = [78, 236]
+
+[output]
+type = "button"
+size = [14, 14]
+position = [190, 111]
+texture = "output_normal"
+
+[copy]
+type = "button"
+size = [14, 14]
+position = [190, 127]
+texture = "output_normal"

@@ -27,10 +27,12 @@ public abstract class LanguageProviderBase extends LanguageProvider {
     protected void addTreeTranslates() {
         var trees = TreeRegistry.getRegistry().get(modid);
 
-        for (var tree : trees) {
-            var translates = tree.makeTranslatesForLocale(locale);
-            for (var entry : translates.entrySet()) {
-                add(entry.getKey(), entry.getValue());
+        if (trees != null && !trees.isEmpty()) {
+            for (var tree : trees) {
+                var translates = tree.makeTranslatesForLocale(locale);
+                for (var entry : translates.entrySet()) {
+                    add(entry.getKey(), entry.getValue());
+                }
             }
         }
     }

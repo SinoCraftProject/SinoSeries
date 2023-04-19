@@ -1,17 +1,23 @@
 package games.moegirl.sinocraft.sinocalligraphy.drawing.simple;
 
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
+import games.moegirl.sinocraft.sinocalligraphy.client.drawing.IDrawingRenderer;
+import games.moegirl.sinocraft.sinocalligraphy.client.drawing.SimpleDrawingRenderer;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.data.DrawingDataVersion;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.util.INBTSerializable;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 
-public class SimpleDrawing implements INBTSerializable<CompoundTag> {
+public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType {
     protected DrawingDataVersion version = DrawingDataVersion.getLatest();
 
     protected Component title = Component.translatable(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY);
@@ -20,6 +26,9 @@ public class SimpleDrawing implements INBTSerializable<CompoundTag> {
 
     protected int size = 32;
     protected byte[] pixels = new byte[0];
+
+    protected PaperType paperType = PaperType.WHITE;
+    protected InkType inkType = InkType.BLACK;
 
     public SimpleDrawing() {
         // Nothing here?
@@ -48,80 +57,131 @@ public class SimpleDrawing implements INBTSerializable<CompoundTag> {
 
     // <editor-fold desc="Getter and Setter.">
 
+    @Override
     public DrawingDataVersion getVersion() {
         return version;
     }
 
+    @Override
     public void setVersion(DrawingDataVersion version) {
         this.version = version;
     }
 
+    @Override
     public void setVersion(int version) {
         setVersion(DrawingDataVersion.fromVersion(version));
     }
 
+    @Override
     public Component getTitle() {
         return title;
     }
 
+    @Override
     public void setTitle(Component title) {
         this.title = title;
     }
 
+    @Override
     public void setTitle(String title) {
         setTitle(Component.literal(title));
     }
 
+    @Override
     public Component getAuthor() {
         return author;
     }
 
+    @Override
     public void setAuthor(Component author) {
         this.author = author;
     }
 
+    @Override
     public void setAuthor(String author) {
         setAuthor(Component.literal(author));
     }
 
+    @Override
     public void setAuthor(Player author) {
         setAuthor(author.getDisplayName());
     }
 
+    @Override
     public long getDate() {
         return date;
     }
 
+    @Override
     public ZonedDateTime getZonedDate() {
         var instant = Instant.ofEpochSecond(getDate());
         return ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
+    @Override
     public void setDate(long date) {
         this.date = date;
     }
 
+    @Override
     public void setZonedDate(ZonedDateTime date) {
         setDate(date.toEpochSecond());
     }
 
+    @Override
     public int getSize() {
         return size;
     }
 
+    @Override
     public void setSize(int size) {
         this.size = size;
     }
 
+    @Override
+    public boolean isEmpty() {
+        for (byte b : pixels) {
+            if (b != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public byte[] getPixels() {
         return pixels;
     }
 
+    @Override
     public void setPixels(byte[] pixels) {
         this.pixels = pixels;
     }
 
+    @Override
+    public PaperType getPaperType() {
+        return paperType;
+    }
+
+    @Override
+    public void setPaperType(PaperType type) {
+        this.paperType = type;
+    }
+
+    @Override
+    public InkType getInkType() {
+        return inkType;
+    }
+
+    @Override
+    public void setInkType(InkType type) {
+        this.inkType = type;
+    }
+
     // </editor-fold>
+
+    // <editor-fold desc="Serializer and deserializer.">
 
     @Override
     public void deserializeNBT(CompoundTag tag) {
@@ -131,6 +191,8 @@ public class SimpleDrawing implements INBTSerializable<CompoundTag> {
         setDate(tag.getLong(SCAConstants.DRAWING_TAG_DATE_NAME));
         setSize(tag.getInt(SCAConstants.DRAWING_TAG_SIZE_NAME));
         setPixels(tag.getByteArray(SCAConstants.DRAWING_TAG_PIXELS_NAME));
+        setPaperType(PaperType.of(tag.getString(SCAConstants.DRAWING_TAG_PAPER_TYPE)));
+        setInkType(InkType.of(tag.getString(SCAConstants.DRAWING_TAG_INK_TYPE)));
     }
 
     @Override
@@ -142,6 +204,31 @@ public class SimpleDrawing implements INBTSerializable<CompoundTag> {
         tag.putLong(SCAConstants.DRAWING_TAG_DATE_NAME, getDate());
         tag.putInt(SCAConstants.DRAWING_TAG_SIZE_NAME, getSize());
         tag.putByteArray(SCAConstants.DRAWING_TAG_PIXELS_NAME, pixels);
+        tag.putString(SCAConstants.DRAWING_TAG_PAPER_TYPE, paperType.getName());
+        tag.putString(SCAConstants.DRAWING_TAG_INK_TYPE, inkType.getName());
         return tag;
     }
+
+    public static ISimpleDrawing from(CompoundTag tag) {
+        var drawing = new SimpleDrawing();
+        drawing.deserializeNBT(tag);
+        return drawing;
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="Renderer">
+
+    protected IDrawingRenderer renderer;
+
+    @Override
+    public IDrawingRenderer getRenderer() {
+        if (renderer == null) {
+            renderer = new SimpleDrawingRenderer(this);
+        }
+
+        return renderer;
+    }
+
+    // </editor-fold>
 }

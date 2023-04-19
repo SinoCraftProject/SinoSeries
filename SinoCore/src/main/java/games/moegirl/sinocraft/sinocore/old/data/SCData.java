@@ -14,7 +14,6 @@ public class SCData {
         PackOutput output = generator.getPackOutput();
 
         if (event.includeClient()) {
-            generator.addProvider(true, new SCLanguage(output, SinoCore.MODID));
         }
 
         if (event.includeServer()) {

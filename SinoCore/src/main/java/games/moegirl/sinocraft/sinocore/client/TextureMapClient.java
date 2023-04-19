@@ -34,7 +34,7 @@ public class TextureMapClient {
                                         Button.OnPress onPress,
                                         @Nullable Button.OnPress onRightPress) {
         return texture.buttons().get(name).map(e -> ((IScreen) parent)
-                .sinocoreAddRenderableWidget(new ImageButton(parent, texture, e, onPress, onRightPress)));
+                .sinocore$addRenderableWidget(new ImageButton(parent, texture, e, onPress, onRightPress)));
     }
 
     public Optional<Button> placeButton(String name,

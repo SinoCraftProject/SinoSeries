@@ -7,5 +7,5 @@ import net.minecraft.world.inventory.Slot;
  */
 public interface IContainerMenu {
 
-    void sinocoreAddSlot(Slot slot);
+    void sinocore$addSlot(Slot slot);
 }

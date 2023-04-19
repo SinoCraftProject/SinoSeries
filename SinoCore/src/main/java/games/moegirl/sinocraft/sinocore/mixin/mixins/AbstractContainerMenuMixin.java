@@ -15,7 +15,7 @@ public abstract class AbstractContainerMenuMixin implements IContainerMenu {
     @Shadow protected abstract Slot addSlot(Slot slot);
 
     @Override
-    public void sinocoreAddSlot(Slot slot) {
+    public void sinocore$addSlot(Slot slot) {
         addSlot(slot);
     }
 }

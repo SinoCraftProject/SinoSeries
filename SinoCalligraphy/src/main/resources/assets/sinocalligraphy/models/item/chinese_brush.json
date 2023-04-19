@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sinocalligraphy:item/inked_chinese_brush"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "damaged": 0
+      },
+      "model": "sinocalligraphy:item/brush"
+    },
+    {
+      "predicate": {
+        "damaged": 1
+      },
+      "model": "sinocalligraphy:item/inked_brush"
+    }
+  ]
+}

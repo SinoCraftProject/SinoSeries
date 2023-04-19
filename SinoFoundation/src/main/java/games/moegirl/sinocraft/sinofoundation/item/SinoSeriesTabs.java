@@ -10,6 +10,7 @@ public class SinoSeriesTabs {
     public static final ResourceLocation AGRICULTURE = new ResourceLocation(SinoFoundation.MODID, "agriculture");
     public static final ResourceLocation TOOLS = new ResourceLocation(SinoFoundation.MODID, "tools");
     public static final ResourceLocation WEAPONS = new ResourceLocation(SinoFoundation.MODID, "weapons");
+    public static final ResourceLocation MATERIALS = new ResourceLocation(SinoFoundation.MODID, "materials");
     public static final ResourceLocation MISC = new ResourceLocation(SinoFoundation.MODID, "misc");
 
 }
