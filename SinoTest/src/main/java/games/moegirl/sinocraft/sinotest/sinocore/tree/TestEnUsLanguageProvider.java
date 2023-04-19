@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinotest.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.data.LanguageProviderBase;
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
 import net.minecraft.data.PackOutput;
 
-public class TestEnUsLanguageProvider extends LanguageProviderBase {
+public class TestEnUsLanguageProvider extends AbstractLanguageProvider {
     public TestEnUsLanguageProvider(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }

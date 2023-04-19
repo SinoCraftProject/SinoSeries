@@ -1,24 +1,29 @@
-package games.moegirl.sinocraft.sinocalligraphy.drawing.data;
+package games.moegirl.sinocraft.sinocalligraphy.drawing;
 
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.SimpleDrawing;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public enum DrawingDataVersion {
-    V1(1, true, SimpleDrawing::from),
+    V1(1, true, () -> new SimpleDrawing(32), SimpleDrawing::from),
     ;
 
     private final int version;
     private final boolean latest;
-    private final Function<CompoundTag, ISimpleDrawing> fromTag;
+    private final Supplier<ISimpleDrawing> createFunction;
+    private final Function<CompoundTag, ISimpleDrawing> fromTagFunction;
 
-    private DrawingDataVersion(int version, boolean latest, Function<CompoundTag, ISimpleDrawing> fromTag) {
+    private DrawingDataVersion(int version, boolean latest,
+                               Supplier<ISimpleDrawing> createFunction,
+                               Function<CompoundTag, ISimpleDrawing> fromTagFunction) {
         this.version = version;
         this.latest = latest;
 
-        this.fromTag = fromTag;
+        this.createFunction = createFunction;
+        this.fromTagFunction = fromTagFunction;
     }
 
     public int getVersionNumber() {
@@ -43,6 +48,10 @@ public enum DrawingDataVersion {
     }
 
     public ISimpleDrawing fromTag(CompoundTag tag) {
-        return fromTag.apply(tag);
+        return fromTagFunction.apply(tag);
+    }
+
+    public ISimpleDrawing create() {
+        return createFunction.get();
     }
 }

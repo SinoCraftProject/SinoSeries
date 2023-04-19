@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.gui.slot;
+package games.moegirl.sinocraft.sinocore.gui.menu.slot;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

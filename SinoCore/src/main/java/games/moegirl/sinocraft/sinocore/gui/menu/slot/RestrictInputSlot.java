@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.gui.slot;
+package games.moegirl.sinocraft.sinocore.gui.menu.slot;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  * Accept special slot.
  * @author qyl27
  */
-public class AcceptSpecialSlot extends Slot {
+public class RestrictInputSlot extends Slot {
     protected TagKey<Item> tagKey = null;
     protected ItemLike item = null;
 
@@ -24,7 +24,7 @@ public class AcceptSpecialSlot extends Slot {
      * @param y Y location in screen of the slot. (From up.)
      * @param itemIn The item will accept.
      */
-    public AcceptSpecialSlot(Container container, int index, int x, int y, ItemLike itemIn) {
+    public RestrictInputSlot(Container container, int index, int x, int y, ItemLike itemIn) {
         super(container, index, x, y);
 
         item = itemIn;
@@ -38,7 +38,7 @@ public class AcceptSpecialSlot extends Slot {
      * @param y Y location in screen of the slot. (From up.)
      * @param tag The tag will accept.
      */
-    public AcceptSpecialSlot(Container container, int index, int x, int y, TagKey<Item> tag) {
+    public RestrictInputSlot(Container container, int index, int x, int y, TagKey<Item> tag) {
         super(container, index, x, y);
 
         tagKey = tag;

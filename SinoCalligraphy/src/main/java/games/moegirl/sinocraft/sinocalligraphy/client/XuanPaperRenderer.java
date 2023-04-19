@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.data.DrawingDataVersion;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;

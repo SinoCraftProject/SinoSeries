@@ -5,7 +5,7 @@ import games.moegirl.sinocraft.sinocalligraphy.client.drawing.IDrawingRenderer;
 import games.moegirl.sinocraft.sinocalligraphy.client.drawing.SimpleDrawingRenderer;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.data.DrawingDataVersion;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 
 public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType {
     protected DrawingDataVersion version = DrawingDataVersion.getLatest();
@@ -30,14 +29,15 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
     protected PaperType paperType = PaperType.WHITE;
     protected InkType inkType = InkType.BLACK;
 
-    public SimpleDrawing() {
-        // Nothing here?
+    public SimpleDrawing(int size) {
+        this.version = DrawingDataVersion.V1;
+        this.size = size;
+        this.pixels = new byte[size * size];
     }
 
     public SimpleDrawing(DrawingDataVersion version, int size) {
-        this();
+        this(size);
         this.version = version;
-        this.size = size;
     }
 
     public SimpleDrawing(DrawingDataVersion version, int size,
@@ -241,7 +241,7 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
     }
 
     public static ISimpleDrawing from(CompoundTag tag) {
-        var drawing = new SimpleDrawing();
+        var drawing = new SimpleDrawing(0);
         drawing.deserializeNBT(tag);
         return drawing;
     }

@@ -4,9 +4,8 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "sinocalligraphy:chinese_brush"
-            ]
+            "items": [],
+            "tag": "sinocalligraphy:brushes"
           }
         ]
       },

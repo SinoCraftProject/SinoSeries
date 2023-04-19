@@ -85,12 +85,12 @@ public class TabsRegistry {
         return false;
     }
 
-    public static void addDeferredRegister(ResourceLocation resourceLocation,
+    public static void addDeferredRegister(ResourceLocation defaultTab,
                                            DeferredRegister<Item> deferredRegister) {
-        if (!DEFERRED_REGISTERS.containsKey(resourceLocation)) {
-            DEFERRED_REGISTERS.put(resourceLocation, new ArrayList<>());
+        if (!DEFERRED_REGISTERS.containsKey(defaultTab)) {
+            DEFERRED_REGISTERS.put(defaultTab, new ArrayList<>());
         }
 
-        DEFERRED_REGISTERS.get(resourceLocation).add(deferredRegister);
+        DEFERRED_REGISTERS.get(defaultTab).add(deferredRegister);
     }
 }

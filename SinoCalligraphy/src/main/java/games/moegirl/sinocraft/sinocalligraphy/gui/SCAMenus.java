@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui;
 
-import com.mojang.datafixers.TypeRewriteRule;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
 import net.minecraft.world.inventory.MenuType;

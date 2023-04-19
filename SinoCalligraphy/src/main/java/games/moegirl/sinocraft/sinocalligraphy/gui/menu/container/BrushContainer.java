@@ -1,11 +1,17 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.menu.container;
 
+import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
+import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
+import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class BrushContainer implements Container {
     public static final int CONTAINER_SIZE = 3;
@@ -33,17 +39,17 @@ public class BrushContainer implements Container {
     }
 
     @Override
-    public ItemStack getItem(int slot) {
+    public @NotNull ItemStack getItem(int slot) {
         return items.get(slot);
     }
 
     @Override
-    public ItemStack removeItem(int slot, int amount) {
+    public @NotNull ItemStack removeItem(int slot, int amount) {
         return ContainerHelper.removeItem(items, slot, amount);
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int slot) {
+    public @NotNull ItemStack removeItemNoUpdate(int slot) {
         return ContainerHelper.takeItem(items, slot);
     }
 
@@ -59,17 +65,42 @@ public class BrushContainer implements Container {
     public void setChanged() {
         menu.broadcastChanges();
 
-        // Todo: qyl27.
+        // Todo: qyl27: maybe delegate to screen?
     }
 
     @Override
     public boolean stillValid(Player player) {
-        // Todo: qyl27.
-        return false;
+        return player.getMainHandItem().is(SCAItemTags.BRUSHES)
+                || player.getOffhandItem().is(SCAItemTags.BRUSHES);
     }
 
     @Override
     public void clearContent() {
         items.clear();
     }
+
+    public ItemStack getPaper() {
+        return getItem(XUAN_PAPER_SLOT);
+    }
+
+    public ItemStack getInk() {
+        return getItem(INK_SLOT);
+    }
+
+    public boolean hasPaper() {
+        return !getPaper().isEmpty();
+    }
+
+    public boolean hasInk() {
+        return !getInk().isEmpty();
+    }
+
+    public boolean isPaper(ItemStack stack) {
+        return stack.is(SCAItemTags.PAPERS);
+    }
+
+    public boolean isInk(ItemStack stack) {
+        return stack.is(SCAItemTags.INKS);
+    }
+
 }

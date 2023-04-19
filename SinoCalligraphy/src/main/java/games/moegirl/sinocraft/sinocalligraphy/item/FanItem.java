@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinocalligraphy.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.ChatFormatting;
@@ -26,10 +27,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class FanItem extends Item implements Vanishable, ITabItem {
-    public static final String UNFOLDED_DESCRIPTION_LINE_1 = "sinocalligraphy.fan.desc.1";
-    public static final String UNFOLDED_DESCRIPTION_LINE_2 = "sinocalligraphy.fan.desc.2";
-    public static final String FOLDED_DESCRIPTION_LINE_1 = "sinocalligraphy.fan_folded.desc.1";
-    public static final String FOLDED_DESCRIPTION_LINE_2 = "sinocalligraphy.fan_folded.desc.2";
 
     protected boolean folded;
     protected final Multimap<Attribute, AttributeModifier> defaultModifiers;
@@ -103,11 +100,11 @@ public class FanItem extends Item implements Vanishable, ITabItem {
         super.appendHoverText(stack, level, tooltip, isAdvanced);
 
         if (folded) {
-            tooltip.add(Component.translatable(FOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable(FOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltip.add(Component.translatable(UNFOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable(UNFOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
         }
     }
 

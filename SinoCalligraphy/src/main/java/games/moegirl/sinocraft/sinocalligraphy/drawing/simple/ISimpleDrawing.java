@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.drawing.simple;
 
 import games.moegirl.sinocraft.sinocalligraphy.client.drawing.IDrawingRenderer;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.data.DrawingDataVersion;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;

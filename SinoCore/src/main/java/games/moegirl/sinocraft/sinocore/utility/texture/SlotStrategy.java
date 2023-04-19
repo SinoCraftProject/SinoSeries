@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.utility.texture;
 
+import games.moegirl.sinocraft.sinocore.gui.menu.slot.TakeOnlySlot;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -41,12 +42,7 @@ public interface SlotStrategy<T extends Slot, C extends Container> {
     }
 
     static SlotStrategy<Slot, Container> onlyTake() {
-        return (container, slot, x, y) -> new Slot(container, slot, x, y) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return false;
-            }
-        };
+        return TakeOnlySlot::new;
     }
 
     static SlotStrategy<Slot, Container> insertFilter(Predicate<ItemStack> test) {

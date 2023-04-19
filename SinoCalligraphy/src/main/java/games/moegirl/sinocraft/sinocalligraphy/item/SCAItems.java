@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
+import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,7 +16,9 @@ public class SCAItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SinoCalligraphy.MODID);
 
     public static final RegistryObject<Item> BRUSH = ITEMS.register("chinese_brush", BrushItem::new);
-//    public static final RegistryObject<Item> FIRE_BRUSH = ITEMS.register("fire_chinese_brush", FireBrushItem::new);
+    public static final RegistryObject<Item> FAN = ITEMS.register("fan", () -> new FanItem(false));
+    public static final RegistryObject<Item> FAN_FOLDED = ITEMS.register("fan_folded", () -> new FanItem(true));
+
     public static final RegistryObject<Item> INK = ITEMS.register("ink", () -> new InkItem(InkType.BLACK));
     public static final RegistryObject<Item> GOLDEN_INK = ITEMS.register("golden_ink", () -> new InkItem(InkType.GOLDEN));
 
@@ -26,12 +29,9 @@ public class SCAItems {
     // Todo: qyl27.
 //    public static final RegistryObject<BucketItem> WOOD_PULP_BUCKET = ITEMS.register("wood_pulp_bucket", () -> new BucketItem(SCAFluids.WOOD_PULP, new Item.Properties().tab(SCACreativeTab.CALLIGRAPHY).setNoRepair().stacksTo(1)));
 
-    public static final RegistryObject<Item> FAN = ITEMS.register("fan", () -> new FanItem(false));
-    public static final RegistryObject<Item> FAN_FOLDED = ITEMS.register("fan_folded", () -> new FanItem(true));
-
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
 
-        TabsRegistry.addDeferredRegister(new ResourceLocation(SinoCalligraphy.MODID, "items"), ITEMS);
+        TabsRegistry.addDeferredRegister(SinoSeriesTabs.MISC, ITEMS);
     }
 }

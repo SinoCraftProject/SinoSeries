@@ -30,7 +30,7 @@ public class SCAData {
             gen.addProvider(true, blockTagsProvider);
             gen.addProvider(true, new SCAItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoCalligraphy.MODID, exHelper));
 
-            gen.addProvider(true, new ForgeAdvancementProvider(output, lookupProvider, exHelper, List.of(new SCAAdvancementGeneratorBrush())));
+            gen.addProvider(true, new ForgeAdvancementProvider(output, lookupProvider, exHelper, List.of(new SCAAdvancementGeneratorBrush(SinoCalligraphy.MODID))));
 
             gen.addProvider(true, new SCALanguageProviderZHCN(output, SinoCalligraphy.MODID, "zh_cn"));
             gen.addProvider(true, new SCALanguageProviderENUS(output, SinoCalligraphy.MODID, "en_us"));
