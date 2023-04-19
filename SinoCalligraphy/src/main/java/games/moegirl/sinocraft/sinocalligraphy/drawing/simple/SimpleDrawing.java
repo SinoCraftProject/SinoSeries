@@ -185,14 +185,45 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
 
     @Override
     public void deserializeNBT(CompoundTag tag) {
-        setVersion(tag.getInt(SCAConstants.DRAWING_TAG_VERSION_NAME));
-        setTitle(Component.Serializer.fromJson(tag.getString(SCAConstants.DRAWING_TAG_TITLE_NAME)));
-        setAuthor(Component.Serializer.fromJson(tag.getString(SCAConstants.DRAWING_TAG_AUTHOR_NAME)));
-        setDate(tag.getLong(SCAConstants.DRAWING_TAG_DATE_NAME));
-        setSize(tag.getInt(SCAConstants.DRAWING_TAG_SIZE_NAME));
-        setPixels(tag.getByteArray(SCAConstants.DRAWING_TAG_PIXELS_NAME));
-        setPaperType(PaperType.of(tag.getString(SCAConstants.DRAWING_TAG_PAPER_TYPE)));
-        setInkType(InkType.of(tag.getString(SCAConstants.DRAWING_TAG_INK_TYPE)));
+        var version = tag.getInt(SCAConstants.DRAWING_TAG_VERSION_NAME);
+        if (version != 0) {
+            setVersion(version);
+        }
+
+        var title = Component.Serializer.fromJson(tag.getString(SCAConstants.DRAWING_TAG_TITLE_NAME));
+        if (title != null) {
+            setTitle(title);
+        }
+
+        var author = Component.Serializer.fromJson(tag.getString(SCAConstants.DRAWING_TAG_AUTHOR_NAME));
+        if (author != null) {
+            setAuthor(author);
+        }
+
+        var date = tag.getLong(SCAConstants.DRAWING_TAG_DATE_NAME);
+        if (date != 0) {
+            setDate(date);
+        }
+
+        var size = tag.getInt(SCAConstants.DRAWING_TAG_SIZE_NAME);
+        if (size != 0) {
+            setSize(size);
+        }
+
+        var pixels = tag.getByteArray(SCAConstants.DRAWING_TAG_PIXELS_NAME);
+        if (pixels.length != 0) {
+            setPixels(pixels);
+        }
+
+        var paper = tag.getString(SCAConstants.DRAWING_TAG_PAPER_TYPE);
+        if (!paper.isBlank()) {
+            setPaperType(PaperType.of(paper));
+        }
+
+        var ink = tag.getString(SCAConstants.DRAWING_TAG_INK_TYPE);
+        if (!ink.isBlank()) {
+            setInkType(InkType.of(ink));
+        }
     }
 
     @Override

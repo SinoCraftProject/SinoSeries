@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
+import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.data.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
@@ -26,13 +27,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderItemInFrameEvent;
+import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
  * Client render event subscriber.
  */
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = SinoCalligraphy.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class XuanPaperRenderEvent {
     @SubscribeEvent
     public static void onRenderInFrame(RenderItemInFrameEvent event) {
@@ -57,7 +59,8 @@ public class XuanPaperRenderEvent {
                 stack.pushPose();
                 stack.translate(-0.5D, -0.5D, -0.5D);
                 dispatcher.getModelRenderer().renderModel(stack.last(), consumer, null, model,
-                        1.0F, 1.0F, 1.0F, getLightVal(frame, light), OverlayTexture.NO_OVERLAY);
+                        1.0F, 1.0F, 1.0F, getLightVal(frame, light),
+                        OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
                 stack.popPose();
                 stack.translate(0.0D, 0.0D, 0.4375D);
             }

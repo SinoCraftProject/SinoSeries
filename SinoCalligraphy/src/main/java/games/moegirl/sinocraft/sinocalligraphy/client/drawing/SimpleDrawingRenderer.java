@@ -139,7 +139,6 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
         consumer.vertex(poseStack.last().pose(), x2, y1, 0).color(color).uv2(light).endVertex();
     }
 
-
     protected int getBackgroundColor() {
         if (drawing != null) {
             return drawing.getPaperType().getColor();

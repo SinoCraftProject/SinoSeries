@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.advancement.SCAAdvancementGeneratorBrush;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderENUS;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderZHCN;
+import net.minecraft.data.tags.InstrumentTagsProvider;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +26,10 @@ public class SCAData {
         }
 
         if (event.includeServer()) {
+            var blockTagsProvider = new SCABlockTagsProvider(output, lookupProvider, SinoCalligraphy.MODID, exHelper);
+            gen.addProvider(true, blockTagsProvider);
+            gen.addProvider(true, new SCAItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoCalligraphy.MODID, exHelper));
+
             gen.addProvider(true, new ForgeAdvancementProvider(output, lookupProvider, exHelper, List.of(new SCAAdvancementGeneratorBrush())));
 
             gen.addProvider(true, new SCALanguageProviderZHCN(output, SinoCalligraphy.MODID, "zh_cn"));

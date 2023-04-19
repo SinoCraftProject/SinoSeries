@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.data.base;
+package games.moegirl.sinocraft.sinocore.data.abstracted;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -12,17 +12,18 @@ import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-public abstract class BlockTagsProviderBase extends BlockTagsProvider {
+public abstract class AbstractBlockTagsProvider extends BlockTagsProvider {
 
-    public BlockTagsProviderBase(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, ExistingFileHelper existingFileHelper) {
+    public AbstractBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                                     String modId, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, modId, existingFileHelper);
     }
 
-    protected abstract void addTags();
+    protected abstract void addToTags();
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        addTags();
+        addToTags();
     }
 
     public void addPickaxe(Block... blocks) {
