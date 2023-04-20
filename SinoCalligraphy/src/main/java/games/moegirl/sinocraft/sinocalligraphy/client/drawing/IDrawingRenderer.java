@@ -28,10 +28,10 @@ public interface IDrawingRenderer {
      */
     void draw(PoseStack poseStack, MultiBufferSource buffer, int packedLight);
 
-    /**
-     * Render the draw to a buffer
-     * @param poseStack stack
-     * @param buffer buffer
-     */
-    void draw(PoseStack poseStack, MultiBufferSource buffer);
+//    /**
+//     * Render the draw to a buffer
+//     * @param poseStack stack
+//     * @param buffer buffer
+//     */
+//    void draw(PoseStack poseStack, MultiBufferSource buffer);
 }
