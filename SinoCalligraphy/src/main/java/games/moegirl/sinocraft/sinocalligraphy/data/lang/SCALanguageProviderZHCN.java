@@ -23,7 +23,7 @@ public class SCALanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SCAItems.GOLDEN_INK, "加金粉的墨汁");
 
         add(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY, "无题字画");
-        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_PREFIX_KEY, "作者：");
+        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, "作者：");
         add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY, "佚名");
 
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1, "传说，道家深湖在演讲时就用过这把扇子");

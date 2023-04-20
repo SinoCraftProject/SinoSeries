@@ -99,7 +99,7 @@ public class XuanPaperRenderEvent {
 
         var light = event.getPackedLight();
 
-        if (stack.is(SCAItems.FILLED_XUAN_PAPER.get()) && player != null && !player.isScoping()) {
+        if (stack.is(SCAItemTags.FILLED_PAPERS) && player != null && !player.isScoping()) {
 
             ISimpleDrawing drawing = DrawingDataVersion.getLatest().fromTag(nbt);
 

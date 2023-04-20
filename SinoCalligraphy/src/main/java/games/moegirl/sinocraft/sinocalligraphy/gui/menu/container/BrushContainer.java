@@ -1,10 +1,12 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.menu.container;
 
 import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
+import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -20,11 +22,11 @@ public class BrushContainer implements Container {
     public static final int INK_SLOT = 1;
     public static final int FILLED_XUAN_PAPER_SLOT = 2;
 
-    public AbstractContainerMenu menu;
+    public BrushMenu menu;
 
     public NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
 
-    public BrushContainer(AbstractContainerMenu menu) {
+    public BrushContainer(BrushMenu menu) {
         this.menu = menu;
     }
 
@@ -105,5 +107,18 @@ public class BrushContainer implements Container {
 
     public void setResult(ItemStack stack) {
         setItem(FILLED_XUAN_PAPER_SLOT, stack);
+    }
+
+    public void dropAll(Player player) {
+        if (!player.isAlive()
+                || (player instanceof ServerPlayer && ((ServerPlayer) player).hasDisconnected())) {
+            for (int j = 0; j < CONTAINER_SIZE - 1; ++j) {  // qyl27: No drop output slot.
+                player.drop(removeItemNoUpdate(j), false);
+            }
+        } else {
+            for (int i = 0; i < CONTAINER_SIZE - 1; ++i) {  // qyl27: No drop output slot.
+                player.getInventory().placeItemBackInInventory(removeItemNoUpdate(i));
+            }
+        }
     }
 }

@@ -12,23 +12,23 @@ size = [212, 256]
 [inventory]
 type = "slots"
 count = [3, 9]
-position = [41, 170]
+position = [42, 171]
 [selection_bar]
 type = "slots"
 count = 9
-position = [41, 228]
+position = [42, 229]
 
 # Canvas
 [canvas]
 type = "texture"
 size = [130, 130]
 uv = [212, 0]
-position = [57, 11]
+position = [58, 11]
 [shadow]
 type = "texture"
 size = [130, 130]
 uv = [342, 0]
-position = [57, 11]
+position = [58, 11]
 
 # ColorPal
 [color_selector]
@@ -115,7 +115,7 @@ tooltip = "sinocalligraphy.gui.brush.button.apply.tooltip"
 
 [draw_clear_button]
 type = "button"
-position = [172, 148]
+position = [188, 148]
 size = [16, 16]
 texture = "draw_button_texture"
 texture_hover = "draw_button_over_texture"

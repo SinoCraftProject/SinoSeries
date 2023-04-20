@@ -241,7 +241,7 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
     }
 
     public static ISimpleDrawing from(CompoundTag tag) {
-        var drawing = new SimpleDrawing(0);
+        var drawing = new SimpleDrawing(32);
         drawing.deserializeNBT(tag);
         return drawing;
     }

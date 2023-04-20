@@ -35,7 +35,7 @@ public class FilledXuanPaperItem extends Item {
         var nbt = tag.getCompound(SCAConstants.DRAWING_TAG_NAME);
         var drawing = DrawingDataVersion.getLatest().fromTag(nbt);
 
-        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_AUTHOR_PREFIX_KEY).append(drawing.getAuthor()));
+        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, drawing.getAuthor()));
     }
 
     @Override

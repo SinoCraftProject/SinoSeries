@@ -6,6 +6,8 @@ import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.screen.BrushScreen;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
@@ -25,8 +27,6 @@ public class BrushCanvas extends AbstractWidget {
     private TextureMapClient atlas;
     private IntSupplier getColor;
     private IntConsumer setColor;
-    private PaperType paperType;
-    private InkType inkType;
 
     private ISimpleDrawing drawing;
 
@@ -44,16 +44,22 @@ public class BrushCanvas extends AbstractWidget {
         this.atlas = atlas;
         this.getColor = getColor;
         this.setColor = setColor;
-        this.paperType = paperType;
-        this.inkType = inkType;
 
         drawing = DrawingDataVersion.getLatest().create();
+
+        if (drawing instanceof IHasPaperType hasPaperType) {
+            hasPaperType.setPaperType(paperType);
+        }
+
+        if (drawing instanceof IHasInkType hasInkType) {
+            hasInkType.setInkType(inkType);
+        }
     }
 
     @Override
     public void renderWidget(PoseStack poseStack, int x, int y, float partialTick) {
         atlas.blitTexture(poseStack, "canvas", parent);
-        drawing.getRenderer().draw(poseStack, x + 1, y + 1, canvasWidth, canvasHeight);
+        drawing.getRenderer().draw(poseStack, getX() + 1, getY() + 1, canvasWidth, canvasHeight);
         if (!isEnabled()) {
             atlas.blitTexture(poseStack, "shadow", parent, GLSwitcher.blend().enable());
         }
@@ -95,13 +101,13 @@ public class BrushCanvas extends AbstractWidget {
     /// <editor-fold desc="Handle input">
 
     private boolean isDragging = false;
-    private int draggingMouseButton = 0;
+    private int draggingMouseButton = -1;
     private boolean isAltPressed = false;
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (isMouseOver(mouseX, mouseY)) {
-            if (isValidClickButton(draggingMouseButton)) {
+            if (isValidClickButton(button)) {
                 drawColor(mouseX, mouseY);
                 return true;
             } else {

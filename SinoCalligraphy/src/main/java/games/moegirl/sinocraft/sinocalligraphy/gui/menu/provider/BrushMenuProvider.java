@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.menu.provider;
 
-import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -19,7 +18,8 @@ public class BrushMenuProvider implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable(SCAConstants.TRANSLATE_BRUSH_MENU_DISPLAY_NAME);
+//        return Component.translatable(SCAConstants.TRANSLATE_BRUSH_MENU_DISPLAY_NAME);
+        return Component.empty();
     }
 
     @Nullable

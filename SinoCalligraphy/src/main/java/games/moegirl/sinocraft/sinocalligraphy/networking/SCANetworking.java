@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinocalligraphy.networking;
 
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
+import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingClearCanvasS2CPacket;
+import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingEnableCanvasS2CPacket;
 import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingSaveC2SPacket;
 import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingSaveResultS2CPacket;
 import games.moegirl.sinocraft.sinocore.SinoCore;
@@ -29,6 +31,8 @@ public class SCANetworking {
 
         channel.registerMessage(nextId(), DrawingSaveC2SPacket.class, DrawingSaveC2SPacket::serialize, DrawingSaveC2SPacket::new, DrawingSaveC2SPacket::handle);
         channel.registerMessage(nextId(), DrawingSaveResultS2CPacket.class, DrawingSaveResultS2CPacket::serialize, DrawingSaveResultS2CPacket::new, DrawingSaveResultS2CPacket::handle);
+        channel.registerMessage(nextId(), DrawingEnableCanvasS2CPacket.class, DrawingEnableCanvasS2CPacket::serialize, DrawingEnableCanvasS2CPacket::new, DrawingEnableCanvasS2CPacket::handle);
+        channel.registerMessage(nextId(), DrawingClearCanvasS2CPacket.class, DrawingClearCanvasS2CPacket::serialize, DrawingClearCanvasS2CPacket::new, DrawingClearCanvasS2CPacket::handle);
     }
 
     public SimpleChannel getChannel() {

@@ -28,6 +28,14 @@ public class NetworkHelper {
         }
     }
 
+    public static void onClientEnableCanvas(boolean isEnabled) {
+        var screen = Minecraft.getInstance().screen;
+        if (screen instanceof BrushScreen brushScreen) {
+            brushScreen.getCanvas().setEnabled(isEnabled);
+            brushScreen.getTitleBox().setEditable(isEnabled);
+        }
+    }
+
     private static void showFail(BrushScreen screen, Component component) {
         screen.getText().begin(Duration.ofSeconds(2), 0, 255, 0, 0, component);
     }

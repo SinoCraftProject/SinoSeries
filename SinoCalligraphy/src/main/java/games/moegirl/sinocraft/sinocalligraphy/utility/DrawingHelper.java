@@ -12,7 +12,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DrawHelper {
+public class DrawingHelper {
     public static final Map<Integer, Integer> INVERT_MAP = new HashMap<>(256);
 
     static {

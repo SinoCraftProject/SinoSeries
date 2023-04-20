@@ -26,12 +26,13 @@ public class SCAConstants {
     public static final String GUI_MESSAGE_BRUSH_SAVE_SUCCESS = "sinocalligraphy.gui.brush.brush.message.save.success";
 
     public static final String NARRATION_BRUSH_CANVAS = "sinocalligraphy.gui.narration.brush.canvas";
+    public static final String NARRATION_BRUSH_TITLE_BOX = "sinocalligraphy.gui.narration.brush.title_box";
 
     public static final String TRANSLATE_MESSAGE_OUTPUT_SUCCESS = "sinocalligraphy.message.output.success";
     public static final String TRANSLATE_MESSAGE_OUTPUT_FAIL = "sinocalligraphy.message.output.fail";
 
     public static final String TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY = "sinocalligraphy.drawing.title.unknown";
-    public static final String TRANSLATE_DRAWING_AUTHOR_PREFIX_KEY = "sinocalligraphy.drawing.author.prefix";
+    public static final String TRANSLATE_DRAWING_AUTHOR_KEY = "sinocalligraphy.drawing.author";
     public static final String TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY = "sinocalligraphy.drawing.author.unknown";
 
     public static final String TRANSLATE_BRUSH_MENU_DISPLAY_NAME = "sinocalligraphy.gui.brush.display_name";

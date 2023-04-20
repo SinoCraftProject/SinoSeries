@@ -23,7 +23,7 @@ public class SCALanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SCAItems.GOLDEN_INK, "Golden ink");
 
         add(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY, "Untitled drawing");
-        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_PREFIX_KEY, "Author: ");
+        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, "Author: ");
         add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY, "Anonymous");
 
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1, "Legend said, TaoismDeeplake used this fan during his speech.");

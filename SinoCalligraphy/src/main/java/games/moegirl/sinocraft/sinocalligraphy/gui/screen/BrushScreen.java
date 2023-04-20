@@ -1,9 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.screen;
 
-import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
@@ -12,25 +10,24 @@ import games.moegirl.sinocraft.sinocalligraphy.gui.components.BrushCanvas;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.ColorSelectionList;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingSaveC2SPacket;
-import games.moegirl.sinocraft.sinocalligraphy.utility.DrawHelper;
+import games.moegirl.sinocraft.sinocalligraphy.utility.DrawingHelper;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
 import games.moegirl.sinocraft.sinocore.client.component.AnimatedText;
+import games.moegirl.sinocraft.sinocore.gui.menu.inventory.InventoryNoTitleWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.common.util.Lazy;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-
 
 public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private static final TextureMapClient CLIENT_TEXTURE = new TextureMapClient(BrushMenu.TEXTURE);
@@ -39,8 +36,10 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private final Lazy<AnimatedText> text = Lazy.of(() -> new AnimatedText(130, 130));
     private final Lazy<ColorSelectionList> list = Lazy.of(() -> ColorSelectionList.create(this));
 
+    protected EditBox titleBox;
+
     public BrushScreen(BrushMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title);
+        super(menu, new InventoryNoTitleWrapper(inventory), title);
 
         width = 212;
         height = 256;
@@ -61,7 +60,18 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         addRenderableOnly(text.get().resize(leftPos + 58 + (130 / 2 - 10), topPos + 11 + 132, font));
 
         list.get().setRelativeLocation(leftPos, topPos);
+        list.get().setSelectedItem(list.get().getEntry(0));
         addRenderableWidget(list.get());
+
+        titleBox = new EditBox(font, leftPos + 41, topPos + 148, 128, 16, Component.translatable(SCAConstants.NARRATION_BRUSH_TITLE_BOX));
+        titleBox.setTextColor(-1);
+        titleBox.setTextColorUneditable(-1);
+        titleBox.setBordered(false);
+        titleBox.setMaxLength(50);
+        titleBox.setResponder(this::onTitleChanged);
+        titleBox.setValue("");
+        setInitialFocus(titleBox);
+        addWidget(titleBox);
 
         CLIENT_TEXTURE.placeButton("copy_button", this, this::copyDraw, this::pasteDraw);
         CLIENT_TEXTURE.placeButton("output_button", this, this::saveToFile);
@@ -80,13 +90,19 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         CLIENT_TEXTURE.blitTexture(poseStack, "background", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(poseStack, "draw_title_box_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(poseStack, "draw_button_yes_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(poseStack, "draw_button_no_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
     }
 
     /// <editor-fold desc="Handle input.">
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        // Todo: qyl27.
+        if (canvas.get().isMouseOver(mouseX, mouseY)) {
+            canvas.get().mouseClicked(mouseX, mouseY, button);
+        }
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -142,6 +158,10 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         return canvas.get();
     }
 
+    public EditBox getTitleBox() {
+        return titleBox;
+    }
+
     /// <editor-fold desc="Button pressed.">
 
     private void copyDraw(Button button) {
@@ -166,7 +186,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private void saveToFile(Button button) {
         var player = Minecraft.getInstance().player;
         var drawing = canvas.get().getDrawing();
-        try (var image = DrawHelper.toNaiveImage(drawing)) {
+        try (var image = DrawingHelper.toNaiveImage(drawing)) {
             File name = new File(Minecraft.getInstance().gameDirectory,
                     "sinoseries/sinocalligraphy/drawings/" + drawing.getAuthor().getString() +
                             "/" + System.currentTimeMillis() + ".png");
@@ -197,6 +217,10 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     private void applyDraw(Button button) {
         SinoCalligraphy.getInstance().getNetworking().send(new DrawingSaveC2SPacket(canvas.get().getDrawing()));
+    }
+
+    private void onTitleChanged(String title) {
+        canvas.get().getDrawing().setTitle(titleBox.getValue());
     }
 
     /// </editor-fold>

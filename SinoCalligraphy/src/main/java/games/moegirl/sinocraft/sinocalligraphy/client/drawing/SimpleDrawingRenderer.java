@@ -38,13 +38,17 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
                 int y1 = y;
                 int y2 = y1 + unitY;
                 for (int j = 0; j < drawing.getSize(); j++) {
-                    int color = getForegroundColor();
-                    int r = FastColor.ARGB32.red(color);
-                    int g = FastColor.ARGB32.green(color);
-                    int b = FastColor.ARGB32.blue(color);
-                    int scale = 16 * (16 - draw[index++]) - 1; // qyl27: For calculating grayscale.
-                    int scaledColor = FastColor.ARGB32.color(scale, r, g, b);
-                    RenderSystem.setShaderColor(color, color, color, 1.0f);
+                    int foregroundColor = getForegroundColor();
+                    int backgroundColor = getBackgroundColor();
+                    int fr = FastColor.ARGB32.red(foregroundColor);
+                    int fg = FastColor.ARGB32.green(foregroundColor);
+                    int fb = FastColor.ARGB32.blue(foregroundColor);
+                    int br = FastColor.ARGB32.red(backgroundColor);
+                    int bg = FastColor.ARGB32.green(backgroundColor);
+                    int bb = FastColor.ARGB32.blue(backgroundColor);
+                    int scale = 255 - 16 * (16 - draw[index++]) - 1; // qyl27: For calculating grayscale.
+                    int scaledColor = FastColor.ARGB32.color(scale, fr, fg, fb);
+                    RenderSystem.setShaderColor(br, bg, bb, 1);
                     GuiComponent.fill(poseStack, x1, y1, x2, y2, scaledColor);
                     y1 = y2;
                     y2 += unitY;
@@ -82,7 +86,11 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
             for (int y1 = 0; y1 < drawing.getSize(); y1++) {
                 int geryScale = 16 * (16 - pixels[x1 * drawing.getSize() + y1]) - 1;
                 int y2 = y1 + 1;
-                vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getForegroundColor(), geryScale);
+                if (geryScale == 255) {
+                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getBackgroundColor(), geryScale);
+                } else {
+                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getForegroundColor(), geryScale);
+                }
             }
         }
     }
@@ -92,7 +100,7 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
         for (int x1 = 0; x1 < drawing.getSize(); x1++) {
             int x2 = x1 + 1;
             for (int y1 = 0; y1 < drawing.getSize(); y1++) {
-                int geryScale = 16 * (16 - pixels[x1 * drawing.getSize() + y1]) - 1;
+                int geryScale = 255 - 16 * (16 - pixels[x1 * drawing.getSize() + y1]) - 1;
                 int y2 = y1 + 1;
                 vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getForegroundColor(), geryScale, light);
             }
