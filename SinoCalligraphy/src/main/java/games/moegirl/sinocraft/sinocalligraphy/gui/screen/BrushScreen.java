@@ -3,11 +3,16 @@ package games.moegirl.sinocraft.sinocalligraphy.gui.screen;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
+import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.BrushCanvas;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.ColorSelectionList;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
+import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingSaveC2SPacket;
+import games.moegirl.sinocraft.sinocalligraphy.utility.DrawHelper;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
 import games.moegirl.sinocraft.sinocore.client.component.AnimatedText;
@@ -15,6 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -59,8 +65,8 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
         CLIENT_TEXTURE.placeButton("copy_button", this, this::copyDraw, this::pasteDraw);
         CLIENT_TEXTURE.placeButton("output_button", this, this::saveToFile);
-        CLIENT_TEXTURE.placeButton("draw_apply_button", this, this::saveToFile);
-        CLIENT_TEXTURE.placeButton("draw_clear_button", this, this::saveToFile);
+        CLIENT_TEXTURE.placeButton("draw_apply_button", this, this::applyDraw);
+        CLIENT_TEXTURE.placeButton("draw_clear_button", this, this::clearDraw);
     }
 
     @Override
@@ -128,53 +134,70 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         return list.get();
     }
 
+    public AnimatedText getText() {
+        return text.get();
+    }
+
+    public BrushCanvas getCanvas() {
+        return canvas.get();
+    }
+
     /// <editor-fold desc="Button pressed.">
 
     private void copyDraw(Button button) {
-//        DrawHolder holder = canvas.get().getDraw(Minecraft.getInstance().player);
-//        StringBuffer sb = new StringBuffer();
-//        holder.getVersion().write(holder, sb);
-//        Minecraft.getInstance().keyboardHandler.setClipboard(sb.toString());
-//        text.get().begin(Duration.ofSeconds(1), 0, 0, 255, 0, new TranslatableComponent(KEY_COPIED));
+        var drawing = canvas.get().getDrawing();
+        var data = drawing.serializeNBT().getAsString();
+        Minecraft.getInstance().keyboardHandler.setClipboard(data);
+        text.get().begin(Duration.ofSeconds(1), 0, 0, 255, 0, Component.translatable(SCAConstants.GUI_MESSAGE_BRUSH_COPIED));
     }
 
     private void pasteDraw(Button button) {
-//        String data = Minecraft.getInstance().keyboardHandler.getClipboard();
-//        DrawHolder.from(data)
-//                .filter(h -> canvas.get().setDraw(h))
-//                .ifPresentOrElse(c -> {},
-//                        () -> text.get().begin(Duration.ofSeconds(1), 0, 255, 0, 0, new TranslatableComponent(KEY_PASTE_FAILED, data)));
+        String data = Minecraft.getInstance().keyboardHandler.getClipboard();
+        try {
+            canvas.get().getDrawing().deserializeNBT(TagParser.parseTag(data));
+            text.get().begin(Duration.ofSeconds(1), 0, 255, 0, 0, Component.translatable(SCAConstants.GUI_MESSAGE_BRUSH_PASTED));
+        } catch (Exception ex) {
+            text.get().begin(Duration.ofSeconds(1), 0, 255, 0, 0, Component.translatable(SCAConstants.GUI_MESSAGE_BRUSH_PASTE_FAILED));
+            SinoCalligraphy.LOGGER.warn(ex.toString());
+        }
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void saveToFile(Button button) {
-//        LocalPlayer player = Minecraft.getInstance().player;
-//        DrawHolder holder = canvas.get().getDraw(player);
-//        try (NativeImage image = holder.getVersion().toImage(holder).get()) {
-//            File name = new File(Minecraft.getInstance().gameDirectory,
-//                    "sinoseries/sinocalligraphy/draws/" + holder.getAuthor().getString() +
-//                            "/" + System.currentTimeMillis() + ".png");
-//            name.getParentFile().mkdirs();
-//            if (!name.exists()) {
-//                name.createNewFile();
-//            }
-//            image.writeToFile(name);
-//            if (player != null) {
-//                player.displayClientMessage(new TranslatableComponent(KEY_OUTPUT_SUCCEED), false);
-//            }
-//
-//            TextComponent path = new TextComponent(name.toString());
-//            path.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, name.getAbsolutePath()));
-//
-//            if (player != null) {
-//                player.displayClientMessage(path, false);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            if (player != null) {
-//                player.displayClientMessage(new TranslatableComponent(KEY_OUTPUT_FAILED, e.getMessage()), false);
-//            }
-//        }
+        var player = Minecraft.getInstance().player;
+        var drawing = canvas.get().getDrawing();
+        try (var image = DrawHelper.toNaiveImage(drawing)) {
+            File name = new File(Minecraft.getInstance().gameDirectory,
+                    "sinoseries/sinocalligraphy/drawings/" + drawing.getAuthor().getString() +
+                            "/" + System.currentTimeMillis() + ".png");
+            name.getParentFile().mkdirs();
+            if (!name.exists()) {
+                name.createNewFile();
+            }
+            image.writeToFile(name);
+            if (player != null) {
+                var path = Component.literal(name.toString());
+                path.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, name.getAbsolutePath()));
+
+                player.displayClientMessage(Component.translatable(SCAConstants.TRANSLATE_MESSAGE_OUTPUT_SUCCESS,
+                        path), false);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (player != null) {
+                player.displayClientMessage(Component.translatable(SCAConstants.TRANSLATE_MESSAGE_OUTPUT_SUCCESS,
+                        e.getMessage()), false);
+            }
+        }
     }
+
+    private void clearDraw(Button button) {
+        canvas.get().clear();
+    }
+
+    private void applyDraw(Button button) {
+        SinoCalligraphy.getInstance().getNetworking().send(new DrawingSaveC2SPacket(canvas.get().getDrawing()));
+    }
+
+    /// </editor-fold>
 }

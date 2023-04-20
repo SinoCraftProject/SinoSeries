@@ -103,4 +103,7 @@ public class BrushContainer implements Container {
         return stack.is(SCAItemTags.INKS);
     }
 
+    public void setResult(ItemStack stack) {
+        setItem(FILLED_XUAN_PAPER_SLOT, stack);
+    }
 }

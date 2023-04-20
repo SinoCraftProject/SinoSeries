@@ -17,7 +17,18 @@ public class SCAConstants {
     public static final String GUI_BRUSH_APPLY_BUTTON_TOOLTIP = "sinocalligraphy.gui.brush.button.apply.tooltip";
     public static final String GUI_BRUSH_CLEAR_BUTTON_TOOLTIP = "sinocalligraphy.gui.brush.button.clear.tooltip";
 
+    public static final String GUI_MESSAGE_BRUSH_COPIED = "sinocalligraphy.gui.brush.brush.message.copy";
+    public static final String GUI_MESSAGE_BRUSH_PASTED = "sinocalligraphy.gui.brush.brush.message.paste";
+    public static final String GUI_MESSAGE_BRUSH_PASTE_FAILED = "sinocalligraphy.gui.brush.brush.message.paste.fail";
+    public static final String GUI_MESSAGE_BRUSH_SAVE_FAILED_INK = "sinocalligraphy.gui.brush.brush.message.save.fail.ink";
+    public static final String GUI_MESSAGE_BRUSH_SAVE_FAILED_PAPER = "sinocalligraphy.gui.brush.brush.message.save.fail.paper";
+    public static final String GUI_MESSAGE_BRUSH_SAVE_FAILED_UNKNOWN_SCREEN = "sinocalligraphy.gui.brush.brush.message.save.fail.unknown_screen";
+    public static final String GUI_MESSAGE_BRUSH_SAVE_SUCCESS = "sinocalligraphy.gui.brush.brush.message.save.success";
+
     public static final String NARRATION_BRUSH_CANVAS = "sinocalligraphy.gui.narration.brush.canvas";
+
+    public static final String TRANSLATE_MESSAGE_OUTPUT_SUCCESS = "sinocalligraphy.message.output.success";
+    public static final String TRANSLATE_MESSAGE_OUTPUT_FAIL = "sinocalligraphy.message.output.fail";
 
     public static final String TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY = "sinocalligraphy.drawing.title.unknown";
     public static final String TRANSLATE_DRAWING_AUTHOR_PREFIX_KEY = "sinocalligraphy.drawing.author.prefix";

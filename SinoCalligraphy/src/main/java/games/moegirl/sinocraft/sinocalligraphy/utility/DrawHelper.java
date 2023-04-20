@@ -1,6 +1,11 @@
 package games.moegirl.sinocraft.sinocalligraphy.utility;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
 import net.minecraft.util.FastColor;
 import org.apache.commons.lang3.tuple.Triple;
 
@@ -72,7 +77,7 @@ public class DrawHelper {
         return FastColor.ARGB32.color(a, r, g, b);
     }
 
-    public static int toNativeImage(int rgba) {
+    public static int rgbaToAbgr(int rgba) {
         var a = FastColor.ARGB32.alpha(rgba);
         var r = FastColor.ARGB32.red(rgba);
         var g = FastColor.ARGB32.green(rgba);
@@ -129,5 +134,42 @@ public class DrawHelper {
 
     public static int nativeImageCombine(int alpha, int blue, int green, int red) {
         return (alpha & 255) << 24 | (blue & 255) << 16 | (green & 255) << 8 | (red & 255);
+    }
+
+    public static NativeImage toNaiveImage(ISimpleDrawing drawing) {
+        NativeImage image = new NativeImage(drawing.getSize(), drawing.getSize(), false);
+
+        int background;
+        if (drawing instanceof IHasPaperType hasPaperType) {
+            background = hasPaperType.getPaperType().getColor();
+        } else {
+            background = PaperType.WHITE.getColor();
+        }
+
+        int foreground;
+        if (drawing instanceof IHasInkType hasInkType) {
+            foreground = hasInkType.getInkType().getColor();
+        } else {
+            foreground = InkType.BLACK.getColor();
+        }
+
+        var bgColor = rgbaToAbgr(background);
+        image.fillRect(0, 0, drawing.getSize(), drawing.getSize(), bgColor);
+        int index = 0;
+        byte[] value = drawing.getPixels();
+        for (int w = 0; w < drawing.getSize(); w++) {
+            for (int h = 0; h < drawing.getSize(); h++) {
+                var alpha = 16 * (16 - value[index++]) - 1;
+
+                if (alpha == 255) {
+                    continue;
+                }
+
+                int mixed = mix(foreground, background, alpha);
+                var abgr = rgbaToAbgr(mixed);
+                image.setPixelRGBA(w, h, abgr);
+            }
+        }
+        return image;
     }
 }

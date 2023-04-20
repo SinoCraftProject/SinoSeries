@@ -4,12 +4,14 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.gui.SCAMenus;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.container.BrushContainer;
+import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingClearCanvasS2CPacket;
 import games.moegirl.sinocraft.sinocore.gui.menu.slot.RestrictInputSlot;
 import games.moegirl.sinocraft.sinocore.gui.menu.slot.TakeOnlySlot;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotStrategy;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureMap;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -42,7 +44,28 @@ public class BrushMenu extends AbstractContainerMenu {
         TEXTURE.placeSlot(this, brushContainer, "ink", BrushContainer.INK_SLOT,
                 ((container, slot, x, y) -> new RestrictInputSlot(container, slot, x, y, SCAItemTags.INKS)));
         TEXTURE.placeSlot(this, brushContainer, "result", BrushContainer.FILLED_XUAN_PAPER_SLOT,
-                SlotStrategy.onlyTake());
+                ((container, slot, x, y) -> new TakeOnlySlot(container, slot, x, y) {
+                    @Override
+                    public ItemStack safeTake(int count, int decrement, Player player) {
+                        if (getPaper().isEmpty() || getInk().isEmpty()) {
+                            return ItemStack.EMPTY;
+                        }
+
+                        return super.safeTake(count, decrement, player);
+                    }
+
+                    @Override
+                    public void onTake(Player player, ItemStack stack) {
+                        getPaper().shrink(1);
+                        getInk().shrink(1);
+
+                        if (player instanceof ServerPlayer) {
+                            SinoCalligraphy.getInstance().getNetworking().send(new DrawingClearCanvasS2CPacket(), player);
+                        }
+
+                        super.onTake(player, stack);
+                    }
+                }));
 
         TEXTURE.placeSlots(this, playerInv, "inventory", 9, SlotStrategy.noLimit());
         TEXTURE.placeSlots(this, playerInv, "selection_bar", 0, SlotStrategy.noLimit());
@@ -92,6 +115,10 @@ public class BrushMenu extends AbstractContainerMenu {
 
     public ItemStack getInk() {
         return brushContainer.getInk();
+    }
+
+    public void setResult(ItemStack result) {
+        brushContainer.setResult(result);
     }
 
     protected int brushColorLevel = 0;

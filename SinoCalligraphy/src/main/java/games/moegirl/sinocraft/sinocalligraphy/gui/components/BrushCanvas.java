@@ -88,6 +88,10 @@ public class BrushCanvas extends AbstractWidget {
         drawing.setPixels(new byte[drawing.getSize() * drawing.getSize()]);
     }
 
+    public ISimpleDrawing getDrawing() {
+        return drawing;
+    }
+
     /// <editor-fold desc="Handle input">
 
     private boolean isDragging = false;
