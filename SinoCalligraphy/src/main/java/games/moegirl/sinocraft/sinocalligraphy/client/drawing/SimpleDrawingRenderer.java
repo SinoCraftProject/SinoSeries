@@ -22,10 +22,6 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
         this.drawing = drawing;
     }
 
-    public void setDrawing(SimpleDrawing drawing) {
-        this.drawing = drawing;
-    }
-
     @Override
     public void draw(PoseStack poseStack, int x, int y, int width, int height) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -62,11 +58,18 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
     @Override
     public void draw(PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         VertexConsumer vertexConsumer = buffer.getBuffer(COLOR_LIGHT_256);
+
+        RenderSystem.enableBlend();
+        RenderSystem.enableDepthTest();
+
         if (drawing.isEmpty()) {
             vertexRect(poseStack, vertexConsumer, 0, 0, drawing.getSize(), drawing.getSize(), getBackgroundColor(), packedLight);
         } else {
             drawPixels(poseStack, vertexConsumer, packedLight);
         }
+
+        RenderSystem.disableBlend();
+        RenderSystem.disableDepthTest();
     }
 
     protected void drawPixels(PoseStack poseStack, VertexConsumer consumer, int light) {
@@ -85,53 +88,6 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
             }
         }
     }
-
-//    @Override
-//    public void draw(PoseStack poseStack, MultiBufferSource buffer) {
-//        VertexConsumer vertexConsumer = buffer.getBuffer(COLOR_256);
-//        if (drawing.isEmpty()) {
-//            vertexRect(poseStack, vertexConsumer, 0, 0, drawing.getSize(), drawing.getSize(), getBackgroundColor());
-//        } else {
-//            drawPixels(poseStack, vertexConsumer);
-//        }
-//    }
-//
-//    protected void drawPixels(PoseStack poseStack, VertexConsumer consumer) {
-//        byte[] pixels = drawing.getPixels();
-//        for (int x1 = 0; x1 < drawing.getSize(); x1++) {
-//            int x2 = x1 + 1;
-//            for (int y1 = 0; y1 < drawing.getSize(); y1++) {
-//                int geryScale = 16 * pixels[x1 * drawing.getSize() + y1];
-//                int y2 = y1 + 1;
-//
-//                if (geryScale == 0) {
-//                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getBackgroundColor(), 255);
-//                } else {
-//                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getForegroundColor(), geryScale);
-//                }
-//            }
-//        }
-//    }
-//
-//    protected void vertexRectScaleColor(PoseStack poseStack, VertexConsumer consumer,
-//                              int x1, int y1, int x2, int y2,
-//                              int color, int scale) {
-//        int r = FastColor.ARGB32.red(color);
-//        int g = FastColor.ARGB32.green(color);
-//        int b = FastColor.ARGB32.blue(color);
-//        int scaledColor = FastColor.ARGB32.color(scale, r, g, b);
-//
-//        vertexRect(poseStack, consumer, x1, y1, x2, y2, scaledColor);
-//    }
-//
-//    protected void vertexRect(PoseStack poseStack, VertexConsumer consumer,
-//                              int x1, int y1, int x2, int y2,
-//                              int color) {
-//        consumer.vertex(poseStack.last().pose(), x1, y1, 0).color(color).endVertex();
-//        consumer.vertex(poseStack.last().pose(), x1, y2, 0).color(color).endVertex();
-//        consumer.vertex(poseStack.last().pose(), x2, y2, 0).color(color).endVertex();
-//        consumer.vertex(poseStack.last().pose(), x2, y1, 0).color(color).endVertex();
-//    }
 
     protected void vertexRectScaleColor(PoseStack poseStack, VertexConsumer consumer,
                                         int x1, int y1, int x2, int y2,

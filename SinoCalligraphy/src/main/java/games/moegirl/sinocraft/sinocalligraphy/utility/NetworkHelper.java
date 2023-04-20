@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinocalligraphy.utility;
 
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.screen.BrushScreen;
 import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingSaveResultS2CPacket;
 import net.minecraft.client.Minecraft;
@@ -28,11 +30,20 @@ public class NetworkHelper {
         }
     }
 
-    public static void onClientEnableCanvas(boolean isEnabled) {
+    public static void onClientEnableCanvas(PaperType paperType, InkType inkType) {
         var screen = Minecraft.getInstance().screen;
         if (screen instanceof BrushScreen brushScreen) {
-            brushScreen.getCanvas().setEnabled(isEnabled);
-            brushScreen.getTitleBox().setEditable(isEnabled);
+            brushScreen.createCanvas(paperType, inkType);
+            brushScreen.getCanvas().setEnabled(true);
+            brushScreen.getTitleBox().setEditable(true);
+        }
+    }
+
+    public static void onClientDisableCanvas() {
+        var screen = Minecraft.getInstance().screen;
+        if (screen instanceof BrushScreen brushScreen) {
+            brushScreen.getCanvas().setEnabled(false);
+            brushScreen.getTitleBox().setEditable(false);
         }
     }
 

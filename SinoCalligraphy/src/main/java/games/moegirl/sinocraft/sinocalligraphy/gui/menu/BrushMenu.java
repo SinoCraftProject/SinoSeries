@@ -2,9 +2,14 @@ package games.moegirl.sinocraft.sinocalligraphy.gui.menu;
 
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.SCAMenus;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.container.BrushContainer;
+import games.moegirl.sinocraft.sinocalligraphy.item.InkItem;
+import games.moegirl.sinocraft.sinocalligraphy.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingClearCanvasS2CPacket;
+import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingDisableCanvasS2CPacket;
 import games.moegirl.sinocraft.sinocalligraphy.networking.packet.DrawingEnableCanvasS2CPacket;
 import games.moegirl.sinocraft.sinocore.gui.menu.slot.RestrictInputSlot;
 import games.moegirl.sinocraft.sinocore.gui.menu.slot.TakeOnlySlot;
@@ -145,20 +150,19 @@ public class BrushMenu extends AbstractContainerMenu {
         super.broadcastChanges();
 
         if (brushContainer.hasInk() && brushContainer.hasPaper()) {
-            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(true));
+            var inkType = InkType.BLACK;
+            if (getInk().getItem() instanceof InkItem ink) {
+                inkType = ink.getType();
+            }
+
+            var paperType = PaperType.BLACK;
+            if (getPaper().getItem() instanceof XuanPaperItem paper) {
+                paperType = paper.getType();
+            }
+
+            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType));
         } else {
-            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(false));
+            SinoCalligraphy.getInstance().getNetworking().send(new DrawingDisableCanvasS2CPacket());
         }
     }
-
-//    @Override
-//    public void slotsChanged(Container container) {
-//        super.slotsChanged(container);
-//
-//        if (brushContainer.hasInk() && brushContainer.hasPaper()) {
-//            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(true));
-//        } else {
-//            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(false));
-//        }
-//    }
 }

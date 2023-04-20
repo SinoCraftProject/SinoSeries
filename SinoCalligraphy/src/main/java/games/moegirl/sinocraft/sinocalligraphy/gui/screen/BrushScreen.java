@@ -22,6 +22,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.common.util.Lazy;
 
@@ -32,9 +33,10 @@ import java.time.Duration;
 public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private static final TextureMapClient CLIENT_TEXTURE = new TextureMapClient(BrushMenu.TEXTURE);
 
-    private final Lazy<BrushCanvas> canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, menu::getColorLevel, menu::setColorLevel, PaperType.WHITE, InkType.BLACK));
     private final Lazy<AnimatedText> text = Lazy.of(() -> new AnimatedText(130, 130));
     private final Lazy<ColorSelectionList> list = Lazy.of(() -> ColorSelectionList.create(this));
+
+    private Lazy<BrushCanvas> canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, menu::getColorLevel, menu::setColorLevel, PaperType.WHITE, InkType.BLACK));
 
     protected EditBox titleBox;
 
@@ -60,18 +62,16 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         addRenderableOnly(text.get().resize(leftPos + 58 + (130 / 2 - 10), topPos + 11 + 132, font));
 
         list.get().setRelativeLocation(leftPos, topPos);
-        list.get().setSelectedItem(list.get().getEntry(0));
         addRenderableWidget(list.get());
 
-        titleBox = new EditBox(font, leftPos + 41, topPos + 148, 128, 16, Component.translatable(SCAConstants.NARRATION_BRUSH_TITLE_BOX));
-        titleBox.setTextColor(-1);
-        titleBox.setTextColorUneditable(-1);
+        titleBox = new EditBox(font, leftPos + 43, topPos + 150, 128, 16, Component.translatable(SCAConstants.NARRATION_BRUSH_TITLE_BOX));
+        titleBox.setTextColor(FastColor.ARGB32.color(255, 255, 225, 255));
         titleBox.setBordered(false);
         titleBox.setMaxLength(50);
         titleBox.setResponder(this::onTitleChanged);
         titleBox.setValue("");
         setInitialFocus(titleBox);
-        addWidget(titleBox);
+        addRenderableWidget(titleBox);
 
         CLIENT_TEXTURE.placeButton("copy_button", this, this::copyDraw, this::pasteDraw);
         CLIENT_TEXTURE.placeButton("output_button", this, this::saveToFile);
@@ -99,7 +99,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (canvas.get().isMouseOver(mouseX, mouseY)) {
+        if (canvas.get().isEnabled()) {
             canvas.get().mouseClicked(mouseX, mouseY, button);
         }
 
@@ -108,12 +108,19 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-        canvas.get().mouseDragged(mouseX, mouseY, button, dragX, dragY);
+        if (canvas.get().isEnabled()) {
+            canvas.get().mouseDragged(mouseX, mouseY, button, dragX, dragY);
+        }
+
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
     }
 
     @Override
     public void mouseMoved(double mouseX, double mouseY) {
+        if (canvas.get().isEnabled()) {
+            canvas.get().mouseMoved(mouseX, mouseY);
+        }
+
         super.mouseMoved(mouseX, mouseY);
     }
 
@@ -125,7 +132,8 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        if (canvas.get().isMouseOver(mouseX, mouseY)) {
+        if (canvas.get().isEnabled()
+                && (canvas.get().isMouseOver(mouseX, mouseY) || list.get().isMouseOver(mouseX, mouseY))) {
             return list.get().mouseScrolled(mouseX, mouseY, delta);
         }
 
@@ -134,13 +142,19 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        canvas.get().keyPressed(keyCode, scanCode, modifiers);
+        if (canvas.get().isEnabled()) {
+            canvas.get().keyPressed(keyCode, scanCode, modifiers);
+        }
+
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
     public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-        canvas.get().keyReleased(keyCode, scanCode, modifiers);
+        if (canvas.get().isEnabled()) {
+            canvas.get().keyReleased(keyCode, scanCode, modifiers);
+        }
+
         return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
@@ -156,6 +170,10 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     public BrushCanvas getCanvas() {
         return canvas.get();
+    }
+
+    public void createCanvas(PaperType paperType, InkType inkType) {
+        canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, menu::getColorLevel, menu::setColorLevel, paperType, inkType));
     }
 
     public EditBox getTitleBox() {
@@ -220,7 +238,11 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     }
 
     private void onTitleChanged(String title) {
-        canvas.get().getDrawing().setTitle(titleBox.getValue());
+        if (titleBox.getValue().equals("")) {
+            canvas.get().getDrawing().setTitle(Component.translatable(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY));
+        } else {
+            canvas.get().getDrawing().setTitle(titleBox.getValue());
+        }
     }
 
     /// </editor-fold>

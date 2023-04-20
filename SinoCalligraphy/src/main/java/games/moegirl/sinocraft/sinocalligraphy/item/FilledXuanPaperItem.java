@@ -36,6 +36,9 @@ public class FilledXuanPaperItem extends Item {
         var drawing = DrawingDataVersion.getLatest().fromTag(nbt);
 
         tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, drawing.getAuthor()));
+
+        var date = drawing.getZonedDate();
+        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, date.getYear(), date.getMonth(), date.getDayOfMonth(), date.getHour(), date.getMinute(), date.getSecond()));
     }
 
     @Override
