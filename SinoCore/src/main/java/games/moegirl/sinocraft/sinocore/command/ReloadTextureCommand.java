@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.command;
+package games.moegirl.sinocraft.sinocore.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.command;
+package games.moegirl.sinocraft.sinocore.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import games.moegirl.sinocraft.sinocore.SinoCore;
@@ -11,9 +11,8 @@ import static net.minecraft.commands.Commands.literal;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SCCommands {
-    public static LiteralArgumentBuilder<CommandSourceStack> SINOCORE_ROOT = literal("sinocore")
+    public static LiteralArgumentBuilder<CommandSourceStack> SINOCORE_ROOT = literal("sinoseries")
             .then(ReloadTextureCommand.RELOAD)
-            .then(QuizCommand.QUIZ)
             .then(VersionCommand.VERSION);
 
     @SubscribeEvent

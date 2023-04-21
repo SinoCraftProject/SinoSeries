@@ -40,8 +40,6 @@ public class SinoCore {
         bus.addListener(this::onSetup);
         bus.addListener(this::onClientSetup);
 
-//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QuizModelConfig.SPEC, "sinoseries/sinocore/quiz.toml");
-
         JsonUtils.INSTANCE
                 .registerAdapter(Ingredient.class, new IngredientSerializer())
                 .registerAdapter(ItemStack.class, new ItemStackSerializer())
@@ -56,9 +54,6 @@ public class SinoCore {
     }
 
     private void onSetup(FMLCommonSetupEvent event) {
-//        if (QuizModelConfig.CONFIG.ENABLED.get()) {
-//            QuizModel.fetch();
-//        }
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
