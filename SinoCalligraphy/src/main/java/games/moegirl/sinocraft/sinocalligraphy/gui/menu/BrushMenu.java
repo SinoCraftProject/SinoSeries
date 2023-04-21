@@ -87,7 +87,7 @@ public class BrushMenu extends AbstractContainerMenu {
 
     @Override
     public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
-        // Todo: this is had no test yet.
+        // qyl27: tested? tasty.
         ItemStack result = ItemStack.EMPTY;
 
         Slot slot = slots.get(index);
@@ -147,6 +147,9 @@ public class BrushMenu extends AbstractContainerMenu {
         brushContainer.dropAll(player);
     }
 
+    protected PaperType prevPaperType = PaperType.WHITE;
+    protected InkType prevInkType = InkType.BLACK;
+
     @Override
     public void broadcastChanges() {
         super.broadcastChanges();
@@ -162,7 +165,11 @@ public class BrushMenu extends AbstractContainerMenu {
                 paperType = paper.getType();
             }
 
-            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType));
+            if (paperType != prevPaperType || inkType != prevInkType) {
+                prevPaperType = paperType;
+                prevInkType = inkType;
+                SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType));
+            }
         } else {
             SinoCalligraphy.getInstance().getNetworking().send(new DrawingDisableCanvasS2CPacket());
         }

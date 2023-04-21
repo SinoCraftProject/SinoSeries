@@ -23,7 +23,6 @@ import java.util.Properties;
 public class SinoCore {
     public static final Logger LOGGER = LoggerFactory.getLogger("SinoCore");
 
-    // Todo: qyl27: use sinoseries.debug instead.
     public static final boolean DEBUG = System.getProperty("sinoseries.debug", "false").equalsIgnoreCase("true");
 
     public static final String MODID = "sinocore";
@@ -63,9 +62,5 @@ public class SinoCore {
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
-        if (DEBUG) {
-            // Fixme: qyl27: Not working for debug show highlighted block shape box.
-//            MinecraftForge.EVENT_BUS.register(new DebugBlockHighlighter());
-        }
     }
 }

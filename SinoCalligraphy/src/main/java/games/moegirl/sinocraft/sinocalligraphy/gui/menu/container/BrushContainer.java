@@ -66,8 +66,7 @@ public class BrushContainer implements Container {
     @Override
     public void setChanged() {
         menu.broadcastChanges();
-
-        // Todo: qyl27: maybe delegate to screen?
+        // qyl27: delegated to screen?
     }
 
     @Override
