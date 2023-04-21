@@ -18,7 +18,7 @@
   "sinocalligraphy.advancements.sca.desc": "The painting that used color to depict all walks of life, while retained black and white to render the beauty of ages. ",
   "sinocalligraphy.drawing.author": "Author: {0}",
   "sinocalligraphy.drawing.author.unknown": "Anonymous",
-  "sinocalligraphy.drawing.date": "Drawing date: {2}/{1}/{0} {3}:{4}:{5}",
+  "sinocalligraphy.drawing.date": "Drawing date: %3$d/%2$d/%1$04d %4$02d:%5$02d:%6$02d",
   "sinocalligraphy.drawing.title.unknown": "Untitled drawing",
   "sinocalligraphy.fan.desc.1": "Opening this fan, Rivers and mountains rendered by light ink floats on it.",
   "sinocalligraphy.fan.desc.2": "Carrying this fan, there will be no fear of disappointing life. fears.",

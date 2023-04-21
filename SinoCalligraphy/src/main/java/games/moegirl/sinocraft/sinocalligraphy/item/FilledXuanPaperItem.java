@@ -40,7 +40,7 @@ public class FilledXuanPaperItem extends Item implements ITabItem {
         tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, drawing.getAuthor().getString()));
 
         var date = drawing.getZonedDate();
-        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, date.getYear(), date.getMonth(), date.getDayOfMonth(), date.getHour(), date.getMinute(), date.getSecond()));
+        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, date.getYear(), date.getMonth().getValue(), date.getDayOfMonth(), date.getHour(), date.getMinute(), date.getSecond()));
     }
 
     @Override

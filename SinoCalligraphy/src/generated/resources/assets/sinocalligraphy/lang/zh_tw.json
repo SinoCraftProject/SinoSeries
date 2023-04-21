@@ -18,7 +18,7 @@
   "sinocalligraphy.advancements.sca.desc": "丹青描繪浮生，雲墨書盡芳華",
   "sinocalligraphy.drawing.author": "作者：{0}",
   "sinocalligraphy.drawing.author.unknown": "佚名",
-  "sinocalligraphy.drawing.date": "著墨日期：{0} 年 {1} 月 {2} 日 {3}:{4}:{5}",
+  "sinocalligraphy.drawing.date": "著墨日期：%1$04d 年 %2$d 月 %3$d 日 %4$02d:%5$02d:%6$02d",
   "sinocalligraphy.drawing.title.unknown": "無題",
   "sinocalligraphy.fan.desc.1": "開此扇，上有淡墨河山",
   "sinocalligraphy.fan.desc.2": "攜此扇，無懼此生風雨",

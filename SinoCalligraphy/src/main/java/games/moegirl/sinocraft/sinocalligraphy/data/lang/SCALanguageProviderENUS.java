@@ -59,7 +59,7 @@ public class SCALanguageProviderENUS extends AbstractLanguageProvider {
         add(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY, "Untitled drawing");
         add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, "Author: {0}");
         add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY, "Anonymous");
-        add(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, "Drawing date: {2}/{1}/{0} {3}:{4}:{5}");
+        add(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, "Drawing date: %3$d/%2$d/%1$04d %4$02d:%5$02d:%6$02d");
 
     }
 }

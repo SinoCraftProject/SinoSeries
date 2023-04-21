@@ -58,7 +58,7 @@ public class SCALanguageProviderZHTW extends AbstractLanguageProvider {
         add(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY, "無題");
         add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, "作者：{0}");
         add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY, "佚名");
-        add(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, "著墨日期：{0} 年 {1} 月 {2} 日 {3}:{4}:{5}");
+        add(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, "著墨日期：%1$04d 年 %2$d 月 %3$d 日 %4$02d:%5$02d:%6$02d");
 
     }
 }
