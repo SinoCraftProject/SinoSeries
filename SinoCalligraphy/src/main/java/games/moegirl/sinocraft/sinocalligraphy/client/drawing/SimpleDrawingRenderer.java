@@ -6,13 +6,12 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.SimpleDrawing;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
+import games.moegirl.sinocraft.sinocalligraphy.utility.DrawingHelper;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.FastColor;
 
-import static games.moegirl.sinocraft.sinocalligraphy.client.drawing.RenderTypes.COLOR_256;
 import static games.moegirl.sinocraft.sinocalligraphy.client.drawing.RenderTypes.COLOR_LIGHT_256;
 
 public class SimpleDrawingRenderer implements IDrawingRenderer {
@@ -77,13 +76,14 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
         for (int x1 = 0; x1 < drawing.getSize(); x1++) {
             int x2 = x1 + 1;
             for (int y1 = 0; y1 < drawing.getSize(); y1++) {
-                int geryScale = 16 * pixels[x1 * drawing.getSize() + y1];
+                int greyScale = 16 * pixels[x1 * drawing.getSize() + y1];
                 int y2 = y1 + 1;
 
-                if (geryScale == 0) {
-                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getBackgroundColor(), 255, light);
+                if (greyScale == 0) {
+                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getBackgroundColor(), light);
                 } else {
-                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, getForegroundColor(), geryScale, light);
+                    var mixed = DrawingHelper.mix(getForegroundColor(), getBackgroundColor(), 256 - greyScale);
+                    vertexRectScaleColor(poseStack, consumer, x1, y1, x2, y2, mixed, light);
                 }
             }
         }
@@ -91,11 +91,11 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
 
     protected void vertexRectScaleColor(PoseStack poseStack, VertexConsumer consumer,
                                         int x1, int y1, int x2, int y2,
-                                        int color, int scale, int light) {
+                                        int color, int light) {
         int r = FastColor.ARGB32.red(color);
         int g = FastColor.ARGB32.green(color);
         int b = FastColor.ARGB32.blue(color);
-        int scaledColor = FastColor.ARGB32.color(scale, r, g, b);
+        int scaledColor = FastColor.ARGB32.color(255, r, g, b);
 
         vertexRect(poseStack, consumer, x1, y1, x2, y2, scaledColor, light);
     }
