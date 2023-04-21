@@ -227,7 +227,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
             text.get().begin(Duration.ofSeconds(1), 0, 255, 0, 0, Component.translatable(SCAConstants.GUI_MESSAGE_BRUSH_PASTED));
         } catch (Exception ex) {
             text.get().begin(Duration.ofSeconds(1), 0, 255, 0, 0, Component.translatable(SCAConstants.GUI_MESSAGE_BRUSH_PASTE_FAILED));
-            SinoCalligraphy.LOGGER.warn(ex.toString());
+//            SinoCalligraphy.LOGGER.warn(ex.toString());
         }
     }
 
@@ -254,7 +254,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         } catch (IOException e) {
             e.printStackTrace();
             if (player != null) {
-                player.displayClientMessage(Component.translatable(SCAConstants.TRANSLATE_MESSAGE_OUTPUT_SUCCESS,
+                player.displayClientMessage(Component.translatable(SCAConstants.TRANSLATE_MESSAGE_OUTPUT_FAIL,
                         e.getMessage()), false);
             }
         }

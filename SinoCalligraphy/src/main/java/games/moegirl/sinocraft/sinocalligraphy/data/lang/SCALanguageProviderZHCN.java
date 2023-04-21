@@ -22,10 +22,6 @@ public class SCALanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SCAItems.INK, "墨汁");
         addItem(SCAItems.GOLDEN_INK, "加金粉的墨汁");
 
-        add(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY, "无题字画");
-        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, "作者：");
-        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY, "佚名");
-
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1, "传说，道家深湖在演讲时就用过这把扇子");
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_2, "他浪迹天地，无长剑在手");
         add(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_1, "开此扇，上有淡墨河山");
@@ -39,5 +35,30 @@ public class SCALanguageProviderZHCN extends AbstractLanguageProvider {
         add(SCAConstants.TRANSLATE_ADVANCEMENT_INK_DESC, "获得一些墨汁");
         add(SCAConstants.TRANSLATE_ADVANCEMENT_FAN, "此展折扇，此任平生不惧风与雪");
         add(SCAConstants.TRANSLATE_ADVANCEMENT_FAN_DESC, "此身洒脱，此间侠义何需他人说");
+
+        add(SCAConstants.GUI_BRUSH_COPY_BUTTON_TOOLTIP, "左键复制到剪贴板，右键粘贴");
+        add(SCAConstants.GUI_BRUSH_OUTPUT_BUTTON_TOOLTIP, "保存到文件");
+        add(SCAConstants.GUI_BRUSH_APPLY_BUTTON_TOOLTIP, "保存");
+        add(SCAConstants.GUI_BRUSH_CLEAR_BUTTON_TOOLTIP, "清空画布");
+
+        add(SCAConstants.GUI_MESSAGE_BRUSH_COPIED, "复制成功");
+        add(SCAConstants.GUI_MESSAGE_BRUSH_PASTED, "粘贴成功");
+        add(SCAConstants.GUI_MESSAGE_BRUSH_PASTE_FAILED, "粘贴失败");
+        add(SCAConstants.GUI_MESSAGE_BRUSH_SAVE_FAILED_INK, "保存失败，请放入墨汁");
+        add(SCAConstants.GUI_MESSAGE_BRUSH_SAVE_FAILED_PAPER, "保存失败，请放入宣纸");
+        add(SCAConstants.GUI_MESSAGE_BRUSH_SAVE_FAILED_UNKNOWN_SCREEN, "保存失败，未知 GUI");
+        add(SCAConstants.GUI_MESSAGE_BRUSH_SAVE_SUCCESS, "保存成功");
+
+        add(SCAConstants.NARRATION_BRUSH_CANVAS, "画布");
+        add(SCAConstants.NARRATION_BRUSH_TITLE_BOX, "毛笔 GUI");
+
+        add(SCAConstants.TRANSLATE_MESSAGE_OUTPUT_SUCCESS, "保存成功，保存于 {0}");
+        add(SCAConstants.TRANSLATE_MESSAGE_OUTPUT_FAIL, "保存失败，{0}");
+
+        add(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY, "无题");
+        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_KEY, "作者：{0}");
+        add(SCAConstants.TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY, "佚名");
+        add(SCAConstants.TRANSLATE_DRAWING_DATE_KEY, "着墨日期：{0}");
+
     }
 }

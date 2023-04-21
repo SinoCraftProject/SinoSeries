@@ -1,7 +1,7 @@
 {
   "parent": "sinocalligraphy:root",
   "criteria": {
-    "fan": {
+    "got_fan": {
       "conditions": {
         "items": [
           {
@@ -20,7 +20,7 @@
       "translate": "sinocalligraphy.advancements.fan.desc"
     },
     "frame": "task",
-    "hidden": true,
+    "hidden": false,
     "icon": {
       "item": "sinocalligraphy:fan",
       "nbt": "{Damage:0}"
@@ -32,7 +32,7 @@
   },
   "requirements": [
     [
-      "fan"
+      "got_fan"
     ]
   ]
 }

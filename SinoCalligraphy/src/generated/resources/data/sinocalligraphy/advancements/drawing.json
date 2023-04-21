@@ -1,7 +1,7 @@
 {
   "parent": "sinocalligraphy:root",
   "criteria": {
-    "draw": {
+    "got_drawing": {
       "conditions": {
         "items": [
           {
@@ -17,7 +17,7 @@
     "announce_to_chat": true,
     "background": "sinocalligraphy:textures/advancement/white_marble.png",
     "description": {
-      "translate": "sinocalligraphy.advancements.draw.desc"
+      "translate": "sinocalligraphy.advancements.drawing.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -26,12 +26,12 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "sinocalligraphy.advancements.draw"
+      "translate": "sinocalligraphy.advancements.drawing"
     }
   },
   "requirements": [
     [
-      "draw"
+      "got_drawing"
     ]
   ]
 }

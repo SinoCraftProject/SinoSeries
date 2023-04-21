@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.advancement.SCAAdvancementGeneratorBrush;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderENUS;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderZHCN;
+import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderZHTW;
 import net.minecraft.data.tags.InstrumentTagsProvider;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -33,6 +34,8 @@ public class SCAData {
             gen.addProvider(true, new ForgeAdvancementProvider(output, lookupProvider, exHelper, List.of(new SCAAdvancementGeneratorBrush(SinoCalligraphy.MODID))));
 
             gen.addProvider(true, new SCALanguageProviderZHCN(output, SinoCalligraphy.MODID, "zh_cn"));
+            gen.addProvider(true, new SCALanguageProviderZHTW(output, SinoCalligraphy.MODID, "zh_tw"));
+            gen.addProvider(true, new SCALanguageProviderZHTW(output, SinoCalligraphy.MODID, "zh_hk"));
             gen.addProvider(true, new SCALanguageProviderENUS(output, SinoCalligraphy.MODID, "en_us"));
         }
     }

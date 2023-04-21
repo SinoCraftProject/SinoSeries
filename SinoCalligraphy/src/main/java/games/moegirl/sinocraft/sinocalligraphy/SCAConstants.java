@@ -36,7 +36,6 @@ public class SCAConstants {
     public static final String TRANSLATE_DRAWING_AUTHOR_UNKNOWN_KEY = "sinocalligraphy.drawing.author.unknown";
     public static final String TRANSLATE_DRAWING_DATE_KEY = "sinocalligraphy.drawing.date";
 
-    public static final String TRANSLATE_BRUSH_MENU_DISPLAY_NAME = "sinocalligraphy.gui.brush.display_name";
     public static final String TRANSLATE_UNFOLDED_DESCRIPTION_LINE_1 = "sinocalligraphy.fan.desc.1";
     public static final String TRANSLATE_UNFOLDED_DESCRIPTION_LINE_2 = "sinocalligraphy.fan.desc.2";
     public static final String TRANSLATE_FOLDED_DESCRIPTION_LINE_1 = "sinocalligraphy.fan_folded.desc.1";
