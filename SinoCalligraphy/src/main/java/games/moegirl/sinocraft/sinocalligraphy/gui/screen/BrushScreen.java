@@ -36,8 +36,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private final Lazy<AnimatedText> text = Lazy.of(() -> new AnimatedText(130, 130));
     private final Lazy<ColorSelectionList> list = Lazy.of(() -> ColorSelectionList.create(this));
 
-    private Lazy<BrushCanvas> canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, menu::getColorLevel, menu::setColorLevel, PaperType.WHITE, InkType.BLACK));
-
+    private Lazy<BrushCanvas> canvas;
     protected EditBox titleBox;
 
     public BrushScreen(BrushMenu menu, Inventory inventory, Component title) {
@@ -48,15 +47,13 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
         imageWidth = 212;
         imageHeight = 256;
+
+        canvas =  Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, leftPos + 58, topPos + 11, 130, 130, menu::getColorLevel, menu::setColorLevel, PaperType.WHITE, InkType.BLACK));
     }
 
     @Override
     protected void init() {
         super.init();
-
-        canvas.get().resize(130, 130);
-        canvas.get().setLocation(leftPos + 58, topPos + 11);
-        addRenderableWidget(canvas.get());
 
         // qyl27: Ensure the text below the canvas.
         addRenderableOnly(text.get().resize(leftPos + 58 + (130 / 2 - 10), topPos + 11 + 132, font));
@@ -67,6 +64,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         titleBox = new EditBox(font, leftPos + 43, topPos + 150, 128, 16, Component.translatable(SCAConstants.NARRATION_BRUSH_TITLE_BOX));
         titleBox.setTextColor(FastColor.ARGB32.color(255, 255, 225, 255));
         titleBox.setBordered(false);
+        titleBox.setCanLoseFocus(false);
         titleBox.setMaxLength(50);
         titleBox.setResponder(this::onTitleChanged);
         titleBox.setValue("");
@@ -80,10 +78,25 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     }
 
     @Override
+    protected void containerTick() {
+        super.containerTick();
+        titleBox.tick();
+    }
+
+    @Override
     public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
         renderBackground(poseStack);
         super.render(poseStack, mouseX, mouseY, partialTick);
         renderTooltip(poseStack, mouseX, mouseY);
+
+        if (shouldUpdateCanvas) {
+            shouldUpdateCanvas = false;
+            if (prevCanvas != null) {
+                removeWidget(prevCanvas);
+            }
+
+            addRenderableWidget(canvas.get());
+        }
     }
 
     @Override
@@ -134,7 +147,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         if (canvas.get().isEnabled()
                 && (canvas.get().isMouseOver(mouseX, mouseY) || list.get().isMouseOver(mouseX, mouseY))) {
-            return list.get().mouseScrolled(mouseX, mouseY, delta);
+            list.get().mouseScrolled(mouseX, mouseY, delta);
         }
 
         return super.mouseScrolled(mouseX, mouseY, delta);
@@ -146,7 +159,15 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
             canvas.get().keyPressed(keyCode, scanCode, modifiers);
         }
 
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        if (keyCode == 256) {
+            assert minecraft != null;
+            assert minecraft.player != null;
+            minecraft.player.closeContainer();
+        }
+
+        return titleBox.keyPressed(keyCode, scanCode, modifiers)
+                || titleBox.canConsumeInput()
+                || super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
@@ -156,6 +177,11 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         }
 
         return super.keyReleased(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    public boolean charTyped(char codePoint, int modifiers) {
+        return super.charTyped(codePoint, modifiers);
     }
 
     /// </editor-fold>
@@ -172,8 +198,13 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         return canvas.get();
     }
 
+    protected BrushCanvas prevCanvas = null;
+    protected boolean shouldUpdateCanvas = true;
+
     public void createCanvas(PaperType paperType, InkType inkType) {
-        canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, menu::getColorLevel, menu::setColorLevel, paperType, inkType));
+        shouldUpdateCanvas = true;
+        prevCanvas = canvas.get();
+        canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, leftPos + 58, topPos + 11, 130, 130, menu::getColorLevel, menu::setColorLevel, paperType, inkType));
     }
 
     public EditBox getTitleBox() {

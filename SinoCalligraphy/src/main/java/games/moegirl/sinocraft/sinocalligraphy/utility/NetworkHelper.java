@@ -33,9 +33,11 @@ public class NetworkHelper {
     public static void onClientEnableCanvas(PaperType paperType, InkType inkType) {
         var screen = Minecraft.getInstance().screen;
         if (screen instanceof BrushScreen brushScreen) {
-            brushScreen.createCanvas(paperType, inkType);
-            brushScreen.getCanvas().setEnabled(true);
-            brushScreen.getTitleBox().setEditable(true);
+            if (!brushScreen.getCanvas().isEnabled()) {
+                brushScreen.createCanvas(paperType, inkType);
+                brushScreen.getCanvas().setEnabled(true);
+                brushScreen.getTitleBox().setEditable(true);
+            }
         }
     }
 

@@ -36,9 +36,13 @@ public class BrushCanvas extends AbstractWidget {
     private boolean enabled = false;
 
     public BrushCanvas(AbstractContainerScreen<?> parent, TextureMapClient atlas,
+                       int x, int y, int width, int height,
                        IntSupplier getColor, IntConsumer setColor,
                        PaperType paperType, InkType inkType) {
-        super(0, 0, 0, 0, Component.empty());
+        super(x, y, width, height, Component.empty());
+
+        this.canvasWidth = width - 2;
+        this.canvasHeight = height - 2;
 
         this.parent = parent;
         this.atlas = atlas;
@@ -76,18 +80,7 @@ public class BrushCanvas extends AbstractWidget {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public void setLocation(int x, int y) {
-        setX(x);
-        setY(y);
-    }
-
-    public void resize(int width, int height) {
-        this.width = width;
-        this.height = height;
-        this.canvasWidth = width - 2;
-        this.canvasHeight = height - 2;
+//        this.visible = enabled;
     }
 
     public void clear() {
@@ -103,6 +96,11 @@ public class BrushCanvas extends AbstractWidget {
     private boolean isDragging = false;
     private int draggingMouseButton = -1;
     private boolean isAltPressed = false;
+
+    @Override
+    public boolean isMouseOver(double mouseX, double mouseY) {
+        return super.isMouseOver(mouseX, mouseY);
+    }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {

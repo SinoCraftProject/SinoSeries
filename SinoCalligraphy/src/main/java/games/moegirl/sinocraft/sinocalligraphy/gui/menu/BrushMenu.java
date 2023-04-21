@@ -67,6 +67,8 @@ public class BrushMenu extends AbstractContainerMenu {
                         getPaper().shrink(1);
                         getInk().shrink(1);
 
+                        brush.setDamageValue(brush.getDamageValue() + 1);
+
                         if (player instanceof ServerPlayer) {
                             SinoCalligraphy.getInstance().getNetworking().send(new DrawingClearCanvasS2CPacket(), player);
                         }
