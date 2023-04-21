@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore;
 
+import games.moegirl.sinocraft.sinocore.data.loottable.SCLootConditions;
 import games.moegirl.sinocraft.sinocore.old.utility.json.JsonUtils;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.FluidStackSerializer;
 import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.IngredientSerializer;
@@ -45,6 +46,8 @@ public class SinoCore {
                 .registerAdapter(ItemStack.class, new ItemStackSerializer())
                 .registerAdapter(FluidStack.class, new FluidStackSerializer())
                 .registerAdapter(NonNullList.class, new NonNullListSerializer());
+
+        SCLootConditions.register(bus);
 
         LOGGER.info("SinoCore loaded!");
     }

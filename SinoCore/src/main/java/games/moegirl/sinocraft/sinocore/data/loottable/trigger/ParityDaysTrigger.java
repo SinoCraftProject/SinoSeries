@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.data.condition.trigger;
+package games.moegirl.sinocraft.sinocore.data.loottable.trigger;
 
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.*;

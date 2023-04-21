@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.data.condition;
+package games.moegirl.sinocraft.sinocore.data.loottable;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;

@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package games.moegirl.sinocraft.sinocore.old.data.condition;
+package games.moegirl.sinocraft.sinocore.data.loottable.trigger;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 
