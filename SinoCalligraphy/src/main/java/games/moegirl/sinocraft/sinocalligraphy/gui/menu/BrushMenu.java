@@ -54,8 +54,13 @@ public class BrushMenu extends AbstractContainerMenu {
         TEXTURE.placeSlot(this, brushContainer, "result", BrushContainer.FILLED_XUAN_PAPER_SLOT,
                 ((container, slot, x, y) -> new TakeOnlySlot(container, slot, x, y) {
                     @Override
+                    public boolean mayPickup(Player player) {
+                        return brushContainer.hasInk() && brushContainer.hasPaper();
+                    }
+
+                    @Override
                     public ItemStack safeTake(int count, int decrement, Player player) {
-                        if (getPaper().isEmpty() || getInk().isEmpty()) {
+                        if (!brushContainer.hasInk() || !brushContainer.hasPaper()) {
                             return ItemStack.EMPTY;
                         }
 
@@ -147,9 +152,6 @@ public class BrushMenu extends AbstractContainerMenu {
         brushContainer.dropAll(player);
     }
 
-    protected PaperType prevPaperType = PaperType.WHITE;
-    protected InkType prevInkType = InkType.BLACK;
-
     @Override
     public void broadcastChanges() {
         super.broadcastChanges();
@@ -165,11 +167,7 @@ public class BrushMenu extends AbstractContainerMenu {
                 paperType = paper.getType();
             }
 
-            if (paperType != prevPaperType || inkType != prevInkType) {
-                prevPaperType = paperType;
-                prevInkType = inkType;
-                SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType));
-            }
+            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType));
         } else {
             SinoCalligraphy.getInstance().getNetworking().send(new DrawingDisableCanvasS2CPacket());
         }

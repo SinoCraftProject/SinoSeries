@@ -61,6 +61,8 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         list.get().setRelativeLocation(leftPos, topPos);
         addRenderableWidget(list.get());
 
+        addRenderableWidget(canvas.get());
+
         titleBox = new EditBox(font, leftPos + 43, topPos + 150, 128, 16, Component.translatable(SCAConstants.NARRATION_BRUSH_TITLE_BOX));
         titleBox.setTextColor(FastColor.ARGB32.color(255, 255, 225, 255));
         titleBox.setBordered(false);
@@ -88,15 +90,6 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         renderBackground(poseStack);
         super.render(poseStack, mouseX, mouseY, partialTick);
         renderTooltip(poseStack, mouseX, mouseY);
-
-        if (shouldUpdateCanvas) {
-            shouldUpdateCanvas = false;
-            if (prevCanvas != null) {
-                removeWidget(prevCanvas);
-            }
-
-            addRenderableWidget(canvas.get());
-        }
     }
 
     @Override
@@ -198,13 +191,9 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         return canvas.get();
     }
 
-    protected BrushCanvas prevCanvas = null;
-    protected boolean shouldUpdateCanvas = true;
-
-    public void createCanvas(PaperType paperType, InkType inkType) {
-        shouldUpdateCanvas = true;
-        prevCanvas = canvas.get();
-        canvas = Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, leftPos + 58, topPos + 11, 130, 130, menu::getColorLevel, menu::setColorLevel, paperType, inkType));
+    public void updateCanvas(PaperType paperType, InkType inkType) {
+        canvas.get().setPaperType(paperType);
+        canvas.get().setInkType(inkType);
     }
 
     public EditBox getTitleBox() {

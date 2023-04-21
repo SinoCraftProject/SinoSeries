@@ -60,6 +60,18 @@ public class BrushCanvas extends AbstractWidget {
         }
     }
 
+    public void setInkType(InkType inkType) {
+        if (drawing instanceof IHasInkType hasInkType) {
+            hasInkType.setInkType(inkType);
+        }
+    }
+
+    public void setPaperType(PaperType paperType) {
+        if (drawing instanceof IHasPaperType hasPaperType) {
+            hasPaperType.setPaperType(paperType);
+        }
+    }
+
     @Override
     public void renderWidget(PoseStack poseStack, int x, int y, float partialTick) {
         atlas.blitTexture(poseStack, "canvas", parent);
