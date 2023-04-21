@@ -14,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * A base class of BlockStateProvider.
+ * The default base class of BlockState data generator in SinoCore.
+ *
+ * @author qyl27
  */
 public abstract class AbstractBlockStateProvider extends BlockStateProvider {
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sinocalligraphy:item/empty_xuan_paper_black"
+  }
+}

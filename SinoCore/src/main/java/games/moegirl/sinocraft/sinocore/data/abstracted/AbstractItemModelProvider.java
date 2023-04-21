@@ -22,9 +22,13 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * A base class of ItemModelProvider.
+ * The default base class of ItemModel data generator in SinoCore.
+ *
+ * @author qyl27
  */
 public abstract class AbstractItemModelProvider extends ItemModelProvider {
+    public static final ResourceLocation GENERATED = new ResourceLocation("minecraft", "item/generated");
+    public static final ResourceLocation HANDHELD = new ResourceLocation("minecraft", "item/handheld");
 
     private final boolean strict;
 
@@ -130,17 +134,17 @@ public abstract class AbstractItemModelProvider extends ItemModelProvider {
 
     protected void generated(ItemLike item) {
         String path = ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
-        withExistingParent(path, mcLoc("item/generated")).texture("layer0", modLoc("item/" + path));
+        withExistingParent(path, GENERATED).texture("layer0", modLoc("item/" + path));
     }
 
     protected void handheld(ItemLike item) {
         String path = ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
-        withExistingParent(path, mcLoc("item/handheld")).texture("layer0", modLoc("item/" + path));
+        withExistingParent(path, HANDHELD).texture("layer0", modLoc("item/" + path));
     }
 
     protected void handheld(Block block) {
         String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
-        withExistingParent(path, mcLoc("item/handheld")).texture("layer0", modLoc("block/" + path));
+        withExistingParent(path, HANDHELD).texture("layer0", modLoc("block/" + path));
     }
 
     protected void blockItem(Block block) {

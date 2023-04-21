@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocalligraphy.data.advancement.SCAAdvancementGe
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderENUS;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderZHCN;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderZHTW;
+import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import net.minecraft.data.tags.InstrumentTagsProvider;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -23,7 +24,7 @@ public class SCAData {
         var lookupProvider = event.getLookupProvider();
 
         if (event.includeClient()) {
-            gen.addProvider(true, new SCAItemModelProvider(output, SinoCalligraphy.MODID, exHelper));
+            gen.addProvider(true, new SCAItemModelProvider(output, SinoCalligraphy.MODID, exHelper, SCAItems.ITEMS));
         }
 
         if (event.includeServer()) {
