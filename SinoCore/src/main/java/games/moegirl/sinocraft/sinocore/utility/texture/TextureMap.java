@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.utility.texture;
 
 import com.google.common.collect.Iterators;
-import games.moegirl.sinocraft.sinocore.mixin.interfaces.IContainerMenu;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -51,7 +50,7 @@ public final class TextureMap {
 
     private <T extends Slot, C extends Container> T placeSlot(AbstractContainerMenu menu, C container, SlotEntry entry, int index, SlotStrategy<T, C> slot) {
         T s = slot.createSlot(container, index, entry.x(), entry.y());
-        ((IContainerMenu) menu).sinocore$addSlot(s);
+        menu.addSlot(s);
         return s;
     }
 

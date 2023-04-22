@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import games.moegirl.sinocraft.sinocore.client.component.ImageButton;
-import games.moegirl.sinocraft.sinocore.mixin.interfaces.IScreen;
 import games.moegirl.sinocraft.sinocore.utility.texture.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -33,8 +32,8 @@ public class TextureMapClient {
                                         AbstractContainerScreen<?> parent,
                                         Button.OnPress onPress,
                                         @Nullable Button.OnPress onRightPress) {
-        return texture.buttons().get(name).map(e -> ((IScreen) parent)
-                .sinocore$addRenderableWidget(new ImageButton(parent, texture, e, onPress, onRightPress)));
+        return texture.buttons().get(name)
+                .map(e -> parent.addRenderableWidget(new ImageButton(parent, texture, e, onPress, onRightPress)));
     }
 
     public Optional<Button> placeButton(String name,
