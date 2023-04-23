@@ -5,8 +5,9 @@
       "conditions": {
         "items": [
           {
-            "items": [],
-            "tag": "sinocalligraphy:fan"
+            "items": [
+              "sinocalligraphy:fan"
+            ]
           }
         ]
       },

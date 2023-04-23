@@ -8,12 +8,11 @@ import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +35,9 @@ public class SinoTest {
             .translate("zh_cn", "测试")
             .translate("zh_tw", "測試")
             .translate("en_us", "Test")
+            .toTabs(CreativeModeTabs.SPAWN_EGGS)
+            .toBlockTags(BlockTags.create(new ResourceLocation(MODID, "test_tree_blocks")))
+            .toItemTags(ItemTags.create(new ResourceLocation(MODID, "test_tree_items")))
             .build();
 
     public static RegistryObject<MenuType<TestTextureMenu>> TEST_TEXTURE_MENU =

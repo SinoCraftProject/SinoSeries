@@ -1,11 +1,10 @@
 {
-  "parent": "sinocalligraphy:root",
+  "parent": "sinocalligraphy:ink",
   "criteria": {
     "got_drawing": {
       "conditions": {
         "items": [
           {
-            "items": [],
             "tag": "sinocalligraphy:filled_papers"
           }
         ]

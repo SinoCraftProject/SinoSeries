@@ -46,11 +46,11 @@ public class FanItem extends Item implements Vanishable, ITabItem {
     }
 
     public double getDamage() {
-        return folded ? 2.5 : 0.5;
+        return !folded ? 2.5 : 0.5;
     }
 
     public double getSpeed() {
-        return folded ? -2 : -1.6;
+        return !folded ? -2 : -1.6;
     }
 
     @Override

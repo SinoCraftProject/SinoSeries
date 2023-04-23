@@ -17,5 +17,6 @@
   "result": {
     "count": 3,
     "item": "sinotest:test_fence"
-  }
+  },
+  "show_notification": true
 }
