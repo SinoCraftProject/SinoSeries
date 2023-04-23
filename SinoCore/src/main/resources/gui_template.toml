@@ -108,17 +108,54 @@ type = "button"
 position = [7, 99]
 # 按钮尺寸
 size = [1, 1]
-# 普通状态材质名，类型：字符串，必须指向一个 type = "texture" 的表
-# 可省略，可为空，表示无对应材质
-texture = ""
-# 鼠标悬浮材质名，类型：字符串，必须指向一个 type = "texture" 的表
-# 可省略，可为空，默认使用 texture
-texture_hover = ""
-# 按下状态材质名，类型：字符串，必须指向一个 type = "texture" 的表
-# 可省略，可为空，默认使用 texture_hover
-texture_pressed = ""
-# 按钮无效材质名，类型：字符串，必须指向一个 type = "texture" 的表
-# 可省略，可为空，默认使用 texture
-texture_disable = ""
+# 普通状态材质名，类型：字符串数组，数组中每个元素必须指向一个 type = "texture" 的表
+# 可省略，可为空，可为字符串，表示无对应材质
+texture = [""]
+# 鼠标悬浮材质名，类型：字符串数组，数组中每个元素必须指向一个 type = "texture" 的表
+# 可省略，可为空，可为字符串，默认使用 texture
+texture_hover = [""]
+# 按下状态材质名，类型：字符串数组，数组中每个元素必须指向一个 type = "texture" 的表
+# 可省略，可为空，可为字符串，默认使用 texture_hover
+texture_pressed = [""]
+# 按钮无效材质名，类型：字符串数组，数组中每个元素必须指向一个 type = "texture" 的表
+# 可省略，可为空，可为字符串，默认使用 texture
+texture_disable = [""]
+# 鼠标悬浮时显示的提示，可以是 lang key
+tooltip = ""
+
+# 文本输入框，类似于告示牌的输入框
+[a_editbox]
+type = "editbox"
+# 左上角位置
+position = [0, 0]
+# 大小
+size = [0, 0]
+# title，可省略，可以是 lang key
+title = ""
+# 提示，可以是 lang key
+hint = ""
+# 最大长度
+# 可省略，默认 32
+max_length = 32
+# 是否有边框
+# 可省略，默认为 false
+bordered = true
+# 可省略，不知道是啥
+suggestion = ""
+# 默认文本
+# 可省略，默认为空
+default = ""
+# 文本颜色
+# 可省略，默认 0xE0E0E0
+color = 0xE0E0E0
+# 不可编辑时的文本颜色
+# 可省略，默认 0x707070
+color_uneditable = 0xE0E0E0
+# 没猜错的话是前景色？
+# 可省略，默认 -1
+color_fg = -1
+# 透明度，0-1 浮点数
+# 可省略，默认 1
+alpha = 1
 # 鼠标悬浮时显示的提示，可以是 lang key
 tooltip = ""

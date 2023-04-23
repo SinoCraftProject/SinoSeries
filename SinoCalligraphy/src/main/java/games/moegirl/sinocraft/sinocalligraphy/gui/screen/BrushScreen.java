@@ -14,21 +14,21 @@ import games.moegirl.sinocraft.sinocalligraphy.utility.DrawingHelper;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
 import games.moegirl.sinocraft.sinocore.client.component.AnimatedText;
+import games.moegirl.sinocraft.sinocore.client.component.EditBoxOptional;
 import games.moegirl.sinocraft.sinocore.gui.menu.inventory.InventoryNoTitleWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.common.util.Lazy;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Optional;
 
 public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private static final TextureMapClient CLIENT_TEXTURE = new TextureMapClient(BrushMenu.TEXTURE);
@@ -36,8 +36,8 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     private final Lazy<AnimatedText> text = Lazy.of(() -> new AnimatedText(130, 130));
     private final Lazy<ColorSelectionList> list = Lazy.of(() -> ColorSelectionList.create(this));
 
-    private Lazy<BrushCanvas> canvas;
-    protected EditBox titleBox;
+    private final Lazy<BrushCanvas> canvas;
+    protected EditBoxOptional titleBox;
 
     public BrushScreen(BrushMenu menu, Inventory inventory, Component title) {
         super(menu, new InventoryNoTitleWrapper(inventory), title);
@@ -63,26 +63,21 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
         addRenderableWidget(canvas.get());
 
-        titleBox = new EditBox(font, leftPos + 43, topPos + 150, 128, 16, Component.translatable(SCAConstants.NARRATION_BRUSH_TITLE_BOX));
-        titleBox.setTextColor(FastColor.ARGB32.color(255, 255, 225, 255));
-        titleBox.setBordered(false);
-        titleBox.setCanLoseFocus(false);
-        titleBox.setMaxLength(50);
-        titleBox.setResponder(this::onTitleChanged);
-        titleBox.setValue("");
-        setInitialFocus(titleBox);
-        addRenderableWidget(titleBox);
-
-        CLIENT_TEXTURE.placeButton("copy_button", this, this::copyDraw, this::pasteDraw);
-        CLIENT_TEXTURE.placeButton("output_button", this, this::saveToFile);
-        CLIENT_TEXTURE.placeButton("draw_apply_button", this, this::applyDraw);
-        CLIENT_TEXTURE.placeButton("draw_clear_button", this, this::clearDraw);
+        CLIENT_TEXTURE.placeButton("copy_button", this)
+                .onLeftClick(this::copyDraw)
+                .onRightClick(this::pasteDraw);
+        CLIENT_TEXTURE.placeButton("output_button", this).onLeftClick(this::saveToFile);
+        CLIENT_TEXTURE.placeButton("draw_apply_button", this).onLeftClick(this::applyDraw);
+        CLIENT_TEXTURE.placeButton("draw_clear_button", this).onLeftClick(this::clearDraw);
+        titleBox = CLIENT_TEXTURE.placeEditBox("draw_name", this)
+                .setResponder(this::onTitleChanged)
+                .focused();
     }
 
     @Override
     protected void containerTick() {
         super.containerTick();
-        titleBox.tick();
+        titleBox.handleTick();
     }
 
     @Override
@@ -109,7 +104,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
             canvas.get().mouseClicked(mouseX, mouseY, button);
         }
 
-        return super.mouseClicked(mouseX, mouseY, button);
+        return titleBox.handleMouseClicked(mouseX, mouseY, button) || super.mouseClicked(mouseX, mouseY, button);
     }
 
     @Override
@@ -158,8 +153,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
             minecraft.player.closeContainer();
         }
 
-        return titleBox.keyPressed(keyCode, scanCode, modifiers)
-                || titleBox.canConsumeInput()
+        return titleBox.handleKeyPressed(keyCode, scanCode, modifiers)
                 || super.keyPressed(keyCode, scanCode, modifiers);
     }
 
@@ -174,7 +168,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
 
     @Override
     public boolean charTyped(char codePoint, int modifiers) {
-        return super.charTyped(codePoint, modifiers);
+        return titleBox.handleCharTyped(codePoint, modifiers) || super.charTyped(codePoint, modifiers);
     }
 
     /// </editor-fold>
@@ -191,13 +185,13 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         return canvas.get();
     }
 
+    public EditBoxOptional getTitleBox() {
+        return titleBox;
+    }
+
     public void updateCanvas(PaperType paperType, InkType inkType) {
         canvas.get().setPaperType(paperType);
         canvas.get().setInkType(inkType);
-    }
-
-    public EditBox getTitleBox() {
-        return titleBox;
     }
 
     /// <editor-fold desc="Button pressed.">
@@ -258,10 +252,11 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     }
 
     private void onTitleChanged(String title) {
-        if (titleBox.getValue().equals("")) {
+        Optional<String> value = titleBox.getValue();
+        if (value.isEmpty()) {
             canvas.get().getDrawing().setTitle(Component.translatable(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY));
         } else {
-            canvas.get().getDrawing().setTitle(titleBox.getValue());
+            canvas.get().getDrawing().setTitle(value.get());
         }
     }
 

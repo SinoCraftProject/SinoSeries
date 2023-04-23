@@ -4,13 +4,10 @@
   "package": "games.moegirl.sinocraft.sinocore.mixin.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlockPropertiesMixin",
-    "BlockEntityTypeMixin",
-    "AbstractContainerMenuMixin"
+    "BlockEntityTypeMixin"
   ],
   "client": [
-    "MinecraftMixin",
-    "ScreenMixin"
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -22,7 +22,7 @@ public class TestTextureScreen extends AbstractContainerScreen<TestTextureMenu> 
 
     public TestTextureScreen(TestTextureMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
-        CLIENT.placeButton("button", this, this::onLeft, this::onRight);
+        CLIENT.placeButton("button", this).onLeftClick(this::onLeft).onRightClick(this::onRight);
     }
 
     @Override

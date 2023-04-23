@@ -107,20 +107,20 @@ position = [172, 148]
 type = "button"
 position = [172, 148]
 size = [16, 16]
-texture = "draw_button_texture"
-texture_hover = "draw_button_over_texture"
-texture_pressed = "draw_button_press_texture"
-texture_disable = "draw_button_disable_texture"
+texture = ["draw_button_yes_texture", "draw_button_texture"]
+texture_hover = ["draw_button_yes_texture", "draw_button_over_texture"]
+texture_pressed = ["draw_button_yes_texture", "draw_button_press_texture"]
+texture_disable = ["draw_button_yes_texture", "draw_button_disable_texture"]
 tooltip = "sinocalligraphy.gui.brush.button.apply.tooltip"
 
 [draw_clear_button]
 type = "button"
 position = [188, 148]
 size = [16, 16]
-texture = "draw_button_texture"
-texture_hover = "draw_button_over_texture"
-texture_pressed = "draw_button_press_texture"
-texture_disable = "draw_button_disable_texture"
+texture = ["draw_button_no_texture", "draw_button_texture"]
+texture_hover = ["draw_button_no_texture", "draw_button_over_texture"]
+texture_pressed = ["draw_button_no_texture", "draw_button_press_texture"]
+texture_disable = ["draw_button_no_texture", "draw_button_disable_texture"]
 tooltip = "sinocalligraphy.gui.brush.button.clear.tooltip"
 
 [draw_title_box_texture]
@@ -128,3 +128,13 @@ type = "texture"
 size = [128, 16]
 uv = [256, 160]
 position = [41, 148]
+
+[draw_name]
+type = "editbox"
+position = [43, 150]
+size = [128, 16]
+title = "sinocalligraphy.gui.narration.brush.title_box"
+color = 0xFFFFFF
+bordered = false
+max_length = 50
+

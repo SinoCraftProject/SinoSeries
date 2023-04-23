@@ -4,6 +4,7 @@ import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.toml.TomlParser;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.fml.ModList;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -46,20 +47,22 @@ public class TextureParser {
             CommentedConfig config = new TomlParser().parse(reader);
             int width = config.getIntOrElse("width", 256);
             int height = config.getIntOrElse("height", 256);
-            List<PointEntry> points = new LinkedList<>();
+            List<PointEntry> points = new ArrayList<>();
             Map<String, PointEntry> pointMap = new HashMap<>();
-            List<TextEntry> texts = new LinkedList<>();
+            List<TextEntry> texts = new ArrayList<>();
             Map<String, TextEntry> textMap = new HashMap<>();
-            List<TextureEntry> textures = new LinkedList<>();
+            List<TextureEntry> textures = new ArrayList<>();
             Map<String, TextureEntry> textureMap = new HashMap<>();
-            List<SlotEntry> slot = new LinkedList<>();
+            List<SlotEntry> slot = new ArrayList<>();
             Map<String, SlotEntry> slotMap = new HashMap<>();
-            List<SlotsEntry> slots = new LinkedList<>();
+            List<SlotsEntry> slots = new ArrayList<>();
             Map<String, SlotsEntry> slotsMap = new HashMap<>();
-            List<ProgressEntry> progress = new LinkedList<>();
+            List<ProgressEntry> progress = new ArrayList<>();
             Map<String, ProgressEntry> progressMap = new HashMap<>();
-            List<ButtonEntry> buttons = new LinkedList<>();
+            List<ButtonEntry> buttons = new ArrayList<>();
             Map<String, ButtonEntry> buttonMap = new HashMap<>();
+            List<EditBoxEntry> editBoxes = new ArrayList<>();
+            Map<String, EditBoxEntry> editBoxMap = new HashMap<>();
             for (CommentedConfig.Entry entry : config.entrySet()) {
                 String name = entry.getKey();
                 Object value = entry.getValue();
@@ -74,6 +77,7 @@ public class TextureParser {
                         case "slots" -> buildSlots(name, map, slots, slotsMap);
                         case "progress" -> buildProgress(name, map, progress, progressMap);
                         case "button" -> buildButton(name, map, buttons, buttonMap);
+                        case "editbox" -> buildEditBox(name, map, editBoxes, editBoxMap);
                     }
                 }
             }
@@ -86,18 +90,39 @@ public class TextureParser {
             m.slots().set(slots, slotsMap);
             m.progress().set(progress, progressMap);
             m.buttons().set(buttons, buttonMap);
+            m.editBoxes().set(editBoxes, editBoxMap);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private static void buildEditBox(String name, Config data, List<EditBoxEntry> editBoxes, Map<String, EditBoxEntry> editBoxMap) {
+        int[] p = getPoint(data, "position");
+        int[] size = getPoint(data, "size");
+        String title = getString(data, "title");
+        String hint = getString(data, "hint");
+        int maxLength = getInt(data, "max_length", 32);
+        String suggestion = getString(data, "suggestion");
+        String defVal = getString(data, "default", "");
+        int color = getInt(data, "color", 0xE0E0E0);
+        int uneditableColor = getInt(data, "color_uneditable", 0xE0E0E0);
+        int fgColor = getInt(data, "color_fg", -1);
+        float alpha = getFloat(data, "alpha", 0, 1, 1);
+        String tooltip = getString(data, "tooltip");
+        boolean bordered = getBoolean(data, "bordered", true);
+        EditBoxEntry entry = new EditBoxEntry(name, p[0], p[1], size[0], size[1], title, hint, maxLength, suggestion,
+                defVal, color, uneditableColor, fgColor, alpha, tooltip, bordered);
+        editBoxes.add(entry);
+        editBoxMap.put(name, entry);
+    }
+
     private static void buildButton(String name, Config data, List<ButtonEntry> buttons, Map<String, ButtonEntry> buttonsMap) {
         int[] position = getPoint(data, "position");
         int[] size = getPoint(data, "size");
-        String texture = getString(data, "texture");
-        String textureHover = getString(data, "texture_hover", texture);
-        String texturePressed = getString(data, "texture_pressed", textureHover);
-        String textureDisable = getString(data, "texture_disable", texture);
+        List<String> texture = getStrings(data, "texture");
+        List<String> textureHover = getStrings(data, "texture_hover", texture);
+        List<String> texturePressed = getStrings(data, "texture_pressed", textureHover);
+        List<String> textureDisable = getStrings(data, "texture_disable", texture);
         String tooltip = getString(data, "tooltip");
         ButtonEntry entry = new ButtonEntry(name, position[0], position[1], size[0], size[1], texture, textureHover, texturePressed, textureDisable, tooltip);
         buttons.add(entry);
@@ -218,5 +243,29 @@ public class TextureParser {
     @Nullable
     private static String getString(Config data, String name, @Nullable String defaultValue) {
         return (data.get(name) instanceof String s && !s.isEmpty()) ? s : defaultValue;
+    }
+
+    private static List<String> getStrings(Config data, String name, List<String> defaultValue) {
+        Object o = data.get(name);
+        if (o instanceof List<?> lst) {
+            List<String> ss = new ArrayList<>(lst.size());
+            for (int i = lst.size() - 1; i >= 0; i--) {
+                ss.add(String.valueOf(lst.get(i)));
+            }
+            return Collections.unmodifiableList(ss);
+        } else if (o instanceof String str) return List.of(str);
+        else return List.copyOf(defaultValue);
+    }
+
+    private static List<String> getStrings(Config data, String name) {
+        return getStrings(data, name, List.of());
+    }
+
+    private static float getFloat(Config data, String name, float min, float max, float defaultValue) {
+        return Mth.clamp(data.get(name) instanceof Double db ? ((float) db.doubleValue()) : defaultValue, min, max);
+    }
+
+    private static boolean getBoolean(Config data, String name, boolean defaultValue) {
+        return data.get(name) instanceof Boolean b ? b : defaultValue;
     }
 }
