@@ -21,6 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -33,10 +34,10 @@ public class Tree {
     protected final WoodType woodType;
     protected final BlockSetType blockSetType;
 
-    protected final Map<TreeBlockType, RegistryObject<? extends Block>> blocks = new HashMap<>();
-    protected final Map<TreeBlockType, RegistryObject<? extends Item>> items = new HashMap<>();
+    protected final Map<TreeBlockType, Supplier<? extends Block>> blocks = new HashMap<>();
+    protected final Map<TreeBlockType, Supplier<? extends Item>> items = new HashMap<>();
     protected final Map<TreeBlockType, List<CreativeModeTab>> itemCreativeTabs = new HashMap<>();
-    protected final Map<CreativeModeTab, List<RegistryObject<? extends Item>>> creativeTabItems = new HashMap<>();
+    protected final Map<CreativeModeTab, List<Supplier<? extends Item>>> creativeTabItems = new HashMap<>();
 
     protected final Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties;
 
@@ -51,9 +52,9 @@ public class Tree {
                    Map<String, String> translateRoots,
                    Map<String, Map<TreeBlockType, StringDecorator>> customTranslates,
                    Map<String, Map<TreeBlockType, String>> customLiteralTranslates,
-                   Map<TreeBlockType, RegistryObject<? extends Block>> customBlocks,
+                   Map<TreeBlockType, Supplier<? extends Block>> customBlocks,
                    Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties,
-                   Map<TreeBlockType, RegistryObject<? extends Item>> customBlockItems,
+                   Map<TreeBlockType, Supplier<? extends Item>> customItems,
                    Map<TreeBlockType, List<CreativeModeTab>> customItemTabs,
                    @Nullable ModTreeGrowerBase grower, @Nullable TreeConfiguration configuration) {
         this.name = name;
@@ -75,7 +76,7 @@ public class Tree {
         this.customBlockProperties = customBlockProperties;
 
         blocks.putAll(customBlocks);
-        items.putAll(customBlockItems);
+        items.putAll(customItems);
         itemCreativeTabs.putAll(customItemTabs);
 
         TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
@@ -251,20 +252,20 @@ public class Tree {
         return woodType;
     }
 
-    public Map<TreeBlockType, RegistryObject<? extends Block>> getBlocks() {
-        return ImmutableMap.<TreeBlockType, RegistryObject<? extends Block>>builder().putAll(blocks).build();
+    public Map<TreeBlockType, Supplier<? extends Block>> getBlocks() {
+        return ImmutableMap.<TreeBlockType, Supplier<? extends Block>>builder().putAll(blocks).build();
     }
 
-    public Map<TreeBlockType, RegistryObject<? extends Item>> getItems() {
-        return ImmutableMap.<TreeBlockType, RegistryObject<? extends Item>>builder().putAll(items).build();
+    public Map<TreeBlockType, Supplier<? extends Item>> getItems() {
+        return ImmutableMap.<TreeBlockType, Supplier<? extends Item>>builder().putAll(items).build();
     }
 
     public Map<TreeBlockType, List<CreativeModeTab>> getItemTabs() {
         return ImmutableMap.<TreeBlockType, List<CreativeModeTab>>builder().putAll(itemCreativeTabs).build();
     }
 
-    public Map<CreativeModeTab, List<RegistryObject<? extends Item>>> getTabItems() {
-        return ImmutableMap.<CreativeModeTab, List<RegistryObject<? extends Item>>>builder().putAll(creativeTabItems).build();
+    public Map<CreativeModeTab, List<Supplier<? extends Item>>> getTabItems() {
+        return ImmutableMap.<CreativeModeTab, List<Supplier<? extends Item>>>builder().putAll(creativeTabItems).build();
     }
 
     public ResourceLocation getName() {
@@ -324,9 +325,9 @@ public class Tree {
         protected Map<String, Map<TreeBlockType, StringDecorator>> translates = new HashMap<>();
         protected Map<String, Map<TreeBlockType, String>> literalTranslates = new HashMap<>();
 
-        protected Map<TreeBlockType, RegistryObject<? extends Block>> customBlocks = new HashMap<>();
+        protected Map<TreeBlockType, Supplier<? extends Block>> customBlocks = new HashMap<>();
         protected Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties = new HashMap<>();
-        protected Map<TreeBlockType, RegistryObject<? extends Item>> customBlockItems = new HashMap<>();
+        protected Map<TreeBlockType, Supplier<? extends Item>> customItems = new HashMap<>();
         protected Map<TreeBlockType, List<CreativeModeTab>> customItemTabs = new HashMap<>();
 
         @Nullable
@@ -394,7 +395,7 @@ public class Tree {
          * @param block         Block.
          * @return Builder
          */
-        public Builder block(TreeBlockType treeBlockType, RegistryObject<Block> block) {
+        public Builder block(TreeBlockType treeBlockType, Supplier<Block> block) {
             customBlocks.put(treeBlockType, block);
             return this;
         }
@@ -415,11 +416,11 @@ public class Tree {
          * Custom block item instead of auto generate.
          *
          * @param treeBlockType Specific block item.
-         * @param blockItem     Block item.
+         * @param item          Block item.
          * @return Builder
          */
-        public Builder blockItem(TreeBlockType treeBlockType, RegistryObject<BlockItem> blockItem) {
-            customBlockItems.put(treeBlockType, blockItem);
+        public Builder item(TreeBlockType treeBlockType, Supplier<BlockItem> item) {
+            customItems.put(treeBlockType, item);
             return this;
         }
 
@@ -480,7 +481,7 @@ public class Tree {
         public Tree build() {
             return new Tree(name, translateRoots, translates, literalTranslates,
                     customBlocks, customBlockProperties,
-                    customBlockItems, customItemTabs,
+                    customItems, customItemTabs,
                     grower, configuration);
         }
     }
