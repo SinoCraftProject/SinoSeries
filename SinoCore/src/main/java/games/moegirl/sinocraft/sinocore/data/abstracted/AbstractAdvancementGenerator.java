@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocore.data.abstracted;
 
-import com.google.common.collect.ImmutableSet;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.DisplayInfo;
@@ -12,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
@@ -42,7 +40,7 @@ public abstract class AbstractAdvancementGenerator implements ForgeAdvancementPr
 
     public CriterionTriggerInstance triggerGotItems(TagKey<Item> tag) {
         return InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate(tag,
-                Set.of(), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, EnchantmentPredicate.NONE,
+                null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, EnchantmentPredicate.NONE,
                 EnchantmentPredicate.NONE, null, NbtPredicate.ANY));
     }
 

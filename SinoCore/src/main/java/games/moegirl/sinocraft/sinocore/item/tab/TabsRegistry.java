@@ -62,7 +62,7 @@ public class TabsRegistry {
             event.registerCreativeModeTab(key, builder -> {
                 var translationKey = makeTranslateKey(entry.getKey());
                 builder.title(Component.translatable(translationKey))
-                        .icon(() -> new ItemStack(Items.APPLE))
+                        .icon(() -> entry.getValue().stream().findFirst().orElse(new ItemStack(Items.APPLE)))
                         .displayItems((flagSet, output) -> output.acceptAll(new ArrayList<>(entry.getValue())));
                 var result = builder.build();
                 CREATIVE_MODE_TABS.put(key, new Tuple<>(result, translationKey));

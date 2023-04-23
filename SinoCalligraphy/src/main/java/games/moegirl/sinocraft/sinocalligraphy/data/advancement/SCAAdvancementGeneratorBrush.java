@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractAdvancementGenerator;
+import games.moegirl.sinocraft.sinocore.data.advancement.AdvancementTree;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
@@ -27,39 +28,36 @@ public class SCAAdvancementGeneratorBrush extends AbstractAdvancementGenerator {
 
     @Override
     public void addAdvancements(Consumer<Advancement> consumer) {
-        var root = Advancement.Builder.advancement()
+        var tree = new AdvancementTree(consumer);
+
+        tree.root(moddedId("root"), Advancement.Builder.advancement()
                 .display(display(SCAItems.BRUSH.get(),
                         SCAConstants.TRANSLATE_ADVANCEMENT_SCA, SCAConstants.TRANSLATE_ADVANCEMENT_SCA_DESC,
                         FrameType.TASK))
                 .addCriterion("got_brush", triggerGotItems(SCAItemTags.BRUSHES))
-                .rewards(AdvancementRewards.EMPTY)
-                .save(consumer, moddedId("root"));
+                .rewards(AdvancementRewards.EMPTY));
 
-        Advancement.Builder.advancement()
-                .display(display(SCAItems.INK.get(),
-                        SCAConstants.TRANSLATE_ADVANCEMENT_INK, SCAConstants.TRANSLATE_ADVANCEMENT_INK_DESC,
-                        FrameType.TASK))
-                .addCriterion("got_ink", triggerGotItems(SCAItemTags.INKS))
-                .parent(root)
-                .rewards(AdvancementRewards.EMPTY)
-                .save(consumer, moddedId("ink"));
-
-        Advancement.Builder.advancement()
-                .display(display(SCAItems.FILLED_XUAN_PAPER.get(),
-                        SCAConstants.TRANSLATE_ADVANCEMENT_DRAWING, SCAConstants.TRANSLATE_ADVANCEMENT_DRAWING_DESC,
-                        FrameType.TASK))
-                .addCriterion("got_drawing", triggerGotItems(SCAItemTags.FILLED_PAPERS))
-                .parent(root)
-                .rewards(AdvancementRewards.EMPTY)
-                .save(consumer, moddedId("drawing"));
-
-        Advancement.Builder.advancement()
+        tree.child(moddedId("fan"), Advancement.Builder.advancement()
                 .display(display(SCAItems.FAN.get(),
                         SCAConstants.TRANSLATE_ADVANCEMENT_FAN, SCAConstants.TRANSLATE_ADVANCEMENT_FAN_DESC,
                         FrameType.TASK))
-                .addCriterion("got_fan", triggerGotItems(SCAItemTags.FAN))
-                .parent(root)
-                .rewards(AdvancementRewards.EMPTY)
-                .save(consumer, moddedId("fan"));
+                .addCriterion("got_fan", triggerGotItems(SCAItems.FAN.get()))
+                .rewards(AdvancementRewards.EMPTY));
+
+        tree.push(moddedId("ink"), Advancement.Builder.advancement()
+                        .display(display(SCAItems.INK.get(),
+                                SCAConstants.TRANSLATE_ADVANCEMENT_INK, SCAConstants.TRANSLATE_ADVANCEMENT_INK_DESC,
+                                FrameType.TASK))
+                        .addCriterion("got_ink", triggerGotItems(SCAItemTags.INKS))
+                        .rewards(AdvancementRewards.EMPTY));
+
+        tree.child(moddedId("drawing"), Advancement.Builder.advancement()
+                        .display(display(SCAItems.FILLED_XUAN_PAPER.get(),
+                                SCAConstants.TRANSLATE_ADVANCEMENT_DRAWING, SCAConstants.TRANSLATE_ADVANCEMENT_DRAWING_DESC,
+                                FrameType.TASK))
+                        .addCriterion("got_drawing", triggerGotItems(SCAItemTags.FILLED_PAPERS))
+                        .rewards(AdvancementRewards.EMPTY));
+
+        tree.pop();
     }
 }
