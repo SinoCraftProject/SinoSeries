@@ -91,6 +91,11 @@ public class Tree {
     }
 
     private void makeDefaultBlocks(DeferredRegister<Block> blockRegister) {
+        for (var entry : blocks.entrySet()) {
+            var type = entry.getKey();
+            blockRegister.register(type.makeRegistryName(getName()), () -> entry.getValue().get());
+        }
+
         for (var entry : customBlockProperties.entrySet()) {
             var type = entry.getKey();
             if (type.isGeneralBlock()) {
@@ -188,6 +193,11 @@ public class Tree {
     }
 
     private void makeDefaultBlockItems(DeferredRegister<Item> itemRegister) {
+        for (var entry : items.entrySet()) {
+            var type = entry.getKey();
+            itemRegister.register(type.makeRegistryName(getName()), () -> entry.getValue().get());
+        }
+
         var itemTypesRemain = new ArrayList<>(List.of(TreeBlockType.values()))
                 .stream()
                 .filter(TreeBlockType::hasItem)
