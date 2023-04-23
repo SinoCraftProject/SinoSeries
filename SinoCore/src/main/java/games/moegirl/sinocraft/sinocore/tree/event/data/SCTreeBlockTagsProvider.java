@@ -67,6 +67,12 @@ public class SCTreeBlockTagsProvider extends BlockTagsProvider {
             tag(BlockTags.WALL_HANGING_SIGNS).add(tree.getBlock(TreeBlockType.WALL_HANGING_SIGN));
             tag(BlockTags.FENCE_GATES).add(tree.getBlock(TreeBlockType.FENCE_GATE));
             tag(Tags.Blocks.FENCE_GATES_WOODEN).add(tree.getBlock(TreeBlockType.FENCE_GATE));
+
+            for (var entry : tree.getBlockTags().entrySet()) {
+                for (var tagKey : entry.getValue()) {
+                    tag(tagKey).add(tree.getBlock(entry.getKey()));
+                }
+            }
         }
     }
 

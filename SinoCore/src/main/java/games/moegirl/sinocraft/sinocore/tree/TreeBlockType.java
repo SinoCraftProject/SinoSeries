@@ -23,8 +23,8 @@ public enum TreeBlockType {
     WALL_SIGN("wall_sign", false, false, false),
     HANGING_SIGN("hanging_sign", true, false, false),
     WALL_HANGING_SIGN("wall_hanging_sign", false, false, false),
-    BOAT("boat", true, true, false),
-    CHEST_BOAT("chest_boat", true, true, false),
+    BOAT("boat", false, true, false),   // Todo: qyl27: not implemented yet.
+    CHEST_BOAT("chest_boat", false, true, false),   // Todo: qyl27: not implemented yet.
     ;
 
     private final String name;

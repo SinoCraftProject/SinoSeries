@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -21,7 +22,6 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -38,6 +38,8 @@ public class Tree {
     protected final Map<TreeBlockType, Supplier<? extends Item>> items = new HashMap<>();
     protected final Map<TreeBlockType, List<CreativeModeTab>> itemCreativeTabs = new HashMap<>();
     protected final Map<CreativeModeTab, List<Supplier<? extends Item>>> creativeTabItems = new HashMap<>();
+    protected final Map<TreeBlockType, List<TagKey<Block>>> customBlockTags = new HashMap<>();
+    protected final Map<TreeBlockType, List<TagKey<Item>>> customItemTags = new HashMap<>();
 
     protected final Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties;
 
@@ -56,7 +58,9 @@ public class Tree {
                    Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties,
                    Map<TreeBlockType, Supplier<? extends Item>> customItems,
                    Map<TreeBlockType, List<CreativeModeTab>> customItemTabs,
-                   @Nullable ModTreeGrowerBase grower, @Nullable TreeConfiguration configuration) {
+                   @Nullable ModTreeGrowerBase grower, @Nullable TreeConfiguration configuration,
+                   Map<TreeBlockType, List<TagKey<Block>>> customBlockTags,
+                   Map<TreeBlockType, List<TagKey<Item>>> customItemTags) {
         this.name = name;
 
         this.translator = new TreeBlockNameTranslator(name, translateRoots, customTranslates, customLiteralTranslates);
@@ -78,6 +82,9 @@ public class Tree {
         blocks.putAll(customBlocks);
         items.putAll(customItems);
         itemCreativeTabs.putAll(customItemTabs);
+
+        this.customBlockTags.putAll(customBlockTags);
+        this.customItemTags.putAll(customItemTags);
 
         TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
     }
@@ -306,6 +313,14 @@ public class Tree {
         return configuration;
     }
 
+    public Map<TreeBlockType, List<TagKey<Block>>> getBlockTags() {
+        return customBlockTags;
+    }
+
+    public Map<TreeBlockType, List<TagKey<Item>>> getItemTags() {
+        return customItemTags;
+    }
+
     /**
      * Make translates map.
      *
@@ -339,6 +354,8 @@ public class Tree {
         protected Map<TreeBlockType, BlockBehaviour.Properties> customBlockProperties = new HashMap<>();
         protected Map<TreeBlockType, Supplier<? extends Item>> customItems = new HashMap<>();
         protected Map<TreeBlockType, List<CreativeModeTab>> customItemTabs = new HashMap<>();
+        protected Map<TreeBlockType, List<TagKey<Block>>> customBlockTags = new HashMap<>();
+        protected Map<TreeBlockType, List<TagKey<Item>>> customItemTags = new HashMap<>();
 
         @Nullable
         protected ModTreeGrowerBase grower;
@@ -486,13 +503,70 @@ public class Tree {
             return this;
         }
 
+        /**
+         * Add all items to tabs.
+         * @param tabs Tabs to add all items to.
+         * @return Builder
+         */
+        public Builder toTabs(CreativeModeTab... tabs) {
+            for (var type : TreeBlockType.values()) {
+                if (!customItemTabs.containsKey(type)) {
+                    customItemTabs.put(type, new ArrayList<>());
+                }
+            }
+
+            for (var tabList : customItemTabs.values()) {
+                tabList.addAll(Arrays.asList(tabs));
+            }
+
+            return this;
+        }
+
+        /**
+         * Add all block to tags.
+         * @param tags Block tags.
+         * @return Builder
+         */
+        public Builder toBlockTags(TagKey<Block>... tags) {
+            for (var type : TreeBlockType.values()) {
+                if (!customBlockTags.containsKey(type) && !type.hasNoBlock()) {
+                    customBlockTags.put(type, new ArrayList<>());
+                }
+            }
+
+            for (var tabList : customBlockTags.values()) {
+                tabList.addAll(Arrays.asList(tags));
+            }
+
+            return this;
+        }
+
+        /**
+         * Add all item to tags.
+         * @param tags Item tags.
+         * @return Builder
+         */
+        public Builder toItemTags(TagKey<Item>... tags) {
+            for (var type : TreeBlockType.values()) {
+                if (!customItemTags.containsKey(type) && type.hasItem()) {
+                    customItemTags.put(type, new ArrayList<>());
+                }
+            }
+
+            for (var tabList : customItemTags.values()) {
+                tabList.addAll(Arrays.asList(tags));
+            }
+
+            return this;
+        }
+
         // Todo: generate trees in wild.
 
         public Tree build() {
             return new Tree(name, translateRoots, translates, literalTranslates,
                     customBlocks, customBlockProperties,
                     customItems, customItemTabs,
-                    grower, configuration);
+                    grower, configuration, customBlockTags, customItemTags);
         }
     }
 }

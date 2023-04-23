@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "sinotest:test_pressure_gate"
-  }
+  },
+  "show_notification": true
 }

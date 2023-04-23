@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "sinotest:test_fence_gate"
-  }
+  },
+  "show_notification": true
 }

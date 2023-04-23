@@ -61,6 +61,12 @@ public class SCTreeItemTagsProvider extends ItemTagsProvider {
             tag(ItemTags.SIGNS).add(tree.getBlock(TreeBlockType.SIGN).asItem());
             tag(ItemTags.HANGING_SIGNS).add(tree.getBlock(TreeBlockType.HANGING_SIGN).asItem());
             tag(Tags.Items.FENCE_GATES_WOODEN).add(tree.getBlock(TreeBlockType.FENCE_GATE).asItem());
+
+            for (var entry : tree.getItemTags().entrySet()) {
+                for (var tagKey : entry.getValue()) {
+                    tag(tagKey).add(tree.getItem(entry.getKey()));
+                }
+            }
         }
     }
 

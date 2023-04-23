@@ -70,7 +70,7 @@ public class TabsRegistry {
         }
     }
 
-    public static void addToList(ResourceLocation resourceLocation, ItemStack stack) {
+    private static void addToList(ResourceLocation resourceLocation, ItemStack stack) {
         if (!REGISTRY_LIST.containsKey(resourceLocation)) {
             REGISTRY_LIST.put(resourceLocation, new ArrayList<>());
         }
