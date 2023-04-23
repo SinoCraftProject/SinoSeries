@@ -3,20 +3,21 @@ package games.moegirl.sinocraft.sinocore.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import games.moegirl.sinocraft.sinocore.client.component.ButtonOptional;
+import games.moegirl.sinocraft.sinocore.client.component.EditBoxOptional;
 import games.moegirl.sinocraft.sinocore.client.component.ImageButton;
 import games.moegirl.sinocraft.sinocore.utility.texture.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.navigation.FocusNavigationEvent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.joml.Matrix4f;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class TextureMapClient {
 
@@ -28,18 +29,41 @@ public class TextureMapClient {
         this.render = new RenderTypes(texture.texture());
     }
 
-    public Optional<Button> placeButton(String name,
-                                        AbstractContainerScreen<?> parent,
-                                        Button.OnPress onPress,
-                                        @Nullable Button.OnPress onRightPress) {
-        return texture.buttons().get(name)
-                .map(e -> parent.addRenderableWidget(new ImageButton(parent, texture, e, onPress, onRightPress)));
+    public ButtonOptional placeButton(String name, AbstractContainerScreen<?> parent) {
+        return ButtonOptional.wrap(texture.buttons().get(name)
+                .map(e -> parent.addRenderableWidget(new ImageButton(parent, texture, e))));
     }
 
-    public Optional<Button> placeButton(String name,
-                                        AbstractContainerScreen<?> parent,
-                                        Button.OnPress onPress) {
-        return placeButton(name, parent, onPress, null);
+    public EditBoxOptional placeEditBox(String name, AbstractContainerScreen<?> parent, Font font) {
+        return EditBoxOptional.wrap(parent, texture.editBoxes().get(name)
+                .map(e -> {
+                    EditBox box = new EditBox(font, parent.getGuiLeft() + e.x(), parent.getGuiTop() + e.y(), e.w(), e.h(), e.buildTitle());
+                    box.setHint(e.buildHint());
+                    box.setMaxLength(e.maxLength());
+                    box.setSuggestion(e.suggestion());
+                    box.setValue(e.defVal());
+                    box.setTextColor(e.color());
+                    box.setTextColorUneditable(e.uneditableColor());
+                    box.setFGColor(e.fgColor());
+                    box.setAlpha(e.alpha());
+                    box.setTooltip(e.buildTooltip());
+                    box.setBordered(e.bordered());
+                    parent.addRenderableWidget(box);
+
+                    // initialize focus
+                    ComponentPath path = ComponentPath.path(parent, box.nextFocusPath(new FocusNavigationEvent.InitialFocus()));
+                    if (path != null) {
+                        ComponentPath current = parent.getCurrentFocusPath();
+                        if (current != null) current.applyFocus(false);
+                        path.applyFocus(true);
+                    }
+
+                    return box;
+                }));
+    }
+
+    public EditBoxOptional placeEditBox(String name, AbstractContainerScreen<?> parent) {
+        return placeEditBox(name, parent, parent.getMinecraft().font);
     }
 
     public void renderText(PoseStack stack, String name) {

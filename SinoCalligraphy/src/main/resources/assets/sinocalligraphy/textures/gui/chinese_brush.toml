@@ -128,3 +128,13 @@ type = "texture"
 size = [128, 16]
 uv = [256, 160]
 position = [41, 148]
+
+[draw_name]
+type = "editbox"
+position = [43, 150]
+size = [128, 16]
+title = "sinocalligraphy.gui.narration.brush.title_box"
+color = 0xFFFFFF
+bordered = false
+max_length = 50
+

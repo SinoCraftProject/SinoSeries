@@ -20,7 +20,9 @@ import java.util.function.Supplier;
 public class ImageButton extends net.minecraft.client.gui.components.Button {
 
     @Nullable
-    private final OnPress onRightClick;
+    private OnPress onRightClick;
+    @Nullable
+    private OnPress onLeftClick;
     private final TextureMap map;
     private final List<String> tex;
     private final List<String> texHover;
@@ -29,9 +31,8 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
 
     private final Screen parent;
 
-    public ImageButton(AbstractContainerScreen<?> parent, TextureMap texture, ButtonEntry entry, OnPress onPress, @Nullable OnPress onRightClick) {
-        super(entry.x() + parent.getGuiLeft(), entry.y() + parent.getGuiTop(), entry.w(), entry.h(), entry.buildTooltip(), onPress, Supplier::get);
-        this.onRightClick = onRightClick;
+    public ImageButton(AbstractContainerScreen<?> parent, TextureMap texture, ButtonEntry entry) {
+        super(entry.x() + parent.getGuiLeft(), entry.y() + parent.getGuiTop(), entry.w(), entry.h(), entry.buildTooltip(), btn -> {}, Supplier::get);
         this.map = texture;
         this.tex = entry.texture();
         this.texHover = entry.textureHover();
@@ -89,7 +90,19 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
         }
     }
 
-    public interface RenderTooltip {
-        void renderTooltip(PoseStack poseStack, int x, int y);
+    @Override
+    public void onPress() {
+        if (onLeftClick != null)
+            onLeftClick.onPress(this);
+    }
+
+    public ImageButton setOnRightClick(@Nullable OnPress onRightClick) {
+        this.onRightClick = onRightClick;
+        return this;
+    }
+
+    public ImageButton setOnLeftClick(@Nullable OnPress onLeftClick) {
+        this.onLeftClick = onLeftClick;
+        return this;
     }
 }

@@ -21,6 +21,7 @@ public final class TextureMap {
     private final Entry<SlotsEntry> slots = new Entry<>();
     private final Entry<ProgressEntry> progress = new Entry<>();
     private final Entry<ButtonEntry> buttons = new Entry<>();
+    private final Entry<EditBoxEntry> editBoxes = new Entry<>();
 
     TextureMap(ResourceLocation texture) {
         this.texture = texture;
@@ -92,6 +93,10 @@ public final class TextureMap {
 
     public Entry<ButtonEntry> buttons() {
         return buttons;
+    }
+
+    public Entry<EditBoxEntry> editBoxes() {
+        return editBoxes;
     }
 
     public void reload() {
