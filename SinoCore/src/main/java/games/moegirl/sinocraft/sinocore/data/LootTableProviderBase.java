@@ -1,5 +1,6 @@
-package games.moegirl.sinocraft.sinocore.old.data.base;
+package games.moegirl.sinocraft.sinocore.data;
 
+import games.moegirl.sinocraft.sinocore.mixin.IBlockLootSubProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -120,7 +121,7 @@ public abstract class LootTableProviderBase extends LootTableProvider {
     public void add(LootTableSubProvider provider, LootContextParamSet set) {
         other.add(new SubProviderEntry(() -> provider, set));
         if (provider instanceof BlockLootSubProvider) {
-//            blocks.removeAll(((IBlockLootSubProvider) provider).sinocoreGetKnownBlocks());
+            blocks.removeAll(((IBlockLootSubProvider) provider).sinocore$getKnownBlocks());
         }
     }
 }

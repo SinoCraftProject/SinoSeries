@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.networking.packet;
 
 import games.moegirl.sinocraft.sinocalligraphy.utility.NetworkHelper;
-import games.moegirl.sinocraft.sinocore.networking.AbstractMessagePacket;
+import games.moegirl.sinocraft.sinocore.network.AbstractMessagePacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 

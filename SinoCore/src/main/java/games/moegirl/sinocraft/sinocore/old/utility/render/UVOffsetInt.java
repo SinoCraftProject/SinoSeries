@@ -41,8 +41,7 @@ public class UVOffsetInt {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof UVOffsetInt) {
-            UVOffsetInt pair = (UVOffsetInt) obj;
+        if (obj instanceof UVOffsetInt pair) {
             return (u == pair.u) && (v == pair.v);
         }
         return super.equals(obj);

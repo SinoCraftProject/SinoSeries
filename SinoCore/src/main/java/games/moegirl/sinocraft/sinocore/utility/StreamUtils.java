@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import java.util.*;
 import java.util.stream.Collector;

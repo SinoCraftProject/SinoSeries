@@ -1,6 +1,5 @@
-package games.moegirl.sinocraft.sinocore.networking;
+package games.moegirl.sinocraft.sinocore.network;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 

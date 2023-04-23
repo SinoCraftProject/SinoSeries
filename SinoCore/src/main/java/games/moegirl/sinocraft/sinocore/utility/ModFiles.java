@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.utility;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import net.minecraftforge.fml.ModList;
 
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 /**
- * A class to get classes jar or directory.
+ * 用于遍历 Mod 类的工具
  */
 public record ModFiles(Path root, FileSystem fs) {
 
@@ -27,10 +27,9 @@ public record ModFiles(Path root, FileSystem fs) {
             .filter(f -> "union".equalsIgnoreCase(f.getScheme())).findFirst().orElseThrow();
 
     /**
-     * Get classes path from modid, require mod loaded
+     * 根据 Mod ID 查询类
      *
      * @param modid modid
-     * @return file
      * @throws URISyntaxException   if this URL is not formatted strictly according to
      *                              RFC2396 and cannot be converted to a URI.
      * @throws NullPointerException if this modid is not loaded.
@@ -45,10 +44,9 @@ public record ModFiles(Path root, FileSystem fs) {
     }
 
     /**
-     * Get classes path from any class
+     * 查询任意类所在的 Mod
      *
      * @param anyClass class in the mod
-     * @return file
      * @throws URISyntaxException   if this URL is not formatted strictly according to
      *                              RFC2396 and cannot be converted to a URI.
      * @throws NullPointerException if this modid is not loaded.
@@ -70,10 +68,9 @@ public record ModFiles(Path root, FileSystem fs) {
     }
 
     /**
-     * Return a stream contains all files in the package
+     * 查询对应包的所有类文件
      *
      * @param packageName package name
-     * @return the {@link Stream} of {@link Path}
      * @throws IOException if an I/O error is thrown when accessing the starting file.
      */
     public Stream<Path> forPackage(String packageName) throws IOException {
@@ -81,11 +78,10 @@ public record ModFiles(Path root, FileSystem fs) {
     }
 
     /**
-     * Return a stream contains all files in the package
+     * 查询对应包的所有类文件
      *
      * @param packageName package name
      * @param depth       the maximum number of directory levels to visit
-     * @return the {@link Stream} of {@link Path}
      * @throws IOException if an I/O error is thrown when accessing the starting file.
      */
     public Stream<Path> forPackage(String packageName, int depth) throws IOException {

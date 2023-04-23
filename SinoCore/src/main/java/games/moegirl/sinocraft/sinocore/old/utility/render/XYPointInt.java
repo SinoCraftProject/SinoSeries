@@ -36,8 +36,7 @@ public class XYPointInt {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof XYPointInt) {
-            XYPointInt point = (XYPointInt) obj;
+        if (obj instanceof XYPointInt point) {
             return (x == point.x) && (y == point.y);
         }
         return super.equals(obj);

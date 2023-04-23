@@ -4,7 +4,8 @@
   "package": "games.moegirl.sinocraft.sinocore.mixin.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlockEntityTypeMixin"
+    "BlockEntityTypeMixin",
+    "BlockLootSubProviderMixin"
   ],
   "client": [
     "MinecraftMixin"

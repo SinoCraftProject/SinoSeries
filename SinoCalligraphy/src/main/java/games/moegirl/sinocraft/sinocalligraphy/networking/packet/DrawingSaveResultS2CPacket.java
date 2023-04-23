@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.networking.packet;
 
 import games.moegirl.sinocraft.sinocalligraphy.utility.NetworkHelper;
-import games.moegirl.sinocraft.sinocore.networking.AbstractMessagePacket;
+import games.moegirl.sinocraft.sinocore.network.AbstractMessagePacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public class DrawingSaveResultS2CPacket extends AbstractMessagePacket {
 
-    private Result result;
+    private final Result result;
 
     public static DrawingSaveResultS2CPacket unknownScreen() {
         return new DrawingSaveResultS2CPacket(Result.UNKNOWN_SCREEN);

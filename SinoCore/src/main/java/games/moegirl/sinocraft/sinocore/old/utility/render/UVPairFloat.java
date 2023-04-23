@@ -41,8 +41,7 @@ public class UVPairFloat {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof UVPairFloat) {
-            UVPairFloat pair = (UVPairFloat) obj;
+        if (obj instanceof UVPairFloat pair) {
             return (u == pair.u) && (v == pair.v);
         }
         return super.equals(obj);

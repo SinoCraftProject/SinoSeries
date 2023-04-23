@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.old.data.base;
+package games.moegirl.sinocraft.sinocore.data;
 
 import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
 import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class SimpleBlockLootTables extends BlockLootSubProvider {
 
-    private Map<Block, LootTable.Builder> blocks = new HashMap<>();
+    private final Map<Block, LootTable.Builder> blocks = new HashMap<>();
 
     public SimpleBlockLootTables() {
         super(new HashSet<>(), FeatureFlags.DEFAULT_FLAGS);

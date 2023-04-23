@@ -10,10 +10,8 @@ import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinocalligraphy.item.InkItem;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import games.moegirl.sinocraft.sinocalligraphy.item.XuanPaperItem;
-import games.moegirl.sinocraft.sinocore.networking.AbstractMessagePacket;
-import net.minecraft.nbt.CompoundTag;
+import games.moegirl.sinocraft.sinocore.network.AbstractMessagePacket;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -21,7 +19,7 @@ import java.time.ZonedDateTime;
 import java.util.function.Supplier;
 
 public class DrawingSaveC2SPacket extends AbstractMessagePacket {
-    private ISimpleDrawing drawing;
+    private final ISimpleDrawing drawing;
 
     public DrawingSaveC2SPacket(ISimpleDrawing drawing) {
         this.drawing = drawing;
