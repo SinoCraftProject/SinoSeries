@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sinocalligraphy:block/green_sandalwood_slab"
+    },
+    "type=double": {
+      "model": "sinocalligraphy:block/green_sandalwood_planks"
+    },
+    "type=top": {
+      "model": "sinocalligraphy:block/green_sandalwood_slab_top"
+    }
+  }
+}

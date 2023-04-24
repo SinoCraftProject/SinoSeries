@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sinocalligraphy:block/green_sandalwood_pressure_gate"
+    },
+    "powered=true": {
+      "model": "sinocalligraphy:block/green_sandalwood_pressure_gate_down"
+    }
+  }
+}
