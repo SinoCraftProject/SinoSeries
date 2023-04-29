@@ -1,20 +1,18 @@
 package games.moegirl.sinocraft.sinotest;
 
+import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureItem;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureMenu;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,7 +27,10 @@ public class SinoTest {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MODID);
 
-    public static CreativeModeTab TAB;
+    public static TabsRegistry TAB = TabsRegistry.register(new ResourceLocation(MODID, "test_all"))
+            .custom(CreativeModeTab.Builder::withSearchBar)
+            .icon(() -> new ItemStack(Items.BAMBOO))
+            .add(ITEMS);
 
     public static Tree TREE = Tree.builder(new ResourceLocation(MODID, "test"))
             .translate("zh_cn", "测试")
@@ -55,20 +56,5 @@ public class SinoTest {
 
     public void onClientInit(FMLClientSetupEvent event) {
         MenuScreens.register(TEST_TEXTURE_MENU.get(), TestTextureScreen::new);
-    }
-
-    @SubscribeEvent
-    public void onTabRegister(CreativeModeTabEvent.Register event) {
-        TAB = event.registerCreativeModeTab(new ResourceLocation(MODID, "test_all"), builder -> builder
-                .icon(() -> new ItemStack(Items.BAMBOO))
-                .withSearchBar()
-                .title(Component.literal("SinoTest")));
-    }
-
-    @SubscribeEvent
-    public void onTabBuilder(CreativeModeTabEvent.BuildContents event) {
-        if (event.getTab() == TAB) {
-            event.accept(TEST_TEXTURE_ITEM);
-        }
     }
 }

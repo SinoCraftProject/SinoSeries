@@ -1,24 +1,13 @@
 package games.moegirl.sinocraft.sinocore;
 
 import games.moegirl.sinocraft.sinocore.data.loottable.SCLootConditions;
-import games.moegirl.sinocraft.sinocore.old.utility.json.JsonUtils;
-import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.FluidStackSerializer;
-import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.IngredientSerializer;
-import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.ItemStackSerializer;
-import games.moegirl.sinocraft.sinocore.old.utility.json.serializer.NonNullListSerializer;
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Properties;
 
 @Mod(SinoCore.MODID)
 public class SinoCore {
@@ -40,12 +29,6 @@ public class SinoCore {
 
         bus.addListener(this::onSetup);
         bus.addListener(this::onClientSetup);
-
-        JsonUtils.INSTANCE
-                .registerAdapter(Ingredient.class, new IngredientSerializer())
-                .registerAdapter(ItemStack.class, new ItemStackSerializer())
-                .registerAdapter(FluidStack.class, new FluidStackSerializer())
-                .registerAdapter(NonNullList.class, new NonNullListSerializer());
 
         SCLootConditions.register(bus);
 

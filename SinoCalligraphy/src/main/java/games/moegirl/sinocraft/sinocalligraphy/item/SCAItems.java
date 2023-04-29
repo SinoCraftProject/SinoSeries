@@ -1,11 +1,10 @@
 package games.moegirl.sinocraft.sinocalligraphy.item;
 
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -31,7 +30,6 @@ public class SCAItems {
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
-
-        TabsRegistry.addDeferredRegister(SinoSeriesTabs.MISC, ITEMS);
+        TabsRegistry.register(SinoSeriesTabs.MISC).add(ITEMS);
     }
 }

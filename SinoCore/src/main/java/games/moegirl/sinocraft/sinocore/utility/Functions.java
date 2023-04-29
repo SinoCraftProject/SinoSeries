@@ -12,10 +12,22 @@ import java.util.function.Supplier;
  */
 public class Functions {
 
+    public static <T> Function<T, T> compose(Function<T, T> first, Consumer<T> second) {
+        return t -> {
+            T tt = first.apply(t);
+            second.accept(tt);
+            return tt;
+        };
+    }
+
+    public static <A, B, C> Function<A, C> compose(Function<A, B> first, Function<B, C> second) {
+        return obj -> second.apply(first.apply(obj));
+    }
+
     /**
      * 生成一个 Supplier，可以根据给定构造函数构造出无参构造，并通过 Consumer 对其修饰
      */
-    public static <T> Supplier<T> decorate(Supplier<T> constructor, Consumer<T> decorator) {
+    public static <T> Supplier<T> constructor(Supplier<T> constructor, Consumer<T> decorator) {
         return () -> {
             T value = constructor.get();
             decorator.accept(value);
@@ -26,7 +38,7 @@ public class Functions {
     /**
      * 生成一个 Supplier，可以根据给定构造函数构造出无参构造，并通过 Function 对其修饰
      */
-    public static <T, R> Supplier<R> decorate(Supplier<T> constructor, Function<T, R> decorator) {
+    public static <T, R> Supplier<R> constructor(Supplier<T> constructor, Function<T, R> decorator) {
         return () -> decorator.apply(constructor.get());
     }
 
@@ -106,4 +118,5 @@ public class Functions {
             }
         }
     }
+
 }

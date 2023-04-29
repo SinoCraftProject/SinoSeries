@@ -46,7 +46,7 @@ public class PlacedFeatureRegister {
     }
 
     public Entry<OreConfiguration, OreFeatureBuilder> registerOre(String name, PlacedFilter filter, Function<OreFeatureBuilder, OreFeatureBuilder> feature) {
-        return registerOre(name, filter, Functions.decorate(OreFeatureBuilder::new, feature));
+        return registerOre(name, filter, Functions.constructor(OreFeatureBuilder::new, feature));
     }
 
     public Entry<OreConfiguration, OreFeatureBuilder> registerOre(String name, Function<OreFeatureBuilder, OreFeatureBuilder> feature) {
@@ -58,7 +58,7 @@ public class PlacedFeatureRegister {
     }
 
     public Entry<TreeConfiguration, TreeFeatureBuilder> registerTree(String name, PlacedFilter filter, Function<TreeFeatureBuilder, TreeFeatureBuilder> feature) {
-        return registerTree(name, filter, Functions.decorate(TreeFeatureBuilder::new, feature));
+        return registerTree(name, filter, Functions.constructor(TreeFeatureBuilder::new, feature));
     }
 
     public Entry<TreeConfiguration, TreeFeatureBuilder> registerTree(String name, Function<TreeFeatureBuilder, TreeFeatureBuilder> feature) {

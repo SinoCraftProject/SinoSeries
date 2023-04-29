@@ -1,96 +1,69 @@
 package games.moegirl.sinocraft.sinocore.item.tab;
 
-import games.moegirl.sinocraft.sinocore.SinoCore;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class TabsRegistry {
+/**
+ * @author luqin2007
+ */
+public interface TabsRegistry {
 
-    /**
-     * Map<ResourceLocation resourceLocation, Tuple<CreativeModeTab tab, String translationKey> tuple>.
-     */
-    public static final Map<ResourceLocation, Tuple<CreativeModeTab, String>> CREATIVE_MODE_TABS = new HashMap<>();
+    Map<ResourceLocation, TabsRegistry> TAB_MAP = new HashMap<>();
 
-    private static final Map<ResourceLocation, List<DeferredRegister<Item>>> DEFERRED_REGISTERS = new HashMap<>();
-    private static final Map<ResourceLocation, List<ItemStack>> REGISTRY_LIST = new HashMap<>();
-
-    private static String makeTranslateKey(ResourceLocation loc) {
-        return "tab." + loc.getNamespace() + "." + loc.getPath();
+    static TabsRegistry get(ResourceLocation name) {
+        return TAB_MAP.computeIfAbsent(name, TabsRegistryOps::new);
     }
 
-    @SubscribeEvent
-    public static void onCreativeModeTabRegister(CreativeModeTabEvent.Register event) {
-        // Fixme: qyl27: bad performance.
-        for (var deferredRegisters : DEFERRED_REGISTERS.entrySet()) {
-            for (var deferredRegister : deferredRegisters.getValue()) {
-                for (var registryItem : deferredRegister.getEntries()) {
-                    var item = registryItem.get();
-                    if (item instanceof ITabItem tabItem) {
-                        tabItem.getTabs().forEach(id -> {
-                            if (!hasRegistered(id, item)) {
-                                addToList(id, new ItemStack(item));
-                            }
-                        });
-                    } else {
-                        var resourceLocation = deferredRegisters.getKey();
-
-                        if (!hasRegistered(resourceLocation, item)) {
-                            addToList(resourceLocation, new ItemStack(item));
-                        }
-                    }
-                }
-            }
-        }
-
-        for (var entry : REGISTRY_LIST.entrySet()) {
-            var key = entry.getKey();
-            event.registerCreativeModeTab(key, builder -> {
-                var translationKey = makeTranslateKey(entry.getKey());
-                builder.title(Component.translatable(translationKey))
-                        .icon(() -> entry.getValue().stream().findFirst().orElse(new ItemStack(Items.APPLE)))
-                        .displayItems((flagSet, output) -> output.acceptAll(new ArrayList<>(entry.getValue())));
-                var result = builder.build();
-                CREATIVE_MODE_TABS.put(key, new Tuple<>(result, translationKey));
-            });
-        }
+    static TabsRegistry register(ResourceLocation name, IEventBus bus) {
+        return new TabsRegistryImpl(name, bus);
     }
 
-    private static void addToList(ResourceLocation resourceLocation, ItemStack stack) {
-        if (!REGISTRY_LIST.containsKey(resourceLocation)) {
-            REGISTRY_LIST.put(resourceLocation, new ArrayList<>());
-        }
-
-        REGISTRY_LIST.get(resourceLocation).add(stack);
+    static TabsRegistry register(ResourceLocation name) {
+        return register(name, FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    private static boolean hasRegistered(ResourceLocation resourceLocation, Item item) {
-        if (REGISTRY_LIST.containsKey(resourceLocation)) {
-            return REGISTRY_LIST.get(resourceLocation).stream().anyMatch(i -> i.is(item));
-        }
-        return false;
+    ResourceLocation name();
+
+    default CreativeModeTab tab() {
+        throw new RuntimeException("Tab is null because it is not created now. You should get it after CreativeModeTabEvent.Register event.");
     }
 
-    public static void addDeferredRegister(ResourceLocation defaultTab,
-                                           DeferredRegister<Item> deferredRegister) {
-        if (!DEFERRED_REGISTERS.containsKey(defaultTab)) {
-            DEFERRED_REGISTERS.put(defaultTab, new ArrayList<>());
-        }
+    default TabsRegistry icon(RegistryObject<? extends ItemLike> item) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
+    }
 
-        DEFERRED_REGISTERS.get(defaultTab).add(deferredRegister);
+    default TabsRegistry icon(Supplier<ItemStack> item) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
+    }
+
+    default TabsRegistry custom(Consumer<CreativeModeTab.Builder> consumer) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
+    }
+
+    default TabsRegistry addStack(Supplier<ItemStack> stack) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
+    }
+
+    default TabsRegistry add(Supplier<? extends ItemLike> item) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
+    }
+
+    default TabsRegistry add(Supplier<? extends ItemLike>... items) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
+    }
+
+    default TabsRegistry add(DeferredRegister<? extends ItemLike> dr) {
+        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
     }
 }

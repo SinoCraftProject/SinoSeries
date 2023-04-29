@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(BlockLootSubProvider.class)
 public abstract class BlockLootSubProviderMixin implements IBlockLootSubProvider {
 
-    @Shadow protected abstract Iterable<Block> getKnownBlocks();
+    @Shadow(remap = false) protected abstract Iterable<Block> getKnownBlocks();
 
     @Override
     public Iterable<Block> sinocore$getKnownBlocks() {

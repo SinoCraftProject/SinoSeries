@@ -11,5 +11,6 @@ public class TestZhCnLanguageProvider extends AbstractLanguageProvider {
     @Override
     public void translate() {
         add("zh_cn", "简体中文");
+        add("tab.sinotest.test_all", "测试 Tab");
     }
 }

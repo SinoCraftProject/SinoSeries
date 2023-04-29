@@ -1,21 +1,21 @@
 {
   "values": [
-    "sinotest:test_fence_gate",
-    "sinotest:test_hanging_sign",
-    "sinotest:test_button",
-    "sinotest:test_stairs",
     "sinotest:test_planks",
+    "sinotest:test_sapling",
+    "sinotest:test_button",
+    "sinotest:test_stripped_log",
+    "sinotest:test_log",
+    "sinotest:test_hanging_sign",
+    "sinotest:test_stripped_log_wood",
+    "sinotest:test_trapdoor",
+    "sinotest:test_fence",
     "sinotest:test_log_wood",
     "sinotest:test_sign",
-    "sinotest:test_door",
-    "sinotest:test_log",
-    "sinotest:test_sapling",
-    "sinotest:test_fence",
-    "sinotest:test_trapdoor",
+    "sinotest:test_fence_gate",
     "sinotest:test_pressure_gate",
-    "sinotest:test_stripped_log_wood",
     "sinotest:test_leaves",
-    "sinotest:test_stripped_log",
+    "sinotest:test_stairs",
+    "sinotest:test_door",
     "sinotest:test_slab"
   ]
 }
