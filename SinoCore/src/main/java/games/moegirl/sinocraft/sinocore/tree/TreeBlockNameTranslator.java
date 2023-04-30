@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import com.google.common.collect.ImmutableMap;
+import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.utility.decorator.StringDecorator;
 import net.minecraft.resources.ResourceLocation;
 
@@ -193,7 +194,7 @@ public class TreeBlockNameTranslator {
 
     public Map<String, String> makeTranslatesForLocale(String locale) {
         if (!translateRoots.containsKey(locale)) {
-            throw new IllegalArgumentException("There is no root translate for locale: " + locale);
+            SinoCore.LOGGER.warn("There is no root translate for locale: " + locale);
         }
 
         if (translateCaches.containsKey(locale)) {

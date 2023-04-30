@@ -64,7 +64,10 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             simpleBlock(tree.getBlock(TreeBlockType.HANGING_SIGN), sign);
             simpleBlock(tree.getBlock(TreeBlockType.WALL_HANGING_SIGN), sign);
 
-            trapdoorBlock((TrapDoorBlock) tree.getBlock(TreeBlockType.TRAPDOOR), planksTextures, true);
+            ResourceLocation trapdoorName = TreeBlockType.TRAPDOOR.makeResourceLoc(tree.getName());
+            ResourceLocation trapdoorTextures = new ResourceLocation(trapdoorName.getNamespace(),
+                    ModelProvider.BLOCK_FOLDER + "/" + trapdoorName.getPath());
+            trapdoorBlockWithRenderType((TrapDoorBlock) tree.getBlock(TreeBlockType.TRAPDOOR), trapdoorTextures, true, "cutout_mipped");
             slabBlock((SlabBlock) tree.getBlock(TreeBlockType.SLAB), planksTextures, planksTextures);
             stairsBlock((StairBlock) tree.getBlock(TreeBlockType.STAIRS), planksTextures);
 
@@ -91,7 +94,7 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
                 logger.warn(doorBottom + " does not exist, use " + planksTextures);
                 doorBottom = planksTextures;
             }
-            doorBlock(door, doorBottom, doorTop);
+            doorBlockWithRenderType(door, doorBottom, doorTop, "cutout_mipped");
 
             models().singleTexture(TreeBlockType.BUTTON.makeResourceLoc(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("button_inventory")), planksTextures);
             models().fenceInventory(TreeBlockType.FENCE.makeResourceLoc(tree.getName()).getPath() + "_inventory", planksTextures);

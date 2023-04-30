@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "sinocalligraphy:green_sandalwood_planks"
+    }
+  ],
+  "result": {
+    "item": "sinocalligraphy:green_sandalwood_button"
+  }
+}
