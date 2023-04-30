@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/template_orientable_trapdoor_bottom",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
-    "texture": "sinocalligraphy:block/green_sandalwood_planks"
+    "texture": "sinocalligraphy:block/green_sandalwood_trapdoor"
   }
 }
