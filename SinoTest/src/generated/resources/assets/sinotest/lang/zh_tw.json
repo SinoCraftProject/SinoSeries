@@ -1,3 +1,21 @@
 {
+  "block.sinotest.test_button": "測試按鈕",
+  "block.sinotest.test_door": "測試門",
+  "block.sinotest.test_fence": "測試柵欄",
+  "block.sinotest.test_fence_gate": "測試柵欄門",
+  "block.sinotest.test_hanging_sign": "懸挂式測試告示牌",
+  "block.sinotest.test_leaves": "測試樹葉",
+  "block.sinotest.test_log": "測試原木",
+  "block.sinotest.test_log_wood": "測試塊",
+  "block.sinotest.test_planks": "測試材",
+  "block.sinotest.test_potted_sapling": "測試樹苗盆栽",
+  "block.sinotest.test_pressure_gate": "測試壓力板",
+  "block.sinotest.test_sapling": "測試樹苗",
+  "block.sinotest.test_sign": "測試告示牌",
+  "block.sinotest.test_slab": "測試半磚",
+  "block.sinotest.test_stairs": "測試階梯",
+  "block.sinotest.test_stripped_log": "剝皮測試原木",
+  "block.sinotest.test_stripped_log_wood": "剝皮測試塊",
+  "block.sinotest.test_trapdoor": "測試地板門",
   "zh_tw": "正體中文"
 }

@@ -16,7 +16,6 @@ public class TreeLanguages {
 
     final Map<String, String> rootNames = new HashMap<>();
     final Table<String, TreeBlockType, List<Function<StringBuilder, StringBuilder>>> names = HashBasedTable.create();
-    private final Set<String> langKeys = new HashSet<>();
 
     public TreeLanguages() {
 
@@ -152,6 +151,7 @@ public class TreeLanguages {
             return;
         }
 
+        Set<String> langKeys = new HashSet<>();
         String root = rootNames.getOrDefault(locale, tree.name.getPath());
         names.row(locale).forEach((type, functions) -> {
             if (type.hasItem() || type.hasBlock()) {

@@ -9,6 +9,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public final class TreeRegistry {
 
-    private static final Map<String, List<Tree>> TREE_REGISTRY = new HashMap<>();
+    private static final Map<String, List<Tree>> TREE_REGISTRY = Collections.synchronizedMap(new HashMap<>());
 
     /**
      * Get tree registry.
