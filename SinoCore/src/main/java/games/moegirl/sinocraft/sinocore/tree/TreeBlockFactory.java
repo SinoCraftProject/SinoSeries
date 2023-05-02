@@ -36,6 +36,7 @@ public class TreeBlockFactory {
     boolean fillDefaultTabs = false;
 
     boolean addDefaultBlockTag = true, addDefaultItemTag = true;
+
     public TreeBlockFactory(TreeBlockType type) {
         this.type = type;
         blockBuilder = wrapBlock(type.defBlock);

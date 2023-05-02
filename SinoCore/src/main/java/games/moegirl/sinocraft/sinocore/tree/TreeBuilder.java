@@ -174,8 +174,9 @@ public class TreeBuilder {
     }
 
     public TreeBuilder fillDefaultTabs(TreeBlockType... types) {
-        for (TreeBlockType type : types)
+        for (TreeBlockType type : types) {
             treeBlocks.get(type).fillDefaultTabs = true;
+        }
         return this;
     }
 
@@ -226,9 +227,15 @@ public class TreeBuilder {
         return this;
     }
 
-    public TreeBuilder banDefaultBlockTags(TreeBlockType... types) {
-        for (TreeBlockType type : types)
+    /**
+     * Remove block from adding tags.
+     * @param types block type.
+     * @return Builder
+     */
+    public TreeBuilder noDefaultBlockTags(TreeBlockType... types) {
+        for (TreeBlockType type : types) {
             treeBlocks.get(type).addDefaultBlockTag = false;
+        }
         return this;
     }
 
@@ -256,9 +263,15 @@ public class TreeBuilder {
         return this;
     }
 
-    public TreeBuilder banDefaultItemTags(TreeBlockType... types) {
-        for (TreeBlockType type : types)
+    /**
+     * Remove item from adding tags.
+     * @param types item type.
+     * @return Builder
+     */
+    public TreeBuilder noDefaultItemTags(TreeBlockType... types) {
+        for (TreeBlockType type : types) {
             treeBlocks.get(type).addDefaultItemTag = false;
+        }
         return this;
     }
 

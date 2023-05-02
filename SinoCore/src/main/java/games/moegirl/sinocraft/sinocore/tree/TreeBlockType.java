@@ -72,10 +72,10 @@ public enum TreeBlockType {
     TreeBlockType(String name, BiFunction<Tree, TreeBlockType, Item> defItem) {
         this(name, false, true,
                 (tree, v2) -> {
-                    throw new RuntimeException("Tree " + tree.name + " don't hava " + name + "block");
+                    throw new RuntimeException("Tree " + tree.name + " don't have a " + name + "block");
                 },
                 tree -> {
-                    throw new RuntimeException("Tree " + tree.name + " don't hava " + name + "block");
+                    throw new RuntimeException("Tree " + tree.name + " don't have a " + name + "block");
                 },
                 defItem);
     }
@@ -85,20 +85,20 @@ public enum TreeBlockType {
                   Function<Tree, BlockBehaviour.Properties> defBlockProp) {
         this(name, true, false, defBlock, defBlockProp,
                 (tree, type) -> {
-                    throw new RuntimeException("Tree " + tree.name + " don't hava " + name + "item");
+                    throw new RuntimeException("Tree " + tree.name + " don't have a " + name + "item");
                 });
     }
 
     TreeBlockType(String name) {
         this(name, false, false,
                 (tree, v2) -> {
-                    throw new RuntimeException("Tree " + tree.name + " don't hava " + name + "block");
+                    throw new RuntimeException("Tree " + tree.name + " don't have a " + name + "block");
                 },
                 tree -> {
-                    throw new RuntimeException("Tree " + tree.name + " don't hava " + name + "block");
+                    throw new RuntimeException("Tree " + tree.name + " don't have a " + name + "block");
                 },
                 (tree, v2) -> {
-                    throw new RuntimeException("Tree " + tree.name + " don't hava " + name + "item");
+                    throw new RuntimeException("Tree " + tree.name + " don't have a " + name + "item");
                 });
     }
 

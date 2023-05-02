@@ -90,13 +90,16 @@ public class Tree {
             if (type.hasItem()) {
                 RegistryObject<? extends Item> item = items.get(type);
 
-                if (factory.fillDefaultTabs)
+                if (factory.fillDefaultTabs) {
                     tabsListener.addDefaultTabs(type, item);
+                }
 
                 // todo 使用 ResourceLocation 的版本只支持 SC 的 Tab 注册，，，这样好吗？
-                if (!factory.tabs.isEmpty())
-                    for (ResourceLocation tab : factory.tabs)
+                if (!factory.tabs.isEmpty()) {
+                    for (ResourceLocation tab : factory.tabs) {
                         TabsRegistry.get(tab).add(item);
+                    }
+                }
             }
         });
     }
