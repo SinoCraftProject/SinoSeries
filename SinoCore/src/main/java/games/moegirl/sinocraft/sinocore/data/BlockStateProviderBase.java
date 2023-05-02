@@ -9,7 +9,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +26,7 @@ public abstract class BlockStateProviderBase extends AbstractBlockStateProvider 
     private final Set<Block> addedBlocks = new HashSet<>();
     private boolean adding = false;
 
+    @SafeVarargs
     public BlockStateProviderBase(PackOutput output, String modId, ExistingFileHelper existingFileHelper, DeferredRegister<? extends Block>... deferredRegisters) {
         super(output, modId, existingFileHelper);
 

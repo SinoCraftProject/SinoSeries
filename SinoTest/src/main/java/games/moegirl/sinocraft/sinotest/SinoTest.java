@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinotest;
 
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureItem;
 import games.moegirl.sinocraft.sinotest.sinocore.texture.TestTextureMenu;
@@ -13,6 +14,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -25,6 +27,7 @@ public class SinoTest {
     public static final String MODID = "sinotest";
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MODID);
 
     public static TabsRegistry TAB = TabsRegistry.register(new ResourceLocation(MODID, "test_all"))
@@ -36,9 +39,10 @@ public class SinoTest {
             .translate("zh_cn", "测试")
             .translate("zh_tw", "測試")
             .translate("en_us", "Test")
-            .toTabs(CreativeModeTabs.SPAWN_EGGS)
-            .toBlockTags(BlockTags.create(new ResourceLocation(MODID, "test_tree_blocks")))
-            .toItemTags(ItemTags.create(new ResourceLocation(MODID, "test_tree_items")))
+            .tab(TAB.name())
+            .fillDefaultTabs(TreeBlockType.values())
+            .blockTags(BlockTags.create(new ResourceLocation(MODID, "test_tree_blocks")))
+            .itemTags(ItemTags.create(new ResourceLocation(MODID, "test_tree_items")))
             .build();
 
     public static RegistryObject<MenuType<TestTextureMenu>> TEST_TEXTURE_MENU =
@@ -47,9 +51,10 @@ public class SinoTest {
 
     public SinoTest() {
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
-        TreeRegistry.register(MODID, bus);
         ITEMS.register(bus);
+        BLOCKS.register(bus);
         MENUS.register(bus);
+        TreeRegistry.register(MODID, BLOCKS, ITEMS);
         bus.register(this);
         bus.addListener(this::onClientInit);
     }

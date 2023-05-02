@@ -42,7 +42,11 @@ public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, 
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess arg) {
+    public final ItemStack getResultItem(RegistryAccess arg) {
+        return getResultItem();
+    }
+
+    public ItemStack getResultItem() {
         return output;
     }
 

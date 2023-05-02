@@ -34,6 +34,7 @@ public abstract class ItemModelProviderBase extends AbstractItemModelProvider {
 
     private final DeferredRegister<? extends Item>[] deferredRegisters;
 
+    @SafeVarargs
     public ItemModelProviderBase(PackOutput output, String modId, ExistingFileHelper exHelper, DeferredRegister<? extends Item>... deferredRegisters) {
         super(output, modId, exHelper);
         this.deferredRegisters = deferredRegisters;
@@ -87,6 +88,7 @@ public abstract class ItemModelProviderBase extends AbstractItemModelProvider {
      * @return item name
      */
     protected static String name(Item item) { // Todo: qyl: Avoid direct use string Path, use ResourceLocation instead.
+        //noinspection DataFlowIssue
         return ForgeRegistries.ITEMS.getKey(item).getPath();
     }
 

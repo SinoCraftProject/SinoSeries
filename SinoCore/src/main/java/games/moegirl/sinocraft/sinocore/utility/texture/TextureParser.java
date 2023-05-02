@@ -24,6 +24,7 @@ public class TextureParser {
         return List.copyOf(NAMES);
     }
 
+    @Nullable
     public static TextureMap get(ResourceLocation name) {
         return MAPS.get(name);
     }
@@ -240,8 +241,7 @@ public class TextureParser {
         return (data.get(name) instanceof String s && !s.isEmpty()) ? s : null;
     }
 
-    @Nullable
-    private static String getString(Config data, String name, @Nullable String defaultValue) {
+    private static String getString(Config data, String name, String defaultValue) {
         return (data.get(name) instanceof String s && !s.isEmpty()) ? s : defaultValue;
     }
 

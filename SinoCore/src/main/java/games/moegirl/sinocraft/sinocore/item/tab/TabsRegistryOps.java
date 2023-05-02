@@ -59,8 +59,9 @@ public class TabsRegistryOps implements TabsRegistry {
         return this;
     }
 
+    @SafeVarargs
     @Override
-    public TabsRegistry add(Supplier<? extends ItemLike>... items) {
+    public final TabsRegistry add(Supplier<? extends ItemLike>... items) {
         ops.add(t -> t.add(items));
         return this;
     }

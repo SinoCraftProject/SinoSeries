@@ -124,6 +124,7 @@ public abstract class AbstractItemModelProvider extends ItemModelProvider {
 
     protected ItemModelBuilder withBlockParent(Block block) {
         var name = ForgeRegistries.BLOCKS.getKey(block);
+        assert name != null;
         return withExistingParent(name.getPath(), blockLoc(name));
     }
 
@@ -133,27 +134,37 @@ public abstract class AbstractItemModelProvider extends ItemModelProvider {
     }
 
     protected void generated(ItemLike item) {
-        String path = ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+        ResourceLocation key = ForgeRegistries.ITEMS.getKey(item.asItem());
+        assert key != null;
+        String path = key.getPath();
         withExistingParent(path, GENERATED).texture("layer0", modLoc("item/" + path));
     }
 
     protected void handheld(ItemLike item) {
-        String path = ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+        ResourceLocation key = ForgeRegistries.ITEMS.getKey(item.asItem());
+        assert key != null;
+        String path = key.getPath();
         withExistingParent(path, HANDHELD).texture("layer0", modLoc("item/" + path));
     }
 
     protected void handheld(Block block) {
-        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+        assert key != null;
+        String path = key.getPath();
         withExistingParent(path, HANDHELD).texture("layer0", modLoc("block/" + path));
     }
 
     protected void blockItem(Block block) {
-        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+        assert key != null;
+        String path = key.getPath();
         withExistingParent(path, modLoc("block/" + path));
     }
 
     protected void blockItem(Block block, String statedModel) {
-        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+        assert key != null;
+        String path = key.getPath();
         withExistingParent(path, modLoc("block/" + path + "_" + statedModel));
     }
 

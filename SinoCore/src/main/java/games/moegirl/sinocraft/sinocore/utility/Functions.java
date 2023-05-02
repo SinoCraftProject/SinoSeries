@@ -24,6 +24,18 @@ public class Functions {
         return obj -> second.apply(first.apply(obj));
     }
 
+    public static <T, R> Function<T, R> ext(Supplier<R> sup) {
+        return __ -> sup.get();
+    }
+
+    public static <T, U, R> BiFunction<T, U, R> lExt(Function<U, R> sup) {
+        return (__, u) -> sup.apply(u);
+    }
+
+    public static <T, U, R> BiFunction<T, U, R> rExt(Function<T, R> sup) {
+        return (t, __) -> sup.apply(t);
+    }
+
     /**
      * 生成一个 Supplier，可以根据给定构造函数构造出无参构造，并通过 Consumer 对其修饰
      */

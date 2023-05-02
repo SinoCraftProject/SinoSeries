@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,6 +28,7 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
     private final List<Supplier<? extends ItemLike>> items = new ArrayList<>();
 
     private final ResourceLocation name;
+    @Nullable
     private CreativeModeTab tab;
 
     private Function<CreativeModeTab.Builder, CreativeModeTab.Builder> builder;
@@ -87,8 +89,9 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
         return this;
     }
 
+    @SafeVarargs
     @Override
-    public TabsRegistry add(Supplier<? extends ItemLike>... items) {
+    public final TabsRegistry add(Supplier<? extends ItemLike>... items) {
         Collections.addAll(this.items, items);
         return this;
     }

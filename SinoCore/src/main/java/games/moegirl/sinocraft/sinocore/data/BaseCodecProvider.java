@@ -26,13 +26,14 @@ import java.util.concurrent.CompletableFuture;
 /**
  * 使用 CODEC 或 DIRECT_CODEC 直接导出 json 文件的的 Provider
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class BaseCodecProvider implements DataProvider {
 
     private final CompletableFuture<HolderLookup.Provider> provider;
     private final PackOutput packOutput;
     private final String modid;
 
-    private Map<ResourceKey<Registry>, List<Triple<ResourceLocation, Codec, Object>>> map = new HashMap<>();
+    private final Map<ResourceKey<Registry>, List<Triple<ResourceLocation, Codec, Object>>> map = new HashMap<>();
 
     public BaseCodecProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modid) {
         this.provider = provider;

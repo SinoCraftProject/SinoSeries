@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocore.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
@@ -52,6 +51,7 @@ public record ReplacedModel(BakedModel model, ItemDisplayContext... replaced) im
 
     @Override
     public TextureAtlasSprite getParticleIcon() {
+        //noinspection deprecation
         return model.getParticleIcon();
     }
 

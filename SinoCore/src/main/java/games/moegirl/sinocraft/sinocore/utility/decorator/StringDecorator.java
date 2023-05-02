@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.utility.decorator;
 import java.util.function.UnaryOperator;
 
 public class StringDecorator implements IDecoratorChain<String> {
-    protected UnaryOperator<String> operator;
+    protected final UnaryOperator<String> operator;
 
     protected StringDecorator innerDecorator;
 

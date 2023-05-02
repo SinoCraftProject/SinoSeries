@@ -63,6 +63,7 @@ public interface NetworkHolder {
             for (Type anInterface : type.getGenericInterfaces())
                 if (anInterface instanceof ParameterizedType pt && pt.getRawType() == Consumer.class)
                     toServer = pt.getActualTypeArguments()[0] == ServerPlayer.class;
+        //noinspection unchecked,rawtypes
         register(type, encoder, decoder,
                 Runnable.class.isAssignableFrom(type) ? v -> ((Runnable) v).run() : null,
                 toServer ? (v, p) -> ((Consumer) v).accept(p) : null);

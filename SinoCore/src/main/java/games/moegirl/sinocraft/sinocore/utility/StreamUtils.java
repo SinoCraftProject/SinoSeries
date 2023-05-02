@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinocore.utility;
 
+import net.minecraft.util.RandomSource;
+
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
@@ -16,7 +18,7 @@ public class StreamUtils {
      * @param <T> element type
      * @return collector to get a random element, or empty if the stream is empty
      */
-    public static <T> Collector<T, ?, Optional<T>> random(Random random) {
+    public static <T> Collector<T, ?, Optional<T>> random(RandomSource random) {
         return Collector.<T, List<T>, Optional<T>>of(
                 ArrayList::new, List::add, StreamUtils::combiner,
                 list -> {
@@ -38,7 +40,7 @@ public class StreamUtils {
      * @param <T> element type
      * @return collector to get a random element, or empty if the stream is empty
      */
-    public static <T> Collector<T, ?, Stream<T>> randomStream(Random random) {
+    public static <T> Collector<T, ?, Stream<T>> randomStream(RandomSource random) {
         return Collector.<T, List<T>, Stream<T>>of(
                 ArrayList::new, List::add, StreamUtils::combiner,
                 list -> {
