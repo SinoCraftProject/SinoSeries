@@ -23,7 +23,7 @@ public class TreeLanguages {
         put("zh_cn", TreeBlockType.LOG, s -> s.append("原木"));
         put("zh_cn", TreeBlockType.STRIPPED_LOG, s -> s.insert(0, "去皮").append("原木"));
         put("zh_cn", TreeBlockType.LOG_WOOD, Function.identity());
-        put("zh_cn", TreeBlockType.STRIPPED_LOG_WOOD, s -> s.append("去皮"));
+        put("zh_cn", TreeBlockType.STRIPPED_LOG_WOOD, s -> s.insert(0, "去皮"));
         put("zh_cn", TreeBlockType.SAPLING, s -> s.append("树苗"));
         put("zh_cn", TreeBlockType.POTTED_SAPLING, s -> s.append("树苗盆栽"));
         put("zh_cn", TreeBlockType.PLANKS, s -> s.append("木板"));
@@ -46,7 +46,7 @@ public class TreeLanguages {
         put("zh_hk", TreeBlockType.LOG, s -> s.append("原木"));
         put("zh_hk", TreeBlockType.STRIPPED_LOG, s -> s.insert(0, "剝皮").append("原木"));
         put("zh_hk", TreeBlockType.LOG_WOOD, Function.identity());
-        put("zh_hk", TreeBlockType.STRIPPED_LOG_WOOD, s -> s.append("剝皮"));
+        put("zh_hk", TreeBlockType.STRIPPED_LOG_WOOD, s -> s.insert(0, "剝皮"));
         put("zh_hk", TreeBlockType.SAPLING, s -> s.append("樹苗"));
         put("zh_hk", TreeBlockType.POTTED_SAPLING, s -> s.append("樹苗盆栽"));
         put("zh_hk", TreeBlockType.PLANKS, s -> s.append("板"));
@@ -148,7 +148,10 @@ public class TreeLanguages {
     }
 
     public void addTranslatesForLocale(String locale, Tree tree, LanguageProvider provider) {
-        if (!names.containsRow(locale)) return;
+        if (!names.containsRow(locale)) {
+            return;
+        }
+
         String root = rootNames.getOrDefault(locale, tree.name.getPath());
         names.row(locale).forEach((type, functions) -> {
             if (type.hasItem() || type.hasBlock()) {

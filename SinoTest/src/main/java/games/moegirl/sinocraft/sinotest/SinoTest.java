@@ -54,7 +54,7 @@ public class SinoTest {
         ITEMS.register(bus);
         BLOCKS.register(bus);
         MENUS.register(bus);
-        TreeRegistry.register(MODID, BLOCKS, ITEMS);
+        TreeRegistry.register(MODID, bus, BLOCKS, ITEMS);
         bus.register(this);
         bus.addListener(this::onClientInit);
     }

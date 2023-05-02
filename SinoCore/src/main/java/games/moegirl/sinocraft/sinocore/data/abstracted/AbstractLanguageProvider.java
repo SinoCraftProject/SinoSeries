@@ -27,9 +27,11 @@ public abstract class AbstractLanguageProvider extends LanguageProvider {
     protected void addTreeTranslates() {
         var trees = TreeRegistry.getRegistry().get(modid);
 
-        if (trees != null && !trees.isEmpty())
-            for (var tree : trees)
+        if (trees != null && !trees.isEmpty()) {
+            for (var tree : trees) {
                 tree.getTranslator().addTranslatesForLocale(locale, tree, this);
+            }
+        }
     }
 
     protected void addTab(ResourceLocation name, String translate) {

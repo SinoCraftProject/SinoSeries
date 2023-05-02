@@ -10,6 +10,7 @@ public class SCATrees {
     public static Tree GREEN_SANDALWOOD = Tree.builder(new ResourceLocation(SinoCalligraphy.MODID, "green_sandalwood"))
             .translate("zh_cn", "青檀木")
             .translate("zh_tw", "青檀木")
+            .translate("zh_hk", "青檀木")
             .translate("en_us", "Green Sandalwood")
             .build();
 

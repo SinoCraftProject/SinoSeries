@@ -1,7 +1,8 @@
-// 1.19.4	2023-04-24T20:56:29.8556681	Tree Tags for minecraft:item mod id sinocalligraphy
+// 1.19.4	2023-05-02T21:42:10.854408	Tree Tags for minecraft:item mod id sinocalligraphy
 0acb4b228650034b1d273913d2e597e1f2760817 data/forge/tags/items/fence_gates/wooden.json
 ec4ffbda0b6eac4f851186afffa6a66003889637 data/minecraft/tags/items/hanging_signs.json
 ab771d2245422bb139cdd45678c1310bea7bb30f data/minecraft/tags/items/leaves.json
+976af57c0be97350b68bef944dd0fb658ee1c35c data/minecraft/tags/items/logs.json
 976af57c0be97350b68bef944dd0fb658ee1c35c data/minecraft/tags/items/logs_that_burn.json
 9949eb35cba68407936e46474902dbb80caf1210 data/minecraft/tags/items/planks.json
 68498cf96c35554990ea266b3bfdeeba5f88344c data/minecraft/tags/items/saplings.json

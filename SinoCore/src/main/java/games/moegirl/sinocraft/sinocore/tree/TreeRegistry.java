@@ -33,17 +33,15 @@ public final class TreeRegistry {
      * Register mod trees.
      * @param modid ModId
      */
-    public static void register(String modid) {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static void register(String modid, IEventBus bus) {
         var blockRegister = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
         var itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
         blockRegister.register(bus);
         itemRegister.register(bus);
-        register(modid, blockRegister, itemRegister);
+        register(modid, bus, blockRegister, itemRegister);
     }
 
-    public static void register(String modid, DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister) {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static void register(String modid, IEventBus bus, DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister) {
         SCTreeTabsBuildListener tabsListener = new SCTreeTabsBuildListener();
         bus.register(tabsListener);
         bus.register(new SCTreeGatherDataListener(modid));
