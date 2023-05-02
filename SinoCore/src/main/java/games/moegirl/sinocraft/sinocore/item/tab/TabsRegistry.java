@@ -17,6 +17,7 @@ import java.util.function.Supplier;
 /**
  * @author luqin2007
  */
+@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 public interface TabsRegistry {
 
     Map<ResourceLocation, TabsRegistry> TAB_MAP = new HashMap<>();

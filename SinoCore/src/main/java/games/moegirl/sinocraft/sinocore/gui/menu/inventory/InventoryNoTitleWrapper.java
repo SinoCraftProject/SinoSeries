@@ -4,11 +4,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
 public class InventoryNoTitleWrapper extends Inventory {
-    protected Inventory inv;
+    protected final Inventory inv;
 
     public InventoryNoTitleWrapper(Inventory inv) {
         super(inv.player);
-
         this.inv = inv;
     }
 

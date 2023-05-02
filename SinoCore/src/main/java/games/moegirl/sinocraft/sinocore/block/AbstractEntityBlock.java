@@ -58,6 +58,7 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
 
     @Nullable
     @Override
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public <T2 extends BlockEntity> BlockEntityTicker<T2> getTicker(Level pLevel, BlockState pState, BlockEntityType<T2> pBlockEntityType) {
         return BlockEntityTicker.class.isAssignableFrom(typeClass) ? ((pLevel1, pPos, pState1, pBlockEntity) -> {
             if (pBlockEntity instanceof BlockEntityTicker ticker) {
@@ -67,7 +68,7 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
     }
 
     @Override
-    public <T extends BlockEntity> GameEventListener getListener(ServerLevel level, T blockEntity) {
+    public <T2 extends BlockEntity> GameEventListener getListener(ServerLevel level, T2 blockEntity) {
         return GameEventListener.class.isAssignableFrom(typeClass)
                 ? (GameEventListener) blockEntity
                 : this instanceof GameEventListener l ? l : null;

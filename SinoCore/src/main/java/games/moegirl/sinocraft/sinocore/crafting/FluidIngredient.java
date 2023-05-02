@@ -64,6 +64,7 @@ public class FluidIngredient {
             return List.of(new FluidStack(fluid, amount));
         }
 
+        //noinspection DataFlowIssue
         return StreamSupport.stream(ForgeRegistries.FLUIDS.tags().getTag(tag).spliterator(), false)
                 .map(f -> new FluidStack(f, amount))
                 .toList();
@@ -118,7 +119,7 @@ public class FluidIngredient {
         if (ingredient.tag().isPresent()) {
             object.addProperty("tag", ingredient.tag().get().location().toString());
         } else {
-            object.addProperty("fluid", ForgeRegistries.FLUIDS.getKey(ingredient.fluid()).toString());
+            object.addProperty("fluid", Objects.toString(ForgeRegistries.FLUIDS.getKey(ingredient.fluid())));
         }
         object.addProperty("amount", ingredient.amount());
         return object;

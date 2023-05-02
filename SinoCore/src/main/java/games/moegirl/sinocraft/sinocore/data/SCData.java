@@ -11,12 +11,5 @@ public class SCData {
     public static void onRegisterPredicates(GatherDataEvent event) {
         var gen = event.getGenerator();
         var output = gen.getPackOutput();
-
-        if (event.includeClient()) {
-
-        }
-
-        if (event.includeServer()) {
-        }
     }
 }

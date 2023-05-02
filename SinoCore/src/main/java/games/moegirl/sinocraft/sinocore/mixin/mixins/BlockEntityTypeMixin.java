@@ -14,6 +14,7 @@ public abstract class BlockEntityTypeMixin {
 
     @Inject(at = @At("HEAD"), method = "isValid", cancellable = true)
     private void sinocore$isValid(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+        //noinspection DataFlowIssue
         if (BlockEntityType.getKey((BlockEntityType<?>) (Object) this)
                 .equals(new ResourceLocation("minecraft", "sign"))) {
             if (state.getBlock() instanceof SignBlock) {

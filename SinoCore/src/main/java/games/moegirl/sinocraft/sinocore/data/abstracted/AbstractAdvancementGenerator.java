@@ -15,12 +15,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 
-import java.util.Set;
 import java.util.function.Consumer;
 
 public abstract class AbstractAdvancementGenerator implements ForgeAdvancementProvider.AdvancementGenerator {
-    protected String modid;
-    protected ResourceLocation background;
+    protected final String modid;
+    protected final ResourceLocation background;
 
     public AbstractAdvancementGenerator(String modid, ResourceLocation background) {
         this.modid = modid;

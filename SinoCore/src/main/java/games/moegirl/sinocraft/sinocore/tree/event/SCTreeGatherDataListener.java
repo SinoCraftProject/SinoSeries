@@ -6,8 +6,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class SCTreeGatherDataListener {
-    private String modid;
-
+    private final String modid;
     public SCTreeGatherDataListener(String modid) {
         this.modid = modid;
     }

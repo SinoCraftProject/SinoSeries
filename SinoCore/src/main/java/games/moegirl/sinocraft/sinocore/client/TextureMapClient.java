@@ -37,6 +37,7 @@ public class TextureMapClient {
     public EditBoxOptional placeEditBox(String name, AbstractContainerScreen<?> parent, Font font) {
         return EditBoxOptional.wrap(parent, texture.editBoxes().get(name)
                 .map(e -> {
+                    assert e.buildHint() != null;
                     EditBox box = new EditBox(font, parent.getGuiLeft() + e.x(), parent.getGuiTop() + e.y(), e.w(), e.h(), e.buildTitle());
                     box.setHint(e.buildHint());
                     box.setMaxLength(e.maxLength());
@@ -149,13 +150,12 @@ public class TextureMapClient {
     }
 
     public void blitTexture(PoseStack stack, String name, String position, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
-        texture.textures().get(name).ifPresent(entry -> {
-            texture.points().get(position).ifPresent(p -> {
-                bindTexture();
-                blitTexture(stack, gui.getGuiLeft() + p.x(), gui.getGuiTop() + p.y(), entry.w(), entry.h(),
-                        entry.u(), entry.v(), entry.tw(), entry.th());
-            });
-        });
+        texture.textures().get(name).ifPresent(entry ->
+                texture.points().get(position).ifPresent(p -> {
+                    bindTexture();
+                    blitTexture(stack, gui.getGuiLeft() + p.x(), gui.getGuiTop() + p.y(), entry.w(), entry.h(),
+                            entry.u(), entry.v(), entry.tw(), entry.th());
+                }));
         resumeGL(configurations);
     }
 

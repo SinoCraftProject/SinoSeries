@@ -16,7 +16,7 @@ public interface ReadonlyItemFluidContainer extends Container {
         return new FluidsRecipeContainer(items, fluids);
     }
 
-    static ReadonlyItemFluidContainer create(Container items, IFluidTank tank) {
+    static ReadonlyItemFluidContainer create(IFluidTank tank, Container items) {
         return new FluidRecipeContainer(items, tank);
     }
 

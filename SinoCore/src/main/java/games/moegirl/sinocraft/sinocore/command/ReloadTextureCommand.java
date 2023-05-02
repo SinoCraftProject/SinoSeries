@@ -18,7 +18,7 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 public class ReloadTextureCommand {
-    public static LiteralCommandNode<CommandSourceStack> RELOAD = literal("reload")
+    public static final LiteralCommandNode<CommandSourceStack> RELOAD = literal("reload")
             .requires(s -> s.hasPermission(2))
             .then(literal("texture")
                     .then(argument("texture_name", ResourceLocationArgument.id())

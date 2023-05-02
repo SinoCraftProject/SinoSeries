@@ -96,13 +96,11 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
             onLeftClick.onPress(this);
     }
 
-    public ImageButton setOnRightClick(@Nullable OnPress onRightClick) {
+    public void setOnRightClick(@Nullable OnPress onRightClick) {
         this.onRightClick = onRightClick;
-        return this;
     }
 
-    public ImageButton setOnLeftClick(@Nullable OnPress onLeftClick) {
+    public void setOnLeftClick(@Nullable OnPress onLeftClick) {
         this.onLeftClick = onLeftClick;
-        return this;
     }
 }

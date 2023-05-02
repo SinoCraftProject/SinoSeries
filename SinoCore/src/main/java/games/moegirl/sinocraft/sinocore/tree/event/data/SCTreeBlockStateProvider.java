@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinocore.tree.event.data;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockStateProvider;
-import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -32,8 +32,8 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         for (var tree : treeTypes) {
-            logBlock((RotatedPillarBlock) tree.getBlock(TreeBlockType.LOG));
-            logBlock((RotatedPillarBlock) tree.getBlock(TreeBlockType.STRIPPED_LOG));
+            logBlock(tree.getBlock(TreeBlockType.LOG));
+            logBlock(tree.getBlock(TreeBlockType.STRIPPED_LOG));
 
             simpleBlock(tree.getBlock(TreeBlockType.LOG_WOOD));
             simpleBlock(tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD));
@@ -59,25 +59,22 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             ResourceLocation planksTextures = blockTexture(tree.getBlock(TreeBlockType.PLANKS));
 
             ModelFile sign = models().sign(TreeBlockType.SIGN.makeResourceLoc(tree.getName()).getPath(), planksTextures);
-            signBlock((StandingSignBlock) tree.getBlock(TreeBlockType.SIGN),
-                    (WallSignBlock) tree.getBlock(TreeBlockType.WALL_SIGN), sign);
+            signBlock(tree.getBlock(TreeBlockType.SIGN),
+                    tree.getBlock(TreeBlockType.WALL_SIGN), sign);
             simpleBlock(tree.getBlock(TreeBlockType.HANGING_SIGN), sign);
             simpleBlock(tree.getBlock(TreeBlockType.WALL_HANGING_SIGN), sign);
 
-            ResourceLocation trapdoorName = TreeBlockType.TRAPDOOR.makeResourceLoc(tree.getName());
-            ResourceLocation trapdoorTextures = new ResourceLocation(trapdoorName.getNamespace(),
-                    ModelProvider.BLOCK_FOLDER + "/" + trapdoorName.getPath());
-            trapdoorBlockWithRenderType((TrapDoorBlock) tree.getBlock(TreeBlockType.TRAPDOOR), trapdoorTextures, true, "cutout_mipped");
-            slabBlock((SlabBlock) tree.getBlock(TreeBlockType.SLAB), planksTextures, planksTextures);
-            stairsBlock((StairBlock) tree.getBlock(TreeBlockType.STAIRS), planksTextures);
+            trapdoorBlock(tree.getBlock(TreeBlockType.TRAPDOOR), planksTextures, true);
+            slabBlock(tree.getBlock(TreeBlockType.SLAB), planksTextures, planksTextures);
+            stairsBlock(tree.getBlock(TreeBlockType.STAIRS), planksTextures);
 
-            fenceBlock((FenceBlock) tree.getBlock(TreeBlockType.FENCE), planksTextures);
-            fenceGateBlock((FenceGateBlock) tree.getBlock(TreeBlockType.FENCE_GATE), planksTextures);
+            fenceBlock(tree.getBlock(TreeBlockType.FENCE), planksTextures);
+            fenceGateBlock(tree.getBlock(TreeBlockType.FENCE_GATE), planksTextures);
 
-            buttonBlock((ButtonBlock) tree.getBlock(TreeBlockType.BUTTON), planksTextures);
-            pressurePlateBlock((PressurePlateBlock) tree.getBlock(TreeBlockType.PRESSURE_PLATE), planksTextures);
+            buttonBlock(tree.getBlock(TreeBlockType.BUTTON), planksTextures);
+            pressurePlateBlock(tree.getBlock(TreeBlockType.PRESSURE_PLATE), planksTextures);
 
-            DoorBlock door = (DoorBlock) tree.getBlock(TreeBlockType.DOOR);
+            DoorBlock door = tree.getBlock(TreeBlockType.DOOR);
             ResourceLocation doorName = TreeBlockType.DOOR.makeResourceLoc(tree.getName());
             ResourceLocation doorTop = new ResourceLocation(doorName.getNamespace(),
                     ModelProvider.BLOCK_FOLDER + "/" + doorName.getPath() + "_top");
@@ -94,7 +91,7 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
                 logger.warn(doorBottom + " does not exist, use " + planksTextures);
                 doorBottom = planksTextures;
             }
-            doorBlockWithRenderType(door, doorBottom, doorTop, "cutout_mipped");
+            doorBlock(door, doorBottom, doorTop);
 
             models().singleTexture(TreeBlockType.BUTTON.makeResourceLoc(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("button_inventory")), planksTextures);
             models().fenceInventory(TreeBlockType.FENCE.makeResourceLoc(tree.getName()).getPath() + "_inventory", planksTextures);

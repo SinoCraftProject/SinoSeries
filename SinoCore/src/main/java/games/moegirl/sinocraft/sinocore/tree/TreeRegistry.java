@@ -5,9 +5,9 @@ import games.moegirl.sinocraft.sinocore.tree.event.SCTreeTabsBuildListener;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,6 @@ import java.util.Map;
 public final class TreeRegistry {
 
     private static final Map<String, List<Tree>> TREE_REGISTRY = new HashMap<>();
-    private static final Map<String, Pair<DeferredRegister<Block>, DeferredRegister<Item>>> MOD_DEFERRED_REGISTERS = new HashMap<>();
 
     /**
      * Get tree registry.
@@ -33,30 +32,24 @@ public final class TreeRegistry {
     /**
      * Register mod trees.
      * @param modid ModId
-     * @param bus Mod Event Bus {@code FMLModContainer#getModEventBus()}
      */
-    public static void register(String modid, IEventBus bus) {
-        registerListeners(modid, bus);
-
-        for (var tree : getRegistry().get(modid)) {
-            registerInternal(modid, tree);
-        }
-    }
-
-    private static void registerListeners(String modid, IEventBus bus) {
+    public static void register(String modid) {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         var blockRegister = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
         var itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
-        MOD_DEFERRED_REGISTERS.put(modid, Pair.of(blockRegister, itemRegister));
-
-        bus.register(new SCTreeTabsBuildListener(modid));
-        bus.register(new SCTreeGatherDataListener(modid));
-
         blockRegister.register(bus);
         itemRegister.register(bus);
+        register(modid, blockRegister, itemRegister);
     }
 
-    private static void registerInternal(String modid, Tree tree) {
-        var pair = MOD_DEFERRED_REGISTERS.get(modid);
-        tree.register(pair.getLeft(), pair.getRight());
+    public static void register(String modid, DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister) {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        SCTreeTabsBuildListener tabsListener = new SCTreeTabsBuildListener();
+        bus.register(tabsListener);
+        bus.register(new SCTreeGatherDataListener(modid));
+
+        for (var tree : getRegistry().get(modid)) {
+            tree.register(blockRegister, itemRegister, tabsListener);
+        }
     }
 }

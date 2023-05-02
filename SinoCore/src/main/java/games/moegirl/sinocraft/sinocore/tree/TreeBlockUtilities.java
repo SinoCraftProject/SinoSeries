@@ -2,66 +2,86 @@ package games.moegirl.sinocraft.sinocore.tree;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-
-import java.util.List;
 
 public class TreeBlockUtilities {
 
     // <editor-fold desc="Blocks">
 
-    public static Block makeGeneralBlock(TreeBlockType type, BlockSetType setType, BlockBehaviour.Properties properties) {
-        return switch (type) {
-            case LOG, LOG_WOOD, STRIPPED_LOG, STRIPPED_LOG_WOOD -> new RotatedPillarBlock(properties);
-            case PLANKS -> new Block(properties);
-            case LEAVES -> new LeavesBlock(properties);
-            case SLAB -> new SlabBlock(properties);
-            case BUTTON -> new ButtonBlock(properties, setType, 30, true);
-            case DOOR -> new DoorBlock(properties, setType);
-            case TRAPDOOR -> new TrapDoorBlock(properties, setType);
-            case FENCE -> new FenceBlock(properties);
-            case FENCE_GATE -> new FenceGateBlock(properties, SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN);
-            case PRESSURE_PLATE -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, properties, setType);
-            default -> throw new IllegalArgumentException("Unknown tree block type " + type);
-        };
+    public static Block rotatedPillar(BlockBehaviour.Properties properties) {
+        return new RotatedPillarBlock(properties);
     }
 
-    public static Block makeSignBlock(TreeBlockType type, BlockBehaviour.Properties properties, WoodType woodType) {
-        return switch (type) {
-            case SIGN -> new StandingSignBlock(properties, woodType);
-            case WALL_SIGN -> new WallSignBlock(properties, woodType);
-            case HANGING_SIGN -> new CeilingHangingSignBlock(properties, woodType);
-            case WALL_HANGING_SIGN -> new WallHangingSignBlock(properties, woodType);
-            default -> throw new IllegalArgumentException("Block type " + type + " is not a sign block");
-        };
+    public static Block normalBlock(BlockBehaviour.Properties properties) {
+        return new Block(properties);
     }
 
-    public static Block sapling(AbstractTreeGrower grower, BlockBehaviour.Properties properties) {
-        return new SaplingBlock(grower, properties);
+    public static Block leaves(BlockBehaviour.Properties properties) {
+        return new LeavesBlock(properties);
     }
 
-    public static Block pottedSapling(SaplingBlock sapling, BlockBehaviour.Properties properties) {
-        return new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> sapling, properties);
+    public static Block slab(BlockBehaviour.Properties properties) {
+        return new SlabBlock(properties);
     }
 
-    public static Block stairs(Block block) {
-        return new StairBlock(block::defaultBlockState, stairsProp(block));
+    public static Block button(Tree tree, BlockBehaviour.Properties properties) {
+        return new ButtonBlock(properties, tree.getBlockSetType(), 30, true);
     }
 
-    public static Block stairs(Block block, BlockBehaviour.Properties properties) {
-        return new StairBlock(block::defaultBlockState, properties);
+    public static Block door(Tree tree, BlockBehaviour.Properties properties) {
+        return new DoorBlock(properties, tree.getBlockSetType());
+    }
+
+    public static Block trapdoor(Tree tree, BlockBehaviour.Properties properties) {
+        return new TrapDoorBlock(properties, tree.getBlockSetType());
+    }
+
+    public static Block fence(BlockBehaviour.Properties properties) {
+        return new FenceBlock(properties);
+    }
+
+    public static Block fenceGate(Tree tree, BlockBehaviour.Properties properties) {
+        return new FenceGateBlock(properties, tree.getWoodType());
+    }
+
+    public static Block pressurePlate(Tree tree, BlockBehaviour.Properties properties) {
+        return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, properties, tree.getBlockSetType());
+    }
+
+    public static Block standingSign(Tree tree, BlockBehaviour.Properties properties) {
+        return new StandingSignBlock(properties, tree.getWoodType());
+    }
+
+    public static Block wallSign(Tree tree, BlockBehaviour.Properties properties) {
+        return new WallSignBlock(properties, tree.getWoodType());
+    }
+
+    public static Block ceilingHangingSign(Tree tree, BlockBehaviour.Properties properties) {
+        return new CeilingHangingSignBlock(properties, tree.getWoodType());
+    }
+
+    public static Block wallHangingSign(Tree tree, BlockBehaviour.Properties properties) {
+        return new WallHangingSignBlock(properties, tree.getWoodType());
+    }
+
+    public static Block sapling(Tree tree, BlockBehaviour.Properties properties) {
+        return new SaplingBlock(tree.getGrower(), properties);
+    }
+
+    public static Block pottedSapling(Tree tree, BlockBehaviour.Properties properties) {
+        return new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> tree.getBlock(TreeBlockType.SAPLING), properties);
+    }
+
+    public static Block stairs(Tree tree, BlockBehaviour.Properties properties) {
+        return new StairBlock(() -> tree.getBlock(TreeBlockType.PLANKS).defaultBlockState(), properties);
     }
 
     // </editor-fold>
@@ -69,14 +89,8 @@ public class TreeBlockUtilities {
     // <editor-fold desc="Properties">
 
     public static BlockBehaviour.Properties logProp() {
-        return logProp(MaterialColor.PODZOL, MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties logProp(MaterialColor color) {
-        return logProp(color, MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties logProp(MaterialColor color, MaterialColor yColor) {
+        MaterialColor color = MaterialColor.PODZOL;
+        MaterialColor yColor = MaterialColor.WOOD;
         return BlockBehaviour.Properties.of(Material.WOOD, axis ->
                         axis.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? yColor : color)
                 .strength(2.0F)
@@ -100,10 +114,7 @@ public class TreeBlockUtilities {
     }
 
     public static BlockBehaviour.Properties leavesProp() {
-        return leavesProp(SoundType.GRASS);
-    }
-
-    public static BlockBehaviour.Properties leavesProp(SoundType sound) {
+        SoundType sound = SoundType.GRASS;
         return BlockBehaviour.Properties.of(Material.LEAVES)
                 .strength(0.2F)
                 .randomTicks()
@@ -122,10 +133,7 @@ public class TreeBlockUtilities {
     }
 
     public static BlockBehaviour.Properties doorProp() {
-        return doorProp(MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties doorProp(MaterialColor color) {
+        MaterialColor color = MaterialColor.WOOD;
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .strength(3.0F)
                 .sound(SoundType.WOOD)
@@ -140,25 +148,19 @@ public class TreeBlockUtilities {
                 .isValidSpawn(TreeBlockUtilities::never);
     }
 
-    public static BlockBehaviour.Properties stairsProp(Block block) {
-        return BlockBehaviour.Properties.copy(block);
+    public static BlockBehaviour.Properties stairsProp() {
+        return planksProp();
     }
 
     public static BlockBehaviour.Properties fenceProp() {
-        return fenceProp(MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties fenceProp(MaterialColor color) {
+        MaterialColor color = MaterialColor.WOOD;
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .strength(2.0F, 3.0F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties pressurePlateProp() {
-        return pressurePlateProp(MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties pressurePlateProp(MaterialColor color) {
+        MaterialColor color = MaterialColor.WOOD;
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .noCollission()
                 .strength(0.5F)
@@ -166,21 +168,16 @@ public class TreeBlockUtilities {
     }
 
     public static BlockBehaviour.Properties signProp() {
-        return signProp(MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties signProp(MaterialColor color) {
+        MaterialColor color = MaterialColor.WOOD;
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD);
     }
 
-    public static BlockBehaviour.Properties wallSignProp(Block lootFrom) {
-        return wallSignProp(MaterialColor.WOOD, lootFrom);
-    }
-
-    public static BlockBehaviour.Properties wallSignProp(MaterialColor color, Block lootFrom) {
+    public static BlockBehaviour.Properties wallSignProp(Tree tree) {
+        MaterialColor color = MaterialColor.WOOD;
+        Block lootFrom = tree.getBlock(TreeBlockType.SIGN);
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .noCollission()
                 .strength(1.0F)
@@ -189,10 +186,7 @@ public class TreeBlockUtilities {
     }
 
     public static BlockBehaviour.Properties hangingSignProp() {
-        return hangingSignProp(MaterialColor.WOOD);
-    }
-
-    public static BlockBehaviour.Properties hangingSignProp(MaterialColor color) {
+        MaterialColor color = MaterialColor.WOOD;
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .noCollission()
                 .strength(1.0F)
@@ -200,11 +194,9 @@ public class TreeBlockUtilities {
                 .requiredFeatures(FeatureFlags.UPDATE_1_20);
     }
 
-    public static BlockBehaviour.Properties wallHangingSignProp(Block lootFrom) {
-        return wallHangingSignProp(MaterialColor.WOOD, lootFrom);
-    }
-
-    public static BlockBehaviour.Properties wallHangingSignProp(MaterialColor color, Block lootFrom) {
+    public static BlockBehaviour.Properties wallHangingSignProp(Tree tree) {
+        MaterialColor color = MaterialColor.WOOD;
+        Block lootFrom = tree.getBlock(TreeBlockType.HANGING_SIGN);
         return BlockBehaviour.Properties.of(Material.WOOD, color)
                 .noCollission()
                 .strength(1.0F)
@@ -239,10 +231,6 @@ public class TreeBlockUtilities {
         return false;
     }
 
-    public static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
-        return true;
-    }
-
     public static boolean ocelotOrParrot(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
@@ -251,28 +239,20 @@ public class TreeBlockUtilities {
 
     // <editor-fold desc="Items">
 
-    public static Item blockItem(Block block) {
-        return blockItem(block, itemProp());
+    public static Item blockItem(Tree tree, TreeBlockType type) {
+        return new BlockItem(tree.getBlock(type), itemProp());
     }
 
-    public static Item blockItem(Block block, Item.Properties properties) {
-        return new BlockItem(block, properties);
+    public static Item doubleBlockItem(Tree tree, TreeBlockType type) {
+        return new DoubleHighBlockItem(tree.getBlock(type), itemProp());
     }
 
-    public static Item doubleBlockItem(Block block) {
-        return doubleBlockItem(block, itemProp());
+    public static Item signBlockItem(Tree tree) {
+        return new SignItem(itemProp(), tree.getBlock(TreeBlockType.SIGN), tree.getBlock(TreeBlockType.WALL_SIGN));
     }
 
-    public static Item signBlockItem(Block standingBlock, Block wallBlock) {
-        return new SignItem(itemProp(), standingBlock, wallBlock);
-    }
-
-    public static Item hangingSignBlockItem(Block hangingBlock, Block wallBlock) {
-        return new HangingSignItem(hangingBlock, wallBlock, itemProp());
-    }
-
-    public static Item doubleBlockItem(Block block, Item.Properties properties) {
-        return new DoubleHighBlockItem(block, properties);
+    public static Item hangingSignBlockItem(Tree tree) {
+        return new HangingSignItem(tree.getBlock(TreeBlockType.HANGING_SIGN), tree.getBlock(TreeBlockType.WALL_HANGING_SIGN), itemProp());
     }
 
     public static Item.Properties itemProp() {
@@ -292,19 +272,6 @@ public class TreeBlockUtilities {
     // </editor-fold>
 
     // <editor-fold desc="Tabs">
-
-    public static List<CreativeModeTab> getDefaultTabs(TreeBlockType type) {
-        return switch (type) {
-            case LOG -> List.of(CreativeModeTabs.NATURAL_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
-            case LOG_WOOD, STRIPPED_LOG, STRIPPED_LOG_WOOD, PLANKS, SLAB, STAIRS, FENCE -> List.of(CreativeModeTabs.BUILDING_BLOCKS);
-            case LEAVES, SAPLING -> List.of(CreativeModeTabs.NATURAL_BLOCKS);
-            case DOOR, TRAPDOOR, PRESSURE_PLATE, BUTTON, FENCE_GATE -> List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
-            case SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
-            case BOAT -> List.of(CreativeModeTabs.TOOLS_AND_UTILITIES);
-            case CHEST_BOAT -> List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.TOOLS_AND_UTILITIES);
-            default -> List.of();
-        };
-    }
 
     // </editor-fold>
 }
