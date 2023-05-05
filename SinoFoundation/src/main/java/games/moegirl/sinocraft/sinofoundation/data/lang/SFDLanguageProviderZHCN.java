@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.data.lang;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.data.PackOutput;
 
@@ -18,5 +19,9 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addTab(SinoSeriesTabs.WEAPONS, "华夏系列 | 战斗用品");
         addTab(SinoSeriesTabs.MATERIALS, "华夏系列 | 原材料");
         addTab(SinoSeriesTabs.MISC, "华夏系列 | 杂项");
+
+        add(SFDItems.IRON_KNIFE.get(), "铁质小刀");
+        add(SFDItems.GOLD_KNIFE.get(), "金质小刀");
+        add(SFDItems.DIAMOND_KNIFE.get(), "钻石小刀");
     }
 }

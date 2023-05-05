@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.data.lang;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.data.PackOutput;
 
@@ -18,5 +19,9 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addTab(SinoSeriesTabs.WEAPONS, "SinoSeries | Combat");
         addTab(SinoSeriesTabs.MATERIALS, "SinoSeries | Ingredients");
         addTab(SinoSeriesTabs.MISC, "SinoSeries | Misc");
+
+        add(SFDItems.IRON_KNIFE.get(), "Iron Knife");
+        add(SFDItems.GOLD_KNIFE.get(), "Golden Knife");
+        add(SFDItems.DIAMOND_KNIFE.get(), "Diamond Knife");
     }
 }

@@ -35,5 +35,5 @@ side = "BOTH"
 modId = "sinocore"
 mandatory = true
 versionRange = "[${sinoseries_full_version},${next_sinoseries_full_version})"
-ordering = "NONE"
+ordering = "AFTER"
 side = "BOTH"

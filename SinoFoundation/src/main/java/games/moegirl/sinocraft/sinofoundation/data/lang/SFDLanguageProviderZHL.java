@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.data.lang;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.data.PackOutput;
 
@@ -18,5 +19,10 @@ public class SFDLanguageProviderZHL extends AbstractLanguageProvider {
         addTab(SinoSeriesTabs.WEAPONS, "夏藝 | 兵者");
         addTab(SinoSeriesTabs.MATERIALS, "夏藝 | 原材");
         addTab(SinoSeriesTabs.MISC, "夏藝 | 雜項");
+
+        // Fixme: qyl27: LZH translation.
+        add(SFDItems.IRON_KNIFE.get(), "铁厨刀");
+        add(SFDItems.GOLD_KNIFE.get(), "金厨刀");
+        add(SFDItems.DIAMOND_KNIFE.get(), "钻石厨刀");
     }
 }

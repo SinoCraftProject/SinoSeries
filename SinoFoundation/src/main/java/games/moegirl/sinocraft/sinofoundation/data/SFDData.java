@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.data.lang.*;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +17,7 @@ public class SFDData {
         var lookupProvider = event.getLookupProvider();
 
         if (event.includeClient()) {
+            gen.addProvider(true, new SFDItemModelProvider(output, SinoFoundation.MODID, exHelper, SFDItems.ITEMS));
         }
 
         if (event.includeServer()) {
@@ -24,6 +26,11 @@ public class SFDData {
             gen.addProvider(true, new SFDLanguageProviderZHTW(output, SinoFoundation.MODID, "zh_tw"));
             gen.addProvider(true, new SFDLanguageProviderZHL(output, SinoFoundation.MODID, "lzh"));
             gen.addProvider(true, new SFDLanguageProviderENUS(output, SinoFoundation.MODID, "en_us"));
+
+            var blockTagsProvider = new SFDBlockTagsProvider(output, lookupProvider, SinoFoundation.MODID, exHelper);
+            gen.addProvider(true, blockTagsProvider);
+            gen.addProvider(true, new SFDItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoFoundation.MODID, exHelper));
+
         }
     }
 }
