@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.data.lang.*;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -17,7 +19,8 @@ public class SFDData {
         var lookupProvider = event.getLookupProvider();
 
         if (event.includeClient()) {
-            gen.addProvider(true, new SFDItemModelProvider(output, SinoFoundation.MODID, exHelper, SFDItems.ITEMS));
+            gen.addProvider(true, new SFDItemModelProvider(output, SinoFoundation.MODID, exHelper, SFDItems.ITEMS, SFDBlockItems.ITEMS));
+            gen.addProvider(true, new SFDBlockStateProvider(output, SinoFoundation.MODID, exHelper, SFDBlocks.BLOCKS));
         }
 
         if (event.includeServer()) {

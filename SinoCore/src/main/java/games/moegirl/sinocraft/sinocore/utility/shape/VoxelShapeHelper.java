@@ -1,11 +1,10 @@
-package games.moegirl.sinocraft.sinocore.old.utility.shape;
+package games.moegirl.sinocraft.sinocore.utility.shape;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class VoxelShapeHelper {
-    // Todo: qyl27: move from sfd.
     public static VoxelShape rotateHorizontal(VoxelShape shape, Direction from, Direction to) {
         var rotates = (to.get2DDataValue() - from.get2DDataValue() + 4) % 4;
 
@@ -24,5 +23,13 @@ public class VoxelShapeHelper {
         buffer[1] = Shapes.empty();
 
         return buffer[0];
+    }
+
+    public static VoxelShape rotateClockwise(VoxelShape shape, int times) {
+        var result = shape;
+        for (var i = 0; i < times; i++) {
+            shape = rotateClockwise(shape);
+        }
+        return shape;
     }
 }
