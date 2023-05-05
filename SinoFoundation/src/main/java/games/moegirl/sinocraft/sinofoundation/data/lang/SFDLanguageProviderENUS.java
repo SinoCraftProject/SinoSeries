@@ -12,7 +12,7 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
     @Override
     public void translate() {
         addTab(SinoSeriesTabs.BUILDING_BLOCKS, "SinoSeries | Building Blocks");
-        addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "SinoSeries | Functional Blocks");
+        // addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "SinoSeries | Functional Blocks");
         addTab(SinoSeriesTabs.AGRICULTURE, "SinoSeries | Agriculture");
         addTab(SinoSeriesTabs.TOOLS, "SinoSeries | Tools & Utilities");
         addTab(SinoSeriesTabs.WEAPONS, "SinoSeries | Combat");
