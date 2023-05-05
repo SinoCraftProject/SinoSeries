@@ -30,6 +30,6 @@ public class SCAItems {
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
-        TabsRegistry.register(SinoSeriesTabs.MISC).add(ITEMS);
+        TabsRegistry.get(SinoSeriesTabs.MISC).add(ITEMS);
     }
 }

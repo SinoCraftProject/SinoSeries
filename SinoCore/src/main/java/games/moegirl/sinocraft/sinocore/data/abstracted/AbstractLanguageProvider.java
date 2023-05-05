@@ -18,7 +18,6 @@ public abstract class AbstractLanguageProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        System.out.println("Mod " + modid + " Lang " + locale);
         addTreeTranslates();
         translate();
     }

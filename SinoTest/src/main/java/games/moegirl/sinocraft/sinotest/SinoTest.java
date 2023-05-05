@@ -15,6 +15,7 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -30,7 +31,8 @@ public class SinoTest {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MODID);
 
-    public static TabsRegistry TAB = TabsRegistry.register(new ResourceLocation(MODID, "test_all"))
+    private static final IEventBus BUS = FMLJavaModLoadingContext.get().getModEventBus();
+    public static TabsRegistry TAB = TabsRegistry.register(new ResourceLocation(MODID, "test_all"), BUS)
             .custom(CreativeModeTab.Builder::withSearchBar)
             .icon(() -> new ItemStack(Items.BAMBOO))
             .add(ITEMS);

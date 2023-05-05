@@ -30,10 +30,6 @@ public interface TabsRegistry {
         return new TabsRegistryImpl(name, bus);
     }
 
-    static TabsRegistry register(ResourceLocation name) {
-        return register(name, FMLJavaModLoadingContext.get().getModEventBus());
-    }
-
     ResourceLocation name();
 
     default CreativeModeTab tab() {

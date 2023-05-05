@@ -13,15 +13,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayItemsGenerator {
+    private static final Map<ResourceLocation, List<ItemLike>> TAB_ITEM_MAP = new HashMap<>();
 
     private final List<DeferredRegister<? extends ItemLike>> deferredRegisters = new ArrayList<>();
     private final List<Supplier<ItemStack>> itemStacks = new ArrayList<>();
@@ -99,6 +98,22 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
     @Override
     public TabsRegistry add(DeferredRegister<? extends ItemLike> dr) {
         deferredRegisters.add(dr);
+
+        // Fixme: qyl27: it has bad performance.
+        var items = dr.getEntries().stream()
+                .map(RegistryObject::get)
+                .filter(i -> i instanceof ITabItem)
+                .toList();
+        for (var item : items) {
+            var tabItem = (ITabItem) item;
+            for (var tab : tabItem.getTabs()) {
+                if (!TAB_ITEM_MAP.containsKey(tab)) {
+                    TAB_ITEM_MAP.put(tab, new ArrayList<>());
+                }
+                TAB_ITEM_MAP.get(tab).add(item);
+            }
+        }
+
         return this;
     }
 
@@ -123,6 +138,15 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
                 .map(DeferredRegister::getEntries)
                 .flatMap(Collection::stream)
                 .map(RegistryObject::get)
+                .filter(i -> {
+                    if (i instanceof ITabItem tabItem) {
+                        return tabItem.getTabs().contains(name);
+                    }
+                    return true;
+                })
                 .forEach(output::accept);
+        if (TAB_ITEM_MAP.containsKey(name)) {
+            TAB_ITEM_MAP.get(name).forEach(output::accept);
+        }
     }
 }
