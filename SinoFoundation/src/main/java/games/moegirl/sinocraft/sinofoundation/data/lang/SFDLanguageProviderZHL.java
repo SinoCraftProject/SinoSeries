@@ -13,7 +13,7 @@ public class SFDLanguageProviderZHL extends AbstractLanguageProvider {
     @Override
     public void translate() {
         addTab(SinoSeriesTabs.BUILDING_BLOCKS, "夏藝 | 築方");
-        addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "夏藝 | 用方");
+//        addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "夏藝 | 用方");
         addTab(SinoSeriesTabs.AGRICULTURE, "夏藝 | 農事");
         addTab(SinoSeriesTabs.TOOLS, "夏藝 | 用物");
         addTab(SinoSeriesTabs.WEAPONS, "夏藝 | 兵者");

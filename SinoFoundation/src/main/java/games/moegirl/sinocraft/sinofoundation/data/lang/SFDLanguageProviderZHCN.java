@@ -13,7 +13,7 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
     @Override
     public void translate() {
         addTab(SinoSeriesTabs.BUILDING_BLOCKS, "华夏系列 | 建筑方块");
-        addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "华夏系列 | 功能性方块");
+//        addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "华夏系列 | 功能性方块");
         addTab(SinoSeriesTabs.AGRICULTURE, "华夏系列 | 农业");
         addTab(SinoSeriesTabs.TOOLS, "华夏系列 | 工具与实用物品");
         addTab(SinoSeriesTabs.WEAPONS, "华夏系列 | 战斗用品");

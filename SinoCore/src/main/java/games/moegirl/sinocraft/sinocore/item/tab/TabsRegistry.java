@@ -22,8 +22,10 @@ public interface TabsRegistry {
 
     Map<ResourceLocation, TabsRegistry> TAB_MAP = new HashMap<>();
 
-    static TabsRegistry get(ResourceLocation name) {
-        return TAB_MAP.computeIfAbsent(name, TabsRegistryOps::new);
+    static  TabsRegistry get(ResourceLocation name) {
+        synchronized (TabsRegistry.class) {
+            return TAB_MAP.computeIfAbsent(name, TabsRegistryOps::new);
+        }
     }
 
     static TabsRegistry register(ResourceLocation name, IEventBus bus) {

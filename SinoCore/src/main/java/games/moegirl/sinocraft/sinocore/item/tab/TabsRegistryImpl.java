@@ -4,12 +4,15 @@ import games.moegirl.sinocraft.sinocore.utility.Functions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -17,10 +20,17 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayItemsGenerator {
-    private static final Map<ResourceLocation, List<ItemLike>> TAB_ITEM_MAP = new HashMap<>();
+    private static final Lazy<Map<ResourceLocation, List<ItemStack>>> TAB_ITEM_MAP = Lazy.of(() -> {
+        Map<ResourceLocation, List<ItemStack>> map = new HashMap<>();
+        for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            if (item instanceof ITabItem<?> tabs) {
+                tabs.acceptTabs((tab, stack) -> map.computeIfAbsent(tab, t -> new ArrayList<>()).add(stack));
+            }
+        }
+        return map;
+    });
 
     private final List<DeferredRegister<? extends ItemLike>> deferredRegisters = new ArrayList<>();
     private final List<Supplier<ItemStack>> itemStacks = new ArrayList<>();
@@ -31,11 +41,13 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
     private CreativeModeTab tab;
 
     private Function<CreativeModeTab.Builder, CreativeModeTab.Builder> builder;
+    private final ItemStack[] firstStack = new ItemStack[] { ItemStack.EMPTY };
 
     TabsRegistryImpl(ResourceLocation name, IEventBus bus) {
         this.name = name;
         this.builder = b -> b
                 .title(Component.translatable(makeTranslateKey(name)))
+                .icon(() -> firstStack[0])
                 .displayItems(this);
 
         bus.register(this);
@@ -98,22 +110,6 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
     @Override
     public TabsRegistry add(DeferredRegister<? extends ItemLike> dr) {
         deferredRegisters.add(dr);
-
-        // Fixme: qyl27: it has bad performance.
-        var items = dr.getEntries().stream()
-                .map(RegistryObject::get)
-                .filter(i -> i instanceof ITabItem)
-                .toList();
-        for (var item : items) {
-            var tabItem = (ITabItem) item;
-            for (var tab : tabItem.getTabs()) {
-                if (!TAB_ITEM_MAP.containsKey(tab)) {
-                    TAB_ITEM_MAP.put(tab, new ArrayList<>());
-                }
-                TAB_ITEM_MAP.get(tab).add(item);
-            }
-        }
-
         return this;
     }
 
@@ -128,25 +124,27 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
 
     @Override
     public void accept(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+
         itemStacks.stream()
                 .map(Supplier::get)
-                .forEach(output::accept);
+                .forEach(stack -> accept(stack, output));
         items.stream()
                 .map(Supplier::get)
-                .forEach(output::accept);
+                .forEach(item -> accept(new ItemStack(item), output));
         deferredRegisters.stream()
                 .map(DeferredRegister::getEntries)
                 .flatMap(Collection::stream)
                 .map(RegistryObject::get)
-                .filter(i -> {
-                    if (i instanceof ITabItem tabItem) {
-                        return tabItem.getTabs().contains(name);
-                    }
-                    return true;
-                })
-                .forEach(output::accept);
-        if (TAB_ITEM_MAP.containsKey(name)) {
-            TAB_ITEM_MAP.get(name).forEach(output::accept);
+                .filter(i -> !(i instanceof ITabItem))
+                .forEach(item -> accept(new ItemStack(item), output));
+        TAB_ITEM_MAP.get().getOrDefault(name, Collections.emptyList())
+                .forEach(stack -> accept(stack, output));
+    }
+
+    private void accept(ItemStack stack, CreativeModeTab.Output output) {
+        if (firstStack[0].isEmpty()) {
+            firstStack[0] = stack;
         }
+        output.accept(stack);
     }
 }
