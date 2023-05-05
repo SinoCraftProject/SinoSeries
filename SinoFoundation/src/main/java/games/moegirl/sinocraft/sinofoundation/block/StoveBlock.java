@@ -57,8 +57,8 @@ public class StoveBlock extends HorizontalDirectionalBlock implements EntityBloc
         var east = Shapes.join(lastShape, frontHole, BooleanOp.ONLY_FIRST);
         SHAPE_EAST = east;
         SHAPE_NORTH = VoxelShapeHelper.rotateClockwise(east, 3);
-        SHAPE_SOUTH = VoxelShapeHelper.rotateClockwise(east, 2);
-        SHAPE_WEST = VoxelShapeHelper.rotateClockwise(east, 1);
+        SHAPE_WEST = VoxelShapeHelper.rotateClockwise(east, 2);
+        SHAPE_SOUTH = VoxelShapeHelper.rotateClockwise(east, 1);
     }
 
     public static final VoxelShape SHAPE_NORTH;
