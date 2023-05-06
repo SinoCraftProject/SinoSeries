@@ -1,9 +1,11 @@
 package games.moegirl.sinocraft.sinofoundation.capability.block.combustible;
 
+import games.moegirl.sinocraft.sinocore.utility.ItemStackHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class Combustible implements ICombustible {
 
@@ -14,7 +16,7 @@ public class Combustible implements ICombustible {
 
     private int burnTime = 0;
     private ItemStack burnFuel = ItemStack.EMPTY;
-    private int ashesCapacity = 0;
+    private int ashesCapacity = 3;
     private NonNullList<ItemStack> ashes = NonNullList.create();
 
     @Override
@@ -65,10 +67,25 @@ public class Combustible implements ICombustible {
     @Override
     public void addAsh(ItemStack ash) {
         if (!isFullOfAshes()) {
-            ashes.add(ash);
+            for (var stack : ashes) {
+                if (stack.sameItem(ash)) {
+                    ash = ItemStackHelper.mergeStack(stack, ash);
+                    if (ash.isEmpty()) {
+                        break;
+                    }
+                }
+            }
+            if (!ash.isEmpty()) {
+                ashes.add(ash);
+            }
         } else {
             throw new IllegalStateException("There are full of ashes. Amount: " + ashes.size());
         }
+    }
+
+    @Override
+    public void setAsh(int index, ItemStack ash) {
+        ashes.set(index, ash);
     }
 
     @Override
@@ -98,7 +115,18 @@ public class Combustible implements ICombustible {
 
     @Override
     public boolean isFullOfAshes() {
-        return ashes.size() >= getAshesCapacity();
+        if (ashes.size() > getAshesCapacity()) {
+            return true;
+        } else if (ashes.size() < getAshesCapacity()) {
+            return false;
+        } else {
+            for (var ash : ashes) {
+                if (ash.getCount() < ash.getMaxStackSize()) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     @Override
@@ -110,9 +138,10 @@ public class Combustible implements ICombustible {
     public CompoundTag serializeNBT() {
         var tag = new CompoundTag();
         tag.putInt(TAG_BURN_TIME_NAME, burnTime);
-        tag.put(TAG_BURN_FUEL_NAME, burnFuel.serializeNBT());
+        tag.put(TAG_BURN_FUEL_NAME, burnFuel.serializeNBT());   // Fixme: qyl27: it has not been saved.
         tag.putInt(TAG_ASHES_CAPACITY_NAME, ashesCapacity);
 
+        // Fixme: qyl27: it has not been saved.
         var ashesTag = ContainerHelper.saveAllItems(new CompoundTag(), ashes);
         tag.put(TAG_ASHES_NAME, ashesTag);
 
@@ -122,7 +151,7 @@ public class Combustible implements ICombustible {
     @Override
     public void deserializeNBT(CompoundTag tag) {
         burnTime = tag.getInt(TAG_BURN_TIME_NAME);
-        burnFuel.deserializeNBT(tag.getCompound(TAG_BURN_FUEL_NAME));
+        burnFuel = ItemStack.of(tag.getCompound(TAG_BURN_FUEL_NAME));
         ashesCapacity = tag.getInt(TAG_ASHES_CAPACITY_NAME);
 
         ContainerHelper.loadAllItems(tag.getCompound(TAG_ASHES_NAME), ashes);

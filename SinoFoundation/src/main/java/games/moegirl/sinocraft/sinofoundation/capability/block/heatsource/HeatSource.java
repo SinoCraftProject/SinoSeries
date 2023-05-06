@@ -23,6 +23,7 @@ public class HeatSource implements IHeatSource {
     @Override
     public void resetHeatValue() {
         setHeatValue(0);
+        changeHeatTo(0);
     }
 
     @Override

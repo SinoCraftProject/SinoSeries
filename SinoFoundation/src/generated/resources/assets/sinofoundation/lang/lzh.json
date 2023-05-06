@@ -1,4 +1,9 @@
 {
+  "block.sinofoundation.stove": "灶",
+  "block.stove.use.empty_now": "灶台里面现在是空的。",
+  "block.stove.use.full_of_ashes": "灶台被灰烬填满了。空手右键取出灰烬，空手 Shift + 右键清除灰烬。",
+  "block.stove.use.not_a_fuel": "你发现手中的物品不是燃料。",
+  "item.sinofoundation.ashes": "燼",
   "item.sinofoundation.diamond_knife": "钻石厨刀",
   "item.sinofoundation.gold_knife": "金厨刀",
   "item.sinofoundation.iron_knife": "铁厨刀",

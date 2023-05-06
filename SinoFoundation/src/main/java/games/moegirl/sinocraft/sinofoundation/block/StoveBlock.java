@@ -1,12 +1,18 @@
 package games.moegirl.sinocraft.sinofoundation.block;
 
 import games.moegirl.sinocraft.sinocore.utility.shape.VoxelShapeHelper;
+import games.moegirl.sinocraft.sinofoundation.SFDConstants;
+import games.moegirl.sinocraft.sinofoundation.block.entity.StoveBlockEntity;
+import games.moegirl.sinocraft.sinofoundation.block.entity.ticker.StoveBlockEntityTicker;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
@@ -14,12 +20,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -121,9 +128,57 @@ public class StoveBlock extends HorizontalDirectionalBlock implements EntityBloc
         return super.getLightEmission(state, level, pos);
     }
 
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+                                 InteractionHand hand, BlockHitResult hit) {
+        var itemStack = player.getItemInHand(hand);
+        var blockEntity = level.getBlockEntity(pos);
+
+        if (blockEntity instanceof StoveBlockEntity stoveBlockEntity) {
+            if (!itemStack.isEmpty()) {
+                if (FurnaceBlockEntity.isFuel(itemStack)) {
+                    var result = stoveBlockEntity.addFuel(itemStack);
+                    if (result) {
+                        player.setItemInHand(hand, ItemStack.EMPTY);
+                        return InteractionResult.SUCCESS;
+                    } else {
+                        player.displayClientMessage(Component.translatable(SFDConstants.TRANSLATE_STOVE_FULL_OF_ASHES).withStyle(ChatFormatting.GREEN), true);
+                        return super.use(state, level, pos, player, hand, hit);
+                    }
+                } else {
+                    player.displayClientMessage(Component.translatable(SFDConstants.TRANSLATE_STOVE_NOT_A_FUEL).withStyle(ChatFormatting.GREEN), true);
+                    return super.use(state, level, pos, player, hand, hit);
+                }
+            } else {
+                if (!player.isDescending()) {
+                    var ashes = stoveBlockEntity.removeAshes();
+                    if (ashes.isEmpty()) {
+                        player.displayClientMessage(Component.translatable(SFDConstants.TRANSLATE_STOVE_EMPTY_NOW).withStyle(ChatFormatting.GREEN), true);
+                    } else {
+                        var result = player.getInventory().add(ashes);
+                        if (result) {
+                            player.drop(ashes, false);
+                        }
+                    }
+                } else {
+                    stoveBlockEntity.removeAllAshes();
+                    player.displayClientMessage(Component.translatable(SFDConstants.TRANSLATE_STOVE_EMPTY_NOW).withStyle(ChatFormatting.GREEN), true);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.use(state, level, pos, player, hand, hit);
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new StoveBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return StoveBlockEntityTicker::tick;
     }
 }
