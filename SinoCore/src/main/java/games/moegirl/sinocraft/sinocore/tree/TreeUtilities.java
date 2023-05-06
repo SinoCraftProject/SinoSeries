@@ -2,6 +2,11 @@ package games.moegirl.sinocraft.sinocore.tree;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.TreePlacements;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
@@ -9,10 +14,21 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.FeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryManager;
 
-public class TreeBlockUtilities {
+import java.util.List;
+
+public class TreeUtilities {
 
     // <editor-fold desc="Blocks">
 
@@ -120,9 +136,9 @@ public class TreeBlockUtilities {
                 .randomTicks()
                 .sound(sound)
                 .noOcclusion()
-                .isValidSpawn(TreeBlockUtilities::ocelotOrParrot)
-                .isSuffocating(TreeBlockUtilities::never)
-                .isViewBlocking(TreeBlockUtilities::never);
+                .isValidSpawn(TreeUtilities::ocelotOrParrot)
+                .isSuffocating(TreeUtilities::never)
+                .isViewBlocking(TreeUtilities::never);
     }
 
     public static BlockBehaviour.Properties buttonProp() {
@@ -145,7 +161,7 @@ public class TreeBlockUtilities {
                 .strength(3.0F)
                 .sound(SoundType.WOOD)
                 .noOcclusion()
-                .isValidSpawn(TreeBlockUtilities::never);
+                .isValidSpawn(TreeUtilities::never);
     }
 
     public static BlockBehaviour.Properties stairsProp() {
@@ -271,7 +287,25 @@ public class TreeBlockUtilities {
 
     // </editor-fold>
 
-    // <editor-fold desc="Tabs">
+    // <editor-fold desc="Feature Configuration">
+
+    public static TreeConfiguration.TreeConfigurationBuilder create(Tree tree, TrunkPlacer trunkPlacer, FoliagePlacer foliagePlacer, FeatureSize minimumSize) {
+        SimpleStateProvider trunkProvider = BlockStateProvider.simple(tree.getBlock(TreeBlockType.LOG));
+        SimpleStateProvider foliageProvider = BlockStateProvider.simple(tree.getBlock(TreeBlockType.LEAVES));
+        return new TreeConfiguration.TreeConfigurationBuilder(trunkProvider, trunkPlacer, foliageProvider, foliagePlacer, minimumSize);
+    }
+
+    public static TreeConfiguration.TreeConfigurationBuilder copy(Tree tree, ResourceKey<ConfiguredFeature<?, ?>> copyFrom, TrunkPlacer trunkPlacer, FoliagePlacer foliagePlacer, FeatureSize minimumSize) {
+        TreeConfiguration.TreeConfigurationBuilder builder = create(tree, trunkPlacer, foliagePlacer, minimumSize);
+        ConfiguredFeature<?, ?> feature = RegistryManager.ACTIVE.getRegistry(Registries.CONFIGURED_FEATURE).getDelegateOrThrow(copyFrom).get();
+        if (feature.config() instanceof TreeConfiguration configuration) {
+            if (configuration.forceDirt) builder.forceDirt();
+            if (configuration.ignoreVines) builder.ignoreVines();
+            builder.decorators(List.copyOf(configuration.decorators));
+            builder.dirt(configuration.dirtProvider);
+        }
+        return builder;
+    }
 
     // </editor-fold>
 }

@@ -1,0 +1,39 @@
+width=256
+height=256
+
+[title]
+type="text"
+center=true
+position=[88, 8]
+
+[background]
+type="texture"
+size=[176, 185]
+
+[jei]
+type="texture"
+uv=[5, 25]
+size=[166, 76]
+
+[inventory]
+type = "slots"
+count = [3, 9]
+position = [8, 103]
+
+[selection]
+type = "slots"
+count = 9
+position = [8, 161]
+
+[input]
+type = "slots"
+count = [4, 4]
+position = [8, 28]
+
+[dye]
+type = "slot"
+position = [93, 82]
+
+[output]
+type = "slot"
+position = [138, 64]

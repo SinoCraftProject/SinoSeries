@@ -12,9 +12,9 @@ import java.util.function.Supplier;
  */
 public class Functions {
 
-    public static <T> Function<T, T> compose(Function<T, T> first, Consumer<T> second) {
+    public static <T, R> Function<T, R> compose(Function<T, R> first, Consumer<R> second) {
         return t -> {
-            T tt = first.apply(t);
+            R tt = first.apply(t);
             second.accept(tt);
             return tt;
         };

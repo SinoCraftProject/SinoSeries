@@ -1,11 +1,13 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.RegistryObject;
@@ -15,6 +17,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -24,7 +27,7 @@ public class TreeBuilder {
     final ResourceLocation name;
     final TreeLanguages languages;
     private final EnumMap<TreeBlockType, TreeBlockFactory> treeBlocks;
-    Function<Tree, ModTreeGrowerBase> grower = tree -> new ModTreeGrowerBase(tree.name);
+    Function<Tree, AbstractTreeGrower> grower = tree -> new ModTreeGrowerBase(tree.name);
     Function<Tree, TreeConfiguration> configuration = tree ->
             ModConfiguredFeatures.defaultTree(tree.getBlock(TreeBlockType.LOG), tree.getBlock(TreeBlockType.LEAVES));
 
@@ -112,6 +115,18 @@ public class TreeBuilder {
     }
 
     /**
+     * Change all block Property.
+     *
+     * @return Builder
+     */
+    public TreeBuilder blockProperty(Consumer<BlockBehaviour.Properties> property) {
+        for (TreeBlockFactory factory : treeBlocks.values()) {
+            factory.blockPropBuilder = Functions.compose(factory.blockPropBuilder, property);
+        }
+        return this;
+    }
+
+    /**
      * Custom block instead of auto register.
      *
      * @param treeBlockType Specific block.
@@ -186,20 +201,20 @@ public class TreeBuilder {
      * @param grower Grower.
      * @return Builder
      */
-    public TreeBuilder grower(ModTreeGrowerBase grower, TreeConfiguration configuration) {
+    public TreeBuilder grower(AbstractTreeGrower grower) {
         this.grower = t -> grower;
-        this.configuration = t -> configuration;
+        this.configuration = t -> null;
         return this;
     }
 
     /**
      * Set grower for sapling.
      *
-     * @param grower Grower.
      * @return Builder
      */
-    public TreeBuilder grower(ModTreeGrowerBase grower) {
-        this.grower = t -> grower;
+    public TreeBuilder grower(Function<Tree, TreeConfiguration> configuration) {
+        this.grower = t -> new ModTreeGrowerBase(t.name);
+        this.configuration = configuration;
         return this;
     }
 
@@ -229,6 +244,7 @@ public class TreeBuilder {
 
     /**
      * Remove block from adding tags.
+     *
      * @param types block type.
      * @return Builder
      */
@@ -265,6 +281,7 @@ public class TreeBuilder {
 
     /**
      * Remove item from adding tags.
+     *
      * @param types item type.
      * @return Builder
      */

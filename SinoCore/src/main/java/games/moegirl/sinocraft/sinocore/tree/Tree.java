@@ -2,12 +2,12 @@ package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.event.SCTreeTabsBuildListener;
-import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -27,7 +27,7 @@ public class Tree {
     private final EnumMap<TreeBlockType, RegistryObject<? extends Block>> blocks = new EnumMap<>(TreeBlockType.class);
     private final EnumMap<TreeBlockType, RegistryObject<? extends Item>> items = new EnumMap<>(TreeBlockType.class);
     private final TreeLanguages translator;
-    private final Lazy<ModTreeGrowerBase> grower;
+    private final Lazy<AbstractTreeGrower> grower;
     private final Lazy<TreeConfiguration> configuration;
 
     private final TreeBuilder builder;
@@ -144,12 +144,12 @@ public class Tree {
         return (RegistryObject<T>) items.get(treeBlockType);
     }
 
-    public ModTreeGrowerBase getGrower() {
+    public AbstractTreeGrower getGrower() {
         return grower.get();
     }
 
-    public TreeConfiguration getFeaturedConfiguration() {
-        return configuration.get();
+    public Optional<TreeConfiguration> getFeaturedConfiguration() {
+        return Optional.ofNullable(configuration.get());
     }
 
     public TreeLanguages getTranslator() {
@@ -166,5 +166,9 @@ public class Tree {
 
     public static TreeBuilder builder(ResourceLocation name) {
         return new TreeBuilder(name);
+    }
+
+    public static TreeBuilder builder(String modid, String name) {
+        return builder(new ResourceLocation(modid, name));
     }
 }

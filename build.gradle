@@ -44,9 +44,10 @@ loom {
     forge {
         // XXX: qyl27: this is a temp resolution for architectury/architectury-loom#120. remember to change it in future.
         mixinConfig new File(project(':SinoCore').projectDir, 'src/main/resources/sinocore.mixins.json').toString()
-        // mixinConfig new File(project(':SinoDivination').projectDir, 'src/main/resources/sinodivination.mixins.json').toString()
+        mixinConfig new File(project(':SinoDivination').projectDir, 'src/main/resources/sinodivination.mixins.json').toString()
 
         accessTransformer new File(project(':SinoCore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
+        accessTransformer new File(project(':SinoDivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
     }
 
     mods {
@@ -80,8 +81,8 @@ loom {
             data()
 
             programArgs '--all', '--mod', "sinocore",
-                '--output', file('SinoCore/src/generated/resources').absolutePath,
-                '--existing', file('SinoCore/src/main/resources').absolutePath
+                    '--output', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath
         }
 
         sinoFoundationData {
