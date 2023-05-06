@@ -1,4 +1,12 @@
 {
+  "block.sinofoundation.stove": "Stove",
+  "block.stove.use.empty_now": "Stove is empty now.",
+  "block.stove.use.full_of_ashes": "Stove is full of ashes. With empty hand, Right click to pick up ashes; Shift + Right click to remove all the ashes.",
+  "block.stove.use.not_a_fuel": "The item in your hand is not a valid fuel.",
+  "item.sinofoundation.ashes": "Ashes",
+  "item.sinofoundation.diamond_knife": "Diamond Knife",
+  "item.sinofoundation.gold_knife": "Golden Knife",
+  "item.sinofoundation.iron_knife": "Iron Knife",
   "tab.sinofoundation.agriculture": "SinoSeries | Agriculture",
   "tab.sinofoundation.building_blocks": "SinoSeries | Building Blocks",
   "tab.sinofoundation.functional_blocks": "SinoSeries | Functional Blocks",

@@ -14,6 +14,6 @@ public class SFDBlocks {
         BLOCKS.register(bus);
     }
 
-//    public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
+    public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
 
 }

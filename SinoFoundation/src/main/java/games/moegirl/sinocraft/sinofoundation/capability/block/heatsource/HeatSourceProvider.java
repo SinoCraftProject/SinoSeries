@@ -29,13 +29,13 @@ public class HeatSourceProvider implements ICapabilitySerializable<CompoundTag> 
 
     @Override
     public CompoundTag serializeNBT() {
-        var heatSource = heatSourceOptional.orElse(emptyHeatSource);
+        var heatSource = heatSourceOptional.orElseThrow(RuntimeException::new);
         return heatSource.serializeNBT();
     }
 
     @Override
     public void deserializeNBT(CompoundTag tag) {
-        var heatSource = heatSourceOptional.orElse(emptyHeatSource);
+        var heatSource = heatSourceOptional.orElseThrow(RuntimeException::new);
         heatSource.deserializeNBT(tag);
     }
 }

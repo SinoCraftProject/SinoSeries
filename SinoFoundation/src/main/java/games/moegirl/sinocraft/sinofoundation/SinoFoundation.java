@@ -1,5 +1,9 @@
 package games.moegirl.sinocraft.sinofoundation;
 
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
+import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -15,6 +19,11 @@ public class SinoFoundation {
         LOGGER.info("Loading SinoFoundation.");
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        SFDItems.register(bus);
+        SFDBlocks.register(bus);
+        SFDBlockItems.register(bus);
+        SFDBlockEntities.register(bus);
 
         LOGGER.info("Shake it, baby!");
     }

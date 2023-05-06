@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.capability.block;
 
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinofoundation.block.entity.StoveBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
 import games.moegirl.sinocraft.sinofoundation.capability.block.combustible.CombustibleProvider;
 import games.moegirl.sinocraft.sinofoundation.capability.block.combustible.ICombustible;
@@ -23,14 +24,14 @@ public class SFDBlockCapsRegister {
 
     @SubscribeEvent
     public static void onAttachBlockEntity(AttachCapabilitiesEvent<BlockEntity> event) {
-//        if (event.getObject() instanceof StoveBlockEntity) {
-//            var heatSourceProvider = new HeatSourceProvider();
-//            event.addCapability(SFDCapabilities.HEAT_SOURCE_NAME, heatSourceProvider);
-//            event.addListener(heatSourceProvider::invalidate);
-//
-//            var combustibleProvider = new CombustibleProvider();
-//            event.addCapability(SFDCapabilities.COMBUSTIBLE_NAME, combustibleProvider);
-//            event.addListener(combustibleProvider::invalidate);
-//        }
+        if (event.getObject() instanceof StoveBlockEntity) {
+            var heatSourceProvider = new HeatSourceProvider();
+            event.addCapability(SFDCapabilities.HEAT_SOURCE_NAME, heatSourceProvider);
+            event.addListener(heatSourceProvider::invalidate);
+
+            var combustibleProvider = new CombustibleProvider();
+            event.addCapability(SFDCapabilities.COMBUSTIBLE_NAME, combustibleProvider);
+            event.addListener(combustibleProvider::invalidate);
+        }
     }
 }

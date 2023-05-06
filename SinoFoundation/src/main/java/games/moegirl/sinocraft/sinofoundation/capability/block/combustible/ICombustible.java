@@ -22,6 +22,7 @@ public interface ICombustible extends INBTSerializable<CompoundTag> {
     ItemStack getBurningFuel();
 
     void addAsh(ItemStack ash);
+    void setAsh(int index, ItemStack ash);
 
     /**
      * Take the first stack of ashes.

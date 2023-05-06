@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,10 +33,11 @@ public abstract class ItemModelProviderBase extends AbstractItemModelProvider {
     private final Set<String> addedItems = new HashSet<>();
     private boolean adding = false;
 
-    private final DeferredRegister<? extends Item>[] deferredRegisters;
+    private final DeferredRegister<? extends ItemLike>[] deferredRegisters;
 
     @SafeVarargs
-    public ItemModelProviderBase(PackOutput output, String modId, ExistingFileHelper exHelper, DeferredRegister<? extends Item>... deferredRegisters) {
+    public ItemModelProviderBase(PackOutput output, String modId, ExistingFileHelper exHelper,
+                                 DeferredRegister<? extends ItemLike>... deferredRegisters) {
         super(output, modId, exHelper);
         this.deferredRegisters = deferredRegisters;
         // qyl: We need not an additional modId variable. MC already have.
@@ -62,6 +64,7 @@ public abstract class ItemModelProviderBase extends AbstractItemModelProvider {
 //                .filter(i -> !(i instanceof CrossbowItem))
                 .filter(i -> !skipItems.contains(i))
                 .filter(i -> !addedItems.contains(name(i)))
+                .map(ItemLike::asItem)
                 .collect(Collectors.toSet());
     }
 
@@ -87,9 +90,9 @@ public abstract class ItemModelProviderBase extends AbstractItemModelProvider {
      * @param item item
      * @return item name
      */
-    protected static String name(Item item) { // Todo: qyl: Avoid direct use string Path, use ResourceLocation instead.
+    protected static String name(ItemLike item) { // Todo: qyl: Avoid direct use string Path, use ResourceLocation instead.
         //noinspection DataFlowIssue
-        return ForgeRegistries.ITEMS.getKey(item).getPath();
+        return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
     }
 
     @Override

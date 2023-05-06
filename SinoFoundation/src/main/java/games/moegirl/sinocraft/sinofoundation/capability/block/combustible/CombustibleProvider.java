@@ -29,13 +29,13 @@ public class CombustibleProvider implements ICapabilitySerializable<CompoundTag>
 
     @Override
     public CompoundTag serializeNBT() {
-        var heatSource = combustibleOptional.orElse(emptyCombustible);
+        var heatSource = combustibleOptional.orElseThrow(RuntimeException::new);
         return heatSource.serializeNBT();
     }
 
     @Override
     public void deserializeNBT(CompoundTag tag) {
-        var heatSource = combustibleOptional.orElse(emptyCombustible);
+        var heatSource = combustibleOptional.orElseThrow(RuntimeException::new);
         heatSource.deserializeNBT(tag);
     }
 }
