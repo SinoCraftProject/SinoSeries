@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "sinofoundation:block/mulberry_stripped_log_wood"
+  }
+}

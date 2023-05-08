@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "bottom": "sinofoundation:block/mulberry_planks",
+    "top": "sinofoundation:block/mulberry_planks"
+  }
+}

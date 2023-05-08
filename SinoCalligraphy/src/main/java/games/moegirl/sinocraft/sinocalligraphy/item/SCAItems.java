@@ -14,6 +14,11 @@ import net.minecraftforge.registries.RegistryObject;
 public class SCAItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SinoCalligraphy.MODID);
 
+    public static void register(IEventBus bus) {
+        ITEMS.register(bus);
+        TabsRegistry.get(SinoSeriesTabs.MISC).add(ITEMS);
+    }
+
     public static final RegistryObject<Item> BRUSH = ITEMS.register("chinese_brush", BrushItem::new);
     public static final RegistryObject<Item> FAN = ITEMS.register("fan", () -> new FanItem(false));
     public static final RegistryObject<Item> FAN_FOLDED = ITEMS.register("fan_folded", () -> new FanItem(true));
@@ -28,8 +33,4 @@ public class SCAItems {
     // Todo: qyl27.
 //    public static final RegistryObject<BucketItem> WOOD_PULP_BUCKET = ITEMS.register("wood_pulp_bucket", () -> new BucketItem(SCAFluids.WOOD_PULP, new Item.Properties().tab(SCACreativeTab.CALLIGRAPHY).setNoRepair().stacksTo(1)));
 
-    public static void register(IEventBus bus) {
-        ITEMS.register(bus);
-        TabsRegistry.get(SinoSeriesTabs.MISC).add(ITEMS);
-    }
 }

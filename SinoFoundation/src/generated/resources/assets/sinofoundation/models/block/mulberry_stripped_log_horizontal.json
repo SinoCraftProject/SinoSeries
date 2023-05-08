@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "sinofoundation:block/mulberry_stripped_log_top",
+    "side": "sinofoundation:block/mulberry_stripped_log"
+  }
+}
