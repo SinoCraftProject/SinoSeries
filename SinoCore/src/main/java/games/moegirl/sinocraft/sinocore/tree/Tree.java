@@ -61,6 +61,8 @@ public class Tree {
         makeDefaultBlocks(blockRegister);
         makeDefaultBlockItems(itemRegister);
         fillCreativeTabs(tabsListener);
+
+        // Todo: add tree block to BlockStrippingEvent.
     }
 
     private void makeDefaultBlocks(DeferredRegister<Block> blockRegister) {
