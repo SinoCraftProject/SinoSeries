@@ -126,10 +126,6 @@ public class BlockStrippingEvent {
             var player = event.getPlayer();
             var tool = player.getItemInHand(context.getHand());
 
-            if (!getFrozenToolList().contains(tool.getItem())) {
-                return;
-            }
-
             if (!getFrozenMap().containsKey(state.getBlock())) {
                 return;
             }
@@ -144,7 +140,7 @@ public class BlockStrippingEvent {
                 }
                 event.setFinalState(finalState);
 
-                if (tuple.getB() != Items.AIR) {
+                if (tuple.getB() != Items.AIR && getFrozenToolList().contains(tool.getItem())) {
                     player.drop(new ItemStack(tuple.getB()), false);
                 }
             }
