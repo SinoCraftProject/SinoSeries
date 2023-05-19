@@ -15,12 +15,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class SFDItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SinoFoundation.MODID);
 
-    static {
-        for (var entry : BlockStrippingEvent.getBlockStrippingMap().entrySet()) {
-            BlockStrippingEvent.registerStripping(entry.getKey(), entry.getValue().getA(), SFDItems.TREE_BARK.get());
-        }
-    }
-
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
         TabsRegistry.get(SinoSeriesTabs.MISC).add(ITEMS);
@@ -32,4 +26,10 @@ public class SFDItems {
 
     public static final RegistryObject<Item> ASHES = ITEMS.register("ashes", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new Item(new Item.Properties()));
+
+    static {
+        for (var entry : BlockStrippingEvent.getBlockStrippingMap().entrySet()) {
+            BlockStrippingEvent.registerStripping(entry.getKey(), entry.getValue().getA(), SFDItems.TREE_BARK::get);
+        }
+    }
 }

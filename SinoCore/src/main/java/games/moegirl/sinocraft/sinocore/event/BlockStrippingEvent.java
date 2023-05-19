@@ -16,10 +16,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BlockStrippingEvent {
-    private static final Map<Block, Tuple<Block, Item>> BLOCK_STRIPPING_MAP = new HashMap<>();
+    private static final Map<Supplier<Block>, Tuple<Supplier<Block>, Supplier<ItemLike>>> BLOCK_STRIPPING_MAP = new HashMap<>();
 
     static {
         registerStripping(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD, Items.AIR);
@@ -45,11 +46,15 @@ public class BlockStrippingEvent {
         registerStripping(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK, Items.AIR);
     }
 
-    public static void registerStripping(Block source, Block target, ItemLike item) {
-        BLOCK_STRIPPING_MAP.put(source, new Tuple<>(target, item.asItem()));
+    public static void registerStripping(Supplier<Block> source, Supplier<Block> target, Supplier<ItemLike> item) {
+        BLOCK_STRIPPING_MAP.put(source, new Tuple<>(target, item));
     }
 
-    public static Map<Block, Tuple<Block, Item>> getBlockStrippingMap() {
+    public static void registerStripping(Block source, Block target, ItemLike item) {
+        BLOCK_STRIPPING_MAP.put(() -> source, new Tuple<>(() -> target, () -> item));
+    }
+
+    public static Map<Supplier<Block>, Tuple<Supplier<Block>, Supplier<ItemLike>>> getBlockStrippingMap() {
         return BLOCK_STRIPPING_MAP;
     }
 
@@ -70,7 +75,7 @@ public class BlockStrippingEvent {
             if (!event.isSimulated()) {
                 var tuple = BLOCK_STRIPPING_MAP.get(state.getBlock());
 
-                var finalState = tuple.getA().defaultBlockState();
+                var finalState = tuple.getA().get().defaultBlockState();
                 for (Property property : state.getProperties()) {   // Type gymnastics.
                     var pValue = state.getValue(property);
                     finalState = finalState.trySetValue(property, pValue);
@@ -78,7 +83,7 @@ public class BlockStrippingEvent {
                 event.setFinalState(finalState);
 
                 if (tuple.getB() != Items.AIR) {
-                    player.drop(new ItemStack(tuple.getB()), false);
+                    player.drop(new ItemStack(tuple.getB().get()), false);
                 }
             }
         }
