@@ -30,6 +30,9 @@ public class SCAItems {
     public static final RegistryObject<Item> EMPTY_XUAN_PAPER_RED = ITEMS.register("empty_xuan_paper_red", () -> new XuanPaperItem(PaperType.RED));
     public static final RegistryObject<Item> EMPTY_XUAN_PAPER_BLACK = ITEMS.register("empty_xuan_paper_black", () -> new XuanPaperItem(PaperType.BLACK));
     public static final RegistryObject<Item> FILLED_XUAN_PAPER = ITEMS.register("filled_xuan_paper", FilledXuanPaperItem::new);
+
+    public static final RegistryObject<Item> GREEN_SANDALWOOD_BARK = ITEMS.register("green_sandalwood_bark", () -> new Item(new Item.Properties()));
+
     // Todo: qyl27.
 //    public static final RegistryObject<BucketItem> WOOD_PULP_BUCKET = ITEMS.register("wood_pulp_bucket", () -> new BucketItem(SCAFluids.WOOD_PULP, new Item.Properties().tab(SCACreativeTab.CALLIGRAPHY).setNoRepair().stacksTo(1)));
 

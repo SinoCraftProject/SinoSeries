@@ -28,8 +28,8 @@ public class SFDItems {
     public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new Item(new Item.Properties()));
 
     static {
-        for (var entry : BlockStrippingEvent.getBlockStrippingMap().entrySet()) {
-            BlockStrippingEvent.registerStripping(entry.getKey(), entry.getValue().getA(), SFDItems.TREE_BARK::get);
-        }
+        BlockStrippingEvent.registerTool(IRON_KNIFE);
+        BlockStrippingEvent.registerTool(GOLD_KNIFE);
+        BlockStrippingEvent.registerTool(DIAMOND_KNIFE);
     }
 }

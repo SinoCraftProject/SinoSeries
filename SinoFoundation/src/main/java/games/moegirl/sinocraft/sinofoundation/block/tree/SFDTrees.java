@@ -1,9 +1,11 @@
 package games.moegirl.sinocraft.sinofoundation.block.tree;
 
+import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,5 +23,9 @@ public class SFDTrees {
 
     public static void register(IEventBus bus) {
         TreeRegistry.register(SinoFoundation.MODID, bus);
+
+        for (var entry : BlockStrippingEvent.getDeferredBlockStrippingMap().entrySet()) {
+            BlockStrippingEvent.registerStripping(entry.getKey(), entry.getValue().getLeft(), entry.getValue().getMiddle(), SFDItems.TREE_BARK::get);
+        }
     }
 }

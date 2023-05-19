@@ -64,8 +64,8 @@ public class Tree {
         makeDefaultBlockItems(itemRegister);
         fillCreativeTabs(tabsListener);
 
-        BlockStrippingEvent.registerStripping(getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
-        BlockStrippingEvent.registerStripping(getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
+        BlockStrippingEvent.registerStripping(TreeBlockType.LOG.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
+        BlockStrippingEvent.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
     }
 
     private void makeDefaultBlocks(DeferredRegister<Block> blockRegister) {
