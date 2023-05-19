@@ -19,11 +19,10 @@ build
 
 # other
 eclipse
-run
+run/
 
 # Files from Forge MDK
 forge*changelog.txt
 
 publish/
 output/
-/SinoTest/src/generated/resources/data/minecraft/
