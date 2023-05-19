@@ -21,11 +21,22 @@ public class SFDTrees {
             .tab(TreeBlockType.SAPLING, SinoSeriesTabs.AGRICULTURE)
             .build();
 
-    public static void register(IEventBus bus) {
-        TreeRegistry.register(SinoFoundation.MODID, bus);
-
+    static {
         for (var entry : BlockStrippingEvent.getDeferredBlockStrippingMap().entrySet()) {
             BlockStrippingEvent.registerStripping(entry.getKey(), entry.getValue().getLeft(), entry.getValue().getMiddle(), SFDItems.TREE_BARK::get);
         }
+    }
+
+    public static void register(IEventBus bus) {
+        TreeRegistry.register(SinoFoundation.MODID, bus);
+
+        BlockStrippingEvent.registerStripping(TreeBlockType.LOG.makeResourceLoc(MULBERRY.getName()),
+                MULBERRY.getBlockObj(TreeBlockType.LOG),
+                MULBERRY.getBlockObj(TreeBlockType.STRIPPED_LOG),
+                SFDItems.TREE_BARK::get);
+        BlockStrippingEvent.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(MULBERRY.getName()),
+                MULBERRY.getBlockObj(TreeBlockType.LOG_WOOD),
+                MULBERRY.getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD),
+                SFDItems.TREE_BARK::get);
     }
 }
