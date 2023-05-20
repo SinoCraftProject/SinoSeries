@@ -10,8 +10,8 @@
     }
   },
   "pattern": [
-    " I",
-    "S "
+    "I ",
+    " S"
   ],
   "result": {
     "item": "sinofoundation:gold_knife"

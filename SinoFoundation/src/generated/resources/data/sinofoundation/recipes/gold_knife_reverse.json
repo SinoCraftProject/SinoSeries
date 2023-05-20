@@ -3,18 +3,18 @@
   "category": "equipment",
   "key": {
     "I": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:gold_ingot"
     },
     "S": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "I ",
-    " S"
+    " I",
+    "S "
   ],
   "result": {
-    "item": "sinofoundation:iron_knife"
+    "item": "sinofoundation:gold_knife"
   },
   "show_notification": false
 }

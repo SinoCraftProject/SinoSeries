@@ -24,8 +24,8 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .define('S', Items.STICK)
                 .showNotification(false)
-                .unlockedBy("got_iron", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
-                .save(writer);
+                .unlockedBy("got_iron", has(Items.IRON_INGOT))
+                .save(writer, modLoc("iron_knife"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.GOLD_KNIFE.get())
@@ -34,8 +34,8 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .define('I', Items.GOLD_INGOT)
                 .define('S', Items.STICK)
                 .showNotification(false)
-                .unlockedBy("got_gold", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
-                .save(writer);
+                .unlockedBy("got_gold", has(Items.GOLD_INGOT))
+                .save(writer, modLoc("gold_knife"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.DIAMOND_KNIFE.get())
@@ -44,8 +44,8 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .define('I', Items.DIAMOND)
                 .define('S', Items.STICK)
                 .showNotification(false)
-                .unlockedBy("got_diamond", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
-                .save(writer);
+                .unlockedBy("got_diamond", has(Items.DIAMOND))
+                .save(writer, modLoc("diamond_knife"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.IRON_KNIFE.get())
                 .pattern(" I")
@@ -53,8 +53,8 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .define('S', Items.STICK)
                 .showNotification(false)
-                .unlockedBy("got_iron", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
-                .save(writer);
+                .unlockedBy("got_iron", has(Items.IRON_INGOT))
+                .save(writer, modLoc("iron_knife_reverse"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.GOLD_KNIFE.get())
@@ -63,8 +63,8 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .define('I', Items.GOLD_INGOT)
                 .define('S', Items.STICK)
                 .showNotification(false)
-                .unlockedBy("got_gold", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
-                .save(writer);
+                .unlockedBy("got_gold", has(Items.GOLD_INGOT))
+                .save(writer, modLoc("gold_knife_reverse"));
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.DIAMOND_KNIFE.get())
@@ -73,7 +73,7 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .define('I', Items.DIAMOND)
                 .define('S', Items.STICK)
                 .showNotification(false)
-                .unlockedBy("got_diamond", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
-                .save(writer);
+                .unlockedBy("got_diamond", has(Items.DIAMOND))
+                .save(writer, modLoc("diamond_knife_reverse"));
     }
 }

@@ -70,6 +70,10 @@ public abstract class AbstractRecipeProvider implements DataProvider {
         return "Recipes: " + modid;
     }
 
+    public ResourceLocation modLoc(String path) {
+        return new ResourceLocation(modid, path);
+    }
+
     /// <editor-fold desc="Methods from RecipeProvider.">
 
     private static final Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> SHAPE_BUILDERS;
