@@ -27,6 +27,7 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         add(SFDItems.GOLD_KNIFE.get(), "Golden Knife");
         add(SFDItems.DIAMOND_KNIFE.get(), "Diamond Knife");
         add(SFDItems.ASHES.get(), "Ashes");
+        add(SFDItems.TREE_BARK.get(), "Tree Bark");
 
         add(SFDBlocks.STOVE.get(), "Stove");
 

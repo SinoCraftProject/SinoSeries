@@ -26,6 +26,7 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         add(SFDItems.GOLD_KNIFE.get(), "金质小刀");
         add(SFDItems.DIAMOND_KNIFE.get(), "钻石小刀");
         add(SFDItems.ASHES.get(), "炉灰");
+        add(SFDItems.TREE_BARK.get(), "树皮");
 
         add(SFDBlocks.STOVE.get(), "灶台");
 

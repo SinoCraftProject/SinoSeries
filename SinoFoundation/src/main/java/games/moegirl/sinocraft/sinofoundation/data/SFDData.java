@@ -34,6 +34,7 @@ public class SFDData {
             gen.addProvider(true, blockTagsProvider);
             gen.addProvider(true, new SFDItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoFoundation.MODID, exHelper));
 
+            gen.addProvider(true, new SFDRecipeProvider(output, SinoFoundation.MODID));
         }
     }
 }

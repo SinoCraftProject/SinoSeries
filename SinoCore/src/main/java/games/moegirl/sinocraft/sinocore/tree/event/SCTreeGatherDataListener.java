@@ -30,7 +30,7 @@ public class SCTreeGatherDataListener {
             generator.addProvider(true, blockTagsProvider);
             generator.addProvider(true, new SCTreeItemTagsProvider(output, lookupProvider, blockTagsProvider, modid, exHelper, trees));
 
-            generator.addProvider(true, new SCTreeRecipeProvider(output, trees));
+            generator.addProvider(true, new SCTreeRecipeProvider(output, modid, trees));
             generator.addProvider(true, new SCTreeLootTableProvider(output, trees));
 
             generator.addProvider(true, new SCTreeFeaturesProvider(output, lookupProvider, modid, trees));
