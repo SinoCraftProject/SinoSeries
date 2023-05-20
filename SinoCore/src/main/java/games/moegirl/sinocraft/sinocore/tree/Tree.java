@@ -40,7 +40,7 @@ public class Tree {
         this.name = builder.name;
         this.translator = builder.languages;
         this.grower = Lazy.of(() -> builder.grower.apply(this));
-        this.configuration = Lazy.of(() -> builder.configuration.apply(this));
+        this.configuration = Lazy.of(() -> builder.grower.apply(this).getConfiguration(getBlock(TreeBlockType.LOG), getBlock(TreeBlockType.LEAVES)));
 
         // todo may be should set in builder ?
         blockSetType = new BlockSetType(name.toString(), SoundType.WOOD,

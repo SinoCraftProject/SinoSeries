@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
+import games.moegirl.sinocraft.sinocore.world.gen.tree.DefaultTreeGrower;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -24,9 +25,7 @@ public class TreeBuilder {
     final ResourceLocation name;
     final TreeLanguages languages;
     private final EnumMap<TreeBlockType, TreeBlockFactory> treeBlocks;
-    Function<Tree, ModTreeGrowerBase> grower = tree -> new ModTreeGrowerBase(tree.name);
-    Function<Tree, TreeConfiguration> configuration = tree ->
-            ModConfiguredFeatures.defaultTree(tree.getBlock(TreeBlockType.LOG), tree.getBlock(TreeBlockType.LEAVES));
+    Function<Tree, ModTreeGrowerBase> grower = tree -> new DefaultTreeGrower(tree.name);
 
     /**
      * New builder.
@@ -180,17 +179,17 @@ public class TreeBuilder {
         return this;
     }
 
-    /**
-     * Set grower for sapling.
-     *
-     * @param grower Grower.
-     * @return Builder
-     */
-    public TreeBuilder grower(ModTreeGrowerBase grower, TreeConfiguration configuration) {
-        this.grower = t -> grower;
-        this.configuration = t -> configuration;
-        return this;
-    }
+//    /**
+//     * Set grower for sapling.
+//     *
+//     * @param grower Grower.
+//     * @return Builder
+//     */
+//    public TreeBuilder grower(ModTreeGrowerBase grower, TreeConfiguration configuration) {
+//        this.grower = t -> grower;
+//        this.configuration = t -> configuration;
+//        return this;
+//    }
 
     /**
      * Set grower for sapling.
