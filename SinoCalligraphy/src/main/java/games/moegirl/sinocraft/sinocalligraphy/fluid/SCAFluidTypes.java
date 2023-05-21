@@ -21,17 +21,17 @@ public class SCAFluidTypes {
         FLUID_TYPES.register(bus);
     }
 
-    public static final ResourceLocation WATER_STILL_LOCATION = new ResourceLocation(SinoCalligraphy.MODID, "fluid/water_still");
-    public static final ResourceLocation WATER_FLOWING_LOCATION = new ResourceLocation(SinoCalligraphy.MODID, "fluid/water_flow");
-    public static final ResourceLocation WATER_OVERLAY_LOCATION = new ResourceLocation(SinoCalligraphy.MODID, "fluid/water_overlay");
+    public static final ResourceLocation WATER_STILL_LOCATION = new ResourceLocation(SinoCalligraphy.MODID, "block/fluid/water_still");
+    public static final ResourceLocation WATER_FLOWING_LOCATION = new ResourceLocation(SinoCalligraphy.MODID, "block/fluid/water_flow");
+    public static final ResourceLocation WATER_OVERLAY_LOCATION = new ResourceLocation(SinoCalligraphy.MODID, "block/fluid/water_overlay");
 
     public static final RegistryObject<FluidType> WOOD_PULP_TYPE = FLUID_TYPES.register("wood_pulp", () -> new FluidTypeBase(
             FluidType.Properties.create()
                     .descriptionId(SCAConstants.DESCRIPTION_ID_WOOD_PULP)
                     .density(3000)
-                    .viscosity(6000)
+                    .viscosity(7000)
                     .lightLevel(0)
-                    .temperature(25)
+                    .temperature(300)
                     .canSwim(false)
                     .canConvertToSource(false)
                     .supportsBoating(true)
