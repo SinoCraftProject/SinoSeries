@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinocalligraphy.data;
 
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
+import games.moegirl.sinocraft.sinocalligraphy.block.SCABlockItems;
+import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
 import games.moegirl.sinocraft.sinocalligraphy.data.advancement.SCAAdvancementGeneratorBrush;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderENUS;
 import games.moegirl.sinocraft.sinocalligraphy.data.lang.SCALanguageProviderZHCN;
@@ -24,7 +26,9 @@ public class SCAData {
         var lookupProvider = event.getLookupProvider();
 
         if (event.includeClient()) {
-            gen.addProvider(true, new SCAItemModelProvider(output, SinoCalligraphy.MODID, exHelper, SCAItems.ITEMS));
+            gen.addProvider(true, new SCAItemModelProvider(output, SinoCalligraphy.MODID, exHelper, SCAItems.ITEMS, SCABlockItems.BLOCK_ITEMS));
+
+            gen.addProvider(true, new SCABlockStateProvider(output, SinoCalligraphy.MODID, exHelper, SCABlocks.BLOCKS));
         }
 
         if (event.includeServer()) {

@@ -49,4 +49,6 @@ public class SCAConstants {
     public static final String TRANSLATE_ADVANCEMENT_INK_DESC = "sinocalligraphy.advancements.ink.desc";
     public static final String TRANSLATE_ADVANCEMENT_FAN = "sinocalligraphy.advancements.fan";
     public static final String TRANSLATE_ADVANCEMENT_FAN_DESC = "sinocalligraphy.advancements.fan.desc";
+
+    public static final String DESCRIPTION_ID_WOOD_PULP = "fluid.sinocalligraphy.wood_pulp";
 }

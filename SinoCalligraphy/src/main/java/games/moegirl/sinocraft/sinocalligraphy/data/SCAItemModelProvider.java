@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.data;
 
+import games.moegirl.sinocraft.sinocalligraphy.block.SCABlockItems;
+import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import games.moegirl.sinocraft.sinocore.data.ItemModelProviderBase;
 import net.minecraft.data.PackOutput;
@@ -18,6 +20,9 @@ public class SCAItemModelProvider extends ItemModelProviderBase {
         skipItem(SCAItems.FAN_FOLDED.get());
         skipItem(SCAItems.BRUSH.get());
         skipItem(SCAItems.INK.get());
+        skipItem(SCAItems.WOOD_PULP_BUCKET.get());
+
+        blockItem(SCABlocks.PAPER_DRYING_RACK.get(), "0");
     }
 }
 
