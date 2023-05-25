@@ -7,11 +7,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -42,6 +44,9 @@ public class TreeBuilder {
         this.treeBlocks = new EnumMap<>(TreeBlockType.class);
         for (TreeBlockType value : TreeBlockType.values())
             treeBlocks.put(value, new TreeBlockFactory(value));
+
+        blockEntity(TreeBlockType.CHEST, TreeUtilities::chestEntity);
+        blockEntity(TreeBlockType.TRAPPED_CHEST, TreeUtilities::trappedChestEntity);
     }
 
     /**
@@ -103,6 +108,18 @@ public class TreeBuilder {
     }
 
     /**
+     * Custom block instead of auto register.
+     *
+     * @param treeBlockType Specific block.
+     * @param block         Block.
+     * @return Builder
+     */
+    public TreeBuilder block(TreeBlockType treeBlockType, RegistryObject<? extends Block> block) {
+        treeBlocks.get(treeBlockType).blockBuilder = (v1, v2, v3) -> block;
+        return this;
+    }
+
+    /**
      * Custom block Property instead of auto generate.
      *
      * @param treeBlockType Specific block Property.
@@ -123,18 +140,6 @@ public class TreeBuilder {
         for (TreeBlockFactory factory : treeBlocks.values()) {
             factory.blockPropBuilder = Functions.compose(factory.blockPropBuilder, property);
         }
-        return this;
-    }
-
-    /**
-     * Custom block instead of auto register.
-     *
-     * @param treeBlockType Specific block.
-     * @param block         Block.
-     * @return Builder
-     */
-    public TreeBuilder block(TreeBlockType treeBlockType, RegistryObject<? extends Block> block) {
-        treeBlocks.get(treeBlockType).blockBuilder = (v1, v2, v3) -> block;
         return this;
     }
 
@@ -161,6 +166,31 @@ public class TreeBuilder {
     public TreeBuilder item(TreeBlockType treeBlockType, RegistryObject<? extends Item> item) {
         TreeBlockFactory factory = treeBlocks.get(treeBlockType);
         factory.itemBuilder = (v1, v2, v3) -> item;
+        return this;
+    }
+
+    /**
+     * Custom block entity instead of auto generate.
+     *
+     * @param treeBlockType Specific block.
+     * @param blockEntity   BlockEntity.
+     * @return Builder
+     */
+    public TreeBuilder blockEntity(TreeBlockType treeBlockType, @Nullable Function<Tree, BlockEntityType<?>> blockEntity) {
+        TreeBlockFactory factory = treeBlocks.get(treeBlockType);
+        factory.blockEntityBuilder = factory.wrapBlockEntity(blockEntity);
+        return this;
+    }
+
+    /**
+     * Custom block entity instead of auto register.
+     *
+     * @param treeBlockType Specific block.
+     * @param blockEntity   BlockEntity.
+     * @return Builder
+     */
+    public TreeBuilder blockEntity(TreeBlockType treeBlockType, RegistryObject<BlockEntityType<?>> blockEntity) {
+        treeBlocks.get(treeBlockType).blockEntityBuilder = (v1, v2, v3) -> blockEntity;
         return this;
     }
 

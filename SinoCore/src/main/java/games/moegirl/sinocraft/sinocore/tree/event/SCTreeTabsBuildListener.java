@@ -25,6 +25,8 @@ public class SCTreeTabsBuildListener {
                 case DOOR, TRAPDOOR, PRESSURE_PLATE, BUTTON, FENCE_GATE ->
                         List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
                 case SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
+                case CHEST -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
+                case TRAPPED_CHEST -> List.of(CreativeModeTabs.REDSTONE_BLOCKS);
                 case BOAT -> List.of(CreativeModeTabs.TOOLS_AND_UTILITIES);
                 case CHEST_BOAT -> List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.TOOLS_AND_UTILITIES);
                 default -> List.of();

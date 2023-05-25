@@ -5,10 +5,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -24,6 +26,9 @@ public class TreeBlockFactory {
     Function3<DeferredRegister<Block>, String, Tree, RegistryObject<? extends Block>> blockBuilder;
 
     Function<Tree, BlockBehaviour.Properties> blockPropBuilder;
+
+    @Nullable
+    Function3<DeferredRegister<BlockEntityType<?>>, String, Tree, RegistryObject<BlockEntityType<?>>> blockEntityBuilder;
 
     Function3<DeferredRegister<Item>, String, Tree, RegistryObject<? extends Item>> itemBuilder;
 
@@ -66,5 +71,11 @@ public class TreeBlockFactory {
 
     Function3<DeferredRegister<Item>, String, Tree, RegistryObject<? extends Item>> wrapItem(BiFunction<Tree, TreeBlockType, Item> factory) {
         return (dr, name, tree) -> dr.register(name, () -> factory.apply(tree, type));
+    }
+
+    @Nullable
+    Function3<DeferredRegister<BlockEntityType<?>>, String, Tree, RegistryObject<BlockEntityType<?>>> wrapBlockEntity(@Nullable Function<Tree, BlockEntityType<?>> factory) {
+        if (factory == null) return null;
+        return (dr, name, tree) -> dr.register(name, () -> factory.apply(tree));
     }
 }

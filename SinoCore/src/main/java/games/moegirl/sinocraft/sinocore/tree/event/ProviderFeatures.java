@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event.data;
+package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
@@ -17,12 +17,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class SCTreeFeaturesProvider extends DatapackBuiltinEntriesProvider {
+class ProviderFeatures extends DatapackBuiltinEntriesProvider {
 
     protected final List<Tree> treeTypes;
 
-    public SCTreeFeaturesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                                  String modid, List<Tree> treeTypes) {
+    public ProviderFeatures(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                            String modid, List<Tree> treeTypes) {
         super(output, lookupProvider,
                 new RegistrySetBuilder().add(Registries.CONFIGURED_FEATURE,
                         context -> registerAll(context, treeTypes)),

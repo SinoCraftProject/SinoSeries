@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event.data;
+package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
@@ -6,19 +6,21 @@ import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
+class ProviderBlockState extends AbstractBlockStateProvider {
 
     protected final List<Tree> treeTypes;
 
-    public SCTreeBlockStateProvider(PackOutput output, String modid, ExistingFileHelper exHelper, List<Tree> treeTypes) {
+    public ProviderBlockState(PackOutput output, String modid, ExistingFileHelper exHelper, List<Tree> treeTypes) {
         super(output, modid, exHelper);
 
         this.treeTypes = treeTypes;
@@ -32,9 +34,9 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         for (var tree : treeTypes) {
+
             logBlock(tree.getBlock(TreeBlockType.LOG));
             logBlock(tree.getBlock(TreeBlockType.STRIPPED_LOG));
-
             simpleBlock(tree.getBlock(TreeBlockType.LOG_WOOD));
             simpleBlock(tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD));
 
@@ -43,19 +45,17 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
                             blockLoc(TreeBlockType.LEAVES.makeResourceLoc(tree.getName())))
                     .renderType("cutout_mipped"));
 
-            simpleBlock(tree.getBlock(TreeBlockType.PLANKS));
-
             simpleBlock(tree.getBlock(TreeBlockType.SAPLING), models()
                     .cross(TreeBlockType.SAPLING.makeResourceLoc(tree.getName()).getPath(),
                             blockLoc(TreeBlockType.SAPLING.makeResourceLoc(tree.getName())))
                     .renderType("cutout"));
-
             simpleBlock(tree.getBlock(TreeBlockType.POTTED_SAPLING), models()
                     .singleTexture(TreeBlockType.POTTED_SAPLING.makeResourceLoc(tree.getName()).getPath(),
                             blockLoc(mcLoc("flower_pot_cross")),
                             blockLoc(TreeBlockType.SAPLING.makeResourceLoc(tree.getName())))
                     .renderType("cutout"));
 
+            simpleBlock(tree.getBlock(TreeBlockType.PLANKS));
             ResourceLocation planksTextures = blockTexture(tree.getBlock(TreeBlockType.PLANKS));
 
             ModelFile sign = models().sign(TreeBlockType.SIGN.makeResourceLoc(tree.getName()).getPath(), planksTextures);
@@ -68,13 +68,17 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             ResourceLocation trapdoorTextures = new ResourceLocation(trapdoorName.getNamespace(),
                     ModelProvider.BLOCK_FOLDER + "/" + trapdoorName.getPath());
             trapdoorBlockWithRenderType(tree.getBlock(TreeBlockType.TRAPDOOR), trapdoorTextures, true, "cutout_mipped");
+
             slabBlock(tree.getBlock(TreeBlockType.SLAB), planksTextures, planksTextures);
             stairsBlock(tree.getBlock(TreeBlockType.STAIRS), planksTextures);
 
             fenceBlock(tree.getBlock(TreeBlockType.FENCE), planksTextures);
+            models().fenceInventory(TreeBlockType.FENCE.makeResourceLoc(tree.getName()).getPath() + "_inventory", planksTextures);
             fenceGateBlock(tree.getBlock(TreeBlockType.FENCE_GATE), planksTextures);
 
             buttonBlock(tree.getBlock(TreeBlockType.BUTTON), planksTextures);
+            models().singleTexture(TreeBlockType.BUTTON.makeResourceLoc(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("button_inventory")), planksTextures);
+
             pressurePlateBlock(tree.getBlock(TreeBlockType.PRESSURE_PLATE), planksTextures);
 
             DoorBlock door = tree.getBlock(TreeBlockType.DOOR);
@@ -83,7 +87,6 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
                     ModelProvider.BLOCK_FOLDER + "/" + doorName.getPath() + "_top");
             ResourceLocation doorBottom = new ResourceLocation(doorName.getNamespace(),
                     ModelProvider.BLOCK_FOLDER + "/" + doorName.getPath() + "_bottom");
-
             var exHelper = models().existingFileHelper;
             var resType = new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, ".png", "textures");
             if (!exHelper.exists(doorTop, resType)) {
@@ -96,8 +99,11 @@ public class SCTreeBlockStateProvider extends AbstractBlockStateProvider {
             }
             doorBlockWithRenderType(door, doorBottom, doorTop, "cutout_mipped");
 
-            models().singleTexture(TreeBlockType.BUTTON.makeResourceLoc(tree.getName()).getPath() + "_inventory", blockLoc(mcLoc("button_inventory")), planksTextures);
-            models().fenceInventory(TreeBlockType.FENCE.makeResourceLoc(tree.getName()).getPath() + "_inventory", planksTextures);
+            RegistryObject<Block> chestObj = tree.getBlockObj(TreeBlockType.CHEST);
+            simpleBlock(chestObj.get(), models().getBuilder(chestObj.getId().getPath()).texture("particle", planksTextures));
+
+            RegistryObject<Block> trappedChestObj = tree.getBlockObj(TreeBlockType.TRAPPED_CHEST);
+            simpleBlock(trappedChestObj.get(), models().getBuilder(trappedChestObj.getId().getPath()).texture("particle", planksTextures));
         }
     }
 }

@@ -21,26 +21,28 @@ public class TreeLanguages {
 
         put("zh_cn", TreeBlockType.LOG, s -> s.append("原木"));
         put("zh_cn", TreeBlockType.STRIPPED_LOG, s -> s.insert(0, "去皮").append("原木"));
-        put("zh_cn", TreeBlockType.LOG_WOOD, Function.identity());
-        put("zh_cn", TreeBlockType.STRIPPED_LOG_WOOD, s -> s.insert(0, "去皮"));
+        put("zh_cn", TreeBlockType.LOG_WOOD, s -> s.append("木"));
+        put("zh_cn", TreeBlockType.STRIPPED_LOG_WOOD, s -> s.insert(0, "去皮").append("木"));
         put("zh_cn", TreeBlockType.SAPLING, s -> s.append("树苗"));
         put("zh_cn", TreeBlockType.POTTED_SAPLING, s -> s.append("树苗盆栽"));
         put("zh_cn", TreeBlockType.PLANKS, s -> s.append("木板"));
         put("zh_cn", TreeBlockType.LEAVES, s -> s.append("树叶"));
-        put("zh_cn", TreeBlockType.STAIRS, s -> s.append("楼梯"));
-        put("zh_cn", TreeBlockType.SLAB, s -> s.append("台阶"));
-        put("zh_cn", TreeBlockType.BUTTON, s -> s.append("按钮"));
-        put("zh_cn", TreeBlockType.DOOR, s -> s.append("门"));
-        put("zh_cn", TreeBlockType.TRAPDOOR, s -> s.append("陷阱门"));
-        put("zh_cn", TreeBlockType.FENCE, s -> s.append("栅栏"));
-        put("zh_cn", TreeBlockType.FENCE_GATE, s -> s.append("栅栏门"));
-        put("zh_cn", TreeBlockType.PRESSURE_PLATE, s -> s.append("压力板"));
-        put("zh_cn", TreeBlockType.SIGN, s -> s.append("告示牌"));
-        put("zh_cn", TreeBlockType.WALL_SIGN, s -> s.append("告示牌"));
-        put("zh_cn", TreeBlockType.HANGING_SIGN, s -> s.insert(0, "悬挂式").append("告示牌"));
-        put("zh_cn", TreeBlockType.WALL_HANGING_SIGN, s -> s.insert(0, "悬挂式").append("告示牌"));
-        put("zh_cn", TreeBlockType.BOAT, s -> s.append("船"));
-        put("zh_cn", TreeBlockType.CHEST_BOAT, s -> s.append("运输船"));
+        put("zh_cn", TreeBlockType.STAIRS, s -> s.append("木楼梯"));
+        put("zh_cn", TreeBlockType.SLAB, s -> s.append("木台阶"));
+        put("zh_cn", TreeBlockType.BUTTON, s -> s.append("木按钮"));
+        put("zh_cn", TreeBlockType.DOOR, s -> s.append("木门"));
+        put("zh_cn", TreeBlockType.TRAPDOOR, s -> s.append("木陷阱门"));
+        put("zh_cn", TreeBlockType.FENCE, s -> s.append("木栅栏"));
+        put("zh_cn", TreeBlockType.FENCE_GATE, s -> s.append("木栅栏门"));
+        put("zh_cn", TreeBlockType.PRESSURE_PLATE, s -> s.append("木压力板"));
+        put("zh_cn", TreeBlockType.SIGN, s -> s.append("木告示牌"));
+        put("zh_cn", TreeBlockType.WALL_SIGN, s -> s.append("木告示牌"));
+        put("zh_cn", TreeBlockType.HANGING_SIGN, s -> s.insert(0, "悬挂式").append("木告示牌"));
+        put("zh_cn", TreeBlockType.WALL_HANGING_SIGN, s -> s.insert(0, "悬挂式").append("木告示牌"));
+        put("zh_cn", TreeBlockType.CHEST, s -> s.append("箱子"));
+        put("zh_cn", TreeBlockType.CHEST_BOAT, s -> s.append("陷阱箱"));
+        put("zh_cn", TreeBlockType.BOAT, s -> s.append("木船"));
+        put("zh_cn", TreeBlockType.CHEST_BOAT, s -> s.append("木运输船"));
 
         put("zh_hk", TreeBlockType.LOG, s -> s.append("原木"));
         put("zh_hk", TreeBlockType.STRIPPED_LOG, s -> s.insert(0, "剝皮").append("原木"));
@@ -62,6 +64,8 @@ public class TreeLanguages {
         put("zh_hk", TreeBlockType.WALL_SIGN, s -> s.append("指示牌"));
         put("zh_hk", TreeBlockType.HANGING_SIGN, s -> s.append("吊牌"));
         put("zh_hk", TreeBlockType.WALL_HANGING_SIGN, s -> s.append("吊牌"));
+        put("zh_hk", TreeBlockType.CHEST, s -> s.append("箱子"));        // todo 箱子 文言文
+        put("zh_hk", TreeBlockType.CHEST_BOAT, s -> s.append("陷阱箱"));  // todo 陷阱箱
         put("zh_hk", TreeBlockType.BOAT, s -> s.append("船"));
         put("zh_hk", TreeBlockType.CHEST_BOAT, s -> s.insert(0, "儲物箱").append("船"));
 
@@ -85,6 +89,8 @@ public class TreeLanguages {
         put("zh_tw", TreeBlockType.WALL_SIGN, s -> s.append("告示牌"));
         put("zh_tw", TreeBlockType.HANGING_SIGN, s -> s.insert(0, "懸挂式").append("告示牌"));
         put("zh_tw", TreeBlockType.WALL_HANGING_SIGN, s -> s.insert(0, "懸挂式").append("告示牌"));
+        put("zh_tw", TreeBlockType.CHEST, s -> s.append("箱子"));        // todo 箱子 文言文
+        put("zh_tw", TreeBlockType.CHEST_BOAT, s -> s.append("陷阱箱"));  // todo 陷阱箱
         put("zh_tw", TreeBlockType.BOAT, s -> s.append("船"));
         put("zh_tw", TreeBlockType.CHEST_BOAT, s -> s.insert(0, "儲物箱").append("船"));
 
@@ -108,6 +114,8 @@ public class TreeLanguages {
         put("lzh", TreeBlockType.WALL_SIGN, s -> s.append("牌"));
         put("lzh", TreeBlockType.HANGING_SIGN, s -> s.append("懸牌"));
         put("lzh", TreeBlockType.WALL_HANGING_SIGN, s -> s.append("懸牌"));
+        put("lzh", TreeBlockType.CHEST, s -> s.append("箱子"));        // todo 箱子 文言文
+        put("lzh", TreeBlockType.CHEST_BOAT, s -> s.append("陷阱箱"));  // todo 陷阱箱
         put("lzh", TreeBlockType.BOAT, s -> s.append("舟"));
         put("lzh", TreeBlockType.CHEST_BOAT, s -> s.append("艚"));
 
@@ -131,6 +139,8 @@ public class TreeLanguages {
         put("en_us", TreeBlockType.WALL_SIGN, s -> s.append(" Sign"));
         put("en_us", TreeBlockType.HANGING_SIGN, s -> s.append(" Hanging Sign"));
         put("en_us", TreeBlockType.WALL_HANGING_SIGN, s -> s.append(" Hanging Sign"));
+        put("lzh", TreeBlockType.CHEST, s -> s.append(" Chest"));
+        put("lzh", TreeBlockType.CHEST_BOAT, s -> s.append(" Trapped Chest"));
         put("en_us", TreeBlockType.BOAT, s -> s.append(" Boat"));
         put("en_us", TreeBlockType.CHEST_BOAT, s -> s.append(" Boat with Chest"));
     }

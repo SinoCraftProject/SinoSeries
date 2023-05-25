@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event.data;
+package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.core.HolderLookup;
@@ -17,16 +17,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class SCTreeItemTagsProvider extends ItemTagsProvider {
+class ProviderItemTags extends ItemTagsProvider {
 
     protected final List<Tree> treeTypes;
 
-    public SCTreeItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                                  TagsProvider<Block> blockTagsProvider, String modid,
-                                  @Nullable ExistingFileHelper existingFileHelper,
-                                  List<Tree> treeTypes) {
+    public ProviderItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                            TagsProvider<Block> blockTagsProvider, String modid,
+                            @Nullable ExistingFileHelper existingFileHelper,
+                            List<Tree> treeTypes) {
         super(output, lookupProvider, blockTagsProvider.contentsGetter(), modid, existingFileHelper);
-
         this.treeTypes = treeTypes;
     }
 
@@ -60,6 +59,11 @@ public class SCTreeItemTagsProvider extends ItemTagsProvider {
                             case SIGN -> tag(ItemTags.SIGNS).add(item);
                             case HANGING_SIGN -> tag(ItemTags.HANGING_SIGNS).add(item);
                             case FENCE_GATE -> tag(Tags.Items.FENCE_GATES_WOODEN).add(item);
+                            case CHEST -> tag(Tags.Items.CHESTS_WOODEN).add(item);
+                            case TRAPPED_CHEST -> {
+                                tag(Tags.Items.CHESTS_WOODEN).add(item);
+                                tag(Tags.Items.CHESTS_TRAPPED).add(item);
+                            }
                         }
                     }
 

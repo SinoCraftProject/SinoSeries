@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event.data;
+package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import net.minecraft.core.HolderLookup;
@@ -14,13 +14,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class SCTreeBlockTagsProvider extends BlockTagsProvider {
+class ProviderBlockTags extends BlockTagsProvider {
 
     protected final List<Tree> treeTypes;
 
-    public SCTreeBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                                   String modId, @Nullable ExistingFileHelper existingFileHelper,
-                                   List<Tree> treeTypes) {
+    public ProviderBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                             String modId, @Nullable ExistingFileHelper existingFileHelper,
+                             List<Tree> treeTypes) {
         super(output, lookupProvider, modId, existingFileHelper);
         this.treeTypes = treeTypes;
     }
@@ -34,7 +34,6 @@ public class SCTreeBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         for (var tree : treeTypes) {
             var treeLogsTagKey = BlockTags.create(tree.getDefaultLogTag());
-
             tree.getBuilder().getBlockFactories().forEach((type, factory) -> {
                 if (type.hasBlock()) {
                     Block block = tree.getBlock(type);
@@ -59,6 +58,19 @@ public class SCTreeBlockTagsProvider extends BlockTagsProvider {
                             case FENCE_GATE -> {
                                 tag(BlockTags.FENCE_GATES).add(block);
                                 tag(Tags.Blocks.FENCE_GATES_WOODEN).add(block);
+                            }
+                            case CHEST -> {
+                                tag(Tags.Blocks.CHESTS_WOODEN).add(block);
+                                tag(BlockTags.GUARDED_BY_PIGLINS).add(block);
+                                tag(BlockTags.MINEABLE_WITH_AXE).add(block);
+                                tag(BlockTags.FEATURES_CANNOT_REPLACE).add(block);
+                            }
+                            case TRAPPED_CHEST -> {
+                                tag(Tags.Blocks.CHESTS_WOODEN).add(block);
+                                tag(BlockTags.GUARDED_BY_PIGLINS).add(block);
+                                tag(BlockTags.MINEABLE_WITH_AXE).add(block);
+                                tag(BlockTags.FEATURES_CANNOT_REPLACE).add(block);
+                                tag(Tags.Blocks.CHESTS_TRAPPED).add(block);
                             }
                         }
                     }

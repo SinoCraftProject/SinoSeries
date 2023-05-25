@@ -1,17 +1,20 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
+import games.moegirl.sinocraft.sinocore.block.BaseTrappedChestBlock;
+import games.moegirl.sinocraft.sinocore.blockentity.BaseChestBlockEntity;
+import games.moegirl.sinocraft.sinocore.blockentity.BaseTrappedChestBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -23,10 +26,11 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProv
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryManager;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class TreeUtilities {
 
@@ -98,6 +102,32 @@ public class TreeUtilities {
 
     public static Block stairs(Tree tree, BlockBehaviour.Properties properties) {
         return new StairBlock(() -> tree.getBlock(TreeBlockType.PLANKS).defaultBlockState(), properties);
+    }
+
+    public static Block chest(Tree tree, BlockBehaviour.Properties properties) {
+        return new BaseChestBlock(properties, tree);
+    }
+
+    public static Block trappedChest(Tree tree, BlockBehaviour.Properties properties) {
+        return new BaseTrappedChestBlock(properties, tree);
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="BlockEntities">
+
+    public static BlockEntityType<?> chestEntity(Tree tree) {
+        Lazy<BlockEntityType<BlockEntity>> chestEntity = Lazy.of(() -> tree.getBlockEntityType(TreeBlockType.CHEST));
+        return BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>)
+                        (pos, state) -> new BaseChestBlockEntity(chestEntity.get(), pos, state), tree.getBlock(TreeBlockType.CHEST))
+                .build(null);
+    }
+
+    public static BlockEntityType<?> trappedChestEntity(Tree tree) {
+        Lazy<BlockEntityType<BlockEntity>> chestEntity = Lazy.of(() -> tree.getBlockEntityType(TreeBlockType.TRAPPED_CHEST));
+        return BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>)
+                        (pos, state) -> new BaseTrappedChestBlockEntity(chestEntity.get(), pos, state), tree.getBlock(TreeBlockType.CHEST))
+                .build(null);
     }
 
     // </editor-fold>
@@ -233,6 +263,14 @@ public class TreeUtilities {
         return BlockBehaviour.Properties.of(Material.DECORATION)
                 .instabreak()
                 .noOcclusion();
+    }
+
+    public static BlockBehaviour.Properties chestProp() {
+        return BlockBehaviour.Properties.copy(Blocks.CHEST);
+    }
+
+    public static BlockBehaviour.Properties trappedChestProp() {
+        return BlockBehaviour.Properties.copy(Blocks.TRAPPED_CHEST);
     }
 
     // </editor-fold>

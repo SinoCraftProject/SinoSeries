@@ -7,6 +7,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -15,7 +17,10 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class Tree {
 
@@ -26,6 +31,8 @@ public class Tree {
 
     private final EnumMap<TreeBlockType, RegistryObject<? extends Block>> blocks = new EnumMap<>(TreeBlockType.class);
     private final EnumMap<TreeBlockType, RegistryObject<? extends Item>> items = new EnumMap<>(TreeBlockType.class);
+    private final EnumMap<TreeBlockType, RegistryObject<BlockEntityType<?>>> blockEntities = new EnumMap<>(TreeBlockType.class);
+
     private final TreeLanguages translator;
     private final Lazy<AbstractTreeGrower> grower;
     private final Lazy<TreeConfiguration> configuration;
@@ -56,9 +63,10 @@ public class Tree {
         TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
     }
 
-    public void register(DeferredRegister<Block> blockRegister, DeferredRegister<Item> itemRegister,
+    public void register(DeferredRegister<Block> blockRegister, DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister,
                          SCTreeTabsBuildListener tabsListener) {
         makeDefaultBlocks(blockRegister);
+        makeDefaultBlockEntities(blockEntityRegister);
         makeDefaultBlockItems(itemRegister);
         fillCreativeTabs(tabsListener);
     }
@@ -72,6 +80,17 @@ public class Tree {
                     return Map.entry(p.getKey(), ro);
                 })
                 .forEach(p -> blocks.put(p.getKey(), p.getValue()));
+    }
+
+    private void makeDefaultBlockEntities(DeferredRegister<BlockEntityType<?>> blockEntityRegister) {
+        builder.getBlockFactories().entrySet().stream()
+                .filter(p -> p.getValue().blockEntityBuilder != null)
+                .map(p -> {
+                    String key = p.getKey().makeRegistryName(getName());
+                    RegistryObject<BlockEntityType<?>> ro = p.getValue().blockEntityBuilder.apply(blockEntityRegister, key, this);
+                    return Map.entry(p.getKey(), ro);
+                })
+                .forEach(p -> blockEntities.put(p.getKey(), p.getValue()));
     }
 
     private void makeDefaultBlockItems(DeferredRegister<Item> itemRegister) {
@@ -94,7 +113,6 @@ public class Tree {
                     tabsListener.addDefaultTabs(type, item);
                 }
 
-                // todo 使用 ResourceLocation 的版本只支持 SC 的 Tab 注册，，，这样好吗？
                 if (!factory.tabs.isEmpty()) {
                     for (ResourceLocation tab : factory.tabs) {
                         TabsRegistry.get(tab).add(item);
@@ -112,14 +130,6 @@ public class Tree {
         return blockSetType;
     }
 
-    public Collection<RegistryObject<? extends Block>> getAllBlocks() {
-        return Collections.unmodifiableCollection(blocks.values());
-    }
-
-    public Collection<RegistryObject<? extends Item>> getAllItems() {
-        return Collections.unmodifiableCollection(items.values());
-    }
-
     public ResourceLocation getName() {
         return name;
     }
@@ -132,6 +142,20 @@ public class Tree {
     public <T extends Block> RegistryObject<T> getBlockObj(TreeBlockType treeBlockType) {
         //noinspection unchecked
         return (RegistryObject<T>) blocks.get(treeBlockType);
+    }
+
+    public boolean hasBlockEntity(TreeBlockType treeBlockType) {
+        return blockEntities.containsKey(treeBlockType);
+    }
+
+    public <T extends BlockEntity> BlockEntityType<T> getBlockEntityType(TreeBlockType treeBlockType) {
+        //noinspection unchecked
+        return (BlockEntityType<T>) blockEntities.get(treeBlockType).get();
+    }
+
+    public <T extends BlockEntity> RegistryObject<BlockEntityType<T>> getBlockEntityTypeObj(TreeBlockType treeBlockType) {
+        //noinspection unchecked
+        return (RegistryObject<BlockEntityType<T>>) (RegistryObject<?>) blockEntities.get(treeBlockType);
     }
 
     public <T extends Item> T getItem(TreeBlockType treeBlockType) {
