@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "sinofoundation:block/mulberry_sapling"
+  }
+}
