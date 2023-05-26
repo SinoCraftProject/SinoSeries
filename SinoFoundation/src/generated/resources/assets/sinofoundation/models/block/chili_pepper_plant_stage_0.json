@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/crop",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "crop": "sinofoundation:block/chili_pepper_plant_stage_0"
+  }
+}

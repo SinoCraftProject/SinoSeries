@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinofoundation.data.lang;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
@@ -22,13 +23,34 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addTab(SinoSeriesTabs.MATERIALS, "华夏系列 | 原材料");
         addTab(SinoSeriesTabs.MISC, "华夏系列 | 杂项");
 
-        add(SFDItems.IRON_KNIFE.get(), "铁质小刀");
-        add(SFDItems.GOLD_KNIFE.get(), "金质小刀");
-        add(SFDItems.DIAMOND_KNIFE.get(), "钻石小刀");
-        add(SFDItems.ASHES.get(), "炉灰");
-        add(SFDItems.TREE_BARK.get(), "树皮");
+        addItem(SFDItems.IRON_KNIFE, "铁质小刀");
+        addItem(SFDItems.GOLD_KNIFE, "金质小刀");
+        addItem(SFDItems.DIAMOND_KNIFE, "钻石小刀");
+        addItem(SFDItems.ASHES, "炉灰");
+        addItem(SFDItems.TREE_BARK, "树皮");
+        addItem(SFDItems.MILLET, "小米");
+        addItem(SFDItems.CHILI_PEPPER, "辣椒");
+        addItem(SFDItems.GREEN_PEPPER, "青椒");
+        addItem(SFDItems.CABBAGE, "卷心菜");
+        addItem(SFDItems.EGGPLANT, "茄子");
 
-        add(SFDBlocks.STOVE.get(), "灶台");
+        addBlock(SFDBlocks.STOVE, "灶台");
+        addBlock(SFDBlocks.WHITE_RADISH_PLANT, "白萝卜");
+        addBlock(SFDBlocks.SUMMER_RADISH_PLANT, "水萝卜");
+        addBlock(SFDBlocks.GREEN_RADISH_PLANT, "青萝卜");
+        addBlock(SFDBlocks.CHILI_PEPPER_PLANT, "辣椒");
+        addBlock(SFDBlocks.GREEN_PEPPER_PLANT, "青椒");
+        addBlock(SFDBlocks.EGGPLANT_PLANT, "茄子");
+        addBlock(SFDBlocks.CABBAGE_PLANT, "卷心菜");
+        addBlock(SFDBlocks.MILLET_PLANT, "小米");
+        addBlock(SFDBlocks.SOYBEAN_PLANT, "大豆");
+        addBlock(SFDBlocks.GARLIC_PLANT, "大蒜");
+
+        addItem(SFDBlockItems.CHILI_PEPPER_SEED, "辣椒种子");
+        addItem(SFDBlockItems.GREEN_PEPPER_SEED, "青椒种子");
+        addItem(SFDBlockItems.EGGPLANT_SEED, "茄子种子");
+        addItem(SFDBlockItems.CABBAGE_SEED, "卷心菜种子");
+        addItem(SFDBlockItems.MILLET_SEED, "稻谷");
 
         add(SFDConstants.TRANSLATE_STOVE_FULL_OF_ASHES, "灶台被灰烬填满了。空手右键取出灰烬，空手 Shift + 右键清除全部灰烬。");
         add(SFDConstants.TRANSLATE_STOVE_NOT_A_FUEL, "你发现手中的物品不是燃料。");

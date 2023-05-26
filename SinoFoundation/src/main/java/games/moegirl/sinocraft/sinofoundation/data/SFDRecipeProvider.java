@@ -1,13 +1,16 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractRecipeProvider;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
@@ -75,5 +78,17 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .showNotification(false)
                 .unlockedBy("got_diamond", has(Items.DIAMOND))
                 .save(writer, modLoc("diamond_knife_reverse"));
+
+        fruitsToSeed("chili_pepper", SFDItems.CHILI_PEPPER.get(), SFDBlockItems.CHILI_PEPPER_SEED.get(), 2, writer);
+        fruitsToSeed("green_pepper", SFDItems.GREEN_PEPPER.get(), SFDBlockItems.GREEN_PEPPER_SEED.get(), 2, writer);
+        fruitsToSeed("eggplant", SFDItems.EGGPLANT.get(), SFDBlockItems.EGGPLANT_SEED.get(), 4, writer);
+        fruitsToSeed("cabbage", SFDItems.CABBAGE.get(), SFDBlockItems.CABBAGE_SEED.get(), 2, writer);
+    }
+
+    protected void fruitsToSeed(String name, ItemLike fruit, ItemLike seed, int count, Consumer<FinishedRecipe> writer) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, seed, count)
+                .requires(fruit)
+                .unlockedBy("got_fruit", has(fruit))
+                .save(writer, modLoc(name));
     }
 }

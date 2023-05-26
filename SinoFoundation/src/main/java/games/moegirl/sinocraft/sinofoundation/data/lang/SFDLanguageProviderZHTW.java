@@ -22,13 +22,14 @@ public class SFDLanguageProviderZHTW extends AbstractLanguageProvider {
         addTab(SinoSeriesTabs.MATERIALS, "華夏系列 | 原材料");
         addTab(SinoSeriesTabs.MISC, "華夏系列 | 雜項");
 
-        add(SFDItems.IRON_KNIFE.get(), "鐵質小刀");
-        add(SFDItems.GOLD_KNIFE.get(), "金質小刀");
-        add(SFDItems.DIAMOND_KNIFE.get(), "鑽石小刀");
-        add(SFDItems.ASHES.get(), "灰燼");
-        add(SFDItems.TREE_BARK.get(), "樹皮");
+        // Fixme: qyl27: ZH TW translation.
+        addItem(SFDItems.IRON_KNIFE, "鐵質小刀");
+        addItem(SFDItems.GOLD_KNIFE, "金質小刀");
+        addItem(SFDItems.DIAMOND_KNIFE, "鑽石小刀");
+        addItem(SFDItems.ASHES, "灰燼");
+        addItem(SFDItems.TREE_BARK, "樹皮");
 
-        add(SFDBlocks.STOVE.get(), "竈臺");
+        addBlock(SFDBlocks.STOVE, "竈臺");
 
         add(SFDConstants.TRANSLATE_STOVE_FULL_OF_ASHES, "竈臺被灰燼填滿了。空手右鍵取出灰燼，空手 Shift + 右鍵清除灰燼。");
         add(SFDConstants.TRANSLATE_STOVE_NOT_A_FUEL, "你發現手中的物品不是燃料。");
