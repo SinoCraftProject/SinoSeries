@@ -64,10 +64,7 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
 
     @Override
     public CreativeModeTab tab() {
-        if (tab == null) {
-            TabsRegistry.super.tab();
-        }
-        return tab;
+        return Objects.requireNonNull(tab, "Tab is null because it is not created now. You should get it after CreativeModeTabEvent.Register event.");
     }
 
     @Override
@@ -116,10 +113,13 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
     @SubscribeEvent
     public void onCreativeModeTabRegister(CreativeModeTabEvent.Register event) {
         TabsRegistry tmp = TabsRegistry.get(name);
-        if (tmp instanceof TabsRegistryOps ops && !ops.isEmpty())
-            custom(b -> ops.ops.forEach(c -> c.accept(this)));
+        if (tmp instanceof TabsRegistryOps ops) {
+            ops.accept(this);
+        }
         tab = event.registerCreativeModeTab(name, builder::apply);
-        TabsRegistry.TAB_MAP.put(name, new TabsRegistryEnd(name, tab));
+        if (tmp instanceof TabsRegistryOps ops) {
+            ops.tab = tab;
+        }
     }
 
     @Override

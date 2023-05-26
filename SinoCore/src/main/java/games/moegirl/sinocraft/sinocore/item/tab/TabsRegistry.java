@@ -5,7 +5,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -22,7 +21,7 @@ public interface TabsRegistry {
 
     Map<ResourceLocation, TabsRegistry> TAB_MAP = new HashMap<>();
 
-    static  TabsRegistry get(ResourceLocation name) {
+    static TabsRegistry get(ResourceLocation name) {
         synchronized (TabsRegistry.class) {
             return TAB_MAP.computeIfAbsent(name, TabsRegistryOps::new);
         }
@@ -34,35 +33,19 @@ public interface TabsRegistry {
 
     ResourceLocation name();
 
-    default CreativeModeTab tab() {
-        throw new RuntimeException("Tab is null because it is not created now. You should get it after CreativeModeTabEvent.Register event.");
-    }
+    CreativeModeTab tab();
 
-    default TabsRegistry icon(RegistryObject<? extends ItemLike> item) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry icon(RegistryObject<? extends ItemLike> item);
 
-    default TabsRegistry icon(Supplier<ItemStack> item) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry icon(Supplier<ItemStack> item);
 
-    default TabsRegistry custom(Consumer<CreativeModeTab.Builder> consumer) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry custom(Consumer<CreativeModeTab.Builder> consumer);
 
-    default TabsRegistry addStack(Supplier<ItemStack> stack) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry addStack(Supplier<ItemStack> stack);
 
-    default TabsRegistry add(Supplier<? extends ItemLike> item) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry add(Supplier<? extends ItemLike> item);
 
-    default TabsRegistry add(Supplier<? extends ItemLike>... items) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry add(Supplier<? extends ItemLike>... items);
 
-    default TabsRegistry add(DeferredRegister<? extends ItemLike> dr) {
-        throw new RuntimeException("You can't edit tab " + name() + ", because this tab had been added to minecraft.");
-    }
+    TabsRegistry add(DeferredRegister<? extends ItemLike> dr);
 }
