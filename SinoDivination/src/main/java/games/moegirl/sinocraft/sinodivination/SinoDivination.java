@@ -1,15 +1,13 @@
 package games.moegirl.sinocraft.sinodivination;
 
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
-import games.moegirl.sinocraft.sinodivination.old.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.old.blockentity.SDBlockEntities;
-import games.moegirl.sinocraft.sinodivination.old.client.screen.SDScreens;
-import games.moegirl.sinocraft.sinodivination.old.entity.SDEntities;
-import games.moegirl.sinocraft.sinodivination.old.item.SDItems;
-import games.moegirl.sinocraft.sinodivination.old.menu.SDMenus;
-import games.moegirl.sinocraft.sinodivination.old.network.SDNetworks;
-import games.moegirl.sinocraft.sinodivination.old.recipe.SDRecipes;
-import games.moegirl.sinocraft.sinodivination.old.tree.SDTrees;
+import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
+import games.moegirl.sinocraft.sinodivination.blockentity.SDBlockEntities;
+import games.moegirl.sinocraft.sinodivination.client.screen.SDScreens;
+import games.moegirl.sinocraft.sinodivination.item.SDItems;
+import games.moegirl.sinocraft.sinodivination.menu.SDMenus;
+import games.moegirl.sinocraft.sinodivination.recipe.SDRecipes;
+import games.moegirl.sinocraft.sinodivination.tree.SDTrees;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +21,7 @@ public class SinoDivination {
     public static final String NAME = "SinoDivination";
     public static final String VERSION = "@version@";
 
-    public static TabsRegistry TAB;
+    public static ResourceLocation TAB;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
@@ -31,21 +29,20 @@ public class SinoDivination {
         LOGGER.info("Loading SinoDivination. Ver: " + VERSION);
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        TAB = TabsRegistry.register(new ResourceLocation(MODID, "tab"), bus);
+        TabsRegistry tab = TabsRegistry.register(new ResourceLocation(MODID, "tab"), bus);
+        TAB = tab.name();
 
-        SDNetworks.register();
+//        SDNetworks.register();
         SDBlocks.REGISTRY.register(bus);
-        SDItems.REGISTRY.register(bus);
+        SDItems.register(bus);
         SDBlockEntities.REGISTRY.register(bus);
-//        SDPlacedFeatures.REGISTRY.register();
-        SDEntities.REGISTRY.register(bus);
+//        SDEntities.REGISTRY.register(bus);
         SDMenus.REGISTRY.register(bus);
         SDRecipes.REGISTRY.register(bus);
         SDScreens.register(bus);
-//        SDCommands.REGISTER.register();
-        SDTrees.register(bus, SDBlocks.REGISTRY, SDItems.REGISTRY);
+        SDTrees.register(bus);
 
-        TAB.add(SDItems.REGISTRY);
+        tab.add(SDItems.REGISTRY);
 
         LOGGER.info("Reverence for heaven and earth, respect ghosts and gods.");
     }

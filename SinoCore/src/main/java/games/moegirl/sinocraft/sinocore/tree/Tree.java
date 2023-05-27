@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
-import games.moegirl.sinocraft.sinocore.tree.event.SCTreeTabsBuildListener;
+import games.moegirl.sinocraft.sinocore.tree.event.TreeTabsBuildListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
@@ -24,6 +24,13 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * todo
+ * <ul>
+ *     <li>修复：猫无法坐在箱子上：{@link net.minecraft.world.entity.ai.goal.CatSitOnBlockGoal}</li>
+ *     <li>修复：马：{@link net.minecraft.world.entity.animal.horse.AbstractChestedHorse}</li>
+ * </ul>
+ */
 public class Tree {
 
     public final ResourceLocation name;
@@ -66,7 +73,7 @@ public class Tree {
     }
 
     public void register(DeferredRegister<Block> blockRegister, DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister,
-                         SCTreeTabsBuildListener tabsListener) {
+                         TreeTabsBuildListener tabsListener) {
         makeDefaultBlocks(blockRegister);
         makeDefaultBlockEntities(blockEntityRegister);
         makeDefaultBlockItems(itemRegister);
@@ -109,7 +116,7 @@ public class Tree {
                 .forEach(p -> items.put(p.getKey(), p.getValue()));
     }
 
-    private void fillCreativeTabs(SCTreeTabsBuildListener tabsListener) {
+    private void fillCreativeTabs(TreeTabsBuildListener tabsListener) {
         builder.getBlockFactories().forEach((type, factory) -> {
             if (type.hasItem()) {
                 RegistryObject<? extends Item> item = items.get(type);

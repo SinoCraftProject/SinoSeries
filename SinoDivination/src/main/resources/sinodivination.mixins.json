@@ -1,14 +1,12 @@
 {
   "required": true,
-  "minVersion": "0.8"
-  "package": "games.moegirl.sinocraft.sinodivination.old.mixin",
+  "minVersion": "0.8",
+  "package": "games.moegirl.sinocraft.sinodivination.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinAbstractFurnaceBlockEntity",
-    "MixinRecipeManager"
+    "MixinAbstractFurnaceBlockEntity"
   ],
   "client": [
-    "MixinSheets"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -3,9 +3,9 @@ package games.moegirl.sinocraft.sinodivination.old.plugin.jei.category;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotEntry;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotsEntry;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureEntry;
-import games.moegirl.sinocraft.sinodivination.old.recipe.CarvingTableRecipe;
+import games.moegirl.sinocraft.sinodivination.recipe.CarvingTableRecipe;
 
-import static games.moegirl.sinocraft.sinodivination.old.menu.CarvingTableMenu.TEXTURE;
+import static games.moegirl.sinocraft.sinodivination.menu.CarvingTableMenu.TEXTURE;
 
 // TODO jei support
 public class CarvingTableRecipeCategory extends AbstractRecipeCategory<CarvingTableRecipe> {

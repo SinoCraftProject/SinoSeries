@@ -15,6 +15,7 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,6 +30,7 @@ public class SinoTest {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MODID);
 
     private static final IEventBus BUS = FMLJavaModLoadingContext.get().getModEventBus();
@@ -56,7 +58,7 @@ public class SinoTest {
         ITEMS.register(bus);
         BLOCKS.register(bus);
         MENUS.register(bus);
-        TreeRegistry.register(MODID, bus, BLOCKS, ITEMS);
+        TreeRegistry.register(MODID, bus, BLOCKS, BLOCK_ENTITY, ITEMS);
         bus.register(this);
         bus.addListener(this::onClientInit);
     }

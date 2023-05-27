@@ -3,6 +3,12 @@ package games.moegirl.sinocraft.sinocore.block;
 import games.moegirl.sinocraft.sinocore.utility.IGenericClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -12,16 +18,22 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 /**
  * 带有 {@link  BlockEntity} 的方块
- * <p>可根据泛型获取 BlockEntity 类型</p>
- * <p>实现 getTicker 与 getListener 方法，只需 BlockEntity 实现相关接口即可生效</p>
- * <p>渲染模式默认 {@link RenderShape#MODEL}</p>
+ * <p>
+ * <li>可根据泛型获取 BlockEntity 类型</li>
+ * <li>实现 getTicker 方法，只需 BlockEntity 实现 BlockEntityTicker 接口即可生效</li>
+ * <li>实现 getListener 方法，只需 BlockEntity 实现 GameEventListener 接口即可生效</li>
+ * <li>当 BlockEntity 实现 MenuProvider 接口时，右键默认打开 gui</li>
+ * <li>渲染模式默认 {@link RenderShape#MODEL}</li>
+ * </p>
  *
  * @see BlockEntity
  * @see BlockEntityTicker
@@ -52,6 +64,19 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
     }
 
     @Override
+    @SuppressWarnings("deprecation")
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (MenuProvider.class.isAssignableFrom(typeClass)) {
+            if (player instanceof ServerPlayer sp) {
+                level.getBlockEntity(pos, entityType.get())
+                        .ifPresent(entity -> NetworkHooks.openScreen(sp, (MenuProvider) entity, pos));
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return super.use(state, level, pos, player, hand, hit);
+    }
+
+    @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
@@ -72,5 +97,16 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
         return GameEventListener.class.isAssignableFrom(typeClass)
                 ? (GameEventListener) blockEntity
                 : this instanceof GameEventListener l ? l : null;
+    }
+
+    /**
+     * 获取对应 BlockEntity，为了安全问题设为 protected
+     *
+     * @param level 所在世界
+     * @param pos   方块位置
+     * @return BlockEntity
+     */
+    protected T getBlockEntity(BlockGetter level, BlockPos pos) {
+        return level.getBlockEntity(pos, entityType.get()).orElseThrow();
     }
 }

@@ -1,22 +1,5 @@
 package games.moegirl.sinocraft.sinodivination.old.plugin.jei;
 
-import games.moegirl.sinocraft.sinocore.crafting.RecipeHolder;
-import games.moegirl.sinocraft.sinodivination.old.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.old.item.SDItems;
-import games.moegirl.sinocraft.sinodivination.old.recipe.CarvingTableRecipe;
-import games.moegirl.sinocraft.sinodivination.old.recipe.ChangeSoupRecipe;
-import games.moegirl.sinocraft.sinodivination.old.recipe.KettlePotRecipe;
-import games.moegirl.sinocraft.sinodivination.old.recipe.SDRecipes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
-
 // TODO jei support
 //@JeiPlugin
 public class JEIPlugin /*implements IModPlugin*/ {

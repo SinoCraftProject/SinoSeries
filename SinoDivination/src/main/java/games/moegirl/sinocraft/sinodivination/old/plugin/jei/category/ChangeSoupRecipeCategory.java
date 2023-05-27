@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.old.plugin.jei.category;
 
-import games.moegirl.sinocraft.sinodivination.old.recipe.ChangeSoupRecipe;
+import games.moegirl.sinocraft.sinodivination.recipe.ChangeSoupRecipe;
 
 // TODO jei support
 public class ChangeSoupRecipeCategory extends AbstractRecipeCategory<ChangeSoupRecipe> {

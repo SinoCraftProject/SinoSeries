@@ -1,13 +1,5 @@
 package games.moegirl.sinocraft.sinodivination.old.plugin.top;
 
-import games.moegirl.sinocraft.sinodivination.old.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.old.blockentity.SDBlockEntities;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-
 // todo jei support
 public enum KettlePotDisplayOverride /*implements IBlockDisplayOverride*/ {
 

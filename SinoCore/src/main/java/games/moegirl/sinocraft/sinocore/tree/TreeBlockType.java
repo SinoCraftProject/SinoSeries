@@ -31,8 +31,8 @@ public enum TreeBlockType {
     WALL_SIGN("wall_sign", TreeUtilities::wallSign, TreeUtilities::wallSignProp),
     HANGING_SIGN("hanging_sign", TreeUtilities::ceilingHangingSign, ext(TreeUtilities::hangingSignProp), rExt(TreeUtilities::hangingSignBlockItem)),
     WALL_HANGING_SIGN("wall_hanging_sign", TreeUtilities::wallHangingSign, TreeUtilities::wallHangingSignProp),
-    CHEST("chest", TreeUtilities::chest, ext(TreeUtilities::chestProp), TreeUtilities::blockItem),
-    TRAPPED_CHEST("trapped_chest", TreeUtilities::trappedChest, ext(TreeUtilities::trappedChestProp), TreeUtilities::blockItem),
+    CHEST("chest", TreeUtilities::chest, ext(TreeUtilities::chestProp), rExt(TreeUtilities::chestItem)),
+    TRAPPED_CHEST("trapped_chest", TreeUtilities::trappedChest, ext(TreeUtilities::trappedChestProp), rExt(TreeUtilities::trappedChestItem)),
     BOAT("boat"),   // Todo: qyl27: not implemented yet.
     CHEST_BOAT("chest_boat"),   // Todo: qyl27: not implemented yet.
     ;

@@ -1,8 +1,5 @@
 package games.moegirl.sinocraft.sinodivination.old.plugin.jei.guihandler;
 
-import games.moegirl.sinocraft.sinodivination.old.client.screen.SilkwormPlaqueScreen;
-import net.minecraft.client.Minecraft;
-
 // todo jei support
 public enum SilkwormPlaqueScreenHandler /*implements IScreenHandler<SilkwormPlaqueScreen>*/ {
 

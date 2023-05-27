@@ -1,15 +1,5 @@
 package games.moegirl.sinocraft.sinodivination.old.plugin.top;
 
-import games.moegirl.sinocraft.sinodivination.old.blockentity.ISophoraEntity;
-import games.moegirl.sinocraft.sinodivination.old.blockentity.SophoraChestEntity;
-import games.moegirl.sinocraft.sinodivination.old.blockentity.SophoraEntity;
-import games.moegirl.sinocraft.sinodivination.old.data.SDLangKeys;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Optional;
-
 // todo jei support
 public enum SophoraBlockDisplayOverride /*implements IBlockDisplayOverride*/ {
 

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.old.plugin.jei.category;
 
-import games.moegirl.sinocraft.sinodivination.old.recipe.KettlePotRecipe;
+import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;
 
 // TODO jei support
 public class KettlePotRecipeCategory extends AbstractRecipeCategory<KettlePotRecipe> {

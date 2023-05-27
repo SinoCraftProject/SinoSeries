@@ -1,15 +1,19 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
+import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -179,6 +183,23 @@ public class TreeBuilder {
     public TreeBuilder blockEntity(TreeBlockType treeBlockType, @Nullable Function<Tree, BlockEntityType<?>> blockEntity) {
         TreeBlockFactory factory = treeBlocks.get(treeBlockType);
         factory.blockEntityBuilder = factory.wrapBlockEntity(blockEntity);
+        return this;
+    }
+
+    /**
+     * Custom block entity instead of auto generate.
+     *
+     * @param treeBlockType Specific block.
+     * @param blockEntity   BlockEntity.
+     * @return Builder
+     */
+    public TreeBuilder blockEntity(TreeBlockType treeBlockType, @Nullable Function3<Tree, BlockPos, BlockState, BlockEntity> blockEntity) {
+        TreeBlockFactory factory = treeBlocks.get(treeBlockType);
+        factory.blockEntityBuilder = factory.wrapBlockEntity(tree ->
+                BlockEntityType.Builder.of((pos, state) -> {
+                    assert blockEntity != null;
+                    return blockEntity.apply(tree, pos, state);
+                }, tree.getBlock(treeBlockType)).build(null));
         return this;
     }
 

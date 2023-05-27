@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
 import games.moegirl.sinocraft.sinocore.block.BaseTrappedChestBlock;
 import games.moegirl.sinocraft.sinocore.blockentity.BaseChestBlockEntity;
 import games.moegirl.sinocraft.sinocore.blockentity.BaseTrappedChestBlockEntity;
+import games.moegirl.sinocraft.sinocore.item.TreeChestItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -30,7 +31,6 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryManager;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class TreeUtilities {
 
@@ -307,6 +307,14 @@ public class TreeUtilities {
 
     public static Item hangingSignBlockItem(Tree tree) {
         return new HangingSignItem(tree.getBlock(TreeBlockType.HANGING_SIGN), tree.getBlock(TreeBlockType.WALL_HANGING_SIGN), itemProp());
+    }
+
+    public static Item chestItem(Tree tree) {
+        return new TreeChestItem(itemProp(), tree, TreeBlockType.CHEST);
+    }
+
+    public static Item trappedChestItem(Tree tree) {
+        return new TreeChestItem(itemProp(), tree, TreeBlockType.TRAPPED_CHEST);
     }
 
     public static Item.Properties itemProp() {
