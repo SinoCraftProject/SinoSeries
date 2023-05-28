@@ -4,8 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,7 +44,7 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        var result = updateConnectState(context.getLevel(), context.getClickedPos(), true);
+        var result = updateConnectState(context.getLevel(), context.getClickedPos());
         return super.getStateForPlacement(context)
                 .setValue(FACING, result.facing())
                 .setValue(CONNECT_STATE, result.state().getId());
@@ -56,25 +54,11 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         super.neighborChanged(state, level, pos, block, fromPos, isMoving);
 
-        updateConnectState(level, pos, true);
+        updateConnectState(level, pos);
     }
 
-//    @Override
-//    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-//        super.onPlace(state, level, pos, oldState, isMoving);
-//
-//        updateConnectState(level, pos, true);
-//    }
-//
-//    @Override
-//    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-//        super.onRemove(state, level, pos, newState, isMoving);
-//
-//        updateConnectState(level, pos, true);
-//    }
-
-    private ConnectUpdateResult updateConnectState(Level level, BlockPos pos, boolean isStartPos) {
-        return updateConnectState(level, pos, isStartPos, new HashSet<>());
+    private ConnectUpdateResult updateConnectState(Level level, BlockPos pos) {
+        return updateConnectState(level, pos, true, new HashSet<>());
     }
 
     private ConnectUpdateResult updateConnectState(Level level, BlockPos pos, boolean isStartPos, Set<BlockPos> visited) {
