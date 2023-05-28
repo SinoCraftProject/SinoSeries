@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinofoundation.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -48,6 +49,11 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
         return super.getStateForPlacement(context)
                 .setValue(FACING, result.facing())
                 .setValue(CONNECT_STATE, result.state().getId());
+    }
+
+    @Override
+    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+        return 1;
     }
 
     @Override
@@ -100,7 +106,7 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
         if (!isStartPos) {
             level.setBlock(pos, level.getBlockState(pos)
                     .setValue(CONNECT_STATE, state.getId())
-                    .setValue(FACING, direction), Block.UPDATE_NEIGHBORS);
+                    .setValue(FACING, direction), Block.UPDATE_ALL);
         }
 
         return new ConnectUpdateResult(direction, state);
