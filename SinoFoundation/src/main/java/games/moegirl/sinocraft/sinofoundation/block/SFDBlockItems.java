@@ -26,6 +26,7 @@ public class SFDBlockItems {
     }
 
     public static final RegistryObject<BlockItem> STOVE = ITEMS.register("stove", () -> new BlockItem(SFDBlocks.STOVE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> WOOD_DESK = ITEMS.register("wood_desk", () -> new BlockItem(SFDBlocks.WOOD_DESK.get(), new Item.Properties()));
 
     public static RegistryObject<BlockItem> WHITE_RADISH = ITEMS.register("white_radish", () -> new TabBlockItemBase(SFDBlocks.WHITE_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));
     public static RegistryObject<BlockItem> SUMMER_RADISH = ITEMS.register("summer_radish", () -> new TabBlockItemBase(SFDBlocks.SUMMER_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));

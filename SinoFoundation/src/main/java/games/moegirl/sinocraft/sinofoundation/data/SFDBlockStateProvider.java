@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinofoundation.data;
 import games.moegirl.sinocraft.sinocore.data.BlockStateProviderBase;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.StoveBlock;
+import games.moegirl.sinocraft.sinofoundation.block.WoodDeskBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.DoublePlantBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import net.minecraft.core.Direction;
@@ -20,29 +21,29 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
     @Override
     protected void registerBlockStatesAndModels() {
         addStove();
-
         addCrops();
+        addWoodDesk();
     }
 
     private void addStove() {
-        VariantBlockStateBuilder stoveBuilder = getVariantBuilder(SFDBlocks.STOVE.get());
-        Direction stoveDirection = Direction.NORTH;
+        var builder = getVariantBuilder(SFDBlocks.STOVE.get());
+        var direction = Direction.NORTH;
         for (int i = 0; i < 4; i++) {
-            stoveBuilder.partialState()
-                    .with(StoveBlock.FACING, stoveDirection)
+            builder.partialState()
+                    .with(StoveBlock.FACING, direction)
                     .with(StoveBlock.BURNING, false)
                     .modelForState()
                     .modelFile(models().getExistingFile(modLoc("block/stove_off")))
                     .rotationY(90 * i)
                     .addModel();
-            stoveBuilder.partialState()
-                    .with(StoveBlock.FACING, stoveDirection)
+            builder.partialState()
+                    .with(StoveBlock.FACING, direction)
                     .with(StoveBlock.BURNING, true)
                     .modelForState()
                     .modelFile(models().getExistingFile(modLoc("block/stove_on")))
                     .rotationY(90 * i)
                     .addModel();
-            stoveDirection = stoveDirection.getClockWise();
+            direction = direction.getClockWise();
         }
     }
 
@@ -59,6 +60,26 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
 
         // Todo: qyl27: double crops.
     }
+
+    private void addWoodDesk() {
+        var builder = getVariantBuilder(SFDBlocks.WOOD_DESK.get());
+        var direction = Direction.NORTH;
+        var states = WoodDeskBlock.ConnectState.values();
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < states.length; j++) {
+                builder.partialState()
+                        .with(WoodDeskBlock.FACING, direction)
+                        .with(WoodDeskBlock.CONNECT_STATE, j)
+                        .modelForState()
+                        .modelFile(models().getExistingFile(modLoc("block/" + states[j].getName())))
+                        .rotationY(90 * i)
+                        .addModel();
+            }
+            direction = direction.getClockWise();
+        }
+    }
+
+    /// <editor-fold desc="Utility methods.">
 
     protected void cropsStaged(PlantBlock plant) {
         cropsStaged(plant, plant.getPlantType().getName());
@@ -87,4 +108,6 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
             }
         }
     }
+
+    /// </editor-fold>
 }

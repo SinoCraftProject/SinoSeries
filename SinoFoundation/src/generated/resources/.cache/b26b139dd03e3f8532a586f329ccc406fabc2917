@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-26T12:25:55.4641427	Item Models: sinofoundation
+// 1.19.4	2023-05-28T10:05:45.781953	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 a60e685b9dc428fd655a1f950c243d32b4dd65a2 assets/sinofoundation/models/item/cabbage.json
 00f707280f8347b58077f1e0c4a49d54802e6602 assets/sinofoundation/models/item/cabbage_seed.json
@@ -20,3 +20,4 @@ ab8482fc5b2d794a5a323eedb850bb6ff4225c31 assets/sinofoundation/models/item/iron_
 0df38b59d485badc555661a9c3dfceab5421d4e0 assets/sinofoundation/models/item/summer_radish.json
 bb5fb5a2ad9efa8c96eab52f9d8758d2faf8aa27 assets/sinofoundation/models/item/tree_bark.json
 eb98780071e32b8be7daa320793347d9874bc9f1 assets/sinofoundation/models/item/white_radish.json
+700285b21c6ef2fcdc02081d1ef049651605e6ce assets/sinofoundation/models/item/wood_desk.json

@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-26T12:25:55.4671333	Block States: sinofoundation
+// 1.19.4	2023-05-28T09:21:33.9416645	Block States: sinofoundation
 86cabb82c723f287e249ce414d11c65f491fd3c2 assets/sinofoundation/blockstates/cabbage_plant.json
 ad3609ef6047f4b701f67a52689d776aac9a56da assets/sinofoundation/blockstates/chili_pepper_plant.json
 34458d89c92c3ba82f3c66fe3d1d5bef69b34d37 assets/sinofoundation/blockstates/eggplant_plant.json
@@ -10,6 +10,7 @@ f1c4b714d7278e981738f1095fbd71b459c8ff5c assets/sinofoundation/blockstates/soybe
 4b9fca1d95db4bb6918b927f06b64c2d0640c471 assets/sinofoundation/blockstates/stove.json
 dc061b8c7930efaff9018cfaeb56ac65f3809efa assets/sinofoundation/blockstates/summer_radish_plant.json
 5e4dfd6647326aa3314f6716507c036f4add8125 assets/sinofoundation/blockstates/white_radish_plant.json
+db6563978b66a92ca15d0e3a0330d6792641f12f assets/sinofoundation/blockstates/wood_desk.json
 515cb3ade5a5587731630e024dabccb853cac76d assets/sinofoundation/models/block/celery_cabbage_stage_0.json
 e300f7d0fb25fca1357e41614d6f1cf72abba8bc assets/sinofoundation/models/block/celery_cabbage_stage_1.json
 4c9d4361eeea8478588ee4fe11c0e359366fdad2 assets/sinofoundation/models/block/celery_cabbage_stage_2.json

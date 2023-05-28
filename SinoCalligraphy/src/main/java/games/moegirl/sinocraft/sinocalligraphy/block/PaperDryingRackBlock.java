@@ -40,7 +40,7 @@ public class PaperDryingRackBlock extends HorizontalDirectionalBlock {
 
     protected PaperDryingRackBlock() {
         super(BlockBehaviour.Properties.of(Material.WOOD)
-                .destroyTime(3)
+                .destroyTime(2.5f)
                 .randomTicks()
                 .sound(SoundType.WOOD)
                 .noOcclusion());
