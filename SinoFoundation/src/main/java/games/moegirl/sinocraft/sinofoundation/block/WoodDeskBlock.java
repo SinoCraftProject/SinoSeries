@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.block;
 
+import games.moegirl.sinocraft.sinocore.utility.shape.VoxelShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -12,11 +13,74 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class WoodDeskBlock extends HorizontalDirectionalBlock {
+    public static final VoxelShape[] SHAPES;
+
+    static {
+        SHAPES = new VoxelShape[24];
+
+        var desktop = Block.box(0, 14, 0, 16, 16, 16);
+        var desktopWaistRemoval1 = Block.box(0, 14, 0, 16, 15, 1);
+        var desktopWaistRemoval2 = VoxelShapeHelper.rotateClockwise(desktopWaistRemoval1);
+        var desktopWaistRemoval3 = VoxelShapeHelper.rotateClockwise(desktopWaistRemoval1, 2);
+        var desktopWaistRemoval4 = VoxelShapeHelper.rotateClockwise(desktopWaistRemoval1, 3);
+        var leg1 = Block.box(1, 0, 1, 3, 14, 3);
+        var leg2 = VoxelShapeHelper.rotateClockwise(leg1);
+        var leg3 = VoxelShapeHelper.rotateClockwise(leg1, 2);
+        var leg4 = VoxelShapeHelper.rotateClockwise(leg1, 3);
+
+        for (var i = 0; i < 4; i++) {
+            var noConnect = Shapes.or(desktop, leg1, leg2, leg3, leg4);
+            noConnect = Shapes.join(noConnect, desktopWaistRemoval1, BooleanOp.ONLY_FIRST);
+            noConnect = Shapes.join(noConnect, desktopWaistRemoval2, BooleanOp.ONLY_FIRST);
+            noConnect = Shapes.join(noConnect, desktopWaistRemoval3, BooleanOp.ONLY_FIRST);
+            noConnect = Shapes.join(noConnect, desktopWaistRemoval4, BooleanOp.ONLY_FIRST);
+            SHAPES[i] = noConnect;
+        }
+
+        for (var i = 0; i < 4; i++) {
+            var singleConnect = Shapes.or(desktop, leg1, leg2);
+            singleConnect = Shapes.join(singleConnect, desktopWaistRemoval1, BooleanOp.ONLY_FIRST);
+            singleConnect = Shapes.join(singleConnect, desktopWaistRemoval2, BooleanOp.ONLY_FIRST);
+            singleConnect = Shapes.join(singleConnect, desktopWaistRemoval4, BooleanOp.ONLY_FIRST);
+            SHAPES[4 + i] = VoxelShapeHelper.rotateClockwise(singleConnect, i);
+        }
+
+        for (var i = 0; i < 4; i++) {
+            var paraConnect = Shapes.or(desktop);
+            paraConnect = Shapes.join(paraConnect, desktopWaistRemoval2, BooleanOp.ONLY_FIRST);
+            paraConnect = Shapes.join(paraConnect, desktopWaistRemoval4, BooleanOp.ONLY_FIRST);
+            SHAPES[8 + i] = VoxelShapeHelper.rotateClockwise(paraConnect, i);
+        }
+
+        for (var i = 0; i < 4; i++) {
+            var orthoConnect = Shapes.or(desktop, leg2);
+            orthoConnect = Shapes.join(orthoConnect, desktopWaistRemoval1, BooleanOp.ONLY_FIRST);
+            orthoConnect = Shapes.join(orthoConnect, desktopWaistRemoval2, BooleanOp.ONLY_FIRST);
+            SHAPES[12 + i] = VoxelShapeHelper.rotateClockwise(orthoConnect, i);
+        }
+
+        for (var i = 0; i < 4; i++) {
+            var leg = Block.box(7, 0, 1, 9, 14, 3);
+            var vicinalConnect = Shapes.or(desktop, leg);
+            vicinalConnect = Shapes.join(vicinalConnect, desktopWaistRemoval1, BooleanOp.ONLY_FIRST);
+            vicinalConnect = Shapes.join(vicinalConnect, desktopWaistRemoval3, BooleanOp.ONLY_FIRST);
+            SHAPES[16 + i] = VoxelShapeHelper.rotateClockwise(vicinalConnect, i);
+        }
+
+        for (var i = 0; i < 4; i++) {
+            SHAPES[20 + i] = VoxelShapeHelper.rotateClockwise(desktop, i);
+        }
+    }
+
     /**
      * qyl27: Property about connect state.
      * 0: no connect.
@@ -45,26 +109,27 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        var result = updateConnectState(context.getLevel(), context.getClickedPos());
+        var result = updateConnectState(context.getLevel(), context.getClickedPos(), true);
         return super.getStateForPlacement(context)
                 .setValue(FACING, result.facing())
                 .setValue(CONNECT_STATE, result.state().getId());
     }
 
     @Override
-    public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-        return 1;
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        var index = state.getValue(CONNECT_STATE) * 4 + (state.getValue(FACING).get2DDataValue() + 1) % 4;
+        return SHAPES[index];
     }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         super.neighborChanged(state, level, pos, block, fromPos, isMoving);
 
-        updateConnectState(level, pos);
+        updateConnectState(level, pos, false);
     }
 
-    private ConnectUpdateResult updateConnectState(Level level, BlockPos pos) {
-        return updateConnectState(level, pos, true, new HashSet<>());
+    private ConnectUpdateResult updateConnectState(Level level, BlockPos pos, boolean isStartPos) {
+        return updateConnectState(level, pos, isStartPos, new HashSet<>());
     }
 
     private ConnectUpdateResult updateConnectState(Level level, BlockPos pos, boolean isStartPos, Set<BlockPos> visited) {
