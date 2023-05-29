@@ -39,4 +39,8 @@ public class SFDBlockItems {
     public static RegistryObject<BlockItem> MILLET_SEED = ITEMS.register("millet_seed", () -> new TabNamedBlockItemBase(SFDBlocks.MILLET_PLANT.get(), new Item.Properties(), SinoSeriesTabs.AGRICULTURE));
     public static RegistryObject<BlockItem> SOYBEAN = ITEMS.register("soybean", () -> new TabBlockItemBase(SFDBlocks.SOYBEAN_PLANT.get(), new Item.Properties(), SinoSeriesTabs.AGRICULTURE));
     public static RegistryObject<BlockItem> GARLIC = ITEMS.register("garlic", () -> new TabBlockItemBase(SFDBlocks.GARLIC_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));
+
+    public static RegistryObject<BlockItem> MARBLE = ITEMS.register("marble", () -> new TabBlockItemBase(SFDBlocks.MARBLE.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
+    public static RegistryObject<BlockItem> MARBLE_WALL = ITEMS.register("marble_wall", () -> new TabBlockItemBase(SFDBlocks.MARBLE_WALL.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
+
 }

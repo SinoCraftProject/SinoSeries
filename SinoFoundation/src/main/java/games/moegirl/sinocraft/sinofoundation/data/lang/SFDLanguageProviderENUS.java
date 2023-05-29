@@ -16,7 +16,7 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
     @Override
     public void translate() {
         addTab(SinoSeriesTabs.BUILDING_BLOCKS, "SinoSeries | Building Blocks");
-         addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "SinoSeries | Functional Blocks");
+        addTab(SinoSeriesTabs.FUNCTIONAL_BLOCKS, "SinoSeries | Functional Blocks");
         addTab(SinoSeriesTabs.AGRICULTURE, "SinoSeries | Agriculture");
         addTab(SinoSeriesTabs.TOOLS, "SinoSeries | Tools & Utilities");
         addTab(SinoSeriesTabs.WEAPONS, "SinoSeries | Combat");
@@ -35,6 +35,7 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SFDItems.EGGPLANT, "Eggplant");
 
         addBlock(SFDBlocks.STOVE, "Stove");
+        addBlock(SFDBlocks.WOOD_DESK, "Wood Desk");
         addBlock(SFDBlocks.WHITE_RADISH_PLANT, "White Radish");
         addBlock(SFDBlocks.SUMMER_RADISH_PLANT, "Summer Radish");
         addBlock(SFDBlocks.GREEN_RADISH_PLANT, "Green Radish");
@@ -45,6 +46,8 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.MILLET_PLANT, "Millet");
         addBlock(SFDBlocks.SOYBEAN_PLANT, "Soybean");
         addBlock(SFDBlocks.GARLIC_PLANT, "Garlic");
+        addBlock(SFDBlocks.MARBLE, "Marble");
+        addBlock(SFDBlocks.MARBLE_WALL, "Marble Walls");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "Chili Pepper Seed");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "Green Pepper Seed");

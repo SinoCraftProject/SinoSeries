@@ -5,6 +5,10 @@ import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantType;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,5 +34,8 @@ public class SFDBlocks {
     public static RegistryObject<PlantBlock> MILLET_PLANT = BLOCKS.register("millet_plant", () -> new PlantBlock(PlantType.MILLET, SFDBlockItems.MILLET_SEED));
     public static RegistryObject<PlantBlock> SOYBEAN_PLANT = BLOCKS.register("soybean_plant", () -> new PlantBlock(PlantType.SOYBEAN, SFDBlockItems.SOYBEAN));
     public static RegistryObject<PlantBlock> GARLIC_PLANT = BLOCKS.register("garlic_plant", () -> new PlantBlock(PlantType.GARLIC, SFDBlockItems.GARLIC));
+
+    public static RegistryObject<Block> MARBLE = BLOCKS.register("marble", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
+    public static RegistryObject<WallBlock> MARBLE_WALL = BLOCKS.register("marble_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(MARBLE.get())));
 
 }

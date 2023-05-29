@@ -9,6 +9,10 @@ import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
@@ -23,6 +27,9 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         addStove();
         addCrops();
         addWoodDesk();
+
+        skipBlock(SFDBlocks.MARBLE_WALL.get());
+        wallBlock(SFDBlocks.MARBLE_WALL.get(), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_post")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side_tall")));
     }
 
     private void addStove() {
