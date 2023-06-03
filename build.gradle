@@ -10,9 +10,8 @@ println "Java: ${System.getProperty 'java.version'}, " +
         "JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), " +
         "Arch: ${System.getProperty 'os.arch'}"
 
-// Fixme: qyl27: it is not work as our wish.
-//import java.nio.file.Path
-//// 删除 .idea/runConfigurations 文件
+import java.nio.file.Path
+// 删除 .idea/runConfigurations 文件
 //Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
 //if (Files.isDirectory(ideaCache)) {
 //    Files.walk(ideaCache, 1)
