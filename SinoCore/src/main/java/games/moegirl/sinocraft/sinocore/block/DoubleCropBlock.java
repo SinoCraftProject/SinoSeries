@@ -38,6 +38,8 @@ public abstract class DoubleCropBlock<T extends Item> extends DoublePlantBlock i
     private final IntegerProperty ageProperty;
     private final int maxAge;
 
+    protected final StateDefinition<Block, BlockState> stateDefinition;
+
     /**
      * @param properties   方块属性
      * @param crop         作物
@@ -57,6 +59,13 @@ public abstract class DoubleCropBlock<T extends Item> extends DoublePlantBlock i
         this.maxCropCount = maxCropCount;
         this.maxAge = age;
         this.ageProperty = Crop.getAgeProperties(age);
+
+        StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
+        builder.add(HALF);
+        builder.add(getAgeProperty());
+        this.stateDefinition = builder.create(Block::defaultBlockState, BlockState::new);
+        registerDefaultState(stateDefinition.any());
+
         registerDefaultState(defaultBlockState()
                 .setValue(HALF, DoubleBlockHalf.LOWER)
                 .setValue(ageProperty, 0));
@@ -78,9 +87,8 @@ public abstract class DoubleCropBlock<T extends Item> extends DoublePlantBlock i
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(getAgeProperty());
+    public StateDefinition<Block, BlockState> getStateDefinition() {
+        return stateDefinition;
     }
 
     @Override
