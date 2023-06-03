@@ -1,3 +1,5 @@
+import java.nio.file.Files
+
 plugins {
     id 'maven-publish'
     id 'architectury-plugin' version "${architectury_plugin_version}"
@@ -8,6 +10,14 @@ println "Java: ${System.getProperty 'java.version'}, " +
         "JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), " +
         "Arch: ${System.getProperty 'os.arch'}"
 
+import java.nio.file.Path
+
+Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
+if (Files.isDirectory(ideaCache)) {
+    Files.walk(ideaCache, 1)
+            .filter { Files.isRegularFile(it) }
+            .forEach { Files.delete(it) }
+}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
