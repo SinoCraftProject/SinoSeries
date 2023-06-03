@@ -12,12 +12,12 @@ println "Java: ${System.getProperty 'java.version'}, " +
 
 import java.nio.file.Path
 // 删除 .idea/runConfigurations 文件
-Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
-if (Files.isDirectory(ideaCache)) {
-    Files.walk(ideaCache, 1)
-            .filter { Files.isRegularFile(it) }
-            .forEach { Files.delete(it) }
-}
+//Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
+//if (Files.isDirectory(ideaCache)) {
+//    Files.walk(ideaCache, 1)
+//            .filter { Files.isRegularFile(it) }
+//            .forEach { Files.delete(it) }
+//}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
