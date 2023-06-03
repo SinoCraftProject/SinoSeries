@@ -130,4 +130,9 @@ class ProviderDatapack extends DatapackBuiltinEntriesProvider {
     private static PlacedFeature cropPlaced(Holder.Reference<ConfiguredFeature<?, ?>> configuration, BlockPredicate forPredicate) {
         return new PlacedFeature(configuration, List.of(BiomeFilter.biome(), BlockPredicateFilter.forPredicate(forPredicate)));
     }
+
+    @Override
+    public String getName() {
+        return super.getName() + ": " + SinoDivination.MODID;
+    }
 }

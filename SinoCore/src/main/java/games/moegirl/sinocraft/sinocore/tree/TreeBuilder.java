@@ -245,28 +245,15 @@ public class TreeBuilder {
         return this;
     }
 
-//    /**
-//     * Set grower for sapling.
-//     *
-//     * @param grower Grower.
-//     * @return Builder
-//     */
-//    public TreeBuilder grower(ModTreeGrowerBase grower, TreeConfiguration configuration) {
-//        this.grower = t -> grower;
-//        this.configuration = t -> configuration;
-//        return this;
-//    }
-
-//    /**
-//     * Set grower for sapling.
-//     *
-//     * @return Builder
-//     */
-//    public TreeBuilder grower(Function<Tree, TreeConfiguration> configuration) {
-//        this.grower = t -> new ModTreeGrowerBase(t.name);
-//        this.configuration = configuration;
-//        return this;
-//    }
+    /**
+     * Set grower for sapling.
+     *
+     * @return Builder
+     */
+    public TreeBuilder grower(ModTreeGrowerBase grower) {
+        this.grower = t -> grower;
+        return this;
+    }
 
     /**
      * Add all block to tags.

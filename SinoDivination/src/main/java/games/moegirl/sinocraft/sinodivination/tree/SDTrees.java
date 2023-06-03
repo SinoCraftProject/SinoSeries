@@ -10,6 +10,7 @@ import games.moegirl.sinocraft.sinodivination.blockentity.*;
 import games.moegirl.sinocraft.sinodivination.data.SDTags;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
@@ -32,10 +33,7 @@ public class SDTrees {
             .blockEntity(TreeBlockType.CHEST, CotinusChestEntity::new)
             .blockEntity(TreeBlockType.TRAPPED_CHEST, CotinusTrappedChestEntity::new)
             .blockTags(SDTags.COTINUS_BLOCK)
-            .grower(tree -> TreeUtilities.copy(tree, TreeFeatures.OAK,
-                    new StraightTrunkPlacer(4, 2, 0),
-                    new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
-                    new TwoLayersFeatureSize(1, 0, 1)).build())
+            .grower(new TreeGrower(new ResourceLocation(SinoDivination.MODID, "cotinus")))
             .build();
 
     public static final Tree JUJUBE = Tree.builder(SinoDivination.MODID, "jujube")
@@ -52,10 +50,7 @@ public class SDTrees {
             .blockTags(SDTags.SOPHORA_BLOCK)
             .itemTags()
             .blockProperty(b -> b.destroyTime *= 2)
-            .grower(tree -> TreeUtilities.copy(tree, TreeFeatures.OAK,
-                    new StraightTrunkPlacer(4, 2, 0),
-                    new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
-                    new TwoLayersFeatureSize(1, 0, 1)).build())
+            .grower(new TreeGrower(new ResourceLocation(SinoDivination.MODID, "jujube")))
             .build();
 
     public static final Tree SOPHORA = Tree.builder(SinoDivination.MODID, "sophora")
@@ -71,10 +66,7 @@ public class SDTrees {
             .blockEntity(TreeBlockType.FENCE_GATE, SophoraEntity::fenceGate)
             .blockEntity(TreeBlockType.CHEST, SophoraChestEntity::new)
             .blockEntity(TreeBlockType.TRAPPED_CHEST, SophoraTrappedChestEntity::new)
-            .grower(tree -> TreeUtilities.copy(tree, TreeFeatures.OAK,
-                    new StraightTrunkPlacer(4, 2, 0),
-                    new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
-                    new TwoLayersFeatureSize(1, 0, 1)).build())
+            .grower(new TreeGrower(new ResourceLocation(SinoDivination.MODID, "sophora")))
             .build();
 
     public static void register(IEventBus bus) {

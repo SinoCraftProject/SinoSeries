@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event.data;
+package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
@@ -6,16 +6,15 @@ import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SCTreeRecipeProvider extends AbstractRecipeProvider {
+public class ProviderRecipe extends AbstractRecipeProvider {
     protected final List<Tree> treeTypes;
 
-    public SCTreeRecipeProvider(PackOutput output, String modid, List<Tree> treeTypes) {
+    public ProviderRecipe(PackOutput output, String modid, List<Tree> treeTypes) {
         super(output, modid);
 
         this.treeTypes = treeTypes;

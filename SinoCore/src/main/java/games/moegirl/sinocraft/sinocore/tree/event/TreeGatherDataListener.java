@@ -29,7 +29,7 @@ public class TreeGatherDataListener {
             generator.addProvider(true, blockTagsProvider);
             generator.addProvider(true, new ProviderItemTags(output, lookupProvider, blockTagsProvider, modid, exHelper, trees));
 
-            generator.addProvider(true, new ProviderRecipe(output, trees));
+            generator.addProvider(true, new ProviderRecipe(output, modid, trees));
             generator.addProvider(true, new ProviderBlockLootTable(output, trees));
 
             generator.addProvider(true, new ProviderFeatures(output, lookupProvider, modid, trees));
