@@ -28,31 +28,29 @@ import java.util.function.Supplier;
 public final class RecipeHolder<C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> {
 
     public static <C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> RecipeHolder<C, T, S> register(
-            DeferredRegister<RecipeSerializer<?>> registry, RegistryObject<? extends ItemLike> sign, S serializer) {
+            RegistryObject<? extends ItemLike> sign, S serializer, DeferredRegister<RecipeSerializer<?>> registry, DeferredRegister<RecipeType<?>> registerType) {
         ResourceLocation id = sign.getId();
-        RecipeHolder<C, T, S> holder = new RecipeHolder<>(id, Suppliers.memoize(() -> sign.get().asItem()), serializer, serializer.recipeClass());
-        registry.register(id.getPath(), () -> {
-            holder.recipeType = RecipeType.register(id.toString());
-            return serializer;
-        });
-        return holder;
+        registry.register(id.getPath(), () -> serializer);
+        RegistryObject<RecipeType<T>> rt = registerType.register(id.getPath(), () -> RecipeType.simple(id));
+        return new RecipeHolder<>(id, Suppliers.memoize(() -> sign.get().asItem()), serializer, rt, serializer.recipeClass());
     }
 
     private final ResourceLocation name;
     private final Supplier<? extends Item> sign;
-    private RecipeType<T> recipeType;
+    private final RegistryObject<RecipeType<T>> recipeType;
     private final S serializer;
     private final Class<T> type;
 
-    public RecipeHolder(ResourceLocation name, Supplier<? extends Item> sign, S serializer, Class<T> type) {
+    public RecipeHolder(ResourceLocation name, Supplier<? extends Item> sign, S serializer, RegistryObject<RecipeType<T>> recipeType, Class<T> type) {
         this.name = name;
         this.sign = sign;
+        this.recipeType = recipeType;
         this.serializer = serializer;
         this.type = type;
     }
 
     public Optional<T> match(Level level, C container) {
-        return level.getRecipeManager().getRecipeFor(recipeType, container, level);
+        return level.getRecipeManager().getRecipeFor(recipeType.get(), container, level);
     }
 
     public Optional<ItemStack> matchResult(Level level, C container) {
@@ -68,8 +66,7 @@ public final class RecipeHolder<C extends Container, T extends Recipe<C>, S exte
     }
 
     public RecipeType<T> recipeType() {
-        Objects.requireNonNull(recipeType, "get RecipeType must after RegisterEvent");
-        return recipeType;
+        return recipeType.get();
     }
 
     public S serializer() {

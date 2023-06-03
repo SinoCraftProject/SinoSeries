@@ -9,7 +9,7 @@ import net.minecraft.data.DataGenerator;
 class ProviderLanguageZh extends AbstractLanguageProvider {
 
     public ProviderLanguageZh(DataGenerator generator) {
-        super(generator.getPackOutput(), SinoDivination.MODID, "en_us");
+        super(generator.getPackOutput(), SinoDivination.MODID, "zh_cn");
     }
 
     @Override

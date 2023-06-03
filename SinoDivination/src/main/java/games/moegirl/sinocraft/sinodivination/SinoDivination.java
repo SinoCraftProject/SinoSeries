@@ -38,7 +38,7 @@ public class SinoDivination {
         SDBlockEntities.REGISTRY.register(bus);
 //        SDEntities.REGISTRY.register(bus);
         SDMenus.REGISTRY.register(bus);
-        SDRecipes.REGISTRY.register(bus);
+        SDRecipes.REGISTRY_SERIALIZER.register(bus);
         SDScreens.register(bus);
         SDTrees.register(bus);
 
