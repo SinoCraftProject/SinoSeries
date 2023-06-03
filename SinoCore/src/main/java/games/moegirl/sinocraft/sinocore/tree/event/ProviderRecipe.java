@@ -1,27 +1,22 @@
-package games.moegirl.sinocraft.sinocore.tree.event;
+package games.moegirl.sinocraft.sinocore.tree.event.data;
 
+import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
-import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-class ProviderRecipe extends RecipeProvider {
+public class SCTreeRecipeProvider extends AbstractRecipeProvider {
     protected final List<Tree> treeTypes;
 
-    public ProviderRecipe(PackOutput output, List<Tree> treeTypes) {
-        super(output);
+    public SCTreeRecipeProvider(PackOutput output, String modid, List<Tree> treeTypes) {
+        super(output, modid);
 
         this.treeTypes = treeTypes;
     }
@@ -50,20 +45,11 @@ class ProviderRecipe extends RecipeProvider {
                     .dontGenerateModel()
                     .getFamily();
             generateRecipes(writer, family);
-
-            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, tree.getBlock(TreeBlockType.CHEST))
-                    .define('#', tree.getItem(TreeBlockType.PLANKS))
-                    .pattern("###")
-                    .pattern("# #")
-                    .pattern("###")
-                    .unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0]))
-                    .save(writer);
-
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, Blocks.TRAPPED_CHEST)
-                    .requires(tree.getBlock(TreeBlockType.CHEST))
-                    .requires(Blocks.TRIPWIRE_HOOK)
-                    .unlockedBy("has_tripwire_hook", VanillaRecipeProvider.has(Blocks.TRIPWIRE_HOOK))
-                    .save(writer);
         }
+    }
+
+    @Override
+    public String getName() {
+        return "Mod Tree Recipes: " + modid;
     }
 }

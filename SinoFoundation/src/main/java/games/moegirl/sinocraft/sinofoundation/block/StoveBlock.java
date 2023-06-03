@@ -78,6 +78,7 @@ public class StoveBlock extends HorizontalDirectionalBlock implements EntityBloc
     protected StoveBlock() {
         super(Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
                 .requiresCorrectToolForDrops()
+                .dynamicShape()
                 .strength(3.5f));
     }
 

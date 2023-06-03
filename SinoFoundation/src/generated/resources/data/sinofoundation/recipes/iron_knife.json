@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I ",
+    " S"
+  ],
+  "result": {
+    "item": "sinofoundation:iron_knife"
+  },
+  "show_notification": false
+}

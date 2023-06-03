@@ -27,6 +27,7 @@ public class SFDLanguageProviderZHL extends AbstractLanguageProvider {
         add(SFDItems.GOLD_KNIFE.get(), "金厨刀");
         add(SFDItems.DIAMOND_KNIFE.get(), "钻石厨刀");
         add(SFDItems.ASHES.get(), "燼");
+        add(SFDItems.TREE_BARK.get(), "树皮");
 
         add(SFDBlocks.STOVE.get(), "灶");
 

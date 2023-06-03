@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinofoundation.item;
 
+import games.moegirl.sinocraft.sinocore.item.TabItemBase;
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,6 +26,13 @@ public class SFDItems {
 
     public static final RegistryObject<Item> ASHES = ITEMS.register("ashes", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TREE_BARK = ITEMS.register("tree_bark", () -> new Item(new Item.Properties()));
+
+    public static RegistryObject<Item> MILLET = ITEMS.register("millet", () -> new TabItemBase(new Item.Properties(), SinoSeriesTabs.AGRICULTURE));
+
+    public static RegistryObject<Item> CHILI_PEPPER = ITEMS.register("chili_pepper", () -> new TabItemBase(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));
+    public static RegistryObject<Item> GREEN_PEPPER = ITEMS.register("green_pepper", () -> new TabItemBase(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));
+    public static RegistryObject<Item> CABBAGE = ITEMS.register("cabbage", () -> new TabItemBase(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));
+    public static RegistryObject<Item> EGGPLANT = ITEMS.register("eggplant", () -> new TabItemBase(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build()), SinoSeriesTabs.AGRICULTURE));
 
     static {
         BlockStrippingEvent.registerTool(IRON_KNIFE);

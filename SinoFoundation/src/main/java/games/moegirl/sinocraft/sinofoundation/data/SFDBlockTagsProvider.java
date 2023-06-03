@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockTagsProvider;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -16,6 +17,6 @@ public class SFDBlockTagsProvider extends AbstractBlockTagsProvider {
 
     @Override
     protected void addToTags() {
-
+        tag(SFDBlockTags.MINECRAFT_WALLS).add(SFDBlocks.MARBLE_WALL.get());
     }
 }

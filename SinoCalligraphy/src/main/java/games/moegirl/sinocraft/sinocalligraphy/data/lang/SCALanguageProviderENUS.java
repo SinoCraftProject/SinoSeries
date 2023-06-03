@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.data.lang;
 
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
+import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
 import net.minecraft.data.PackOutput;
@@ -21,6 +22,13 @@ public class SCALanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SCAItems.FILLED_XUAN_PAPER, "Filled Xuan paper");
         addItem(SCAItems.INK, "Ink");
         addItem(SCAItems.GOLDEN_INK, "Golden ink");
+        addItem(SCAItems.GREEN_SANDALWOOD_BARK, "Green Sandalwood Wood Bark");
+        addItem(SCAItems.WOOD_PULP_BUCKET, "Bucket of Wood Pulp");
+
+        addBlock(SCABlocks.PAPER_DRYING_RACK, "Paper Drying Rack");
+        addBlock(SCABlocks.WOOD_PULP_BLOCK, "Wood Pulp");
+
+        add(SCAConstants.DESCRIPTION_ID_WOOD_PULP, "Wood Pulp");
 
 
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1, "Legend said, TaoismDeeplake used this fan during his speech.");

@@ -16,9 +16,9 @@ public interface ITabItem<T extends ItemLike> extends Self<T> {
     /**
      * 允许一个物品在不同物品栏，或自定义物品栏中的 ItemStack
      */
-    default void acceptTabs(BiConsumer<ResourceLocation, ItemStack> accept) {
+    default void acceptTabs(BiConsumer<ResourceLocation, ItemStack> consumer) {
         for (ResourceLocation tab : getTabs()) {
-            accept.accept(tab, new ItemStack(self()));
+            consumer.accept(tab, new ItemStack(self()));
         }
     }
 

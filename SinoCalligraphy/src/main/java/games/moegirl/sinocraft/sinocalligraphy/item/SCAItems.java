@@ -3,8 +3,10 @@ package games.moegirl.sinocraft.sinocalligraphy.item;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
+import games.moegirl.sinocraft.sinocalligraphy.fluid.SCAFluids;
 import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,7 +35,5 @@ public class SCAItems {
 
     public static final RegistryObject<Item> GREEN_SANDALWOOD_BARK = ITEMS.register("green_sandalwood_bark", () -> new Item(new Item.Properties()));
 
-    // Todo: qyl27.
-//    public static final RegistryObject<BucketItem> WOOD_PULP_BUCKET = ITEMS.register("wood_pulp_bucket", () -> new BucketItem(SCAFluids.WOOD_PULP, new Item.Properties().tab(SCACreativeTab.CALLIGRAPHY).setNoRepair().stacksTo(1)));
-
+    public static final RegistryObject<BucketItem> WOOD_PULP_BUCKET = ITEMS.register("wood_pulp_bucket", () -> new BucketItem(SCAFluids.WOOD_PULP, new Item.Properties().setNoRepair().stacksTo(1)));
 }

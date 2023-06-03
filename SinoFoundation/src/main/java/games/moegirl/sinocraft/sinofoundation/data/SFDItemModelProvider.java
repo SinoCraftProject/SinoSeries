@@ -16,7 +16,11 @@ public class SFDItemModelProvider extends ItemModelProviderBase {
     @Override
     protected void registerItemModels() {
         skipItem(SFDBlockItems.STOVE.get());
+        skipItem(SFDBlockItems.WOOD_DESK.get());
+        skipItem(SFDBlockItems.MARBLE_WALL.get());
 
         getBuilder(SFDBlockItems.STOVE.getKey().location().getPath()).parent(weakCheckModel(modLoc("block/stove_off")));
+        getBuilder(SFDBlockItems.WOOD_DESK.getKey().location().getPath()).parent(weakCheckModel(modLoc("block/wood_desk_no_connection")));
+        getBuilder(SFDBlockItems.MARBLE_WALL.getKey().location().getPath()).parent(weakCheckModel(modLoc("block/marble_wall_inventory")));
     }
 }

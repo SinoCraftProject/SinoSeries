@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.data.lang;
 
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
+import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
 import net.minecraft.data.PackOutput;
@@ -21,6 +22,13 @@ public class SCALanguageProviderZHTW extends AbstractLanguageProvider {
         addItem(SCAItems.FILLED_XUAN_PAPER, "填充過的宣紙");
         addItem(SCAItems.INK, "墨汁");
         addItem(SCAItems.GOLDEN_INK, "加金粉的墨汁");
+        addItem(SCAItems.GREEN_SANDALWOOD_BARK, "青檀樹皮");
+        addItem(SCAItems.WOOD_PULP_BUCKET, "木漿桶");
+
+        addBlock(SCABlocks.PAPER_DRYING_RACK, "晾紙架");
+        addBlock(SCABlocks.WOOD_PULP_BLOCK, "木漿");
+
+        add(SCAConstants.DESCRIPTION_ID_WOOD_PULP, "木漿");
 
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1, "傳說，道家深湖在演講時就用過這把扇子");
         add(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_2, "他浪跡天地，無長劍在手");
