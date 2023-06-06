@@ -10,14 +10,15 @@ println "Java: ${System.getProperty 'java.version'}, " +
         "JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), " +
         "Arch: ${System.getProperty 'os.arch'}"
 
+// 没有任何任务（即重新加载任务）时清理 runConfigurations
 import java.nio.file.Path
-// 删除 .idea/runConfigurations 文件
-//Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
-//if (Files.isDirectory(ideaCache)) {
-//    Files.walk(ideaCache, 1)
-//            .filter { Files.isRegularFile(it) }
-//            .forEach { Files.delete(it) }
-//}
+if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") }) {
+    Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
+    if (Files.isDirectory(ideaCache))
+        Files.walk(ideaCache, 1)
+                .filter { Files.isRegularFile(it) }
+                .forEach { Files.delete(it) }
+}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
