@@ -24,6 +24,6 @@ public class DataGen {
         generator.addProvider(true, provider = new ProviderTagBlock(event));
         generator.addProvider(true, new ProviderTagItem(event, provider));
         generator.addProvider(true, new ProviderTagBiome(event));
-        generator.addProvider(true, new ProviderBiomeModifier(event));
+//        generator.addProvider(true, new ProviderBiomeModifier(event));
     }
 }

@@ -84,7 +84,9 @@ class ProviderBlockLootTable extends LootTableProvider {
                     if (block instanceof ILootableBlock loot) {
                         add(block, loot.createLootBuilder(BlockLootables.INSTANCE));
                     } else {
-                        add(block, DEFAULT_LOOT.get(type).apply(block, tree, this));
+                        if (DEFAULT_LOOT.containsKey(type)) {
+                            add(block, DEFAULT_LOOT.get(type).apply(block, tree, this));
+                        }
                     }
                 }
             }

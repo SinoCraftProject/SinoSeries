@@ -20,18 +20,6 @@ public class SDItems {
 
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, SinoDivination.MODID);
 
-    public static final RegistryObject<BlockItem> ORE_JADE = block(SDBlocks.ORE_JADE);
-
-    public static final RegistryObject<BlockItem> ORE_NITER = block(SDBlocks.ORE_NITER);
-
-    public static final RegistryObject<BlockItem> ORE_SULPHUR = block(SDBlocks.ORE_SULPHUR);
-
-    public static final RegistryObject<Item> JADE = simple("jade");
-
-    public static final RegistryObject<Item> NITER = simple(Niter.class);
-
-    public static final RegistryObject<Item> SULPHUR = simple("sulfur", FireChargeItem.class);
-
     public static final RegistryObject<BlockItem> KETTLE_POT = block(SDBlocks.KETTLE_POT);
 
     public static final RegistryObject<Item> CHANGE_SOUP = simple(ChangeSoup.class);

@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootPool;
 
@@ -26,6 +27,10 @@ public class SFDBlockLootTableProvider extends LootTableProviderBase {
         addBlock(SFDBlocks.MILLET_PLANT, table(dropWhenNotMature(SFDBlocks.MILLET_PLANT.get(), SFDBlockItems.MILLET_SEED.get()), dropWhenMature(SFDBlocks.MILLET_PLANT.get(), SFDBlockItems.MILLET_SEED.get(), 2, 6)));
         addBlock(SFDBlocks.SOYBEAN_PLANT, table(dropSeeds(SFDBlockItems.SOYBEAN.get()), dropWhenMature(SFDBlocks.SOYBEAN_PLANT.get(), SFDBlockItems.SOYBEAN.get(), 1, 4)));
         addBlock(SFDBlocks.GARLIC_PLANT, table(dropSeeds(SFDBlockItems.GARLIC.get()), dropWhenMature(SFDBlocks.GARLIC_PLANT.get(), SFDBlockItems.GARLIC.get(), 2, 4)));
+
+        addBlock(SFDBlocks.JADE_ORE, table(dropIngotByChance(SFDItems.JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.NITER_ORE, table(dropIngotByChance(SFDItems.NITER.get(), 1, 2)));
+        addBlock(SFDBlocks.SULPHUR_ORE, table(dropIngotByChance(SFDItems.SULPHUR.get(), 1, 2)));
     }
 
     protected LootPool.Builder dropWhenMature(PlantBlock block, ItemLike item, int minDrop, int maxDrop) {

@@ -1,6 +1,8 @@
-package games.moegirl.sinocraft.sinodivination.item;
+package games.moegirl.sinocraft.sinofoundation.item;
 
+import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -9,10 +11,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class Niter extends Item {
+import java.util.function.BiConsumer;
 
-    public Niter() {
-        super(new Properties());
+public class Niter extends Item implements ITabItem<Niter> {
+
+    public Niter(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -28,5 +32,10 @@ public class Niter extends Item {
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
         return InteractionResult.FAIL;
+    }
+
+    @Override
+    public void acceptTabs(BiConsumer<ResourceLocation, ItemStack> consumer) {
+        consumer.accept(SinoSeriesTabs.MATERIALS, new ItemStack(self()));
     }
 }

@@ -17,12 +17,6 @@ public class SDBlocks {
 
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, SinoDivination.MODID);
 
-    public static final RegistryObject<OreJade> ORE_JADE = simple(OreJade.class);
-
-    public static final RegistryObject<OreNiter> ORE_NITER = simple(OreNiter.class);
-
-    public static final RegistryObject<OreSulphur> ORE_SULPHUR = simple(OreSulphur.class);
-
     public static final RegistryObject<KettlePot> KETTLE_POT = simple(KettlePot.class);
 
     public static final RegistryObject<SimpleCropBlock<Item>> WORMWOOD = crop3(() -> SDItems.WORMWOOD_LEAF, "wormwood", 0, 1, 2, 2);

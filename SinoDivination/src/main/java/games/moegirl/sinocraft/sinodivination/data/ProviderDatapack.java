@@ -60,9 +60,6 @@ class ProviderDatapack extends DatapackBuiltinEntriesProvider {
     }
 
     private static void addFeatures(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        jade = context.register(SDFeatures.Features.JADE, oreConfiguration(SDBlocks.ORE_JADE, 16));
-        sulphur = context.register(SDFeatures.Features.SULPHUR, oreConfiguration(SDBlocks.ORE_SULPHUR, 20));
-        niter = context.register(SDFeatures.Features.NITER, oreConfiguration(SDBlocks.ORE_NITER, 20));
         rice = context.register(SDFeatures.Features.RICE, cropConfiguration(SDBlocks.RICE));
         rehmannia = context.register(SDFeatures.Features.REHMANNIA, cropConfiguration(SDBlocks.REHMANNIA));
         dragonliverMelon = context.register(SDFeatures.Features.DRAGONLIVER_MELON, cropConfiguration(SDBlocks.DRAGONLIVER_MELON));

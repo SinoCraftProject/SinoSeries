@@ -12,6 +12,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -43,4 +44,7 @@ public class SFDBlockItems {
     public static RegistryObject<BlockItem> MARBLE = ITEMS.register("marble", () -> new TabBlockItemBase(SFDBlocks.MARBLE.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
     public static RegistryObject<BlockItem> MARBLE_WALL = ITEMS.register("marble_wall", () -> new TabBlockItemBase(SFDBlocks.MARBLE_WALL.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
 
+    public static final RegistryObject<BlockItem> JADE_ORE = ITEMS.register("jade_ore", () -> new TabBlockItemBase(SFDBlocks.JADE_ORE.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
+    public static final RegistryObject<BlockItem> NITER_ORE = ITEMS.register("niter_ore", () -> new TabBlockItemBase(SFDBlocks.NITER_ORE.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
+    public static final RegistryObject<BlockItem> SULPHUR_ORE = ITEMS.register("sulphur_ore", () -> new TabBlockItemBase(SFDBlocks.SULPHUR_ORE.get(), new Item.Properties(), SinoSeriesTabs.BUILDING_BLOCKS));
 }

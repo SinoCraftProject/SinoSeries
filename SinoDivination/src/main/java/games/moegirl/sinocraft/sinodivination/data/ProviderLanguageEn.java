@@ -21,9 +21,6 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
         // group
         addTab(SinoDivination.TAB, "SinoDivination");
         // blocks
-        addBlock(SDBlocks.ORE_JADE, "Jade Ore");
-        addBlock(SDBlocks.ORE_NITER, "Niter Ore");
-        addBlock(SDBlocks.ORE_SULPHUR, "Sulphur Ore");
         addBlock(SDBlocks.KETTLE_POT, "Kettle Pot");
         addBlock(SDBlocks.WORMWOOD, "Wormwood");
         addBlock(SDBlocks.GARLIC, "Garlic");
@@ -40,9 +37,6 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
         addBlock(SDBlocks.ALTAR);
         addBlock(SDBlocks.CARVING_TABLE);
         // item
-        addItem(SDItems.JADE, "Jade");
-        addItem(SDItems.NITER, "Niter");
-        addItem(SDItems.SULPHUR, "Sulphur");
         addItem(SDItems.STICK_COTINUS, "Ghost Killing Stick");
         addItem(SDItems.CHANGE_SOUP, "Changing Seeding Decoction");
         addItem(SDItems.STICK_JUJUBE, "Divine Power Stick");

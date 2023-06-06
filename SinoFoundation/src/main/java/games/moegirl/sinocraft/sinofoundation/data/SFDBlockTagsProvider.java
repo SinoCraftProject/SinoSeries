@@ -18,5 +18,14 @@ public class SFDBlockTagsProvider extends AbstractBlockTagsProvider {
     @Override
     protected void addToTags() {
         tag(SFDBlockTags.MINECRAFT_WALLS).add(SFDBlocks.MARBLE_WALL.get());
+
+
+        addPickaxe(SFDBlocks.JADE_ORE.get(), SFDBlocks.NITER_ORE.get(), SFDBlocks.SULPHUR_ORE.get());
+        addIronTool(SFDBlocks.JADE_ORE.get());
+        addStoneTool(SFDBlocks.NITER_ORE.get(), SFDBlocks.SULPHUR_ORE.get());
+
+        tag(SFDBlockTags.FORGE_ORES_SULFUR).add(SFDBlocks.SULPHUR_ORE.get());
+        tag(SFDBlockTags.FORGE_ORES_NITER).add(SFDBlocks.NITER_ORE.get());
+        tag(SFDBlockTags.FORGE_ORES_JADE).add(SFDBlocks.JADE_ORE.get());
     }
 }

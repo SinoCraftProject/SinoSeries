@@ -33,6 +33,9 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SFDItems.GREEN_PEPPER, "Green Pepper");
         addItem(SFDItems.CABBAGE, "Cabbage");
         addItem(SFDItems.EGGPLANT, "Eggplant");
+        addItem(SFDItems.JADE, "Jade");
+        addItem(SFDItems.NITER, "Niter");
+        addItem(SFDItems.SULPHUR, "Sulphur");
 
         addBlock(SFDBlocks.STOVE, "Stove");
         addBlock(SFDBlocks.WOOD_DESK, "Wood Desk");
@@ -48,6 +51,9 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.GARLIC_PLANT, "Garlic");
         addBlock(SFDBlocks.MARBLE, "Marble");
         addBlock(SFDBlocks.MARBLE_WALL, "Marble Walls");
+        addBlock(SFDBlocks.JADE_ORE, "Jade Ore");
+        addBlock(SFDBlocks.NITER_ORE, "Niter Ore");
+        addBlock(SFDBlocks.SULPHUR_ORE, "Sulphur Ore");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "Chili Pepper Seed");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "Green Pepper Seed");

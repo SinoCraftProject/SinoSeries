@@ -17,9 +17,6 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
         // group
         addTab(SinoDivination.TAB, "华夏九筮");
         // blocks
-        addBlock(SDBlocks.ORE_JADE, "玉矿石");
-        addBlock(SDBlocks.ORE_NITER, "硝石矿石");
-        addBlock(SDBlocks.ORE_SULPHUR, "硫磺矿石");
         addBlock(SDBlocks.KETTLE_POT, "釜锅");
         addBlock(SDBlocks.WORMWOOD, "艾草");
         addBlock(SDBlocks.GARLIC, "大蒜");
@@ -36,9 +33,6 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
         addBlock(SDBlocks.ALTAR, "祭坛");
         addBlock(SDBlocks.CARVING_TABLE, "雕刻台");
         // item
-        addItem(SDItems.JADE, "玉石");
-        addItem(SDItems.NITER, "硝石");
-        addItem(SDItems.SULPHUR, "硫磺");
         addItem(SDItems.STICK_COTINUS, "鬼杀棒");
         addItem(SDItems.CHANGE_SOUP, "变荑汤");
         addItem(SDItems.STICK_JUJUBE, "神力棒");

@@ -33,6 +33,9 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SFDItems.GREEN_PEPPER, "青椒");
         addItem(SFDItems.CABBAGE, "卷心菜");
         addItem(SFDItems.EGGPLANT, "茄子");
+        addItem(SFDItems.JADE, "玉石");
+        addItem(SFDItems.NITER, "硝石");
+        addItem(SFDItems.SULPHUR, "硫磺");
 
         addBlock(SFDBlocks.STOVE, "灶台");
         addBlock(SFDBlocks.WOOD_DESK, "桌子");
@@ -48,6 +51,9 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.GARLIC_PLANT, "大蒜");
         addBlock(SFDBlocks.MARBLE, "大理石");
         addBlock(SFDBlocks.MARBLE_WALL, "大理石墙");
+        addBlock(SFDBlocks.JADE_ORE, "玉矿石");
+        addBlock(SFDBlocks.NITER_ORE, "硝石矿石");
+        addBlock(SFDBlocks.SULPHUR_ORE, "硫磺矿石");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "辣椒种子");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "青椒种子");

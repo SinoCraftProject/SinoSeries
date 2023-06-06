@@ -13,6 +13,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -220,6 +221,13 @@ public abstract class LootTableProviderBase implements DataProvider {
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDropCount, maxDropCount))));
     }
 
+    protected LootPool.Builder dropIngotByChance(ItemLike ingot, int min, int max) {
+        return LootPool.lootPool()
+                .name("ingot")
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ingot)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))));
+    }
 
     /// </editor-fold>
 }

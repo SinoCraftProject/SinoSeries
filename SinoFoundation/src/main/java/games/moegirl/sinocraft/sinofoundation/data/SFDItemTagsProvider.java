@@ -25,5 +25,8 @@ public class SFDItemTagsProvider extends AbstractItemTagsProvider {
     @Override
     protected void addToTags() {
         tag(SFDItemTags.KNIVES).add(SFDItems.IRON_KNIFE.get(), SFDItems.GOLD_KNIFE.get(), SFDItems.DIAMOND_KNIFE.get());
+
+        tag(SFDItemTags.FORGE_DUSTS_SULFUR).add(SFDItems.SULPHUR.get());
+        tag(SFDItemTags.FORGE_DUSTS_NITER).add(SFDItems.NITER.get());
     }
 }
