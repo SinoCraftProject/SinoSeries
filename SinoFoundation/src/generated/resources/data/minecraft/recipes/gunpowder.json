@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "sinofoundation:sulfur"
+    },
+    {
+      "item": "sinofoundation:niter"
+    },
+    {
+      "tag": "minecraft:coals"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:gunpowder"
+  }
+}

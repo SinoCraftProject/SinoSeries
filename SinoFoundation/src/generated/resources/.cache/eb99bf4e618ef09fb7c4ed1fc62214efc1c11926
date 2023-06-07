@@ -1,4 +1,6 @@
-// 1.19.4	2023-05-20T08:21:42.1400769	Tree Tags for minecraft:item mod id sinofoundation
+// 1.19.4	2023-06-07T18:04:36.8023123	Tree Tags for minecraft:item mod id sinofoundation
+42bac19536e761200fb2a903e153f914d699253a data/forge/tags/items/chests/trapped.json
+8c878f31472f62d3a6f95561acf2f4316eaec277 data/forge/tags/items/chests/wooden.json
 959d770c8432b1854542ef1875dd463207a923b2 data/forge/tags/items/fence_gates/wooden.json
 3d1f000b710fbf01344a48b470cbb5213dd4b502 data/minecraft/tags/items/hanging_signs.json
 ab942ce0522f248c2eece5ead32c7bc35d3d56cd data/minecraft/tags/items/leaves.json

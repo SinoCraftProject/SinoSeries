@@ -1,11 +1,16 @@
-// 1.19.4	2023-05-20T08:21:42.1434118	Tree Tags for minecraft:block mod id sinofoundation
+// 1.19.4	2023-06-07T18:04:36.8073531	Tree Tags for minecraft:block mod id sinofoundation
+42bac19536e761200fb2a903e153f914d699253a data/forge/tags/blocks/chests/trapped.json
+8c878f31472f62d3a6f95561acf2f4316eaec277 data/forge/tags/blocks/chests/wooden.json
 959d770c8432b1854542ef1875dd463207a923b2 data/forge/tags/blocks/fence_gates/wooden.json
 3d1f000b710fbf01344a48b470cbb5213dd4b502 data/minecraft/tags/blocks/ceiling_hanging_signs.json
+8c878f31472f62d3a6f95561acf2f4316eaec277 data/minecraft/tags/blocks/features_cannot_replace.json
 959d770c8432b1854542ef1875dd463207a923b2 data/minecraft/tags/blocks/fence_gates.json
 5ee96b4048082c434253cd6146282480bc5df16f data/minecraft/tags/blocks/flower_pots.json
+8c878f31472f62d3a6f95561acf2f4316eaec277 data/minecraft/tags/blocks/guarded_by_piglins.json
 ab942ce0522f248c2eece5ead32c7bc35d3d56cd data/minecraft/tags/blocks/leaves.json
 4430478b46e16f997cf469eea979e3508b8ace4a data/minecraft/tags/blocks/logs.json
 4430478b46e16f997cf469eea979e3508b8ace4a data/minecraft/tags/blocks/logs_that_burn.json
+8c878f31472f62d3a6f95561acf2f4316eaec277 data/minecraft/tags/blocks/mineable/axe.json
 99f7c228790decbf64960f46bba311ab4e155b0f data/minecraft/tags/blocks/planks.json
 9302233fd20c10907dbce88bcafce8d1312f983a data/minecraft/tags/blocks/saplings.json
 a994dbd2e30fa57695d5ad71b62b8010975c105e data/minecraft/tags/blocks/standing_signs.json

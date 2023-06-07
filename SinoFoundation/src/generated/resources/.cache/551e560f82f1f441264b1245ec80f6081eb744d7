@@ -1,2 +1,4 @@
-// 1.19.4	2023-05-20T08:21:42.1424011	Tags for minecraft:item mod id sinofoundation
+// 1.19.4	2023-06-07T18:04:36.8063528	Tags for minecraft:item mod id sinofoundation
+80eb00ac510c83de70c2c433e736a97844c1451f data/forge/tags/items/dusts/niter.json
+5c9bc0656e973a3a6ba9829254636c1e851d2477 data/forge/tags/items/dusts/sulfur.json
 41f57c729a3164d9a65aee6e98b395f626af5c4a data/sinofoundation/tags/items/knives.json
