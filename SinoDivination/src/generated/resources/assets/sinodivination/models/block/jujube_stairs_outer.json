@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "sinodivination:block/jujube_planks",
+    "side": "sinodivination:block/jujube_planks",
+    "top": "sinodivination:block/jujube_planks"
+  }
+}

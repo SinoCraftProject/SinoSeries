@@ -6,9 +6,10 @@ import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootPool;
+
+import java.util.List;
 
 public class SFDBlockLootTableProvider extends LootTableProviderBase {
     public SFDBlockLootTableProvider(PackOutput output, String modid) {
@@ -16,7 +17,7 @@ public class SFDBlockLootTableProvider extends LootTableProviderBase {
     }
 
     @Override
-    public void addLootTables() {
+    public void getTables(List<SubProviderEntry> tables) {
         addBlock(SFDBlocks.GREEN_RADISH_PLANT, table(dropSeeds(SFDBlockItems.GREEN_RADISH.get()), dropWhenMature(SFDBlocks.GREEN_RADISH_PLANT.get(), SFDBlockItems.GREEN_RADISH.get(), 0, 4)));
         addBlock(SFDBlocks.SUMMER_RADISH_PLANT, table(dropSeeds(SFDBlockItems.SUMMER_RADISH.get()), dropWhenMature(SFDBlocks.SUMMER_RADISH_PLANT.get(), SFDBlockItems.SUMMER_RADISH.get(), 0, 4)));
         addBlock(SFDBlocks.WHITE_RADISH_PLANT, table(dropSeeds(SFDBlockItems.WHITE_RADISH.get()), dropWhenMature(SFDBlocks.WHITE_RADISH_PLANT.get(), SFDBlockItems.WHITE_RADISH.get(), 0, 4)));

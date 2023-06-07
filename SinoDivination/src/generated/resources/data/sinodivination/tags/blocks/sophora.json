@@ -1,0 +1,26 @@
+{
+  "values": [
+    "sinodivination:jujube_log",
+    "sinodivination:jujube_stripped_log",
+    "sinodivination:jujube_log_wood",
+    "sinodivination:jujube_stripped_log_wood",
+    "sinodivination:jujube_sapling",
+    "sinodivination:jujube_potted_sapling",
+    "sinodivination:jujube_planks",
+    "sinodivination:jujube_leaves",
+    "sinodivination:jujube_stairs",
+    "sinodivination:jujube_slab",
+    "sinodivination:jujube_button",
+    "sinodivination:jujube_door",
+    "sinodivination:jujube_trapdoor",
+    "sinodivination:jujube_fence",
+    "sinodivination:jujube_fence_gate",
+    "sinodivination:jujube_pressure_gate",
+    "sinodivination:jujube_sign",
+    "sinodivination:jujube_wall_sign",
+    "sinodivination:jujube_hanging_sign",
+    "sinodivination:jujube_wall_hanging_sign",
+    "sinodivination:jujube_chest",
+    "sinodivination:jujube_trapped_chest"
+  ]
+}

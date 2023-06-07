@@ -1,0 +1,5 @@
+{
+  "type": "sinodivination:change_soup",
+  "input": "minecraft:poppy",
+  "result": "sinodivination:zhu_cao"
+}

@@ -1,0 +1,21 @@
+{
+  "type": "sinodivination:carving_table",
+  "dye": {
+    "tag": "forge:dyes/gray"
+  },
+  "key": {
+    "X": {
+      "item": "sinofoundation:jade"
+    }
+  },
+  "pattern": [
+    " X ",
+    " X ",
+    "X X",
+    "XXX"
+  ],
+  "result": {
+    "Count": 1,
+    "id": "sinodivination:huang_cong"
+  }
+}

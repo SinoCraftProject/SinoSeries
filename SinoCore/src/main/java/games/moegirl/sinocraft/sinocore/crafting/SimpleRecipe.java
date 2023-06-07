@@ -8,6 +8,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.registries.RegistryObject;
 
 /**
  * 简化版 Recipe Serializer
@@ -17,14 +18,14 @@ import net.minecraft.world.item.crafting.RecipeType;
 public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, S extends AbstractRecipeSerializer<SELF>>
         implements Recipe<C>, Self<SELF> {
 
-    final RecipeType<SELF> type;
+    final RegistryObject<RecipeType<SELF>> type;
     final S serializer;
     final ResourceLocation id;
     final int size;
     final ItemStack output;
 
     public SimpleRecipe(RecipeHolder<C, SELF, S> type, ResourceLocation id, int size, ItemStack output) {
-        this.type = type.recipeType();
+        this.type = type.recipeTypeObj();
         this.serializer = type.serializer();
         this.id = id;
         this.size = size;
@@ -62,7 +63,7 @@ public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, 
 
     @Override
     public RecipeType<SELF> getType() {
-        return type;
+        return type.get();
     }
 
     public FinishedRecipe finished() {

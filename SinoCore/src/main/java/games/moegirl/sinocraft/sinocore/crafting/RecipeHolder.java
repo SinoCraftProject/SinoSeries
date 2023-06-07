@@ -69,6 +69,10 @@ public final class RecipeHolder<C extends Container, T extends Recipe<C>, S exte
         return recipeType.get();
     }
 
+    public RegistryObject<RecipeType<T>> recipeTypeObj() {
+        return recipeType;
+    }
+
     public S serializer() {
         return serializer;
     }

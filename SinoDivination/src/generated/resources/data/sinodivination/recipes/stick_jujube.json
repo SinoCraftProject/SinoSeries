@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinodivination",
+  "key": {
+    "X": {
+      "item": "sinodivination:jujube_planks"
+    },
+    "Y": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "X",
+    "Y",
+    "X"
+  ],
+  "result": {
+    "item": "sinodivination:stick_jujube"
+  },
+  "show_notification": true
+}

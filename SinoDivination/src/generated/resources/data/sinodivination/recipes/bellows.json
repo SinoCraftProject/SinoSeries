@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinodivination",
+  "key": {
+    "A": {
+      "tag": "minecraft:planks"
+    },
+    "Y": {
+      "item": "minecraft:stick"
+    },
+    "Z": {
+      "tag": "forge:chests"
+    }
+  },
+  "pattern": [
+    "AYY",
+    "A Z",
+    "AYY"
+  ],
+  "result": {
+    "item": "sinodivination:bellows"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinodivination",
+  "key": {
+    "A": {
+      "tag": "forge:obsidian"
+    },
+    "X": {
+      "tag": "forge:ingots/copper"
+    },
+    "Y": {
+      "item": "sinofoundation:jade"
+    },
+    "Z": {
+      "item": "minecraft:stonecutter"
+    }
+  },
+  "pattern": [
+    "XYX",
+    "XZX",
+    "AAA"
+  ],
+  "result": {
+    "item": "sinodivination:carving_table"
+  },
+  "show_notification": true
+}

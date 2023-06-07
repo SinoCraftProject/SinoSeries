@@ -34,6 +34,10 @@ public final class TreeRegistry {
         return TREE_REGISTRY;
     }
 
+    public static List<Tree> getTrees(String modid) {
+        return TREE_REGISTRY.getOrDefault(modid, List.of());
+    }
+
     /**
      * Register mod trees.
      *

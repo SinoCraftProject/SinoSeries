@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class TreeGatherDataListener {
     private final String modid;
+
     public TreeGatherDataListener(String modid) {
         this.modid = modid;
     }
@@ -17,7 +18,7 @@ public class TreeGatherDataListener {
         var exHelper = event.getExistingFileHelper();
         var lookupProvider = event.getLookupProvider();
 
-        var trees = TreeRegistry.getRegistry().get(modid);
+        var trees = TreeRegistry.getTrees(modid);
 
         if (event.includeClient()) {
             generator.addProvider(true, new ProviderBlockState(output, modid, exHelper, trees));

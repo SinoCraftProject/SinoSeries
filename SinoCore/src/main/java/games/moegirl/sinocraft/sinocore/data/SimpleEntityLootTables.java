@@ -34,4 +34,8 @@ public class SimpleEntityLootTables extends EntityLootSubProvider {
     protected Stream<EntityType<?>> getKnownEntityTypes() {
         return tables.keySet().stream();
     }
+
+    public boolean isEmpty() {
+        return tables.isEmpty();
+    }
 }

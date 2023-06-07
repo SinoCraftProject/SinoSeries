@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinodivination",
+  "key": {
+    "A": {
+      "item": "minecraft:stick"
+    },
+    "Y": {
+      "item": "minecraft:string"
+    },
+    "Z": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "A A",
+    "AYA",
+    "ZZZ"
+  ],
+  "result": {
+    "item": "sinodivination:silkworm_plaque"
+  },
+  "show_notification": true
+}

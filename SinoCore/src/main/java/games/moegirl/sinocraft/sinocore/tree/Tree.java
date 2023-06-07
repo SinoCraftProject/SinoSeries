@@ -19,10 +19,8 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * todo
@@ -154,6 +152,12 @@ public class Tree {
     public <T extends Block> RegistryObject<T> getBlockObj(TreeBlockType treeBlockType) {
         //noinspection unchecked
         return (RegistryObject<T>) blocks.get(treeBlockType);
+    }
+
+    public List<Block> getBlocks() {
+        return blocks.values().stream()
+                .map(RegistryObject::get)
+                .collect(Collectors.toList());
     }
 
     public boolean hasBlockEntity(TreeBlockType treeBlockType) {

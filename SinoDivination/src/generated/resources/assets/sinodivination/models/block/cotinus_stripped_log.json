@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "sinodivination:block/cotinus_stripped_log"
+  }
+}

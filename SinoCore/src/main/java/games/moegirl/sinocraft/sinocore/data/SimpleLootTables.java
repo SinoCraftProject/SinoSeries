@@ -19,6 +19,8 @@ public interface SimpleLootTables extends Consumer<BiConsumer<ResourceLocation, 
     @Override
     void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer);
 
+    boolean isEmpty();
+
     class Impl implements SimpleLootTables {
         private final Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
 
@@ -32,5 +34,9 @@ public interface SimpleLootTables extends Consumer<BiConsumer<ResourceLocation, 
             tables.forEach(consumer);
         }
 
+        @Override
+        public boolean isEmpty() {
+            return tables.isEmpty();
+        }
     }
 }
