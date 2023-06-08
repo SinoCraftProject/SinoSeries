@@ -18,6 +18,7 @@
   "block.sinodivination.cotinus_stripped_log": "既扡cotinus樁",
   "block.sinodivination.cotinus_stripped_log_wood": "既扡cotinus木",
   "block.sinodivination.cotinus_trapdoor": "cotinus窖門",
+  "block.sinodivination.cotinus_trapped_chest": "cotinus陷阱箱 Trapped Chest",
   "block.sinodivination.jujube_button": "jujube鈕",
   "block.sinodivination.jujube_chest": "jujube箱子 Chest",
   "block.sinodivination.jujube_door": "jujube門",
@@ -37,6 +38,7 @@
   "block.sinodivination.jujube_stripped_log": "既扡jujube樁",
   "block.sinodivination.jujube_stripped_log_wood": "既扡jujube木",
   "block.sinodivination.jujube_trapdoor": "jujube窖門",
+  "block.sinodivination.jujube_trapped_chest": "jujube陷阱箱 Trapped Chest",
   "block.sinodivination.sophora_button": "sophora鈕",
   "block.sinodivination.sophora_chest": "sophora箱子 Chest",
   "block.sinodivination.sophora_door": "sophora門",
@@ -55,5 +57,6 @@
   "block.sinodivination.sophora_stairs": "sophora階",
   "block.sinodivination.sophora_stripped_log": "既扡sophora樁",
   "block.sinodivination.sophora_stripped_log_wood": "既扡sophora木",
-  "block.sinodivination.sophora_trapdoor": "sophora窖門"
+  "block.sinodivination.sophora_trapdoor": "sophora窖門",
+  "block.sinodivination.sophora_trapped_chest": "sophora陷阱箱 Trapped Chest"
 }

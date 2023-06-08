@@ -33,12 +33,12 @@ public class SinoDivination {
         TAB = tab.name();
 
 //        SDNetworks.register();
-        SDBlocks.REGISTRY.register(bus);
+        SDBlocks.register(bus);
         SDItems.register(bus);
-        SDBlockEntities.REGISTRY.register(bus);
+        SDBlockEntities.register(bus);
 //        SDEntities.REGISTRY.register(bus);
-        SDMenus.REGISTRY.register(bus);
-        SDRecipes.REGISTRY_SERIALIZER.register(bus);
+        SDMenus.register(bus);
+        SDRecipes.register(bus);
         SDScreens.register(bus);
         SDTrees.register(bus);
 

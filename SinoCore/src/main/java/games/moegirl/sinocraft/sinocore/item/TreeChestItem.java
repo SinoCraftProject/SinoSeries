@@ -46,7 +46,9 @@ public class TreeChestItem extends BlockItem {
     // 物品渲染
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new TreeChestItemRenderer(block, tree));
+        if (tree != null) {
+            consumer.accept(new TreeChestItemRenderer(block, tree));
+        }
     }
 }
 

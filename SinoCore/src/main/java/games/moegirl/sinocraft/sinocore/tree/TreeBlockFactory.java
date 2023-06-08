@@ -75,7 +75,10 @@ public class TreeBlockFactory {
 
     @Nullable
     Function3<DeferredRegister<BlockEntityType<?>>, String, Tree, RegistryObject<BlockEntityType<?>>> wrapBlockEntity(@Nullable Function<Tree, BlockEntityType<?>> factory) {
-        if (factory == null) return null;
+        if (factory == null) {
+            return null;
+        }
+
         return (dr, name, tree) -> dr.register(name, () -> factory.apply(tree));
     }
 }

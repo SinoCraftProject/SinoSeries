@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinodivination.util.NameUtils;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,5 +27,9 @@ public class SDMenus {
 
     public static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> simple(Class<T> aClass, IContainerFactory<T> factory) {
         return REGISTRY.register(NameUtils.to_snake_name(aClass.getSimpleName()), () -> new MenuType<>(factory, FeatureFlagSet.of()));
+    }
+
+    public static void register(IEventBus bus) {
+        REGISTRY.register(bus);
     }
 }
