@@ -16,8 +16,15 @@ public class TreeClientEventHandler {
     public void onBlockEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         TreeRegistry.getRegistry().forEach((modid, trees) -> {
             for (Tree tree : trees) {
-                event.registerBlockEntityRenderer(tree.getBlockEntityType(TreeBlockType.CHEST), context -> new TreeChestRenderer(context, tree, false));
-                event.registerBlockEntityRenderer(tree.getBlockEntityType(TreeBlockType.TRAPPED_CHEST), context -> new TreeChestRenderer(context, tree, true));
+                var chestRO = tree.getBlockEntityTypeObj(TreeBlockType.CHEST);
+                if (chestRO != null && chestRO.isPresent()) {
+                    event.registerBlockEntityRenderer(tree.getBlockEntityType(TreeBlockType.CHEST), context -> new TreeChestRenderer(context, tree, false));
+                }
+
+                var trappedChestRO = tree.getBlockEntityTypeObj(TreeBlockType.CHEST);
+                if (trappedChestRO != null && trappedChestRO.isPresent()) {
+                    event.registerBlockEntityRenderer(tree.getBlockEntityType(TreeBlockType.TRAPPED_CHEST), context -> new TreeChestRenderer(context, tree, true));
+                }
             }
         });
     }

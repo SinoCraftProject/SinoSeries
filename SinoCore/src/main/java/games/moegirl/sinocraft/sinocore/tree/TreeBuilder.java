@@ -45,18 +45,17 @@ public class TreeBuilder {
         this.name = name;
         this.languages = new TreeLanguages();
         this.treeBlocks = new EnumMap<>(TreeBlockType.class);
-        for (TreeBlockType value : TreeBlockType.values())
+        for (TreeBlockType value : TreeBlockType.values()) {
             treeBlocks.put(value, new TreeBlockFactory(value));
+        }
 
-        blockEntity(TreeBlockType.CHEST, TreeUtilities::chestEntity);
-        blockEntity(TreeBlockType.TRAPPED_CHEST, TreeUtilities::trappedChestEntity);
     }
 
     /**
      * Translate root for a locale.
      *
      * @param name Translate root value, like Oak, Spruce.
-     * @return TreeLanguages
+     * @return TreeBuilder
      */
     public TreeBuilder translate(String locale, String name) {
         languages.rootNames.put(locale, name);
@@ -67,7 +66,7 @@ public class TreeBuilder {
      * Translate decorators for a locale.
      *
      * @param translate Translate value.
-     * @return TreeLanguages
+     * @return TreeBuilder
      */
     public TreeBuilder translate(TreeBlockType type, String locale, Function<StringBuilder, StringBuilder> translate) {
         languages.put(locale, type, translate);
@@ -78,7 +77,7 @@ public class TreeBuilder {
      * Translate decorators for a locale.
      *
      * @param name Literal translate value.
-     * @return TreeLanguages
+     * @return TreeBuilder
      */
     public TreeBuilder translate(TreeBlockType type, String locale, String name) {
         return translateOverride(type, locale, b -> new StringBuilder(name));
@@ -88,7 +87,7 @@ public class TreeBuilder {
      * Translate decorators for a locale, clear all existed translate function before insert.
      *
      * @param translate Translate value.
-     * @return TreeLanguages
+     * @return TreeBuilder
      */
     public TreeBuilder translateOverride(TreeBlockType type, String locale, Function<StringBuilder, StringBuilder> translate) {
         List<Function<StringBuilder, StringBuilder>> list = new ArrayList<>();
@@ -211,6 +210,16 @@ public class TreeBuilder {
      */
     public TreeBuilder blockEntity(TreeBlockType treeBlockType, RegistryObject<BlockEntityType<?>> blockEntity) {
         treeBlocks.get(treeBlockType).blockEntityBuilder = (v1, v2, v3) -> blockEntity;
+        return this;
+    }
+
+    /**
+     * Add default chests impl.
+     * @return TreeBuilder.
+     */
+    public TreeBuilder blockEntityDefaultChests() {
+        blockEntity(TreeBlockType.CHEST, TreeUtilities::chestEntity);
+        blockEntity(TreeBlockType.TRAPPED_CHEST, TreeUtilities::trappedChestEntity);
         return this;
     }
 

@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -169,7 +170,7 @@ public class Tree {
         return (BlockEntityType<T>) blockEntities.get(treeBlockType).get();
     }
 
-    public <T extends BlockEntity> RegistryObject<BlockEntityType<T>> getBlockEntityTypeObj(TreeBlockType treeBlockType) {
+    public <T extends BlockEntity> @Nullable RegistryObject<BlockEntityType<T>> getBlockEntityTypeObj(TreeBlockType treeBlockType) {
         //noinspection unchecked
         return (RegistryObject<BlockEntityType<T>>) (RegistryObject<?>) blockEntities.get(treeBlockType);
     }
