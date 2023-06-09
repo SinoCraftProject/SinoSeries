@@ -42,7 +42,7 @@ public class ReloadTextureCommand {
             context.getSource().sendFailure(Component.literal("Not found texture map named " + name));
         } else {
             map.reload();
-            context.getSource().sendSuccess(Component.literal("Reload succeed"), false);
+            context.getSource().sendSuccess(() -> Component.literal("Reload succeed"), false);
         }
         return Command.SINGLE_SUCCESS;
     }

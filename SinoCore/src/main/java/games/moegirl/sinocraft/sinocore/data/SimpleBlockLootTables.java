@@ -22,7 +22,7 @@ public class SimpleBlockLootTables extends BlockLootSubProvider {
     private final List<Block> blocks = new ArrayList<>();
 
     public SimpleBlockLootTables() {
-        super(new HashSet<>(), FeatureFlags.DEFAULT_FLAGS.join(FeatureFlagSet.of(FeatureFlags.UPDATE_1_20)));
+        super(new HashSet<>(), FeatureFlags.DEFAULT_FLAGS);
     }
 
     @Override

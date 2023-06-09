@@ -120,11 +120,11 @@ public abstract class AbstractRecipeProvider implements DataProvider {
     }
 
     protected static void netheriteSmithing(Consumer<FinishedRecipe> finishedRecipeConsumer, Item ingredientItem, RecipeCategory category, Item resultItem) {
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(ingredientItem), Ingredient.of(Items.NETHERITE_INGOT), category, resultItem).unlocks("has_netherite_ingot", has((ItemLike)Items.NETHERITE_INGOT)).save(finishedRecipeConsumer, getItemName(resultItem) + "_smithing");
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(ingredientItem), Ingredient.of(Items.NETHERITE_INGOT), category, resultItem).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(finishedRecipeConsumer, getItemName(resultItem) + "_smithing");
     }
 
-    protected static void trimSmithing(Consumer<FinishedRecipe> consumer, Item arg) {
-        SmithingTrimRecipeBuilder.smithingTrim(Ingredient.of(arg), Ingredient.of(ItemTags.TRIMMABLE_ARMOR), Ingredient.of(ItemTags.TRIM_MATERIALS), RecipeCategory.MISC).unlocks("has_smithing_trim_template", has((ItemLike)arg)).save(consumer, getItemName(arg) + "_smithing_trim");
+    protected static void trimSmithing(Consumer<FinishedRecipe> consumer, Item arg, ResourceLocation name) {
+        SmithingTrimRecipeBuilder.smithingTrim(Ingredient.of(arg), Ingredient.of(ItemTags.TRIMMABLE_ARMOR), Ingredient.of(ItemTags.TRIM_MATERIALS), RecipeCategory.MISC).unlocks("has_smithing_trim_template", has(arg)).save(consumer, name);
     }
 
     protected static void twoByTwoPacker(Consumer<FinishedRecipe> finishedRecipeConsumer, RecipeCategory category, ItemLike packed, ItemLike unpacked) {
@@ -380,7 +380,7 @@ public abstract class AbstractRecipeProvider implements DataProvider {
      * Creates a new {@link EnterBlockTrigger} for use with recipe unlock criteria.
      */
     protected static EnterBlockTrigger.TriggerInstance insideOf(Block block) {
-        return new EnterBlockTrigger.TriggerInstance(EntityPredicate.Composite.ANY, block, StatePropertiesPredicate.ANY);
+        return new EnterBlockTrigger.TriggerInstance(ContextAwarePredicate.ANY, block, StatePropertiesPredicate.ANY);
     }
 
     protected static InventoryChangeTrigger.TriggerInstance has(MinMaxBounds.Ints count, ItemLike item) {
@@ -405,7 +405,7 @@ public abstract class AbstractRecipeProvider implements DataProvider {
      * Creates a new {@link InventoryChangeTrigger} that checks for a player having a certain item.
      */
     protected static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate... predicates) {
-        return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
+        return new InventoryChangeTrigger.TriggerInstance(ContextAwarePredicate.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
     }
 
     protected static String getHasName(ItemLike itemLike) {

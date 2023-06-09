@@ -139,33 +139,26 @@ public abstract class LootTableProviderBase extends LootTableProvider {
     }
 
     protected LootPool.Builder dropSeeds(ItemLike seeds) {
-        return dropSeeds("seeds", seeds);
-    }
-
-    protected LootPool.Builder dropSeeds(String name, ItemLike seeds) {
         return LootPool.lootPool()
-                .name(name)
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(seeds)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))));
     }
 
-    protected LootPool.Builder dropWhenIntPropertyByChance(String name, Block block, ItemLike item,
+    protected LootPool.Builder dropWhenIntPropertyByChance(Block block, ItemLike item,
                                                            IntegerProperty property, int value,
                                                            int minDropCount, int maxDropCount) {
         return LootPool.lootPool()
-                .name(name)
                 .setRolls(ConstantValue.exactly(1))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value)))
                 .add(LootItem.lootTableItem(item)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDropCount, maxDropCount))));
     }
 
-    protected LootPool.Builder dropWhenNotIntPropertyByChance(String name, Block block, ItemLike item,
+    protected LootPool.Builder dropWhenNotIntPropertyByChance(Block block, ItemLike item,
                                                               IntegerProperty property, int value,
                                                               int minDropCount, int maxDropCount) {
         return LootPool.lootPool()
-                .name(name)
                 .setRolls(ConstantValue.exactly(1))
                 .when(InvertedLootItemCondition.invert(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                         .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, value))))
@@ -175,7 +168,6 @@ public abstract class LootTableProviderBase extends LootTableProvider {
 
     protected LootPool.Builder dropIngotByChance(ItemLike ingot, int min, int max) {
         return LootPool.lootPool()
-                .name("ingot")
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(ingot)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))));

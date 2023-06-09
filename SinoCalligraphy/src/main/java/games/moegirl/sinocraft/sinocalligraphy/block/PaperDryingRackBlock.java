@@ -1,11 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.block;
 
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
-import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
-import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,13 +16,13 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +36,7 @@ public class PaperDryingRackBlock extends HorizontalDirectionalBlock {
     public static IntegerProperty PROCESS = IntegerProperty.create("process", 0, 4);
 
     protected PaperDryingRackBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD)
+        super(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
                 .destroyTime(2.5f)
                 .randomTicks()
                 .sound(SoundType.WOOD)

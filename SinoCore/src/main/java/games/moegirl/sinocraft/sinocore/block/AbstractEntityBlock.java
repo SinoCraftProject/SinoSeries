@@ -15,9 +15,9 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEventListener;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.network.NetworkHooks;
@@ -51,11 +51,11 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
     }
 
     public AbstractEntityBlock(Supplier<BlockEntityType<T>> entityType) {
-        this(Properties.of(Material.METAL), entityType);
+        this(Properties.of(), entityType);
     }
 
-    public AbstractEntityBlock(Material material, float strength, Supplier<BlockEntityType<T>> entityType) {
-        this(Properties.of(material).strength(strength), entityType);
+    public AbstractEntityBlock(BlockBehaviour block, float strength, Supplier<BlockEntityType<T>> entityType) {
+        this(Properties.copy(block).strength(strength), entityType);
     }
 
     @Override

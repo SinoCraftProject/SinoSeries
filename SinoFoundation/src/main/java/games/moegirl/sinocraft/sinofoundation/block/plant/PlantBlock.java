@@ -62,7 +62,7 @@ public class PlantBlock extends CropBlock {
     }
 
     @Override
-    protected int getAge(BlockState state) {
+    public int getAge(BlockState state) {
         return state.getValue(getStageProperty());
     }
 

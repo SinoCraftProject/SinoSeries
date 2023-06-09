@@ -11,6 +11,7 @@ import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperTy
 import games.moegirl.sinocraft.sinocalligraphy.gui.screen.BrushScreen;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -73,11 +74,11 @@ public class BrushCanvas extends AbstractWidget {
     }
 
     @Override
-    public void renderWidget(PoseStack poseStack, int x, int y, float partialTick) {
-        atlas.blitTexture(poseStack, "canvas", parent);
-        drawing.getRenderer().draw(poseStack, getX() + 1, getY() + 1, canvasWidth, canvasHeight);
+    public void renderWidget(GuiGraphics graphics, int x, int y, float partialTick) {
+        atlas.blitTexture(graphics, "canvas", parent);
+        drawing.getRenderer().draw(graphics, getX() + 1, getY() + 1, canvasWidth, canvasHeight);
         if (!isEnabled()) {
-            atlas.blitTexture(poseStack, "shadow", parent, GLSwitcher.blend().enable());
+            atlas.blitTexture(graphics, "shadow", parent, GLSwitcher.blend().enable());
         }
     }
 

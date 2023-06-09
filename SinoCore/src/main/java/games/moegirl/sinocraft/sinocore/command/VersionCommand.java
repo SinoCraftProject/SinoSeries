@@ -10,7 +10,7 @@ import static net.minecraft.commands.Commands.literal;
 public class VersionCommand {
     public static final LiteralCommandNode<CommandSourceStack> VERSION = literal("version")
             .executes(stack -> {
-                stack.getSource().sendSuccess(Component.literal("SinoCore Version: " + SinoCore.VERSION), true);
+                stack.getSource().sendSuccess(() -> Component.literal("SinoCore Version: " + SinoCore.VERSION), true);
                 return 1;
             })
             .build();

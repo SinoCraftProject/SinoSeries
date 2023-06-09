@@ -1,11 +1,12 @@
 package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -13,11 +14,11 @@ import java.util.*;
 
 public class TreeTabsBuildListener {
 
-    private static final EnumMap<TreeBlockType, List<CreativeModeTab>> DEFAULT_TYPES = new EnumMap<>(TreeBlockType.class);
+    private static final EnumMap<TreeBlockType, List<ResourceKey<CreativeModeTab>>> DEFAULT_TYPES = new EnumMap<>(TreeBlockType.class);
 
     static {
         for (TreeBlockType type : TreeBlockType.values()) {
-            List<CreativeModeTab> defaultTabs = switch (type) {
+            List<ResourceKey<CreativeModeTab>> defaultTabs = switch (type) {
                 case LOG -> List.of(CreativeModeTabs.NATURAL_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
                 case LOG_WOOD, STRIPPED_LOG, STRIPPED_LOG_WOOD, PLANKS, SLAB, STAIRS, FENCE ->
                         List.of(CreativeModeTabs.BUILDING_BLOCKS);
@@ -35,15 +36,16 @@ public class TreeTabsBuildListener {
         }
     }
 
-    private final Map<CreativeModeTab, List<RegistryObject<? extends Item>>> tabItems = new HashMap<>();
+    private final Map<ResourceKey<CreativeModeTab>, List<RegistryObject<? extends Item>>> tabItems = new HashMap<>();
 
     public void addDefaultTabs(TreeBlockType type, RegistryObject<? extends Item> item) {
-        for (CreativeModeTab tab : DEFAULT_TYPES.get(type))
+        for (ResourceKey<CreativeModeTab> tab : DEFAULT_TYPES.get(type)) {
             tabItems.computeIfAbsent(tab, t -> new ArrayList<>()).add(item);
+        }
     }
 
     @SubscribeEvent
-    public void onTabsBuild(CreativeModeTabEvent.BuildContents event) {
+    public void onTabsBuild(BuildCreativeModeTabContentsEvent event) {
         var tab = event.getTab();
 
         if (tabItems.containsKey(tab)) {

@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import games.moegirl.sinocraft.sinocore.client.component.ButtonOptional;
 import games.moegirl.sinocraft.sinocore.client.component.EditBoxOptional;
@@ -10,7 +9,7 @@ import games.moegirl.sinocraft.sinocore.utility.texture.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.navigation.FocusNavigationEvent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -67,11 +66,11 @@ public class TextureMapClient {
         return placeEditBox(name, parent, parent.getMinecraft().font);
     }
 
-    public void renderText(PoseStack stack, String name) {
+    public void renderText(GuiGraphics stack, String name) {
         renderText(stack, Minecraft.getInstance().font, name);
     }
 
-    public void renderText(PoseStack stack, Font font, String name) {
+    public void renderText(GuiGraphics stack, Font font, String name) {
         texture.texts().get(name).ifPresent(entry -> {
             if (entry.text() == null) {
                 if (entry.rawText() != null) {
@@ -83,11 +82,11 @@ public class TextureMapClient {
         });
     }
 
-    public void renderText(PoseStack stack, AbstractContainerScreen<?> parent, String name) {
+    public void renderText(GuiGraphics stack, AbstractContainerScreen<?> parent, String name) {
         renderText(stack, parent, Minecraft.getInstance().font, name);
     }
 
-    public void renderText(PoseStack stack, AbstractContainerScreen<?> parent, Font font, String name) {
+    public void renderText(GuiGraphics stack, AbstractContainerScreen<?> parent, Font font, String name) {
         texture.texts().get(name).ifPresent(entry -> {
             if (entry.text() == null) {
                 if (entry.rawText() == null) {
@@ -101,65 +100,56 @@ public class TextureMapClient {
         });
     }
 
-    private void renderText(PoseStack stack, TextEntry entry, Component text, Font font) {
+    private void renderText(GuiGraphics graphics, TextEntry entry, Component text, Font font) {
         int tx = entry.x();
         int ty = entry.y();
         if (entry.center()) {
             tx += font.width(text) / 2;
         }
         if (entry.shadow()) {
-            font.drawShadow(stack, text, tx, ty, entry.color());
+            graphics.drawString(font, text, tx, ty, entry.color(), true);
         } else {
-            font.draw(stack, text, tx, ty, entry.color());
+            graphics.drawString(font, text, tx, ty, entry.color());
         }
     }
 
-    private void renderText(PoseStack stack, TextEntry entry, String text, Font font) {
-        int tx = entry.x();
-        int ty = entry.y();
-        if (entry.center()) {
-            tx += font.width(text) / 2;
-        }
-        if (entry.shadow()) {
-            font.drawShadow(stack, text, tx, ty, entry.color());
-        } else {
-            font.draw(stack, text, tx, ty, entry.color());
-        }
+    private void renderText(GuiGraphics graphics, TextEntry entry, String text, Font font) {
+        renderText(graphics, entry, Component.literal(text), font);
     }
 
     public void bindTexture() {
         RenderSystem.setShaderTexture(0, texture.texture());
     }
 
-    public void blitTexture(PoseStack stack, String name, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
+    public void blitTexture(GuiGraphics graphics, String name, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
         texture.textures().get(name).ifPresent(entry -> {
             bindTexture();
-            blitTexture(stack, gui.getGuiLeft() + entry.x(), gui.getGuiTop() + entry.y(), entry.w(), entry.h(),
+            blitTexture(graphics, gui.getGuiLeft() + entry.x(), gui.getGuiTop() + entry.y(), entry.w(), entry.h(),
                     entry.u(), entry.v(), entry.tw(), entry.th());
         });
         resumeGL(configurations);
     }
 
-    public void blitTexture(PoseStack stack, String name, int x, int y, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
+    public void blitTexture(GuiGraphics graphics, String name, int x, int y, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
         texture.textures().get(name).ifPresent(entry -> {
             bindTexture();
-            blitTexture(stack, gui.getGuiLeft() + x, gui.getGuiTop() + y, entry.w(), entry.h(),
+            blitTexture(graphics, gui.getGuiLeft() + x, gui.getGuiTop() + y, entry.w(), entry.h(),
                     entry.u(), entry.v(), entry.tw(), entry.th());
         });
         resumeGL(configurations);
     }
 
-    public void blitTexture(PoseStack stack, String name, String position, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
+    public void blitTexture(GuiGraphics graphics, String name, String position, AbstractContainerScreen<?> gui, GLSwitcher... configurations) {
         texture.textures().get(name).ifPresent(entry ->
                 texture.points().get(position).ifPresent(p -> {
                     bindTexture();
-                    blitTexture(stack, gui.getGuiLeft() + p.x(), gui.getGuiTop() + p.y(), entry.w(), entry.h(),
+                    blitTexture(graphics, gui.getGuiLeft() + p.x(), gui.getGuiTop() + p.y(), entry.w(), entry.h(),
                             entry.u(), entry.v(), entry.tw(), entry.th());
                 }));
         resumeGL(configurations);
     }
 
-    public void blitProgress(PoseStack stack, String name,
+    public void blitProgress(GuiGraphics graphics, String name,
                              AbstractContainerScreen<?> gui,
                              float progress, GLSwitcher... configurations) {
         texture.progress().get(name).ifPresent(entry -> {
@@ -170,7 +160,7 @@ public class TextureMapClient {
             int finalX = x;
             int finalY = y;
             texture.textures().get(begin).ifPresent(bg ->
-                    blitTexture(stack, finalX, finalY, bg.w(), bg.h(), bg.u(), bg.v(), bg.tw(), bg.th()));
+                    blitTexture(graphics, finalX, finalY, bg.w(), bg.h(), bg.u(), bg.v(), bg.tw(), bg.th()));
             if (progress > 0) {
                 TextureEntry p = texture.textures().ensureGet(entry.textureFilled());
                 int w = p.w(), h = p.h();
@@ -191,67 +181,68 @@ public class TextureMapClient {
                     tw = (int) (tw * progress);
                     w = (int) (w * progress);
                 }
-                blitTexture(stack, x, y, w, h, tu, tv, tw, th);
+                blitTexture(graphics, x, y, w, h, tu, tv, tw, th);
             }
         });
         resumeGL(configurations);
     }
 
-    private void blitTexture(PoseStack stack, int x, int y, int w, int h, float tu, float tv, int tw, int th) {
+    private void blitTexture(GuiGraphics stack, int x, int y, int w, int h, float tu, float tv, int tw, int th) {
         if (w > 0 && h > 0) {
-            GuiComponent.blit(stack, x, y, w, h, tu, tv, tw, th, texture.width, texture.height);
+            stack.blit(texture.texture(), x, y, w, h, tu, tv, tw, th, texture.width, texture.height);
         }
     }
 
-    public void blitTexture(MultiBufferSource bufferSource, PoseStack poseStack, String name,
-                            boolean transparency, Rect rect) {
-        texture.textures().get(name).ifPresent(entry -> {
-            bindTexture();
-            Matrix4f matrix = poseStack.last().pose();
-            RenderType type = transparency ? render.renderTypeWithTransparency.get() : render.renderType.get();
-            VertexConsumer buffer = bufferSource.getBuffer(type);
-            float[] uv = entry.normalized(texture.width, texture.height);
-            buffer.vertex(matrix, rect.x0(), rect.y0(), rect.z0()).uv(uv[0], uv[2]).endVertex();
-            buffer.vertex(matrix, rect.x1(), rect.y1(), rect.z1()).uv(uv[0], uv[3]).endVertex();
-            buffer.vertex(matrix, rect.x2(), rect.y2(), rect.z2()).uv(uv[1], uv[3]).endVertex();
-            buffer.vertex(matrix, rect.x3(), rect.y3(), rect.z3()).uv(uv[1], uv[2]).endVertex();
-        });
-    }
+    // Fixme: qyl27: Migrated to 1.20.
+//    public void blitTexture(MultiBufferSource bufferSource, GuiGraphics poseStack, String name,
+//                            boolean transparency, Rect rect) {
+//        texture.textures().get(name).ifPresent(entry -> {
+//            bindTexture();
+//            Matrix4f matrix = poseStack.last().pose();
+//            RenderType type = transparency ? render.renderTypeWithTransparency.get() : render.renderType.get();
+//            VertexConsumer buffer = bufferSource.getBuffer(type);
+//            float[] uv = entry.normalized(texture.width, texture.height);
+//            buffer.vertex(matrix, rect.x0(), rect.y0(), rect.z0()).uv(uv[0], uv[2]).endVertex();
+//            buffer.vertex(matrix, rect.x1(), rect.y1(), rect.z1()).uv(uv[0], uv[3]).endVertex();
+//            buffer.vertex(matrix, rect.x2(), rect.y2(), rect.z2()).uv(uv[1], uv[3]).endVertex();
+//            buffer.vertex(matrix, rect.x3(), rect.y3(), rect.z3()).uv(uv[1], uv[2]).endVertex();
+//        });
+//    }
 
-    public void blitTexture(MultiBufferSource bufferSource, PoseStack poseStack, String name,
-                            boolean transparency, Rect rect, int packedLight) {
-        blitTexture(bufferSource, poseStack, name, transparency, rect, packedLight, 1, 1, 1, 1);
-    }
+//    public void blitTexture(MultiBufferSource bufferSource, GuiGraphics poseStack, String name,
+//                            boolean transparency, Rect rect, int packedLight) {
+//        blitTexture(bufferSource, poseStack, name, transparency, rect, packedLight, 1, 1, 1, 1);
+//    }
 
-    public void blitTexture(MultiBufferSource bufferSource, PoseStack poseStack, String name,
-                            boolean transparency, Rect rect, float r, float g, float b, float a) {
-        texture.textures().get(name).ifPresent(entry -> {
-            bindTexture();
-            Matrix4f matrix = poseStack.last().pose();
-            RenderType type = transparency ? render.renderTypeWithColorTransparency.get() : render.renderTypeWithColor.get();
-            VertexConsumer buffer = bufferSource.getBuffer(type);
-            float[] uv = entry.normalized(texture.width, texture.height);
-            buffer.vertex(matrix, rect.x0(), rect.y0(), rect.z0()).color(r, g, b, a).uv(uv[0], uv[2]).endVertex();
-            buffer.vertex(matrix, rect.x1(), rect.y1(), rect.z1()).color(r, g, b, a).uv(uv[0], uv[3]).endVertex();
-            buffer.vertex(matrix, rect.x2(), rect.y2(), rect.z2()).color(r, g, b, a).uv(uv[1], uv[3]).endVertex();
-            buffer.vertex(matrix, rect.x3(), rect.y3(), rect.z3()).color(r, g, b, a).uv(uv[1], uv[2]).endVertex();
-        });
-    }
+//    public void blitTexture(MultiBufferSource bufferSource, GuiGraphics poseStack, String name,
+//                            boolean transparency, Rect rect, float r, float g, float b, float a) {
+//        texture.textures().get(name).ifPresent(entry -> {
+//            bindTexture();
+//            Matrix4f matrix = poseStack.last().pose();
+//            RenderType type = transparency ? render.renderTypeWithColorTransparency.get() : render.renderTypeWithColor.get();
+//            VertexConsumer buffer = bufferSource.getBuffer(type);
+//            float[] uv = entry.normalized(texture.width, texture.height);
+//            buffer.vertex(matrix, rect.x0(), rect.y0(), rect.z0()).color(r, g, b, a).uv(uv[0], uv[2]).endVertex();
+//            buffer.vertex(matrix, rect.x1(), rect.y1(), rect.z1()).color(r, g, b, a).uv(uv[0], uv[3]).endVertex();
+//            buffer.vertex(matrix, rect.x2(), rect.y2(), rect.z2()).color(r, g, b, a).uv(uv[1], uv[3]).endVertex();
+//            buffer.vertex(matrix, rect.x3(), rect.y3(), rect.z3()).color(r, g, b, a).uv(uv[1], uv[2]).endVertex();
+//        });
+//    }
 
-    public void blitTexture(MultiBufferSource bufferSource, PoseStack poseStack, String name,
-                            boolean transparency, Rect rect, int packedLight, float r, float g, float b, float a) {
-        texture.textures().get(name).ifPresent(entry -> {
-            bindTexture();
-            Matrix4f matrix = poseStack.last().pose();
-            RenderType type = transparency ? render.renderTypeWithColorLightmapTransparency.get() : render.renderTypeWithColorLightmap.get();
-            VertexConsumer buffer = bufferSource.getBuffer(type);
-            float[] uv = entry.normalized(texture.width, texture.height);
-            buffer.vertex(matrix, rect.x0(), rect.y0(), rect.z0()).color(r, g, b, a).uv(uv[0], uv[2]).uv2(packedLight).endVertex();
-            buffer.vertex(matrix, rect.x1(), rect.y1(), rect.z1()).color(r, g, b, a).uv(uv[0], uv[3]).uv2(packedLight).endVertex();
-            buffer.vertex(matrix, rect.x2(), rect.y2(), rect.z2()).color(r, g, b, a).uv(uv[1], uv[3]).uv2(packedLight).endVertex();
-            buffer.vertex(matrix, rect.x3(), rect.y3(), rect.z3()).color(r, g, b, a).uv(uv[1], uv[2]).uv2(packedLight).endVertex();
-        });
-    }
+//    public void blitTexture(MultiBufferSource bufferSource, GuiGraphics poseStack, String name,
+//                            boolean transparency, Rect rect, int packedLight, float r, float g, float b, float a) {
+//        texture.textures().get(name).ifPresent(entry -> {
+//            bindTexture();
+//            Matrix4f matrix = poseStack.last().pose();
+//            RenderType type = transparency ? render.renderTypeWithColorLightmapTransparency.get() : render.renderTypeWithColorLightmap.get();
+//            VertexConsumer buffer = bufferSource.getBuffer(type);
+//            float[] uv = entry.normalized(texture.width, texture.height);
+//            buffer.vertex(matrix, rect.x0(), rect.y0(), rect.z0()).color(r, g, b, a).uv(uv[0], uv[2]).uv2(packedLight).endVertex();
+//            buffer.vertex(matrix, rect.x1(), rect.y1(), rect.z1()).color(r, g, b, a).uv(uv[0], uv[3]).uv2(packedLight).endVertex();
+//            buffer.vertex(matrix, rect.x2(), rect.y2(), rect.z2()).color(r, g, b, a).uv(uv[1], uv[3]).uv2(packedLight).endVertex();
+//            buffer.vertex(matrix, rect.x3(), rect.y3(), rect.z3()).color(r, g, b, a).uv(uv[1], uv[2]).uv2(packedLight).endVertex();
+//        });
+//    }
 
     private void resumeGL(GLSwitcher... configurations) {
         for (var switcher : configurations) {

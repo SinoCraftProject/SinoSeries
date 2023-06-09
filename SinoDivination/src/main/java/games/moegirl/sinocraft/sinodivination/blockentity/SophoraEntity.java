@@ -110,7 +110,7 @@ public class SophoraEntity extends BlockEntity implements ISophoraEntity {
         ForgeHooks.onLivingHurt(entity, damageSource, damageAmount);
         ForgeHooks.onLivingDamage(entity, damageSource, damageAmount);
         float currentHealth = entity.getHealth();
-        entity.getCombatTracker().recordDamage(damageSource, currentHealth, damageAmount);
+        entity.getCombatTracker().recordDamage(damageSource, damageAmount);
         entity.setHealth(currentHealth - damageAmount);
         entity.gameEvent(GameEvent.ENTITY_DAMAGE, damageSource.getEntity());
     }

@@ -68,7 +68,7 @@ public class Combustible implements ICombustible {
     public void addAsh(ItemStack ash) {
         if (!isFullOfAshes()) {
             for (var stack : ashes) {
-                if (stack.sameItem(ash)) {
+                if (stack.is(ash.getItem())) {
                     ash = ItemStackHelper.mergeStack(stack, ash);
                     if (ash.isEmpty()) {
                         break;

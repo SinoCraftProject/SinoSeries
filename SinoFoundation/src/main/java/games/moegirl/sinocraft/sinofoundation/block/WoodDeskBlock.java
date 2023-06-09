@@ -7,12 +7,11 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -93,7 +92,7 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
     public static final IntegerProperty CONNECT_STATE = IntegerProperty.create("connect", 0, 5);
 
     public WoodDeskBlock() {
-        super(Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_RED)
+        super(Properties.copy(Blocks.ACACIA_PLANKS)
                 .dynamicShape()
                 .strength(2.5f)
                 .noOcclusion());

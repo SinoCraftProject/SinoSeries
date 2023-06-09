@@ -56,7 +56,7 @@ public class CarvingTableMenu extends AbstractContainerMenu {
     @Override
     public void slotsChanged(Container inventory) {
         if (owner != null) {
-            SDRecipes.CARVING_TABLE.match(owner.level, container)
+            SDRecipes.CARVING_TABLE.match(owner.level(), container)
                     .ifPresent(recipe -> container.setOutput(recipe.assemble(container, RegistryAccess.EMPTY)));
         }
         super.slotsChanged(inventory);

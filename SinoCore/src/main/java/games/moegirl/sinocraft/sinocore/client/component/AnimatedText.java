@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -72,7 +73,7 @@ public class AnimatedText extends AbstractWidget {
     }
 
     @Override
-    public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         Component message = getMessage();
         if (!CommonComponents.EMPTY.equals(message) && duration > 0) {
             long delta = System.nanoTime() - beginTime;
@@ -93,15 +94,15 @@ public class AnimatedText extends AbstractWidget {
                     p *= 2;
                 }
                 GLSwitcher switcher = GLSwitcher.blend().enable();
-                renderMessage(pPoseStack, message, p);
+                renderMessage(graphics, message, p);
                 switcher.resume();
             }
         }
     }
 
-    private void renderMessage(PoseStack poseStack, Component message, double alpha) {
+    private void renderMessage(GuiGraphics graphics, Component message, double alpha) {
         int textWidth = font.width(message);
-        font.draw(poseStack, message, getX() - textWidth / 2f, getY(), FastColor.ARGB32.color((int) (alpha * 255), r, g, b));
+        graphics.drawString(font, message, getX() - textWidth / 2, getY(), FastColor.ARGB32.color((int) (alpha * 255), r, g, b));
     }
 
     @Override

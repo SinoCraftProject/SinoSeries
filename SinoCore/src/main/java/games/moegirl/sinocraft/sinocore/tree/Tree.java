@@ -56,7 +56,7 @@ public class Tree {
         this.configuration = Lazy.of(() -> builder.grower.apply(this).getConfiguration(getBlock(TreeBlockType.LOG), getBlock(TreeBlockType.LEAVES)));
 
         // todo may be should set in builder ?
-        blockSetType = new BlockSetType(name.toString(), SoundType.WOOD,
+        blockSetType = new BlockSetType(name.toString(), true, SoundType.WOOD,
                 SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN,
                 SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN,
                 SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON,

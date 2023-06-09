@@ -93,6 +93,12 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
         return crop.get();
     }
 
+    // Todo: qyl27: test it.
+    @Override
+    public IntegerProperty getAgeProperty() {
+        return super.getAgeProperty();
+    }
+
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state, int growAge) {
         int age = Math.min(getAge(state) + growAge, getMaxAge());

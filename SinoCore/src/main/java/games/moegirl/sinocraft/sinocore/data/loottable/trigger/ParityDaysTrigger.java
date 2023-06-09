@@ -26,22 +26,22 @@ public class ParityDaysTrigger extends SimpleCriterionTrigger<ParityDaysTrigger.
     }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite player,
-                                             DeserializationContext context) {
+    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate contextAwarePredicate,
+                                             DeserializationContext deserializationContext) {
         if (even == 0) {
-            return new TriggerInstance(getId(), player, false);
+            return new TriggerInstance(getId(), contextAwarePredicate, false);
         } else if (even == 1) {
-            return new TriggerInstance(getId(), player, true);
+            return new TriggerInstance(getId(), contextAwarePredicate, true);
         }
 
-        return new TriggerInstance(getId(), player, json.get("isEven").getAsBoolean());
+        return new TriggerInstance(getId(), contextAwarePredicate, json.get("isEven").getAsBoolean());
     }
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
         private final boolean even;
 
-        public TriggerInstance(ResourceLocation id, EntityPredicate.Composite player, boolean isEven) {
-            super(id, player);
+        public TriggerInstance(ResourceLocation id, ContextAwarePredicate contextAwarePredicate, boolean isEven) {
+            super(id, contextAwarePredicate);
             even = isEven;
         }
 

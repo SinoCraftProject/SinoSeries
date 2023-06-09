@@ -17,6 +17,7 @@ import games.moegirl.sinocraft.sinocore.client.component.AnimatedText;
 import games.moegirl.sinocraft.sinocore.client.component.EditBoxOptional;
 import games.moegirl.sinocraft.sinocore.gui.menu.inventory.InventoryNoTitleWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.nbt.TagParser;
@@ -81,19 +82,19 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        renderBackground(poseStack);
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        renderTooltip(poseStack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, partialTick);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        CLIENT_TEXTURE.blitTexture(poseStack, "background", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
-        CLIENT_TEXTURE.blitTexture(poseStack, "draw_title_box_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
-        CLIENT_TEXTURE.blitTexture(poseStack, "draw_button_yes_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
-        CLIENT_TEXTURE.blitTexture(poseStack, "draw_button_no_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(graphics, "background", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(graphics, "draw_title_box_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(graphics, "draw_button_yes_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
+        CLIENT_TEXTURE.blitTexture(graphics, "draw_button_no_texture", this, GLSwitcher.blend().enable(), GLSwitcher.depth().enable());
     }
 
     /// <editor-fold desc="Handle input.">

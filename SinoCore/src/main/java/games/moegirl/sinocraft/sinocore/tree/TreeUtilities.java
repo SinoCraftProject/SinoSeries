@@ -25,8 +25,6 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryManager;
 
@@ -135,22 +133,19 @@ public class TreeUtilities {
     // <editor-fold desc="Properties">
 
     public static BlockBehaviour.Properties logProp() {
-        MaterialColor color = MaterialColor.PODZOL;
-        MaterialColor yColor = MaterialColor.WOOD;
-        return BlockBehaviour.Properties.of(Material.WOOD, axis ->
-                        axis.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? yColor : color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_LOG)
                 .strength(2.0F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties woodProp() {
-        return BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)
                 .strength(2.0F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties planksProp() {
-        return BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
                 .strength(2.0F, 3.0F)
                 .sound(SoundType.WOOD);
     }
@@ -161,7 +156,7 @@ public class TreeUtilities {
 
     public static BlockBehaviour.Properties leavesProp() {
         SoundType sound = SoundType.GRASS;
-        return BlockBehaviour.Properties.of(Material.LEAVES)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)
                 .strength(0.2F)
                 .randomTicks()
                 .sound(sound)
@@ -172,22 +167,21 @@ public class TreeUtilities {
     }
 
     public static BlockBehaviour.Properties buttonProp() {
-        return BlockBehaviour.Properties.of(Material.DECORATION)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)
                 .noCollission()
                 .strength(0.5F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties doorProp() {
-        MaterialColor color = MaterialColor.WOOD;
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)
                 .strength(3.0F)
                 .sound(SoundType.WOOD)
                 .noOcclusion();
     }
 
     public static BlockBehaviour.Properties trapdoorProp() {
-        return BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR)
                 .strength(3.0F)
                 .sound(SoundType.WOOD)
                 .noOcclusion()
@@ -199,32 +193,28 @@ public class TreeUtilities {
     }
 
     public static BlockBehaviour.Properties fenceProp() {
-        MaterialColor color = MaterialColor.WOOD;
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)
                 .strength(2.0F, 3.0F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties pressurePlateProp() {
-        MaterialColor color = MaterialColor.WOOD;
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)
                 .noCollission()
                 .strength(0.5F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties signProp() {
-        MaterialColor color = MaterialColor.WOOD;
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_SIGN)
                 .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD);
     }
 
     public static BlockBehaviour.Properties wallSignProp(Tree tree) {
-        MaterialColor color = MaterialColor.WOOD;
         Block lootFrom = tree.getBlock(TreeBlockType.SIGN);
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN)
                 .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD)
@@ -232,27 +222,23 @@ public class TreeUtilities {
     }
 
     public static BlockBehaviour.Properties hangingSignProp() {
-        MaterialColor color = MaterialColor.WOOD;
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN)
                 .noCollission()
                 .strength(1.0F)
-                .sound(SoundType.HANGING_SIGN)
-                .requiredFeatures(FeatureFlags.UPDATE_1_20);
+                .sound(SoundType.HANGING_SIGN);
     }
 
     public static BlockBehaviour.Properties wallHangingSignProp(Tree tree) {
-        MaterialColor color = MaterialColor.WOOD;
         Block lootFrom = tree.getBlock(TreeBlockType.HANGING_SIGN);
-        return BlockBehaviour.Properties.of(Material.WOOD, color)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN)
                 .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.HANGING_SIGN)
-                .lootFrom(() -> lootFrom)
-                .requiredFeatures(FeatureFlags.UPDATE_1_20);
+                .lootFrom(() -> lootFrom);
     }
 
     public static BlockBehaviour.Properties saplingProp() {
-        return BlockBehaviour.Properties.of(Material.PLANT)
+        return BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)
                 .noCollission()
                 .randomTicks()
                 .instabreak()
@@ -260,7 +246,7 @@ public class TreeUtilities {
     }
 
     public static BlockBehaviour.Properties pottedSaplingProp() {
-        return BlockBehaviour.Properties.of(Material.DECORATION)
+        return BlockBehaviour.Properties.copy(Blocks.POTTED_OAK_SAPLING)
                 .instabreak()
                 .noOcclusion();
     }

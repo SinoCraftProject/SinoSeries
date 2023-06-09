@@ -18,14 +18,13 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -76,7 +75,7 @@ public class StoveBlock extends HorizontalDirectionalBlock implements EntityBloc
     public static final BooleanProperty BURNING = BooleanProperty.create("burning");
 
     protected StoveBlock() {
-        super(Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+        super(Properties.copy(Blocks.BRICKS)
                 .requiresCorrectToolForDrops()
                 .dynamicShape()
                 .strength(3.5f));

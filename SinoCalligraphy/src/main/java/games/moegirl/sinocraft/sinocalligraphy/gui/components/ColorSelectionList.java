@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocalligraphy.gui.components;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.list.SelectionEntry;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.list.AbstractSelectionList;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.list.VerticalListLayout;
@@ -11,6 +10,7 @@ import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
 import games.moegirl.sinocraft.sinocore.utility.texture.PointEntry;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureEntry;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +69,7 @@ public class ColorSelectionList extends AbstractSelectionList<ColorSelectionList
     }
 
     @Override
-    protected void drawCanvas(List<SelectionEntry<ColorEntry>> displayItems, PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+    protected void drawCanvas(List<SelectionEntry<ColorEntry>> displayItems, GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         if (!items.isEmpty()) {
             int rollY = layout.getRollY();
             SelectionEntry<ColorEntry> entry;
@@ -104,14 +104,14 @@ public class ColorSelectionList extends AbstractSelectionList<ColorSelectionList
             int y = entry.getYInList() + 3;
             float c = entry.getValue().color;
             RenderSystem.setShaderColor(c, c, c, 1);
-            blit(poseStack, x, y, COLOR.w(), COLOR.h(), COLOR.u(), COLOR.v(), COLOR.tw(), COLOR.th(), TEXTURE.width(), TEXTURE.height());
+            graphics.blit(TEXTURE.texture(), x, y, COLOR.w(), COLOR.h(), COLOR.u(), COLOR.v(), COLOR.tw(), COLOR.th(), TEXTURE.width(), TEXTURE.height());
         }
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        CLIENT.blitTexture(poseStack, "color_selector", screen, GLSwitcher.blend().enable());
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.render(graphics, mouseX, mouseY, partialTick);
+        CLIENT.blitTexture(graphics, "color_selector", screen, GLSwitcher.blend().enable());
     }
 
     @Override

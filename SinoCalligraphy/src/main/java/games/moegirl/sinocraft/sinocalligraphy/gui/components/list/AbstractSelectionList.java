@@ -3,9 +3,9 @@ package games.moegirl.sinocraft.sinocalligraphy.gui.components.list;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -176,13 +176,13 @@ public abstract class AbstractSelectionList<T> extends AbstractContainerEventHan
         }
     }
 
-    protected abstract void drawCanvas(List<SelectionEntry<T>> displayItems, PoseStack poseStack,
+    protected abstract void drawCanvas(List<SelectionEntry<T>> displayItems, GuiGraphics graphics,
                                        int mouseX, int mouseY, float partialTick);
 
     protected abstract boolean onClick(int mouseX, int mouseY, int button);
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         measureVisible();
         if (hovered != null && !hovered.isIn(mouseX, mouseY)) {
             hovered = null;
@@ -196,11 +196,11 @@ public abstract class AbstractSelectionList<T> extends AbstractContainerEventHan
         }
 
         RenderSystem.enableScissor(scissorX, scissorY, scissorW, scissorH);
-        poseStack.pushPose();
-        poseStack.translate(left, top, 0);
+        graphics.pose().pushPose();
+        graphics.pose().translate(left, top, 0);
         GLSwitcher b = GLSwitcher.blend().enable();
-        drawCanvas(displayItems, poseStack, mouseX, mouseY, partialTick);
-        poseStack.popPose();
+        drawCanvas(displayItems, graphics, mouseX, mouseY, partialTick);
+        graphics.pose().popPose();
         b.disable();
         RenderSystem.disableScissor();
         RenderSystem.setShaderColor(1, 1, 1, 1);

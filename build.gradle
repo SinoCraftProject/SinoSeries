@@ -12,6 +12,7 @@ println "Java: ${System.getProperty 'java.version'}, " +
 
 // 重新加载任务时清理 runConfigurations
 import java.nio.file.Path
+
 if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") }) {
     Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
     if (Files.isDirectory(ideaCache))
@@ -37,8 +38,9 @@ dependencies {
     implementation project(path: ':SinoTest', configuration: 'namedElements')
 
     // Add compile only api to any subproject.
-    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
-    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
+//    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
+//    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
+    modRuntimeOnly("maven.modrinth:jei:14.0.0.4")  // JEI 1.20
 //    modImplementation("com.ptsmods:devlogin:3.1.1")
 }
 
@@ -179,17 +181,13 @@ allprojects {
             }
         }
 
-//        maven {
-//            // location of the maven that hosts JEI files before January 2023
-//            name = "Progwml6's maven"
-//            url = "https://dvs1.progwml6.com/files/maven/"
-//        }
-//
-//        maven {
-//            // location of a maven mirror for JEI files, as a fallback
-//            name = "ModMaven"
-//            url = "https://modmaven.dev"
-//        }
+        maven {
+            name = "Modrinth"
+            url = "https://api.modrinth.com/maven"
+            content {
+                includeGroup "maven.modrinth"
+            }
+        }
     }
 }
 

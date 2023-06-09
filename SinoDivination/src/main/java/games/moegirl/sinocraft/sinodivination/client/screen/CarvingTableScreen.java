@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinodivination.client.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
 import games.moegirl.sinocraft.sinodivination.menu.CarvingTableMenu;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,18 +18,18 @@ public class CarvingTableScreen extends AbstractContainerScreen<CarvingTableMenu
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        renderTooltip(poseStack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.render(graphics, mouseX, mouseY, partialTick);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
-        CLIENT.blitTexture(poseStack, "background", this);
+    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        CLIENT.blitTexture(graphics, "background", this);
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-        CLIENT.renderText(poseStack, this, "title");
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        CLIENT.renderText(graphics, this, "title");
     }
 }

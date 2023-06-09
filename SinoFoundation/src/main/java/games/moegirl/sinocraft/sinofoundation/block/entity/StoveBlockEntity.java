@@ -29,7 +29,7 @@ public class StoveBlockEntity extends BlockEntity {
         }
 
         combustible.addBurnTime(burnTime * fuel.getCount());
-        if (!combustible.getBurningFuel().sameItem(fuel)) {
+        if (!combustible.getBurningFuel().is(fuel.getItem())) {
             combustible.setBurningFuel(fuel);
         }
         combustible.addAsh(getAsh(fuel));

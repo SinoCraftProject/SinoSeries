@@ -48,7 +48,10 @@ public interface CotinusBlock extends EntityBlock {
      * @return 是否被允许
      */
     default boolean isAllowed(BlockPos pos, @Nullable Entity entity, boolean allowNull) {
-        if (entity == null) return allowNull;
-        return entity.level.getBlockEntity(pos) instanceof ICotinusEntity ce && ce.owner().isAllowed(entity);
+        if (entity == null) {
+            return allowNull;
+        }
+
+        return entity.level().getBlockEntity(pos) instanceof ICotinusEntity ce && ce.owner().isAllowed(entity);
     }
 }

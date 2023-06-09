@@ -7,7 +7,7 @@ import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.SimpleDrawing;
 import games.moegirl.sinocraft.sinocalligraphy.utility.DrawingHelper;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.FastColor;
@@ -22,10 +22,10 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
     }
 
     @Override
-    public void draw(PoseStack poseStack, int x, int y, int width, int height) {
+    public void draw(GuiGraphics graphics, int x, int y, int width, int height) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-        GuiComponent.fill(poseStack, x, y, x + width, y + height, getBackgroundColor());
+        graphics.fill(x, y, x + width, y + height, getBackgroundColor());
 
         int unitX = width / drawing.getSize();
         int unitY = height / drawing.getSize();
@@ -44,7 +44,7 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
                 int scale = 16 * draw[index++]; // qyl27: For calculating grayscale.
                 if (scale != 0) {
                     int scaledColor = FastColor.ARGB32.color(scale, fr, fg, fb);
-                    GuiComponent.fill(poseStack, x1, y1, x2, y2, scaledColor);
+                    graphics.fill(x1, y1, x2, y2, scaledColor);
                 }
                 y1 = y2;
                 y2 += unitY;

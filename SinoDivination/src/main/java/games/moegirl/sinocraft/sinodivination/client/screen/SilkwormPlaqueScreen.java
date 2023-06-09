@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureEntry;
 import games.moegirl.sinocraft.sinodivination.blockentity.SilkwormPlaqueEntity;
 import games.moegirl.sinocraft.sinodivination.menu.SilkwormPlaqueMenu;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -36,26 +37,26 @@ public class SilkwormPlaqueScreen extends AbstractContainerScreen<SilkwormPlaque
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
-        CLIENT.blitTexture(poseStack, "background", this);
+    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        CLIENT.blitTexture(graphics, "background", this);
         SilkwormPlaqueEntity entity = menu.entity();
         // 进度
         for (int i = 0; i < SilkwormPlaqueEntity.SILKWORM_COUNT; i++) {
-            CLIENT.blitProgress(poseStack, "progress" + i, this, entity.silkworm(i).progress());
+            CLIENT.blitProgress(graphics, "progress" + i, this, entity.silkworm(i).progress());
         }
         float progress = entity.nutrition() / 100f;
         if (progress > 0) {
             GLSwitcher switcher = GLSwitcher.blend().enable();
-            CLIENT.blitTexture(poseStack, "texture_nutrition_tail", this);
-            CLIENT.blitProgress(poseStack, "nutrition_progress", this, progress);
-            CLIENT.blitTexture(poseStack, "texture_nutrition_head", TAIL.x(), (int) (TAIL.y() - TAIL.h() - BODY.h() * progress), this);
+            CLIENT.blitTexture(graphics, "texture_nutrition_tail", this);
+            CLIENT.blitProgress(graphics, "nutrition_progress", this, progress);
+            CLIENT.blitTexture(graphics, "texture_nutrition_head", TAIL.x(), (int) (TAIL.y() - TAIL.h() - BODY.h() * progress), this);
             switcher.resume();
         }
-        renderTooltip(poseStack, mouseX, mouseY);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-        this.font.draw(poseStack, this.title, (float)this.titleLabelX, (float)this.titleLabelY, 0x404040);
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawString(font, this.title, this.titleLabelX, this.titleLabelY, 0x404040);
     }
 }

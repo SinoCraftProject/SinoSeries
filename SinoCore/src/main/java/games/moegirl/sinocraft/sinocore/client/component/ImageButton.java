@@ -8,7 +8,7 @@ import games.moegirl.sinocraft.sinocore.utility.texture.TextureEntry;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 
@@ -56,13 +56,14 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
     }
 
     @Override
-    public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float partialTick) {
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         if (!visible) {
             return;
         }
         List<String> textures;
         if (this.isHovered) {
-            parent.renderTooltip(pPoseStack, getMessage(), pMouseX, pMouseY);
+            // Fixme: qyl27: migration breaks it.
+//            parent.renderWithTooltip(graphics, mouseX, mouseY, partialTick);
             MouseHandler mouse = Minecraft.getInstance().mouseHandler;
             if (mouse.isLeftPressed() || mouse.isMiddlePressed() || mouse.isRightPressed()) {
                 textures = texPressed;
@@ -78,11 +79,12 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
             for (String texture : textures) {
                 Optional<TextureEntry> optional = map.textures().get(texture);
                 if (optional.isPresent()) {
+                    // Todo: qyl27: remove all RenderSystem invokes.
                     TextureEntry entry = optional.get();
                     RenderSystem.setShaderTexture(0, map.texture());
                     GLSwitcher d = GLSwitcher.depth().enable();
                     GLSwitcher b = GLSwitcher.blend().enable();
-                    GuiComponent.blit(pPoseStack, getX(), getY(), width, height, entry.u(), entry.v(), entry.tw(), entry.th(), map.width, map.height);
+                    graphics.blit(map.texture(), getX(), getY(), width, height, entry.u(), entry.v(), entry.tw(), entry.th(), map.width, map.height);
                     d.resume();
                     b.resume();
                 }

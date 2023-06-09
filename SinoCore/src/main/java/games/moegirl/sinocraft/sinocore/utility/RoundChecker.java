@@ -27,9 +27,11 @@ public class RoundChecker {
     public BlockPos relative(Direction direction) {
         return pos.relative(direction);
     }
+
     public BlockPos relative(Direction direction, int distance) {
         return pos.relative(direction, distance);
     }
+
     public BlockPos here() {
         return pos;
     }
@@ -37,6 +39,7 @@ public class RoundChecker {
     public void move(Direction direction) {
         set(relative(direction));
     }
+
     public void set(BlockPos p) {
         pos = p;
     }
@@ -44,9 +47,11 @@ public class RoundChecker {
     public BlockState block(BlockPos pos) {
         return bs.computeIfAbsent(pos, level::getBlockState);
     }
+
     public FluidState fluid(BlockPos pos) {
         return block(pos).getFluidState();
     }
+
     public int light(BlockPos pos) {
         return level instanceof BlockAndTintGetter t ? t.getRawBrightness(pos, 0) : -1;
     }
@@ -54,6 +59,7 @@ public class RoundChecker {
     public boolean is(Direction direction, Block block) {
         return block(relative(direction)).is(block);
     }
+
     public boolean is(Direction direction, TagKey<Block> block) {
         return block(relative(direction)).is(block);
     }
@@ -71,8 +77,9 @@ public class RoundChecker {
     public boolean isAir(Direction direction, int distance) {
         return block(relative(direction, distance)).isAir();
     }
+
     public boolean isReplaceable(Direction direction) {
-        return block(relative(direction)).is(BlockTags.REPLACEABLE_PLANTS);
+        return block(relative(direction)).is(BlockTags.REPLACEABLE);
     }
 
     public boolean isSource(Direction direction) {

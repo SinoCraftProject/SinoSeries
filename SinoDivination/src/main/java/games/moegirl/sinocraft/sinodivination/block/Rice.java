@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -41,7 +40,7 @@ public class Rice extends DoubleCropBlock<Item> implements SimpleWaterloggedBloc
     };
 
     public Rice() {
-        super(Properties.of(Material.WATER_PLANT).noCollission().randomTicks().sound(SoundType.CROP),
+        super(Properties.copy(Blocks.SEAGRASS).noCollission().randomTicks().sound(SoundType.CROP),
                 SDItems.RICE, 7, 0, 1, 3, 4);
     }
 
