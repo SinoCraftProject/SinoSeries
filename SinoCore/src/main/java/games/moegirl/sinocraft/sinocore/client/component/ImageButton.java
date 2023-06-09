@@ -62,8 +62,7 @@ public class ImageButton extends net.minecraft.client.gui.components.Button {
         }
         List<String> textures;
         if (this.isHovered) {
-            // Fixme: qyl27: migration breaks it.
-//            parent.renderWithTooltip(graphics, mouseX, mouseY, partialTick);
+            graphics.renderTooltip(Minecraft.getInstance().font, getMessage(), mouseX, mouseY);
             MouseHandler mouse = Minecraft.getInstance().mouseHandler;
             if (mouse.isLeftPressed() || mouse.isMiddlePressed() || mouse.isRightPressed()) {
                 textures = texPressed;
