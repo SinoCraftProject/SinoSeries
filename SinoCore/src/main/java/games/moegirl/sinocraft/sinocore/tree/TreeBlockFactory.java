@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import com.mojang.datafixers.util.Function3;
+import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -32,7 +33,7 @@ public class TreeBlockFactory {
 
     Function3<DeferredRegister<Item>, String, Tree, RegistryObject<? extends Item>> itemBuilder;
 
-    final List<ResourceLocation> tabs = new ArrayList<>();
+    final List<TabItemGenerator> tabs = new ArrayList<>();
 
     final List<TagKey<Block>> blockTags = new ArrayList<>();
 

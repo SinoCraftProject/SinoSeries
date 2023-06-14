@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinofoundation.item;
 
-import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;

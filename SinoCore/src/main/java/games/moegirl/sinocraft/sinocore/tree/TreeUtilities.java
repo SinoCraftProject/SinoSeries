@@ -28,9 +28,33 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryManager;
 
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 
 public class TreeUtilities {
+
+    private static final EnumMap<TreeBlockType, List<ResourceKey<CreativeModeTab>>> DEFAULT_TYPES = new EnumMap<>(TreeBlockType.class);
+
+    static {
+        for (TreeBlockType type : TreeBlockType.values()) {
+            List<ResourceKey<CreativeModeTab>> defaultTabs = switch (type) {
+                case LOG -> List.of(CreativeModeTabs.NATURAL_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
+                case LOG_WOOD, STRIPPED_LOG, STRIPPED_LOG_WOOD, PLANKS, SLAB, STAIRS, FENCE ->
+                        List.of(CreativeModeTabs.BUILDING_BLOCKS);
+                case LEAVES, SAPLING -> List.of(CreativeModeTabs.NATURAL_BLOCKS);
+                case DOOR, TRAPDOOR, PRESSURE_PLATE, BUTTON, FENCE_GATE ->
+                        List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
+                case SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
+                case CHEST -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
+                case TRAPPED_CHEST -> List.of(CreativeModeTabs.REDSTONE_BLOCKS);
+                case BOAT -> List.of(CreativeModeTabs.TOOLS_AND_UTILITIES);
+                case CHEST_BOAT -> List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.TOOLS_AND_UTILITIES);
+                default -> List.of();
+            };
+            DEFAULT_TYPES.put(type, defaultTabs);
+        }
+    }
 
     // <editor-fold desc="Blocks">
 
@@ -339,5 +363,10 @@ public class TreeUtilities {
         return builder;
     }
 
+    public static List<ResourceKey<CreativeModeTab>> defaultTabs(TreeBlockType tab) {
+        return DEFAULT_TYPES.getOrDefault(tab, Collections.emptyList());
+    }
+
     // </editor-fold>
+
 }

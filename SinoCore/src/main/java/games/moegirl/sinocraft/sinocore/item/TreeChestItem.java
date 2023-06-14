@@ -29,7 +29,6 @@ public class TreeChestItem extends BlockItem {
 
     public TreeChestItem(Properties properties, Tree tree, TreeBlockType block) {
         super(tree.getBlock(block), properties);
-
         this.tree = tree;
         this.block = block;
 
@@ -46,15 +45,13 @@ public class TreeChestItem extends BlockItem {
     // 物品渲染
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        if (tree != null) {
-            consumer.accept(new TreeChestItemRenderer(block, tree));
-        }
+        consumer.accept(new TreeChestItemRenderer(block, tree));
     }
 
     /**
      * 发射器
      */
-    class ChestDispenseBehavior extends OptionalDispenseItemBehavior {
+    static class ChestDispenseBehavior extends OptionalDispenseItemBehavior {
 
         @Override
         public ItemStack execute(BlockSource source, ItemStack stack) {

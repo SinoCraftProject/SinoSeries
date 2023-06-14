@@ -1,13 +1,16 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import com.mojang.datafixers.util.Function3;
+import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.DefaultTreeGrower;
 import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -230,9 +233,9 @@ public class TreeBuilder {
      * @param tab           Item tab.
      * @return Builder
      */
-    public TreeBuilder tab(TreeBlockType treeBlockType, ResourceLocation tab) {
+    public TreeBuilder tab(TreeBlockType treeBlockType, ResourceKey<CreativeModeTab> tab) {
         TreeBlockFactory factory = treeBlocks.get(treeBlockType);
-        factory.tabs.add(tab);
+        factory.tabs.add(TabItemGenerator.forCreativeModeTab(tab));
         return this;
     }
 
@@ -242,7 +245,7 @@ public class TreeBuilder {
      * @param tab Tabs to add all items to.
      * @return Builder
      */
-    public TreeBuilder tab(ResourceLocation tab) {
+    public TreeBuilder tab(TabItemGenerator tab) {
         treeBlocks.values().forEach(factory -> factory.tabs.add(tab));
         return this;
     }

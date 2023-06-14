@@ -1,10 +1,12 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
-import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
-import games.moegirl.sinocraft.sinocore.tree.event.TreeTabsBuildListener;
+import games.moegirl.sinocraft.sinocore.tab.SCTabs;
+import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -71,12 +73,11 @@ public class Tree {
         TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
     }
 
-    public void register(DeferredRegister<Block> blockRegister, DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister,
-                         TreeTabsBuildListener tabsListener) {
+    public void register(DeferredRegister<Block> blockRegister, DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister) {
         makeDefaultBlocks(blockRegister);
         makeDefaultBlockEntities(blockEntityRegister);
         makeDefaultBlockItems(itemRegister);
-        fillCreativeTabs(tabsListener);
+        fillCreativeTabs();
 
         BlockStrippingEvent.registerStripping(TreeBlockType.LOG.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
         BlockStrippingEvent.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
@@ -115,18 +116,20 @@ public class Tree {
                 .forEach(p -> items.put(p.getKey(), p.getValue()));
     }
 
-    private void fillCreativeTabs(TreeTabsBuildListener tabsListener) {
+    private void fillCreativeTabs() {
         builder.getBlockFactories().forEach((type, factory) -> {
             if (type.hasItem()) {
                 RegistryObject<? extends Item> item = items.get(type);
 
                 if (factory.fillDefaultTabs) {
-                    tabsListener.addDefaultTabs(type, item);
+                    for (ResourceKey<CreativeModeTab> tab : TreeUtilities.defaultTabs(type)) {
+                        TabItemGenerator.forCreativeModeTab(tab).addItem(item);
+                    }
                 }
 
                 if (!factory.tabs.isEmpty()) {
-                    for (ResourceLocation tab : factory.tabs) {
-                        TabsRegistry.get(tab).add(item);
+                    for (TabItemGenerator tab : factory.tabs) {
+                        tab.addItem(item);
                     }
                 }
             }
