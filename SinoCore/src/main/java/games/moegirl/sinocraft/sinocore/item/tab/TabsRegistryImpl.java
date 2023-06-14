@@ -2,8 +2,10 @@ package games.moegirl.sinocraft.sinocore.item.tab;
 
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -12,9 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.*;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -112,17 +112,18 @@ public class TabsRegistryImpl implements TabsRegistry, CreativeModeTab.DisplayIt
     }
 
     // Fixme: qyl27: tab registry, use deferred register.
-//    @SubscribeEvent
-//    public void onCreativeModeTabRegister(CreativeModeTabEvent.Register event) {
-//        TabsRegistry tmp = TabsRegistry.get(name);
-//        if (tmp instanceof TabsRegistryOps ops) {
-//            ops.accept(this);
-//        }
-//        tab = event.registerCreativeModeTab(name, builder::apply);
-//        if (tmp instanceof TabsRegistryOps ops) {
-//            ops.tab = tab;
-//        }
-//    }
+    @SubscribeEvent
+    public void onCreativeModeTabRegister(RegisterEvent event) {
+        TabsRegistry tmp = TabsRegistry.get(name);
+        if (tmp instanceof TabsRegistryOps ops) {
+            ops.accept(this);
+        }
+        tab = builder.apply(CreativeModeTab.builder()).build();
+        event.register(Registries.CREATIVE_MODE_TAB, name, () -> tab);
+        if (tmp instanceof TabsRegistryOps ops) {
+            ops.tab = tab;
+        }
+    }
 
     @Override
     public void accept(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {

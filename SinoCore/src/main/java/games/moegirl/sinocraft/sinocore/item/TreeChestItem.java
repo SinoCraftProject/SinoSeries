@@ -50,22 +50,22 @@ public class TreeChestItem extends BlockItem {
             consumer.accept(new TreeChestItemRenderer(block, tree));
         }
     }
-}
 
-/**
- * 发射器
- */
-class ChestDispenseBehavior extends OptionalDispenseItemBehavior {
+    /**
+     * 发射器
+     */
+    class ChestDispenseBehavior extends OptionalDispenseItemBehavior {
 
-    @Override
-    public ItemStack execute(BlockSource source, ItemStack stack) {
-        BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-        for (AbstractChestedHorse horse : source.getLevel().getEntitiesOfClass(AbstractChestedHorse.class, new AABB(blockpos), h -> h.isAlive() && !h.hasChest())) {
-            if (!horse.isTamed() || !horse.getSlot(499).set(stack)) continue;
-            stack.shrink(1);
-            this.setSuccess(true);
-            return stack;
+        @Override
+        public ItemStack execute(BlockSource source, ItemStack stack) {
+            BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+            for (AbstractChestedHorse horse : source.getLevel().getEntitiesOfClass(AbstractChestedHorse.class, new AABB(blockpos), h -> h.isAlive() && !h.hasChest())) {
+                if (!horse.isTamed() || !horse.getSlot(499).set(stack)) continue;
+                stack.shrink(1);
+                this.setSuccess(true);
+                return stack;
+            }
+            return super.execute(source, stack);
         }
-        return super.execute(source, stack);
     }
 }
