@@ -30,5 +30,6 @@
     "recipes": [
       "sinodivination:jujube_fence"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

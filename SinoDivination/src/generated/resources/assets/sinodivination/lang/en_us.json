@@ -22,7 +22,6 @@
   "block.sinodivination.cotinus_stripped_log_wood": "Stripped cotinus Wood",
   "block.sinodivination.cotinus_trapdoor": "cotinus Trapdoor",
   "block.sinodivination.dragonliver_melon": "Longan Melon",
-  "block.sinodivination.garlic": "Garlic",
   "block.sinodivination.jujube_button": "jujube Button",
   "block.sinodivination.jujube_door": "jujube Door",
   "block.sinodivination.jujube_fence": "jujube Fence",
@@ -79,7 +78,6 @@
   "item.sinodivination.copper_mask": "Copper Mask",
   "item.sinodivination.copper_mirror": "Copper Mirror",
   "item.sinodivination.dragonliver_melon": "Longan Melon",
-  "item.sinodivination.garlic": "Garlic",
   "item.sinodivination.hook": "Hook",
   "item.sinodivination.huang_cong": "Huang Cong",
   "item.sinodivination.jujube": "Jujube",
@@ -89,7 +87,6 @@
   "item.sinodivination.rehmannia": "Rehmannia Glutinosa",
   "item.sinodivination.rice": "Rice",
   "item.sinodivination.seed_dragonliver_melon": "Longan Melon Seed",
-  "item.sinodivination.seed_garlic": "Garlic Seed",
   "item.sinodivination.seed_rehmannia": "Rehmannia Seed",
   "item.sinodivination.seed_rice": "Glutinous Rice Seed",
   "item.sinodivination.seed_sesame": "Jusheng Seed",
@@ -113,6 +110,5 @@
   "sinodivination.top.birthday": "Birthday(%s): %s",
   "sinodivination.top.birthday_no": "Birthday: No Record",
   "sinodivination.top.block_allowed": "Allowed Player(%d)",
-  "sinodivination.top.block_owner": "Owner: %s",
-  "tab.sinodivination.tab": "SinoDivination"
+  "sinodivination.top.block_owner": "Owner: %s"
 }

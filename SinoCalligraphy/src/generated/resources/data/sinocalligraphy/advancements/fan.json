@@ -35,5 +35,6 @@
     [
       "got_fan"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

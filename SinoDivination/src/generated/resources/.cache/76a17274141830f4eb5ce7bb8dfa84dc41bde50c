@@ -1,4 +1,4 @@
-// 1.19.4	2023-06-08T12:35:52.850159	Block States: sinodivination
+// 1.20.1	2023-06-16T09:08:56.7826616	Block States: sinodivination
 f87cd40863f0126d14ab61e6d2b74c5ac83c283c assets/sinodivination/blockstates/altar.json
 f0ef63b733939b43c0923c6f5dc9a6618cd24301 assets/sinodivination/blockstates/bellows.json
 143e8d1e9ef255504a7f32457be7fe52b4e92066 assets/sinodivination/blockstates/bright_stem_grass.json
@@ -26,7 +26,6 @@ e15b335dbbb1d80e93e9edf8c08b203bc2d53871 assets/sinodivination/blockstates/cotin
 0d74a384e4e019716830b15a84d424c3cbd905fb assets/sinodivination/blockstates/cotinus_wall_hanging_sign.json
 8d9e3981aef3ffb6510f47b3e35dac15da76e526 assets/sinodivination/blockstates/cotinus_wall_sign.json
 dbb32e6b6b6825456b10ae8cf5ac4e3eef9647af assets/sinodivination/blockstates/dragonliver_melon.json
-a4e472710ef6a615a67753defa78a54ff26b9b97 assets/sinodivination/blockstates/garlic.json
 b993e32e629013514af31faf2b8e9de7fda479dc assets/sinodivination/blockstates/jujube_button.json
 a289ba8b80b9f28919772ce0437652b16a70c5d6 assets/sinodivination/blockstates/jujube_chest.json
 6075a5caee2bc29f6fdbc7942bee407c3cc142e4 assets/sinodivination/blockstates/jujube_door.json
@@ -113,10 +112,6 @@ c31cd3d212cf15079538e24f3585d272df86bb09 assets/sinodivination/models/block/drag
 9bce4ec01e536bf4a10e82b01f5465ec3a415154 assets/sinodivination/models/block/dragonliver_melon_stage_5.json
 cfa6c08037dcc9e09a0fcb31db2d23bc8d1070da assets/sinodivination/models/block/dragonliver_melon_stage_6.json
 e669a420ea8bd562345b9bcd83cef94a6de1404a assets/sinodivination/models/block/dragonliver_melon_stage_7.json
-a4e09aeb302fc3d1330e93770e58879c2ac63793 assets/sinodivination/models/block/garlic_stage_0.json
-1fca78326440c47f87ec64b1810ff12f373f4494 assets/sinodivination/models/block/garlic_stage_1.json
-8d73b053f8c52f3bff1e41c6e4127c943cd23235 assets/sinodivination/models/block/garlic_stage_2.json
-48413e8ebfc744229c9c93cb64725b5a41c34016 assets/sinodivination/models/block/garlic_stage_3.json
 d1e7473dcdbe6749162041b50bbb7f84d1bdeff4 assets/sinodivination/models/block/jujube_button.json
 4d680fc347b03604ff6ec416cd78a14745a85aa4 assets/sinodivination/models/block/jujube_chest.json
 c84a6a1317dbd1c4bf16d33365fdef4808a022df assets/sinodivination/models/block/jujube_door.json

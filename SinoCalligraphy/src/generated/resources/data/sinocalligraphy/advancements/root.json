@@ -32,5 +32,6 @@
     [
       "got_brush"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

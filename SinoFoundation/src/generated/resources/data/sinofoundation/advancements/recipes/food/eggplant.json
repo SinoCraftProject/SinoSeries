@@ -30,5 +30,6 @@
     "recipes": [
       "sinofoundation:eggplant"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

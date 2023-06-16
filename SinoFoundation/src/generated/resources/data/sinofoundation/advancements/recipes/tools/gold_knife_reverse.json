@@ -30,5 +30,6 @@
     "recipes": [
       "sinofoundation:gold_knife_reverse"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

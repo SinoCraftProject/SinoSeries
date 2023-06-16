@@ -30,5 +30,6 @@
     "recipes": [
       "sinodivination:stick_cotinus"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

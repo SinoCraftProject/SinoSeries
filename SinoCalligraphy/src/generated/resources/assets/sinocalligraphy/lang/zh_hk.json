@@ -1,5 +1,6 @@
 {
   "block.sinocalligraphy.green_sandalwood_button": "青檀木按鈕",
+  "block.sinocalligraphy.green_sandalwood_chest": "青檀木箱子",
   "block.sinocalligraphy.green_sandalwood_door": "青檀木門",
   "block.sinocalligraphy.green_sandalwood_fence": "青檀木欄杆",
   "block.sinocalligraphy.green_sandalwood_fence_gate": "青檀木閘門",
@@ -17,6 +18,7 @@
   "block.sinocalligraphy.green_sandalwood_stripped_log": "剝皮青檀木原木",
   "block.sinocalligraphy.green_sandalwood_stripped_log_wood": "剝皮青檀木",
   "block.sinocalligraphy.green_sandalwood_trapdoor": "青檀木地板門",
+  "block.sinocalligraphy.green_sandalwood_trapped_chest": "青檀木陷阱箱",
   "block.sinocalligraphy.paper_drying_rack": "晾紙架",
   "block.sinocalligraphy.wood_pulp": "木漿",
   "fluid.sinocalligraphy.wood_pulp": "木漿",

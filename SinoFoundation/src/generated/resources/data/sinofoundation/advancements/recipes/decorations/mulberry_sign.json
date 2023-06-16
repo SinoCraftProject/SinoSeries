@@ -30,5 +30,6 @@
     "recipes": [
       "sinofoundation:mulberry_sign"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

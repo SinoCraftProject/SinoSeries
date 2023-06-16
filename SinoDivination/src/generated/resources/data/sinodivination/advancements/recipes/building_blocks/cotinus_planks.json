@@ -28,5 +28,6 @@
     "recipes": [
       "sinodivination:cotinus_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

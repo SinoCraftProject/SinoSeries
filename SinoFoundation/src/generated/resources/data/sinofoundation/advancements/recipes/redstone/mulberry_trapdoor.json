@@ -30,5 +30,6 @@
     "recipes": [
       "sinofoundation:mulberry_trapdoor"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

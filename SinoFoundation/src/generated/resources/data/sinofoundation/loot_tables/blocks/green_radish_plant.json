@@ -20,7 +20,6 @@
           "name": "sinofoundation:green_radish"
         }
       ],
-      "name": "seeds",
       "rolls": 1.0
     },
     {
@@ -51,8 +50,8 @@
           "name": "sinofoundation:green_radish"
         }
       ],
-      "name": "mature",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sinofoundation:blocks/green_radish_plant"
 }

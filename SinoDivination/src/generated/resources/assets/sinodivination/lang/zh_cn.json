@@ -24,7 +24,6 @@
   "block.sinodivination.cotinus_trapdoor": "无患木陷阱门",
   "block.sinodivination.cotinus_trapped_chest": "无患陷阱箱",
   "block.sinodivination.dragonliver_melon": "龙肝瓜",
-  "block.sinodivination.garlic": "大蒜",
   "block.sinodivination.jujube_button": "枣心木按钮",
   "block.sinodivination.jujube_chest": "枣木匣",
   "block.sinodivination.jujube_door": "枣心木门",
@@ -85,7 +84,6 @@
   "item.sinodivination.copper_mask": "铜面",
   "item.sinodivination.copper_mirror": "铜镜",
   "item.sinodivination.dragonliver_melon": "龙肝瓜",
-  "item.sinodivination.garlic": "大蒜",
   "item.sinodivination.hook": "钩棍",
   "item.sinodivination.huang_cong": "黄琮",
   "item.sinodivination.jujube": "枣",
@@ -95,7 +93,6 @@
   "item.sinodivination.rehmannia": "地黄",
   "item.sinodivination.rice": "稻米",
   "item.sinodivination.seed_dragonliver_melon": "龙肝瓜种子",
-  "item.sinodivination.seed_garlic": "大蒜种子",
   "item.sinodivination.seed_rehmannia": "地黄种子",
   "item.sinodivination.seed_rice": "糯稻种子",
   "item.sinodivination.seed_sesame": "巨胜种子",
@@ -173,6 +170,5 @@
   "sinodivination.top.birthday": "生辰八字(%s): %s",
   "sinodivination.top.birthday_no": "生辰八字：无记录",
   "sinodivination.top.block_allowed": "允许玩家(%d)",
-  "sinodivination.top.block_owner": "所有者: %s",
-  "tab.sinodivination.tab": "华夏九筮"
+  "sinodivination.top.block_owner": "所有者: %s"
 }

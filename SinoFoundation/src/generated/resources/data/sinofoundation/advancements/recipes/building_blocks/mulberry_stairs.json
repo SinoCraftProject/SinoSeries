@@ -30,5 +30,6 @@
     "recipes": [
       "sinofoundation:mulberry_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

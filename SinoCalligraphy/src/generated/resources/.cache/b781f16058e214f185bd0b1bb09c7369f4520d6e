@@ -1,11 +1,16 @@
-// 1.19.4	2023-04-24T20:56:29.8544317	Tree Tags for minecraft:block mod id sinocalligraphy
+// 1.20.1	2023-06-16T09:08:11.0477754	Tree Tags for minecraft:block mod id sinocalligraphy
+f5b88031dd2d75876ac821d8e810a97be970d3da data/forge/tags/blocks/chests/trapped.json
+79fb0309c683ae760c0d2daf5c46f8ae54f6854d data/forge/tags/blocks/chests/wooden.json
 0acb4b228650034b1d273913d2e597e1f2760817 data/forge/tags/blocks/fence_gates/wooden.json
 ec4ffbda0b6eac4f851186afffa6a66003889637 data/minecraft/tags/blocks/ceiling_hanging_signs.json
+79fb0309c683ae760c0d2daf5c46f8ae54f6854d data/minecraft/tags/blocks/features_cannot_replace.json
 0acb4b228650034b1d273913d2e597e1f2760817 data/minecraft/tags/blocks/fence_gates.json
 f889f254a59aef856aaa4dee773100d663f4c98c data/minecraft/tags/blocks/flower_pots.json
+79fb0309c683ae760c0d2daf5c46f8ae54f6854d data/minecraft/tags/blocks/guarded_by_piglins.json
 ab771d2245422bb139cdd45678c1310bea7bb30f data/minecraft/tags/blocks/leaves.json
 976af57c0be97350b68bef944dd0fb658ee1c35c data/minecraft/tags/blocks/logs.json
 976af57c0be97350b68bef944dd0fb658ee1c35c data/minecraft/tags/blocks/logs_that_burn.json
+79fb0309c683ae760c0d2daf5c46f8ae54f6854d data/minecraft/tags/blocks/mineable/axe.json
 9949eb35cba68407936e46474902dbb80caf1210 data/minecraft/tags/blocks/planks.json
 68498cf96c35554990ea266b3bfdeeba5f88344c data/minecraft/tags/blocks/saplings.json
 1bc73ea622a63b9fc3cab82c7e63cf0f260b7946 data/minecraft/tags/blocks/standing_signs.json

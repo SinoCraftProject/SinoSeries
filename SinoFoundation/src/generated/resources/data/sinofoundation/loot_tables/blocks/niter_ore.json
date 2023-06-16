@@ -20,8 +20,8 @@
           "name": "sinofoundation:niter"
         }
       ],
-      "name": "ingot",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sinofoundation:blocks/niter_ore"
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "sinocalligraphy:green_sandalwood_log_wood"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

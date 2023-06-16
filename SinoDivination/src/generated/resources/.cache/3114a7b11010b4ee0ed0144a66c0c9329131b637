@@ -1,4 +1,4 @@
-// 1.19.4	2023-06-08T12:35:52.8602705	Item Models: sinodivination
+// 1.20.1	2023-06-16T09:08:56.7891717	Item Models: sinodivination
 d75e97b47b48a3e965b8d608dcc71ac5089c9dff assets/sinodivination/models/item/altar.json
 2e6760c3fca44cf9f30d5b0c45208ac9be915aac assets/sinodivination/models/item/bai_hu.json
 25fc6b44e8fc68ba49b24356e0b582ce42008ff5 assets/sinodivination/models/item/bellows.json
@@ -33,7 +33,6 @@ aeec198142fe8bdc6c223d5cb96de446bfe711fb assets/sinodivination/models/item/cotin
 3388aed8d86e7a0f98a806c757d5eb1a21061526 assets/sinodivination/models/item/cotinus_trapdoor.json
 774607ddfdace4e8ac18c1315e6f2bd8fc87f153 assets/sinodivination/models/item/cotinus_trapped_chest.json
 3459b5313a4afbab9ece5279cd539cf0977edbde assets/sinodivination/models/item/dragonliver_melon.json
-f3e17280b551f7b0ded1a6315b6a6d84f3c3bc1c assets/sinodivination/models/item/garlic.json
 a54fd44520ec338b0982beae0fac7bfc57366f0a assets/sinodivination/models/item/hook.json
 4e19d8af3f73f759f38514bed0f0e15c96c7f4d5 assets/sinodivination/models/item/huang_cong.json
 1681acc5fbb19115e015efcc4d21900f3f710397 assets/sinodivination/models/item/jujube.json
@@ -64,7 +63,6 @@ ae0db34ba50a2eb22fe991f3ccd4c63f1ea8c37f assets/sinodivination/models/item/lucid
 c51905acf83df20b9bad1759b820daa4c36074c6 assets/sinodivination/models/item/rehmannia.json
 81b8f3734ed5527980b4994d86055affe2945c4f assets/sinodivination/models/item/rice.json
 69fb1dd269b96e4fbd8d8f15d0d03c62317c23c2 assets/sinodivination/models/item/seed_dragonliver_melon.json
-b70084c2370bf24862f11e99ebe80bb20fbcf8f7 assets/sinodivination/models/item/seed_garlic.json
 fc79d143b52320bda8cc5eb58354394729de48ee assets/sinodivination/models/item/seed_rehmannia.json
 a6e8d8ced225d18180efa413f4f9bc2c0f257c49 assets/sinodivination/models/item/seed_rice.json
 2f69471a3f9af7a7200fe93accd14177fddb1da7 assets/sinodivination/models/item/seed_sesame.json

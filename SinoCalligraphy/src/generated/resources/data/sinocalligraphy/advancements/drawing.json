@@ -32,5 +32,6 @@
     [
       "got_drawing"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

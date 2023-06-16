@@ -30,5 +30,6 @@
     "recipes": [
       "sinodivination:cotinus_door"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -20,7 +20,6 @@
           "name": "sinofoundation:soybean"
         }
       ],
-      "name": "seeds",
       "rolls": 1.0
     },
     {
@@ -51,8 +50,8 @@
           "name": "sinofoundation:soybean"
         }
       ],
-      "name": "mature",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sinofoundation:blocks/soybean_plant"
 }

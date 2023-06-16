@@ -30,5 +30,6 @@
     "recipes": [
       "sinodivination:cotinus_pressure_gate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

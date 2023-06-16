@@ -30,5 +30,6 @@
     "recipes": [
       "sinodivination:stick_sophora"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

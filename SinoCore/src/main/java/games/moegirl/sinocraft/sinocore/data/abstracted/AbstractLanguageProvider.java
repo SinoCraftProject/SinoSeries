@@ -50,7 +50,7 @@ public abstract class AbstractLanguageProvider extends LanguageProvider {
      * @param translate 名称
      */
     protected void addTab(RegistryObject<CreativeModeTab> tab, String translate) {
-        add("tab." + modid + "." + tab.getKey().registry().getPath(), translate);
+        add("tab." + modid + "." + tab.getKey().location().getPath(), translate);
     }
 
     /**

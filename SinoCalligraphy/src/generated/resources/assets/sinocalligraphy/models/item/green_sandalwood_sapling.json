@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "sinocalligraphy:block/green_sandalwood_sapling"
+    "layer0": "sinocalligraphy:item/green_sandalwood_sapling"
   }
 }

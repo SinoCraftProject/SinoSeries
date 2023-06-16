@@ -20,7 +20,6 @@
           "name": "sinofoundation:white_radish"
         }
       ],
-      "name": "seeds",
       "rolls": 1.0
     },
     {
@@ -51,8 +50,8 @@
           "name": "sinofoundation:white_radish"
         }
       ],
-      "name": "mature",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sinofoundation:blocks/white_radish_plant"
 }

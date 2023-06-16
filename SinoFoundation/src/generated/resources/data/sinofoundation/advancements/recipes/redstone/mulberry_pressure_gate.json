@@ -30,5 +30,6 @@
     "recipes": [
       "sinofoundation:mulberry_pressure_gate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

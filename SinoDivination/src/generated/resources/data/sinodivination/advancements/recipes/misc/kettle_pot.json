@@ -30,5 +30,6 @@
     "recipes": [
       "sinodivination:kettle_pot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

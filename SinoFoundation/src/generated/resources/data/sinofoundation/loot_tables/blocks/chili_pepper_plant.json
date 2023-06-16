@@ -32,7 +32,6 @@
           "name": "sinofoundation:chili_pepper_seed"
         }
       ],
-      "name": "not_mature",
       "rolls": 1.0
     },
     {
@@ -63,8 +62,8 @@
           "name": "sinofoundation:chili_pepper"
         }
       ],
-      "name": "mature",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sinofoundation:blocks/chili_pepper_plant"
 }

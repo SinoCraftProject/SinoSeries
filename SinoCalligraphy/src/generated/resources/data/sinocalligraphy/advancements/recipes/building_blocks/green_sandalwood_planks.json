@@ -28,5 +28,6 @@
     "recipes": [
       "sinocalligraphy:green_sandalwood_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
