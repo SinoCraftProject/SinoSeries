@@ -1,7 +1,5 @@
 package games.moegirl.sinocraft.sinocore.tab;
 
-import games.moegirl.sinocraft.sinocore.event.TabItemAddEventHandler;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -17,16 +15,6 @@ import java.util.function.Supplier;
  * @author luqin2007
  */
 public class TabItemGenerator implements CreativeModeTab.DisplayItemsGenerator {
-
-    /**
-     * 用于 CreativeModeTab 实例，用于 Minecraft 原版 Tab。该方法获取的 Generator 仅 add，addStack 有效
-     *
-     * @param tab tab
-     * @return TabItemGenerator
-     */
-    public static TabItemGenerator forCreativeModeTab(ResourceKey<CreativeModeTab> tab) {
-        return TabItemAddEventHandler.forCreativeModeTab(tab);
-    }
 
     private final List<Supplier<ItemStack>> items = new ArrayList<>();
     private Supplier<ItemStack> display = () -> ItemStack.EMPTY;
