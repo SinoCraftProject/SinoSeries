@@ -3,7 +3,9 @@ package games.moegirl.sinocraft.sinocore.data.abstracted;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -47,8 +49,8 @@ public abstract class AbstractLanguageProvider extends LanguageProvider {
      * @param tab       tab
      * @param translate 名称
      */
-    protected void addTab(ResourceLocation tab, String translate) {
-        add("tab." + modid + "." + tab.getPath(), translate);
+    protected void addTab(RegistryObject<CreativeModeTab> tab, String translate) {
+        add("tab." + modid + "." + tab.getKey().registry().getPath(), translate);
     }
 
     /**

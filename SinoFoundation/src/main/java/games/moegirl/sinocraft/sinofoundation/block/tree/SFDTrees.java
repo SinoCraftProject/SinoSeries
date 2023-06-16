@@ -1,17 +1,15 @@
 package games.moegirl.sinocraft.sinofoundation.block.tree;
 
 import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
+import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
-import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
-
-import java.util.function.Supplier;
 
 public class SFDTrees {
     public static final ResourceLocation MULBERRY_NAME = new ResourceLocation(SinoFoundation.MODID, "mulberry");
@@ -23,8 +21,8 @@ public class SFDTrees {
             .translate("lzh", "桑")
             .translate("en_us", "Mulberry")
             .grower(new MulberryTreeGrower(MULBERRY_NAME))
-            .tab(SinoSeriesTabs.BUILDING_BLOCKS)
-            .tab(TreeBlockType.SAPLING, SinoSeriesTabs.AGRICULTURE)
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     static {

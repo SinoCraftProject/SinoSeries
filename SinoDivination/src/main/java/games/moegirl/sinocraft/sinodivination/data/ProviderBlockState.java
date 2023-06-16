@@ -34,7 +34,6 @@ class ProviderBlockState extends BlockStateProviderBase {
         skipBlock(SDBlocks.KETTLE_POT.get());
         crop(SDBlocks.WORMWOOD);
         crop(SDBlocks.RICE);
-        crop(SDBlocks.GARLIC);
         crop(SDBlocks.REHMANNIA);
         crop(SDBlocks.DRAGONLIVER_MELON);
         crop(SDBlocks.SESAME);

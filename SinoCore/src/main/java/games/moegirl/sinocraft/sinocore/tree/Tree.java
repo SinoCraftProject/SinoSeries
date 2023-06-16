@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
-import games.moegirl.sinocraft.sinocore.tab.SCTabs;
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

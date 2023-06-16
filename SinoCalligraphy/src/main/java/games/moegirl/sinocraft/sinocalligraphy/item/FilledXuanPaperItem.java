@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocalligraphy.item;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.client.XuanPaperRenderer;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
-import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class FilledXuanPaperItem extends Item implements ITabItem {
+public class FilledXuanPaperItem extends Item {
     public FilledXuanPaperItem() {
         super(new Item.Properties()
                 .stacksTo(1)
@@ -64,10 +63,5 @@ public class FilledXuanPaperItem extends Item implements ITabItem {
                 return XuanPaperRenderer.getInstance();
             }
         });
-    }
-
-    @Override
-    public List<ResourceLocation> getTabs() {
-        return List.of();
     }
 }

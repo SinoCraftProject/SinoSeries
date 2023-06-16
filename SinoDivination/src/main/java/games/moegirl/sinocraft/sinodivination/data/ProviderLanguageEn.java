@@ -18,12 +18,9 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
 
     @Override
     public void translate() {
-        // group
-        addTab(SinoDivination.TAB, "SinoDivination");
         // blocks
         addBlock(SDBlocks.KETTLE_POT, "Kettle Pot");
         addBlock(SDBlocks.WORMWOOD, "Wormwood");
-        addBlock(SDBlocks.GARLIC, "Garlic");
         addBlock(SDBlocks.RICE, "Glutinous Rise");
         addBlock(SDBlocks.LUCID_GANODERMA, "Ganoderma Lucidum");
         addBlock(SDBlocks.REHMANNIA, "Rehmannia Glutinosa");
@@ -46,8 +43,6 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
         addItem(SDItems.SEED_WORMWOOD, "Argy Wormwood Seed");
         addItem(SDItems.WORMWOOD_LEAF, "Argy Wormwood Leaves");
         addItem(SDItems.MOXIBUSTION, "Moxibustion");
-        addItem(SDItems.SEED_GARLIC, "Garlic Seed");
-        addItem(SDItems.GARLIC, "Garlic");
         addItem(SDItems.RICE, "Rice");
         addItem(SDItems.SEED_RICE, "Glutinous Rice Seed");
         addItem(SDItems.REHMANNIA, "Rehmannia Glutinosa");

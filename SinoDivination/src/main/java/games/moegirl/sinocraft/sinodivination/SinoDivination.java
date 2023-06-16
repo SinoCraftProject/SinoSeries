@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinodivination;
 
-import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.blockentity.SDBlockEntities;
 import games.moegirl.sinocraft.sinodivination.client.screen.SDScreens;
@@ -21,16 +20,12 @@ public class SinoDivination {
     public static final String NAME = "SinoDivination";
     public static final String VERSION = "@version@";
 
-    public static ResourceLocation TAB;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
     public SinoDivination() {
         LOGGER.info("Loading SinoDivination. Ver: " + VERSION);
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        TabsRegistry tab = TabsRegistry.register(new ResourceLocation(MODID, "tab"), bus);
-        TAB = tab.name();
 
 //        SDNetworks.register();
         SDBlocks.register(bus);
@@ -41,8 +36,6 @@ public class SinoDivination {
         SDRecipes.register(bus);
         SDScreens.register(bus);
         SDTrees.register(bus);
-
-        tab.add(SDItems.REGISTRY);
 
         LOGGER.info("Reverence for heaven and earth, respect ghosts and gods.");
     }

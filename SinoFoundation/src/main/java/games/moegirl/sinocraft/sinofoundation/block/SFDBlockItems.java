@@ -21,8 +21,8 @@ public class SFDBlockItems {
         ITEMS.register(bus);
     }
 
-    public static final RegistryObject<BlockItem> STOVE = register("stove", () -> new BlockItem(SFDBlocks.STOVE.get(), new Item.Properties()), SinoSeriesTabs.Generators.FUNCTIONAL);
-    public static final RegistryObject<BlockItem> WOOD_DESK = register("wood_desk", () -> new BlockItem(SFDBlocks.WOOD_DESK.get(), new Item.Properties()), SinoSeriesTabs.Generators.FUNCTIONAL);
+    public static final RegistryObject<BlockItem> STOVE = register("stove", () -> new BlockItem(SFDBlocks.STOVE.get(), new Item.Properties()), SinoSeriesTabs.Generators.FUNCTIONAL_BLOCKS);
+    public static final RegistryObject<BlockItem> WOOD_DESK = register("wood_desk", () -> new BlockItem(SFDBlocks.WOOD_DESK.get(), new Item.Properties()), SinoSeriesTabs.Generators.FUNCTIONAL_BLOCKS);
 
     public static RegistryObject<BlockItem> WHITE_RADISH = register("white_radish", () -> new BlockItem(SFDBlocks.WHITE_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())), SinoSeriesTabs.Generators.AGRICULTURE);
     public static RegistryObject<BlockItem> SUMMER_RADISH = register("summer_radish", () -> new BlockItem(SFDBlocks.SUMMER_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())), SinoSeriesTabs.Generators.AGRICULTURE);
@@ -36,12 +36,12 @@ public class SFDBlockItems {
     public static RegistryObject<BlockItem> SOYBEAN = register("soybean", () -> new BlockItem(SFDBlocks.SOYBEAN_PLANT.get(), new Item.Properties()), SinoSeriesTabs.Generators.AGRICULTURE);
     public static RegistryObject<BlockItem> GARLIC = register("garlic", () -> new BlockItem(SFDBlocks.GARLIC_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())), SinoSeriesTabs.Generators.AGRICULTURE);
 
-    public static RegistryObject<BlockItem> MARBLE = register("marble", () -> new BlockItem(SFDBlocks.MARBLE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING);
-    public static RegistryObject<BlockItem> MARBLE_WALL = register("marble_wall", () -> new BlockItem(SFDBlocks.MARBLE_WALL.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING);
+    public static RegistryObject<BlockItem> MARBLE = register("marble", () -> new BlockItem(SFDBlocks.MARBLE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING_BLOCKS);
+    public static RegistryObject<BlockItem> MARBLE_WALL = register("marble_wall", () -> new BlockItem(SFDBlocks.MARBLE_WALL.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING_BLOCKS);
 
-    public static final RegistryObject<BlockItem> JADE_ORE = register("jade_ore", () -> new BlockItem(SFDBlocks.JADE_ORE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING);
-    public static final RegistryObject<BlockItem> NITER_ORE = register("niter_ore", () -> new BlockItem(SFDBlocks.NITER_ORE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING);
-    public static final RegistryObject<BlockItem> SULPHUR_ORE = register("sulphur_ore", () -> new BlockItem(SFDBlocks.SULPHUR_ORE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING);
+    public static final RegistryObject<BlockItem> JADE_ORE = register("jade_ore", () -> new BlockItem(SFDBlocks.JADE_ORE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING_BLOCKS);
+    public static final RegistryObject<BlockItem> NITER_ORE = register("niter_ore", () -> new BlockItem(SFDBlocks.NITER_ORE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING_BLOCKS);
+    public static final RegistryObject<BlockItem> SULPHUR_ORE = register("sulphur_ore", () -> new BlockItem(SFDBlocks.SULPHUR_ORE.get(), new Item.Properties()), SinoSeriesTabs.Generators.BUILDING_BLOCKS);
 
     private static <T extends Item> RegistryObject<T> register(String name, Supplier<T> item, TabItemGenerator tab) {
         RegistryObject<T> object = ITEMS.register(name, item);

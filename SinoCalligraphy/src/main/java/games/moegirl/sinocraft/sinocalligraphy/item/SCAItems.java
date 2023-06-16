@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.fluid.SCAFluids;
-import games.moegirl.sinocraft.sinocore.item.tab.TabsRegistry;
+import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -18,7 +18,23 @@ public class SCAItems {
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
-        TabsRegistry.get(SinoSeriesTabs.MISC).add(ITEMS);
+
+        TabsRegistry.items(SinoSeriesTabs.MATERIALS)
+                .addItem(INK)
+                .addItem(GOLDEN_INK)
+                .addItem(EMPTY_XUAN_PAPER)
+                .addItem(EMPTY_XUAN_PAPER_RED)
+                .addItem(FILLED_XUAN_PAPER)
+                .addItem(GREEN_SANDALWOOD_BARK);
+
+        TabsRegistry.items(SinoSeriesTabs.TOOLS)
+                .addItem(BRUSH)
+                .addItem(FAN)
+                .addItem(FAN_FOLDED);
+
+        TabsRegistry.items(SinoSeriesTabs.WEAPONS)
+                .addItem(FAN)
+                .addItem(FAN_FOLDED);
     }
 
     public static final RegistryObject<Item> BRUSH = ITEMS.register("chinese_brush", BrushItem::new);

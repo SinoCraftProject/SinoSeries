@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocalligraphy.item;
 
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.provider.BrushMenuProvider;
-import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +15,7 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.List;
 
-public class BrushItem extends Item implements ITabItem {
+public class BrushItem extends Item {
     public BrushItem() {
         super(new Properties()
                 .durability(127)
@@ -35,10 +34,5 @@ public class BrushItem extends Item implements ITabItem {
         }
 
         return InteractionResultHolder.success(item);
-    }
-
-    @Override
-    public List<ResourceLocation> getTabs() {
-        return List.of(SinoSeriesTabs.TOOLS);
     }
 }

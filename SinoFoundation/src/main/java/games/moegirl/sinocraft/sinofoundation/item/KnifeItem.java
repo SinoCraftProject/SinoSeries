@@ -21,7 +21,7 @@ import net.minecraftforge.common.ToolActions;
 import java.util.List;
 import java.util.Optional;
 
-public class KnifeItem extends SwordItem implements ITabItem {
+public class KnifeItem extends SwordItem {
 
     public KnifeItem(Tier tier) {
         super(tier, 1, -1.6f, new Properties());
@@ -74,10 +74,5 @@ public class KnifeItem extends SwordItem implements ITabItem {
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         return ToolActions.DEFAULT_AXE_ACTIONS.contains(toolAction);
-    }
-
-    @Override
-    public List<ResourceLocation> getTabs() {
-        return List.of(SinoSeriesTabs.WEAPONS, SinoSeriesTabs.TOOLS);
     }
 }

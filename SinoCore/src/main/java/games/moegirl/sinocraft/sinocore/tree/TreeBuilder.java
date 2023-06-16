@@ -233,9 +233,9 @@ public class TreeBuilder {
      * @param tab           Item tab.
      * @return Builder
      */
-    public TreeBuilder tab(TreeBlockType treeBlockType, ResourceKey<CreativeModeTab> tab) {
+    public TreeBuilder tab(TreeBlockType treeBlockType, TabItemGenerator tab) {
         TreeBlockFactory factory = treeBlocks.get(treeBlockType);
-        factory.tabs.add(TabItemGenerator.forCreativeModeTab(tab));
+        factory.tabs.add(tab);
         return this;
     }
 

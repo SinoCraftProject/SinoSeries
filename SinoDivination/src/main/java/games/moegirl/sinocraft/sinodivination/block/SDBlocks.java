@@ -19,33 +19,18 @@ public class SDBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, SinoDivination.MODID);
 
     public static final RegistryObject<KettlePot> KETTLE_POT = simple(KettlePot.class);
-
     public static final RegistryObject<SimpleCropBlock<Item>> WORMWOOD = crop3(() -> SDItems.WORMWOOD_LEAF, "wormwood", 0, 1, 2, 2);
-
-    public static final RegistryObject<SimpleCropBlock<Item>> GARLIC = crop3(() -> SDItems.GARLIC, "garlic", 0, 1, 2, 3);
-
     public static final RegistryObject<Rice> RICE = simple(Rice.class);
-
     public static final RegistryObject<LucidGanoderma> LUCID_GANODERMA = simple(LucidGanoderma.class);
-
     public static final RegistryObject<SimpleCropBlock<Item>> REHMANNIA = crop3(() -> SDItems.REHMANNIA, "rehmannia", 0, 1, 1, 1);
-
     public static final RegistryObject<SimpleCropBlock<Item>> DRAGONLIVER_MELON = crop(() -> SDItems.DRAGONLIVER_MELON, "dragonliver_melon", 0, 1, 1, 1);
-
     public static final RegistryObject<SimpleCropBlock<Item>> SESAME = crop3(() -> SDItems.SESAME, "sesame", 0, 1, 3, 3);
-
     public static final RegistryObject<ZhuCao> ZHU_CAO = simple(ZhuCao.class);
-
     public static final RegistryObject<BrightStemGrass> BRIGHT_STEM_GRASS = simple(BrightStemGrass.class);
-
     public static final RegistryObject<Bellows> BELLOWS = simple(Bellows.class);
-
     public static final RegistryObject<SilkwormPlaque> SILKWORM_PLAQUE = simple(SilkwormPlaque.class);
-
     public static final RegistryObject<Tripod> TRIPOD = simple(Tripod.class);
-
     public static final RegistryObject<Altar> ALTAR = simple(Altar.class);
-
     public static final RegistryObject<CarvingTable> CARVING_TABLE = simple(CarvingTable.class);
 
     // =================================================================================================================

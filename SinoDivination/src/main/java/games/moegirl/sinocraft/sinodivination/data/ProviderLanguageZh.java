@@ -14,12 +14,9 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
 
     @Override
     public void translate() {
-        // group
-        addTab(SinoDivination.TAB, "华夏九筮");
         // blocks
         addBlock(SDBlocks.KETTLE_POT, "釜锅");
         addBlock(SDBlocks.WORMWOOD, "艾草");
-        addBlock(SDBlocks.GARLIC, "大蒜");
         addBlock(SDBlocks.RICE, "糯稻");
         addBlock(SDBlocks.LUCID_GANODERMA, "灵芝");
         addBlock(SDBlocks.REHMANNIA, "地黄");
@@ -42,8 +39,6 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
         addItem(SDItems.SEED_WORMWOOD, "艾草种子");
         addItem(SDItems.WORMWOOD_LEAF, "艾草叶");
         addItem(SDItems.MOXIBUSTION, "艾灸");
-        addItem(SDItems.SEED_GARLIC, "大蒜种子");
-        addItem(SDItems.GARLIC, "大蒜");
         addItem(SDItems.RICE, "稻米");
         addItem(SDItems.SEED_RICE, "糯稻种子");
         addItem(SDItems.REHMANNIA, "地黄");

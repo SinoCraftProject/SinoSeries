@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocalligraphy.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
-import games.moegirl.sinocraft.sinocore.item.tab.ITabItem;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -26,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FanItem extends Item implements Vanishable, ITabItem {
+public class FanItem extends Item implements Vanishable {
 
     protected boolean folded;
     protected final Multimap<Attribute, AttributeModifier> defaultModifiers;
@@ -106,10 +105,5 @@ public class FanItem extends Item implements Vanishable, ITabItem {
             tooltip.add(Component.translatable(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
             tooltip.add(Component.translatable(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
         }
-    }
-
-    @Override
-    public List<ResourceLocation> getTabs() {
-        return List.of(SinoSeriesTabs.WEAPONS, SinoSeriesTabs.MISC);
     }
 }

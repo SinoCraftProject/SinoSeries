@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * @author luqin2007
  */
-public class SCTabs {
+public class TabsRegistry {
 
     private static final Map<ResourceLocation, TabItemGenerator> GENERATORS = new HashMap<>();
 
@@ -28,24 +28,22 @@ public class SCTabs {
         return GENERATORS.get(tab.getId());
     }
 
-    public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SinoCore.MODID);
-
-    public static final RegistryObject<CreativeModeTab> CORE = tab("sinocore", "tab");
-
     // =================================================================================================================
 
-    public static RegistryObject<CreativeModeTab> tab(String name, String langKey) {
-        TabItemGenerator generator = new TabItemGenerator();
-        RegistryObject<CreativeModeTab> object = REGISTRY.register(name, () -> CreativeModeTab.builder()
-                .title(Component.translatable(langKey))
+    /**
+     * 注册 Tab
+     * @param register DR
+     * @param name tab 名称
+     * @param generator TabItemGenerator
+     * @return RegistryObject<CreativeModeTab>
+     */
+    public static RegistryObject<CreativeModeTab> tab(String modid, DeferredRegister<CreativeModeTab> register, String name, TabItemGenerator generator) {
+        RegistryObject<CreativeModeTab> object = register.register(name, () -> CreativeModeTab.builder()
+                .title(Component.translatable("tab." + modid + "." + name))
                 .displayItems(generator)
                 .icon(generator::displayItem)
                 .build());
         GENERATORS.put(object.getId(), generator);
         return object;
-    }
-
-    public static void register(IEventBus bus) {
-        REGISTRY.register(bus);
     }
 }
