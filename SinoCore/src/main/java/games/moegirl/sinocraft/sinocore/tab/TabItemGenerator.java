@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinocore.tab;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.util.Lazy;
 
@@ -17,7 +18,7 @@ import java.util.function.Supplier;
 public class TabItemGenerator implements CreativeModeTab.DisplayItemsGenerator {
 
     private final List<Supplier<ItemStack>> items = new ArrayList<>();
-    private Supplier<ItemStack> display = () -> ItemStack.EMPTY;
+    private Supplier<ItemStack> display = Lazy.of(() -> items.isEmpty() ? new ItemStack(Items.BARRIER) : items.get(0).get().copy());
 
     @Override
     public void accept(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
