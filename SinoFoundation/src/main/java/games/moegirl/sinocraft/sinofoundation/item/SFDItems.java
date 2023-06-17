@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.item;
 
 import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
+import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -15,6 +16,28 @@ public class SFDItems {
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
+
+        TabsRegistry.items(SinoSeriesTabs.TOOLS)
+                .addItem(IRON_KNIFE)
+                .addItem(GOLD_KNIFE)
+                .addItem(DIAMOND_KNIFE);
+
+        TabsRegistry.items(SinoSeriesTabs.WEAPONS)
+                .addItem(IRON_KNIFE)
+                .addItem(GOLD_KNIFE)
+                .addItem(DIAMOND_KNIFE);
+
+        TabsRegistry.items(SinoSeriesTabs.AGRICULTURE)
+                .addItem(MILLET)
+                .addItem(CHILI_PEPPER)
+                .addItem(GREEN_PEPPER)
+                .addItem(CABBAGE)
+                .addItem(EGGPLANT);
+
+        TabsRegistry.items(SinoSeriesTabs.MATERIALS)
+                .addItem(JADE)
+                .addItem(NITER)
+                .addItem(SULPHUR);
     }
 
     public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife", () -> new KnifeItem(Tiers.IRON));
