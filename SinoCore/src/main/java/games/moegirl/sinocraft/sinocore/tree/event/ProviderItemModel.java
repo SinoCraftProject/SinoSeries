@@ -31,7 +31,7 @@ class ProviderItemModel extends AbstractItemModelProvider {
     @Override
     protected void registerModels() {
         for (var tree : treeTypes) {
-            handheld(tree.getItem(TreeBlockType.SAPLING));
+            generated(tree.getItem(TreeBlockType.SAPLING));
 
             blockItem(tree.getBlock(TreeBlockType.LOG));
             blockItem(tree.getBlock(TreeBlockType.STRIPPED_LOG));

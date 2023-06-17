@@ -13,9 +13,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 public class SCATrees {
     public static final Tree GREEN_SANDALWOOD = Tree.builder(new ResourceLocation(SinoCalligraphy.MODID, "green_sandalwood"))
-            .translate("zh_cn", "青檀木")
-            .translate("zh_tw", "青檀木")
-            .translate("zh_hk", "青檀木")
+            .translate("zh_cn", "青檀")
+            .translate("zh_tw", "青檀")
+            .translate("zh_hk", "青檀")
             .translate("en_us", "Green Sandalwood")
             .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
             .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))

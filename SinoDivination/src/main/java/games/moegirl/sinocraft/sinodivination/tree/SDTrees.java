@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.tree;
 
+import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
@@ -9,6 +10,7 @@ import games.moegirl.sinocraft.sinodivination.block.*;
 import games.moegirl.sinocraft.sinodivination.blockentity.*;
 import games.moegirl.sinocraft.sinodivination.data.SDTags;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
+import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -34,6 +36,8 @@ public class SDTrees {
             .blockEntity(TreeBlockType.TRAPPED_CHEST, CotinusTrappedChestEntity::new)
             .blockTags(SDTags.COTINUS_BLOCK)
             .grower(new TreeGrower(new ResourceLocation(SinoDivination.MODID, "cotinus")))
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     public static final Tree JUJUBE = Tree.builder(SinoDivination.MODID, "jujube")
@@ -51,6 +55,8 @@ public class SDTrees {
             .itemTags()
             .blockProperty(b -> b.destroyTime *= 2)
             .grower(new TreeGrower(new ResourceLocation(SinoDivination.MODID, "jujube")))
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     public static final Tree SOPHORA = Tree.builder(SinoDivination.MODID, "sophora")
@@ -67,6 +73,8 @@ public class SDTrees {
             .blockEntity(TreeBlockType.CHEST, SophoraChestEntity::new)
             .blockEntity(TreeBlockType.TRAPPED_CHEST, SophoraTrappedChestEntity::new)
             .grower(new TreeGrower(new ResourceLocation(SinoDivination.MODID, "sophora")))
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     public static void register(IEventBus bus) {

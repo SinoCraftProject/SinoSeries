@@ -15,9 +15,9 @@ public class SFDTrees {
     public static final ResourceLocation MULBERRY_NAME = new ResourceLocation(SinoFoundation.MODID, "mulberry");
 
     public static final Tree MULBERRY = Tree.builder(MULBERRY_NAME)
-            .translate("zh_cn", "桑树")
-            .translate("zh_tw", "桑樹")
-            .translate("zh_hk", "桑樹")
+            .translate("zh_cn", "桑")
+            .translate("zh_tw", "桑")
+            .translate("zh_hk", "桑")
             .translate("lzh", "桑")
             .translate("en_us", "Mulberry")
             .grower(new MulberryTreeGrower(MULBERRY_NAME))
