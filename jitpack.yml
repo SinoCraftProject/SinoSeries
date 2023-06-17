@@ -3,4 +3,4 @@ before_install:
   - sdk use java 17.0.2-open
   - "chmod 777 gradlew"
 install:
-  - "./gradlew clean build assemble publishToMavenLocal --refresh-dependencies"
+  - "./gradlew build assemble publishToMavenLocal --refresh-dependencies"
