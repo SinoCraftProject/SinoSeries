@@ -1,7 +1,5 @@
 package games.moegirl.sinocraft.sinocore.block;
 
-import games.moegirl.sinocraft.sinocore.tree.Tree;
-import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -9,11 +7,11 @@ import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.function.Supplier;
+import net.minecraftforge.registries.RegistryObject;
 
 /**
  * 陷阱箱
@@ -22,12 +20,12 @@ import java.util.function.Supplier;
  */
 public class BaseTrappedChestBlock extends BaseChestBlock {
 
-    public BaseTrappedChestBlock(Properties properties, Tree tree) {
-        super(properties, tree, () -> tree.getBlockEntityType(TreeBlockType.TRAPPED_CHEST));
+    public BaseTrappedChestBlock(Properties properties, RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
+        super(properties, blockEntity, name);
     }
 
-    public BaseTrappedChestBlock(Properties properties, Tree tree, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
-        super(properties, tree, supplier);
+    public BaseTrappedChestBlock(RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
+        super(Properties.copy(Blocks.TRAPPED_CHEST), blockEntity, name);
     }
 
     // Copy from net.minecraft.world.level.block.TrappedChestBlock =====================================================

@@ -1,12 +1,10 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.tree.event.TreeClientEventHandler;
 import games.moegirl.sinocraft.sinocore.tree.event.TreeGatherDataListener;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -54,10 +52,6 @@ public final class TreeRegistry {
     public static void register(String modid, IEventBus bus, DeferredRegister<Block> blockRegister,
                                 DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister) {
         bus.register(new TreeGatherDataListener(modid));
-
-        if (FMLEnvironment.dist.isClient()) {
-            bus.register(new TreeClientEventHandler());
-        }
 
         for (var tree : getRegistry().get(modid)) {
             tree.register(blockRegister, blockEntityRegister, itemRegister);

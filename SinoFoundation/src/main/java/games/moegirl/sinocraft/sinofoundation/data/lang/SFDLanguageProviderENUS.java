@@ -36,6 +36,7 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SFDItems.JADE, "Jade");
         addItem(SFDItems.NITER, "Niter");
         addItem(SFDItems.SULPHUR, "Sulphur");
+        addItem(SFDItems.JUJUBE, "Jujube");
 
         addBlock(SFDBlocks.STOVE, "Stove");
         addBlock(SFDBlocks.WOOD_DESK, "Wood Desk");
@@ -54,6 +55,12 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JADE_ORE, "Jade Ore");
         addBlock(SFDBlocks.NITER_ORE, "Niter Ore");
         addBlock(SFDBlocks.SULPHUR_ORE, "Sulphur Ore");
+        addBlock(SFDBlocks.COTINUS_CHEST, "Cotinus Chest");
+        addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "Cotinus Trapped Chest");
+        addBlock(SFDBlocks.JUJUBE_CHEST, "Jujube Chest");
+        addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "Jujube Trapped Chest");
+        addBlock(SFDBlocks.SOPHORA_CHEST, "Sophora Chest");
+        addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, "Sophora Trapped Chest");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "Chili Pepper Seed");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "Green Pepper Seed");

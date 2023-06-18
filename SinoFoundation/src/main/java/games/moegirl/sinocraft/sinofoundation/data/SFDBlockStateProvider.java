@@ -1,6 +1,9 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinocore.data.BlockStateProviderBase;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
+import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.StoveBlock;
 import games.moegirl.sinocraft.sinofoundation.block.WoodDeskBlock;
@@ -8,16 +11,16 @@ import games.moegirl.sinocraft.sinofoundation.block.plant.DoublePlantBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 public class SFDBlockStateProvider extends BlockStateProviderBase {
+
+    @SafeVarargs
     public SFDBlockStateProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper, DeferredRegister<? extends Block>... deferredRegisters) {
         super(output, modId, existingFileHelper, deferredRegisters);
     }
@@ -27,6 +30,7 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         addStove();
         addCrops();
         addWoodDesk();
+        addChest();
 
         skipBlock(SFDBlocks.MARBLE_WALL.get());
         wallBlock(SFDBlocks.MARBLE_WALL.get(), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_post")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side_tall")));
@@ -86,6 +90,12 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         }
     }
 
+    private void addChest() {
+        chest(SFDBlocks.COTINUS_CHEST, SFDBlocks.COTINUS_TRAPPED_CHEST, SFDTrees.COTINUS);
+        chest(SFDBlocks.JUJUBE_CHEST, SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDTrees.JUJUBE);
+        chest(SFDBlocks.SOPHORA_CHEST, SFDBlocks.SOPHORA_TRAPPED_CHEST, SFDTrees.SOPHORA);
+    }
+
     /// <editor-fold desc="Utility methods.">
 
     protected void cropsStaged(PlantBlock plant) {
@@ -114,6 +124,12 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
                         .addModel();
             }
         }
+    }
+
+    private void chest(RegistryObject<? extends Block> chestObj, RegistryObject<? extends Block> trappedChestObj, Tree tree) {
+        ResourceLocation planksTextures = blockTexture(tree.getBlock(TreeBlockType.PLANKS));
+        simpleBlock(chestObj.get(), models().getBuilder(chestObj.getId().getPath()).texture("particle", planksTextures));
+        simpleBlock(trappedChestObj.get(), models().getBuilder(trappedChestObj.getId().getPath()).texture("particle", planksTextures));
     }
 
     /// </editor-fold>

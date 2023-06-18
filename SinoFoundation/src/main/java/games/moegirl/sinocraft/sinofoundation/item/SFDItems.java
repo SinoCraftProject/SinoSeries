@@ -58,6 +58,8 @@ public class SFDItems {
     public static final RegistryObject<Item> NITER = ITEMS.register("niter", () -> new Niter(new Item.Properties()));
     public static final RegistryObject<Item> SULPHUR = ITEMS.register("sulfur", () -> new Sulfur(new Item.Properties()));
 
+    public static final RegistryObject<Item> JUJUBE = ITEMS.register("jujube", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+
     static {
         BlockStrippingEvent.registerTool(IRON_KNIFE);
         BlockStrippingEvent.registerTool(GOLD_KNIFE);

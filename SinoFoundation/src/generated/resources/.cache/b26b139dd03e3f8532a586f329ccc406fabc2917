@@ -1,9 +1,11 @@
-// 1.20.1	2023-06-16T09:10:22.4799275	Item Models: sinofoundation
+// 1.20.1	2023-06-18T13:44:08.255168	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 a60e685b9dc428fd655a1f950c243d32b4dd65a2 assets/sinofoundation/models/item/cabbage.json
 00f707280f8347b58077f1e0c4a49d54802e6602 assets/sinofoundation/models/item/cabbage_seed.json
 1e13ed2641e093004ca138676d394f9b3fb1036b assets/sinofoundation/models/item/chili_pepper.json
 58bad20b92c3cec37762cb199625c8422fb14af8 assets/sinofoundation/models/item/chili_pepper_seed.json
+f48f5a835bed0a4bb0e2d3f8f231050995c6277f assets/sinofoundation/models/item/cotinus_chest.json
+f48f5a835bed0a4bb0e2d3f8f231050995c6277f assets/sinofoundation/models/item/cotinus_trapped_chest.json
 ba16a0cd687f9302574a6f039b72f4c099d4bf3f assets/sinofoundation/models/item/diamond_knife.json
 59ed174ba2e215a2e8dab38c374a33a492135164 assets/sinofoundation/models/item/eggplant.json
 3a63a113dc31906504b68532c2bf943df9e6b9c8 assets/sinofoundation/models/item/eggplant_seed.json
@@ -15,12 +17,17 @@ e3d91fd79458fc83d7332fc14d65a1781720358c assets/sinofoundation/models/item/garli
 ab8482fc5b2d794a5a323eedb850bb6ff4225c31 assets/sinofoundation/models/item/iron_knife.json
 e8ff5a69b245fdc8902fcf4184f7e942a6286118 assets/sinofoundation/models/item/jade.json
 b5a6d228810337df72eee7b7db89713ffd506c33 assets/sinofoundation/models/item/jade_ore.json
+624fe519ab57566201e14185cb6a26a3f941a0a8 assets/sinofoundation/models/item/jujube.json
+749efb11ef6da9b693dee12db38652bd892218a1 assets/sinofoundation/models/item/jujube_chest.json
+749efb11ef6da9b693dee12db38652bd892218a1 assets/sinofoundation/models/item/jujube_trapped_chest.json
 069e0ea24ebf0c4c9592431e0f2f28c9ea290416 assets/sinofoundation/models/item/marble.json
 e692a7eecace55add0c8202adf345f6b5c1c8137 assets/sinofoundation/models/item/marble_wall.json
 5c7f64002933d697f07a75807de81765d86ac92a assets/sinofoundation/models/item/millet.json
 0725b143933ab3ef3fd17bdff4713580fddd33b3 assets/sinofoundation/models/item/millet_seed.json
 be527b1cd03076482360d48b74b8f322b486a63e assets/sinofoundation/models/item/niter.json
 8105bb3ea0db45c49e6023ea44711a3dd2005d7b assets/sinofoundation/models/item/niter_ore.json
+fbec9d00f58b533e8b546e92aafe414eb1bbe9d6 assets/sinofoundation/models/item/sophora_chest.json
+fbec9d00f58b533e8b546e92aafe414eb1bbe9d6 assets/sinofoundation/models/item/sophora_trapped_chest.json
 3f7a73d18b347f6bfdea24e279638f4be453598b assets/sinofoundation/models/item/soybean.json
 6608973656121f0814f41042e4b8001c6df4ed2d assets/sinofoundation/models/item/stove.json
 e47da2372a1b7f59db8d839e73d1f26cad5ae3f5 assets/sinofoundation/models/item/sulfur.json

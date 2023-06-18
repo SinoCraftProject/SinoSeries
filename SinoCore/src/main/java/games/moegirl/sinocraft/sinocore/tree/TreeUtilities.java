@@ -1,31 +1,25 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
-import games.moegirl.sinocraft.sinocore.block.BaseTrappedChestBlock;
-import games.moegirl.sinocraft.sinocore.blockentity.BaseChestBlockEntity;
-import games.moegirl.sinocraft.sinocore.blockentity.BaseTrappedChestBlockEntity;
-import games.moegirl.sinocraft.sinocore.item.TreeChestItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.FeatureSize;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
-import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryManager;
 
 import java.util.Collections;
@@ -46,8 +40,6 @@ public class TreeUtilities {
                 case DOOR, TRAPDOOR, PRESSURE_PLATE, BUTTON, FENCE_GATE ->
                         List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.BUILDING_BLOCKS);
                 case SIGN, WALL_SIGN, HANGING_SIGN, WALL_HANGING_SIGN -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS);
-                case CHEST -> List.of(CreativeModeTabs.FUNCTIONAL_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-                case TRAPPED_CHEST -> List.of(CreativeModeTabs.REDSTONE_BLOCKS);
                 case BOAT -> List.of(CreativeModeTabs.TOOLS_AND_UTILITIES);
                 case CHEST_BOAT -> List.of(CreativeModeTabs.REDSTONE_BLOCKS, CreativeModeTabs.TOOLS_AND_UTILITIES);
                 default -> List.of();
@@ -124,32 +116,6 @@ public class TreeUtilities {
 
     public static Block stairs(Tree tree, BlockBehaviour.Properties properties) {
         return new StairBlock(() -> tree.getBlock(TreeBlockType.PLANKS).defaultBlockState(), properties);
-    }
-
-    public static Block chest(Tree tree, BlockBehaviour.Properties properties) {
-        return new BaseChestBlock(properties, tree);
-    }
-
-    public static Block trappedChest(Tree tree, BlockBehaviour.Properties properties) {
-        return new BaseTrappedChestBlock(properties, tree);
-    }
-
-    // </editor-fold>
-
-    // <editor-fold desc="BlockEntities">
-
-    public static BlockEntityType<?> chestEntity(Tree tree) {
-        Lazy<BlockEntityType<BlockEntity>> chestEntity = Lazy.of(() -> tree.getBlockEntityType(TreeBlockType.CHEST));
-        return BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>)
-                        (pos, state) -> new BaseChestBlockEntity(chestEntity.get(), pos, state), tree.getBlock(TreeBlockType.CHEST))
-                .build(null);
-    }
-
-    public static BlockEntityType<?> trappedChestEntity(Tree tree) {
-        Lazy<BlockEntityType<BlockEntity>> chestEntity = Lazy.of(() -> tree.getBlockEntityType(TreeBlockType.TRAPPED_CHEST));
-        return BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>)
-                        (pos, state) -> new BaseTrappedChestBlockEntity(chestEntity.get(), pos, state), tree.getBlock(TreeBlockType.CHEST))
-                .build(null);
     }
 
     // </editor-fold>
@@ -275,14 +241,6 @@ public class TreeUtilities {
                 .noOcclusion();
     }
 
-    public static BlockBehaviour.Properties chestProp() {
-        return BlockBehaviour.Properties.copy(Blocks.CHEST);
-    }
-
-    public static BlockBehaviour.Properties trappedChestProp() {
-        return BlockBehaviour.Properties.copy(Blocks.TRAPPED_CHEST);
-    }
-
     // </editor-fold>
 
     // <editor-fold desc="Block Properties Predicates">
@@ -317,14 +275,6 @@ public class TreeUtilities {
 
     public static Item hangingSignBlockItem(Tree tree) {
         return new HangingSignItem(tree.getBlock(TreeBlockType.HANGING_SIGN), tree.getBlock(TreeBlockType.WALL_HANGING_SIGN), itemProp());
-    }
-
-    public static Item chestItem(Tree tree) {
-        return new TreeChestItem(itemProp(), tree, TreeBlockType.CHEST);
-    }
-
-    public static Item trappedChestItem(Tree tree) {
-        return new TreeChestItem(itemProp(), tree, TreeBlockType.TRAPPED_CHEST);
     }
 
     public static Item.Properties itemProp() {
@@ -365,6 +315,15 @@ public class TreeUtilities {
 
     public static List<ResourceKey<CreativeModeTab>> defaultTabs(TreeBlockType tab) {
         return DEFAULT_TYPES.getOrDefault(tab, Collections.emptyList());
+    }
+
+    public static TreeConfiguration defaultConfiguration(Tree tree) {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(tree.getBlock(TreeBlockType.LOG)),
+                new StraightTrunkPlacer(4, 2, 0),
+                BlockStateProvider.simple(tree.getBlock(TreeBlockType.LEAVES)),
+                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build();
     }
 
     // </editor-fold>

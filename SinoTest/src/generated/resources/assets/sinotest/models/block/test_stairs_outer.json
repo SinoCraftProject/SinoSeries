@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "sinotest:block/test_planks",
-    "side": "sinotest:block/test_planks",
-    "top": "sinotest:block/test_planks"
-  }
-}

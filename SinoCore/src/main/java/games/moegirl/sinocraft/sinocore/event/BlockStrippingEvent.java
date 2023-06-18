@@ -3,9 +3,10 @@ package games.moegirl.sinocraft.sinocore.event;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import games.moegirl.sinocraft.sinocore.SinoCore;
+import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -16,7 +17,6 @@ import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 
@@ -28,7 +28,7 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BlockStrippingEvent {
-    private static final Map<ResourceLocation, Triple<Supplier<Block>, Supplier<Block>, Supplier<ItemLike>>> DEFERRED_BLOCK_STRIPPING_MAP = new HashMap<>();
+    private static final Map<ResourceLocation, Triple<Supplier<Block>, Supplier<Block>, Supplier<? extends ItemLike>>> DEFERRED_BLOCK_STRIPPING_MAP = new HashMap<>();
 
     static {
         registerStripping(mcLoc("oak_wood"), Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD, Items.AIR);
@@ -58,7 +58,7 @@ public class BlockStrippingEvent {
         return new ResourceLocation("minecraft", path);
     }
 
-    public static void registerStripping(ResourceLocation rl, Supplier<Block> source, Supplier<Block> target, Supplier<ItemLike> item) {
+    public static void registerStripping(ResourceLocation rl, Supplier<Block> source, Supplier<Block> target, Supplier<? extends ItemLike> item) {
         DIRTY_FLAG = true;
         DEFERRED_BLOCK_STRIPPING_MAP.put(rl, new ImmutableTriple<>(source, target, item));
     }
@@ -67,7 +67,12 @@ public class BlockStrippingEvent {
         registerStripping(rl, () -> source, () -> target, () -> item);
     }
 
-    public static Map<ResourceLocation, Triple<Supplier<Block>, Supplier<Block>, Supplier<ItemLike>>> getDeferredBlockStrippingMap() {
+    public static void registerStripping(Tree tree, Supplier<? extends ItemLike> item) {
+        registerStripping(tree.name, () -> tree.getBlock(TreeBlockType.LOG), () -> tree.getBlock(TreeBlockType.STRIPPED_LOG), item);
+        registerStripping(tree.name, () -> tree.getBlock(TreeBlockType.LOG_WOOD), () -> tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD), item);
+    }
+
+    public static Map<ResourceLocation, Triple<Supplier<Block>, Supplier<Block>, Supplier<? extends ItemLike>>> getDeferredBlockStrippingMap() {
         return ImmutableMap.copyOf(DEFERRED_BLOCK_STRIPPING_MAP);
     }
 

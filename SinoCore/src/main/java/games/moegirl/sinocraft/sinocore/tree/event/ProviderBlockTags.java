@@ -59,19 +59,6 @@ class ProviderBlockTags extends BlockTagsProvider {
                                 tag(BlockTags.FENCE_GATES).add(block);
                                 tag(Tags.Blocks.FENCE_GATES_WOODEN).add(block);
                             }
-                            case CHEST -> {
-                                tag(Tags.Blocks.CHESTS_WOODEN).add(block);
-                                tag(BlockTags.GUARDED_BY_PIGLINS).add(block);
-                                tag(BlockTags.MINEABLE_WITH_AXE).add(block);
-                                tag(BlockTags.FEATURES_CANNOT_REPLACE).add(block);
-                            }
-                            case TRAPPED_CHEST -> {
-                                tag(Tags.Blocks.CHESTS_WOODEN).add(block);
-                                tag(BlockTags.GUARDED_BY_PIGLINS).add(block);
-                                tag(BlockTags.MINEABLE_WITH_AXE).add(block);
-                                tag(BlockTags.FEATURES_CANNOT_REPLACE).add(block);
-                                tag(Tags.Blocks.CHESTS_TRAPPED).add(block);
-                            }
                         }
                     }
 

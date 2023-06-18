@@ -4,7 +4,6 @@ import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
 import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
 import games.moegirl.sinocraft.sinocore.utility.RoundChecker;
 import games.moegirl.sinocraft.sinocore.utility.StreamUtils;
-import games.moegirl.sinocraft.sinodivination.block.base.LootUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

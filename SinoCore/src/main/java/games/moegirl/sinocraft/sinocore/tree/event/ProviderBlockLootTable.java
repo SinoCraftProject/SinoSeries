@@ -42,8 +42,6 @@ class ProviderBlockLootTable extends LootTableProviderBase {
         DEFAULT_LOOT.put(TreeBlockType.WALL_SIGN, ext(SimpleBlockLootTables::createSingleItemTable));
         DEFAULT_LOOT.put(TreeBlockType.HANGING_SIGN, (block, tree, p) -> p.createSingleItemTable(tree.getBlock(TreeBlockType.SIGN)));
         DEFAULT_LOOT.put(TreeBlockType.WALL_HANGING_SIGN, (block, tree, p) -> p.createSingleItemTable(tree.getBlock(TreeBlockType.SIGN)));
-        DEFAULT_LOOT.put(TreeBlockType.CHEST, ext(SimpleBlockLootTables::createNameableBlockEntityTable));
-        DEFAULT_LOOT.put(TreeBlockType.TRAPPED_CHEST, ext(SimpleBlockLootTables::createNameableBlockEntityTable));
     }
 
     protected final List<Tree> treeTypes;

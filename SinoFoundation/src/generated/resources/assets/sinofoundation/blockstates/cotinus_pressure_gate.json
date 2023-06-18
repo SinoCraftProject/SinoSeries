@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sinofoundation:block/cotinus_pressure_gate"
+    },
+    "powered=true": {
+      "model": "sinofoundation:block/cotinus_pressure_gate_down"
+    }
+  }
+}

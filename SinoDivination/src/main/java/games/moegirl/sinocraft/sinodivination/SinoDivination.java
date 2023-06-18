@@ -6,8 +6,6 @@ import games.moegirl.sinocraft.sinodivination.client.screen.SDScreens;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinodivination.menu.SDMenus;
 import games.moegirl.sinocraft.sinodivination.recipe.SDRecipes;
-import games.moegirl.sinocraft.sinodivination.tree.SDTrees;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,7 +33,6 @@ public class SinoDivination {
         SDMenus.register(bus);
         SDRecipes.register(bus);
         SDScreens.register(bus);
-        SDTrees.register(bus);
 
         LOGGER.info("Reverence for heaven and earth, respect ghosts and gods.");
     }

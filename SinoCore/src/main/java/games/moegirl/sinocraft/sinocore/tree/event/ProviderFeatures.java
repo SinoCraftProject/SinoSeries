@@ -1,14 +1,14 @@
 package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
-import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
-import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
+import games.moegirl.sinocraft.sinocore.world.gen.ModTreeGrowerBase;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 
@@ -35,7 +35,7 @@ class ProviderFeatures extends DatapackBuiltinEntriesProvider {
         for (var tree : treeTypes) {
             Optional<TreeConfiguration> configuration = tree.getFeaturedConfiguration();
             if (tree.getGrower() instanceof ModTreeGrowerBase g && configuration.isPresent()) {
-                ModConfiguredFeatures.registerTree(context, g.getResourceKey(), configuration.get());
+                context.register(g.getResourceKey(), new ConfiguredFeature<>(Feature.TREE, configuration.get()));
             }
         }
     }

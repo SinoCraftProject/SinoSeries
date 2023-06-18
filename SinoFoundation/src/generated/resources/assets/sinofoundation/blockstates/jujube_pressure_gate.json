@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sinofoundation:block/jujube_pressure_gate"
+    },
+    "powered=true": {
+      "model": "sinofoundation:block/jujube_pressure_gate_down"
+    }
+  }
+}

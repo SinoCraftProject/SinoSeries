@@ -6,12 +6,10 @@ import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -98,12 +96,6 @@ class ProviderBlockState extends AbstractBlockStateProvider {
                 doorBottom = planksTextures;
             }
             doorBlockWithRenderType(door, doorBottom, doorTop, "cutout_mipped");
-
-            RegistryObject<Block> chestObj = tree.getBlockObj(TreeBlockType.CHEST);
-            simpleBlock(chestObj.get(), models().getBuilder(chestObj.getId().getPath()).texture("particle", planksTextures));
-
-            RegistryObject<Block> trappedChestObj = tree.getBlockObj(TreeBlockType.TRAPPED_CHEST);
-            simpleBlock(trappedChestObj.get(), models().getBuilder(trappedChestObj.getId().getPath()).texture("particle", planksTextures));
         }
     }
 }

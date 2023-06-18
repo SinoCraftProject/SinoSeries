@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sinofoundation:block/cotinus_slab"
+    },
+    "type=double": {
+      "model": "sinofoundation:block/cotinus_planks"
+    },
+    "type=top": {
+      "model": "sinofoundation:block/cotinus_slab_top"
+    }
+  }
+}

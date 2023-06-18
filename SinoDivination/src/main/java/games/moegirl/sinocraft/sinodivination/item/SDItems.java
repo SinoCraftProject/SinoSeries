@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinodivination.item;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.util.NameUtils;
+import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -25,7 +25,6 @@ public class SDItems {
     public static final RegistryObject<SwordItem> STICK_COTINUS = sword("stick_cotinus", Tiers.WOOD, 3, -2.4F, 1);
     public static final RegistryObject<SwordItem> STICK_JUJUBE = sword("stick_jujube", Tiers.IRON, 3, -2.4f, 2);
     public static final RegistryObject<SwordItem> STICK_SOPHORA = sword("stick_sophora", Tiers.WOOD, 3, -2.4F, 2);
-    public static final RegistryObject<Item> JUJUBE = food("jujube", 2, false);
     public static final RegistryObject<Item> WORMWOOD_LEAF = simple(WormwoodLeaf.class);
     public static final RegistryObject<ItemNameBlockItem> SEED_WORMWOOD = seed(SDBlocks.WORMWOOD);
     public static final RegistryObject<Item> MOXIBUSTION = simple(Moxibustion.class);
@@ -69,10 +68,6 @@ public class SDItems {
 
     public static RegistryObject<Item> simple(String name) {
         return REGISTRY.register(name, () -> new Item(new Item.Properties()));
-    }
-
-    public static <T extends Item> RegistryObject<T> simple(String name, Class<? extends T> aClass) {
-        return REGISTRY.register(name, defItem(aClass));
     }
 
     public static RegistryObject<Item> single(String name, int durability) {

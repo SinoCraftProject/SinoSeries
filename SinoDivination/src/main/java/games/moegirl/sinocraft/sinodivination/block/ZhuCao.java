@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinodivination.block;
 
 import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
 import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
-import games.moegirl.sinocraft.sinodivination.block.base.LootUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

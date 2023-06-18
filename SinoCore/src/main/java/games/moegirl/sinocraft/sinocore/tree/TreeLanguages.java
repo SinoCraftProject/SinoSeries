@@ -39,8 +39,6 @@ public class TreeLanguages {
         put("zh_cn", TreeBlockType.WALL_SIGN, s -> s.append("木告示牌"));
         put("zh_cn", TreeBlockType.HANGING_SIGN, s -> s.insert(0, "悬挂式").append("木告示牌"));
         put("zh_cn", TreeBlockType.WALL_HANGING_SIGN, s -> s.insert(0, "悬挂式").append("木告示牌"));
-        put("zh_cn", TreeBlockType.CHEST, s -> s.append("箱子"));
-        put("zh_cn", TreeBlockType.TRAPPED_CHEST, s -> s.append("陷阱箱"));
         put("zh_cn", TreeBlockType.BOAT, s -> s.append("木船"));
         put("zh_cn", TreeBlockType.CHEST_BOAT, s -> s.append("木运输船"));
 
@@ -64,8 +62,6 @@ public class TreeLanguages {
         put("zh_hk", TreeBlockType.WALL_SIGN, s -> s.append("指示牌"));
         put("zh_hk", TreeBlockType.HANGING_SIGN, s -> s.append("吊牌"));
         put("zh_hk", TreeBlockType.WALL_HANGING_SIGN, s -> s.append("吊牌"));
-        put("zh_hk", TreeBlockType.CHEST, s -> s.append("箱子"));        // todo 箱子 文言文
-        put("zh_hk", TreeBlockType.TRAPPED_CHEST, s -> s.append("陷阱箱"));  // todo 陷阱箱
         put("zh_hk", TreeBlockType.BOAT, s -> s.append("船"));
         put("zh_hk", TreeBlockType.CHEST_BOAT, s -> s.insert(0, "儲物箱").append("船"));
 
@@ -89,8 +85,6 @@ public class TreeLanguages {
         put("zh_tw", TreeBlockType.WALL_SIGN, s -> s.append("告示牌"));
         put("zh_tw", TreeBlockType.HANGING_SIGN, s -> s.insert(0, "懸挂式").append("告示牌"));
         put("zh_tw", TreeBlockType.WALL_HANGING_SIGN, s -> s.insert(0, "懸挂式").append("告示牌"));
-        put("zh_tw", TreeBlockType.CHEST, s -> s.append("箱子"));        // todo 箱子 文言文
-        put("zh_tw", TreeBlockType.TRAPPED_CHEST, s -> s.append("陷阱箱"));  // todo 陷阱箱
         put("zh_tw", TreeBlockType.BOAT, s -> s.append("船"));
         put("zh_tw", TreeBlockType.CHEST_BOAT, s -> s.insert(0, "儲物箱").append("船"));
 
@@ -114,8 +108,6 @@ public class TreeLanguages {
         put("lzh", TreeBlockType.WALL_SIGN, s -> s.append("牌"));
         put("lzh", TreeBlockType.HANGING_SIGN, s -> s.append("懸牌"));
         put("lzh", TreeBlockType.WALL_HANGING_SIGN, s -> s.append("懸牌"));
-        put("lzh", TreeBlockType.CHEST, s -> s.append("箱子"));        // todo 箱子 文言文
-        put("lzh", TreeBlockType.TRAPPED_CHEST, s -> s.append("陷阱箱"));  // todo 陷阱箱
         put("lzh", TreeBlockType.BOAT, s -> s.append("舟"));
         put("lzh", TreeBlockType.CHEST_BOAT, s -> s.append("艚"));
 
@@ -139,8 +131,6 @@ public class TreeLanguages {
         put("en_us", TreeBlockType.WALL_SIGN, s -> s.append(" Sign"));
         put("en_us", TreeBlockType.HANGING_SIGN, s -> s.append(" Hanging Sign"));
         put("en_us", TreeBlockType.WALL_HANGING_SIGN, s -> s.append(" Hanging Sign"));
-        put("lzh", TreeBlockType.CHEST, s -> s.append(" Chest"));
-        put("lzh", TreeBlockType.TRAPPED_CHEST, s -> s.append(" Trapped Chest"));
         put("en_us", TreeBlockType.BOAT, s -> s.append(" Boat"));
         put("en_us", TreeBlockType.CHEST_BOAT, s -> s.append(" Boat with Chest"));
     }

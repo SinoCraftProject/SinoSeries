@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/chest",
+  "textures": {
+    "particle": "sinofoundation:block/cotinus_planks"
+  }
+}

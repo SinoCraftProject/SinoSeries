@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "sinofoundation:sophora_planks"
+    }
+  ],
+  "result": {
+    "item": "sinofoundation:sophora_button"
+  }
+}

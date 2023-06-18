@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinofoundation.data;
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
