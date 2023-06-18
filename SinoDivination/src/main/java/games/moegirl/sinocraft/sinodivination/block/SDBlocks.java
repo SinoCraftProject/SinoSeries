@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocore.block.SimpleCropBlock;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
-import games.moegirl.sinocraft.sinodivination.util.NameUtils;
+import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;

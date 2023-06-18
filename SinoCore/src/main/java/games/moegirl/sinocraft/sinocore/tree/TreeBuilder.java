@@ -3,22 +3,22 @@ package games.moegirl.sinocraft.sinocore.tree;
 import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
-import games.moegirl.sinocraft.sinocore.world.gen.ModConfiguredFeatures;
-import games.moegirl.sinocraft.sinocore.world.gen.tree.DefaultTreeGrower;
-import games.moegirl.sinocraft.sinocore.world.gen.tree.ModTreeGrowerBase;
+import games.moegirl.sinocraft.sinocore.world.gen.ModTreeGrowerBase;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -37,7 +37,18 @@ public class TreeBuilder {
     final ResourceLocation name;
     final TreeLanguages languages;
     private final EnumMap<TreeBlockType, TreeBlockFactory> treeBlocks;
-    Function<Tree, ModTreeGrowerBase> grower = tree -> new DefaultTreeGrower(tree.name);
+    Function<Tree, ModTreeGrowerBase> grower = tree -> new ModTreeGrowerBase(tree.name) {
+        @Override
+        public TreeConfiguration getConfiguration(Tree tree) {
+            return new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(tree.getBlock(TreeBlockType.LOG)),
+                    new StraightTrunkPlacer(4, 2, 0),
+                    BlockStateProvider.simple(tree.getBlock(TreeBlockType.LEAVES)),
+                    new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                    new TwoLayersFeatureSize(1, 0, 1))
+                    .ignoreVines()
+                    .build();
+        }
+    };
 
     /**
      * New builder.
@@ -217,16 +228,6 @@ public class TreeBuilder {
     }
 
     /**
-     * Add default chests impl.
-     * @return TreeBuilder.
-     */
-    public TreeBuilder blockEntityDefaultChests() {
-        blockEntity(TreeBlockType.CHEST, TreeUtilities::chestEntity);
-        blockEntity(TreeBlockType.TRAPPED_CHEST, TreeUtilities::trappedChestEntity);
-        return this;
-    }
-
-    /**
      * Custom creative mode tab instead of auto generate.
      *
      * @param treeBlockType Specific block item.
@@ -262,8 +263,14 @@ public class TreeBuilder {
      *
      * @return Builder
      */
-    public TreeBuilder grower(ModTreeGrowerBase grower) {
-        this.grower = t -> grower;
+    public TreeBuilder grower(Function<Tree, TreeConfiguration> configuration) {
+        this.grower = t -> new ModTreeGrowerBase(t.name) {
+
+            @Override
+            public TreeConfiguration getConfiguration(Tree tree) {
+                return configuration.apply(t);
+            }
+        };
         return this;
     }
 

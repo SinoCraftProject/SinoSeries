@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.menu;
 
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
-import games.moegirl.sinocraft.sinodivination.util.NameUtils;
+import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;

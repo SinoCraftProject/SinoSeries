@@ -8,15 +8,17 @@ import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinodivination.recipe.CarvingTableRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.ChangeSoupRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;
-import games.moegirl.sinocraft.sinodivination.tree.SDTrees;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
+import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -47,17 +49,14 @@ class ProviderRecipe extends RecipeProvider {
                 .save(consumer);
         KettlePotRecipe.builder(SDItems.STICK_RICE, 1)
                 .input(3, SDItems.RICE)
-                .input(SDItems.JUJUBE)
+                .input(SFDItems.JUJUBE)
                 .input(SDItems.WORMWOOD_LEAF)
                 .save(consumer);
-        ChangeSoupRecipe.builder(Blocks.BIRCH_SAPLING, SDTrees.COTINUS.getBlock(TreeBlockType.SAPLING)).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.OAK_SAPLING, SDTrees.JUJUBE.getBlock(TreeBlockType.SAPLING)).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.SPRUCE_SAPLING, SDTrees.SOPHORA.getBlock(TreeBlockType.SAPLING)).save(consumer);
+        ChangeSoupRecipe.builder(Blocks.BIRCH_SAPLING, SFDTrees.COTINUS.getBlock(TreeBlockType.SAPLING)).save(consumer);
+        ChangeSoupRecipe.builder(Blocks.OAK_SAPLING, SFDTrees.JUJUBE.getBlock(TreeBlockType.SAPLING)).save(consumer);
+        ChangeSoupRecipe.builder(Blocks.SPRUCE_SAPLING, SFDTrees.SOPHORA.getBlock(TreeBlockType.SAPLING)).save(consumer);
         ChangeSoupRecipe.builder(Blocks.POPPY, SDBlocks.ZHU_CAO.get()).save(consumer);
         ChangeSoupRecipe.builder(Blocks.CAVE_VINES, SDBlocks.BRIGHT_STEM_GRASS.get()).save(consumer);
-        addStick(SDTrees.COTINUS, SDItems.STICK_COTINUS, consumer);
-        addStick(SDTrees.JUJUBE, SDItems.STICK_JUJUBE, consumer);
-        addStick(SDTrees.SOPHORA, SDItems.STICK_SOPHORA, consumer);
         shaped(SDItems.HOOK, Items.STICK)
                 .pattern("YY")
                 .pattern("Y ")
@@ -197,6 +196,10 @@ class ProviderRecipe extends RecipeProvider {
                 .pattern("XX X")
                 .define('X', Items.COPPER_INGOT)
                 .save(consumer);
+
+        addStick(SFDTrees.COTINUS, SDItems.STICK_COTINUS, consumer);
+        addStick(SFDTrees.JUJUBE, SDItems.STICK_JUJUBE, consumer);
+        addStick(SFDTrees.SOPHORA, SDItems.STICK_SOPHORA, consumer);
     }
 
     private ShapedRecipeBuilder shaped(RegistryObject<? extends ItemLike> result, ItemLike unlockedBy) {
@@ -213,12 +216,6 @@ class ProviderRecipe extends RecipeProvider {
         return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result.get(), count)
                 .group(SinoDivination.MODID)
                 .unlockedBy("has_block", has(unlockedBy));
-    }
-
-    private ShapelessRecipeBuilder shapeless(ItemLike result, int count, RegistryObject<? extends ItemLike> unlockedBy) {
-        return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result, count)
-                .group(SinoDivination.MODID)
-                .unlockedBy("has_block", has(unlockedBy.get()));
     }
 
     private <T extends Item> void addStick(Tree tree, RegistryObject<T> stick, Consumer<FinishedRecipe> pFinishedRecipeConsumer) {

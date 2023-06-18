@@ -36,6 +36,7 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SFDItems.JADE, "玉石");
         addItem(SFDItems.NITER, "硝石");
         addItem(SFDItems.SULPHUR, "硫磺");
+        addItem(SFDItems.JUJUBE, "枣");
 
         addBlock(SFDBlocks.STOVE, "灶台");
         addBlock(SFDBlocks.WOOD_DESK, "桌子");
@@ -54,6 +55,13 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JADE_ORE, "玉矿石");
         addBlock(SFDBlocks.NITER_ORE, "硝石矿石");
         addBlock(SFDBlocks.SULPHUR_ORE, "硫磺矿石");
+        // todo 只有中英文
+        addBlock(SFDBlocks.COTINUS_CHEST, "无患木匣");
+        addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "无患木机关匣");
+        addBlock(SFDBlocks.JUJUBE_CHEST, "枣心木匣");
+        addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "枣心木机关匣");
+        addBlock(SFDBlocks.SOPHORA_CHEST, "槐木匣");
+        addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, "槐木机关匣");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "辣椒种子");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "青椒种子");

@@ -11,14 +11,14 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinodivination.blockentity.SophoraEntity;
-import games.moegirl.sinocraft.sinodivination.blockentity.base.ICotinusEntity;
-import games.moegirl.sinocraft.sinodivination.capability.Birthday;
+import games.moegirl.sinocraft.sinofoundation.block.entity.SophoraEntity;
+import games.moegirl.sinocraft.sinofoundation.block.entity.ICotinusEntity;
+import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
+import games.moegirl.sinocraft.sinofoundation.capability.entity.Birthday;
 import games.moegirl.sinocraft.sinodivination.item.LifeSymbol;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
-import games.moegirl.sinocraft.sinodivination.tree.SDTrees;
-import games.moegirl.sinocraft.sinodivination.util.OwnerChecker;
-import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
+import games.moegirl.sinocraft.sinofoundation.SFDTrees;
+import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.BlockPos;
@@ -45,13 +45,13 @@ import static net.minecraft.commands.Commands.literal;
  */
 class Debug {
 
-    private static final Predicate<BlockState> P_COTINUS_DOOR = s -> s.is(SDTrees.COTINUS.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
-    private static final Predicate<BlockState> P_COTINUS_TRAPDOOR = s -> s.is(SDTrees.COTINUS.<Block>getBlock(TreeBlockType.TRAPDOOR));
-    private static final Predicate<BlockState> P_COTINUS_FENCEGATE = s -> s.is(SDTrees.COTINUS.<Block>getBlock(TreeBlockType.FENCE_GATE));
+    private static final Predicate<BlockState> P_COTINUS_DOOR = s -> s.is(SFDTrees.COTINUS.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
+    private static final Predicate<BlockState> P_COTINUS_TRAPDOOR = s -> s.is(SFDTrees.COTINUS.<Block>getBlock(TreeBlockType.TRAPDOOR));
+    private static final Predicate<BlockState> P_COTINUS_FENCEGATE = s -> s.is(SFDTrees.COTINUS.<Block>getBlock(TreeBlockType.FENCE_GATE));
     private static final Predicate<BlockState> P_COTINUS_ANY = P_COTINUS_DOOR.or(P_COTINUS_TRAPDOOR).or(P_COTINUS_FENCEGATE);
-    private static final Predicate<BlockState> P_SOPHORA_DOOR = s -> s.is(SDTrees.SOPHORA.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
-    private static final Predicate<BlockState> P_SOPHORA_TRAPDOOR = s -> s.is(SDTrees.SOPHORA.<Block>getBlock(TreeBlockType.TRAPDOOR));
-    private static final Predicate<BlockState> P_SOPHORA_FENCEGATE = s -> s.is(SDTrees.SOPHORA.<Block>getBlock(TreeBlockType.FENCE_GATE));
+    private static final Predicate<BlockState> P_SOPHORA_DOOR = s -> s.is(SFDTrees.SOPHORA.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
+    private static final Predicate<BlockState> P_SOPHORA_TRAPDOOR = s -> s.is(SFDTrees.SOPHORA.<Block>getBlock(TreeBlockType.TRAPDOOR));
+    private static final Predicate<BlockState> P_SOPHORA_FENCEGATE = s -> s.is(SFDTrees.SOPHORA.<Block>getBlock(TreeBlockType.FENCE_GATE));
     private static final Predicate<BlockState> P_SOPHORA_ANY = P_SOPHORA_DOOR.or(P_SOPHORA_TRAPDOOR).or(P_SOPHORA_FENCEGATE);
     public static final int SEARCH_RANGE = 10;
 
@@ -229,7 +229,7 @@ class Debug {
 
     private static int symbolRecordPlayer(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
-        Instant birthday = player.getCapability(Birthday.CAPABILITY).map(Birthday::getBirthday).orElseThrow();
+        Instant birthday = player.getCapability(SFDCapabilities.BIRTHDAY).map(Birthday::getBirthday).orElseThrow();
         LifeSymbol.setRecordEntity(getLifeSymbol(context), player.getUUID(), player.getDisplayName(), birthday);
         return SINGLE_SUCCESS;
     }

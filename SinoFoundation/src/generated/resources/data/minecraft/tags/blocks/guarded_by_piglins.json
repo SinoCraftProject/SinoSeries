@@ -1,6 +1,10 @@
 {
   "values": [
-    "sinofoundation:mulberry_chest",
-    "sinofoundation:mulberry_trapped_chest"
+    "sinofoundation:cotinus_chest",
+    "sinofoundation:cotinus_trapped_chest",
+    "sinofoundation:jujube_chest",
+    "sinofoundation:jujube_trapped_chest",
+    "sinofoundation:sophora_chest",
+    "sinofoundation:sophora_trapped_chest"
   ]
 }

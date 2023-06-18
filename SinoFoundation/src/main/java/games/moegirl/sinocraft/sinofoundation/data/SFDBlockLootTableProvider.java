@@ -32,6 +32,13 @@ public class SFDBlockLootTableProvider extends LootTableProviderBase {
         addBlock(SFDBlocks.JADE_ORE, table(dropIngotByChance(SFDItems.JADE.get(), 1, 2)));
         addBlock(SFDBlocks.NITER_ORE, table(dropIngotByChance(SFDItems.NITER.get(), 1, 2)));
         addBlock(SFDBlocks.SULPHUR_ORE, table(dropIngotByChance(SFDItems.SULPHUR.get(), 1, 2)));
+
+        addBlock(SFDBlocks.COTINUS_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.COTINUS_CHEST.get()));
+        addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.COTINUS_TRAPPED_CHEST.get()));
+        addBlock(SFDBlocks.JUJUBE_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.JUJUBE_CHEST.get()));
+        addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.JUJUBE_TRAPPED_CHEST.get()));
+        addBlock(SFDBlocks.SOPHORA_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.SOPHORA_CHEST.get()));
+        addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.SOPHORA_TRAPPED_CHEST.get()));
     }
 
     protected LootPool.Builder dropWhenMature(PlantBlock block, ItemLike item, int minDrop, int maxDrop) {

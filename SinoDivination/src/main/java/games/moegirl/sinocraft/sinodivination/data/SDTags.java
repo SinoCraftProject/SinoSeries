@@ -21,9 +21,6 @@ public class SDTags {
 
     // Blocks ==========================================================================================================
 
-    public static final TagKey<Block> COTINUS_BLOCK = block("cotinus");
-    public static final TagKey<Block> SOPHORA_BLOCK = block("sophora");
-
     public static final TagKey<Block> FIRE_SOURCE = block("fire_source");
     public static final TagKey<Block> HEAT_SOURCE = block("heat");
 

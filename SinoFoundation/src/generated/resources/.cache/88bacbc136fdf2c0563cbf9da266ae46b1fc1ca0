@@ -1,8 +1,16 @@
-// 1.20.1	2023-06-16T09:10:22.4799275	Tags for minecraft:block mod id sinofoundation
+// 1.20.1	2023-06-18T13:44:08.2529242	Tags for minecraft:block mod id sinofoundation
+52c803721c9b270169a3b4f7ba6f084f9d5847d5 data/forge/tags/blocks/chests/trapped.json
+3674a37a7d47030c01e7d7732c933c81c1874a3b data/forge/tags/blocks/chests/wooden.json
 b67c28a75eee144fbe6dbfec65684d7952acd446 data/forge/tags/blocks/ores/jade.json
 68da1f6f63b521b8d631c097f6891a5107ef78ec data/forge/tags/blocks/ores/niter.json
 b8a06ba26b3e926b21b1a1d022a993ad17237538 data/forge/tags/blocks/ores/sulfur.json
+3674a37a7d47030c01e7d7732c933c81c1874a3b data/minecraft/tags/blocks/features_cannot_replace.json
+3674a37a7d47030c01e7d7732c933c81c1874a3b data/minecraft/tags/blocks/guarded_by_piglins.json
+3674a37a7d47030c01e7d7732c933c81c1874a3b data/minecraft/tags/blocks/mineable/axe.json
 34cc6ef0a125b6ba6091879124dc66f088716806 data/minecraft/tags/blocks/mineable/pickaxe.json
 b67c28a75eee144fbe6dbfec65684d7952acd446 data/minecraft/tags/blocks/needs_iron_tool.json
 629c03f994efd88fd941e4a1766b1546f6822bef data/minecraft/tags/blocks/needs_stone_tool.json
 31198dc389d49546c39519b6d916fb95db46f869 data/minecraft/tags/blocks/walls.json
+4ad9ff3a72f9b555b87f5f2c22489c416b53d738 data/sinofoundation/tags/blocks/cotinus.json
+bd89f0f3d9c235ee2c9f1ef3541cb5c8c13e3f30 data/sinofoundation/tags/blocks/jujube.json
+b4ab4da8c86fdd1327cf47d7fa1c65ce4c813a6e data/sinofoundation/tags/blocks/sophora.json

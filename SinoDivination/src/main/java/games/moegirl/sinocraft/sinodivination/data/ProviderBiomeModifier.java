@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinodivination.data;
 
 import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
-import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.world.SDFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -44,9 +43,6 @@ class ProviderBiomeModifier extends JsonCodecProvider<BiomeModifier> {
             HolderLookup.Provider provider = lookupProvider.get();
             HolderLookup.RegistryLookup<Biome> biomeLookup = provider.lookup(Registries.BIOME).orElseThrow();
             HolderLookup.RegistryLookup<PlacedFeature> featureLookup = provider.lookup(Registries.PLACED_FEATURE).orElseThrow();
-            map.put(SDFeatures.Placements.JADE.location(), createOverworldOre(biomeLookup, featureLookup, SDFeatures.Placements.JADE));
-            map.put(SDFeatures.Placements.NITER.location(), createOverworldOre(biomeLookup, featureLookup, SDFeatures.Placements.NITER));
-            map.put(SDFeatures.Placements.SULPHUR.location(), createOverworldOre(biomeLookup, featureLookup, SDFeatures.Placements.SULPHUR));
             map.put(SDFeatures.Placements.RICE.location(), createCrop(biomeLookup, featureLookup, SDFeatures.Placements.RICE, SDTags.SPAWN_RICE));
             map.put(SDFeatures.Placements.REHMANNIA.location(), createCrop(biomeLookup, featureLookup, SDFeatures.Placements.REHMANNIA, SDTags.SPAWN_REHMANNIA));
             map.put(SDFeatures.Placements.DRAGONLIVER_MELON.location(), createCrop(biomeLookup, featureLookup, SDFeatures.Placements.DRAGONLIVER_MELON, SDTags.SPAWN_DRAGONLIVER_MELON));

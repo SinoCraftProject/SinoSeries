@@ -59,11 +59,6 @@ class ProviderItemTags extends ItemTagsProvider {
                             case SIGN -> tag(ItemTags.SIGNS).add(item);
                             case HANGING_SIGN -> tag(ItemTags.HANGING_SIGNS).add(item);
                             case FENCE_GATE -> tag(Tags.Items.FENCE_GATES_WOODEN).add(item);
-                            case CHEST -> tag(Tags.Items.CHESTS_WOODEN).add(item);
-                            case TRAPPED_CHEST -> {
-                                tag(Tags.Items.CHESTS_WOODEN).add(item);
-                                tag(Tags.Items.CHESTS_TRAPPED).add(item);
-                            }
                         }
                     }
 

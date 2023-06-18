@@ -1,9 +1,11 @@
 package games.moegirl.sinocraft.sinofoundation.block;
 
+import games.moegirl.sinocraft.sinocore.utility.Functions;
+import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantType;
-import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
+import games.moegirl.sinocraft.sinofoundation.block.tree.*;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -42,4 +44,15 @@ public class SFDBlocks {
     public static final RegistryObject<DropExperienceBlock> JADE_ORE = BLOCKS.register("jade_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().explosionResistance(3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> NITER_ORE = BLOCKS.register("niter_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().explosionResistance(3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> SULPHUR_ORE = BLOCKS.register("sulphur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().explosionResistance(3.0f), UniformInt.of(2, 5)));
+
+    public static final RegistryObject<CotinusChest> COTINUS_CHEST = block(CotinusChest.class);
+    public static final RegistryObject<CotinusTrappedChest> COTINUS_TRAPPED_CHEST = block(CotinusTrappedChest.class);
+    public static final RegistryObject<JujubeChest> JUJUBE_CHEST = block(JujubeChest.class);
+    public static final RegistryObject<JujubeTrappedChest> JUJUBE_TRAPPED_CHEST = block(JujubeTrappedChest.class);
+    public static final RegistryObject<SophoraChest> SOPHORA_CHEST = block(SophoraChest.class);
+    public static final RegistryObject<SophoraTrappedChest> SOPHORA_TRAPPED_CHEST = block(SophoraTrappedChest.class);
+
+    private static <T extends Block> RegistryObject<T> block(Class<T> blockClass) {
+        return BLOCKS.register(NameUtils.to_snake_name(blockClass.getSimpleName()), Functions.constructor(blockClass));
+    }
 }

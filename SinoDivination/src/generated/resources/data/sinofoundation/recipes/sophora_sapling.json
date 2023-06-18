@@ -1,0 +1,5 @@
+{
+  "type": "sinodivination:change_soup",
+  "input": "minecraft:spruce_sapling",
+  "result": "sinofoundation:sophora_sapling"
+}

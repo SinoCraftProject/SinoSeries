@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
-import games.moegirl.sinocraft.sinodivination.util.NameUtils;
+import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -34,12 +34,8 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
         addBlock(SDBlocks.ALTAR);
         addBlock(SDBlocks.CARVING_TABLE);
         // item
-        addItem(SDItems.STICK_COTINUS, "Ghost Killing Stick");
         addItem(SDItems.CHANGE_SOUP, "Changing Seeding Decoction");
-        addItem(SDItems.STICK_JUJUBE, "Divine Power Stick");
         addItem(SDItems.LIFE_SYMBOL, "Life Symbol");
-        addItem(SDItems.JUJUBE, "Jujube");
-        addItem(SDItems.STICK_SOPHORA, "Ghost Guard Stick");
         addItem(SDItems.SEED_WORMWOOD, "Argy Wormwood Seed");
         addItem(SDItems.WORMWOOD_LEAF, "Argy Wormwood Leaves");
         addItem(SDItems.MOXIBUSTION, "Moxibustion");
@@ -67,6 +63,9 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
         addItem(SDItems.COPPER_LAMP);
         addItem(SDItems.COPPER_BEAST);
         addItem(SDItems.STICK_RICE);
+        addItem(SDItems.STICK_COTINUS, "Ghost Killing Stick");
+        addItem(SDItems.STICK_JUJUBE, "Divine Power Stick");
+        addItem(SDItems.STICK_SOPHORA, "Ghost Guard Stick");
         // single key
         add(SDLangKeys.CARVING_TABLE_TITLE, "Carving Table");
         add(SDLangKeys.SYMBOL_DATE, "Birthday");

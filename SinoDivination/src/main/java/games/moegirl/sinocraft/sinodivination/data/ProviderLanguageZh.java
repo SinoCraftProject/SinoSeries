@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.data.DataGenerator;
 
 class ProviderLanguageZh extends AbstractLanguageProvider {
@@ -30,12 +31,8 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
         addBlock(SDBlocks.ALTAR, "祭坛");
         addBlock(SDBlocks.CARVING_TABLE, "雕刻台");
         // item
-        addItem(SDItems.STICK_COTINUS, "鬼杀棒");
         addItem(SDItems.CHANGE_SOUP, "变荑汤");
-        addItem(SDItems.STICK_JUJUBE, "神力棒");
         addItem(SDItems.LIFE_SYMBOL, "命符");
-        addItem(SDItems.JUJUBE, "枣");
-        addItem(SDItems.STICK_SOPHORA, "御鬼棒");
         addItem(SDItems.SEED_WORMWOOD, "艾草种子");
         addItem(SDItems.WORMWOOD_LEAF, "艾草叶");
         addItem(SDItems.MOXIBUSTION, "艾灸");
@@ -63,6 +60,9 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
         addItem(SDItems.COPPER_LAMP, "铜镫");
         addItem(SDItems.COPPER_BEAST, "铜兽");
         addItem(SDItems.STICK_RICE, "糯米饭");
+        addItem(SDItems.STICK_COTINUS, "鬼杀棒");
+        addItem(SDItems.STICK_JUJUBE, "神力棒");
+        addItem(SDItems.STICK_SOPHORA, "御鬼棒");
         // single key
         add(SDLangKeys.CARVING_TABLE_TITLE, "雕刻台");
         add(SDLangKeys.SYMBOL_DATE, "生辰八字：");

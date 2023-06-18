@@ -3,9 +3,9 @@ package games.moegirl.sinocraft.sinofoundation;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
-import games.moegirl.sinocraft.sinofoundation.block.tree.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
+import games.moegirl.sinocraft.sinocore.world.gen.SCBiomeModifiers;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -27,6 +27,7 @@ public class SinoFoundation {
         SFDBlockItems.register(bus);
         SFDBlockEntities.register(bus);
         SFDTrees.register(bus);
+        SCBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(bus);
         SinoSeriesTabs.register(bus);
 
         LOGGER.info("Shake it, baby!");

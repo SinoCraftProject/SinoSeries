@@ -20,7 +20,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +54,7 @@ public class Tree {
         this.name = builder.name;
         this.translator = builder.languages;
         this.grower = Lazy.of(() -> builder.grower.apply(this));
-        this.configuration = Lazy.of(() -> builder.grower.apply(this).getConfiguration(getBlock(TreeBlockType.LOG), getBlock(TreeBlockType.LEAVES)));
+        this.configuration = Lazy.of(() -> builder.grower.apply(this).getConfiguration(this));
 
         // todo may be should set in builder ?
         blockSetType = new BlockSetType(name.toString(), true, SoundType.WOOD,
@@ -173,7 +172,7 @@ public class Tree {
         return (BlockEntityType<T>) blockEntities.get(treeBlockType).get();
     }
 
-    public <T extends BlockEntity> @Nullable RegistryObject<BlockEntityType<T>> getBlockEntityTypeObj(TreeBlockType treeBlockType) {
+    public <T extends BlockEntity> RegistryObject<BlockEntityType<T>> getBlockEntityTypeObj(TreeBlockType treeBlockType) {
         //noinspection unchecked
         return (RegistryObject<BlockEntityType<T>>) (RegistryObject<?>) blockEntities.get(treeBlockType);
     }

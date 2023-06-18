@@ -1,5 +1,8 @@
 {
   "values": [
-    "sinofoundation:mulberry_sapling"
+    "sinofoundation:mulberry_sapling",
+    "sinofoundation:cotinus_sapling",
+    "sinofoundation:jujube_sapling",
+    "sinofoundation:sophora_sapling"
   ]
 }

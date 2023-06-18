@@ -1,14 +1,10 @@
 package games.moegirl.sinocraft.sinocore.tree.event;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemModelProvider;
-import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -49,11 +45,6 @@ class ProviderItemModel extends AbstractItemModelProvider {
 
             generated(tree.getItem(TreeBlockType.DOOR));
             generated(tree.getItem(TreeBlockType.SIGN));
-
-            ResourceLocation name = tree.getBlockObj(TreeBlockType.PLANKS).getId();
-            ResourceLocation texPlank = new ResourceLocation(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath());
-            singleTexture(tree.getBlockObj(TreeBlockType.CHEST).getId().getPath(), mcLoc("item/chest"), "particle", texPlank);
-            singleTexture(tree.getBlockObj(TreeBlockType.TRAPPED_CHEST).getId().getPath(), mcLoc("item/chest"), "particle", texPlank);
         }
     }
 }

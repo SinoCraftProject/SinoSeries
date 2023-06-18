@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocore.tree;
 
 import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
