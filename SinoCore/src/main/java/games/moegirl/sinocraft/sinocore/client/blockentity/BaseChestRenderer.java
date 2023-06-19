@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.client;
+package games.moegirl.sinocraft.sinocore.client.blockentity;
 
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -18,13 +18,13 @@ public class BaseChestRenderer extends ChestRenderer<ChestBlockEntity> {
     public BaseChestRenderer(BlockEntityRendererProvider.Context context, ResourceLocation name, boolean isTrapped) {
         super(context);
         if (isTrapped) {
-            left = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "trapped_" + name.getPath() + "_left"));
-            right = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "trapped_" + name.getPath() + "_right"));
-            single = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "trapped_" + name.getPath()));
+            left = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "entity/chest/" + "trapped_" + name.getPath() + "_left"));
+            right = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "entity/chest/" + "trapped_" + name.getPath() + "_right"));
+            single = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "entity/chest/" + "trapped_" + name.getPath()));
         } else {
-            left = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), name.getPath() + "_left"));
-            right = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), name.getPath() + "_right"));
-            single = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), name.getPath()));
+            left = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "entity/chest/" + name.getPath() + "_left"));
+            right = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "entity/chest/" + name.getPath() + "_right"));
+            single = new Material(Sheets.CHEST_SHEET, new ResourceLocation(name.getNamespace(), "entity/chest/" + name.getPath()));
         }
     }
 

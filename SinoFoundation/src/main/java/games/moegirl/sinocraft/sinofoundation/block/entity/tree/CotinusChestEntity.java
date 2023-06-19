@@ -1,7 +1,8 @@
-package games.moegirl.sinocraft.sinofoundation.block.entity;
+package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import games.moegirl.sinocraft.sinocore.blockentity.BaseChestBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
 import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

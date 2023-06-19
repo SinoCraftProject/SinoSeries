@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.item;
 
-import games.moegirl.sinocraft.sinocore.tree.client.BaseChestItemRenderer;
+import games.moegirl.sinocraft.sinocore.client.item.BaseChestItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;

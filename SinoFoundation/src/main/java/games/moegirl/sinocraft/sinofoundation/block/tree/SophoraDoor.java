@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinofoundation.block.tree;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinofoundation.block.entity.SophoraDoorEntity;
+import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraDoorEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinofoundation.block.entity;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
+import games.moegirl.sinocraft.sinofoundation.block.entity.tree.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;

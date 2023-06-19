@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.block.entity;
+package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;

@@ -1,18 +1,15 @@
-package games.moegirl.sinocraft.sinofoundation.block.entity;
+package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import games.moegirl.sinocraft.sinocore.utility.Self;
-import net.minecraft.world.entity.Entity;
+import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.gameevent.BlockPositionSource;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.gameevent.PositionSource;
 
-/**
- * 槐木 BlockEntity：带有 GameEventListener
- */
-public interface ISophoraEntity extends GameEventListener, Self<BlockEntity> {
+public interface ICotinusEntity extends GameEventListener, Self<BlockEntity> {
 
-    void setEntity(Entity entity);
+    OwnerChecker owner();
 
     @Override
     default PositionSource getListenerSource() {

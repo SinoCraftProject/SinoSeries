@@ -1,8 +1,9 @@
-package games.moegirl.sinocraft.sinofoundation.block.entity;
+package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import com.mojang.datafixers.util.Pair;
 import games.moegirl.sinocraft.sinocore.blockentity.BaseChestBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;

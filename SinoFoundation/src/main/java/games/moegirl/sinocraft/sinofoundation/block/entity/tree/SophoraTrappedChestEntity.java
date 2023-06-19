@@ -1,9 +1,10 @@
-package games.moegirl.sinocraft.sinofoundation.block.entity;
+package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import com.mojang.datafixers.util.Pair;
 import games.moegirl.sinocraft.sinocore.blockentity.BaseTrappedChestBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.block.entity.SophoraChestEntity.PlayerRecord;
+import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
+import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraChestEntity.PlayerRecord;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
