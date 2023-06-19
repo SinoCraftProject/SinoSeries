@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
+import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
 import games.moegirl.sinocraft.sinocore.data.BlockStateProviderBase;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
@@ -17,12 +18,18 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SFDBlockStateProvider extends BlockStateProviderBase {
+
+    private final Logger logger = LoggerFactory.getLogger(getName());
+    private final ExistingFileHelper fileHelper;
 
     @SafeVarargs
     public SFDBlockStateProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper, DeferredRegister<? extends Block>... deferredRegisters) {
         super(output, modId, existingFileHelper, deferredRegisters);
+        this.fileHelper = existingFileHelper;
     }
 
     @Override
@@ -126,10 +133,11 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         }
     }
 
-    private void chest(RegistryObject<? extends Block> chestObj, RegistryObject<? extends Block> trappedChestObj, Tree tree) {
+    private void chest(RegistryObject<? extends BaseChestBlock> chestObj, RegistryObject<? extends Block> trappedChestObj, Tree tree) {
         ResourceLocation planksTextures = blockTexture(tree.getBlock(TreeBlockType.PLANKS));
         simpleBlock(chestObj.get(), models().getBuilder(chestObj.getId().getPath()).texture("particle", planksTextures));
         simpleBlock(trappedChestObj.get(), models().getBuilder(trappedChestObj.getId().getPath()).texture("particle", planksTextures));
+        chestObj.get().verifyTexture(fileHelper, logger);
     }
 
     /// </editor-fold>
