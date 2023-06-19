@@ -254,7 +254,9 @@ subprojects {
             "$project.modid"(MavenPublication) {
                 groupId = 'games.moegirl.sinocraft'
                 artifactId = project.modid
-                version = project.version
+                version = System.getenv('GITHUB_REF_NAME') == 'main'
+                        ? "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
+                        : project.version
                 from components.java
             }
         }
