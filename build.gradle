@@ -258,30 +258,19 @@ subprojects {
                 from components.java
             }
         }
+    }
+}
 
-        repositories {
-            maven {
-                name = 'YuLuoMaven'
-                url = 'https://maven.yuluo.dev/repository/minecraft-repo/'
+publishing {
+    repositories {
+        maven {
+            name = 'YuLuoMaven'
+            url = 'https://maven.yuluo.dev/repository/minecraft-repo/'
 
-                credentials {
-                    username System.getenv('SINOSERIES_MAVEN_USER')
-                    password System.getenv('SINOSERIES_MAVEN_PASS')
-                }
+            credentials {
+                username System.getenv('SINOSERIES_MAVEN_USER')
+                password System.getenv('SINOSERIES_MAVEN_PASS')
             }
         }
     }
-
 }
-
-
-//nexusPublishing {
-//    repositories {
-//        nexus {
-//            nexusUrl = uri('https://maven.yuluo.dev/service/local/')
-//            snapshotRepositoryUrl = uri('')
-//            username =
-//            password =
-//        }
-//    }
-//}
