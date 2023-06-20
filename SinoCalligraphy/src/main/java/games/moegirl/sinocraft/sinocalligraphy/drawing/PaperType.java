@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.RegistryObject;
 
+@Deprecated
 public enum PaperType {
     WHITE("white", 1,SCAItems.EMPTY_XUAN_PAPER, FastColor.ARGB32.color(255, 255, 255, 255)),
     RED("red", 2, SCAItems.EMPTY_XUAN_PAPER_RED, FastColor.ARGB32.color(255, 235, 76, 68)),

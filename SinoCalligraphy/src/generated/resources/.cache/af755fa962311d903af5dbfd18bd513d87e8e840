@@ -1,6 +1,4 @@
-// 1.20.1	2023-06-16T09:08:11.0477754	Tree Tags for minecraft:item mod id sinocalligraphy
-f5b88031dd2d75876ac821d8e810a97be970d3da data/forge/tags/items/chests/trapped.json
-79fb0309c683ae760c0d2daf5c46f8ae54f6854d data/forge/tags/items/chests/wooden.json
+// 1.20.1	2023-06-20T18:25:32.8680753	Tree Tags for minecraft:item mod id sinocalligraphy
 0acb4b228650034b1d273913d2e597e1f2760817 data/forge/tags/items/fence_gates/wooden.json
 ec4ffbda0b6eac4f851186afffa6a66003889637 data/minecraft/tags/items/hanging_signs.json
 ab771d2245422bb139cdd45678c1310bea7bb30f data/minecraft/tags/items/leaves.json

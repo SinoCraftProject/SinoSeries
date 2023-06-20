@@ -1,6 +1,5 @@
-// 1.20.1	2023-06-17T18:06:07.8692862	Tree Item Models: sinocalligraphy
+// 1.20.1	2023-06-20T18:25:32.8696311	Tree Item Models: sinocalligraphy
 b94b8e2ec023a499d5138a4a83299820085bbae0 assets/sinocalligraphy/models/item/green_sandalwood_button.json
-ff385ab9b7b5650e48c86e76fdeea6b913821b72 assets/sinocalligraphy/models/item/green_sandalwood_chest.json
 0dcf738e816d4fa248460960427a5d9095d72dab assets/sinocalligraphy/models/item/green_sandalwood_door.json
 ad79bff5039d6a64e3f52e9550f8319ed554f6fa assets/sinocalligraphy/models/item/green_sandalwood_fence.json
 7badcea67d8b06a5100846582bf93fd152ed2cc9 assets/sinocalligraphy/models/item/green_sandalwood_fence_gate.json
@@ -16,4 +15,3 @@ e36d74858f3f560ff39c5dfb5acd454ef9970bd1 assets/sinocalligraphy/models/item/gree
 23422c8fa52d7bba8f4a78d1c3afafbe4e126a5d assets/sinocalligraphy/models/item/green_sandalwood_stripped_log.json
 03ddec1ab2a4e5cad79a023447e5e1a40637ebd1 assets/sinocalligraphy/models/item/green_sandalwood_stripped_log_wood.json
 f1db0f6d4fd3848f8c5c12b765d8b771370b6c6e assets/sinocalligraphy/models/item/green_sandalwood_trapdoor.json
-ff385ab9b7b5650e48c86e76fdeea6b913821b72 assets/sinocalligraphy/models/item/green_sandalwood_trapped_chest.json
