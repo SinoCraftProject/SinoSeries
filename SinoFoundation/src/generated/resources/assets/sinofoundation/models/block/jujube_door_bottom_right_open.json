@@ -2,7 +2,7 @@
   "parent": "minecraft:block/door_bottom_right_open",
   "render_type": "minecraft:cutout_mipped",
   "textures": {
-    "bottom": "sinofoundation:block/jujube_planks",
-    "top": "sinofoundation:block/jujube_planks"
+    "bottom": "sinofoundation:block/jujube_door_bottom",
+    "top": "sinofoundation:block/jujube_door_top"
   }
 }

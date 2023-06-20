@@ -59,6 +59,8 @@ public class SFDTrees {
                     BlockStateProvider.simple(t.getBlock(TreeBlockType.LEAVES)),
                     new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
                     new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines().build())
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     public static final Tree JUJUBE = Tree.builder(SinoFoundation.MODID, "jujube")
@@ -77,6 +79,8 @@ public class SFDTrees {
                     BlockStateProvider.simple(t.getBlock(TreeBlockType.LEAVES)),
                     new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
                     new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines().build())
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     public static final Tree SOPHORA = Tree.builder(SinoFoundation.MODID, "sophora")
@@ -94,6 +98,8 @@ public class SFDTrees {
                     BlockStateProvider.simple(t.getBlock(TreeBlockType.LEAVES)),
                     new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
                     new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines().build())
+            .tab(TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS))
+            .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
     static {
