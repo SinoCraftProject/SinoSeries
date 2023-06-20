@@ -105,6 +105,9 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
             canvas.get().mouseClicked(mouseX, mouseY, button);
         }
 
+        titleBox.focused();
+
+        // Fixme: qyl27: titleBox focus can not re-gain after lost.
         return titleBox.handleMouseClicked(mouseX, mouseY, button) || super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -154,8 +157,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
             minecraft.player.closeContainer();
         }
 
-        return titleBox.handleKeyPressed(keyCode, scanCode, modifiers)
-                || super.keyPressed(keyCode, scanCode, modifiers);
+        return titleBox.handleKeyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
