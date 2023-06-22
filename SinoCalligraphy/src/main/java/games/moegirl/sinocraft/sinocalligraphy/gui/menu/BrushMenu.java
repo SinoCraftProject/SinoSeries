@@ -15,12 +15,10 @@ import games.moegirl.sinocraft.sinocore.gui.menu.slot.RestrictInputSlot;
 import games.moegirl.sinocraft.sinocore.gui.menu.slot.TakeOnlySlot;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotStrategy;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureMap;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -156,20 +154,22 @@ public class BrushMenu extends AbstractContainerMenu {
     public void broadcastChanges() {
         super.broadcastChanges();
 
-        if (brushContainer.hasInk() && brushContainer.hasPaper()) {
-            var inkType = InkType.BLACK;
-            if (getInk().getItem() instanceof InkItem ink) {
-                inkType = ink.getType();
-            }
+        if (player instanceof ServerPlayer) {
+            if (brushContainer.hasInk() && brushContainer.hasPaper()) {
+                var inkType = InkType.BLACK;
+                if (getInk().getItem() instanceof InkItem ink) {
+                    inkType = ink.getType();
+                }
 
-            var paperType = PaperType.BLACK;
-            if (getPaper().getItem() instanceof XuanPaperItem paper) {
-                paperType = paper.getType();
-            }
+                var paperType = PaperType.BLACK;
+                if (getPaper().getItem() instanceof XuanPaperItem paper) {
+                    paperType = paper.getType();
+                }
 
-            SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType));
-        } else {
-            SinoCalligraphy.getInstance().getNetworking().send(new DrawingDisableCanvasS2CPacket());
+                SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType), player);
+            } else {
+                SinoCalligraphy.getInstance().getNetworking().send(new DrawingDisableCanvasS2CPacket(), player);
+            }
         }
     }
 }

@@ -16,12 +16,11 @@ import org.slf4j.LoggerFactory;
 public class SinoDivination {
     public static final String MODID = "sinodivination";
     public static final String NAME = "SinoDivination";
-    public static final String VERSION = "@version@";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
     public SinoDivination() {
-        LOGGER.info("Loading SinoDivination. Ver: " + VERSION);
+        LOGGER.info("Loading SinoDivination.");
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
