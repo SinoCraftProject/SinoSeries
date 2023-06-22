@@ -37,6 +37,16 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SFDItems.NITER, "硝石");
         addItem(SFDItems.SULPHUR, "硫磺");
         addItem(SFDItems.JUJUBE, "枣");
+        addItem(SFDItems.SEED_WORMWOOD, "艾草种子");
+        addItem(SFDItems.WORMWOOD_LEAF, "艾草叶");
+        addItem(SFDItems.RICE, "稻米");
+        addItem(SFDItems.SEED_RICE, "糯稻种子");
+        addItem(SFDItems.REHMANNIA, "地黄");
+        addItem(SFDItems.SEED_REHMANNIA, "地黄种子");
+        addItem(SFDItems.DRAGONLIVER_MELON, "龙肝瓜");
+        addItem(SFDItems.SEED_DRAGONLIVER, "龙肝瓜种子");
+        addItem(SFDItems.SESAME, "芝麻");
+        addItem(SFDItems.SEED_SESAME, "巨胜种子");
 
         addBlock(SFDBlocks.STOVE, "灶台");
         addBlock(SFDBlocks.WOOD_DESK, "桌子");
@@ -62,6 +72,14 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "枣心木机关匣");
         addBlock(SFDBlocks.SOPHORA_CHEST, "槐木匣");
         addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, "槐木机关匣");
+        addBlock(SFDBlocks.WORMWOOD, "艾草");
+        addBlock(SFDBlocks.RICE, "糯稻");
+        addBlock(SFDBlocks.LUCID_GANODERMA, "灵芝");
+        addBlock(SFDBlocks.REHMANNIA, "地黄");
+        addBlock(SFDBlocks.DRAGONLIVER_MELON, "龙肝瓜");
+        addBlock(SFDBlocks.SESAME, "巨胜");
+        addBlock(SFDBlocks.ZHU_CAO, "朱草");
+        addBlock(SFDBlocks.BRIGHT_STEM_GRASS, "明茎草");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "辣椒种子");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "青椒种子");

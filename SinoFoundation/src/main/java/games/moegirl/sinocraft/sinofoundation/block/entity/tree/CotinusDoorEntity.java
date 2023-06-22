@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CotinusDoorEntity extends CotinusEntity {
+public class CotinusDoorEntity extends CotinusEntityBase {
     private boolean isAbove = false;
 
     public CotinusDoorEntity(Tree tree, BlockPos worldPosition, BlockState blockState) {

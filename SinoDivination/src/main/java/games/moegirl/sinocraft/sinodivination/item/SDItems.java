@@ -25,21 +25,8 @@ public class SDItems {
     public static final RegistryObject<SwordItem> STICK_COTINUS = sword("stick_cotinus", Tiers.WOOD, 3, -2.4F, 1);
     public static final RegistryObject<SwordItem> STICK_JUJUBE = sword("stick_jujube", Tiers.IRON, 3, -2.4f, 2);
     public static final RegistryObject<SwordItem> STICK_SOPHORA = sword("stick_sophora", Tiers.WOOD, 3, -2.4F, 2);
-    public static final RegistryObject<Item> WORMWOOD_LEAF = simple(WormwoodLeaf.class);
-    public static final RegistryObject<ItemNameBlockItem> SEED_WORMWOOD = seed(SDBlocks.WORMWOOD);
-    public static final RegistryObject<Item> MOXIBUSTION = simple(Moxibustion.class);
-    public static final RegistryObject<Item> RICE = food("rice", 1, false);
-    public static final RegistryObject<ItemNameBlockItem> SEED_RICE = simple(SeedRice.class);
-    public static final RegistryObject<BlockItem> LUCID_GANODERMAMA = block(SDBlocks.LUCID_GANODERMA);
-    public static final RegistryObject<Item> REHMANNIA = food("rehmannia", 2, false);
-    public static final RegistryObject<ItemNameBlockItem> SEED_REHMANNIA = seed(SDBlocks.REHMANNIA);
-    public static final RegistryObject<Item> DRAGONLIVER_MELON = food("dragonliver_melon", 3, false);
-    public static final RegistryObject<ItemNameBlockItem> SEED_DRAGONLIVER = seed(SDBlocks.DRAGONLIVER_MELON);
-    public static final RegistryObject<Item> SESAME = food("sesame", 1, true);
-    public static final RegistryObject<ItemNameBlockItem> SEED_SESAME = seed(SDBlocks.SESAME);
-    public static final RegistryObject<Item> ZHU_CAO = simple(SDBlocks.ZHU_CAO);
-    public static final RegistryObject<Item> BRIGHT_STEM_GRASS = simple(SDBlocks.BRIGHT_STEM_GRASS);
     public static final RegistryObject<BlockItem> BELLOWS = block(SDBlocks.BELLOWS);
+    public static final RegistryObject<Item> MOXIBUSTION = simple(Moxibustion.class);
     public static final RegistryObject<BlockItem> SILKWORM_PLAQUE = block(SDBlocks.SILKWORM_PLAQUE);
     public static final RegistryObject<Item> SILKWORM_BABY = single("silkworm_baby", 10);
     public static final RegistryObject<Hook> HOOK = simple(Hook.class);
@@ -74,30 +61,12 @@ public class SDItems {
         return REGISTRY.register(name, () -> new Item(new Item.Properties().durability(durability)));
     }
 
-    public static <T extends Block> RegistryObject<Item> simple(RegistryObject<T> block) {
-        return REGISTRY.register(block.getId().getPath(), () -> new SimpleBlockItem(block));
-    }
-
     public static <T extends Item> RegistryObject<T> simple(Class<? extends T> aClass) {
         return REGISTRY.register(NameUtils.to_snake_name(aClass.getSimpleName()), defItem(aClass));
     }
 
-    public static <T extends Block> RegistryObject<ItemNameBlockItem> seed(RegistryObject<T> crop) {
-        return namedBlock("seed_" + crop.getId().getPath(), crop);
-    }
-
-    public static RegistryObject<Item> food(String name, int nutrition, boolean fast) {
-        if (fast) {
-            return REGISTRY.register(name, () -> new Item(new Item.Properties()
-                    .food(new FoodProperties.Builder().nutrition(nutrition).fast().build())));
-        } else {
-            return REGISTRY.register(name, () -> new Item(new Item.Properties()
-                    .food(new FoodProperties.Builder().nutrition(nutrition).build())));
-        }
-    }
-
-    public static RegistryObject<SwordItem> sword(String name, Tier tier,
-                                                  int damageModifier, float attackSpeedModifier, int durabilityModifier) {
+    public static RegistryObject<SwordItem> sword(String name, Tier tier, int damageModifier,
+                                                  float attackSpeedModifier, int durabilityModifier) {
         return REGISTRY.register(name, () -> new SwordItem(tier, damageModifier, attackSpeedModifier, new Item.Properties()
                 .durability(tier.getUses() * durabilityModifier)));
     }
@@ -106,13 +75,13 @@ public class SDItems {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    public static <T extends Block> RegistryObject<ItemNameBlockItem> namedBlock(String name, RegistryObject<T> block) {
-        return REGISTRY.register(name, () -> new ItemNameBlockItem(block.get(), new Item.Properties()));
-    }
-
     private static <T extends Item> Supplier<T> defItem(Class<? extends T> aClass) {
-        Function<Item.Properties, ? extends T> constructor = Functions.constructor(aClass, Item.Properties.class);
-        return () -> constructor.apply(new Item.Properties());
+        try {
+            Function<Item.Properties, ? extends T> constructor = Functions.constructor(aClass, Item.Properties.class);
+            return () -> constructor.apply(new Item.Properties());
+        } catch (IllegalArgumentException e) {
+            return Functions.constructor(aClass);
+        }
     }
 
     public static void register(IEventBus bus) {

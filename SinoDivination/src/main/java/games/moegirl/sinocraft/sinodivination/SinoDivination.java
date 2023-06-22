@@ -25,11 +25,9 @@ public class SinoDivination {
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-//        SDNetworks.register();
         SDBlocks.register(bus);
         SDItems.register(bus);
         SDBlockEntities.register(bus);
-//        SDEntities.REGISTRY.register(bus);
         SDMenus.register(bus);
         SDRecipes.register(bus);
         SDScreens.register(bus);

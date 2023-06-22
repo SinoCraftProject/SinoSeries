@@ -17,14 +17,6 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
     public void translate() {
         // blocks
         addBlock(SDBlocks.KETTLE_POT, "釜锅");
-        addBlock(SDBlocks.WORMWOOD, "艾草");
-        addBlock(SDBlocks.RICE, "糯稻");
-        addBlock(SDBlocks.LUCID_GANODERMA, "灵芝");
-        addBlock(SDBlocks.REHMANNIA, "地黄");
-        addBlock(SDBlocks.DRAGONLIVER_MELON, "龙肝瓜");
-        addBlock(SDBlocks.SESAME, "巨胜");
-        addBlock(SDBlocks.ZHU_CAO, "朱草");
-        addBlock(SDBlocks.BRIGHT_STEM_GRASS, "明茎草");
         addBlock(SDBlocks.BELLOWS, "风箱");
         addBlock(SDBlocks.SILKWORM_PLAQUE, "蚕匾");
         addBlock(SDBlocks.TRIPOD, "鼎");
@@ -33,17 +25,7 @@ class ProviderLanguageZh extends AbstractLanguageProvider {
         // item
         addItem(SDItems.CHANGE_SOUP, "变荑汤");
         addItem(SDItems.LIFE_SYMBOL, "命符");
-        addItem(SDItems.SEED_WORMWOOD, "艾草种子");
-        addItem(SDItems.WORMWOOD_LEAF, "艾草叶");
         addItem(SDItems.MOXIBUSTION, "艾灸");
-        addItem(SDItems.RICE, "稻米");
-        addItem(SDItems.SEED_RICE, "糯稻种子");
-        addItem(SDItems.REHMANNIA, "地黄");
-        addItem(SDItems.SEED_REHMANNIA, "地黄种子");
-        addItem(SDItems.DRAGONLIVER_MELON, "龙肝瓜");
-        addItem(SDItems.SEED_DRAGONLIVER, "龙肝瓜种子");
-        addItem(SDItems.SESAME, "芝麻");
-        addItem(SDItems.SEED_SESAME, "巨胜种子");
         addItem(SDItems.SILKWORM_BABY, "蚕宝宝");
         addItem(SDItems.HOOK, "钩棍");
         addItem(SDItems.SILK, "丝");

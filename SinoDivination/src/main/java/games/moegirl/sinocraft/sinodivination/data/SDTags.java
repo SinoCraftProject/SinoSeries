@@ -24,14 +24,6 @@ public class SDTags {
     public static final TagKey<Block> FIRE_SOURCE = block("fire_source");
     public static final TagKey<Block> HEAT_SOURCE = block("heat");
 
-    public static final TagKey<Block> SPAWN_DRAGONLIVER_MELON_BLOCK = block("dragonliver_melon_spawner");
-
-    // Biomes ==========================================================================================================
-
-    public static final TagKey<Biome> SPAWN_RICE = biome("spawn_rice");
-    public static final TagKey<Biome> SPAWN_REHMANNIA = biome("spawn_rehmannia");
-    public static final TagKey<Biome> SPAWN_DRAGONLIVER_MELON = biome("spawn_dragonliver_melon");
-
     // =================================================================================================================
 
     public static TagKey<Block> block(String name) {
@@ -42,7 +34,4 @@ public class SDTags {
         return TagKey.create(Registries.ITEM, new ResourceLocation(SinoDivination.MODID, name));
     }
 
-    public static TagKey<Biome> biome(String name) {
-        return TagKey.create(Registries.BIOME, new ResourceLocation(SinoDivination.MODID, name));
-    }
 }

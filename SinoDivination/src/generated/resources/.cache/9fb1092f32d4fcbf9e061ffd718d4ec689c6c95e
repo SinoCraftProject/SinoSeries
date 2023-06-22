@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-17T02:35:04.008503	Recipes
+// 1.20.1	2023-06-22T10:06:23.2809865	Recipes
 d3a42f1f17f3f0161b063c830a39432f430fa1a5 data/minecraft/advancements/recipes/misc/blast_furnace.json
 9223c8164744bc2799b56be4dd9992fd13501fab data/minecraft/recipes/blast_furnace.json
 8a01fc0132d62786577ce2dd88fb402bc50080e7 data/sinodivination/advancements/recipes/misc/altar.json
@@ -14,7 +14,6 @@ f31551adefd0a3905f4bccb6faca4fa38679d8f2 data/sinodivination/advancements/recipe
 3a75a8f670e505bb0363ae8b26534722fa8303f8 data/sinodivination/recipes/altar.json
 6ef758d39fe1b931d368906f6c0380c16f476fa0 data/sinodivination/recipes/bai_hu.json
 ee6d20f012c3e6c3f0faf0b68c08fc306fc5f689 data/sinodivination/recipes/bellows.json
-f5a2e83f6344fe84e278388570e255b182864032 data/sinodivination/recipes/bright_stem_grass.json
 17d6bf8b91c6a7503f9d238972263721b84cd127 data/sinodivination/recipes/cang_bi.json
 dba896c3b04dc7535f093bd9a52b95315507d1c5 data/sinodivination/recipes/carving_table.json
 dd954d94e4dcf9a720d903c8fb3f1baaa4ad7e21 data/sinodivination/recipes/change_soup.json
@@ -32,11 +31,12 @@ e3485c18b1ccfdbc57b2252a8ada40daa6cdcd53 data/sinodivination/recipes/huang_cong.
 d04b2baff75fda3831ee7f1dc21a312d54e68092 data/sinodivination/recipes/silkworm_plaque.json
 6974a23446a92293c2cca3133c0375e59fb54550 data/sinodivination/recipes/stick_cotinus.json
 cedd5a0ed915f7880adc1ad6b8752d864e50a344 data/sinodivination/recipes/stick_jujube.json
-a2d6176a4b51b40bd5dba6e418c24615cc528230 data/sinodivination/recipes/stick_rice.json
+889d2c68cece6945f5e22336684df00cf0e69579 data/sinodivination/recipes/stick_rice.json
 20efd29e9713760a516d1b2ef4760391ba997f45 data/sinodivination/recipes/stick_sophora.json
 5b80f93426d76c14d1696636e22d3d6a9f3126ea data/sinodivination/recipes/tripod.json
 8e56b4db5aa4812916d1fdf1e4368ae5e5bf65da data/sinodivination/recipes/xuan_huang.json
-1beb2d20efa68c836d1ad5a0b11044f9abc62f1b data/sinodivination/recipes/zhu_cao.json
+f48e09ebb70a1681ca5d3dddce29fcf196a7b541 data/sinofoundation/recipes/bright_stem_grass.json
 24d0548db582f68a32868908dc8b63f8f96ee594 data/sinofoundation/recipes/cotinus_sapling.json
 b5842ee00ab827939dbf73e969bc4641a8913e48 data/sinofoundation/recipes/jujube_sapling.json
 e63fe2a90e8212d37ef2aba57b55c670970a4b96 data/sinofoundation/recipes/sophora_sapling.json
+c03c6e66d823f695230a0a7268e6c9b6c5d417fa data/sinofoundation/recipes/zhu_cao.json

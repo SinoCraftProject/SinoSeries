@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockTagsProvider;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlockTags;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -31,6 +32,7 @@ public class SFDBlockTagsProvider extends AbstractBlockTagsProvider {
         tag(SFDBlockTags.FORGE_ORES_SULFUR).add(SFDBlocks.SULPHUR_ORE.get());
         tag(SFDBlockTags.FORGE_ORES_NITER).add(SFDBlocks.NITER_ORE.get());
         tag(SFDBlockTags.FORGE_ORES_JADE).add(SFDBlocks.JADE_ORE.get());
+        tag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON).addTag(Tags.Blocks.GRAVEL).addTag(BlockTags.DIRT);
 
         chest(SFDBlocks.COTINUS_CHEST, SFDBlockTags.COTINUS_BLOCK, false);
         chest(SFDBlocks.COTINUS_TRAPPED_CHEST, SFDBlockTags.COTINUS_BLOCK, true);

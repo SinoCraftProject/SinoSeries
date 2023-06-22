@@ -18,12 +18,9 @@ public class DataGen {
         generator.addProvider(true, new ProviderLanguageZh(generator));
         generator.addProvider(true, new ProviderLanguageLzh(generator));
         generator.addProvider(true, new ProviderLootTable(generator));
-        generator.addProvider(true, new ProviderDatapack(event));
         generator.addProvider(true, new ProviderRecipe(event.getGenerator()));
         ProviderTagBlock provider;
         generator.addProvider(true, provider = new ProviderTagBlock(event));
         generator.addProvider(true, new ProviderTagItem(event, provider));
-        generator.addProvider(true, new ProviderTagBiome(event));
-//        generator.addProvider(true, new ProviderBiomeModifier(event));
     }
 }

@@ -1,15 +1,7 @@
-// 1.20.1	2023-06-17T02:04:07.4446922	Loot Tables
+// 1.20.1	2023-06-22T10:06:23.2794819	Loot Tables
 b957cb0fa18d215565c14b0f6eed621f4718cc42 data/sinodivination/loot_tables/blocks/altar.json
 6defc6097ddd3467cb1ea5f7e0270dbf994b22cc data/sinodivination/loot_tables/blocks/bellows.json
-fd981dc1e802e088d87851721c1c12f74c4bfab0 data/sinodivination/loot_tables/blocks/bright_stem_grass.json
 6cb9cc40e244d5dcd035438ab92d049a3c50181a data/sinodivination/loot_tables/blocks/carving_table.json
-5397f0e1f2be3de7dc639ae985756927481fca47 data/sinodivination/loot_tables/blocks/dragonliver_melon.json
 0966dba797c969d3fe387721ef2fd19cebac2eed data/sinodivination/loot_tables/blocks/kettle_pot.json
-a22b0a38b61eeb5919ec3270573f9052eb31f628 data/sinodivination/loot_tables/blocks/lucid_ganoderma.json
-ff224b07932943d471b1af96973d6a1d4997acf8 data/sinodivination/loot_tables/blocks/rehmannia.json
-3bfdf49baa9f5677320a361e0f4bdc737207b998 data/sinodivination/loot_tables/blocks/rice.json
-7dd6e21782cfd43e5f20d65905099a53997c275e data/sinodivination/loot_tables/blocks/sesame.json
 822c86269fa96724d23850f29b95519b2cbd0686 data/sinodivination/loot_tables/blocks/silkworm_plaque.json
 6497aa2f949c34be88cca77d798a1849292f1870 data/sinodivination/loot_tables/blocks/tripod.json
-cd03abe20b1b74d8d9dacd59dda24479dbf1c116 data/sinodivination/loot_tables/blocks/wormwood.json
-0be62abd56d5bb5df84afd1041bfc1f3929130c7 data/sinodivination/loot_tables/blocks/zhu_cao.json

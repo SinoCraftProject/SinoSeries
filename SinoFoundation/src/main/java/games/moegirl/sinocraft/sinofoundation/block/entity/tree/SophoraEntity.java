@@ -30,8 +30,6 @@ import java.util.UUID;
  */
 public class SophoraEntity extends BlockEntity implements ISophoraEntity {
 
-    private static boolean hasDivinationMod = false;
-
     public static SophoraEntity trapdoor(Tree tree, BlockPos worldPosition, BlockState blockState) {
         return new SophoraEntity(tree.getBlockEntityType(TreeBlockType.TRAPDOOR), worldPosition, blockState);
     }

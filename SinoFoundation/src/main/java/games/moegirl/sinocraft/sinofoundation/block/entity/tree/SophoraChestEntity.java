@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import com.mojang.datafixers.util.Pair;
-import games.moegirl.sinocraft.sinocore.blockentity.BaseChestBlockEntity;
+import games.moegirl.sinocraft.sinocore.blockentity.SimpleChestBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -26,13 +27,13 @@ import java.util.UUID;
 /**
  * 槐木匣
  */
-public class SophoraChestEntity extends BaseChestBlockEntity implements ISophoraEntity {
+public class SophoraChestEntity extends SimpleChestBlockEntity implements ISophoraEntity {
 
     @Nullable
     private PlayerRecord entity;
 
-    public SophoraChestEntity(BlockPos blockPos, BlockState state) {
-        super(SFDBlockEntities.SOPHORA_CHEST.get(), blockPos, state);
+    public SophoraChestEntity(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
+        super(entityType, pos, state);
     }
 
     @Override

@@ -20,14 +20,6 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
     public void translate() {
         // blocks
         addBlock(SDBlocks.KETTLE_POT, "Kettle Pot");
-        addBlock(SDBlocks.WORMWOOD, "Wormwood");
-        addBlock(SDBlocks.RICE, "Glutinous Rise");
-        addBlock(SDBlocks.LUCID_GANODERMA, "Ganoderma Lucidum");
-        addBlock(SDBlocks.REHMANNIA, "Rehmannia Glutinosa");
-        addBlock(SDBlocks.DRAGONLIVER_MELON, "Longan Melon");
-        addBlock(SDBlocks.SESAME, "Jusheng");
-        addBlock(SDBlocks.ZHU_CAO, "Zhu Cao");
-        addBlock(SDBlocks.BRIGHT_STEM_GRASS, "Bright Stem Grass");
         addBlock(SDBlocks.BELLOWS, "Bellows");
         addBlock(SDBlocks.SILKWORM_PLAQUE, "Silkworm Plaque");
         addBlock(SDBlocks.TRIPOD);
@@ -36,17 +28,7 @@ class ProviderLanguageEn extends AbstractLanguageProvider {
         // item
         addItem(SDItems.CHANGE_SOUP, "Changing Seeding Decoction");
         addItem(SDItems.LIFE_SYMBOL, "Life Symbol");
-        addItem(SDItems.SEED_WORMWOOD, "Argy Wormwood Seed");
-        addItem(SDItems.WORMWOOD_LEAF, "Argy Wormwood Leaves");
         addItem(SDItems.MOXIBUSTION, "Moxibustion");
-        addItem(SDItems.RICE, "Rice");
-        addItem(SDItems.SEED_RICE, "Glutinous Rice Seed");
-        addItem(SDItems.REHMANNIA, "Rehmannia Glutinosa");
-        addItem(SDItems.SEED_REHMANNIA, "Rehmannia Seed");
-        addItem(SDItems.DRAGONLIVER_MELON, "Longan Melon");
-        addItem(SDItems.SEED_DRAGONLIVER, "Longan Melon Seed");
-        addItem(SDItems.SESAME, "Sesame");
-        addItem(SDItems.SEED_SESAME, "Jusheng Seed");
         addItem(SDItems.SILKWORM_BABY, "Silkworm Baby");
         addItem(SDItems.HOOK, "Hook");
         addItem(SDItems.SILK, "Silk");

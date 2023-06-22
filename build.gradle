@@ -40,8 +40,13 @@ dependencies {
     // Add compile only api to any subproject.
 //    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
 //    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
-    modRuntimeOnly("maven.modrinth:jei:15.0.0.14")  // JEI
+//    modRuntimeOnly("maven.modrinth:jei:15.0.0.14")  // JEI
 //    modImplementation("com.ptsmods:devlogin:3.1.1")
+
+    // JEI
+    // modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    // modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    // modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
 }
 
 evaluationDependsOn ':SinoCore'
@@ -187,6 +192,17 @@ allprojects {
             content {
                 includeGroup "maven.modrinth"
             }
+        }
+
+        maven {
+            // location of the maven that hosts JEI files since January 2023
+            name = "Jared's maven"
+            url = "https://maven.blamejared.com/"
+        }
+        maven {
+            // location of a maven mirror for JEI files, as a fallback
+            name = "ModMaven"
+            url = "https://modmaven.dev"
         }
     }
 }

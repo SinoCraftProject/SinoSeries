@@ -37,6 +37,16 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SFDItems.NITER, "Niter");
         addItem(SFDItems.SULPHUR, "Sulphur");
         addItem(SFDItems.JUJUBE, "Jujube");
+        addItem(SFDItems.SEED_WORMWOOD, "Argy Wormwood Seed");
+        addItem(SFDItems.WORMWOOD_LEAF, "Argy Wormwood Leaves");
+        addItem(SFDItems.RICE, "Rice");
+        addItem(SFDItems.SEED_RICE, "Glutinous Rice Seed");
+        addItem(SFDItems.REHMANNIA, "Rehmannia Glutinosa");
+        addItem(SFDItems.SEED_REHMANNIA, "Rehmannia Seed");
+        addItem(SFDItems.DRAGONLIVER_MELON, "Longan Melon");
+        addItem(SFDItems.SEED_DRAGONLIVER, "Longan Melon Seed");
+        addItem(SFDItems.SESAME, "Sesame");
+        addItem(SFDItems.SEED_SESAME, "Jusheng Seed");
 
         addBlock(SFDBlocks.STOVE, "Stove");
         addBlock(SFDBlocks.WOOD_DESK, "Wood Desk");
@@ -61,6 +71,14 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "Jujube Trapped Chest");
         addBlock(SFDBlocks.SOPHORA_CHEST, "Sophora Chest");
         addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, "Sophora Trapped Chest");
+        addBlock(SFDBlocks.WORMWOOD, "Wormwood");
+        addBlock(SFDBlocks.RICE, "Glutinous Rise");
+        addBlock(SFDBlocks.LUCID_GANODERMA, "Ganoderma Lucidum");
+        addBlock(SFDBlocks.REHMANNIA, "Rehmannia Glutinosa");
+        addBlock(SFDBlocks.DRAGONLIVER_MELON, "Longan Melon");
+        addBlock(SFDBlocks.SESAME, "Jusheng");
+        addBlock(SFDBlocks.ZHU_CAO, "Zhu Cao");
+        addBlock(SFDBlocks.BRIGHT_STEM_GRASS, "Bright Stem Grass");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "Chili Pepper Seed");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "Green Pepper Seed");

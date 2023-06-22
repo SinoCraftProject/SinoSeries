@@ -8,6 +8,7 @@ import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinodivination.recipe.CarvingTableRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.ChangeSoupRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import net.minecraft.data.DataGenerator;
@@ -48,15 +49,15 @@ class ProviderRecipe extends RecipeProvider {
                 .input(Items.FERMENTED_SPIDER_EYE)
                 .save(consumer);
         KettlePotRecipe.builder(SDItems.STICK_RICE, 1)
-                .input(3, SDItems.RICE)
+                .input(3, SFDItems.RICE)
                 .input(SFDItems.JUJUBE)
-                .input(SDItems.WORMWOOD_LEAF)
+                .input(SFDItems.WORMWOOD_LEAF)
                 .save(consumer);
         ChangeSoupRecipe.builder(Blocks.BIRCH_SAPLING, SFDTrees.COTINUS.getBlock(TreeBlockType.SAPLING)).save(consumer);
         ChangeSoupRecipe.builder(Blocks.OAK_SAPLING, SFDTrees.JUJUBE.getBlock(TreeBlockType.SAPLING)).save(consumer);
         ChangeSoupRecipe.builder(Blocks.SPRUCE_SAPLING, SFDTrees.SOPHORA.getBlock(TreeBlockType.SAPLING)).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.POPPY, SDBlocks.ZHU_CAO.get()).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.CAVE_VINES, SDBlocks.BRIGHT_STEM_GRASS.get()).save(consumer);
+        ChangeSoupRecipe.builder(Blocks.POPPY, SFDBlocks.ZHU_CAO.get()).save(consumer);
+        ChangeSoupRecipe.builder(Blocks.CAVE_VINES, SFDBlocks.BRIGHT_STEM_GRASS.get()).save(consumer);
         shaped(SDItems.HOOK, Items.STICK)
                 .pattern("YY")
                 .pattern("Y ")

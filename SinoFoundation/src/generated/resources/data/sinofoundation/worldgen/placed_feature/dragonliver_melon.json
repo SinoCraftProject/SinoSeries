@@ -1,0 +1,15 @@
+{
+  "feature": "sinofoundation:dragonliver_melon",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "sinofoundation:spawn_dragonliver_melon"
+      }
+    }
+  ]
+}

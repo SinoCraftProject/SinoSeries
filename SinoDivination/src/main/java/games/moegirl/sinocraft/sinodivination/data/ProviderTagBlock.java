@@ -19,6 +19,5 @@ class ProviderTagBlock extends AbstractBlockTagsProvider {
         tag(SDTags.HEAT_SOURCE).addTag(BlockTags.FIRE).addTag(BlockTags.CAMPFIRES);
         add(SDTags.HEAT_SOURCE, Blocks.LAVA, Blocks.TORCH, Blocks.REDSTONE_TORCH, Blocks.SOUL_TORCH);
         tag(SDTags.FIRE_SOURCE).addTag(BlockTags.FIRE).addTag(BlockTags.CAMPFIRES);
-        tag(SDTags.SPAWN_DRAGONLIVER_MELON_BLOCK).addTag(Tags.Blocks.GRAVEL).addTag(BlockTags.DIRT);
     }
 }

@@ -35,10 +35,12 @@ public class SFDData {
         var blockTagsProvider = new SFDBlockTagsProvider(output, lookupProvider, SinoFoundation.MODID, exHelper);
         gen.addProvider(true, blockTagsProvider);
         gen.addProvider(true, new SFDItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoFoundation.MODID, exHelper));
+        gen.addProvider(true, new SFDBiomeTagsProvider(output, lookupProvider, exHelper));
 
         gen.addProvider(true, new SFDRecipeProvider(output, SinoFoundation.MODID));
         gen.addProvider(true, new SFDBlockLootTableProvider(output, SinoFoundation.MODID));
         gen.addProvider(true, new SFDDatapackProvider(output, lookupProvider));
-        gen.addProvider(true, new SFDBiomeModifierProvider(output, exHelper, lookupProvider));
+
+        gen.addProvider(true, new SFDBiomeModifierProvider(output, exHelper));
     }
 }

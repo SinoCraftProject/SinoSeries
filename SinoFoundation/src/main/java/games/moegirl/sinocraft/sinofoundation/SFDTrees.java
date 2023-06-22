@@ -6,11 +6,11 @@ import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.CotinusDoorEntity;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.CotinusEntity;
+import games.moegirl.sinocraft.sinofoundation.block.entity.tree.CotinusEntityBase;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraDoorEntity;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraEntity;
 import games.moegirl.sinocraft.sinofoundation.block.tree.*;
-import games.moegirl.sinocraft.sinofoundation.data.SFDBlockTags;
+import games.moegirl.sinocraft.sinofoundation.block.SFDBlockTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.resources.ResourceLocation;
@@ -50,8 +50,8 @@ public class SFDTrees {
             .block(TreeBlockType.TRAPDOOR, CotinusTrapdoor::new)
             .block(TreeBlockType.FENCE_GATE, CotinusFenceGate::new)
             .blockEntity(TreeBlockType.DOOR, CotinusDoorEntity::new)
-            .blockEntity(TreeBlockType.TRAPDOOR, CotinusEntity::trapdoor)
-            .blockEntity(TreeBlockType.FENCE_GATE, CotinusEntity::fenceGate)
+            .blockEntity(TreeBlockType.TRAPDOOR, CotinusEntityBase::trapdoor)
+            .blockEntity(TreeBlockType.FENCE_GATE, CotinusEntityBase::fenceGate)
             .blockTags(SFDBlockTags.COTINUS_BLOCK)
             .grower(t -> new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(t.getBlock(TreeBlockType.LOG)),

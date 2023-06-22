@@ -19,8 +19,8 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public class Moxibustion extends Item {
 
-    public Moxibustion() {
-        super(new Properties());
+    public Moxibustion(Properties properties) {
+        super(properties);
     }
 
     @Override
