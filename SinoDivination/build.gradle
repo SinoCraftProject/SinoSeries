@@ -15,6 +15,7 @@ dependencies {
 
     implementation project(path: ':SinoFoundation', configuration: 'namedElements')
     implementation project(path: ':SinoCore', configuration: 'namedElements')
+    implementation project(path: ':SinoTest', configuration: 'namedElements')
 }
 
 repositories {

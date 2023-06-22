@@ -1,7 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-package games.moegirl.sinocraft.sinodivination.old.plugin.jei.guihandler;
+package games.moegirl.sinocraft.sinodivination.plugin.jei.category;
 
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;

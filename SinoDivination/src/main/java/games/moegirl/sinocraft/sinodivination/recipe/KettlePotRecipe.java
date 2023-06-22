@@ -55,6 +55,10 @@ public class KettlePotRecipe extends SimpleRecipe<ReadonlyItemFluidContainer, Ke
         return fluid;
     }
 
+    public IngredientEntry getInput(int index) {
+        return inputs[index];
+    }
+
     public record IngredientEntry(int count, Ingredient ingredient) {
         public static final IngredientEntry EMPTY = new IngredientEntry(0, Ingredient.EMPTY);
 
