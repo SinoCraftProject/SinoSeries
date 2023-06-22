@@ -1,19 +1,22 @@
 package games.moegirl.sinocraft.sinodivination.item;
 
+import games.moegirl.sinocraft.sinodivination.util.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.RegistryObject;
 
 public class Hook extends Item implements Vanishable {
 
-    public Hook() {
-        super(new Properties().durability(500));
+    public Hook(RegistryObject<CreativeModeTab> tab) {
+        super(new ItemProperties().durability(500).tab(tab).properties());
     }
 
     @Override

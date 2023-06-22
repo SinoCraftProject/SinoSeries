@@ -62,7 +62,9 @@ public class Tree {
                 SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN,
                 SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON,
                 SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
-        BlockSetType.register(blockSetType);
+        synchronized (Tree.class) {
+            BlockSetType.register(blockSetType);
+        }
         woodType = new WoodType(name.toString(), blockSetType);
         WoodType.register(woodType);
 
