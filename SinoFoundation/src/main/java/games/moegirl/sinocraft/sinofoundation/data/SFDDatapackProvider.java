@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinofoundation.block.SFDBlockTags;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.SFDDamages;
 import games.moegirl.sinocraft.sinofoundation.world.SFDFeatures;
+import games.moegirl.sinocraft.sinofoundation.world.SFDPlacements;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -72,21 +73,21 @@ public class SFDDatapackProvider extends DatapackBuiltinEntriesProvider {
     }
 
     private static void addConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        confJade = context.register(SFDFeatures.Features.JADE, oreConfiguration(SFDBlocks.JADE_ORE, 16));
-        confSulphur = context.register(SFDFeatures.Features.SULPHUR, oreConfiguration(SFDBlocks.SULPHUR_ORE, 20));
-        confNiter = context.register(SFDFeatures.Features.NITER, oreConfiguration(SFDBlocks.NITER_ORE, 20));
-        rice = context.register(SFDFeatures.Features.RICE, cropConfiguration(SFDBlocks.RICE));
-        rehmannia = context.register(SFDFeatures.Features.REHMANNIA, cropConfiguration(SFDBlocks.REHMANNIA));
-        dragonliverMelon = context.register(SFDFeatures.Features.DRAGONLIVER_MELON, cropConfiguration(SFDBlocks.DRAGONLIVER_MELON));
+        confJade = context.register(SFDFeatures.JADE, oreConfiguration(SFDBlocks.JADE_ORE, 16));
+        confSulphur = context.register(SFDFeatures.SULPHUR, oreConfiguration(SFDBlocks.SULPHUR_ORE, 20));
+        confNiter = context.register(SFDFeatures.NITER, oreConfiguration(SFDBlocks.NITER_ORE, 20));
+        rice = context.register(SFDFeatures.RICE, cropConfiguration(SFDBlocks.RICE));
+        rehmannia = context.register(SFDFeatures.REHMANNIA, cropConfiguration(SFDBlocks.REHMANNIA));
+        dragonliverMelon = context.register(SFDFeatures.DRAGONLIVER_MELON, cropConfiguration(SFDBlocks.DRAGONLIVER_MELON));
     }
 
     private static void addPlacedFeatures(BootstapContext<PlacedFeature> context) {
-        placedJade = context.register(SFDFeatures.Placements.JADE, orePlaced(confJade, 0, 64));
-        placedSulphur = context.register(SFDFeatures.Placements.SULPHUR, orePlaced(confSulphur, -32, 8));
-        placedNiter = context.register(SFDFeatures.Placements.NITER, orePlaced(confNiter, 8, 64));
-        placedRice = context.register(SFDFeatures.Placements.RICE, cropPlaced(rice, BlockPredicate.matchesFluids(Fluids.WATER)));
-        placedRehmannia = context.register(SFDFeatures.Placements.REHMANNIA, cropPlaced(rehmannia, BlockPredicate.matchesTag(BlockTags.DIRT)));
-        placedDragonliverMelon = context.register(SFDFeatures.Placements.DRAGONLIVER_MELON, cropPlaced(dragonliverMelon, BlockPredicate.matchesTag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON)));
+        placedJade = context.register(SFDPlacements.JADE, orePlaced(confJade, 0, 64));
+        placedSulphur = context.register(SFDPlacements.SULPHUR, orePlaced(confSulphur, -32, 8));
+        placedNiter = context.register(SFDPlacements.NITER, orePlaced(confNiter, 8, 64));
+        placedRice = context.register(SFDPlacements.RICE, cropPlaced(rice, BlockPredicate.matchesFluids(Fluids.WATER)));
+        placedRehmannia = context.register(SFDPlacements.REHMANNIA, cropPlaced(rehmannia, BlockPredicate.matchesTag(BlockTags.DIRT)));
+        placedDragonliverMelon = context.register(SFDPlacements.DRAGONLIVER_MELON, cropPlaced(dragonliverMelon, BlockPredicate.matchesTag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON)));
     }
 
     /**

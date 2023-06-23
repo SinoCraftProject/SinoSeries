@@ -16,16 +16,16 @@ import org.slf4j.Logger;
 /**
  * 箱子
  */
-public class BaseChestBlock extends ChestBlock {
+public class ChestBlockBase extends ChestBlock {
 
     public final ResourceLocation name;
 
-    public BaseChestBlock(Properties properties, RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
+    public ChestBlockBase(Properties properties, RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
         super(properties, blockEntity);
         this.name = name;
     }
 
-    public BaseChestBlock(RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
+    public ChestBlockBase(RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
         this(Properties.copy(Blocks.CHEST), blockEntity, name);
     }
 

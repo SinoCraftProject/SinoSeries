@@ -1,8 +1,14 @@
-// 1.20.1	2023-06-17T11:30:02.3068112	Registries: sinofoundation
+// 1.20.1	2023-06-22T17:43:32.3531643	Registries: sinofoundation
 deb77128d5e0448e61c0158d8d152f087c54bc65 data/sinofoundation/damage_type/sophora_door.json
+6ca825bf6a25d41a4e78b1b168798d2804a1b9e2 data/sinofoundation/worldgen/configured_feature/dragonliver_melon.json
 d813bdf3ee913655a0d7666a3a99d4b8e2a2a82e data/sinofoundation/worldgen/configured_feature/jade.json
 ba62bf394011fbda0bfd98d10361a0b52abda3a5 data/sinofoundation/worldgen/configured_feature/niter.json
+0ea907ed863931a90de9926f1dd84a37da367b99 data/sinofoundation/worldgen/configured_feature/rehmannia.json
+ae9dda0bdcffb8ea23f57b7b376ff82809aab8d4 data/sinofoundation/worldgen/configured_feature/rice.json
 fd4bdf70afc242633bee2f77035801a2055e88c5 data/sinofoundation/worldgen/configured_feature/sulphur.json
+4eef249826d96ba524878c686a33e0c17877fde6 data/sinofoundation/worldgen/placed_feature/dragonliver_melon.json
 922d4d36b03d82001519981315ac7aadd290663a data/sinofoundation/worldgen/placed_feature/jade.json
 ff1f89d2a254dc1f6b2d1f99ab8f5c947fd2f317 data/sinofoundation/worldgen/placed_feature/niter.json
+6dba48b2eb507bd72f8df9c71a8f67b83a496490 data/sinofoundation/worldgen/placed_feature/rehmannia.json
+999c97c1d51d59cfff5411947dad10fbc212f1f5 data/sinofoundation/worldgen/placed_feature/rice.json
 d6465f9786406ba147342b971b334e70c020bef8 data/sinofoundation/worldgen/placed_feature/sulphur.json

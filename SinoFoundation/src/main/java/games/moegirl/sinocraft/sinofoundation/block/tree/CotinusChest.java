@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.block.tree;
 
-import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
+import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 /**
  * 无患木匣
  */
-public class CotinusChest extends BaseChestBlock implements CotinusBlock {
+public class CotinusChest extends ChestBlockBase implements CotinusBlock {
 
     public CotinusChest() {
         super(SFDBlockEntities.COTINUS_CHEST, SFDTrees.COTINUS.name);

@@ -26,8 +26,6 @@ public class ProviderRecipe extends AbstractRecipeProvider {
             planksFromLog(writer, tree.getItem(TreeBlockType.PLANKS), ItemTags.create(tree.getDefaultLogTag()), 4);
             woodFromLogs(writer, tree.getBlock(TreeBlockType.LOG_WOOD), tree.getBlock(TreeBlockType.LOG));
             woodFromLogs(writer, tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD), tree.getBlock(TreeBlockType.STRIPPED_LOG));
-            // woodenBoat(writer, tree.getItem(TreeBlockType.BOAT), tree.getItem(TreeBlockType.PLANKS));
-            // chestBoat(writer, tree.getItem(TreeBlockType.CHEST_BOAT), tree.getItem(TreeBlockType.BOAT));
 
             var family = new BlockFamily.Builder(tree.getBlock(TreeBlockType.PLANKS))
                     .stairs(tree.getBlock(TreeBlockType.STAIRS))

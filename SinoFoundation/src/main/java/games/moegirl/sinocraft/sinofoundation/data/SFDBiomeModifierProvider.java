@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.biome.SFDBiomeTags;
 import games.moegirl.sinocraft.sinofoundation.world.SFDFeatures;
 import games.moegirl.sinocraft.sinocore.world.gen.TaggedBiomeFeatureModifier;
+import games.moegirl.sinocraft.sinofoundation.world.SFDPlacements;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.PackOutput;
@@ -38,12 +39,12 @@ class SFDBiomeModifierProvider extends JsonCodecProvider<BiomeModifier> {
     private static Map<ResourceLocation, BiomeModifier> buildModifiers() {
         Map<ResourceLocation, BiomeModifier> map = new HashMap<>();
         try {
-            map.put(SFDFeatures.Placements.JADE.location(), createOverworldOre(SFDDatapackProvider.placedJade));
-            map.put(SFDFeatures.Placements.NITER.location(), createOverworldOre(SFDDatapackProvider.placedNiter));
-            map.put(SFDFeatures.Placements.SULPHUR.location(), createOverworldOre(SFDDatapackProvider.placedSulphur));
-            map.put(SFDFeatures.Placements.RICE.location(), createVegetal(SFDBiomeTags.SPAWN_RICE, SFDDatapackProvider.placedRice));
-            map.put(SFDFeatures.Placements.REHMANNIA.location(), createVegetal(SFDBiomeTags.SPAWN_REHMANNIA, SFDDatapackProvider.placedRehmannia));
-            map.put(SFDFeatures.Placements.DRAGONLIVER_MELON.location(), createVegetal(SFDBiomeTags.SPAWN_DRAGONLIVER_MELON, SFDDatapackProvider.placedDragonliverMelon));
+            map.put(SFDPlacements.JADE.location(), createOverworldOre(SFDDatapackProvider.placedJade));
+            map.put(SFDPlacements.NITER.location(), createOverworldOre(SFDDatapackProvider.placedNiter));
+            map.put(SFDPlacements.SULPHUR.location(), createOverworldOre(SFDDatapackProvider.placedSulphur));
+            map.put(SFDPlacements.RICE.location(), createVegetal(SFDBiomeTags.SPAWN_RICE, SFDDatapackProvider.placedRice));
+            map.put(SFDPlacements.REHMANNIA.location(), createVegetal(SFDBiomeTags.SPAWN_REHMANNIA, SFDDatapackProvider.placedRehmannia));
+            map.put(SFDPlacements.DRAGONLIVER_MELON.location(), createVegetal(SFDBiomeTags.SPAWN_DRAGONLIVER_MELON, SFDDatapackProvider.placedDragonliverMelon));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -18,13 +18,13 @@ import net.minecraftforge.registries.RegistryObject;
  *
  * @author luqin2007
  */
-public class BaseTrappedChestBlock extends BaseChestBlock {
+public class TrappedChestBlockBase extends ChestBlockBase {
 
-    public BaseTrappedChestBlock(Properties properties, RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
+    public TrappedChestBlockBase(Properties properties, RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
         super(properties, blockEntity, name);
     }
 
-    public BaseTrappedChestBlock(RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
+    public TrappedChestBlockBase(RegistryObject<BlockEntityType<? extends ChestBlockEntity>> blockEntity, ResourceLocation name) {
         super(Properties.copy(Blocks.TRAPPED_CHEST), blockEntity, name);
     }
 

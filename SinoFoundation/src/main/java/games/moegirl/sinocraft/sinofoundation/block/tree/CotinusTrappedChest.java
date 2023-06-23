@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.block.tree;
 
-import games.moegirl.sinocraft.sinocore.block.BaseTrappedChestBlock;
+import games.moegirl.sinocraft.sinocore.block.TrappedChestBlockBase;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 /**
  * 无患木匣
  */
-public class CotinusTrappedChest extends BaseTrappedChestBlock implements CotinusBlock {
+public class CotinusTrappedChest extends TrappedChestBlockBase implements CotinusBlock {
 
     public CotinusTrappedChest() {
         super(SFDBlockEntities.COTINUS_TRAPPED_CHEST, SFDTrees.COTINUS.name);

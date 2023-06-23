@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
-import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
+import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinocore.block.Crop;
 import games.moegirl.sinocraft.sinocore.data.BlockStateProviderBase;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
@@ -234,7 +234,7 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         }, StairBlock.WATERLOGGED);
     }
 
-    private void chest(RegistryObject<? extends BaseChestBlock> chestObj, RegistryObject<? extends Block> trappedChestObj, Tree tree) {
+    private void chest(RegistryObject<? extends ChestBlockBase> chestObj, RegistryObject<? extends Block> trappedChestObj, Tree tree) {
         ResourceLocation planksTextures = blockTexture(tree.getBlock(TreeBlockType.PLANKS));
         simpleBlock(chestObj.get(), models().getBuilder(chestObj.getId().getPath()).texture("particle", planksTextures));
         simpleBlock(trappedChestObj.get(), models().getBuilder(trappedChestObj.getId().getPath()).texture("particle", planksTextures));

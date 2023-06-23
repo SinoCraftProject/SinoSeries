@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.block.tree;
 
-import games.moegirl.sinocraft.sinocore.block.BaseChestBlock;
+import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class JujubeChest extends BaseChestBlock {
+public class JujubeChest extends ChestBlockBase {
 
     public JujubeChest() {
         super(SFDBlockEntities.JUJUBE_CHEST, SFDTrees.JUJUBE.name);
