@@ -17,7 +17,7 @@ public class SinoCore {
     public static final boolean DEBUG = System.getProperty("sinoseries.debug", "false").equalsIgnoreCase("true");
 
     public static final String MODID = "sinocore";
-    public static final String VERSION = "1.19.4-1.4.1";
+    public static final String VERSION = "1.20.1-1.5.1";
 
     private static SinoCore INSTANCE = null;
 
