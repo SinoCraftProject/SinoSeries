@@ -51,6 +51,7 @@ public class SFDBlockItems {
                 .addItem(MARBLE_STAIRS)
                 .addItem(MARBLE_WALLS)
                 .addItem(SMOOTH_MARBLE_SLAB)
+                .addItem(SMOOTH_MARBLE_STAIRS)
                 .addItem(JADE_ORE)
                 .addItem(NITER_ORE)
                 .addItem(SULPHUR_ORE);
