@@ -9,10 +9,7 @@ import games.moegirl.sinocraft.sinofoundation.block.tree.*;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -42,8 +39,15 @@ public class SFDBlocks {
     public static final RegistryObject<PlantBlock> SOYBEAN_PLANT = BLOCKS.register("soybean_plant", () -> new PlantBlock(PlantType.SOYBEAN, SFDBlockItems.SOYBEAN));
     public static final RegistryObject<PlantBlock> GARLIC_PLANT = BLOCKS.register("garlic_plant", () -> new PlantBlock(PlantType.GARLIC, SFDBlockItems.GARLIC));
 
-    public static final RegistryObject<Block> MARBLE = BLOCKS.register("marble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
-    public static final RegistryObject<WallBlock> MARBLE_WALL = BLOCKS.register("marble_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(MARBLE.get())));
+    public static final RegistryObject<Block> MARBLE_BLOCK = BLOCKS.register("marble_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
+    public static final RegistryObject<Block> SMOOTH_MARBLE = BLOCKS.register("smooth_marble", () -> new Block(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR = BLOCKS.register("marble_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<RotatedPillarBlock> CHISELED_MARBLE_BLOCK = BLOCKS.register("chiseled_marble_block", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<SlabBlock> MARBLE_SLAB = BLOCKS.register("marble_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<StairBlock> MARBLE_STAIRS = BLOCKS.register("marble_stairs", () -> new StairBlock(() -> MARBLE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<WallBlock> MARBLE_WALLS = BLOCKS.register("marble_walls", () -> new WallBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<SlabBlock> SMOOTH_MARBLE_SLAB = BLOCKS.register("smooth_marble_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
+    public static final RegistryObject<StairBlock> SMOOTH_MARBLE_STAIRS = BLOCKS.register("smooth_marble_stairs", () -> new StairBlock(() -> MARBLE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
 
     public static final RegistryObject<DropExperienceBlock> JADE_ORE = BLOCKS.register("jade_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().explosionResistance(3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> NITER_ORE = BLOCKS.register("niter_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().explosionResistance(3.0f), UniformInt.of(2, 5)));

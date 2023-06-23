@@ -48,10 +48,31 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         addCrops();
         addWoodDesk();
         addChest();
+        addMarble();
 
-        skipBlock(SFDBlocks.MARBLE_WALL.get());
-        wallBlock(SFDBlocks.MARBLE_WALL.get(), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_post")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side_tall")));
         lucidGanoderma();
+    }
+
+    private void addMarble() {
+        skipBlock(SFDBlocks.MARBLE_WALLS.get());
+        wallBlock(SFDBlocks.MARBLE_WALLS.get(), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_post")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side")), new ModelFile.UncheckedModelFile(modLoc("block/marble_wall_side_tall")));
+
+        skipBlock(SFDBlocks.MARBLE_PILLAR.get());
+        logBlock(SFDBlocks.MARBLE_PILLAR.get());
+        skipBlock(SFDBlocks.CHISELED_MARBLE_BLOCK.get());
+        logBlock(SFDBlocks.CHISELED_MARBLE_BLOCK.get());
+
+        var marbleTextures = modLoc("block/marble_block");
+        skipBlock(SFDBlocks.MARBLE_SLAB.get());
+        slabBlock(SFDBlocks.MARBLE_SLAB.get(), marbleTextures, marbleTextures);
+        skipBlock(SFDBlocks.MARBLE_STAIRS.get());
+        stairsBlock(SFDBlocks.MARBLE_STAIRS.get(), marbleTextures);
+
+        var smoothMarbleTextures = modLoc("block/smooth_marble");
+        skipBlock(SFDBlocks.SMOOTH_MARBLE_SLAB.get());
+        slabBlock(SFDBlocks.SMOOTH_MARBLE_SLAB.get(), smoothMarbleTextures, smoothMarbleTextures);
+        skipBlock(SFDBlocks.SMOOTH_MARBLE_STAIRS.get());
+        stairsBlock(SFDBlocks.SMOOTH_MARBLE_STAIRS.get(), smoothMarbleTextures);
     }
 
     private void addStove() {
@@ -118,6 +139,47 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         chest(SFDBlocks.COTINUS_CHEST, SFDBlocks.COTINUS_TRAPPED_CHEST, SFDTrees.COTINUS);
         chest(SFDBlocks.JUJUBE_CHEST, SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDTrees.JUJUBE);
         chest(SFDBlocks.SOPHORA_CHEST, SFDBlocks.SOPHORA_TRAPPED_CHEST, SFDTrees.SOPHORA);
+    }
+
+    private void lucidGanoderma() {
+        String ganoderma = SFDBlocks.LUCID_GANODERMA.getId().getPath();
+        skipBlock(SFDBlocks.LUCID_GANODERMA.get());
+        BlockModelBuilder ganodermaModel = models().crop(ganoderma, new ResourceLocation(SinoFoundation.MODID, ModelProvider.BLOCK_FOLDER + "/" + ganoderma));
+        getVariantBuilder(SFDBlocks.LUCID_GANODERMA.get()).forAllStatesExcept(state -> {
+            Direction facing = state.getValue(LucidGanoderma.LOG_FACING);
+            int xRot, yRot;
+            switch (facing) {
+                case UP -> {
+                    xRot = 270;
+                    yRot = 0;
+                }
+                case DOWN -> {
+                    xRot = 90;
+                    yRot = 0;
+                }
+                case EAST -> {
+                    xRot = 0;
+                    yRot = 90;
+                }
+                case WEST -> {
+                    xRot = 0;
+                    yRot = 270;
+                }
+                case NORTH -> {
+                    xRot = 0;
+                    yRot = 0;
+                }
+                default -> {
+                    xRot = 0;
+                    yRot = 180;
+                }
+            }
+            return ConfiguredModel.builder()
+                    .modelFile(ganodermaModel)
+                    .rotationX(xRot)
+                    .rotationY(yRot)
+                    .build();
+        }, StairBlock.WATERLOGGED);
     }
 
     /// <editor-fold desc="Utility methods.">
@@ -191,47 +253,6 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
                         .modelForState().modelFile(model).addModel();
             }
         }
-    }
-
-    private void lucidGanoderma() {
-        String ganoderma = SFDBlocks.LUCID_GANODERMA.getId().getPath();
-        skipBlock(SFDBlocks.LUCID_GANODERMA.get());
-        BlockModelBuilder ganodermaModel = models().crop(ganoderma, new ResourceLocation(SinoFoundation.MODID, ModelProvider.BLOCK_FOLDER + "/" + ganoderma));
-        getVariantBuilder(SFDBlocks.LUCID_GANODERMA.get()).forAllStatesExcept(state -> {
-            Direction facing = state.getValue(LucidGanoderma.LOG_FACING);
-            int xRot, yRot;
-            switch (facing) {
-                case UP -> {
-                    xRot = 270;
-                    yRot = 0;
-                }
-                case DOWN -> {
-                    xRot = 90;
-                    yRot = 0;
-                }
-                case EAST -> {
-                    xRot = 0;
-                    yRot = 90;
-                }
-                case WEST -> {
-                    xRot = 0;
-                    yRot = 270;
-                }
-                case NORTH -> {
-                    xRot = 0;
-                    yRot = 0;
-                }
-                default -> {
-                    xRot = 0;
-                    yRot = 180;
-                }
-            }
-            return ConfiguredModel.builder()
-                    .modelFile(ganodermaModel)
-                    .rotationX(xRot)
-                    .rotationY(yRot)
-                    .build();
-        }, StairBlock.WATERLOGGED);
     }
 
     private void chest(RegistryObject<? extends ChestBlockBase> chestObj, RegistryObject<? extends Block> trappedChestObj, Tree tree) {

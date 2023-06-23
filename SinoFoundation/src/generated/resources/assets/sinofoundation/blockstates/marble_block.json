@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "sinofoundation:block/marble_block"
+    }
+  }
+}

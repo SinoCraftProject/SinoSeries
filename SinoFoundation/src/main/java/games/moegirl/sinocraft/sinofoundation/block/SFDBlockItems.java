@@ -43,8 +43,14 @@ public class SFDBlockItems {
                 .addItem(GARLIC);
 
         TabsRegistry.items(SinoSeriesTabs.BUILDING_BLOCKS)
-                .addItem(MARBLE)
-                .addItem(MARBLE_WALL)
+                .addItem(MARBLE_BLOCK)
+                .addItem(SMOOTH_MARBLE)
+                .addItem(MARBLE_PILLAR)
+                .addItem(CHISELED_MARBLE_BLOCK)
+                .addItem(MARBLE_SLAB)
+                .addItem(MARBLE_STAIRS)
+                .addItem(MARBLE_WALLS)
+                .addItem(SMOOTH_MARBLE_SLAB)
                 .addItem(JADE_ORE)
                 .addItem(NITER_ORE)
                 .addItem(SULPHUR_ORE);
@@ -65,8 +71,15 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> SOYBEAN = ITEMS.register("soybean", () -> new BlockItem(SFDBlocks.SOYBEAN_PLANT.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> GARLIC = ITEMS.register("garlic", () -> new BlockItem(SFDBlocks.GARLIC_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
 
-    public static final RegistryObject<BlockItem> MARBLE = ITEMS.register("marble", () -> new BlockItem(SFDBlocks.MARBLE.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> MARBLE_WALL = ITEMS.register("marble_wall", () -> new BlockItem(SFDBlocks.MARBLE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> MARBLE_BLOCK = ITEMS.register("marble_block", () -> new BlockItem(SFDBlocks.MARBLE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> SMOOTH_MARBLE = ITEMS.register("smooth_marble", () -> new BlockItem(SFDBlocks.SMOOTH_MARBLE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> MARBLE_PILLAR = ITEMS.register("marble_pillar", () -> new BlockItem(SFDBlocks.MARBLE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> CHISELED_MARBLE_BLOCK = ITEMS.register("chiseled_marble_block", () -> new BlockItem(SFDBlocks.CHISELED_MARBLE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> MARBLE_SLAB = ITEMS.register("marble_slab", () -> new BlockItem(SFDBlocks.MARBLE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> MARBLE_STAIRS = ITEMS.register("marble_stairs", () -> new BlockItem(SFDBlocks.MARBLE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> MARBLE_WALLS = ITEMS.register("marble_walls", () -> new BlockItem(SFDBlocks.MARBLE_WALLS.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> SMOOTH_MARBLE_SLAB = ITEMS.register("smooth_marble_slab", () -> new BlockItem(SFDBlocks.SMOOTH_MARBLE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> SMOOTH_MARBLE_STAIRS = ITEMS.register("smooth_marble_stairs", () -> new BlockItem(SFDBlocks.SMOOTH_MARBLE_STAIRS.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockItem> JADE_ORE = ITEMS.register("jade_ore", () -> new BlockItem(SFDBlocks.JADE_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> NITER_ORE = ITEMS.register("niter_ore", () -> new BlockItem(SFDBlocks.NITER_ORE.get(), new Item.Properties()));

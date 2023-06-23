@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
+import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;

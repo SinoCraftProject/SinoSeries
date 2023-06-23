@@ -60,8 +60,15 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.MILLET_PLANT, "Millet");
         addBlock(SFDBlocks.SOYBEAN_PLANT, "Soybean");
         addBlock(SFDBlocks.GARLIC_PLANT, "Garlic");
-        addBlock(SFDBlocks.MARBLE, "Marble");
-        addBlock(SFDBlocks.MARBLE_WALL, "Marble Walls");
+        addBlock(SFDBlocks.MARBLE_BLOCK, "Marble Block");
+        addBlock(SFDBlocks.SMOOTH_MARBLE, "Smooth Marble");
+        addBlock(SFDBlocks.MARBLE_PILLAR, "Marble Pillar");
+        addBlock(SFDBlocks.CHISELED_MARBLE_BLOCK, "Chiseled Marble Block");
+        addBlock(SFDBlocks.MARBLE_SLAB, "Marble Slab");
+        addBlock(SFDBlocks.MARBLE_STAIRS, "Marble Stairs");
+        addBlock(SFDBlocks.MARBLE_WALLS, "Marble Walls");
+        addBlock(SFDBlocks.SMOOTH_MARBLE_SLAB, "Smooth Marble Slab");
+        addBlock(SFDBlocks.SMOOTH_MARBLE_STAIRS, "Smooth Marble Stairs");
         addBlock(SFDBlocks.JADE_ORE, "Jade Ore");
         addBlock(SFDBlocks.NITER_ORE, "Niter Ore");
         addBlock(SFDBlocks.SULPHUR_ORE, "Sulphur Ore");

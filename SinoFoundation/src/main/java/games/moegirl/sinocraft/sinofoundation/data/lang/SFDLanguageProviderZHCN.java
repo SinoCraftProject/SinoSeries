@@ -60,8 +60,15 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.MILLET_PLANT, "小米");
         addBlock(SFDBlocks.SOYBEAN_PLANT, "大豆");
         addBlock(SFDBlocks.GARLIC_PLANT, "大蒜");
-        addBlock(SFDBlocks.MARBLE, "大理石");
-        addBlock(SFDBlocks.MARBLE_WALL, "大理石墙");
+        addBlock(SFDBlocks.MARBLE_BLOCK, "大理石");
+        addBlock(SFDBlocks.SMOOTH_MARBLE, "平滑大理石");
+        addBlock(SFDBlocks.MARBLE_PILLAR, "大理石柱");
+        addBlock(SFDBlocks.CHISELED_MARBLE_BLOCK, "雕纹大理石");
+        addBlock(SFDBlocks.MARBLE_SLAB, "大理石台阶");
+        addBlock(SFDBlocks.MARBLE_STAIRS, "大理石楼梯");
+        addBlock(SFDBlocks.MARBLE_WALLS, "大理石墙");
+        addBlock(SFDBlocks.SMOOTH_MARBLE_SLAB, "平滑大理石台阶");
+        addBlock(SFDBlocks.SMOOTH_MARBLE_STAIRS, "平滑大理石楼梯");
         addBlock(SFDBlocks.JADE_ORE, "玉矿石");
         addBlock(SFDBlocks.NITER_ORE, "硝石矿石");
         addBlock(SFDBlocks.SULPHUR_ORE, "硫磺矿石");

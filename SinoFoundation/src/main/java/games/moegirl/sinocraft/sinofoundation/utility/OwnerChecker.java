@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.util;
+package games.moegirl.sinocraft.sinofoundation.utility;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
