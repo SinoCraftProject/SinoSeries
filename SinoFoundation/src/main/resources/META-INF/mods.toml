@@ -12,6 +12,8 @@ displayURL = "${sinoseries_url}"
 credits = "${sinoseries_credits}"
 authors = "${sinoseries_authors}"
 
+logoFile = "icon.png"
+
 description = '''
 Foundation contents of SinoSeries mods.
 华夏系列基础内容。

@@ -37,7 +37,7 @@ public class SCANetworking {
         return channel;
     }
 
-    public void send(Object message) {
+    public void sendToServer(Object message) {
         channel.sendToServer(message);
     }
 

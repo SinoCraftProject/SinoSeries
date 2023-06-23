@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import games.moegirl.sinocraft.sinocore.blockentity.SimpleTrappedChestBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
+import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

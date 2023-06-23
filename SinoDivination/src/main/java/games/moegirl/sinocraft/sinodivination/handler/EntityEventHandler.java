@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinodivination.handler;
 
 import games.moegirl.sinocraft.sinodivination.data.SDTags;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +23,8 @@ public class EntityEventHandler {
         Level level = event.getLevel();
         if (!level.isClientSide()) {
             BlockPos pos = event.getHitVec().getBlockPos();
-            if (level.getBlockState(pos).is(SDTags.FIRE_SOURCE)) {
+            if (level.getBlockState(pos).is(SDTags.FIRE_SOURCE)
+                    && event.getItemStack().is(SFDItems.WORMWOOD_LEAF.get())) {
                 Player player = event.getEntity();
                 ItemStack stack = event.getItemStack();
                 stack.shrink(1);

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 
 import games.moegirl.sinocraft.sinocore.utility.Self;
-import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
+import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.gameevent.BlockPositionSource;
 import net.minecraft.world.level.gameevent.GameEventListener;

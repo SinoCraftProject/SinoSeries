@@ -1,9 +1,8 @@
-package games.moegirl.sinocraft.sinofoundation.handler;
+package games.moegirl.sinocraft.sinofoundation.client;
 
 import games.moegirl.sinocraft.sinocore.client.blockentity.BaseChestRenderer;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

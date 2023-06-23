@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
@@ -251,7 +250,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
     }
 
     private void applyDraw(Button button) {
-        SinoCalligraphy.getInstance().getNetworking().send(new DrawingSaveC2SPacket(canvas.get().getDrawing()));
+        SinoCalligraphy.getInstance().getNetworking().sendToServer(new DrawingSaveC2SPacket(canvas.get().getDrawing()));
     }
 
     private void onTitleChanged(String title) {

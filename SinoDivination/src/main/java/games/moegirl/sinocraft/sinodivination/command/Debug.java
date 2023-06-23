@@ -18,7 +18,7 @@ import games.moegirl.sinocraft.sinofoundation.capability.entity.Birthday;
 import games.moegirl.sinocraft.sinodivination.item.LifeSymbol;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
-import games.moegirl.sinocraft.sinofoundation.util.OwnerChecker;
+import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.BlockPos;

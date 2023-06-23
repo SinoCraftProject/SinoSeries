@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @FieldsAreNonnullByDefault
-package games.moegirl.sinocraft.sinofoundation.util;
+package games.moegirl.sinocraft.sinofoundation.utility;
 
 import com.mojang.math.MethodsReturnNonnullByDefault;
 import net.minecraft.FieldsAreNonnullByDefault;
