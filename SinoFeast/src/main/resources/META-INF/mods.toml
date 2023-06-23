@@ -6,7 +6,7 @@ issueTrackerURL = "${sinoseries_issues}"
 [[mods]]
 modId = "sinofeast"
 
-version = "${version}"
+version = "${sinoseries_full_version}"
 displayName = "${mod_name}"
 displayURL = "${sinoseries_url}"
 credits = "${sinoseries_credits}"
