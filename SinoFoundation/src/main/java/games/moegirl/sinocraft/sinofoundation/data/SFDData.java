@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
+import games.moegirl.sinocraft.sinocore.data.ProviderList;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
@@ -39,8 +40,9 @@ public class SFDData {
 
         gen.addProvider(true, new SFDRecipeProvider(output, SinoFoundation.MODID));
         gen.addProvider(true, new SFDBlockLootTableProvider(output, SinoFoundation.MODID));
-        gen.addProvider(true, new SFDDatapackProvider(output, lookupProvider));
 
-        gen.addProvider(true, new SFDBiomeModifierProvider(output, exHelper));
+        gen.addProvider(true, new ProviderList("sinofoundation datapack and biome modifier")
+                .then(() -> new SFDDatapackProvider(output, lookupProvider))
+                .then(() -> new SFDBiomeModifierProvider(output, exHelper, event)));
     }
 }
