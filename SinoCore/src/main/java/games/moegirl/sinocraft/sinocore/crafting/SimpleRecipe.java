@@ -48,7 +48,7 @@ public abstract class SimpleRecipe<C extends Container, SELF extends Recipe<C>, 
     }
 
     public ItemStack getResultItem() {
-        return output;
+        return output.copy();
     }
 
     @Override

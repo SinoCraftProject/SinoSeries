@@ -23,7 +23,7 @@ public class SDItems {
 
     public static final RegistryObject<BlockItem> KETTLE_POT = block(SDBlocks.KETTLE_POT, SinoSeriesTabs.FUNCTIONAL_BLOCKS);
     public static final RegistryObject<Item> CHANGE_SOUP = simple(ChangeSoup.class, SinoSeriesTabs.AGRICULTURE);
-    public static final RegistryObject<Item> LIFE_SYMBOL = simple(LifeSymbol.class, SinoSeriesTabs.AGRICULTURE);
+    public static final RegistryObject<Item> LIFE_SYMBOL = simple(LifeSymbol.class, SinoSeriesTabs.TOOLS);
     public static final RegistryObject<SwordItem> STICK_COTINUS = sword("stick_cotinus", Tiers.WOOD, 3, -2.4F, 1);
     public static final RegistryObject<SwordItem> STICK_JUJUBE = sword("stick_jujube", Tiers.IRON, 3, -2.4f, 2);
     public static final RegistryObject<SwordItem> STICK_SOPHORA = sword("stick_sophora", Tiers.WOOD, 3, -2.4F, 2);

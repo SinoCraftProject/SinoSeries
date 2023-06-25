@@ -73,7 +73,7 @@ public class KettlePotProcessor extends RecipeProcessor<KettlePotEntity, Readonl
     @Override
     protected void onFinished(KettlePotEntity entity, KettlePotRecipe recipe) {
         container = recipe.getContainer();
-        result = recipe.getResultItem().copy();
+        result = recipe.getResultItem();
         isDataChanged = true;
     }
 
