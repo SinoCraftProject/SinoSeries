@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.blockentity;
 
-import games.moegirl.sinocraft.sinocore.crafting.FluidIngredient;
+import games.moegirl.sinocraft.sinocore.crafting.fluid_ingredient.FluidIngredient;
 import games.moegirl.sinocraft.sinocore.crafting.ReadonlyItemFluidContainer;
 import games.moegirl.sinocraft.sinocore.crafting.RecipeHolder;
 import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;

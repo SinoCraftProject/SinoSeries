@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.data;
 
+import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredients;
+import games.moegirl.sinocraft.sinofoundation.recipe.BlockInteractRecipe;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
@@ -19,7 +21,9 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -201,6 +205,11 @@ class ProviderRecipe extends RecipeProvider {
         addStick(SFDTrees.COTINUS, SDItems.STICK_COTINUS, consumer);
         addStick(SFDTrees.JUJUBE, SDItems.STICK_JUJUBE, consumer);
         addStick(SFDTrees.SOPHORA, SDItems.STICK_SOPHORA, consumer);
+
+        BlockInteractRecipe.builder(new ItemStack(SDItems.MOXIBUSTION.get()))
+                .item(Ingredient.of(SFDItems.WORMWOOD_LEAF.get()))
+                .block(BlockIngredients.tag(SDTags.FIRE_SOURCE))
+                .save(consumer);
     }
 
     private ShapedRecipeBuilder shaped(RegistryObject<? extends ItemLike> result, ItemLike unlockedBy) {

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinodivination.recipe;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

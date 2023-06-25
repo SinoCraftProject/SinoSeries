@@ -12,9 +12,6 @@ dependencies {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
     }
-
-    implementation project(path: ':SinoCore', configuration: "namedElements")
-    implementation project(path: ':SinoFoundation', configuration: "namedElements")
 }
 
 repositories {

@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-22T10:06:23.2809865	Recipes
+// 1.20.1	2023-06-24T16:40:22.7067206	Recipes
 d3a42f1f17f3f0161b063c830a39432f430fa1a5 data/minecraft/advancements/recipes/misc/blast_furnace.json
 9223c8164744bc2799b56be4dd9992fd13501fab data/minecraft/recipes/blast_furnace.json
 8a01fc0132d62786577ce2dd88fb402bc50080e7 data/sinodivination/advancements/recipes/misc/altar.json
@@ -27,6 +27,7 @@ e994226b7309a00225a058f8ac387826a9f5b5f1 data/sinodivination/recipes/copper_lamp
 aea11c20edc4a80851c962bf1253679959d0314d data/sinodivination/recipes/hook.json
 e3485c18b1ccfdbc57b2252a8ada40daa6cdcd53 data/sinodivination/recipes/huang_cong.json
 53ff4c8aebef9f3619e469f97e35c29be74cbcbd data/sinodivination/recipes/kettle_pot.json
+9f2a5bc5bc523b66d0d526d490665b56023eaf94 data/sinodivination/recipes/moxibustion.json
 3cd5b198104abc9d9da293c3c35e0a7b7a130620 data/sinodivination/recipes/qing_gui.json
 d04b2baff75fda3831ee7f1dc21a312d54e68092 data/sinodivination/recipes/silkworm_plaque.json
 6974a23446a92293c2cca3133c0375e59fb54550 data/sinodivination/recipes/stick_cotinus.json

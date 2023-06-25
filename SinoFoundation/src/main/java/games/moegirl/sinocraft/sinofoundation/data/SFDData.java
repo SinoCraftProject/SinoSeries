@@ -43,6 +43,6 @@ public class SFDData {
 
         gen.addProvider(true, new ProviderList("sinofoundation datapack and biome modifier")
                 .then(() -> new SFDDatapackProvider(output, lookupProvider))
-                .then(() -> new SFDBiomeModifierProvider(output, exHelper, event)));
+                .then(() -> new SFDBiomeModifierProvider(output, exHelper)));
     }
 }

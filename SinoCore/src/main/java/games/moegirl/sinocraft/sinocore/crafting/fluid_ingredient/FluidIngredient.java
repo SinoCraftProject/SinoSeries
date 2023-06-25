@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.crafting;
+package games.moegirl.sinocraft.sinocore.crafting.fluid_ingredient;
 
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;

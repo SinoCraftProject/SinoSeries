@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
 import games.moegirl.sinocraft.sinocore.crafting.CraftHelper;
-import games.moegirl.sinocraft.sinocore.crafting.FluidIngredient;
+import games.moegirl.sinocraft.sinocore.crafting.fluid_ingredient.FluidIngredient;
 import games.moegirl.sinocraft.sinocore.crafting.ReadonlyItemFluidContainer;
 import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipe;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;

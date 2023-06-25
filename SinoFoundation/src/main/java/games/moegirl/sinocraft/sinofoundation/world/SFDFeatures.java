@@ -37,13 +37,22 @@ public class SFDFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> REHMANNIA = FeatureUtils.createKey(MODID + ":rehmannia");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DRAGONLIVER_MELON = FeatureUtils.createKey(MODID + ":dragonliver_melon");
 
+    public static class Ref {
+        public static Holder.Reference<ConfiguredFeature<?, ?>> JADE;
+        public static Holder.Reference<ConfiguredFeature<?, ?>> SULPHUR;
+        public static Holder.Reference<ConfiguredFeature<?, ?>> NITER;
+        public static Holder.Reference<ConfiguredFeature<?, ?>> RICE;
+        public static Holder.Reference<ConfiguredFeature<?, ?>> REHMANNIA;
+        public static Holder.Reference<ConfiguredFeature<?, ?>> DRAGONLIVER_MELON;
+    }
+
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        context.register(SFDFeatures.JADE, oreConfiguration(SFDBlocks.JADE_ORE, 16));
-        context.register(SFDFeatures.SULPHUR, oreConfiguration(SFDBlocks.SULPHUR_ORE, 20));
-        context.register(SFDFeatures.NITER, oreConfiguration(SFDBlocks.NITER_ORE, 20));
-        context.register(SFDFeatures.RICE, cropConfiguration(SFDBlocks.RICE));
-        context.register(SFDFeatures.REHMANNIA, cropConfiguration(SFDBlocks.REHMANNIA));
-        context.register(SFDFeatures.DRAGONLIVER_MELON, cropConfiguration(SFDBlocks.DRAGONLIVER_MELON));
+        Ref.JADE = context.register(SFDFeatures.JADE, oreConfiguration(SFDBlocks.JADE_ORE, 16));
+        Ref.SULPHUR = context.register(SFDFeatures.SULPHUR, oreConfiguration(SFDBlocks.SULPHUR_ORE, 20));
+        Ref.NITER = context.register(SFDFeatures.NITER, oreConfiguration(SFDBlocks.NITER_ORE, 20));
+        Ref.RICE = context.register(SFDFeatures.RICE, cropConfiguration(SFDBlocks.RICE));
+        Ref.REHMANNIA = context.register(SFDFeatures.REHMANNIA, cropConfiguration(SFDBlocks.REHMANNIA));
+        Ref.DRAGONLIVER_MELON = context.register(SFDFeatures.DRAGONLIVER_MELON, cropConfiguration(SFDBlocks.DRAGONLIVER_MELON));
     }
 
     /**

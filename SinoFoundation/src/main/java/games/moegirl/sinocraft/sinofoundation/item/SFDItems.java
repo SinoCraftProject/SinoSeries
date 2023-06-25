@@ -40,9 +40,25 @@ public class SFDItems {
                 .addItem(CHILI_PEPPER)
                 .addItem(GREEN_PEPPER)
                 .addItem(CABBAGE)
-                .addItem(EGGPLANT);
+                .addItem(EGGPLANT)
+                .addItem(JUJUBE)
+                .addItem(WORMWOOD_LEAF)
+                .addItem(RICE)
+                .addItem(SEED_RICE)
+                .addItem(LUCID_GANODERMAMA)
+                .addItem(REHMANNIA)
+                .addItem(SEED_REHMANNIA)
+                .addItem(DRAGONLIVER_MELON)
+                .addItem(SEED_DRAGONLIVER)
+                .addItem(SESAME)
+                .addItem(SEED_SESAME)
+                .addItem(ZHU_CAO)
+                .addItem(BRIGHT_STEM_GRASS)
+                .addItem(SEED_WORMWOOD);
 
         TabsRegistry.items(SinoSeriesTabs.MATERIALS)
+                .addItem(ASHES)
+                .addItem(TREE_BARK)
                 .addItem(JADE)
                 .addItem(NITER)
                 .addItem(SULPHUR);
@@ -80,6 +96,8 @@ public class SFDItems {
     public static final RegistryObject<ItemNameBlockItem> SEED_SESAME = seed(SFDBlocks.SESAME);
     public static final RegistryObject<Item> ZHU_CAO = simple(SFDBlocks.ZHU_CAO);
     public static final RegistryObject<Item> BRIGHT_STEM_GRASS = simple(SFDBlocks.BRIGHT_STEM_GRASS);
+
+    public static final RegistryObject<Item> ICON_BLOCK_INTERACT = ITEMS.register("icon_block_interact", () -> new Item(new Item.Properties()));
 
     static {
         BlockStrippingEvent.registerTool(IRON_KNIFE);

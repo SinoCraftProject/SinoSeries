@@ -1,0 +1,15 @@
+{
+  "type": "sinofoundation:icon_block_interact",
+  "count": 1,
+  "hold": {
+    "item": "sinofoundation:wormwood_leaf"
+  },
+  "output": {
+    "Count": 1,
+    "id": "sinodivination:moxibustion"
+  },
+  "target": {
+    "id": "sinocore:tag",
+    "tag": "sinodivination:fire_source"
+  }
+}

@@ -30,22 +30,24 @@ public class SFDPlacements {
     public static final ResourceKey<PlacedFeature> REHMANNIA = PlacementUtils.createKey(MODID + ":rehmannia");
     public static final ResourceKey<PlacedFeature> DRAGONLIVER_MELON = PlacementUtils.createKey(MODID + ":dragonliver_melon");
 
+    public static class Ref {
+        public static Holder.Reference<PlacedFeature> JADE;
+        public static Holder.Reference<PlacedFeature> SULPHUR;
+        public static Holder.Reference<PlacedFeature> NITER;
+        public static Holder.Reference<PlacedFeature> RICE;
+        public static Holder.Reference<PlacedFeature> REHMANNIA;
+        public static Holder.Reference<PlacedFeature> DRAGONLIVER_MELON;
+    }
+
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> lookup = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        Holder.Reference<ConfiguredFeature<?, ?>> jade = lookup.getOrThrow(SFDFeatures.JADE);
-        Holder.Reference<ConfiguredFeature<?, ?>> sulphur = lookup.getOrThrow(SFDFeatures.SULPHUR);
-        Holder.Reference<ConfiguredFeature<?, ?>> niter = lookup.getOrThrow(SFDFeatures.NITER);
-        Holder.Reference<ConfiguredFeature<?, ?>> rice = lookup.getOrThrow(SFDFeatures.RICE);
-        Holder.Reference<ConfiguredFeature<?, ?>> rehmannia = lookup.getOrThrow(SFDFeatures.REHMANNIA);
-        Holder.Reference<ConfiguredFeature<?, ?>> dragonliverMelon = lookup.getOrThrow(SFDFeatures.DRAGONLIVER_MELON);
-
-        context.register(SFDPlacements.JADE, orePlaced(jade, 0, 64));
-        context.register(SFDPlacements.SULPHUR, orePlaced(sulphur, -32, 8));
-        context.register(SFDPlacements.NITER, orePlaced(niter, 8, 64));
-        context.register(SFDPlacements.RICE, cropPlaced(rice, BlockPredicate.matchesFluids(Fluids.WATER)));
-        context.register(SFDPlacements.REHMANNIA, cropPlaced(rehmannia, BlockPredicate.matchesTag(BlockTags.DIRT)));
-        context.register(SFDPlacements.DRAGONLIVER_MELON, cropPlaced(dragonliverMelon, BlockPredicate.matchesTag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON)));
+        Ref.JADE = context.register(SFDPlacements.JADE, orePlaced(SFDFeatures.Ref.JADE, 0, 64));
+        Ref.SULPHUR = context.register(SFDPlacements.SULPHUR, orePlaced(SFDFeatures.Ref.SULPHUR, -32, 8));
+        Ref.NITER = context.register(SFDPlacements.NITER, orePlaced(SFDFeatures.Ref.NITER, 8, 64));
+        Ref.RICE = context.register(SFDPlacements.RICE, cropPlaced(SFDFeatures.Ref.RICE, BlockPredicate.matchesFluids(Fluids.WATER)));
+        Ref.REHMANNIA = context.register(SFDPlacements.REHMANNIA, cropPlaced(SFDFeatures.Ref.REHMANNIA, BlockPredicate.matchesTag(BlockTags.DIRT)));
+        Ref.DRAGONLIVER_MELON = context.register(SFDPlacements.DRAGONLIVER_MELON, cropPlaced(SFDFeatures.Ref.DRAGONLIVER_MELON, BlockPredicate.matchesTag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON)));
     }
 
     /**

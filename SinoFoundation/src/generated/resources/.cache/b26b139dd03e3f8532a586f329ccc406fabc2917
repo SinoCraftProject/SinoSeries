@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-23T16:55:41.3535961	Item Models: sinofoundation
+// 1.20.1	2023-06-24T16:46:48.0354795	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 578fec44a612bcc3f51afbe1f4934ef678845bee assets/sinofoundation/models/item/bright_stem_grass.json
 a60e685b9dc428fd655a1f950c243d32b4dd65a2 assets/sinofoundation/models/item/cabbage.json
@@ -17,6 +17,7 @@ dedabd4dee4665317fc613792b6af78bedd8471c assets/sinofoundation/models/item/garli
 51b19097d696a35b071a3f00361e172cd9fd3ad0 assets/sinofoundation/models/item/green_pepper.json
 342b6637911eea19de4ea75b93ab3a1d95831857 assets/sinofoundation/models/item/green_pepper_seed.json
 0bfba18ee8943e64ec190d46a3478fb3b69da531 assets/sinofoundation/models/item/green_radish.json
+2de69ef6fd2bc1f648a9d635eba56f40ff526ed1 assets/sinofoundation/models/item/icon_block_interact.json
 ab8482fc5b2d794a5a323eedb850bb6ff4225c31 assets/sinofoundation/models/item/iron_knife.json
 e8ff5a69b245fdc8902fcf4184f7e942a6286118 assets/sinofoundation/models/item/jade.json
 b5a6d228810337df72eee7b7db89713ffd506c33 assets/sinofoundation/models/item/jade_ore.json

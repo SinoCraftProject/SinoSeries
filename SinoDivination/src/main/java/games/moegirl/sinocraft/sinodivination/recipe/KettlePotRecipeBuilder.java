@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
-import games.moegirl.sinocraft.sinocore.crafting.FluidIngredient;
+import games.moegirl.sinocraft.sinocore.crafting.fluid_ingredient.FluidIngredient;
 import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

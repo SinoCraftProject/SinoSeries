@@ -7,6 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -14,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 /**
  * @author luqin2007
  */
-public class SCBiomeModifiers {
+public class SFDBiomeModifiers {
 
     public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS =
             DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, SinoCore.MODID);
@@ -25,4 +26,8 @@ public class SCBiomeModifiers {
                     PlacedFeature.LIST_CODEC.fieldOf("features").forGetter(TaggedBiomeFeatureModifier::features),
                     GenerationStep.Decoration.CODEC.fieldOf("step").forGetter(TaggedBiomeFeatureModifier::step)
             ).apply(builder, TaggedBiomeFeatureModifier::new)));
+
+    public static void register(IEventBus bus) {
+        BIOME_MODIFIER_SERIALIZERS.register(bus);
+    }
 }
