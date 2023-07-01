@@ -39,17 +39,10 @@ dependencies {
 
     // Add compile only api to any subproject.
 //    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
-//    modRuntimeOnly("maven.modrinth:jei:${project.jei_version}")  // JEI
+    modRuntimeOnly("maven.modrinth:jei:${project.jei_version}")  // JEI
 //    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
 //    modImplementation("com.ptsmods:devlogin:3.1.1")
 }
-
-evaluationDependsOn ':SinoCore'
-evaluationDependsOn ':SinoFoundation'
-evaluationDependsOn ':SinoFeast'
-evaluationDependsOn ':SinoDivination'
-evaluationDependsOn ':SinoCalligraphy'
-evaluationDependsOn ':SinoTest'
 
 loom {
     silentMojangMappingsLicense()
@@ -210,6 +203,8 @@ subprojects {
 
     println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
 
+    archivesBaseName = "${project.modid}"
+
     java {
         withSourcesJar()
     }
@@ -250,6 +245,16 @@ subprojects {
         }
     }
 
+    dependencies {
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
+        }
+    }
+
     remapJar {
         archiveClassifier = null
         destinationDirectory.set(file("${rootProject.projectDir}/output"))
@@ -287,3 +292,10 @@ publishing {
         }
     }
 }
+
+evaluationDependsOn ':SinoCore'
+evaluationDependsOn ':SinoFoundation'
+evaluationDependsOn ':SinoFeast'
+evaluationDependsOn ':SinoDivination'
+evaluationDependsOn ':SinoCalligraphy'
+evaluationDependsOn ':SinoTest'

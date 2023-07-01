@@ -1,26 +1,7 @@
-plugins {
-    id 'dev.architectury.loom' version "${architectury_loom_version}"
-}
-
-archivesBaseName = "${project.modid}"
-
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
-    }
-
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
     implementation project(path: ':SinoCore', configuration: 'namedElements')
-    implementation project(path: ':SinoTest', configuration: 'namedElements')
-}
+    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
 
-repositories {
-    maven {
-        name = 'ParchmentMC'
-        url = 'https://maven.parchmentmc.org'
-    }
+    modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
+    modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge-api:${rootProject.jei_version}")
 }
