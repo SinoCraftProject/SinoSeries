@@ -1,5 +1,3 @@
-import java.nio.file.Files
-
 plugins {
     id 'maven-publish'
     id 'architectury-plugin' version "${architectury_plugin_version}"
@@ -11,6 +9,7 @@ println "Java: ${System.getProperty 'java.version'}, " +
         "Arch: ${System.getProperty 'os.arch'}"
 
 // 重新加载任务时清理 runConfigurations
+import java.nio.file.Files
 import java.nio.file.Path
 
 if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") }) {
@@ -19,118 +18,6 @@ if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") })
         Files.walk(ideaCache, 1)
                 .filter { Files.isRegularFile(it) }
                 .forEach { Files.delete(it) }
-}
-
-dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
-    }
-
-    implementation project(path: ':SinoCore', configuration: 'namedElements')
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
-    implementation project(path: ':SinoFeast', configuration: 'namedElements')
-    implementation project(path: ':SinoDivination', configuration: 'namedElements')
-    implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
-    implementation project(path: ':SinoTest', configuration: 'namedElements')
-
-    // Add compile only api to any subproject.
-//    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
-    modRuntimeOnly("maven.modrinth:jei:${project.jei_version}")  // JEI
-//    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
-//    modImplementation("com.ptsmods:devlogin:3.1.1")
-}
-
-loom {
-    silentMojangMappingsLicense()
-
-    forge {
-        // XXX: qyl27: this is a temp resolution for architectury/architectury-loom#120. remember to change it in future.
-        mixinConfig new File(project(':SinoCore').projectDir, 'src/main/resources/sinocore.mixins.json').toString()
-        mixinConfig new File(project(':SinoDivination').projectDir, 'src/main/resources/sinodivination.mixins.json').toString()
-
-        accessTransformer new File(project(':SinoCore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
-        accessTransformer new File(project(':SinoDivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
-    }
-
-    mods {
-        sinocore {
-            sourceSet project(':SinoCore').sourceSets.main
-        }
-
-        sinofoundation {
-            sourceSet project(':SinoFoundation').sourceSets.main
-        }
-
-        sinofeast {
-            sourceSet project(':SinoFeast').sourceSets.main
-        }
-
-        sinodivination {
-            sourceSet project(':SinoDivination').sourceSets.main
-        }
-
-        sinocalligraphy {
-            sourceSet project(':SinoCalligraphy').sourceSets.main
-        }
-
-        sinotest {
-            sourceSet project(':SinoTest').sourceSets.main
-        }
-    }
-
-    runs {
-        sinoCoreData {
-            data()
-
-            programArgs '--all', '--mod', "sinocore",
-                    '--output', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath
-        }
-
-        sinoFoundationData {
-            data()
-
-            programArgs '--all', '--mod', "sinofoundation",
-                    '--output', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
-        }
-
-        sinoFeastData {
-            data()
-
-            programArgs '--all', '--mod', "sinofeast",
-                    '--output', file('SinoFeast/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFeast/src/main/resources').absolutePath
-        }
-
-        sinoDivinationData {
-            data()
-
-            programArgs '--all', '--mod', "sinodivination",
-                    '--output', file('SinoDivination/src/generated/resources').absolutePath,
-                    '--existing', file('SinoDivination/src/main/resources').absolutePath
-        }
-
-        sinoCalligraphyData {
-            data()
-
-            programArgs '--all', '--mod', "sinocalligraphy",
-                    '--output', file('SinoCalligraphy/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCalligraphy/src/main/resources').absolutePath
-        }
-
-        sinoTestData {
-            data()
-
-            programArgs '--all', '--mod', "sinotest",
-                    '--output', file('SinoTest/src/generated/resources').absolutePath,
-                    '--existing', file('SinoTest/src/main/resources').absolutePath
-        }
-    }
 }
 
 allprojects {
@@ -146,8 +33,6 @@ allprojects {
     var release = false
     if (release || (System.getenv('SINOSERIES_RELEASE') == 'true')) {
         version += '-release'
-    } else {
-        version += '-dev'
     }
 
     architectury {
@@ -201,7 +86,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
 
-    println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
+    println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}."
 
     archivesBaseName = "${project.modid}"
 
@@ -293,9 +178,119 @@ publishing {
     }
 }
 
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
+    }
+
+    implementation project(path: ':SinoCore', configuration: 'namedElements')
+    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
+    implementation project(path: ':SinoFeast', configuration: 'namedElements')
+    implementation project(path: ':SinoDivination', configuration: 'namedElements')
+    implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
+    implementation project(path: ':SinoTest', configuration: 'namedElements')
+
+    // Add compile only api to any subproject.
+//    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
+    modRuntimeOnly("maven.modrinth:jei:${project.jei_version}")  // JEI
+//    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
+//    modRuntimeOnly("com.ptsmods:devlogin:3.1.1")
+}
+
 evaluationDependsOn ':SinoCore'
 evaluationDependsOn ':SinoFoundation'
 evaluationDependsOn ':SinoFeast'
 evaluationDependsOn ':SinoDivination'
 evaluationDependsOn ':SinoCalligraphy'
 evaluationDependsOn ':SinoTest'
+
+loom {
+    silentMojangMappingsLicense()
+
+    forge {
+//        useForgeLoggerConfig = true
+
+        accessTransformer new File(project(':SinoCore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
+        accessTransformer new File(project(':SinoDivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
+    }
+
+    mods {
+        sinocore {
+            sourceSet project(':SinoCore').sourceSets.main
+        }
+
+        sinofoundation {
+            sourceSet project(':SinoFoundation').sourceSets.main
+        }
+
+        sinofeast {
+            sourceSet project(':SinoFeast').sourceSets.main
+        }
+
+        sinodivination {
+            sourceSet project(':SinoDivination').sourceSets.main
+        }
+
+        sinocalligraphy {
+            sourceSet project(':SinoCalligraphy').sourceSets.main
+        }
+
+        sinotest {
+            sourceSet project(':SinoTest').sourceSets.main
+        }
+    }
+
+    runs {
+        sinoCoreData {
+            data()
+
+            programArgs '--all', '--mod', "sinocore",
+                    '--output', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath
+        }
+
+        sinoFoundationData {
+            data()
+
+            programArgs '--all', '--mod', "sinofoundation",
+                    '--output', file('SinoFoundation/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
+        }
+
+        sinoFeastData {
+            data()
+
+            programArgs '--all', '--mod', "sinofeast",
+                    '--output', file('SinoFeast/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFeast/src/main/resources').absolutePath
+        }
+
+        sinoDivinationData {
+            data()
+
+            programArgs '--all', '--mod', "sinodivination",
+                    '--output', file('SinoDivination/src/generated/resources').absolutePath,
+                    '--existing', file('SinoDivination/src/main/resources').absolutePath
+        }
+
+        sinoCalligraphyData {
+            data()
+
+            programArgs '--all', '--mod', "sinocalligraphy",
+                    '--output', file('SinoCalligraphy/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCalligraphy/src/main/resources').absolutePath
+        }
+
+        sinoTestData {
+            data()
+
+            programArgs '--all', '--mod', "sinotest",
+                    '--output', file('SinoTest/src/generated/resources').absolutePath,
+                    '--existing', file('SinoTest/src/main/resources').absolutePath
+        }
+    }
+}

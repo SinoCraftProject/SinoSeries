@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin.mixins;
+package games.moegirl.sinocraft.sinocore.mixins.mixin;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SignBlock;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin;
+package games.moegirl.sinocraft.sinocore.mixins.interfaces;
 
 import net.minecraft.world.level.block.Block;
 

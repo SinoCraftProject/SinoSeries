@@ -1,0 +1,9 @@
+plugins {
+    id 'dev.architectury.loom'
+}
+
+loom {
+    forge {
+        mixinConfig("sinocore.mixins.json")
+    }
+}

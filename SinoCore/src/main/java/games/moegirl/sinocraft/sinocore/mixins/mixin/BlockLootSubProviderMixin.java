@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.mixin.mixins;
+package games.moegirl.sinocraft.sinocore.mixins.mixin;
 
-import games.moegirl.sinocraft.sinocore.mixin.IBlockLootSubProvider;
+import games.moegirl.sinocraft.sinocore.mixins.interfaces.IBlockLootSubProvider;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;

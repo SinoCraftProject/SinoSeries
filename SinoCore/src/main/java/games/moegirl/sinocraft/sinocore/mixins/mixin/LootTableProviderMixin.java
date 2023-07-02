@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin.mixins;
+package games.moegirl.sinocraft.sinocore.mixins.mixin;
 
 import games.moegirl.sinocraft.sinocore.data.LootTableProviderBase;
 import net.minecraft.data.loot.LootTableProvider;
