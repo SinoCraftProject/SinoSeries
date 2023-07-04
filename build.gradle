@@ -156,11 +156,22 @@ subprojects {
             "$project.modid"(MavenPublication) {
                 groupId = 'games.moegirl.sinocraft'
                 artifactId = project.modid
-                version = "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
+                version = System.getenv('GITHUB_REF_NAME') == 'main'
+                        ? "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
+                        : project.version
+                from components.java
 
-                artifact remapJar
-                artifact remapSourcesJar
-                artifact jar
+                artifact remapJar {
+                    archiveClassifier = ''
+                }
+
+                artifact remapSourcesJar {
+                    archiveClassifier = 'sources'
+                }
+
+                artifact jar {
+                    archiveClassifier = 'deobf'
+                }
             }
         }
     }
