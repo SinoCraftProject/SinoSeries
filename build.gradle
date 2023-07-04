@@ -22,16 +22,7 @@ if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") })
 
 allprojects {
     group 'games.moegirl.sinocraft'
-    version "${project.minecraft_version}-${project.sinoseries_version}"
-
-//    if (System.getenv('GITHUB_REF_NAME') != 'main') {
-//        if (System.getenv('GITHUB_SHA') != null) {
-//            version += "-${System.getenv('GITHUB_SHA').substring(0, 7)}"
-//        } else if (System.getenv('JITPACK') == 'true') {
-//            version += "-${System.getenv('VERSION')}"
-//        }
-//    }
-    version += '-SNAPSHOT'
+    version "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
 
     var release = false
     if (release || (System.getenv('SINOSERIES_RELEASE') == 'true')) {
@@ -81,10 +72,6 @@ allprojects {
             url = "https://modmaven.dev"
         }
     }
-
-//    tasks.withType(GenerateModuleMetadata) {
-//        enabled = false
-//    }
 }
 
 subprojects {
@@ -128,8 +115,8 @@ subprojects {
     }
 
     jar {
-//        archiveClassifier = 'dev'
-//        destinationDirectory.set(file("${rootProject.projectDir}/output"))
+        archiveClassifier = 'deobf'
+        destinationDirectory.set(file("${rootProject.projectDir}/output"))
 
         manifest {
             attributes([
@@ -173,6 +160,18 @@ subprojects {
                         ? "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
                         : project.version
                 from components.java
+
+                artifact jar {
+                    classifier null
+                }
+
+                artifact sourceJar {
+                    classifier 'sources'
+                }
+
+                artifact deobfJar {
+                    classifier 'deobf'
+                }
             }
         }
     }
