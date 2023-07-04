@@ -22,13 +22,13 @@ if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") })
 
 allprojects {
     group 'games.moegirl.sinocraft'
-    version "${project.minecraft_version}-${project.sinoseries_version}"
+    version "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
 
-    if (System.getenv('GITHUB_SHA') != null) {
-        version += "-${System.getenv('GITHUB_SHA').substring(0, 7)}"
-    } else if (System.getenv('JITPACK') == 'true') {
-        version += "-${System.getenv('VERSION')}"
-    }
+//    if (System.getenv('GITHUB_SHA') != null) {
+//        version += "-${System.getenv('GITHUB_SHA').substring(0, 7)}"
+//    } else if (System.getenv('JITPACK') == 'true') {
+//        version += "-${System.getenv('VERSION')}"
+//    }
 
     var release = false
     if (release || (System.getenv('SINOSERIES_RELEASE') == 'true')) {
@@ -86,7 +86,11 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
 
-    println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}."
+    if (System.getenv('GITHUB_SHA') != null) {
+        println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}-${System.getenv('GITHUB_SHA').substring(0, 7)}."
+    } else if (System.getenv('JITPACK') == 'true') {
+        println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}."
+    }
 
     archivesBaseName = "${project.modid}"
 
@@ -159,6 +163,30 @@ subprojects {
                         ? "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
                         : project.version
                 from components.java
+
+                pom.withXml {
+                    if ("$project.modid" != "sinocore") {
+                        asNode().remove(asNode().get('dependencies'))
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        if ("$project.modid" == "sinofoundation") {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', 'games.moegirl.sinocraft')
+                            dependencyNode.appendNode('artifactId', 'sinocore')
+                            dependencyNode.appendNode('version', project.version)
+                        } else {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', 'games.moegirl.sinocraft')
+                            dependencyNode.appendNode('artifactId', 'sinocore')
+                            dependencyNode.appendNode('version', project.version)
+
+                            def dependencyNode2 = dependenciesNode.appendNode('dependency')
+                            dependencyNode2.appendNode('groupId', 'games.moegirl.sinocraft')
+                            dependencyNode2.appendNode('artifactId', 'sinofoundation')
+                            dependencyNode2.appendNode('version', project.version)
+                        }
+                    }
+
+                }
             }
         }
     }
