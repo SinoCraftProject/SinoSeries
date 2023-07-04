@@ -115,6 +115,9 @@ subprojects {
     }
 
     jar {
+        archiveClassifier = 'deobf'
+        destinationDirectory.set(file("${rootProject.projectDir}/output"))
+
         manifest {
             attributes([
                     "Specification-Title"     : project.mod_name,
@@ -161,7 +164,7 @@ subprojects {
 
                 artifact remapJar
                 artifact remapSourcesJar
-//                artifact jar
+                artifact jar
             }
         }
     }
