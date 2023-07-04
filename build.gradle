@@ -94,9 +94,9 @@ subprojects {
     apply plugin: 'eclipse'
 
     if (System.getenv('GITHUB_SHA') != null) {
-        println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}-${System.getenv('GITHUB_SHA').substring(0, 7)}."
+        println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}-${System.getenv('GITHUB_SHA').substring(0, 7)}."
     } else {
-        println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}."
+        println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
     }
 
     archivesBaseName = "${project.modid}"
