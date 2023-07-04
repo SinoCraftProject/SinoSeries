@@ -81,10 +81,6 @@ allprojects {
             url = "https://modmaven.dev"
         }
     }
-
-    tasks.withType(GenerateModuleMetadata) {
-        enabled = false
-    }
 }
 
 subprojects {
@@ -124,8 +120,6 @@ subprojects {
     }
 
     jar {
-        archiveClassifier = 'dev'
-
         manifest {
             attributes([
                     "Specification-Title"     : project.mod_name,
