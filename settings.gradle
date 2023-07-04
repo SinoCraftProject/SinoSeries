@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'SinoSeries'
+rootProject.name = 'sinoseries'
 
 include ':sinocore'
 include ':sinocalligraphy'
