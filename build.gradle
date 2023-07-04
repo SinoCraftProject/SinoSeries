@@ -129,6 +129,7 @@ subprojects {
 
     jar {
         archiveClassifier = 'dev'
+        destinationDirectory.set(file("${rootProject.projectDir}/output"))
 
         manifest {
             attributes([
