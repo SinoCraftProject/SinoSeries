@@ -1,4 +1,4 @@
 dependencies {
-    implementation project(path: ':sinocore', configuration: 'namedElements')
-    implementation project(path: ':sinofoundation', configuration: 'namedElements')
+    implementation project(path: ':SinoCore', configuration: 'namedElements')
+    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
 }

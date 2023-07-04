@@ -9,9 +9,9 @@ pluginManagement {
 
 rootProject.name = 'SinoSeries'
 
-include ':sinocore'
-include ':sinocalligraphy'
-include ':sinodivination'
-include ':sinofoundation'
-include ':sinofeast'
-include ':sinotest'
+include ':SinoCore'
+include ':SinoFoundation'
+include ':SinoFeast'
+include ':SinoDivination'
+include ':SinoCalligraphy'
+include ':SinoTest'
