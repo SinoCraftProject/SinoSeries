@@ -141,6 +141,10 @@ subprojects {
         }
     }
 
+    sourcesJar {
+        archiveClassifier = 'deobf-sources'
+    }
+
     remapJar {
         archiveClassifier = null
         destinationDirectory.set(file("${rootProject.projectDir}/output"))
