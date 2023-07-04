@@ -161,11 +161,15 @@ subprojects {
                         : project.version
                 from components.java
 
-                artifact sourceJar {
+                artifact remapJar {
+                    classifier ''
+                }
+                
+                artifact sourcesJar {
                     classifier 'sources'
                 }
 
-                artifact deobfJar {
+                artifact jar {
                     classifier 'deobf'
                 }
             }
