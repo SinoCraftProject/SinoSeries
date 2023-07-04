@@ -161,10 +161,6 @@ subprojects {
                         : project.version
                 from components.java
 
-                artifact jar {
-                    classifier null
-                }
-
                 artifact sourceJar {
                     classifier 'sources'
                 }
