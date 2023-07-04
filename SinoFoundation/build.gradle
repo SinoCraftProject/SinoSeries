@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(path: ':SinoCore', configuration: 'namedElements')
+    implementation project(path: ':sinocore', configuration: 'namedElements')
 
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge-api:${rootProject.jei_version}")

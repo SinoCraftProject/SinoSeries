@@ -82,9 +82,9 @@ allprojects {
         }
     }
 
-    tasks.withType(GenerateModuleMetadata) {
-        enabled = false
-    }
+//    tasks.withType(GenerateModuleMetadata) {
+//        enabled = false
+//    }
 }
 
 subprojects {
@@ -93,7 +93,11 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
 
-    println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}."
+    if (System.getenv('GITHUB_SHA') != null) {
+        println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}-${System.getenv('GITHUB_SHA').substring(0, 7)}."
+    } else {
+        println "Mod ${project.mod_name} of ${rootProject.name}, ver ${project.version}."
+    }
 
     archivesBaseName = "${project.modid}"
 
@@ -196,12 +200,12 @@ dependencies {
         parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
     }
 
-    implementation project(path: ':SinoCore', configuration: 'namedElements')
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
-    implementation project(path: ':SinoFeast', configuration: 'namedElements')
-    implementation project(path: ':SinoDivination', configuration: 'namedElements')
-    implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
-    implementation project(path: ':SinoTest', configuration: 'namedElements')
+    implementation project(path: ':sinocore', configuration: 'namedElements')
+    implementation project(path: ':sinofoundation', configuration: 'namedElements')
+    implementation project(path: ':sinofeast', configuration: 'namedElements')
+    implementation project(path: ':sinodivination', configuration: 'namedElements')
+    implementation project(path: ':sinocalligraphy', configuration: 'namedElements')
+    implementation project(path: ':sinotest', configuration: 'namedElements')
 
     // Add compile only api to any subproject.
 //    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
@@ -210,12 +214,12 @@ dependencies {
 //    modRuntimeOnly("com.ptsmods:devlogin:3.1.1")
 }
 
-evaluationDependsOn ':SinoCore'
-evaluationDependsOn ':SinoFoundation'
-evaluationDependsOn ':SinoFeast'
-evaluationDependsOn ':SinoDivination'
-evaluationDependsOn ':SinoCalligraphy'
-evaluationDependsOn ':SinoTest'
+evaluationDependsOn ':sinocore'
+evaluationDependsOn ':sinofoundation'
+evaluationDependsOn ':sinofeast'
+evaluationDependsOn ':sinodivination'
+evaluationDependsOn ':sinocalligraphy'
+evaluationDependsOn ':sinotest'
 
 loom {
     silentMojangMappingsLicense()
@@ -225,33 +229,33 @@ loom {
         mixinConfig 'sinocore.mixins.json'
         mixinConfig 'sinodivination.mixins.json'
 
-        accessTransformer new File(project(':SinoCore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
-        accessTransformer new File(project(':SinoDivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
+        accessTransformer new File(project(':sinocore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
+        accessTransformer new File(project(':sinodivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
     }
 
     mods {
         sinocore {
-            sourceSet project(':SinoCore').sourceSets.main
+            sourceSet project(':sinocore').sourceSets.main
         }
 
         sinofoundation {
-            sourceSet project(':SinoFoundation').sourceSets.main
+            sourceSet project(':sinofoundation').sourceSets.main
         }
 
         sinofeast {
-            sourceSet project(':SinoFeast').sourceSets.main
+            sourceSet project(':sinofeast').sourceSets.main
         }
 
         sinodivination {
-            sourceSet project(':SinoDivination').sourceSets.main
+            sourceSet project(':sinodivination').sourceSets.main
         }
 
         sinocalligraphy {
-            sourceSet project(':SinoCalligraphy').sourceSets.main
+            sourceSet project(':sinocalligraphy').sourceSets.main
         }
 
         sinotest {
-            sourceSet project(':SinoTest').sourceSets.main
+            sourceSet project(':sinotest').sourceSets.main
         }
     }
 
