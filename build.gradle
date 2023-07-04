@@ -218,8 +218,8 @@ loom {
         mixinConfig 'sinocore.mixins.json'
         mixinConfig 'sinodivination.mixins.json'
 
-        accessTransformer new File(project(':sinocore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
-        accessTransformer new File(project(':sinodivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
+        accessTransformer new File('./SinoCore/src/main/resources/META-INF/accesstransformer.cfg')
+        accessTransformer new File('./SinoDivination/src/main/resources/META-INF/accesstransformer.cfg')
     }
 
     mods {
