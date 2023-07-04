@@ -78,6 +78,10 @@ allprojects {
             url = "https://modmaven.dev"
         }
     }
+
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
 }
 
 subprojects {
@@ -189,10 +193,6 @@ subprojects {
                 }
             }
         }
-    }
-
-    tasks.withType(GenerateModuleMetadata) {
-        enabled = false
     }
 }
 
