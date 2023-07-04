@@ -71,7 +71,6 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
             var leg = Block.box(7, 0, 1, 9, 14, 3);
             var vicinalConnect = Shapes.or(desktop, leg);
             vicinalConnect = Shapes.join(vicinalConnect, desktopWaistRemoval1, BooleanOp.ONLY_FIRST);
-            vicinalConnect = Shapes.join(vicinalConnect, desktopWaistRemoval3, BooleanOp.ONLY_FIRST);
             SHAPES[16 + i] = VoxelShapeHelper.rotateClockwise(vicinalConnect, i);
         }
 

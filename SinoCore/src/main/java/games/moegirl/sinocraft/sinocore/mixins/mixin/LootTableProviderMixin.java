@@ -13,12 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LootTableProvider.class)
 public abstract class LootTableProviderMixin {
 
-    @Inject(method = "getName", at = @At("HEAD"), cancellable = true)
-    protected void injectGetName(CallbackInfoReturnable<String> callback) {
+    @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
+    protected void injectGetName(CallbackInfoReturnable<String> cir) {
         LootTableProvider $this = (LootTableProvider) (Object) this;
         if ($this instanceof LootTableProviderBase provider) {
-            callback.setReturnValue(provider.getProviderName());
-            callback.cancel();
+            cir.setReturnValue(provider.getProviderName());
         }
     }
 }

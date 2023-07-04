@@ -107,6 +107,7 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         cropsStaged(SFDBlocks.EGGPLANT_PLANT.get());
         cropsStaged(SFDBlocks.MILLET_PLANT.get());
         cropsStaged(SFDBlocks.SOYBEAN_PLANT.get());
+        cropsStaged(SFDBlocks.GARLIC_PLANT.get(), "garlic");
 
         crop(SFDBlocks.WORMWOOD);
         crop(SFDBlocks.RICE);

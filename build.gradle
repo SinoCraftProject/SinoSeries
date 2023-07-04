@@ -213,6 +213,8 @@ loom {
 
     forge {
 //        useForgeLoggerConfig = true
+        mixinConfig 'sinocore.mixins.json'
+        mixinConfig 'sinodivination.mixins.json'
 
         accessTransformer new File(project(':SinoCore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
         accessTransformer new File(project(':SinoDivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')

@@ -4,6 +4,8 @@ plugins {
 
 loom {
     forge {
-        mixinConfig("sinocore.mixins.json")
+        mixinConfig 'sinocore.mixins.json'
+
+        accessTransformer file('src/main/resources/META-INF/accesstransformer.cfg')
     }
 }
