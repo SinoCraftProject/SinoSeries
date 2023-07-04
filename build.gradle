@@ -162,15 +162,15 @@ subprojects {
                 from components.java
 
                 artifact remapJar {
-                    archiveClassifier = ''
+                    classifier ''
                 }
-
-                artifact remapSourcesJar {
-                    archiveClassifier = 'sources'
+                
+                artifact sourcesJar {
+                    classifier 'sources'
                 }
 
                 artifact jar {
-                    archiveClassifier = 'deobf'
+                    classifier 'deobf'
                 }
             }
         }
