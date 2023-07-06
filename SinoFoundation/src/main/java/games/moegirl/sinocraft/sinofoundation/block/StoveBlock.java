@@ -76,6 +76,7 @@ public class StoveBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     protected StoveBlock() {
         super(Properties.copy(Blocks.BRICKS)
+                .forceSolidOn()
                 .requiresCorrectToolForDrops()
                 .dynamicShape()
                 .strength(3.5f));

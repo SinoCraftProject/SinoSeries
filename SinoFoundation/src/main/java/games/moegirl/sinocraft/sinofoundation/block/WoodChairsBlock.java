@@ -49,6 +49,7 @@ public class WoodChairsBlock extends HorizontalDirectionalBlock {
 
     public WoodChairsBlock() {
         super(Properties.copy(Blocks.ACACIA_PLANKS)
+                .forceSolidOn()
                 .dynamicShape()
                 .strength(2.5f)
                 .noOcclusion());
@@ -75,7 +76,6 @@ public class WoodChairsBlock extends HorizontalDirectionalBlock {
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPES[state.getValue(FACING).get2DDataValue()];
     }
-
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {

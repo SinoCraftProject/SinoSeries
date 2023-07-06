@@ -92,6 +92,7 @@ public class WoodDeskBlock extends HorizontalDirectionalBlock {
 
     public WoodDeskBlock() {
         super(Properties.copy(Blocks.ACACIA_PLANKS)
+                .forceSolidOn()
                 .dynamicShape()
                 .strength(2.5f)
                 .noOcclusion());
