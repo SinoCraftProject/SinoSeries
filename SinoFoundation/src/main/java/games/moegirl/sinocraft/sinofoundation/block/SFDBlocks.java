@@ -27,6 +27,7 @@ public class SFDBlocks {
 
     public static final RegistryObject<Block> STOVE = BLOCKS.register("stove", StoveBlock::new);
     public static final RegistryObject<Block> WOOD_DESK = BLOCKS.register("wood_desk", WoodDeskBlock::new);
+    public static final RegistryObject<Block> WOOD_CHAIRS = BLOCKS.register("wood_chairs", WoodChairsBlock::new);
 
     public static final RegistryObject<PlantBlock> WHITE_RADISH_PLANT = BLOCKS.register("white_radish_plant", () -> new PlantBlock(PlantType.WHITE_RADISH, SFDBlockItems.WHITE_RADISH));
     public static final RegistryObject<PlantBlock> SUMMER_RADISH_PLANT = BLOCKS.register("summer_radish_plant", () -> new PlantBlock(PlantType.SUMMER_RADISH, SFDBlockItems.SUMMER_RADISH));

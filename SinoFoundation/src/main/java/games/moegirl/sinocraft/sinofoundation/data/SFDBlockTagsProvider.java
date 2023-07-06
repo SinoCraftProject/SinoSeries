@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockTagsProvider;
-import games.moegirl.sinocraft.sinofoundation.block.SFDBlockTags;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
+import games.moegirl.sinocraft.sinofoundation.data.tag.SFDBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;

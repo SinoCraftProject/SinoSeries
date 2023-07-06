@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.capability.entity;
+package games.moegirl.sinocraft.sinofoundation.capability.entity.birthday;
 
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
 import net.minecraft.core.Direction;

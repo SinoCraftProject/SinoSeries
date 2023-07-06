@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinodivination.data;
 import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemTagsProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
-import games.moegirl.sinocraft.sinofoundation.item.SFDItemTags;
+import games.moegirl.sinocraft.sinofoundation.data.tag.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.data.event.GatherDataEvent;

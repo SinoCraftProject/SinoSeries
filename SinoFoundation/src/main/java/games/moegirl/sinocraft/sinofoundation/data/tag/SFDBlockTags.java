@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.block;
+package games.moegirl.sinocraft.sinofoundation.data.tag;
 
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import net.minecraft.core.registries.Registries;

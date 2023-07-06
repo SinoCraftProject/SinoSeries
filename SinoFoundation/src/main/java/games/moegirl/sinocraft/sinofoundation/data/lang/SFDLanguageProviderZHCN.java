@@ -49,7 +49,8 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SFDItems.SEED_SESAME, "巨胜种子");
 
         addBlock(SFDBlocks.STOVE, "灶台");
-        addBlock(SFDBlocks.WOOD_DESK, "桌子");
+        addBlock(SFDBlocks.WOOD_DESK, "木桌子");
+        addBlock(SFDBlocks.WOOD_CHAIRS, "木椅子");
         addBlock(SFDBlocks.WHITE_RADISH_PLANT, "白萝卜");
         addBlock(SFDBlocks.SUMMER_RADISH_PLANT, "水萝卜");
         addBlock(SFDBlocks.GREEN_RADISH_PLANT, "青萝卜");

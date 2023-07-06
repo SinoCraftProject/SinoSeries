@@ -14,7 +14,7 @@ import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraEntity;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.ICotinusEntity;
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
-import games.moegirl.sinocraft.sinofoundation.capability.entity.Birthday;
+import games.moegirl.sinocraft.sinofoundation.capability.entity.birthday.Birthday;
 import games.moegirl.sinocraft.sinodivination.item.LifeSymbol;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;

@@ -50,6 +50,7 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
 
         addBlock(SFDBlocks.STOVE, "Stove");
         addBlock(SFDBlocks.WOOD_DESK, "Wood Desk");
+        addBlock(SFDBlocks.WOOD_CHAIRS, "Wood Chairs");
         addBlock(SFDBlocks.WHITE_RADISH_PLANT, "White Radish");
         addBlock(SFDBlocks.SUMMER_RADISH_PLANT, "Summer Radish");
         addBlock(SFDBlocks.GREEN_RADISH_PLANT, "Green Radish");

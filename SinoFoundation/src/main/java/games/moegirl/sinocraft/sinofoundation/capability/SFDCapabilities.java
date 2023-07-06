@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinofoundation.capability;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.capability.block.combustible.ICombustible;
 import games.moegirl.sinocraft.sinofoundation.capability.block.heatsource.IHeatSource;
-import games.moegirl.sinocraft.sinofoundation.capability.entity.Birthday;
+import games.moegirl.sinocraft.sinofoundation.capability.entity.birthday.Birthday;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;

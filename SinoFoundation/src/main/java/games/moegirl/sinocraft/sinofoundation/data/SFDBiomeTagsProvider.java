@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.biome.SFDBiomeTags;
+import games.moegirl.sinocraft.sinofoundation.data.tag.SFDBiomeTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;

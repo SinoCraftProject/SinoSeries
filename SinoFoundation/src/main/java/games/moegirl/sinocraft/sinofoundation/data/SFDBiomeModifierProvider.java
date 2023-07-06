@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinofoundation.data;
 import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinocore.world.gen.TaggedBiomeFeatureModifier;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.biome.SFDBiomeTags;
 import games.moegirl.sinocraft.sinofoundation.world.SFDPlacements;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.item;
+package games.moegirl.sinocraft.sinofoundation.data.tag;
 
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import net.minecraft.resources.ResourceLocation;

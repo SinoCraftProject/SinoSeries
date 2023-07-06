@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.world;
 
-import games.moegirl.sinocraft.sinofoundation.block.SFDBlockTags;
+import games.moegirl.sinocraft.sinofoundation.data.tag.SFDBlockTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

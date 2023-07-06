@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "sinofoundation:block/wood_chairs"
+    },
+    "facing=north": {
+      "model": "sinofoundation:block/wood_chairs",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "sinofoundation:block/wood_chairs",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "sinofoundation:block/wood_chairs",
+      "y": 180
+    }
+  }
+}

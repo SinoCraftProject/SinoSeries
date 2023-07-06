@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.handler;
 
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
-import games.moegirl.sinocraft.sinofoundation.capability.entity.Birthday;
+import games.moegirl.sinocraft.sinofoundation.capability.entity.birthday.Birthday;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;

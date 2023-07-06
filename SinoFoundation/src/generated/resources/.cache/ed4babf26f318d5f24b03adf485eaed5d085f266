@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-04T08:49:33.7880276	Block States: sinofoundation
+// 1.20.1	2023-07-07T02:43:29.3181979	Block States: sinofoundation
 eb769c605faf2dc8cce9daf1a672e2189771c551 assets/sinofoundation/blockstates/bright_stem_grass.json
 86cabb82c723f287e249ce414d11c65f491fd3c2 assets/sinofoundation/blockstates/cabbage_plant.json
 ad3609ef6047f4b701f67a52689d776aac9a56da assets/sinofoundation/blockstates/chili_pepper_plant.json
@@ -34,6 +34,7 @@ f1c4b714d7278e981738f1095fbd71b459c8ff5c assets/sinofoundation/blockstates/soybe
 8c6c9e298ff402375cea53551f9f326bb33cad2b assets/sinofoundation/blockstates/sulphur_ore.json
 dc061b8c7930efaff9018cfaeb56ac65f3809efa assets/sinofoundation/blockstates/summer_radish_plant.json
 5e4dfd6647326aa3314f6716507c036f4add8125 assets/sinofoundation/blockstates/white_radish_plant.json
+644116a1fc26764fb1310175de4ba54d4ab6fdc6 assets/sinofoundation/blockstates/wood_chairs.json
 db6563978b66a92ca15d0e3a0330d6792641f12f assets/sinofoundation/blockstates/wood_desk.json
 dcd28dfa93d8cc7abca4438fd308333cb64401cf assets/sinofoundation/blockstates/wormwood.json
 c615682973d2536ae7e8226c5f98477eb0f30b36 assets/sinofoundation/blockstates/zhu_cao.json

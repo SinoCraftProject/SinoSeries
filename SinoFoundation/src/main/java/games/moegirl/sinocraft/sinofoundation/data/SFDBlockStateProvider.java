@@ -9,6 +9,7 @@ import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.StoveBlock;
+import games.moegirl.sinocraft.sinofoundation.block.WoodChairsBlock;
 import games.moegirl.sinocraft.sinofoundation.block.WoodDeskBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.DoublePlantBlock;
 import games.moegirl.sinocraft.sinofoundation.block.plant.LucidGanoderma;
@@ -47,6 +48,7 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
         addStove();
         addCrops();
         addWoodDesk();
+        addWoodChairs();
         addChest();
         addMarble();
 
@@ -91,6 +93,20 @@ public class SFDBlockStateProvider extends BlockStateProviderBase {
                     .with(StoveBlock.BURNING, true)
                     .modelForState()
                     .modelFile(models().getExistingFile(modLoc("block/stove_on")))
+                    .rotationY(90 * i)
+                    .addModel();
+            direction = direction.getClockWise();
+        }
+    }
+
+    private void addWoodChairs() {
+        var builder = getVariantBuilder(SFDBlocks.WOOD_CHAIRS.get());
+        var direction = Direction.EAST;
+        for (var i = 0; i < 4; i++) {
+            builder.partialState()
+                    .with(WoodChairsBlock.FACING, direction)
+                    .modelForState()
+                    .modelFile(models().getExistingFile(modLoc("block/wood_chairs")))
                     .rotationY(90 * i)
                     .addModel();
             direction = direction.getClockWise();

@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-24T16:46:48.0354795	Item Models: sinofoundation
+// 1.20.1	2023-07-07T02:40:07.8408811	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 578fec44a612bcc3f51afbe1f4934ef678845bee assets/sinofoundation/models/item/bright_stem_grass.json
 a60e685b9dc428fd655a1f950c243d32b4dd65a2 assets/sinofoundation/models/item/cabbage.json
@@ -54,6 +54,7 @@ d190664467f376559ce4224a82de03e5f493e62c assets/sinofoundation/models/item/sulph
 0df38b59d485badc555661a9c3dfceab5421d4e0 assets/sinofoundation/models/item/summer_radish.json
 bb5fb5a2ad9efa8c96eab52f9d8758d2faf8aa27 assets/sinofoundation/models/item/tree_bark.json
 eb98780071e32b8be7daa320793347d9874bc9f1 assets/sinofoundation/models/item/white_radish.json
+b8b299bc12aa0bb474b20de60aae17ccbe107ed9 assets/sinofoundation/models/item/wood_chairs.json
 700285b21c6ef2fcdc02081d1ef049651605e6ce assets/sinofoundation/models/item/wood_desk.json
 67ffc0a09c0ff169f71babe26c54dcb5557f6005 assets/sinofoundation/models/item/wormwood_leaf.json
 15751986ab145c66d43baca725793981a801617e assets/sinofoundation/models/item/zhu_cao.json
