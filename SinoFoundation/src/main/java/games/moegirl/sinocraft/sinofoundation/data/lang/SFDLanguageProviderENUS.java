@@ -73,6 +73,9 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JADE_ORE, "Jade Ore");
         addBlock(SFDBlocks.NITER_ORE, "Niter Ore");
         addBlock(SFDBlocks.SULPHUR_ORE, "Sulphur Ore");
+        addBlock(SFDBlocks.DEEP_SLATE_JADE_ORE, "Deepslate Jade Ore");
+        addBlock(SFDBlocks.DEEP_SLATE_NITER_ORE, "Deepslate Niter Ore");
+        addBlock(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, "Deepslate Sulphur Ore");
         addBlock(SFDBlocks.COTINUS_CHEST, "Cotinus Chest");
         addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "Cotinus Trapped Chest");
         addBlock(SFDBlocks.JUJUBE_CHEST, "Jujube Chest");

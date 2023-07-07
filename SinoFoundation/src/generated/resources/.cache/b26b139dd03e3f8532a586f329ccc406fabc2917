@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-07T02:40:07.8408811	Item Models: sinofoundation
+// 1.20.1	2023-07-07T09:00:08.8592478	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 578fec44a612bcc3f51afbe1f4934ef678845bee assets/sinofoundation/models/item/bright_stem_grass.json
 a60e685b9dc428fd655a1f950c243d32b4dd65a2 assets/sinofoundation/models/item/cabbage.json
@@ -8,6 +8,9 @@ a60e685b9dc428fd655a1f950c243d32b4dd65a2 assets/sinofoundation/models/item/cabba
 7b90aa2ddfa525e89be56c829ff765b2fbfa8df3 assets/sinofoundation/models/item/chiseled_marble_block.json
 f48f5a835bed0a4bb0e2d3f8f231050995c6277f assets/sinofoundation/models/item/cotinus_chest.json
 f48f5a835bed0a4bb0e2d3f8f231050995c6277f assets/sinofoundation/models/item/cotinus_trapped_chest.json
+c4f562fe2b255f465b7cd2fd3bc75cd004922bfc assets/sinofoundation/models/item/deepslate_jade_ore.json
+fde6368ff5a8fcbafd967ec775924267be356e25 assets/sinofoundation/models/item/deepslate_niter_ore.json
+f66cf3227a888e5c387fff01ccd067545196b1aa assets/sinofoundation/models/item/deepslate_sulphur_ore.json
 ba16a0cd687f9302574a6f039b72f4c099d4bf3f assets/sinofoundation/models/item/diamond_knife.json
 f44c02a3c46f47274829d98ef455d93387934ec8 assets/sinofoundation/models/item/dragonliver_melon.json
 59ed174ba2e215a2e8dab38c374a33a492135164 assets/sinofoundation/models/item/eggplant.json

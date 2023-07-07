@@ -42,6 +42,8 @@ public class ProviderRecipe extends AbstractRecipeProvider {
                     .dontGenerateModel()
                     .getFamily();
             generateRecipes(writer, family);
+
+            hangingSign(writer, tree.getBlock(TreeBlockType.HANGING_SIGN), tree.getBlock(TreeBlockType.PLANKS));
         }
     }
 

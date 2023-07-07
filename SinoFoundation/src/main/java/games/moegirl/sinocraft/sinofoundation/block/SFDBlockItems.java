@@ -54,8 +54,11 @@ public class SFDBlockItems {
                 .addItem(SMOOTH_MARBLE_SLAB)
                 .addItem(SMOOTH_MARBLE_STAIRS)
                 .addItem(JADE_ORE)
+                .addItem(DEEP_SLATE_JADE_ORE)
                 .addItem(NITER_ORE)
-                .addItem(SULPHUR_ORE);
+                .addItem(DEEP_SLATE_NITER_ORE)
+                .addItem(SULPHUR_ORE)
+                .addItem(DEEP_SLATE_SULPHUR_ORE);
     }
 
     public static final RegistryObject<BlockItem> STOVE = ITEMS.register("stove", () -> new BlockItem(SFDBlocks.STOVE.get(), new Item.Properties()));
@@ -87,6 +90,9 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> JADE_ORE = ITEMS.register("jade_ore", () -> new BlockItem(SFDBlocks.JADE_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> NITER_ORE = ITEMS.register("niter_ore", () -> new BlockItem(SFDBlocks.NITER_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> SULPHUR_ORE = ITEMS.register("sulphur_ore", () -> new BlockItem(SFDBlocks.SULPHUR_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEP_SLATE_JADE_ORE = ITEMS.register("deepslate_jade_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEP_SLATE_NITER_ORE = ITEMS.register("deepslate_niter_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_NITER_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEP_SLATE_SULPHUR_ORE = ITEMS.register("deepslate_sulphur_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_SULPHUR_ORE.get(), new Item.Properties()));
 
     public static final RegistryObject<BaseChestItem> COTINUS_CHEST = ITEMS.register("cotinus_chest", () -> BaseChestItem.create(SFDBlocks.COTINUS_CHEST, SFDBlockEntities.COTINUS_CHEST));
     public static final RegistryObject<BaseChestItem> COTINUS_TRAPPED_CHEST = ITEMS.register("cotinus_trapped_chest", () -> BaseChestItem.create(SFDBlocks.COTINUS_TRAPPED_CHEST, SFDBlockEntities.COTINUS_TRAPPED_CHEST));
