@@ -15,7 +15,7 @@ public abstract class BlockLootSubProviderMixin implements IBlockLootSubProvider
     @Shadow(remap = false) protected abstract Iterable<Block> getKnownBlocks();
 
     @Override
-    public Iterable<Block> sinocore$getKnownBlocks() {
+    public Iterable<Block> sino$getKnownBlocks() {
         return getKnownBlocks();
     }
 }

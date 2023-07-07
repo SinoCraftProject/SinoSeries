@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event;
+package games.moegirl.sinocraft.sinocore.tree.event.data;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.world.gen.ModTreeGrowerBase;

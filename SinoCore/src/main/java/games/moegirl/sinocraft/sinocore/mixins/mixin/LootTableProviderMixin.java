@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LootTableProviderMixin {
 
     @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
-    protected void injectGetName(CallbackInfoReturnable<String> cir) {
+    protected void sino$injectGetName(CallbackInfoReturnable<String> cir) {
         LootTableProvider $this = (LootTableProvider) (Object) this;
         if ($this instanceof LootTableProviderBase provider) {
             cir.setReturnValue(provider.getProviderName());

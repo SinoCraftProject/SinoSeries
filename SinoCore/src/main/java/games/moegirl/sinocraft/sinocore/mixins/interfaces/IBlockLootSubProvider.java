@@ -7,5 +7,5 @@ import net.minecraft.world.level.block.Block;
  */
 public interface IBlockLootSubProvider {
 
-    Iterable<Block> sinocore$getKnownBlocks();
+    Iterable<Block> sino$getKnownBlocks();
 }

@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 /**
  * @author luqin2007
  */
-public class SFDBiomeModifiers {
+public class SCBiomeModifiers {
 
     public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS =
             DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, SinoCore.MODID);

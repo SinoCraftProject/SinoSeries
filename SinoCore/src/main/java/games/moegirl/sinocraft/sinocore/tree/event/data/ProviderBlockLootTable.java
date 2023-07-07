@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.tree.event;
+package games.moegirl.sinocraft.sinocore.tree.event.data;
 
 import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.SinoCore;

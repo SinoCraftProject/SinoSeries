@@ -14,7 +14,7 @@ public abstract class MinecraftMixin {
      * Add ": SinoSeries Dev" when debugging, ensure mixin is loading
      */
     @Inject(method = "createTitle", at = @At("RETURN"), cancellable = true)
-    private void sinocore$injectCreateTitle(CallbackInfoReturnable<String> cir) {
+    private void sino$afterCreateTitle(CallbackInfoReturnable<String> cir) {
         if (SinoCore.DEBUG) {
             cir.setReturnValue(cir.getReturnValue() + ": SinoSeries Dev");
         }

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore;
 
 import games.moegirl.sinocraft.sinocore.data.loottable.SCLootConditions;
-import games.moegirl.sinocraft.sinocore.world.gen.SFDBiomeModifiers;
+import games.moegirl.sinocraft.sinocore.world.gen.SCBiomeModifiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -32,7 +32,7 @@ public class SinoCore {
         bus.addListener(this::onClientSetup);
 
         SCLootConditions.register(bus);
-        SFDBiomeModifiers.register(bus);
+        SCBiomeModifiers.register(bus);
 
         LOGGER.info("SinoCore loaded!");
     }

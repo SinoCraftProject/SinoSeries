@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockEntityTypeMixin {
 
     @Inject(at = @At("HEAD"), method = "isValid", cancellable = true)
-    private void sinocore$isValid(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+    private void sino$beforeIsValid(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         //noinspection DataFlowIssue
         if (BlockEntityType.getKey((BlockEntityType<?>) (Object) this)
                 .equals(new ResourceLocation("minecraft", "sign"))) {

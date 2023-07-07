@@ -11,7 +11,7 @@ public class SCAConstants {
     public static final String DRAWING_TAG_PAPER_TYPE = "paper";
     public static final String DRAWING_TAG_INK_TYPE = "ink";
 
-    // qyl27: Below 4 lines were use in chinese_brush.toml file!
+    // qyl27: Below 4 lines were used in chinese_brush.toml file!
     public static final String GUI_BRUSH_COPY_BUTTON_TOOLTIP = "sinocalligraphy.gui.brush.button.copy.tooltip";
     public static final String GUI_BRUSH_OUTPUT_BUTTON_TOOLTIP = "sinocalligraphy.gui.brush.button.output.tooltip";
     public static final String GUI_BRUSH_APPLY_BUTTON_TOOLTIP = "sinocalligraphy.gui.brush.button.apply.tooltip";

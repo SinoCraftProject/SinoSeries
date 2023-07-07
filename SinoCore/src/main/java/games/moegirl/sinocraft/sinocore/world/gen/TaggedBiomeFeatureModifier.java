@@ -28,6 +28,6 @@ public record TaggedBiomeFeatureModifier(TagKey<Biome> tag, HolderSet<PlacedFeat
 
     @Override
     public Codec<? extends BiomeModifier> codec() {
-        return SFDBiomeModifiers.TAGGED_BIOME_FEATURE_MODIFIER_CODEC.get();
+        return SCBiomeModifiers.TAGGED_BIOME_FEATURE_MODIFIER_CODEC.get();
     }
 }
