@@ -24,6 +24,7 @@ import javax.annotation.Nullable;
 public class XuanPaperRenderer extends BlockEntityWithoutLevelRenderer {
     // BlockEntity Without Level Renderer is the new ISTER.
     // A mod should only one BEWLR.
+    // qyl27: really?
 
     @Nullable
     private static XuanPaperRenderer INSTANCE;
@@ -35,12 +36,16 @@ public class XuanPaperRenderer extends BlockEntityWithoutLevelRenderer {
         return INSTANCE;
     }
 
-    XuanPaperRenderer(BlockEntityRenderDispatcher pBlockEntityRenderDispatcher, EntityModelSet pEntityModelSet) {
-        super(pBlockEntityRenderDispatcher, pEntityModelSet);
+    private XuanPaperRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModelSet) {
+        super(dispatcher, entityModelSet);
     }
 
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext transformType, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        if (!stack.hasTag()) {
+            return;
+        }
+
         var tag = stack.getOrCreateTag();
         CompoundTag nbt;
         if (tag.contains(SCAConstants.DRAWING_TAG_NAME)) {

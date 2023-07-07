@@ -8,7 +8,9 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
+import games.moegirl.sinocraft.sinocalligraphy.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
+import games.moegirl.sinocraft.sinocalligraphy.item.XuanPaperItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -89,8 +91,12 @@ public class XuanPaperRenderEvent {
         LocalPlayer player = mc.player;
         ItemStack stack = event.getItemStack();
 
+        if (!stack.is(SCAItems.FILLED_XUAN_PAPER.get())) {
+            return;
+        }
+
         var tag = stack.getOrCreateTag();
-        CompoundTag nbt = null;
+        CompoundTag nbt;
         if (tag.contains(SCAConstants.DRAWING_TAG_NAME)) {
             nbt = tag.getCompound(SCAConstants.DRAWING_TAG_NAME);
         } else {
