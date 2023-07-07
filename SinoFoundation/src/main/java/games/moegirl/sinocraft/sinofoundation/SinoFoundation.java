@@ -28,7 +28,6 @@ public class SinoFoundation {
         SFDBlockItems.register(bus);
         SFDBlockEntities.register(bus);
         SFDTrees.register(bus);
-        SCBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(bus);
         SFDRecipes.register(bus);
         SinoSeriesTabs.register(bus);
 

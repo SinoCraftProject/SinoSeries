@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-class ProviderBlockTags extends BlockTagsProvider {
+public class ProviderBlockTags extends BlockTagsProvider {
 
     protected final List<Tree> treeTypes;
 

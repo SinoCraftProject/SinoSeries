@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-class ProviderItemModel extends AbstractItemModelProvider {
+public class ProviderItemModel extends AbstractItemModelProvider {
 
     protected final List<Tree> treeTypes;
 

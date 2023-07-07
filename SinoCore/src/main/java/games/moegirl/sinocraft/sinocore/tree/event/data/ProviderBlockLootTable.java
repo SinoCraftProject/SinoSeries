@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-class ProviderBlockLootTable extends LootTableProviderBase {
+public class ProviderBlockLootTable extends LootTableProviderBase {
 
     static final Map<TreeBlockType, Function3<Block, Tree, SimpleBlockLootTables, LootTable.Builder>> DEFAULT_LOOT = new HashMap<>();
 

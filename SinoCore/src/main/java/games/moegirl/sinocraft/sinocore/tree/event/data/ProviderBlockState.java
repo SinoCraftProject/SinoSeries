@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-class ProviderBlockState extends AbstractBlockStateProvider {
+public class ProviderBlockState extends AbstractBlockStateProvider {
 
     protected final List<Tree> treeTypes;
 

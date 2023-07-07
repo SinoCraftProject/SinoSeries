@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-class ProviderFeatures extends DatapackBuiltinEntriesProvider {
+public class ProviderFeatures extends DatapackBuiltinEntriesProvider {
 
     protected final List<Tree> treeTypes;
 
