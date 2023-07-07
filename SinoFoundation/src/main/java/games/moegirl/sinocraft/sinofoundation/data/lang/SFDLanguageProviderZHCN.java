@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data.lang;
 
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.lang.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
@@ -73,8 +73,8 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JADE_ORE, "玉矿石");
         addBlock(SFDBlocks.NITER_ORE, "硝石矿石");
         addBlock(SFDBlocks.SULPHUR_ORE, "硫磺矿石");
+        addBlock(SFDBlocks.NETHER_SULPHUR_ORE, "下界硫磺矿石");
         addBlock(SFDBlocks.DEEP_SLATE_JADE_ORE, "深层玉矿石");
-        addBlock(SFDBlocks.DEEP_SLATE_NITER_ORE, "深层硝石矿石");
         addBlock(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, "深层硫磺矿石");
         addBlock(SFDBlocks.COTINUS_CHEST, "无患木匣");
         addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "无患木机关匣");

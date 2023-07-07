@@ -1,11 +1,9 @@
 package games.moegirl.sinocraft.sinodivination.data;
 
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.tag.AbstractBlockTagsProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
-import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.data.event.GatherDataEvent;
 
 class ProviderTagBlock extends AbstractBlockTagsProvider {

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data.lang;
 
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.lang.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
@@ -73,8 +73,8 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.JADE_ORE, "Jade Ore");
         addBlock(SFDBlocks.NITER_ORE, "Niter Ore");
         addBlock(SFDBlocks.SULPHUR_ORE, "Sulphur Ore");
+        addBlock(SFDBlocks.NETHER_SULPHUR_ORE, "Nether Sulphur Ore");
         addBlock(SFDBlocks.DEEP_SLATE_JADE_ORE, "Deepslate Jade Ore");
-        addBlock(SFDBlocks.DEEP_SLATE_NITER_ORE, "Deepslate Niter Ore");
         addBlock(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, "Deepslate Sulphur Ore");
         addBlock(SFDBlocks.COTINUS_CHEST, "Cotinus Chest");
         addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "Cotinus Trapped Chest");

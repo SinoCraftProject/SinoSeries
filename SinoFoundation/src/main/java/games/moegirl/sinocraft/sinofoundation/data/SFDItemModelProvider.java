@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
-import games.moegirl.sinocraft.sinocore.data.ItemModelProviderBase;
+import games.moegirl.sinocraft.sinocore.data.model.BaseAutoItemModelProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
@@ -14,7 +14,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-public class SFDItemModelProvider extends ItemModelProviderBase {
+public class SFDItemModelProvider extends BaseAutoItemModelProvider {
 
     @SafeVarargs
     public SFDItemModelProvider(PackOutput output, String modId, ExistingFileHelper exHelper,

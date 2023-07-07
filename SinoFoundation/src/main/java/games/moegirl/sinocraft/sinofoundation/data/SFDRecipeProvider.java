@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinofoundation.data;
 
 import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinocore.block.TrappedChestBlockBase;
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractRecipeProvider;
+import games.moegirl.sinocraft.sinocore.data.recipe.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;

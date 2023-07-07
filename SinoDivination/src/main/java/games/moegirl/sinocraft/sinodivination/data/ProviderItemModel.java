@@ -1,11 +1,11 @@
 package games.moegirl.sinocraft.sinodivination.data;
 
-import games.moegirl.sinocraft.sinocore.data.ItemModelProviderBase;
+import games.moegirl.sinocraft.sinocore.data.model.BaseAutoItemModelProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import net.minecraftforge.data.event.GatherDataEvent;
 
-class ProviderItemModel extends ItemModelProviderBase {
+class ProviderItemModel extends BaseAutoItemModelProvider {
 
     public ProviderItemModel(GatherDataEvent event) {
         super(event.getGenerator().getPackOutput(), SinoDivination.MODID, event.getExistingFileHelper(), SDItems.REGISTRY);

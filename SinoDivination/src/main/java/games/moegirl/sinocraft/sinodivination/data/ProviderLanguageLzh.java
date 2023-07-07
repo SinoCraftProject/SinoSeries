@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.data;
 
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.lang.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;

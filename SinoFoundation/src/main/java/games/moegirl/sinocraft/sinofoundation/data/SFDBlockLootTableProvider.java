@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data;
 
-import games.moegirl.sinocraft.sinocore.data.LootTableProviderBase;
+import games.moegirl.sinocraft.sinocore.data.loottable.LootTableProviderBase;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;

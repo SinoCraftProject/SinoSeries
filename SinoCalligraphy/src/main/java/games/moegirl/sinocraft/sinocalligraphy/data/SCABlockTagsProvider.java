@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocalligraphy.data;
 
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractBlockTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.tag.AbstractBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;

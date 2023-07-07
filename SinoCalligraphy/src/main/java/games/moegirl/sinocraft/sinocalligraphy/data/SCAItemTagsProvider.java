@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.data;
 
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
-import games.moegirl.sinocraft.sinocore.data.abstracted.AbstractItemTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.tag.AbstractItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;

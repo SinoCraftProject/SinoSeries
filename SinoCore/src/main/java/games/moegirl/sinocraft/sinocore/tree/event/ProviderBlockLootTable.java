@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.tree.event;
 import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
-import games.moegirl.sinocraft.sinocore.data.LootTableProviderBase;
+import games.moegirl.sinocraft.sinocore.data.loottable.LootTableProviderBase;
 import games.moegirl.sinocraft.sinocore.data.SimpleBlockLootTables;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
