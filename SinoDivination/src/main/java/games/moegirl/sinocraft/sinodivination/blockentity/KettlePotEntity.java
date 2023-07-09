@@ -1,11 +1,10 @@
 package games.moegirl.sinocraft.sinodivination.blockentity;
 
-import games.moegirl.sinocraft.sinodivination.data.SDTags;
+import games.moegirl.sinocraft.sinodivination.data.gen.SDTags;
 import games.moegirl.sinocraft.sinodivination.util.RecipeProcessor;
 import games.moegirl.sinocraft.sinodivination.util.container.InputOnlyContainer;
 import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.SDRecipes;
-import games.moegirl.sinocraft.sinodivination.util.container.OutputOnlyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

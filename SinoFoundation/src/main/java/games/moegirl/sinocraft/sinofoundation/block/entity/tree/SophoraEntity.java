@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinofoundation.block.entity.tree;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.data.tag.SFDItemTags;
+import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.SFDDamages;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;

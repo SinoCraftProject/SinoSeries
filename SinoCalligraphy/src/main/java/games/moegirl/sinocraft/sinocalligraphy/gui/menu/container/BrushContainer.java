@@ -1,17 +1,12 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.menu.container;
 
-import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
+import games.moegirl.sinocraft.sinocalligraphy.data.gen.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
-import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
-import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

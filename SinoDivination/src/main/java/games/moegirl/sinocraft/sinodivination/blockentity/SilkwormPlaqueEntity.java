@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.blockentity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinodivination.menu.SilkwormPlaqueMenu;
 import games.moegirl.sinocraft.sinodivination.util.ChangableInt;

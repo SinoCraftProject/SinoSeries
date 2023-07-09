@@ -5,7 +5,7 @@ import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.util.ItemProperties;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraChestEntity;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.ICotinusEntity;
-import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;

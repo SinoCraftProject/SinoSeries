@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinodivination.menu;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotStrategy;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureMap;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
-import games.moegirl.sinocraft.sinodivination.data.SDTags;
+import games.moegirl.sinocraft.sinodivination.data.gen.SDTags;
 import games.moegirl.sinocraft.sinodivination.recipe.CarvingTableRecipeContainer;
 import games.moegirl.sinocraft.sinodivination.recipe.SDRecipes;
 import net.minecraft.core.BlockPos;

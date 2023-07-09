@@ -10,7 +10,7 @@ import games.moegirl.sinocraft.sinofoundation.block.entity.tree.CotinusEntityBas
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraDoorEntity;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraEntity;
 import games.moegirl.sinocraft.sinofoundation.block.tree.*;
-import games.moegirl.sinocraft.sinofoundation.data.tag.SFDBlockTags;
+import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDBlockTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.menu;
 
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
-import games.moegirl.sinocraft.sinocalligraphy.data.SCAItemTags;
+import games.moegirl.sinocraft.sinocalligraphy.data.gen.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.SCAMenus;
