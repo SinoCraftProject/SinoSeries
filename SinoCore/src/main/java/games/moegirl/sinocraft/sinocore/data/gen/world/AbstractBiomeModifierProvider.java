@@ -13,9 +13,12 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-import java.util.*;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+// 明明有 CODEC，但搞不到 Holder，只能用这玩意，就很气
 public abstract class AbstractBiomeModifierProvider implements DataProvider {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -44,7 +47,7 @@ public abstract class AbstractBiomeModifierProvider implements DataProvider {
             JsonObject json = new JsonObject();
             json.addProperty("type", "forge:add_features");
             json.add("biomes", GSON.toJsonTree(f.hasBiomes()
-                    ? Arrays.stream(f.biomes()).map(k -> k.location().toString())
+                    ? f.biomes().stream().map(k -> k.location().toString())
                     : f.hasTag() ? "#" + f.biomesTag().location() : null));
             json.addProperty("features", f.feature().location().toString());
             json.addProperty("step", f.step().getName());
@@ -68,17 +71,16 @@ public abstract class AbstractBiomeModifierProvider implements DataProvider {
     }
 
     public record Feature(ResourceKey<ConfiguredFeature<?, ?>> feature, GenerationStep.Decoration step,
-                           TagKey<Biome> biomesTag, ResourceKey<Biome>... biomes) {
+                          @Nullable TagKey<Biome> biomesTag, boolean hasTag,
+                          List<ResourceKey<Biome>> biomes, boolean hasBiomes) {
+
         @SafeVarargs
-        public Feature {
+        public Feature(ResourceKey<ConfiguredFeature<?, ?>> feature, GenerationStep.Decoration step, ResourceKey<Biome>... biomes) {
+            this(feature, step, null, false, List.of(biomes), true);
         }
 
-        public boolean hasTag() {
-            return biomesTag != null;
-        }
-
-        public boolean hasBiomes() {
-            return biomes != null && biomes.length >= 1;
+        public Feature(ResourceKey<ConfiguredFeature<?, ?>> feature, GenerationStep.Decoration step, TagKey<Biome> biomesTag) {
+            this(feature, step, biomesTag, true, List.of(), false);
         }
     }
 }
