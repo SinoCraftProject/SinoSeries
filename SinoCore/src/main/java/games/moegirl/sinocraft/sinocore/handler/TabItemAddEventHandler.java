@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.event;
+package games.moegirl.sinocraft.sinocore.handler;
 
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import net.minecraft.resources.ResourceKey;

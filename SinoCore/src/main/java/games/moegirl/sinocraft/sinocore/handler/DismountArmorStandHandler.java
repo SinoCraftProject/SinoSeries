@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.event;
+package games.moegirl.sinocraft.sinocore.handler;
 
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.capability.SCCapabilities;
@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class DismountArmorStandListener {
+public class DismountArmorStandHandler {
     @SubscribeEvent
     public static void onDismount(EntityMountEvent event) {
         if (event.isDismounting()) {

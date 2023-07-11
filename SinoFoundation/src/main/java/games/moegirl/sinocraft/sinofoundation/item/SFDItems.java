@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.item;
 
-import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
+import games.moegirl.sinocraft.sinocore.handler.BlockStrippingHandler;
 import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.NameUtils;
@@ -100,9 +100,9 @@ public class SFDItems {
     public static final RegistryObject<Item> ICON_BLOCK_INTERACT = ITEMS.register("icon_block_interact", () -> new Item(new Item.Properties()));
 
     static {
-        BlockStrippingEvent.registerTool(IRON_KNIFE);
-        BlockStrippingEvent.registerTool(GOLD_KNIFE);
-        BlockStrippingEvent.registerTool(DIAMOND_KNIFE);
+        BlockStrippingHandler.registerTool(IRON_KNIFE);
+        BlockStrippingHandler.registerTool(GOLD_KNIFE);
+        BlockStrippingHandler.registerTool(DIAMOND_KNIFE);
     }
 
     public static <T extends Block> RegistryObject<Item> simple(RegistryObject<T> block) {

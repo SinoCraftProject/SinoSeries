@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation;
 
-import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
+import games.moegirl.sinocraft.sinocore.handler.BlockStrippingHandler;
 import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
@@ -103,14 +103,14 @@ public class SFDTrees {
             .build();
 
     static {
-        for (var entry : BlockStrippingEvent.getDeferredBlockStrippingMap().entrySet()) {
-            BlockStrippingEvent.registerStripping(entry.getKey(), entry.getValue().getLeft(), entry.getValue().getMiddle(), SFDItems.TREE_BARK);
+        for (var entry : BlockStrippingHandler.getDeferredBlockStrippingMap().entrySet()) {
+            BlockStrippingHandler.registerStripping(entry.getKey(), entry.getValue().getLeft(), entry.getValue().getMiddle(), SFDItems.TREE_BARK);
         }
     }
 
     public static void register(IEventBus bus) {
         TreeRegistry.register(SinoFoundation.MODID, bus);
         TreeRegistry.getRegistry().get(SinoFoundation.MODID)
-                .forEach(tree -> BlockStrippingEvent.registerStripping(tree, SFDItems.TREE_BARK));
+                .forEach(tree -> BlockStrippingHandler.registerStripping(tree, SFDItems.TREE_BARK));
     }
 }

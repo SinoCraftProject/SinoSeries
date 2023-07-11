@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.event;
+package games.moegirl.sinocraft.sinocore.handler;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = SinoCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class BlockStrippingEvent {
+public class BlockStrippingHandler {
     private static final Map<ResourceLocation, Triple<Supplier<Block>, Supplier<Block>, Supplier<? extends ItemLike>>> DEFERRED_BLOCK_STRIPPING_MAP = new HashMap<>();
 
     static {

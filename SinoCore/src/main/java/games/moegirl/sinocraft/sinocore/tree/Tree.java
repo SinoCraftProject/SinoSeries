@@ -1,8 +1,10 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
+import games.moegirl.sinocraft.sinocore.SinoCore;
+import games.moegirl.sinocraft.sinocore.handler.BlockStrippingHandler;
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -20,7 +22,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.lang3.tuple.Triple;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,6 +36,16 @@ import java.util.stream.Collectors;
  * </ul>
  */
 public class Tree {
+
+    static Map<String, Triple<DeferredRegister<Block>, DeferredRegister<BlockEntityType<?>>, DeferredRegister<Item>>> REGISTRIES = new HashMap<>();
+    public static void defaultRegistry(String modid,
+                                       @Nullable DeferredRegister<Block> blockRegister,
+                                       @Nullable DeferredRegister<BlockEntityType<?>> blockEntityRegister,
+                                       @Nullable DeferredRegister<Item> itemRegister) {
+        REGISTRIES.put(modid, Triple.of(blockRegister, blockEntityRegister, itemRegister));
+    }
+
+    public static final ResourceKey<Registry<Tree>> TREE_REGISTER = ResourceKey.createRegistryKey(new ResourceLocation(SinoCore.MODID, "tree"));
 
     public final ResourceLocation name;
 
@@ -80,8 +94,8 @@ public class Tree {
         makeDefaultBlockItems(itemRegister);
         fillCreativeTabs();
 
-        BlockStrippingEvent.registerStripping(TreeBlockType.LOG.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
-        BlockStrippingEvent.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
+        BlockStrippingHandler.registerStripping(TreeBlockType.LOG.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
+        BlockStrippingHandler.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
     }
 
     private void makeDefaultBlocks(DeferredRegister<Block> blockRegister) {
