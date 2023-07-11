@@ -52,6 +52,10 @@ public class FoodTastes {
     public FoodTaste randomLike() {
         var rand = RAND.nextInt(0, maxLikeWeight);
         for (var taste : foodTastes.values()) {
+            if (taste.likeWeight() == 0) {
+                continue;
+            }
+
             rand -= taste.likeWeight();
             if (rand <= 0) {
                 return taste;
@@ -64,6 +68,10 @@ public class FoodTastes {
     public FoodTaste randomDislike() {
         var rand = RAND.nextInt(0, maxDislikeWeight);
         for (var taste : foodTastes.values()) {
+            if (taste.dislikeWeight() == 0) {
+                continue;
+            }
+
             rand -= taste.dislikeWeight();
             if (rand <= 0) {
                 return taste;
