@@ -23,15 +23,15 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler) {
-        FoodTastes.clearTastes();
+        FoodTastes.getInstance().initTastes();
         for (var entry : map.entrySet()) {
-            var name = entry.getKey();
+            var key = entry.getKey();
             var json = entry.getValue().getAsJsonObject();
-            var l10nName = json.get("name").getAsString();
+            var name = json.get("name").getAsString();
             var isAdvanced = json.get("is_advanced").getAsBoolean();
-            var likeProbability = json.get("like_probability").getAsDouble();
-            var dislikeProbability = json.get("dislike_probability").getAsDouble();
-            FoodTastes.addTaste(name, new FoodTaste(l10nName, isAdvanced, likeProbability, dislikeProbability));
+            var likeWeight = json.get("like_weight").getAsInt();
+            var dislikeWeight = json.get("dislike_weight").getAsInt();
+            FoodTastes.getInstance().addTaste(key, new FoodTaste(key, name, isAdvanced, likeWeight, dislikeWeight));
         }
     }
 

@@ -1,6 +1,6 @@
 {
     "name": "sinofeast.taste.spicy",
     "is_advanced": false,
-    "like_probability": 0.4,
-    "dislike_probability": 0.4
+    "like_weight": 5,
+    "dislike_weight": 5
 }
