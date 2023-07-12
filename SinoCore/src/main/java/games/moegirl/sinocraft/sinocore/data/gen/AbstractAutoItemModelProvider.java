@@ -122,7 +122,6 @@ public abstract class AbstractAutoItemModelProvider extends ItemModelProvider {
      * @param item
      */
     protected void genDefaultItemModel(Item item) {
-        // Todo: more generated model.
         if (item instanceof BlockItem) {
             String name = ForgeRegistries.ITEMS.getKey(item).getPath();
             ResourceLocation texture = modLoc("item/" + name);

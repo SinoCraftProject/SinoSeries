@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen;
 
+import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.CreativeModeTab;
@@ -33,12 +34,8 @@ public abstract class AbstractLanguageProvider extends LanguageProvider {
     public abstract void translate();
 
     protected void addTreeTranslates() {
-        var trees = TreeRegistry.getRegistry().get(modid);
-
-        if (trees != null && !trees.isEmpty()) {
-            for (var tree : trees) {
-                tree.getTranslator().addTranslatesForLocale(locale, tree, this);
-            }
+        for (Tree tree : TreeRegistry.getTrees(modid)) {
+            tree.getTranslator().addTranslatesForLocale(locale, tree, this);
         }
     }
 

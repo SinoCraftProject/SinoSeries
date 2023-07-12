@@ -14,12 +14,9 @@ class SDItemModelProvider extends AbstractAutoItemModelProvider {
 
     @Override
     protected void registerItemModels() {
-//        basicItem(SDItems.RICE.get());
 //        basicItem(SDItems.REHMANNIA.get());
-//        basicItem(SDItems.SESAME.get());
 //        basicItem(SDItems.DRAGONLIVER_MELON.get());
 //        basicItem(SDItems.WORMWOOD_LEAF.get());
-//        basicItem(SDItems.GARLIC.get());
         chest(SDItems.COTINUS_CHEST, SDItems.COTINUS_TRAPPED_CHEST, SDTrees.COTINUS);
         chest(SDItems.SOPHORA_CHEST, SDItems.SOPHORA_TRAPPED_CHEST, SDTrees.SOPHORA);
     }

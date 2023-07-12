@@ -2,13 +2,14 @@ package games.moegirl.sinocraft.sinocalligraphy.data.gen;
 
 import games.moegirl.sinocraft.sinocalligraphy.block.PaperDryingRackBlock;
 import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAutoBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
 
-public class SCABlockStateProvider extends BaseAutoBlockStateProvider {
+public class SCABlockStateProvider extends AbstractAutoBlockStateProvider {
     public SCABlockStateProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper,
                                  DeferredRegister<? extends Block>... deferredRegisters) {
         super(output, modId, existingFileHelper, deferredRegisters);

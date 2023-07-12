@@ -27,17 +27,27 @@ public class SDBlockEntities {
 
     public static final RegistryObject<BlockEntityType<KettlePotEntity>> KETTLE_POT = simple(KettlePotEntity::new, SDBlocks.KETTLE_POT);
 
-    public static final RegistryObject<BlockEntityType<ChestBlockEntity>> COTINUS_CHEST = simple(CotinusChestEntity::new, SDBlocks.COTINUS_CHEST);
+    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> COTINUS_CHEST = chest(CotinusChestEntity::new, SDBlocks.COTINUS_CHEST);
 
-    public static final RegistryObject<BlockEntityType<ChestBlockEntity>> COTINUS_TRAPPED_CHEST = simple(CotinusTrappedChestEntity::new, SDBlocks.COTINUS_TRAPPED_CHEST);
+    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> COTINUS_TRAPPED_CHEST = chest(CotinusTrappedChestEntity::new, SDBlocks.COTINUS_TRAPPED_CHEST);
 
-    public static final RegistryObject<BlockEntityType<ChestBlockEntity>> SOPHORA_CHEST = simple(SophoraChestEntity::new, SDBlocks.SOPHORA_CHEST);
+    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> SOPHORA_CHEST = chest(SophoraChestEntity::new, SDBlocks.SOPHORA_CHEST);
 
-    public static final RegistryObject<BlockEntityType<ChestBlockEntity>> SOPHORA_TRAPPED_CHEST = simple(SophoraTrappedChestEntity::new, SDBlocks.SOPHORA_TRAPPED_CHEST);
+    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> SOPHORA_TRAPPED_CHEST = chest(SophoraTrappedChestEntity::new, SDBlocks.SOPHORA_TRAPPED_CHEST);
 
     // =================================================================================================================
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> simple(Function3<BlockEntityType<?>, BlockPos, BlockState, T> factory, RegistryObject<? extends Block> block) {
+        Reference<BlockEntityType<?>> type = new Reference<>();
+        BlockEntityType.BlockEntitySupplier<T> f = (pos, bs) -> factory.apply(type.get(), pos, bs);
+        return REGISTRY.register(block.getId().getPath(), () -> {
+            BlockEntityType<T> entityType = BlockEntityType.Builder.of(f, block.get()).build(null);
+            type.set(entityType);
+            return entityType;
+        });
+    }
+
+    private static <T extends BlockEntity> RegistryObject<BlockEntityType<? extends T>> chest(Function3<BlockEntityType<?>, BlockPos, BlockState, T> factory, RegistryObject<? extends Block> block) {
         Reference<BlockEntityType<?>> type = new Reference<>();
         BlockEntityType.BlockEntitySupplier<T> f = (pos, bs) -> factory.apply(type.get(), pos, bs);
         return REGISTRY.register(block.getId().getPath(), () -> {

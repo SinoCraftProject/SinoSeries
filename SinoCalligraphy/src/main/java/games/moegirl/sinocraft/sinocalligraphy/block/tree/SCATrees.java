@@ -27,10 +27,10 @@ public class SCATrees {
         BlockStrippingHandler.registerStripping(TreeBlockType.LOG.makeResourceLoc(GREEN_SANDALWOOD.getName()),
                 GREEN_SANDALWOOD.getBlockObj(TreeBlockType.LOG),
                 GREEN_SANDALWOOD.getBlockObj(TreeBlockType.STRIPPED_LOG),
-                SCAItems.GREEN_SANDALWOOD_BARK::get);
+                SCAItems.GREEN_SANDALWOOD_BARK);
         BlockStrippingHandler.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(GREEN_SANDALWOOD.getName()),
                 GREEN_SANDALWOOD.getBlockObj(TreeBlockType.LOG_WOOD),
                 GREEN_SANDALWOOD.getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD),
-                SCAItems.GREEN_SANDALWOOD_BARK::get);
+                SCAItems.GREEN_SANDALWOOD_BARK);
     }
 }

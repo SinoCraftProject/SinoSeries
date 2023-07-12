@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "sinofoundation:block/cotinus_planks",
-    "side": "sinofoundation:block/cotinus_planks",
-    "top": "sinofoundation:block/cotinus_planks"
-  }
-}

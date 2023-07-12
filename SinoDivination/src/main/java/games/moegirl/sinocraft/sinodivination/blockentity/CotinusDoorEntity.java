@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.blockentity;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -50,13 +50,13 @@ public class CotinusDoorEntity extends CotinusEntity {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putBoolean(SinoFoundation.MODID + ".above", true);
+        tag.putBoolean(SinoDivination.MODID + ".above", true);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        if (tag.getBoolean(SinoFoundation.MODID + ".above")) {
+        if (tag.getBoolean(SinoDivination.MODID + ".above")) {
             isAbove = true;
         }
     }

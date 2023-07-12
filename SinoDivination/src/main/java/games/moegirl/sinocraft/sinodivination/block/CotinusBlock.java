@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.block;
 
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.ICotinusEntity;
+import games.moegirl.sinocraft.sinodivination.blockentity.ICotinusEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;

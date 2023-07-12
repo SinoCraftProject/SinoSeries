@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.blockentity;
 
 import games.moegirl.sinocraft.sinocore.blockentity.SimpleChestBlockEntity;
-import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
  */
 public class CotinusChestEntity extends SimpleChestBlockEntity implements ICotinusEntity {
 
-    private final OwnerChecker checker = OwnerChecker.forBlock(SinoFoundation.MODID, this);
+    private final OwnerChecker checker = OwnerChecker.forBlock(SinoDivination.MODID, this);
 
     public CotinusChestEntity(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
         super(entityType, pos, state);

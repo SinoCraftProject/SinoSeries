@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sinodivination:block/sophora_pressure_gate"
+    },
+    "powered=true": {
+      "model": "sinodivination:block/sophora_pressure_gate_down"
+    }
+  }
+}

@@ -46,14 +46,9 @@ public final class TreeRegistry {
         var itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
         blockRegister.register(bus);
         itemRegister.register(bus);
-        register(modid, bus, blockRegister, blockEntityRegister, itemRegister);
-    }
 
-    public static void register(String modid, IEventBus bus, DeferredRegister<Block> blockRegister,
-                                DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister) {
         bus.register(new TreeGatherDataListener(modid));
-
-        for (var tree : getRegistry().get(modid)) {
+        for (Tree tree : getTrees(modid)) {
             tree.register(blockRegister, blockEntityRegister, itemRegister);
         }
     }

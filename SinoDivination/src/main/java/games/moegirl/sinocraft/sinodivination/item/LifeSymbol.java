@@ -2,8 +2,8 @@ package games.moegirl.sinocraft.sinodivination.item;
 
 import games.moegirl.sinocraft.sinocore.utility.OptionalTag;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
+import games.moegirl.sinocraft.sinodivination.blockentity.ICotinusEntity;
 import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.ICotinusEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraChestEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

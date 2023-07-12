@@ -1,0 +1,5 @@
+{
+  "type": "sinodivination:change_soup",
+  "input": "minecraft:birch_sapling",
+  "result": "sinodivination:cotinus_sapling"
+}

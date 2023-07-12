@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "sinodivination:cotinus_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "sinodivination:cotinus_planks"
+  }
+}

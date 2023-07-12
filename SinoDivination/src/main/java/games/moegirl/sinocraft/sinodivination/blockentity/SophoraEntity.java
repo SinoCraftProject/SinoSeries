@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.blockentity;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinofoundation.data.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.SFDDamages;
 import net.minecraft.core.BlockPos;
@@ -68,14 +68,14 @@ public class SophoraEntity extends BlockEntity implements ISophoraEntity {
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        entity = tag.hasUUID(SinoFoundation.MODID + ".record") ? tag.getUUID(SinoFoundation.MODID + ".record") : null;
+        entity = tag.hasUUID(SinoDivination.MODID + ".record") ? tag.getUUID(SinoDivination.MODID + ".record") : null;
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         if (entity != null) {
-            tag.putUUID(SinoFoundation.MODID + ".record", entity);
+            tag.putUUID(SinoDivination.MODID + ".record", entity);
         }
     }
 

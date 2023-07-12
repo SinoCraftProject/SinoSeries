@@ -10,8 +10,7 @@ import games.moegirl.sinocraft.sinodivination.blockentity.CotinusDoorEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.CotinusEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraDoorEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraEntity;
-import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
-import games.moegirl.sinocraft.sinofoundation.data.SFDBlockTags;
+import games.moegirl.sinocraft.sinodivination.data.SDTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -29,7 +28,7 @@ import java.util.OptionalInt;
  */
 public class SDTrees {
 
-    public static final Tree COTINUS = Tree.builder(SinoFoundation.MODID, "cotinus")
+    public static final Tree COTINUS = Tree.builder(SinoDivination.MODID, "cotinus")
             .translate("zh_cn", "无患")
             .block(TreeBlockType.DOOR, CotinusDoor::new)
             .block(TreeBlockType.TRAPDOOR, CotinusTrapdoor::new)
@@ -37,7 +36,7 @@ public class SDTrees {
             .blockEntity(TreeBlockType.DOOR, CotinusDoorEntity::new)
             .blockEntity(TreeBlockType.TRAPDOOR, CotinusEntity::trapdoor)
             .blockEntity(TreeBlockType.FENCE_GATE, CotinusEntity::fenceGate)
-            .blockTags(SFDBlockTags.COTINUS_BLOCK)
+            .blockTags(SDTags.COTINUS_BLOCK)
             .grower(t -> new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(t.getBlock(TreeBlockType.LOG)),
                     new FancyTrunkPlacer(3, 11, 0),
@@ -48,7 +47,7 @@ public class SDTrees {
             .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
-    public static final Tree SOPHORA = Tree.builder(SinoFoundation.MODID, "sophora")
+    public static final Tree SOPHORA = Tree.builder(SinoDivination.MODID, "sophora")
             .translate("zh_cn", "槐")
             .block(TreeBlockType.DOOR, SophoraDoor::new)
             .block(TreeBlockType.TRAPDOOR, SophoraTrapdoor::new)
@@ -56,7 +55,7 @@ public class SDTrees {
             .blockEntity(TreeBlockType.DOOR, SophoraDoorEntity::new)
             .blockEntity(TreeBlockType.TRAPDOOR, SophoraEntity::trapdoor)
             .blockEntity(TreeBlockType.FENCE_GATE, SophoraEntity::fenceGate)
-            .blockTags(SFDBlockTags.JUJUBE_BLOCK)
+            .blockTags(SDTags.SOPHORA_BLOCK)
             .grower(t -> new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(t.getBlock(TreeBlockType.LOG)),
                     new FancyTrunkPlacer(3, 11, 0),
@@ -75,7 +74,7 @@ public class SDTrees {
 
     public static void register(IEventBus bus) {
         TreeRegistry.register(SinoDivination.MODID, bus);
-        TreeRegistry.getRegistry().get(SinoDivination.MODID)
+        TreeRegistry.getTrees(SinoDivination.MODID)
                 .forEach(tree -> BlockStrippingHandler.registerStripping(tree, SFDItems.TREE_BARK));
     }
 }

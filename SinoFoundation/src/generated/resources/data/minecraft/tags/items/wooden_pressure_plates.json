@@ -1,8 +1,6 @@
 {
   "values": [
     "sinofoundation:mulberry_pressure_gate",
-    "sinofoundation:cotinus_pressure_gate",
-    "sinofoundation:jujube_pressure_gate",
-    "sinofoundation:sophora_pressure_gate"
+    "sinofoundation:jujube_pressure_gate"
   ]
 }

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "sinofoundation:block/sophora_planks",
-    "side": "sinofoundation:block/sophora_planks",
-    "top": "sinofoundation:block/sophora_planks"
-  }
-}

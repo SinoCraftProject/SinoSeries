@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.blockentity;
 
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ public class CotinusEntity extends BlockEntity implements ICotinusEntity {
     }
 
     protected boolean isOpen = false;
-    protected final OwnerChecker checker = OwnerChecker.forBlock(SinoFoundation.MODID, this);
+    protected final OwnerChecker checker = OwnerChecker.forBlock(SinoDivination.MODID, this);
 
     public CotinusEntity(BlockEntityType<?> entityType, BlockPos worldPosition, BlockState blockState) {
         super(entityType, worldPosition, blockState);
@@ -61,14 +61,14 @@ public class CotinusEntity extends BlockEntity implements ICotinusEntity {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        isOpen = pTag.getBoolean(SinoFoundation.MODID + ".doorOpen");
+        isOpen = pTag.getBoolean(SinoDivination.MODID + ".doorOpen");
         checker.load(pTag);
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        pTag.putBoolean(SinoFoundation.MODID + ".doorOpen", isOpen);
+        pTag.putBoolean(SinoDivination.MODID + ".doorOpen", isOpen);
         checker.save(pTag);
     }
 

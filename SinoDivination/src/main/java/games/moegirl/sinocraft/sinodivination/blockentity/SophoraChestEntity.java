@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.blockentity;
 
 import com.mojang.datafixers.util.Pair;
 import games.moegirl.sinocraft.sinocore.blockentity.SimpleChestBlockEntity;
-import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
@@ -49,7 +49,7 @@ public class SophoraChestEntity extends SimpleChestBlockEntity implements ISopho
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        if (tag.contains(SinoFoundation.MODID + ".player")) {
+        if (tag.contains(SinoDivination.MODID + ".player")) {
             UUID uuid = tag.getUUID("player");
             entity = new PlayerRecord(uuid,
                     Optional.<Component>ofNullable(Component.Serializer.fromJson(tag.getString("name")))
@@ -65,9 +65,9 @@ public class SophoraChestEntity extends SimpleChestBlockEntity implements ISopho
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         if (entity != null) {
-            tag.putUUID(SinoFoundation.MODID + ".player", entity.uuid);
-            tag.putString(SinoFoundation.MODID + ".name", Component.Serializer.toJson(entity.name));
-            tag.put(SinoFoundation.MODID + ".birthday", ExtraCodecs.INSTANT_ISO8601.encodeStart(NbtOps.INSTANCE, entity.birthday).result().orElseThrow());
+            tag.putUUID(SinoDivination.MODID + ".player", entity.uuid);
+            tag.putString(SinoDivination.MODID + ".name", Component.Serializer.toJson(entity.name));
+            tag.put(SinoDivination.MODID + ".birthday", ExtraCodecs.INSTANT_ISO8601.encodeStart(NbtOps.INSTANCE, entity.birthday).result().orElseThrow());
         }
     }
 

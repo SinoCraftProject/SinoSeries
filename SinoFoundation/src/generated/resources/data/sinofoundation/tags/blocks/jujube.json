@@ -1,6 +1,24 @@
 {
   "values": [
-    "sinofoundation:jujube_chest",
-    "sinofoundation:jujube_trapped_chest"
+    "sinofoundation:jujube_log",
+    "sinofoundation:jujube_stripped_log",
+    "sinofoundation:jujube_log_wood",
+    "sinofoundation:jujube_stripped_log_wood",
+    "sinofoundation:jujube_sapling",
+    "sinofoundation:jujube_potted_sapling",
+    "sinofoundation:jujube_planks",
+    "sinofoundation:jujube_leaves",
+    "sinofoundation:jujube_stairs",
+    "sinofoundation:jujube_slab",
+    "sinofoundation:jujube_button",
+    "sinofoundation:jujube_door",
+    "sinofoundation:jujube_trapdoor",
+    "sinofoundation:jujube_fence",
+    "sinofoundation:jujube_fence_gate",
+    "sinofoundation:jujube_pressure_gate",
+    "sinofoundation:jujube_sign",
+    "sinofoundation:jujube_wall_sign",
+    "sinofoundation:jujube_hanging_sign",
+    "sinofoundation:jujube_wall_hanging_sign"
   ]
 }

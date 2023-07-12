@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinodivination.block;
 
 import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
-import games.moegirl.sinocraft.sinofoundation.SFDTrees;
-import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
+import games.moegirl.sinocraft.sinodivination.SDTrees;
+import games.moegirl.sinocraft.sinodivination.blockentity.SDBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SophoraChest extends ChestBlockBase implements SophoraBlock {
 
     public SophoraChest() {
-        super(SFDBlockEntities.SOPHORA_CHEST, SFDTrees.SOPHORA.name);
+        super(SDBlockEntities.SOPHORA_CHEST, SDTrees.SOPHORA.name);
     }
 
     @Override

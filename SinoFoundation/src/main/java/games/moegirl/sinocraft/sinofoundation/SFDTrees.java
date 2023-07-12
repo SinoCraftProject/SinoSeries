@@ -71,7 +71,7 @@ public class SFDTrees {
 
     public static void register(IEventBus bus) {
         TreeRegistry.register(SinoFoundation.MODID, bus);
-        TreeRegistry.getRegistry().get(SinoFoundation.MODID)
+        TreeRegistry.getTrees(SinoFoundation.MODID)
                 .forEach(tree -> BlockStrippingHandler.registerStripping(tree, SFDItems.TREE_BARK));
     }
 }

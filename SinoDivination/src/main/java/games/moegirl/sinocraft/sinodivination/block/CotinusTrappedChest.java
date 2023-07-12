@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinodivination.block;
 
 import games.moegirl.sinocraft.sinocore.block.TrappedChestBlockBase;
-import games.moegirl.sinocraft.sinofoundation.SFDTrees;
-import games.moegirl.sinocraft.sinofoundation.block.entity.SFDBlockEntities;
+import games.moegirl.sinocraft.sinodivination.SDTrees;
+import games.moegirl.sinocraft.sinodivination.blockentity.SDBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class CotinusTrappedChest extends TrappedChestBlockBase implements CotinusBlock {
 
     public CotinusTrappedChest() {
-        super(SFDBlockEntities.COTINUS_TRAPPED_CHEST, SFDTrees.COTINUS.name);
+        super(SDBlockEntities.COTINUS_TRAPPED_CHEST, SDTrees.COTINUS.name);
     }
 
     @Override
