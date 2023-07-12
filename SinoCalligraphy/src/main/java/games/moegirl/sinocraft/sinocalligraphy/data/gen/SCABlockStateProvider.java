@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocalligraphy.data.gen;
 
 import games.moegirl.sinocraft.sinocalligraphy.block.PaperDryingRackBlock;
 import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
-import games.moegirl.sinocraft.sinocore.data.gen.model.BaseAutoBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;

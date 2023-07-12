@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.block;
 
+import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
@@ -16,7 +18,7 @@ import org.slf4j.Logger;
 /**
  * 箱子
  */
-public class ChestBlockBase extends ChestBlock {
+public class ChestBlockBase extends ChestBlock implements ILootableBlock {
 
     public final ResourceLocation name;
 
@@ -32,6 +34,11 @@ public class ChestBlockBase extends ChestBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return blockEntityType.get().create(pPos, pState);
+    }
+
+    @Override
+    public LootTable.Builder createLootBuilder(BlockLootables helper) {
+        return helper.createNameableBlockEntityTable(this);
     }
 
     public void verifyTexture(ExistingFileHelper helper, Logger logger) {

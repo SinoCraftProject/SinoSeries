@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree.event.data;
 
-import games.moegirl.sinocraft.sinocore.data.gen.model.AbstractBlockStateProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAutoBlockStateProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.PackOutput;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ProviderBlockState extends AbstractBlockStateProvider {
+public class ProviderBlockState extends AbstractAutoBlockStateProvider {
 
     protected final List<Tree> treeTypes;
 
@@ -30,7 +30,7 @@ public class ProviderBlockState extends AbstractBlockStateProvider {
     }
 
     @Override
-    protected void registerStatesAndModels() {
+    protected void registerBlockStatesAndModels() {
         for (var tree : treeTypes) {
 
             logBlock(tree.getBlock(TreeBlockType.LOG));

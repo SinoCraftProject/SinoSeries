@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree.event.data;
 
-import games.moegirl.sinocraft.sinocore.data.gen.model.AbstractItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAutoItemModelProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.PackOutput;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ProviderItemModel extends AbstractItemModelProvider {
+public class ProviderItemModel extends AbstractAutoItemModelProvider {
 
     protected final List<Tree> treeTypes;
 
@@ -25,7 +25,7 @@ public class ProviderItemModel extends AbstractItemModelProvider {
     }
 
     @Override
-    protected void registerModels() {
+    protected void registerItemModels() {
         for (var tree : treeTypes) {
             generated(tree.getItem(TreeBlockType.SAPLING));
 

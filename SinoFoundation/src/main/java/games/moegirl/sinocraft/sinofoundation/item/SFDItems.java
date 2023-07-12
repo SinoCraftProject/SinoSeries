@@ -45,15 +45,8 @@ public class SFDItems {
                 .addItem(WORMWOOD_LEAF)
                 .addItem(RICE)
                 .addItem(SEED_RICE)
-                .addItem(LUCID_GANODERMAMA)
-                .addItem(REHMANNIA)
-                .addItem(SEED_REHMANNIA)
-                .addItem(DRAGONLIVER_MELON)
-                .addItem(SEED_DRAGONLIVER)
                 .addItem(SESAME)
                 .addItem(SEED_SESAME)
-                .addItem(ZHU_CAO)
-                .addItem(BRIGHT_STEM_GRASS)
                 .addItem(SEED_WORMWOOD);
 
         TabsRegistry.items(SinoSeriesTabs.MATERIALS)
@@ -86,16 +79,9 @@ public class SFDItems {
     public static final RegistryObject<Item> WORMWOOD_LEAF = ITEMS.register("wormwood_leaf", () -> new Item(new Item.Properties()));
     public static final RegistryObject<ItemNameBlockItem> SEED_WORMWOOD = seed(SFDBlocks.WORMWOOD);
     public static final RegistryObject<Item> RICE = food("rice", 1, false);
-    public static final RegistryObject<ItemNameBlockItem> SEED_RICE = item(SeedRice.class);
-    public static final RegistryObject<BlockItem> LUCID_GANODERMAMA = block(SFDBlocks.LUCID_GANODERMA);
-    public static final RegistryObject<Item> REHMANNIA = food("rehmannia", 2, false);
-    public static final RegistryObject<ItemNameBlockItem> SEED_REHMANNIA = seed(SFDBlocks.REHMANNIA);
-    public static final RegistryObject<Item> DRAGONLIVER_MELON = food("dragonliver_melon", 3, false);
-    public static final RegistryObject<ItemNameBlockItem> SEED_DRAGONLIVER = seed(SFDBlocks.DRAGONLIVER_MELON);
     public static final RegistryObject<Item> SESAME = food("sesame", 1, true);
+    public static final RegistryObject<ItemNameBlockItem> SEED_RICE = item(SeedRice.class);
     public static final RegistryObject<ItemNameBlockItem> SEED_SESAME = seed(SFDBlocks.SESAME);
-    public static final RegistryObject<Item> ZHU_CAO = simple(SFDBlocks.ZHU_CAO);
-    public static final RegistryObject<Item> BRIGHT_STEM_GRASS = simple(SFDBlocks.BRIGHT_STEM_GRASS);
 
     public static final RegistryObject<Item> ICON_BLOCK_INTERACT = ITEMS.register("icon_block_interact", () -> new Item(new Item.Properties()));
 

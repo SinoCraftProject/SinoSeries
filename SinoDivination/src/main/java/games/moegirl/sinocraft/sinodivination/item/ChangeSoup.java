@@ -1,27 +1,24 @@
 package games.moegirl.sinocraft.sinodivination.item;
 
 import games.moegirl.sinocraft.sinodivination.recipe.SDRecipes;
-import games.moegirl.sinocraft.sinodivination.util.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * 变荑汤
  */
 public class ChangeSoup extends Item {
 
-    public ChangeSoup(RegistryObject<CreativeModeTab> tab) {
-        super(new ItemProperties().stacksTo(1).craftRemainder(Items.BOWL).tab(tab).properties());
+    public ChangeSoup() {
+        super(new Item.Properties().stacksTo(1).craftRemainder(Items.BOWL));
     }
 
     @Override

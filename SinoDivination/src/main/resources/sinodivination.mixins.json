@@ -4,8 +4,7 @@
   "package": "games.moegirl.sinocraft.sinodivination.mixins.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AbstractFurnaceBlockEntityMixin",
-    "ItemMixin"
+    "AbstractFurnaceBlockEntityMixin"
   ],
   "client": [
   ],

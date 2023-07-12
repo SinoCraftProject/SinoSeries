@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data.gen.lang;
 
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
@@ -41,10 +41,6 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addItem(SFDItems.WORMWOOD_LEAF, "艾草叶");
         addItem(SFDItems.RICE, "稻米");
         addItem(SFDItems.SEED_RICE, "糯稻种子");
-        addItem(SFDItems.REHMANNIA, "地黄");
-        addItem(SFDItems.SEED_REHMANNIA, "地黄种子");
-        addItem(SFDItems.DRAGONLIVER_MELON, "龙肝瓜");
-        addItem(SFDItems.SEED_DRAGONLIVER, "龙肝瓜种子");
         addItem(SFDItems.SESAME, "芝麻");
         addItem(SFDItems.SEED_SESAME, "巨胜种子");
 
@@ -76,20 +72,11 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.NETHER_SULPHUR_ORE, "下界硫磺矿石");
         addBlock(SFDBlocks.DEEP_SLATE_JADE_ORE, "深层玉矿石");
         addBlock(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, "深层硫磺矿石");
-        addBlock(SFDBlocks.COTINUS_CHEST, "无患木匣");
-        addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "无患木机关匣");
         addBlock(SFDBlocks.JUJUBE_CHEST, "枣心木匣");
         addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "枣心木机关匣");
-        addBlock(SFDBlocks.SOPHORA_CHEST, "槐木匣");
-        addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, "槐木机关匣");
         addBlock(SFDBlocks.WORMWOOD, "艾草");
         addBlock(SFDBlocks.RICE, "糯稻");
-        addBlock(SFDBlocks.LUCID_GANODERMA, "灵芝");
-        addBlock(SFDBlocks.REHMANNIA, "地黄");
-        addBlock(SFDBlocks.DRAGONLIVER_MELON, "龙肝瓜");
         addBlock(SFDBlocks.SESAME, "巨胜");
-        addBlock(SFDBlocks.ZHU_CAO, "朱草");
-        addBlock(SFDBlocks.BRIGHT_STEM_GRASS, "明茎草");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "辣椒种子");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "青椒种子");

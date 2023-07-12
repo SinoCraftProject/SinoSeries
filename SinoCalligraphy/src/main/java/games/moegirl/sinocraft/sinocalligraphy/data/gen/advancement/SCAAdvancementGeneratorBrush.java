@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.gen.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
-import games.moegirl.sinocraft.sinocore.data.gen.advancement.AbstractAdvancementGenerator;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAdvancementGenerator;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.AdvancementTree;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;

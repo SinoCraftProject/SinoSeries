@@ -4,7 +4,6 @@ import games.moegirl.sinocraft.sinocore.data.gen.ProviderList;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
-import games.moegirl.sinocraft.sinofoundation.data.gen.world.SFDBiomeModifierProvider;
 import games.moegirl.sinocraft.sinofoundation.data.gen.lang.*;
 import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDBiomeTagsProvider;
 import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDBlockTagsProvider;

@@ -3,8 +3,8 @@ package games.moegirl.sinocraft.sinocore.tree.event.data;
 import com.mojang.datafixers.util.Function3;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.LootTableProviderBase;
-import games.moegirl.sinocraft.sinocore.data.gen.SimpleBlockLootTables;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstructLootTableProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loottable.SimpleBlockLootTables;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class ProviderBlockLootTable extends LootTableProviderBase {
+public class ProviderBlockLootTable extends AbstructLootTableProvider {
 
     static final Map<TreeBlockType, Function3<Block, Tree, SimpleBlockLootTables, LootTable.Builder>> DEFAULT_LOOT = new HashMap<>();
 

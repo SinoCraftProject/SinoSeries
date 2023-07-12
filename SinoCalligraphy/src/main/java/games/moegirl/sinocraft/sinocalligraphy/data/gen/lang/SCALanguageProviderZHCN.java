@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocalligraphy.data.gen.lang;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import net.minecraft.data.PackOutput;
 
 public class SCALanguageProviderZHCN extends AbstractLanguageProvider {

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.mixins.mixin;
 
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.LootTableProviderBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstructLootTableProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +16,7 @@ public abstract class LootTableProviderMixin {
     @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
     protected void sino$injectGetName(CallbackInfoReturnable<String> cir) {
         LootTableProvider $this = (LootTableProvider) (Object) this;
-        if ($this instanceof LootTableProviderBase provider) {
+        if ($this instanceof AbstructLootTableProvider provider) {
             cir.setReturnValue(provider.getProviderName());
         }
     }

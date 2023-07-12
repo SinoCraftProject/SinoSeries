@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.handler;
 
-import games.moegirl.sinocraft.sinofoundation.block.tree.CotinusBlock;
+import games.moegirl.sinocraft.sinodivination.block.CotinusBlock;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

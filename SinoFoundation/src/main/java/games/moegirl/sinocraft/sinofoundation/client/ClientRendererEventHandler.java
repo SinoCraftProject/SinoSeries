@@ -16,16 +16,7 @@ public class ClientRendererEventHandler {
 
     @SubscribeEvent
     public static void onBlockEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(SFDBlockEntities.COTINUS_CHEST.get(), context -> new BaseChestRenderer(context, SFDTrees.COTINUS.name, false));
-        event.registerBlockEntityRenderer(SFDBlockEntities.COTINUS_TRAPPED_CHEST.get(), context -> new BaseChestRenderer(context, SFDTrees.COTINUS.name, true));
         event.registerBlockEntityRenderer(SFDBlockEntities.JUJUBE_CHEST.get(), context -> new BaseChestRenderer(context, SFDTrees.JUJUBE.name, false));
         event.registerBlockEntityRenderer(SFDBlockEntities.JUJUBE_TRAPPED_CHEST.get(), context -> new BaseChestRenderer(context, SFDTrees.JUJUBE.name, true));
-        event.registerBlockEntityRenderer(SFDBlockEntities.SOPHORA_CHEST.get(), context -> new BaseChestRenderer(context, SFDTrees.SOPHORA.name, false));
-        event.registerBlockEntityRenderer(SFDBlockEntities.SOPHORA_TRAPPED_CHEST.get(), context -> new BaseChestRenderer(context, SFDTrees.SOPHORA.name, true));
     }
-
-//    @SubscribeEvent
-//    public static void onLayerDefinitionRegister(EntityRenderersEvent.RegisterLayerDefinitions event) {
-//        event.registerLayerDefinition();
-//    }
 }

@@ -15,15 +15,15 @@ public class DataGen {
     public static void onGatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
 
-        event.getGenerator().addProvider(true, new ProviderBlockState(event));
-        event.getGenerator().addProvider(true, new ProviderItemModel(event));
+        event.getGenerator().addProvider(true, new SDBlockStateProvider(event));
+        event.getGenerator().addProvider(true, new SDItemModelProvider(event));
         generator.addProvider(true, new ProviderLanguageEn(generator));
         generator.addProvider(true, new ProviderLanguageZh(generator));
         generator.addProvider(true, new ProviderLanguageLzh(generator));
-        generator.addProvider(true, new ProviderLootTable(generator));
-        generator.addProvider(true, new ProviderRecipe(event.getGenerator()));
-        ProviderTagBlock provider;
-        generator.addProvider(true, provider = new ProviderTagBlock(event));
-        generator.addProvider(true, new ProviderTagItem(event, provider));
+        generator.addProvider(true, new SDLootTableProvider(generator));
+        generator.addProvider(true, new SDRecipeProvider(event.getGenerator()));
+        SDBlockTagProvider provider;
+        generator.addProvider(true, provider = new SDBlockTagProvider(event));
+        generator.addProvider(true, new SDItemTagProvider(event, provider));
     }
 }

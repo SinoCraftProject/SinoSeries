@@ -11,7 +11,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraEntity;
+import games.moegirl.sinocraft.sinodivination.blockentity.SophoraEntity;
 import games.moegirl.sinocraft.sinofoundation.block.entity.tree.ICotinusEntity;
 import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
 import games.moegirl.sinocraft.sinofoundation.capability.entity.birthday.Birthday;

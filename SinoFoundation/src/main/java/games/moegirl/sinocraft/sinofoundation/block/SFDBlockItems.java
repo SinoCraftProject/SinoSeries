@@ -24,12 +24,8 @@ public class SFDBlockItems {
                 .addItem(STOVE)
                 .addItem(WOOD_DESK)
                 .addItem(WOOD_CHAIRS)
-                .addItem(COTINUS_CHEST)
-                .addItem(COTINUS_TRAPPED_CHEST)
                 .addItem(JUJUBE_CHEST)
-                .addItem(JUJUBE_TRAPPED_CHEST)
-                .addItem(SOPHORA_CHEST)
-                .addItem(SOPHORA_TRAPPED_CHEST);
+                .addItem(JUJUBE_TRAPPED_CHEST);
 
         TabsRegistry.items(SinoSeriesTabs.AGRICULTURE)
                 .addItem(WHITE_RADISH)
@@ -94,10 +90,6 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> DEEP_SLATE_JADE_ORE = ITEMS.register("deepslate_jade_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_JADE_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> DEEP_SLATE_SULPHUR_ORE = ITEMS.register("deepslate_sulphur_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_SULPHUR_ORE.get(), new Item.Properties()));
 
-    public static final RegistryObject<BaseChestItem> COTINUS_CHEST = ITEMS.register("cotinus_chest", () -> BaseChestItem.create(SFDBlocks.COTINUS_CHEST, SFDBlockEntities.COTINUS_CHEST));
-    public static final RegistryObject<BaseChestItem> COTINUS_TRAPPED_CHEST = ITEMS.register("cotinus_trapped_chest", () -> BaseChestItem.create(SFDBlocks.COTINUS_TRAPPED_CHEST, SFDBlockEntities.COTINUS_TRAPPED_CHEST));
     public static final RegistryObject<BaseChestItem> JUJUBE_CHEST = ITEMS.register("jujube_chest", () -> BaseChestItem.create(SFDBlocks.JUJUBE_CHEST, SFDBlockEntities.JUJUBE_CHEST));
     public static final RegistryObject<BaseChestItem> JUJUBE_TRAPPED_CHEST = ITEMS.register("jujube_trapped_chest", () -> BaseChestItem.create(SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDBlockEntities.JUJUBE_TRAPPED_CHEST));
-    public static final RegistryObject<BaseChestItem> SOPHORA_CHEST = ITEMS.register("sophora_chest", () -> BaseChestItem.create(SFDBlocks.SOPHORA_CHEST, SFDBlockEntities.SOPHORA_CHEST));
-    public static final RegistryObject<BaseChestItem> SOPHORA_TRAPPED_CHEST = ITEMS.register("sophora_trapped_chest", () -> BaseChestItem.create(SFDBlocks.SOPHORA_TRAPPED_CHEST, SFDBlockEntities.SOPHORA_TRAPPED_CHEST));
 }
