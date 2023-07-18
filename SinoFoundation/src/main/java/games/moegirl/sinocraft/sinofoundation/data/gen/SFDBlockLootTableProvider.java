@@ -29,7 +29,17 @@ public class SFDBlockLootTableProvider extends LootTableProviderBase {
         addBlock(SFDBlocks.SOYBEAN_PLANT, table(dropSeeds(SFDBlockItems.SOYBEAN.get()), dropWhenMature(SFDBlocks.SOYBEAN_PLANT.get(), SFDBlockItems.SOYBEAN.get(), 1, 4)));
         addBlock(SFDBlocks.GARLIC_PLANT, table(dropSeeds(SFDBlockItems.GARLIC.get()), dropWhenMature(SFDBlocks.GARLIC_PLANT.get(), SFDBlockItems.GARLIC.get(), 2, 4)));
 
-        addBlock(SFDBlocks.JADE_ORE, table(dropIngotByChance(SFDItems.JADE.get(), 1, 2)));
+        // Todo: qyl27: jade drop.
+        addBlock(SFDBlocks.BLACK_JADE_ORE, table(dropIngotByChance(SFDItems.BLACK_JADE.get(), 1, 1)));
+        addBlock(SFDBlocks.DEEPSLATE_BLACK_JADE_ORE, table(dropIngotByChance(SFDItems.BLACK_JADE.get(), 1, 1)));
+        addBlock(SFDBlocks.GREEN_JADE_ORE, table(dropIngotByChance(SFDItems.GREEN_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.DEEPSLATE_GREEN_JADE_ORE, table(dropIngotByChance(SFDItems.GREEN_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.RED_JADE_ORE, table(dropIngotByChance(SFDItems.RED_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.DEEPSLATE_RED_JADE_ORE, table(dropIngotByChance(SFDItems.RED_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.WHITE_JADE_ORE, table(dropIngotByChance(SFDItems.WHITE_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.DEEPSLATE_WHITE_JADE_ORE, table(dropIngotByChance(SFDItems.WHITE_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.YELLOW_JADE_ORE, table(dropIngotByChance(SFDItems.YELLOW_JADE.get(), 1, 2)));
+        addBlock(SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE, table(dropIngotByChance(SFDItems.YELLOW_JADE.get(), 1, 2)));
         addBlock(SFDBlocks.NITER_ORE, table(dropIngotByChance(SFDItems.NITER.get(), 1, 2)));
         addBlock(SFDBlocks.SULPHUR_ORE, table(dropIngotByChance(SFDItems.SULPHUR.get(), 1, 2)));
 

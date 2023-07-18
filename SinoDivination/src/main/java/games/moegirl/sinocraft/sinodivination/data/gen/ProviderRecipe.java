@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.data.gen;
 
 import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredients;
+import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.recipe.BlockInteractRecipe;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
@@ -84,13 +85,13 @@ class ProviderRecipe extends RecipeProvider {
                 .define('Y', Items.STICK)
                 .define('Z', Tags.Items.CHESTS)
                 .save(consumer);
-        shaped(SDBlocks.CARVING_TABLE, SFDItems.JADE.get())
+        shaped(SDBlocks.CARVING_TABLE, Items.OBSIDIAN)
                 .pattern("XYX")
                 .pattern("XZX")
                 .pattern("AAA")
                 .define('A', Tags.Items.OBSIDIAN)
                 .define('X', Tags.Items.INGOTS_COPPER)
-                .define('Y', SFDItems.JADE.get())
+                .define('Y', SFDItemTags.JADE)
                 .define('Z', Blocks.STONECUTTER)
                 .save(consumer);
         shaped(SDBlocks.SILKWORM_PLAQUE, SDItems.SILKWORM_BABY.get())
@@ -118,7 +119,7 @@ class ProviderRecipe extends RecipeProvider {
                 .pattern(" XX ")
                 .pattern("X  X")
                 .pattern(" XX ")
-                .define('X', SFDItems.JADE)
+                .define('X', SFDItems.GREEN_JADE)
                 .dye(DyeColor.BLUE)
                 .save(consumer);
         CarvingTableRecipe.builder(SDItems.HUANG_CONG)
@@ -126,7 +127,7 @@ class ProviderRecipe extends RecipeProvider {
                 .pattern(" X ")
                 .pattern("X X")
                 .pattern("XXX")
-                .define('X', SFDItems.JADE)
+                .define('X', SFDItems.YELLOW_JADE)
                 .dye(DyeColor.GRAY)
                 .save(consumer);
         CarvingTableRecipe.builder(SDItems.QING_GUI)
@@ -134,7 +135,7 @@ class ProviderRecipe extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("XXX")
                 .pattern("XXX")
-                .define('X', SFDItems.JADE)
+                .define('X', SFDItems.GREEN_JADE)
                 .dye(DyeColor.CYAN)
                 .save(consumer);
         CarvingTableRecipe.builder(SDItems.CHI_ZHANG)
@@ -142,7 +143,7 @@ class ProviderRecipe extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("XXX")
                 .pattern("XXX")
-                .define('X', SFDItems.JADE)
+                .define('X', SFDItems.RED_JADE)
                 .dye(DyeColor.WHITE)
                 .save(consumer);
         CarvingTableRecipe.builder(SDItems.BAI_HU)
@@ -150,14 +151,14 @@ class ProviderRecipe extends RecipeProvider {
                 .pattern(" X X")
                 .pattern(" XXX")
                 .pattern("XX X")
-                .define('X', SFDItems.JADE)
+                .define('X', SFDItems.WHITE_JADE)
                 .dye(DyeColor.RED)
                 .save(consumer);
         CarvingTableRecipe.builder(SDItems.XUAN_HUANG)
                 .pattern("X  X")
                 .pattern("XXXX")
                 .pattern(" XX ")
-                .define('X', SFDItems.JADE)
+                .define('X', SFDItems.BLACK_JADE)
                 .dye(DyeColor.BLACK)
                 .save(consumer);
         CarvingTableRecipe.builder(SDItems.COPPER_GOBLET)

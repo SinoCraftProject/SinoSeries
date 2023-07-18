@@ -1,6 +1,7 @@
-// 1.20.1	2023-06-18T13:44:08.2692861	Tags for minecraft:item mod id sinofoundation
+// 1.20.1	2023-07-18T10:41:03.9417932	Tags for minecraft:item mod id sinofoundation
 52c803721c9b270169a3b4f7ba6f084f9d5847d5 data/forge/tags/items/chests/trapped.json
 3674a37a7d47030c01e7d7732c933c81c1874a3b data/forge/tags/items/chests/wooden.json
 80eb00ac510c83de70c2c433e736a97844c1451f data/forge/tags/items/dusts/niter.json
 5c9bc0656e973a3a6ba9829254636c1e851d2477 data/forge/tags/items/dusts/sulfur.json
+3928aa6a7ffabc923d629d3f428d96c5aeb2efe0 data/sinofoundation/tags/items/jade.json
 41f57c729a3164d9a65aee6e98b395f626af5c4a data/sinofoundation/tags/items/knives.json

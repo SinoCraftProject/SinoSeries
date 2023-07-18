@@ -53,7 +53,16 @@ public class SFDBlockItems {
                 .addItem(MARBLE_WALLS)
                 .addItem(SMOOTH_MARBLE_SLAB)
                 .addItem(SMOOTH_MARBLE_STAIRS)
-                .addItem(JADE_ORE)
+                .addItem(BLACK_JADE_ORE)
+                .addItem(DEEPSLATE_BLACK_JADE_ORE)
+                .addItem(GREEN_JADE_ORE)
+                .addItem(DEEPSLATE_GREEN_JADE_ORE)
+                .addItem(RED_JADE_ORE)
+                .addItem(DEEPSLATE_RED_JADE_ORE)
+                .addItem(WHITE_JADE_ORE)
+                .addItem(DEEPSLATE_WHITE_JADE_ORE)
+                .addItem(YELLOW_JADE_ORE)
+                .addItem(DEEPSLATE_YELLOW_JADE_ORE)
                 .addItem(DEEP_SLATE_JADE_ORE)
                 .addItem(NITER_ORE)
                 .addItem(SULPHUR_ORE)
@@ -87,7 +96,16 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> SMOOTH_MARBLE_SLAB = ITEMS.register("smooth_marble_slab", () -> new BlockItem(SFDBlocks.SMOOTH_MARBLE_SLAB.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> SMOOTH_MARBLE_STAIRS = ITEMS.register("smooth_marble_stairs", () -> new BlockItem(SFDBlocks.SMOOTH_MARBLE_STAIRS.get(), new Item.Properties()));
 
-    public static final RegistryObject<BlockItem> JADE_ORE = ITEMS.register("jade_ore", () -> new BlockItem(SFDBlocks.JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> BLACK_JADE_ORE = ITEMS.register("black_jade_ore", () -> new BlockItem(SFDBlocks.BLACK_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEPSLATE_BLACK_JADE_ORE = ITEMS.register("deepslate_black_jade_ore", () -> new BlockItem(SFDBlocks.DEEPSLATE_BLACK_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> GREEN_JADE_ORE = ITEMS.register("green_jade_ore", () -> new BlockItem(SFDBlocks.GREEN_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEPSLATE_GREEN_JADE_ORE = ITEMS.register("deepslate_green_jade_ore", () -> new BlockItem(SFDBlocks.DEEPSLATE_GREEN_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> RED_JADE_ORE = ITEMS.register("red_jade_ore", () -> new BlockItem(SFDBlocks.RED_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEPSLATE_RED_JADE_ORE = ITEMS.register("deepslate_red_jade_ore", () -> new BlockItem(SFDBlocks.DEEPSLATE_RED_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> WHITE_JADE_ORE = ITEMS.register("white_jade_ore", () -> new BlockItem(SFDBlocks.WHITE_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEPSLATE_WHITE_JADE_ORE = ITEMS.register("deepslate_white_jade_ore", () -> new BlockItem(SFDBlocks.DEEPSLATE_WHITE_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> YELLOW_JADE_ORE = ITEMS.register("yellow_jade_ore", () -> new BlockItem(SFDBlocks.YELLOW_JADE_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> DEEPSLATE_YELLOW_JADE_ORE = ITEMS.register("deepslate_yellow_jade_ore", () -> new BlockItem(SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> NITER_ORE = ITEMS.register("niter_ore", () -> new BlockItem(SFDBlocks.NITER_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> SULPHUR_ORE = ITEMS.register("sulphur_ore", () -> new BlockItem(SFDBlocks.SULPHUR_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> NETHER_SULPHUR_ORE = ITEMS.register("nether_sulphur_ore", () -> new BlockItem(SFDBlocks.NETHER_SULPHUR_ORE.get(), new Item.Properties()));

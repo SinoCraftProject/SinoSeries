@@ -59,7 +59,11 @@ public class SFDItems {
         TabsRegistry.items(SinoSeriesTabs.MATERIALS)
                 .addItem(ASHES)
                 .addItem(TREE_BARK)
-                .addItem(JADE)
+                .addItem(BLACK_JADE)
+                .addItem(GREEN_JADE)
+                .addItem(RED_JADE)
+                .addItem(WHITE_JADE)
+                .addItem(YELLOW_JADE)
                 .addItem(NITER)
                 .addItem(SULPHUR);
     }
@@ -78,7 +82,11 @@ public class SFDItems {
     public static final RegistryObject<Item> CABBAGE = ITEMS.register("cabbage", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
     public static final RegistryObject<Item> EGGPLANT = ITEMS.register("eggplant", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
 
-    public static final RegistryObject<Item> JADE = ITEMS.register("jade", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_JADE = ITEMS.register("black_jade", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_JADE = ITEMS.register("green_jade", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RED_JADE = ITEMS.register("red_jade", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_JADE = ITEMS.register("white_jade", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_JADE = ITEMS.register("yellow_jade", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NITER = ITEMS.register("niter", () -> new Niter(new Item.Properties()));
     public static final RegistryObject<Item> SULPHUR = ITEMS.register("sulfur", () -> new Sulfur(new Item.Properties()));
 

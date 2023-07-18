@@ -24,13 +24,27 @@ public class SFDBlockTagsProvider extends AbstractBlockTagsProvider {
     protected void addToTags() {
         tag(SFDBlockTags.MINECRAFT_WALLS).add(SFDBlocks.MARBLE_WALLS.get());
 
-        addPickaxe(SFDBlocks.JADE_ORE.get(), SFDBlocks.NITER_ORE.get(), SFDBlocks.SULPHUR_ORE.get());
-        addIronTool(SFDBlocks.JADE_ORE.get());
+        addPickaxe(SFDBlocks.BLACK_JADE_ORE.get(), SFDBlocks.DEEPSLATE_BLACK_JADE_ORE.get(),
+                SFDBlocks.GREEN_JADE_ORE.get(), SFDBlocks.DEEPSLATE_GREEN_JADE_ORE.get(),
+                SFDBlocks.RED_JADE_ORE.get(), SFDBlocks.DEEPSLATE_RED_JADE_ORE.get(),
+                SFDBlocks.WHITE_JADE_ORE.get(), SFDBlocks.DEEPSLATE_WHITE_JADE_ORE.get(),
+                SFDBlocks.YELLOW_JADE_ORE.get(), SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE.get(),
+                SFDBlocks.NITER_ORE.get(), SFDBlocks.SULPHUR_ORE.get());
+        addIronTool(SFDBlocks.BLACK_JADE_ORE.get(), SFDBlocks.DEEPSLATE_BLACK_JADE_ORE.get(),
+                SFDBlocks.GREEN_JADE_ORE.get(), SFDBlocks.DEEPSLATE_GREEN_JADE_ORE.get(),
+                SFDBlocks.RED_JADE_ORE.get(), SFDBlocks.DEEPSLATE_RED_JADE_ORE.get(),
+                SFDBlocks.WHITE_JADE_ORE.get(), SFDBlocks.DEEPSLATE_WHITE_JADE_ORE.get(),
+                SFDBlocks.YELLOW_JADE_ORE.get(), SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE.get());
         addStoneTool(SFDBlocks.NITER_ORE.get(), SFDBlocks.SULPHUR_ORE.get());
 
         tag(SFDBlockTags.FORGE_ORES_SULFUR).add(SFDBlocks.SULPHUR_ORE.get());
         tag(SFDBlockTags.FORGE_ORES_NITER).add(SFDBlocks.NITER_ORE.get());
-        tag(SFDBlockTags.FORGE_ORES_JADE).add(SFDBlocks.JADE_ORE.get());
+        tag(SFDBlockTags.FORGE_ORES_JADE)
+                .add(SFDBlocks.BLACK_JADE_ORE.get(), SFDBlocks.DEEPSLATE_BLACK_JADE_ORE.get(),
+                        SFDBlocks.GREEN_JADE_ORE.get(), SFDBlocks.DEEPSLATE_GREEN_JADE_ORE.get(),
+                        SFDBlocks.RED_JADE_ORE.get(), SFDBlocks.DEEPSLATE_RED_JADE_ORE.get(),
+                        SFDBlocks.WHITE_JADE_ORE.get(), SFDBlocks.DEEPSLATE_WHITE_JADE_ORE.get(),
+                        SFDBlocks.YELLOW_JADE_ORE.get(), SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE.get());
         tag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON).addTag(Tags.Blocks.GRAVEL).addTag(BlockTags.DIRT);
 
         chest(SFDBlocks.COTINUS_CHEST, SFDBlockTags.COTINUS_BLOCK, false);
