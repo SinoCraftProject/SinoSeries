@@ -17,8 +17,14 @@ public class SFItems {
         ITEMS.register(bus);
 
         TabsRegistry.items(SinoSeriesTabs.AGRICULTURE)
-                .addItem(TEA_SEED);
+                .addItem(TEA_SEED)
+                .addItem(TEA_BUDS)
+                .addItem(TEA_FRESH_LEAVES)
+                .addItem(CRUSHED_TEA_FRESH_LEAVES);
     }
 
     public static final RegistryObject<Item> TEA_SEED = ITEMS.register("tea_seed", TeaSeedItem::new);
+    public static final RegistryObject<Item> TEA_BUDS = ITEMS.register("tea_buds", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TEA_FRESH_LEAVES = ITEMS.register("tea_fresh_leaves", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CRUSHED_TEA_FRESH_LEAVES = ITEMS.register("crushed_tea_fresh_leaves", () -> new Item(new Item.Properties()));
 }

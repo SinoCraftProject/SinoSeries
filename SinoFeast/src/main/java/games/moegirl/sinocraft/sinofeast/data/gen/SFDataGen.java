@@ -26,6 +26,8 @@ public class SFDataGen {
         if (event.includeServer()) {
             gen.addProvider(true, new SFLanguageProviderZHCN(output, SinoFeast.MODID));
             gen.addProvider(true, new SFLanguageProviderENUS(output, SinoFeast.MODID));
+
+            gen.addProvider(true, new SFLootTableProvider(output, SinoFeast.MODID));
         }
     }
 }

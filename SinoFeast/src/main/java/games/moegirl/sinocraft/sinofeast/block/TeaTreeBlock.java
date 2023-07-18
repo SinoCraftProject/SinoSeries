@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinofeast.block;
 
+import games.moegirl.sinocraft.sinofeast.item.SFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -9,7 +10,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -28,9 +32,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
-    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 15); // qyl27: according to document.
-    public static final IntegerProperty AGING_PROBABILITY = IntegerProperty.create("aging_probability", 0, 100);
-    public static final BooleanProperty AGING = BooleanProperty.create("aging");
+    public static final BooleanProperty WILD = BooleanProperty.create("wild");
+    public static final BooleanProperty SEEDED = BooleanProperty.create("seeded");
+    public static final IntegerProperty PERIODS = IntegerProperty.create("periods", 0, 60);
+    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 15);     // qyl27: according to document.
 
     public TeaTreeBlock() {
         super(Properties.copy(Blocks.GRASS)
@@ -38,17 +43,20 @@ public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
                 .forceSolidOn()
                 .randomTicks());
 
-        registerDefaultState(defaultBlockState().setValue(STAGE, 4)
-                .setValue(AGING_PROBABILITY, 0)
-                .setValue(AGING, false));
+        registerDefaultState(defaultBlockState()
+                .setValue(WILD, false)      // Todo: qyl27: world generation, true here.
+                .setValue(SEEDED, false)
+                .setValue(PERIODS, 0)
+                .setValue(STAGE, 4));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
+        builder.add(WILD);
+        builder.add(SEEDED);
+        builder.add(PERIODS);
         builder.add(STAGE);
-        builder.add(AGING_PROBABILITY);
-        builder.add(AGING);
     }
 
     @Override
@@ -73,7 +81,75 @@ public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+                                 InteractionHand hand, BlockHitResult hit) {
+        var periods = state.getValue(PERIODS);
+        if (periods < 60) {
+            periods += 1;
+        }
+
+        if (player.getItemInHand(hand).isEmpty()) {
+            if (getStageValue(state) == 6) {
+                if (!level.isClientSide()) {
+                    var count = level.getRandom().nextInt(1, 5);
+                    var entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(SFItems.TEA_BUDS.get(), count));
+                    level.addFreshEntity(entity);
+                }
+
+                level.setBlock(pos, state
+                        .setValue(PERIODS, periods)
+                        .setValue(STAGE, 4), UPDATE_ALL);
+                return InteractionResult.SUCCESS;
+            } else if (getStageValue(state) == 7) {
+                if (!level.isClientSide()) {
+                    var count = level.getRandom().nextInt(1, 5);
+                    var entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(SFItems.TEA_FRESH_LEAVES.get(), count));
+                    level.addFreshEntity(entity);
+                }
+
+                level.setBlock(pos, state
+                        .setValue(PERIODS, periods)
+                        .setValue(STAGE, 4), UPDATE_ALL);
+                return InteractionResult.SUCCESS;
+            } else if (getStageValue(state) == 8) {
+                if (!level.isClientSide()) {
+                    var count = level.getRandom().nextInt(1, 3);
+                    var entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(SFItems.TEA_FRESH_LEAVES.get(), count));
+                    level.addFreshEntity(entity);
+                }
+
+                if (!level.isClientSide()) {
+                    var count = level.getRandom().nextInt(1, 4);
+                    var entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(SFItems.CRUSHED_TEA_FRESH_LEAVES.get(), count));
+                    level.addFreshEntity(entity);
+                }
+
+                level.setBlock(pos, state
+                        .setValue(PERIODS, periods)
+                        .setValue(STAGE, 4), UPDATE_ALL);
+                return InteractionResult.SUCCESS;
+            } else if (getStageValue(state) == 12) {
+                if (!level.isClientSide()) {
+                    var count = level.getRandom().nextInt(1, 5);
+                    var entity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(SFItems.TEA_SEED.get(), count));
+                    level.addFreshEntity(entity);
+                }
+
+                level.setBlock(pos, state
+                        .setValue(PERIODS, periods)
+                        .setValue(STAGE, 4)
+                        .setValue(SEEDED, true), UPDATE_ALL);
+
+                var probability = calcAging(state);
+                var rand = level.getRandom().nextInt(0, 100);
+                if (rand <= probability) {
+                    level.setBlock(pos, state.setValue(STAGE, 13), UPDATE_ALL);
+                }
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+
         return super.use(state, level, pos, player, hand, hit);
     }
     @Override
@@ -83,7 +159,7 @@ public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        grow(state, level, pos);
+        grow(state, level, pos, random);
     }
 
     @Override
@@ -98,44 +174,87 @@ public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        level.setBlock(pos, setStageValue(state, 9), UPDATE_ALL);
+        level.setBlock(pos, state.setValue(STAGE, 9).setValue(SEEDED, true), UPDATE_ALL);
     }
 
     public Stage getStage(BlockState state) {
         return Stage.fromInt(state.getValue(STAGE));
     }
 
-    public BlockState setStageValue(BlockState state, int stage) {
-        return state.setValue(STAGE, stage);
-    }
-
     public int getStageValue(BlockState state) {
         return state.getValue(STAGE);
     }
 
-    public void grow(BlockState state, Level level, BlockPos pos) {
+    public boolean isSeeded(BlockState state) {
+        return state.getValue(SEEDED);
+    }
+
+    public boolean isWild(BlockState state) {
+        return state.getValue(WILD);
+    }
+
+    public int getPeriod(BlockState state) {
+        return state.getValue(PERIODS);
+    }
+
+    public void grow(BlockState state, Level level, BlockPos pos, RandomSource random) {
         var stageValue = getStageValue(state);
+        var periods = getPeriod(state);
+
+        if (periods < 60) {
+            periods += 1;
+        }
+
         if (stageValue == 8) {
-            level.setBlock(pos, setStageValue(state, 4), UPDATE_ALL);
+            var probability = calcAging(state);
+            var rand = random.nextInt(0, 100);
+            if (rand <= probability) {
+                level.setBlock(pos, state.setValue(STAGE, 13), UPDATE_ALL);
+                return;
+            }
+
+            level.setBlock(pos, state.setValue(STAGE, 4).setValue(PERIODS, periods), UPDATE_ALL);
             return;
         }
 
-        if (stageValue == 12) {
-            level.setBlock(pos, setStageValue(state, 4), UPDATE_ALL);
+        if (stageValue == 15) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), UPDATE_ALL);
             return;
         }
 
-        level.setBlock(pos, setStageValue(state, stageValue + 1), UPDATE_ALL);
+        if (stageValue != 12) {
+            level.setBlock(pos, state.setValue(STAGE, stageValue + 1), UPDATE_ALL);
+        }
+    }
+
+    public int calcAging(BlockState state) {
+        if (isWild(state)) {
+            if (isSeeded(state)) {
+                return 25 + getPeriod(state) * 5;
+            } else {
+                return -1;
+            }
+        } else {
+            if (isSeeded(state)) {
+                return 15 + getPeriod(state) * 3;
+            } else {
+                if (getPeriod(state) < 16) {
+                    return -1;
+                } else {
+                    return 10 + (getPeriod(state) - 15) * 2;
+                }
+            }
+        }
     }
 
     public enum Stage {
-        SEEDLING(true, false, 4),       // 幼苗期
-        GROWING(true, false, 2),        // 生长期
-        MATURE(true, true, 1),          // 成熟期
-        FLOURISHING(false, true, 2),    // 茂盛期
-        FLOWERING(true, false, 2),      // 开花期
-        SEED(false, true, 2),           // 结籽期
-        AGING(false, false, 3),         // 衰老期
+        SEEDLING(true, false, 4),       // 幼苗期  0 - 3
+        GROWING(true, false, 2),        // 生长期  4 - 5
+        MATURE(true, true, 1),          // 成熟期  6 - 6
+        FLOURISHING(false, true, 2),    // 茂盛期  7 - 8
+        FLOWERING(true, false, 2),      // 开花期  9 - 10
+        SEED(false, true, 2),           // 结籽期 11 - 12
+        AGING(false, false, 3),         // 衰老期 13 - 15
         ;
 
         private final boolean isGrowing;
