@@ -23,5 +23,11 @@ public class SFDBiomeTagsProvider extends BiomeTagsProvider {
         tag(SFDBiomeTags.SPAWN_RICE).addTags(BiomeTags.IS_RIVER).addTags(Tags.Biomes.IS_PLAINS);
         tag(SFDBiomeTags.SPAWN_REHMANNIA).addTag(BiomeTags.IS_FOREST).add(Biomes.BAMBOO_JUNGLE);
         tag(SFDBiomeTags.SPAWN_DRAGONLIVER_MELON).addTags(Tags.Biomes.IS_SNOWY);
+
+        tag(SFDBiomeTags.BLACK_JADE_GENERATION).addTags(BiomeTags.IS_MOUNTAIN, BiomeTags.IS_HILL);
+        tag(SFDBiomeTags.GREEN_JADE_GENERATION).addTags(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN).add(Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
+        tag(SFDBiomeTags.RED_JADE_GENERATION).addTags(BiomeTags.IS_BADLANDS).add(Biomes.MUSHROOM_FIELDS);
+        tag(SFDBiomeTags.WHITE_JADE_GENERATION).addTags(BiomeTags.IS_FOREST).add(Biomes.PLAINS, Biomes.SNOWY_PLAINS, Biomes.SUNFLOWER_PLAINS);
+        tag(SFDBiomeTags.YELLOW_JADE_GENERATION).addTags(BiomeTags.IS_SAVANNA).add(Biomes.DESERT);
     }
 }

@@ -69,10 +69,6 @@ public abstract class AbstractBiomeModifierProvider implements DataProvider {
 
     public record Feature(ResourceKey<ConfiguredFeature<?, ?>> feature, GenerationStep.Decoration step,
                            TagKey<Biome> biomesTag, ResourceKey<Biome>... biomes) {
-        @SafeVarargs
-        public Feature {
-        }
-
         public boolean hasTag() {
             return biomesTag != null;
         }
