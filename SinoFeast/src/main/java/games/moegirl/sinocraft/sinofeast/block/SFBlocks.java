@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class SFBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SinoFeast.MODID);
@@ -13,5 +14,5 @@ public class SFBlocks {
         BLOCKS.register(bus);
     }
 
-
+    public static final RegistryObject<Block> TEA_TREE_BLOCK = BLOCKS.register("tea_tree", TeaTreeBlock::new);
 }
