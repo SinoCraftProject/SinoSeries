@@ -63,7 +63,6 @@ public class SFDBlockItems {
                 .addItem(DEEPSLATE_WHITE_JADE_ORE)
                 .addItem(YELLOW_JADE_ORE)
                 .addItem(DEEPSLATE_YELLOW_JADE_ORE)
-                .addItem(DEEP_SLATE_JADE_ORE)
                 .addItem(NITER_ORE)
                 .addItem(SULPHUR_ORE)
                 .addItem(NETHER_SULPHUR_ORE)
@@ -109,7 +108,6 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> NITER_ORE = ITEMS.register("niter_ore", () -> new BlockItem(SFDBlocks.NITER_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> SULPHUR_ORE = ITEMS.register("sulphur_ore", () -> new BlockItem(SFDBlocks.SULPHUR_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> NETHER_SULPHUR_ORE = ITEMS.register("nether_sulphur_ore", () -> new BlockItem(SFDBlocks.NETHER_SULPHUR_ORE.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> DEEP_SLATE_JADE_ORE = ITEMS.register("deepslate_jade_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_JADE_ORE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> DEEP_SLATE_SULPHUR_ORE = ITEMS.register("deepslate_sulphur_ore", () -> new BlockItem(SFDBlocks.DEEP_SLATE_SULPHUR_ORE.get(), new Item.Properties()));
 
     public static final RegistryObject<BaseChestItem> COTINUS_CHEST = ITEMS.register("cotinus_chest", () -> BaseChestItem.create(SFDBlocks.COTINUS_CHEST, SFDBlockEntities.COTINUS_CHEST));

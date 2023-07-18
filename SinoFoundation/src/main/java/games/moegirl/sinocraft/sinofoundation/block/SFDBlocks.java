@@ -64,7 +64,6 @@ public class SFDBlocks {
     public static final RegistryObject<DropExperienceBlock> NITER_ORE = BLOCKS.register("niter_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> SULPHUR_ORE = BLOCKS.register("sulphur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> NETHER_SULPHUR_ORE = BLOCKS.register("nether_sulphur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).requiresCorrectToolForDrops().strength(3.0f), UniformInt.of(2, 5)));
-    public static final RegistryObject<DropExperienceBlock> DEEP_SLATE_JADE_ORE = BLOCKS.register("deepslate_jade_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(4.5f, 3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> DEEP_SLATE_SULPHUR_ORE = BLOCKS.register("deepslate_sulphur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(4.5f, 3.0f), UniformInt.of(2, 5)));
 
     public static final RegistryObject<CotinusChest> COTINUS_CHEST = block(CotinusChest.class);
