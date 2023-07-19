@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.recipe;
+package games.moegirl.sinocraft.sinofoundation.crafting.block_interact;
 
 import com.google.gson.JsonObject;
 import games.moegirl.sinocraft.sinocore.crafting.AbstractRecipeSerializer;

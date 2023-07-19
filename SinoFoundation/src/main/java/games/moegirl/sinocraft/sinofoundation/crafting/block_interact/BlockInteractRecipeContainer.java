@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.recipe;
+package games.moegirl.sinocraft.sinofoundation.crafting.block_interact;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

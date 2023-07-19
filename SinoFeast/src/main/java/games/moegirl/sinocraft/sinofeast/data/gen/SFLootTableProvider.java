@@ -6,11 +6,9 @@ import games.moegirl.sinocraft.sinofeast.block.SFBlockItems;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
 import games.moegirl.sinocraft.sinofeast.block.TeaTreeBlock;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
-import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -19,7 +17,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 
 import java.util.List;
 

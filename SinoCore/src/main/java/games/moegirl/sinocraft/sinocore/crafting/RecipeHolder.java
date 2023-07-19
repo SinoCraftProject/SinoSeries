@@ -27,8 +27,11 @@ import java.util.function.Supplier;
  */
 public final class RecipeHolder<C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> {
 
-    public static <C extends Container, T extends Recipe<C>, S extends AbstractRecipeSerializer<T>> RecipeHolder<C, T, S> register(
-            RegistryObject<? extends ItemLike> sign, S serializer, DeferredRegister<RecipeSerializer<?>> registry, DeferredRegister<RecipeType<?>> registerType) {
+    public static <C extends Container,
+            T extends Recipe<C>,
+            S extends AbstractRecipeSerializer<T>>
+    RecipeHolder<C, T, S> register(RegistryObject<? extends ItemLike> sign, S serializer,
+                    DeferredRegister<RecipeSerializer<?>> registry, DeferredRegister<RecipeType<?>> registerType) {
         ResourceLocation id = sign.getId();
         registry.register(id.getPath(), () -> serializer);
         RegistryObject<RecipeType<T>> rt = registerType.register(id.getPath(), () -> RecipeType.simple(id));

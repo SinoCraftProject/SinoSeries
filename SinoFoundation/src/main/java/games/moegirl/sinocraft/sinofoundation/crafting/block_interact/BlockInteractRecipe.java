@@ -1,7 +1,8 @@
-package games.moegirl.sinocraft.sinofoundation.recipe;
+package games.moegirl.sinocraft.sinofoundation.crafting.block_interact;
 
 import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipe;
 import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredient;
+import games.moegirl.sinocraft.sinofoundation.crafting.SFDRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;

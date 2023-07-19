@@ -24,6 +24,7 @@ public class SFDBlockItems {
                 .addItem(STOVE)
                 .addItem(WOOD_DESK)
                 .addItem(WOOD_CHAIRS)
+                .addItem(BAMBOO_PLAQUE)
                 .addItem(COTINUS_CHEST)
                 .addItem(COTINUS_TRAPPED_CHEST)
                 .addItem(JUJUBE_CHEST)
@@ -72,6 +73,7 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> STOVE = ITEMS.register("stove", () -> new BlockItem(SFDBlocks.STOVE.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> WOOD_DESK = ITEMS.register("wood_desk", () -> new BlockItem(SFDBlocks.WOOD_DESK.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> WOOD_CHAIRS = ITEMS.register("wood_chairs", () -> new BlockItem(SFDBlocks.WOOD_CHAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> BAMBOO_PLAQUE = ITEMS.register("bamboo_plaque", () -> new BlockItem(SFDBlocks.BAMBOO_PLAQUE.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockItem> WHITE_RADISH = ITEMS.register("white_radish", () -> new BlockItem(SFDBlocks.WHITE_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
     public static final RegistryObject<BlockItem> SUMMER_RADISH = ITEMS.register("summer_radish", () -> new BlockItem(SFDBlocks.SUMMER_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));

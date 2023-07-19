@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.recipe;
+package games.moegirl.sinocraft.sinofoundation.crafting.block_interact;
 
 import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipeBuilder;
 import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredient;

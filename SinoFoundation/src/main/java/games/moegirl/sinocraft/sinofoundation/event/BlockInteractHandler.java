@@ -1,7 +1,7 @@
-package games.moegirl.sinocraft.sinofoundation.handler;
+package games.moegirl.sinocraft.sinofoundation.event;
 
-import games.moegirl.sinocraft.sinofoundation.recipe.BlockInteractRecipeContainer;
-import games.moegirl.sinocraft.sinofoundation.recipe.SFDRecipes;
+import games.moegirl.sinocraft.sinofoundation.crafting.block_interact.BlockInteractRecipeContainer;
+import games.moegirl.sinocraft.sinofoundation.crafting.SFDRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
  * @author luqin2007
  */
 @Mod.EventBusSubscriber
-public class EntityEventHandler {
+public class BlockInteractHandler {
 
     @SubscribeEvent
     public static void onEntityUseItem(PlayerInteractEvent.RightClickBlock event) {
@@ -44,7 +44,7 @@ public class EntityEventHandler {
                         // 变化方块
                         BlockState block = recipe.getOutputBlock();
                         if (block != null) {
-                            level.setBlock(pos, block, 3);
+                            level.setBlock(pos, block, Block.UPDATE_ALL);
                         }
                     });
         }

@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
- * 简化版 Recipe Serializer
+ * Recipe 默认实现
  *
  * @author luqin2007
  */
