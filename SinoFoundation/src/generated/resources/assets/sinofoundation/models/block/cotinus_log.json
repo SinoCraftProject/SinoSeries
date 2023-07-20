@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "sinofoundation:block/cotinus_log_top",
-    "side": "sinofoundation:block/cotinus_log"
-  }
-}

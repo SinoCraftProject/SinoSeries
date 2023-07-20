@@ -11,13 +11,13 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraEntity;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.ICotinusEntity;
-import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
-import games.moegirl.sinocraft.sinofoundation.capability.entity.birthday.Birthday;
+import games.moegirl.sinocraft.sinodivination.SDTrees;
+import games.moegirl.sinocraft.sinodivination.blockentity.ICotinusEntity;
+import games.moegirl.sinocraft.sinodivination.blockentity.SophoraEntity;
 import games.moegirl.sinocraft.sinodivination.item.LifeSymbol;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
-import games.moegirl.sinocraft.sinofoundation.SFDTrees;
+import games.moegirl.sinocraft.sinofoundation.capability.SFDCapabilities;
+import games.moegirl.sinocraft.sinofoundation.capability.entity.birthday.Birthday;
 import games.moegirl.sinocraft.sinofoundation.utility.OwnerChecker;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -32,7 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
 
-import java.time.*;
+import java.time.Instant;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -45,13 +45,13 @@ import static net.minecraft.commands.Commands.literal;
  */
 class Debug {
 
-    private static final Predicate<BlockState> P_COTINUS_DOOR = s -> s.is(SFDTrees.COTINUS.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
-    private static final Predicate<BlockState> P_COTINUS_TRAPDOOR = s -> s.is(SFDTrees.COTINUS.<Block>getBlock(TreeBlockType.TRAPDOOR));
-    private static final Predicate<BlockState> P_COTINUS_FENCEGATE = s -> s.is(SFDTrees.COTINUS.<Block>getBlock(TreeBlockType.FENCE_GATE));
+    private static final Predicate<BlockState> P_COTINUS_DOOR = s -> s.is(SDTrees.COTINUS.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
+    private static final Predicate<BlockState> P_COTINUS_TRAPDOOR = s -> s.is(SDTrees.COTINUS.<Block>getBlock(TreeBlockType.TRAPDOOR));
+    private static final Predicate<BlockState> P_COTINUS_FENCEGATE = s -> s.is(SDTrees.COTINUS.<Block>getBlock(TreeBlockType.FENCE_GATE));
     private static final Predicate<BlockState> P_COTINUS_ANY = P_COTINUS_DOOR.or(P_COTINUS_TRAPDOOR).or(P_COTINUS_FENCEGATE);
-    private static final Predicate<BlockState> P_SOPHORA_DOOR = s -> s.is(SFDTrees.SOPHORA.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
-    private static final Predicate<BlockState> P_SOPHORA_TRAPDOOR = s -> s.is(SFDTrees.SOPHORA.<Block>getBlock(TreeBlockType.TRAPDOOR));
-    private static final Predicate<BlockState> P_SOPHORA_FENCEGATE = s -> s.is(SFDTrees.SOPHORA.<Block>getBlock(TreeBlockType.FENCE_GATE));
+    private static final Predicate<BlockState> P_SOPHORA_DOOR = s -> s.is(SDTrees.SOPHORA.<Block>getBlock(TreeBlockType.DOOR)) && s.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
+    private static final Predicate<BlockState> P_SOPHORA_TRAPDOOR = s -> s.is(SDTrees.SOPHORA.<Block>getBlock(TreeBlockType.TRAPDOOR));
+    private static final Predicate<BlockState> P_SOPHORA_FENCEGATE = s -> s.is(SDTrees.SOPHORA.<Block>getBlock(TreeBlockType.FENCE_GATE));
     private static final Predicate<BlockState> P_SOPHORA_ANY = P_SOPHORA_DOOR.or(P_SOPHORA_TRAPDOOR).or(P_SOPHORA_FENCEGATE);
     public static final int SEARCH_RANGE = 10;
 

@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinodivination.data.gen.lang;
 
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import net.minecraft.data.DataGenerator;
 
@@ -22,6 +22,15 @@ public class ProviderLanguageZh extends AbstractLanguageProvider {
         addBlock(SDBlocks.TRIPOD, "鼎");
         addBlock(SDBlocks.ALTAR, "祭坛");
         addBlock(SDBlocks.CARVING_TABLE, "雕刻台");
+        addBlock(SDBlocks.LUCID_GANODERMA, "灵芝");
+        addBlock(SDBlocks.REHMANNIA, "地黄");
+        addBlock(SDBlocks.DRAGONLIVER_MELON, "龙肝瓜");
+        addBlock(SDBlocks.ZHU_CAO, "朱草");
+        addBlock(SDBlocks.BRIGHT_STEM_GRASS, "明茎草");
+        addBlock(SDBlocks.COTINUS_CHEST, "无患木匣");
+        addBlock(SDBlocks.COTINUS_TRAPPED_CHEST, "无患木机关匣");
+        addBlock(SDBlocks.SOPHORA_CHEST, "槐木匣");
+        addBlock(SDBlocks.SOPHORA_TRAPPED_CHEST, "槐木机关匣");
         // item
         addItem(SDItems.CHANGE_SOUP, "变荑汤");
         addItem(SDItems.LIFE_SYMBOL, "命符");
@@ -45,6 +54,10 @@ public class ProviderLanguageZh extends AbstractLanguageProvider {
         addItem(SDItems.STICK_COTINUS, "鬼杀棒");
         addItem(SDItems.STICK_JUJUBE, "神力棒");
         addItem(SDItems.STICK_SOPHORA, "御鬼棒");
+        addItem(SDItems.REHMANNIA, "地黄");
+        addItem(SDItems.SEED_REHMANNIA, "地黄种子");
+        addItem(SDItems.DRAGONLIVER_MELON, "龙肝瓜");
+        addItem(SDItems.SEED_DRAGONLIVER, "龙肝瓜种子");
         // single key
         add(SDLangKeys.CARVING_TABLE_TITLE, "雕刻台");
         add(SDLangKeys.SYMBOL_DATE, "生辰八字：");
@@ -112,7 +125,6 @@ public class ProviderLanguageZh extends AbstractLanguageProvider {
         add(SDLangKeys.DIARY1204, "仪式结束了，我的身体恢复到了七十二天前的样子，但我犯下的罪孽该如何洗净？\n");
         add(SDLangKeys.DIARY1205, "“你不必在意，现在你可以回家了，但如果你想，来我门下做我的弟子也无妨。”\n");
         add(SDLangKeys.DIARY1206, "我选择了后者，从今以后我会产妖除魔，这就是我的救赎。\n");
-
 
         // verify
         SDBlocks.REGISTRY.getEntries().forEach(entry -> verifyKey(entry.get().getDescriptionId(), "block"));

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
-import games.moegirl.sinocraft.sinocore.event.BlockStrippingEvent;
+import games.moegirl.sinocraft.sinocore.handler.BlockStrippingHandler;
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import net.minecraft.resources.ResourceKey;
@@ -80,8 +80,8 @@ public class Tree {
         makeDefaultBlockItems(itemRegister);
         fillCreativeTabs();
 
-        BlockStrippingEvent.registerStripping(TreeBlockType.LOG.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
-        BlockStrippingEvent.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
+        BlockStrippingHandler.registerStripping(TreeBlockType.LOG.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG), getBlockObj(TreeBlockType.STRIPPED_LOG), () -> Items.AIR);
+        BlockStrippingHandler.registerStripping(TreeBlockType.LOG_WOOD.makeResourceLoc(getName()), getBlockObj(TreeBlockType.LOG_WOOD), getBlockObj(TreeBlockType.STRIPPED_LOG_WOOD), () -> Items.AIR);
     }
 
     private void makeDefaultBlocks(DeferredRegister<Block> blockRegister) {

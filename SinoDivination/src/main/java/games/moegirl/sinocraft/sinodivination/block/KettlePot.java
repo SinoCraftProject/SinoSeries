@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.block;
 
 import games.moegirl.sinocraft.sinocore.block.AbstractEntityBlock;
-import games.moegirl.sinocraft.sinodivination.data.gen.SDTags;
+import games.moegirl.sinocraft.sinodivination.data.SDTags;
 import games.moegirl.sinocraft.sinodivination.blockentity.KettlePotEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SDBlockEntities;
 import net.minecraft.core.BlockPos;

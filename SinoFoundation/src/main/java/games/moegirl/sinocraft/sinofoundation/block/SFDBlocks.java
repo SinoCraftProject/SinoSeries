@@ -5,13 +5,11 @@ import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.plant.*;
-import games.moegirl.sinocraft.sinofoundation.block.tree.*;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -67,21 +65,12 @@ public class SFDBlocks {
     public static final RegistryObject<DropExperienceBlock> NETHER_SULPHUR_ORE = BLOCKS.register("nether_sulphur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).requiresCorrectToolForDrops().strength(3.0f), UniformInt.of(2, 5)));
     public static final RegistryObject<DropExperienceBlock> DEEP_SLATE_SULPHUR_ORE = BLOCKS.register("deepslate_sulphur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(4.5f, 3.0f), UniformInt.of(2, 5)));
 
-    public static final RegistryObject<CotinusChest> COTINUS_CHEST = block(CotinusChest.class);
-    public static final RegistryObject<CotinusTrappedChest> COTINUS_TRAPPED_CHEST = block(CotinusTrappedChest.class);
     public static final RegistryObject<JujubeChest> JUJUBE_CHEST = block(JujubeChest.class);
     public static final RegistryObject<JujubeTrappedChest> JUJUBE_TRAPPED_CHEST = block(JujubeTrappedChest.class);
-    public static final RegistryObject<SophoraChest> SOPHORA_CHEST = block(SophoraChest.class);
-    public static final RegistryObject<SophoraTrappedChest> SOPHORA_TRAPPED_CHEST = block(SophoraTrappedChest.class);
 
-    public static final RegistryObject<SimpleCropBlock<Item>> WORMWOOD = crop3(() -> SFDItems.WORMWOOD_LEAF, "wormwood", 0, 1, 2, 2);
+    public static final RegistryObject<SimpleCropBlock<Item>> WORMWOOD = crop3(() -> SFDItems.WORMWOOD_LEAF, "wormwood", 2, 2);
     public static final RegistryObject<Rice> RICE = block(Rice.class);
-    public static final RegistryObject<LucidGanoderma> LUCID_GANODERMA = block(LucidGanoderma.class);
-    public static final RegistryObject<SimpleCropBlock<Item>> REHMANNIA = crop3(() -> SFDItems.REHMANNIA, "rehmannia", 0, 1, 1, 1);
-    public static final RegistryObject<SimpleCropBlock<Item>> DRAGONLIVER_MELON = crop(() -> SFDItems.DRAGONLIVER_MELON, "dragonliver_melon", 0, 1, 1, 1);
-    public static final RegistryObject<SimpleCropBlock<Item>> SESAME = crop3(() -> SFDItems.SESAME, "sesame", 0, 1, 3, 3);
-    public static final RegistryObject<ZhuCao> ZHU_CAO = block(ZhuCao.class);
-    public static final RegistryObject<BrightStemGrass> BRIGHT_STEM_GRASS = block(BrightStemGrass.class);
+    public static final RegistryObject<SimpleCropBlock<Item>> SESAME = crop3(() -> SFDItems.SESAME, "sesame", 3, 3);
 
     private static <T extends Block> RegistryObject<T> block(Class<T> blockClass) {
         return BLOCKS.register(NameUtils.to_snake_name(blockClass.getSimpleName()), Functions.constructor(blockClass));
@@ -91,11 +80,7 @@ public class SFDBlocks {
         return BLOCKS.register(name, supplier);
     }
 
-    private static <T extends Item> RegistryObject<SimpleCropBlock<T>> crop(Supplier<RegistryObject<T>> crop, String name, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
-        return block(name, () -> new SimpleCropBlock<>(crop, minSeedCount, maxSeedCount, minCropCount, maxCropCount));
-    }
-
-    private static <T extends Item> RegistryObject<SimpleCropBlock<T>> crop3(Supplier<RegistryObject<T>> crop, String name, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
-        return block(name, () -> SimpleCropBlock.create(crop, 3, minSeedCount, maxSeedCount, minCropCount, maxCropCount));
+    private static <T extends Item> RegistryObject<SimpleCropBlock<T>> crop3(Supplier<RegistryObject<T>> crop, String name, int minCropCount, int maxCropCount) {
+        return block(name, () -> SimpleCropBlock.create(crop, 3, 0, 1, minCropCount, maxCropCount));
     }
 }

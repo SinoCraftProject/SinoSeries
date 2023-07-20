@@ -30,6 +30,7 @@ public class SinoDivination {
         SDMenus.register(bus);
         SDRecipes.register(bus);
         SDScreens.register(bus);
+        SDTrees.register(bus);
 
         LOGGER.info("Reverence for heaven and earth, respect ghosts and gods.");
     }

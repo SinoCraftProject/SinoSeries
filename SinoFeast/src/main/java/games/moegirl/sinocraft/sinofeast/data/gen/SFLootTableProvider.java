@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinofeast.data.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.SimpleBlockLootTables;
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.LootTableProviderBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstructLootTableProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loottable.SimpleBlockLootTables;
 import games.moegirl.sinocraft.sinofeast.block.SFBlockItems;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
 import games.moegirl.sinocraft.sinofeast.block.TeaTreeBlock;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.List;
 
-public class SFLootTableProvider extends LootTableProviderBase {
+public class SFLootTableProvider extends AbstructLootTableProvider {
     public SFLootTableProvider(PackOutput output, String modid) {
         super(output, modid);
     }

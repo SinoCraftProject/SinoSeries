@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore;
 
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.SCLootConditions;
+import games.moegirl.sinocraft.sinocore.data.SCLootConditions;
 import games.moegirl.sinocraft.sinocore.world.gen.SCBiomeModifiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.LootTableProviderBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstructLootTableProvider;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 
 import java.util.List;
 
-public class SFDBlockLootTableProvider extends LootTableProviderBase {
+public class SFDBlockLootTableProvider extends AbstructLootTableProvider {
     public SFDBlockLootTableProvider(PackOutput output, String modid) {
         super(output, modid);
     }
@@ -42,13 +42,6 @@ public class SFDBlockLootTableProvider extends LootTableProviderBase {
         addBlock(SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE, table(dropIngotByChance(SFDItems.YELLOW_JADE.get(), 1, 2)));
         addBlock(SFDBlocks.NITER_ORE, table(dropIngotByChance(SFDItems.NITER.get(), 1, 2)));
         addBlock(SFDBlocks.SULPHUR_ORE, table(dropIngotByChance(SFDItems.SULPHUR.get(), 1, 2)));
-
-        addBlock(SFDBlocks.COTINUS_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.COTINUS_CHEST.get()));
-        addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.COTINUS_TRAPPED_CHEST.get()));
-        addBlock(SFDBlocks.JUJUBE_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.JUJUBE_CHEST.get()));
-        addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.JUJUBE_TRAPPED_CHEST.get()));
-        addBlock(SFDBlocks.SOPHORA_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.SOPHORA_CHEST.get()));
-        addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, getBlocks().createNameableBlockEntityTable(SFDBlocks.SOPHORA_TRAPPED_CHEST.get()));
     }
 
     protected LootPool.Builder dropWhenMature(PlantBlock block, ItemLike item, int minDrop, int maxDrop) {

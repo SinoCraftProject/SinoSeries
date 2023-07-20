@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sinodivination:block/cotinus_stripped_log_top",
+    "side": "sinodivination:block/cotinus_stripped_log"
+  }
+}

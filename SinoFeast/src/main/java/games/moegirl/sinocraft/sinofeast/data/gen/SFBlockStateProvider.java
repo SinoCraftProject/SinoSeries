@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinofeast.data.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.model.AbstractBlockStateProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.model.BaseAutoBlockStateProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAutoBlockStateProvider;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
 import games.moegirl.sinocraft.sinofeast.block.TeaTreeBlock;
 import net.minecraft.data.PackOutput;
@@ -9,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
 
-public class SFBlockStateProvider extends BaseAutoBlockStateProvider {
+public class SFBlockStateProvider extends AbstractAutoBlockStateProvider {
     @SafeVarargs
     public SFBlockStateProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper, DeferredRegister<? extends Block>... registers) {
         super(output, modid, exFileHelper, registers);

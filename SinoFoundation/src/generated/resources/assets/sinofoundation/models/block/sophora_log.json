@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "sinofoundation:block/sophora_log_top",
-    "side": "sinofoundation:block/sophora_log"
-  }
-}

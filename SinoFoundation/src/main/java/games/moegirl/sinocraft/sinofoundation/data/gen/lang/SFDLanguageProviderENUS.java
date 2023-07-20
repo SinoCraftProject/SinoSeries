@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data.gen.lang;
 
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
@@ -45,10 +45,6 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SFDItems.WORMWOOD_LEAF, "Argy Wormwood Leaves");
         addItem(SFDItems.RICE, "Rice");
         addItem(SFDItems.SEED_RICE, "Glutinous Rice Seed");
-        addItem(SFDItems.REHMANNIA, "Rehmannia Glutinosa");
-        addItem(SFDItems.SEED_REHMANNIA, "Rehmannia Seed");
-        addItem(SFDItems.DRAGONLIVER_MELON, "Longan Melon");
-        addItem(SFDItems.SEED_DRAGONLIVER, "Longan Melon Seed");
         addItem(SFDItems.SESAME, "Sesame");
         addItem(SFDItems.SEED_SESAME, "Jusheng Seed");
 
@@ -88,20 +84,11 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.SULPHUR_ORE, "Sulphur Ore");
         addBlock(SFDBlocks.NETHER_SULPHUR_ORE, "Nether Sulphur Ore");
         addBlock(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, "Deepslate Sulphur Ore");
-        addBlock(SFDBlocks.COTINUS_CHEST, "Cotinus Chest");
-        addBlock(SFDBlocks.COTINUS_TRAPPED_CHEST, "Cotinus Trapped Chest");
         addBlock(SFDBlocks.JUJUBE_CHEST, "Jujube Chest");
         addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "Jujube Trapped Chest");
-        addBlock(SFDBlocks.SOPHORA_CHEST, "Sophora Chest");
-        addBlock(SFDBlocks.SOPHORA_TRAPPED_CHEST, "Sophora Trapped Chest");
         addBlock(SFDBlocks.WORMWOOD, "Wormwood");
         addBlock(SFDBlocks.RICE, "Glutinous Rise");
-        addBlock(SFDBlocks.LUCID_GANODERMA, "Ganoderma Lucidum");
-        addBlock(SFDBlocks.REHMANNIA, "Rehmannia Glutinosa");
-        addBlock(SFDBlocks.DRAGONLIVER_MELON, "Longan Melon");
         addBlock(SFDBlocks.SESAME, "Jusheng");
-        addBlock(SFDBlocks.ZHU_CAO, "Zhu Cao");
-        addBlock(SFDBlocks.BRIGHT_STEM_GRASS, "Bright Stem Grass");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "Chili Pepper Seed");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "Green Pepper Seed");

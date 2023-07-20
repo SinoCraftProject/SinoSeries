@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tab;
 
-import games.moegirl.sinocraft.sinocore.event.TabItemAddEventHandler;
+import games.moegirl.sinocraft.sinocore.handler.TabItemAddEventHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;

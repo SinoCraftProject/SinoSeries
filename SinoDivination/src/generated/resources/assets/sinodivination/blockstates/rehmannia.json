@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "sinodivination:block/rehmannia_stage_0"
+    },
+    "age=1": {
+      "model": "sinodivination:block/rehmannia_stage_1"
+    },
+    "age=2": {
+      "model": "sinodivination:block/rehmannia_stage_2"
+    },
+    "age=3": {
+      "model": "sinodivination:block/rehmannia_stage_3"
+    }
+  }
+}

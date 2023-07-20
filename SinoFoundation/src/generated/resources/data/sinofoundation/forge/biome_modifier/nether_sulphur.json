@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_nether",
-  "features": "sinofoundation:nether_sulphur",
-  "step": "underground_ores"
-}

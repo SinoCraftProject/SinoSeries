@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree.event.data;
 
-import games.moegirl.sinocraft.sinocore.data.gen.recipe.AbstractRecipeProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.BlockFamily;

@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinodivination.plugin.jei.category;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotEntry;
 import games.moegirl.sinocraft.sinocore.utility.texture.SlotsEntry;
 import games.moegirl.sinocraft.sinocore.utility.texture.TextureEntry;
-import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
 import games.moegirl.sinocraft.sinodivination.plugin.jei.JEIPlugin;
 import games.moegirl.sinocraft.sinodivination.recipe.CarvingTableRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.SDRecipes;

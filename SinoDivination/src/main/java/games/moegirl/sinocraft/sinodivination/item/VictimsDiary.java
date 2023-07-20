@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.item;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

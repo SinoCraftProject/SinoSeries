@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "sinofoundation:block/sophora_planks",
-    "side": "sinofoundation:block/sophora_planks",
-    "top": "sinofoundation:block/sophora_planks"
-  }
-}

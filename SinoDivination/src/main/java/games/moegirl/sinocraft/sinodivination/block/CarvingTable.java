@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.block;
 
-import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
 import games.moegirl.sinocraft.sinodivination.menu.CarvingTableMenu;
 import games.moegirl.sinocraft.sinodivination.menu.SDMenus;
 import net.minecraft.core.BlockPos;

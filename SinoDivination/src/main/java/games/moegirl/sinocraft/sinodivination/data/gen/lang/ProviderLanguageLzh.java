@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinodivination.data.gen.lang;
 
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import net.minecraft.data.DataGenerator;
 

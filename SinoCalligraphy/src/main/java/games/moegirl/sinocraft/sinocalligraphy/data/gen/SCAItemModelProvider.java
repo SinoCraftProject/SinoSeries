@@ -2,13 +2,13 @@ package games.moegirl.sinocraft.sinocalligraphy.data.gen;
 
 import games.moegirl.sinocraft.sinocalligraphy.block.SCABlocks;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
-import games.moegirl.sinocraft.sinocore.data.gen.model.BaseAutoItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAutoItemModelProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.DeferredRegister;
 
-public class SCAItemModelProvider extends BaseAutoItemModelProvider {
+public class SCAItemModelProvider extends AbstractAutoItemModelProvider {
     public SCAItemModelProvider(PackOutput output, String modId, ExistingFileHelper exHelper, DeferredRegister<? extends Item>... deferredRegisters) {
         super(output, modId, exHelper, deferredRegisters);
     }

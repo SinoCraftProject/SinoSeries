@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.data.gen.lang;
 
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;

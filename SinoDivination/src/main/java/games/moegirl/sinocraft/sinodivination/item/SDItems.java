@@ -1,17 +1,20 @@
 package games.moegirl.sinocraft.sinodivination.item;
 
-import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
+import games.moegirl.sinocraft.sinocore.item.BaseChestItem;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.util.ItemProperties;
+import games.moegirl.sinocraft.sinodivination.blockentity.SDBlockEntities;
+import games.moegirl.sinocraft.sinodivination.util.register.DeferredRegisters;
+import games.moegirl.sinocraft.sinodivination.util.register.ItemRegister;
+import games.moegirl.sinocraft.sinofoundation.item.SimpleBlockItem;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Function;
@@ -19,7 +22,7 @@ import java.util.function.Supplier;
 
 public class SDItems {
 
-    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, SinoDivination.MODID);
+    public static final ItemRegister REGISTRY = DeferredRegisters.item(SinoDivination.MODID);
 
     public static final RegistryObject<BlockItem> KETTLE_POT = block(SDBlocks.KETTLE_POT, SinoSeriesTabs.FUNCTIONAL_BLOCKS);
     public static final RegistryObject<Item> CHANGE_SOUP = simple(ChangeSoup.class, SinoSeriesTabs.AGRICULTURE);
@@ -53,40 +56,65 @@ public class SDItems {
     public static final RegistryObject<Item> COPPER_LAMP = simple("copper_lamp", SinoSeriesTabs.MISC);
     public static final RegistryObject<Item> COPPER_BEAST = simple("copper_beast", SinoSeriesTabs.MISC);
 
+    public static final RegistryObject<Item> REHMANNIA = food("rehmannia", 2);
+    public static final RegistryObject<ItemNameBlockItem> SEED_REHMANNIA = seed(SDBlocks.REHMANNIA);
+    public static final RegistryObject<Item> DRAGONLIVER_MELON = food("dragonliver_melon", 3);
+    public static final RegistryObject<ItemNameBlockItem> SEED_DRAGONLIVER = seed(SDBlocks.DRAGONLIVER_MELON);
+    public static final RegistryObject<BlockItem> LUCID_GANODERMA = block(SDBlocks.LUCID_GANODERMA, SinoSeriesTabs.AGRICULTURE);
+    public static final RegistryObject<Item> ZHU_CAO = simple(SDBlocks.ZHU_CAO, SinoSeriesTabs.AGRICULTURE);
+    public static final RegistryObject<Item> BRIGHT_STEM_GRASS = simple(SDBlocks.BRIGHT_STEM_GRASS, SinoSeriesTabs.AGRICULTURE);
+
+    public static final RegistryObject<BaseChestItem> COTINUS_CHEST = chest(SDBlocks.COTINUS_CHEST, SDBlockEntities.COTINUS_CHEST);
+    public static final RegistryObject<BaseChestItem> COTINUS_TRAPPED_CHEST = chest(SDBlocks.COTINUS_TRAPPED_CHEST, SDBlockEntities.COTINUS_TRAPPED_CHEST);
+    public static final RegistryObject<BaseChestItem> SOPHORA_CHEST = chest(SDBlocks.SOPHORA_CHEST, SDBlockEntities.SOPHORA_CHEST);
+    public static final RegistryObject<BaseChestItem> SOPHORA_TRAPPED_CHEST = chest(SDBlocks.SOPHORA_TRAPPED_CHEST, SDBlockEntities.SOPHORA_TRAPPED_CHEST);
+
     // =================================================================================================================
 
     public static RegistryObject<Item> simple(String name, RegistryObject<CreativeModeTab> tab) {
-        return REGISTRY.register(name, () -> new Item(new ItemProperties().tab(tab).properties()));
+        return REGISTRY.register(name, () -> new Item(new Item.Properties()), tab);
     }
 
     public static RegistryObject<Item> single(String name, int durability, RegistryObject<CreativeModeTab> tab) {
-        return REGISTRY.register(name, () -> new Item(new ItemProperties().durability(durability).tab(tab).properties()));
+        return REGISTRY.register(name, () -> new Item(new Item.Properties().durability(durability)), tab);
+    }
+
+    public static <T extends Block> RegistryObject<Item> simple(RegistryObject<T> block, RegistryObject<CreativeModeTab> tab) {
+        return REGISTRY.register(block.getId().getPath(), () -> new SimpleBlockItem(block), tab);
     }
 
     public static <T extends Item> RegistryObject<T> simple(Class<? extends T> aClass, RegistryObject<CreativeModeTab> tab) {
-        return REGISTRY.register(NameUtils.to_snake_name(aClass.getSimpleName()), defItem(aClass, tab));
+        Supplier<T> sup;
+        try {
+            Function<Item.Properties, ? extends T> constructor = Functions.constructor(aClass, Item.Properties.class);
+            sup = () -> constructor.apply(new Item.Properties());
+        } catch (IllegalArgumentException e) {
+            sup = Functions.constructor(aClass);
+        }
+        return REGISTRY.register(NameUtils.to_snake_name(aClass.getSimpleName()), sup, tab);
     }
 
     public static RegistryObject<SwordItem> sword(String name, Tier tier, int damageModifier,
                                                   float attackSpeedModifier, int durabilityModifier) {
-        return REGISTRY.register(name, () -> new SwordItem(tier, damageModifier, attackSpeedModifier, new ItemProperties()
-                .durability(tier.getUses() * durabilityModifier)
-                .tab(SinoSeriesTabs.WEAPONS)
-                .tab(SinoSeriesTabs.TOOLS).properties()));
+        return REGISTRY.register(name, () -> new SwordItem(tier, damageModifier, attackSpeedModifier, new Item.Properties()
+                .durability(tier.getUses() * durabilityModifier)), SinoSeriesTabs.WEAPONS, SinoSeriesTabs.TOOLS);
     }
 
     public static <T extends Block> RegistryObject<BlockItem> block(RegistryObject<T> block, RegistryObject<CreativeModeTab> tab) {
-        return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new ItemProperties().tab(tab).properties()));
+        return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()), tab);
     }
 
-    private static <T extends Item> Supplier<T> defItem(Class<? extends T> aClass, RegistryObject<CreativeModeTab> tab) {
-        try {
-            Function<Item.Properties, ? extends T> constructor = Functions.constructor(aClass, Item.Properties.class);
-            return () -> constructor.apply(new ItemProperties().tab(tab).properties());
-        } catch (IllegalArgumentException e) {
-            Function<RegistryObject, ? extends T> constructor = Functions.constructor(aClass, RegistryObject.class);
-            return () -> constructor.apply(tab);
-        }
+    public static RegistryObject<Item> food(String name, int nutrition) {
+        return REGISTRY.register(name, () -> new Item(new Item.Properties()
+                .food(new FoodProperties.Builder().nutrition(nutrition).build())), SinoSeriesTabs.AGRICULTURE);
+    }
+
+    public static <T extends Block> RegistryObject<ItemNameBlockItem> seed(RegistryObject<T> crop) {
+        return REGISTRY.register("seed_" + crop.getId().getPath(), () -> new ItemNameBlockItem(crop.get(), new Item.Properties()));
+    }
+
+    public static RegistryObject<BaseChestItem> chest(RegistryObject<? extends Block> block, Supplier<? extends BlockEntityType<?>> be) {
+        return REGISTRY.register(block.getId().getPath(), () -> BaseChestItem.create(block, be), SinoSeriesTabs.FUNCTIONAL_BLOCKS);
     }
 
     public static void register(IEventBus bus) {

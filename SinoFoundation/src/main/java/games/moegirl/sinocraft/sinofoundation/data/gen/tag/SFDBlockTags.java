@@ -14,9 +14,7 @@ public class SFDBlockTags {
     public static final TagKey<Block> FORGE_ORES_SULFUR = BlockTags.create(new ResourceLocation("forge", "ores/sulfur"));
     public static final TagKey<Block> FORGE_ORES_JADE = BlockTags.create(new ResourceLocation("forge", "ores/jade"));
 
-    public static final TagKey<Block> COTINUS_BLOCK = block("cotinus");
     public static final TagKey<Block> JUJUBE_BLOCK = block("jujube");
-    public static final TagKey<Block> SOPHORA_BLOCK = block("sophora");
     public static final TagKey<Block> SPAWN_DRAGONLIVER_MELON = block("spawn_dragonliver_melon");
 
     private static TagKey<Block> block(String name) {

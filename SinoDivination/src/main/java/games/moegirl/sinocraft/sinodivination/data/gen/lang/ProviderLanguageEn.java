@@ -1,11 +1,11 @@
 package games.moegirl.sinocraft.sinodivination.data.gen.lang;
 
-import games.moegirl.sinocraft.sinocore.data.gen.lang.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.data.gen.SDLangKeys;
+import games.moegirl.sinocraft.sinodivination.data.SDLangKeys;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
-import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -20,12 +20,21 @@ public class ProviderLanguageEn extends AbstractLanguageProvider {
     @Override
     public void translate() {
         // blocks
-        addBlock(SDBlocks.KETTLE_POT, "Kettle Pot");
-        addBlock(SDBlocks.BELLOWS, "Bellows");
-        addBlock(SDBlocks.SILKWORM_PLAQUE, "Silkworm Plaque");
+        addBlock(SDBlocks.KETTLE_POT);
+        addBlock(SDBlocks.BELLOWS);
+        addBlock(SDBlocks.SILKWORM_PLAQUE);
         addBlock(SDBlocks.TRIPOD);
         addBlock(SDBlocks.ALTAR);
         addBlock(SDBlocks.CARVING_TABLE);
+        addBlock(SDBlocks.LUCID_GANODERMA, "Ganoderma Lucidum");
+        addBlock(SDBlocks.REHMANNIA, "Rehmannia Glutinosa");
+        addBlock(SDBlocks.DRAGONLIVER_MELON, "Longan Melon");
+        addBlock(SDBlocks.ZHU_CAO);
+        addBlock(SDBlocks.BRIGHT_STEM_GRASS);
+        addBlock(SDBlocks.COTINUS_CHEST);
+        addBlock(SDBlocks.COTINUS_TRAPPED_CHEST);
+        addBlock(SDBlocks.SOPHORA_CHEST);
+        addBlock(SDBlocks.SOPHORA_TRAPPED_CHEST);
         // item
         addItem(SDItems.CHANGE_SOUP, "Changing Seeding Decoction");
         addItem(SDItems.LIFE_SYMBOL, "Life Symbol");
@@ -49,6 +58,10 @@ public class ProviderLanguageEn extends AbstractLanguageProvider {
         addItem(SDItems.STICK_COTINUS, "Ghost Killing Stick");
         addItem(SDItems.STICK_JUJUBE, "Divine Power Stick");
         addItem(SDItems.STICK_SOPHORA, "Ghost Guard Stick");
+        addItem(SDItems.REHMANNIA, "Rehmannia Glutinosa");
+        addItem(SDItems.SEED_REHMANNIA, "Rehmannia Seed");
+        addItem(SDItems.DRAGONLIVER_MELON, "Longan Melon");
+        addItem(SDItems.SEED_DRAGONLIVER, "Longan Melon Seed");
         // single key
         add(SDLangKeys.CARVING_TABLE_TITLE, "Carving Table");
         add(SDLangKeys.SYMBOL_DATE, "Birthday");

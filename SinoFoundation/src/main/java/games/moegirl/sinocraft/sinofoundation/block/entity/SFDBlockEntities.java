@@ -6,10 +6,6 @@ import games.moegirl.sinocraft.sinocore.blockentity.SimpleTrappedChestBlockEntit
 import games.moegirl.sinocraft.sinocore.utility.Reference;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.CotinusChestEntity;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.CotinusTrappedChestEntity;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraChestEntity;
-import games.moegirl.sinocraft.sinofoundation.block.entity.tree.SophoraTrappedChestEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,12 +21,8 @@ public class SFDBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SinoFoundation.MODID);
 
-    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> COTINUS_CHEST = be(CotinusChestEntity::new, SFDBlocks.COTINUS_CHEST);
-    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> COTINUS_TRAPPED_CHEST = be(CotinusTrappedChestEntity::new, SFDBlocks.COTINUS_TRAPPED_CHEST);
     public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> JUJUBE_CHEST = be(SimpleChestBlockEntity::new, SFDBlocks.JUJUBE_CHEST);
     public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> JUJUBE_TRAPPED_CHEST = be(SimpleTrappedChestBlockEntity::new, SFDBlocks.JUJUBE_TRAPPED_CHEST);
-    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> SOPHORA_CHEST = be(SophoraChestEntity::new, SFDBlocks.SOPHORA_CHEST);
-    public static final RegistryObject<BlockEntityType<? extends ChestBlockEntity>> SOPHORA_TRAPPED_CHEST = be(SophoraTrappedChestEntity::new, SFDBlocks.SOPHORA_TRAPPED_CHEST);
     public static final RegistryObject<BlockEntityType<?>> STOVE = BLOCK_ENTITIES.register("stove",
             () -> BlockEntityType.Builder.of(StoveBlockEntity::new,
                     SFDBlocks.STOVE.get()).build(null));
