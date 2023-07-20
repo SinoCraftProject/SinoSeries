@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sinofoundation:block/jujube_slab"
+    },
+    "type=double": {
+      "model": "sinofoundation:block/jujube_planks"
+    },
+    "type=top": {
+      "model": "sinofoundation:block/jujube_slab_top"
+    }
+  }
+}

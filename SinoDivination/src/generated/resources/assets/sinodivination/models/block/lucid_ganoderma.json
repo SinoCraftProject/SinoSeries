@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "sinofoundation:block/lucid_ganoderma"
+    "crop": "sinodivination:block/lucid_ganoderma"
   }
 }

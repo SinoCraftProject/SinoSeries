@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sinofoundation:block/marble_slab"
+    },
+    "type=double": {
+      "model": "sinofoundation:block/marble_block"
+    },
+    "type=top": {
+      "model": "sinofoundation:block/marble_slab_top"
+    }
+  }
+}

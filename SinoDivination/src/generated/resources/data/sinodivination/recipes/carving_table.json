@@ -10,7 +10,7 @@
       "tag": "forge:ingots/copper"
     },
     "Y": {
-      "item": "sinofoundation:jade"
+      "tag": "sinofoundation:jade"
     },
     "Z": {
       "item": "minecraft:stonecutter"

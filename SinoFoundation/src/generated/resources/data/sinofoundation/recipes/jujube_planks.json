@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "sinofoundation:jujube_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "sinofoundation:jujube_planks"
+  }
+}
