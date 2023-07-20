@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-12T17:01:31.347859	Block States: sinodivination
+// 1.20.1	2023-07-20T10:44:12.6325891	Block States: sinodivination
 f87cd40863f0126d14ab61e6d2b74c5ac83c283c assets/sinodivination/blockstates/altar.json
 f0ef63b733939b43c0923c6f5dc9a6618cd24301 assets/sinodivination/blockstates/bellows.json
 143e8d1e9ef255504a7f32457be7fe52b4e92066 assets/sinodivination/blockstates/bright_stem_grass.json
@@ -27,7 +27,7 @@ c31cd3d212cf15079538e24f3585d272df86bb09 assets/sinodivination/models/block/drag
 9bce4ec01e536bf4a10e82b01f5465ec3a415154 assets/sinodivination/models/block/dragonliver_melon_stage_5.json
 cfa6c08037dcc9e09a0fcb31db2d23bc8d1070da assets/sinodivination/models/block/dragonliver_melon_stage_6.json
 e669a420ea8bd562345b9bcd83cef94a6de1404a assets/sinodivination/models/block/dragonliver_melon_stage_7.json
-4ff0962154f4e53fd4590e712b30d302bebbb05d assets/sinodivination/models/block/lucid_ganoderma.json
+1dbf0b2fef00cfa2f034398d4255d9e43174cfee assets/sinodivination/models/block/lucid_ganoderma.json
 60ffe214886967ae5293190daf6982961d9c2147 assets/sinodivination/models/block/rehmannia_stage_0.json
 effacb211adada46094e7cdc6cb75f23188e6a24 assets/sinodivination/models/block/rehmannia_stage_1.json
 abf565bd2e1f141af55649958c02aba30f104d11 assets/sinodivination/models/block/rehmannia_stage_2.json

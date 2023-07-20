@@ -10,7 +10,7 @@ import games.moegirl.sinocraft.sinodivination.blockentity.CotinusDoorEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.CotinusEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraDoorEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraEntity;
-import games.moegirl.sinocraft.sinodivination.data.SDTags;
+import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.util.valueproviders.ConstantInt;

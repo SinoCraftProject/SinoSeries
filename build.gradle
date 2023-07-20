@@ -292,7 +292,9 @@ loom {
 
             programArgs '--all', '--mod', "sinofoundation",
                     '--output', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath,
+                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath
         }
 
         sinoFeastData {
@@ -300,7 +302,11 @@ loom {
 
             programArgs '--all', '--mod', "sinofeast",
                     '--output', file('SinoFeast/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFeast/src/main/resources').absolutePath
+                    '--existing', file('SinoFeast/src/main/resources').absolutePath,
+                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
         }
 
         sinoDivinationData {
@@ -308,7 +314,11 @@ loom {
 
             programArgs '--all', '--mod', "sinodivination",
                     '--output', file('SinoDivination/src/generated/resources').absolutePath,
-                    '--existing', file('SinoDivination/src/main/resources').absolutePath
+                    '--existing', file('SinoDivination/src/main/resources').absolutePath,
+                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
         }
 
         sinoCalligraphyData {
@@ -316,7 +326,11 @@ loom {
 
             programArgs '--all', '--mod', "sinocalligraphy",
                     '--output', file('SinoCalligraphy/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCalligraphy/src/main/resources').absolutePath
+                    '--existing', file('SinoCalligraphy/src/main/resources').absolutePath,
+                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
         }
 
         sinoTestData {
@@ -324,7 +338,11 @@ loom {
 
             programArgs '--all', '--mod', "sinotest",
                     '--output', file('SinoTest/src/generated/resources').absolutePath,
-                    '--existing', file('SinoTest/src/main/resources').absolutePath
+                    '--existing', file('SinoTest/src/main/resources').absolutePath,
+                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
+                    '--existing', file('SinoCore/src/main/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
+                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
         }
     }
 }

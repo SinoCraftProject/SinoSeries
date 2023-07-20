@@ -4,6 +4,8 @@ import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.data.gen.lang.ProviderLanguageEn;
 import games.moegirl.sinocraft.sinodivination.data.gen.lang.ProviderLanguageLzh;
 import games.moegirl.sinocraft.sinodivination.data.gen.lang.ProviderLanguageZh;
+import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDBlockTagProvider;
+import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDItemTagProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

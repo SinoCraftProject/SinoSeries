@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinodivination.data;
+package games.moegirl.sinocraft.sinodivination.data.gen.tag;
 
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import net.minecraft.core.registries.Registries;

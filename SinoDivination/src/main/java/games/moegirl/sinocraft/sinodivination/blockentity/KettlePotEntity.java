@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.blockentity;
 
-import games.moegirl.sinocraft.sinodivination.data.SDTags;
+import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDTags;
 import games.moegirl.sinocraft.sinodivination.util.RecipeProcessor;
 import games.moegirl.sinocraft.sinodivination.util.container.InputOnlyContainer;
 import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;

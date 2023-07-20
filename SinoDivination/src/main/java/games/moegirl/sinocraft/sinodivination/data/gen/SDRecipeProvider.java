@@ -6,7 +6,7 @@ import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredien
 import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.crafting.block_interact.BlockInteractRecipe;
 import games.moegirl.sinocraft.sinodivination.SDTrees;
-import games.moegirl.sinocraft.sinodivination.data.SDTags;
+import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDTags;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;

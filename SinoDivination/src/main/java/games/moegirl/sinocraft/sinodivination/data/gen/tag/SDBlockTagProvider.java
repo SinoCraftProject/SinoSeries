@@ -1,14 +1,13 @@
-package games.moegirl.sinocraft.sinodivination.data.gen;
+package games.moegirl.sinocraft.sinodivination.data.gen.tag;
 
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractBlockTagsProvider;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
-import games.moegirl.sinocraft.sinodivination.data.SDTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.data.event.GatherDataEvent;
 
-class SDBlockTagProvider extends AbstractBlockTagsProvider {
+public class SDBlockTagProvider extends AbstractBlockTagsProvider {
 
     public SDBlockTagProvider(GatherDataEvent event) {
         super(event.getGenerator().getPackOutput(), event.getLookupProvider(), SinoDivination.MODID, event.getExistingFileHelper());
