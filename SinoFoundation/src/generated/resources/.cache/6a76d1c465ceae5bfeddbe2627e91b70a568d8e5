@@ -1,8 +1,9 @@
-// 1.20.1	2023-07-20T10:18:28.5365385	Tree Item Models: sinofoundation
+// 1.20.1	2023-07-22T09:16:17.3678559	Tree Item Models: sinofoundation
 8125ecaaf99a0dacce7b82a728aabe3b6e25fe0f assets/sinofoundation/models/item/jujube_button.json
 339424a00a3916bff38a5b6946b83fe9c370c4e8 assets/sinofoundation/models/item/jujube_door.json
 d5dce5050a542f6587cb726ab7808edfcbb532f0 assets/sinofoundation/models/item/jujube_fence.json
 d257fb85b208eaf08f00278cae66bdfb6a4062cf assets/sinofoundation/models/item/jujube_fence_gate.json
+67b1c60e6bdbe420ef36590a2b2c08158880246b assets/sinofoundation/models/item/jujube_hanging_sign.json
 d29c6229d0eea8fa63974c4d7dd14d0d4b6191f9 assets/sinofoundation/models/item/jujube_leaves.json
 163ec015ec73710df44fbbd28a9591ae275c994a assets/sinofoundation/models/item/jujube_log.json
 64ea63781bbc6886aac42368ad7b612d555bd90e assets/sinofoundation/models/item/jujube_log_wood.json
@@ -19,6 +20,7 @@ bc7b4d3c34cd328d6ea3d4938b034ca71da93645 assets/sinofoundation/models/item/jujub
 d94fadf713ecda803fde5f9a5be37264c62e882a assets/sinofoundation/models/item/mulberry_door.json
 f6fe4878de2d5c8f6e50c400e95c7dd040299aff assets/sinofoundation/models/item/mulberry_fence.json
 b509d255b3a95976d0d1483130a14118664e07aa assets/sinofoundation/models/item/mulberry_fence_gate.json
+5974eb9291908f2a60defcdd7fb70af106f98285 assets/sinofoundation/models/item/mulberry_hanging_sign.json
 f88671b645cdee47459346a468d47b0e8027ddfb assets/sinofoundation/models/item/mulberry_leaves.json
 82bbe80e53403ee245ad770f8aae3fb865315ba0 assets/sinofoundation/models/item/mulberry_log.json
 e2caf324c78c6e49f32b816e44b7f80631f5913b assets/sinofoundation/models/item/mulberry_log_wood.json

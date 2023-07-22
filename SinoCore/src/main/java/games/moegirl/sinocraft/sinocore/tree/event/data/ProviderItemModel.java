@@ -45,6 +45,7 @@ public class ProviderItemModel extends AbstractAutoItemModelProvider {
 
             generated(tree.getItem(TreeBlockType.DOOR));
             generated(tree.getItem(TreeBlockType.SIGN));
+            generated(tree.getItem(TreeBlockType.HANGING_SIGN));
         }
     }
 }
