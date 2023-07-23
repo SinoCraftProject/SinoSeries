@@ -1,7 +1,5 @@
-// 1.20.1	2023-06-16T09:08:11.0527654	Item Models: sinocalligraphy
+// 1.20.1	2023-07-23T09:22:12.1912158	Item Models: sinocalligraphy
 8f30772d7e8612e107e7cc7c955aaee11014ed70 assets/sinocalligraphy/models/item/empty_xuan_paper.json
-df6b72b7f891ce17db9daf9d6508014f59bd334b assets/sinocalligraphy/models/item/empty_xuan_paper_black.json
-4ea6e46db485165a25982e08f9e58fa17507baec assets/sinocalligraphy/models/item/empty_xuan_paper_red.json
 76f7afcaf21cf1e20cee528d16cbfa1f73461d1c assets/sinocalligraphy/models/item/filled_xuan_paper.json
 2779609e22c9ec58d9da13ada9055020f0b23d96 assets/sinocalligraphy/models/item/golden_ink.json
 45f1a44d39c764302ad7890f8f34ed8381d0e575 assets/sinocalligraphy/models/item/green_sandalwood_bark.json

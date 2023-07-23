@@ -17,7 +17,7 @@ public class SCAItemTagsProvider extends AbstractItemTagsProvider {
 
     @Override
     protected void addToTags() {
-        tag(SCAItemTags.PAPERS).add(SCAItems.EMPTY_XUAN_PAPER.get(), SCAItems.EMPTY_XUAN_PAPER_RED.get(), SCAItems.EMPTY_XUAN_PAPER_BLACK.get());
+        tag(SCAItemTags.PAPERS).add(SCAItems.EMPTY_XUAN_PAPER.get());
         tag(SCAItemTags.FILLED_PAPERS).add(SCAItems.FILLED_XUAN_PAPER.get());
         tag(SCAItemTags.INKS).add(SCAItems.INK.get(), SCAItems.GOLDEN_INK.get());
         tag(SCAItemTags.BRUSHES).add(SCAItems.BRUSH.get());

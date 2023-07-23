@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocalligraphy.networking.packet;
 
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.utility.NetworkHelper;
 import games.moegirl.sinocraft.sinocore.network.AbstractMessagePacket;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,22 +10,22 @@ import java.util.function.Supplier;
 
 public class DrawingEnableCanvasS2CPacket extends AbstractMessagePacket {
 
-    private final PaperType paperType;
+    private final int paperColor;
     private final InkType inkType;
 
-    public DrawingEnableCanvasS2CPacket(PaperType paperType, InkType inkType) {
-        this.paperType = paperType;
+    public DrawingEnableCanvasS2CPacket(int paperColor, InkType inkType) {
+        this.paperColor = paperColor;
         this.inkType = inkType;
     }
 
     public DrawingEnableCanvasS2CPacket(FriendlyByteBuf buf) {
-        paperType = buf.readEnum(PaperType.class);
+        paperColor = buf.readInt();
         inkType = buf.readEnum(InkType.class);
     }
 
     @Override
     public void serialize(FriendlyByteBuf buf) {
-        buf.writeEnum(paperType);
+        buf.writeInt(paperColor);
         buf.writeEnum(inkType);
     }
 
@@ -34,7 +33,7 @@ public class DrawingEnableCanvasS2CPacket extends AbstractMessagePacket {
     public void handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            NetworkHelper.onClientEnableCanvas(paperType, inkType);
+            NetworkHelper.onClientEnableCanvas(paperColor, inkType);
             context.setPacketHandled(true);
         });
     }

@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocalligraphy.item;
 
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.fluid.SCAFluids;
 import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
@@ -23,7 +22,6 @@ public class SCAItems {
                 .addItem(INK)
                 .addItem(GOLDEN_INK)
                 .addItem(EMPTY_XUAN_PAPER)
-                .addItem(EMPTY_XUAN_PAPER_RED)
                 .addItem(FILLED_XUAN_PAPER)
                 .addItem(GREEN_SANDALWOOD_BARK);
 
@@ -44,9 +42,7 @@ public class SCAItems {
     public static final RegistryObject<Item> INK = ITEMS.register("ink", () -> new InkItem(InkType.BLACK));
     public static final RegistryObject<Item> GOLDEN_INK = ITEMS.register("golden_ink", () -> new InkItem(InkType.GOLDEN));
 
-    public static final RegistryObject<Item> EMPTY_XUAN_PAPER = ITEMS.register("empty_xuan_paper", () -> new XuanPaperItem(PaperType.WHITE));
-    public static final RegistryObject<Item> EMPTY_XUAN_PAPER_RED = ITEMS.register("empty_xuan_paper_red", () -> new XuanPaperItem(PaperType.RED));
-    public static final RegistryObject<Item> EMPTY_XUAN_PAPER_BLACK = ITEMS.register("empty_xuan_paper_black", () -> new XuanPaperItem(PaperType.BLACK));
+    public static final RegistryObject<Item> EMPTY_XUAN_PAPER = ITEMS.register("empty_xuan_paper", XuanPaperItem::new);
     public static final RegistryObject<Item> FILLED_XUAN_PAPER = ITEMS.register("filled_xuan_paper", FilledXuanPaperItem::new);
 
     public static final RegistryObject<Item> GREEN_SANDALWOOD_BARK = ITEMS.register("green_sandalwood_bark", () -> new Item(new Item.Properties()));

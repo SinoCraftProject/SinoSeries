@@ -2,17 +2,16 @@ package games.moegirl.sinocraft.sinocalligraphy.utility;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperColor;
 import net.minecraft.util.FastColor;
-import org.apache.commons.lang3.tuple.Triple;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class DrawingHelper {
+
+    public static int appendAlpha(int background) {
+        return FastColor.ARGB32.color(255, FastColor.ARGB32.red(background), FastColor.ARGB32.green(background), FastColor.ARGB32.blue(background));
+    }
 
     /// <editor-fold desc="Don't touch it, the algorithm which nobody understood.">
 
@@ -63,10 +62,10 @@ public class DrawingHelper {
         NativeImage image = new NativeImage(drawing.getSize(), drawing.getSize(), false);
 
         int background;
-        if (drawing instanceof IHasPaperType hasPaperType) {
-            background = hasPaperType.getPaperType().getColor();
+        if (drawing instanceof IHasPaperColor hasPaperType) {
+            background = hasPaperType.getPaperColor();
         } else {
-            background = PaperType.WHITE.getColor();
+            background = 0;
         }
 
         int foreground;

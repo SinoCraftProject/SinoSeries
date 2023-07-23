@@ -1,13 +1,11 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.components;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperColor;
 import games.moegirl.sinocraft.sinocalligraphy.gui.screen.BrushScreen;
 import games.moegirl.sinocraft.sinocore.client.GLSwitcher;
 import games.moegirl.sinocraft.sinocore.client.TextureMapClient;
@@ -39,7 +37,7 @@ public class BrushCanvas extends AbstractWidget {
     public BrushCanvas(AbstractContainerScreen<?> parent, TextureMapClient atlas,
                        int x, int y, int width, int height,
                        IntSupplier getColor, IntConsumer setColor,
-                       PaperType paperType, InkType inkType) {
+                       int paperColor, InkType inkType) {
         super(x, y, width, height, Component.empty());
 
         this.canvasWidth = width - 2;
@@ -52,8 +50,8 @@ public class BrushCanvas extends AbstractWidget {
 
         drawing = DrawingDataVersion.getLatest().create();
 
-        if (drawing instanceof IHasPaperType hasPaperType) {
-            hasPaperType.setPaperType(paperType);
+        if (drawing instanceof IHasPaperColor hasPaperType) {
+            hasPaperType.setPaperColor(paperColor);
         }
 
         if (drawing instanceof IHasInkType hasInkType) {
@@ -67,9 +65,9 @@ public class BrushCanvas extends AbstractWidget {
         }
     }
 
-    public void setPaperType(PaperType paperType) {
-        if (drawing instanceof IHasPaperType hasPaperType) {
-            hasPaperType.setPaperType(paperType);
+    public void setPaperType(int paperColor) {
+        if (drawing instanceof IHasPaperColor hasPaperType) {
+            hasPaperType.setPaperColor(paperColor);
         }
     }
 

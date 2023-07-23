@@ -17,8 +17,6 @@ public class SCALanguageProviderENUS extends AbstractLanguageProvider {
         addItem(SCAItems.FAN, "Unfolded fan");
         addItem(SCAItems.FAN_FOLDED, "Fan");
         addItem(SCAItems.EMPTY_XUAN_PAPER, "Empty Xuan paper");
-        addItem(SCAItems.EMPTY_XUAN_PAPER_RED, "Red Xuan paper");
-        addItem(SCAItems.EMPTY_XUAN_PAPER_BLACK, "Black Xuan paper");
         addItem(SCAItems.FILLED_XUAN_PAPER, "Filled Xuan paper");
         addItem(SCAItems.INK, "Ink");
         addItem(SCAItems.GOLDEN_INK, "Golden ink");

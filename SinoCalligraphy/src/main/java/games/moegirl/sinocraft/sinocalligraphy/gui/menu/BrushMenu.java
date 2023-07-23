@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocalligraphy.gui.menu;
 
+import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.data.gen.SCAItemTags;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.SCAMenus;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.container.BrushContainer;
 import games.moegirl.sinocraft.sinocalligraphy.item.InkItem;
@@ -161,12 +161,12 @@ public class BrushMenu extends AbstractContainerMenu {
                     inkType = ink.getType();
                 }
 
-                var paperType = PaperType.BLACK;
+                var paperColor = SCAConstants.COLOR_WHITE;
                 if (getPaper().getItem() instanceof XuanPaperItem paper) {
-                    paperType = paper.getType();
+                    paperColor = paper.getColor(getPaper());
                 }
 
-                SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperType, inkType), player);
+                SinoCalligraphy.getInstance().getNetworking().send(new DrawingEnableCanvasS2CPacket(paperColor, inkType), player);
             } else {
                 SinoCalligraphy.getInstance().getNetworking().send(new DrawingDisableCanvasS2CPacket(), player);
             }
