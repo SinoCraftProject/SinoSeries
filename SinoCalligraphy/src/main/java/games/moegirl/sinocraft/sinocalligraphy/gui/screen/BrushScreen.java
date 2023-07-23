@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.BrushCanvas;
 import games.moegirl.sinocraft.sinocalligraphy.gui.components.ColorSelectionList;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
@@ -22,6 +21,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.common.util.Lazy;
 
@@ -48,7 +48,7 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         imageWidth = 212;
         imageHeight = 256;
 
-        canvas =  Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, leftPos + 58, topPos + 11, 130, 130, menu::getColorLevel, menu::setColorLevel, PaperType.WHITE, InkType.BLACK));
+        canvas =  Lazy.of(() -> new BrushCanvas(this, CLIENT_TEXTURE, leftPos + 58, topPos + 11, 130, 130, menu::getColorLevel, menu::setColorLevel, SCAConstants.COLOR_WHITE, InkType.BLACK));
     }
 
     @Override
@@ -191,8 +191,8 @@ public class BrushScreen extends AbstractContainerScreen<BrushMenu> {
         return titleBox;
     }
 
-    public void updateCanvas(PaperType paperType, InkType inkType) {
-        canvas.get().setPaperType(paperType);
+    public void updateCanvas(int paperColor, InkType inkType) {
+        canvas.get().setPaperType(paperColor);
         canvas.get().setInkType(inkType);
     }
 

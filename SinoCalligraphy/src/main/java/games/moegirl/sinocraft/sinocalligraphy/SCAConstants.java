@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinocalligraphy;
 
+import net.minecraft.util.FastColor;
+
 public class SCAConstants {
     public static final String DRAWING_TAG_NAME = "drawing";
     public static final String DRAWING_TAG_VERSION_NAME = "version";
@@ -51,4 +53,6 @@ public class SCAConstants {
     public static final String TRANSLATE_ADVANCEMENT_FAN_DESC = "sinocalligraphy.advancements.fan.desc";
 
     public static final String DESCRIPTION_ID_WOOD_PULP = "fluid.sinocalligraphy.wood_pulp";
+
+    public static final int COLOR_WHITE = FastColor.ARGB32.color(255, 255, 255, 255);
 }

@@ -17,8 +17,6 @@ public class SCALanguageProviderZHTW extends AbstractLanguageProvider {
         addItem(SCAItems.FAN, "展開的折扇");
         addItem(SCAItems.FAN_FOLDED, "折扇");
         addItem(SCAItems.EMPTY_XUAN_PAPER, "宣紙");
-        addItem(SCAItems.EMPTY_XUAN_PAPER_RED, "紅色的宣紙");
-        addItem(SCAItems.EMPTY_XUAN_PAPER_BLACK, "黑色的宣紙");
         addItem(SCAItems.FILLED_XUAN_PAPER, "填充過的宣紙");
         addItem(SCAItems.INK, "墨汁");
         addItem(SCAItems.GOLDEN_INK, "加金粉的墨汁");

@@ -5,7 +5,7 @@ import games.moegirl.sinocraft.sinocalligraphy.SinoCalligraphy;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.ISimpleDrawing;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperColor;
 import games.moegirl.sinocraft.sinocalligraphy.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinocalligraphy.item.InkItem;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
@@ -57,8 +57,8 @@ public class DrawingSaveC2SPacket extends AbstractMessagePacket {
                 drawing.setAuthor(player);
                 drawing.setZonedDate(ZonedDateTime.now());
 
-                if (drawing instanceof IHasPaperType hasPaperType && paper.getItem() instanceof XuanPaperItem typedPaper) {
-                    hasPaperType.setPaperType(typedPaper.getType());
+                if (drawing instanceof IHasPaperColor hasPaperType && paper.getItem() instanceof XuanPaperItem typedPaper) {
+                    hasPaperType.setPaperColor(hasPaperType.getPaperColor());
                 }
 
                 if (drawing instanceof IHasInkType hasInkType && ink.getItem() instanceof InkItem typedInk) {

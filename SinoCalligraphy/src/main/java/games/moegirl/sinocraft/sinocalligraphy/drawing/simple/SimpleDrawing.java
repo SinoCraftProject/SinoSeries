@@ -4,9 +4,8 @@ import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.client.drawing.IDrawingRenderer;
 import games.moegirl.sinocraft.sinocalligraphy.client.drawing.SimpleDrawingRenderer;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.DrawingDataVersion;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperType;
+import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasPaperColor;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.traits.IHasInkType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -16,7 +15,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType {
+public class SimpleDrawing implements ISimpleDrawing, IHasPaperColor, IHasInkType {
     protected DrawingDataVersion version = DrawingDataVersion.getLatest();
 
     protected Component title = Component.translatable(SCAConstants.TRANSLATE_DRAWING_TITLE_UNKNOWN_KEY);
@@ -26,7 +25,7 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
     protected int size = 32;
     protected byte[] pixels = new byte[0];
 
-    protected PaperType paperType = PaperType.WHITE;
+    protected int paperColor = SCAConstants.COLOR_WHITE;
     protected InkType inkType = InkType.BLACK;
 
     public SimpleDrawing(int size) {
@@ -160,13 +159,13 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
     }
 
     @Override
-    public PaperType getPaperType() {
-        return paperType;
+    public int getPaperColor() {
+        return paperColor;
     }
 
     @Override
-    public void setPaperType(PaperType type) {
-        this.paperType = type;
+    public void setPaperColor(int color) {
+        this.paperColor = color;
     }
 
     @Override
@@ -215,10 +214,8 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
             setPixels(pixels);
         }
 
-        var paper = tag.getString(SCAConstants.DRAWING_TAG_PAPER_TYPE);
-        if (!paper.isBlank()) {
-            setPaperType(PaperType.of(paper));
-        }
+        var paper = tag.getInt(SCAConstants.DRAWING_TAG_PAPER_TYPE);
+        setPaperColor(paper);
 
         var ink = tag.getString(SCAConstants.DRAWING_TAG_INK_TYPE);
         if (!ink.isBlank()) {
@@ -235,7 +232,7 @@ public class SimpleDrawing implements ISimpleDrawing, IHasPaperType, IHasInkType
         tag.putLong(SCAConstants.DRAWING_TAG_DATE_NAME, getDate());
         tag.putInt(SCAConstants.DRAWING_TAG_SIZE_NAME, getSize());
         tag.putByteArray(SCAConstants.DRAWING_TAG_PIXELS_NAME, pixels);
-        tag.putString(SCAConstants.DRAWING_TAG_PAPER_TYPE, paperType.getName());
+        tag.putInt(SCAConstants.DRAWING_TAG_PAPER_TYPE, paperColor);
         tag.putString(SCAConstants.DRAWING_TAG_INK_TYPE, inkType.getName());
         return tag;
     }

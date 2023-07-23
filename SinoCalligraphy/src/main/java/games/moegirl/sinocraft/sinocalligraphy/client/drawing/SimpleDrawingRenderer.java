@@ -3,8 +3,8 @@ package games.moegirl.sinocraft.sinocalligraphy.client.drawing;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import games.moegirl.sinocraft.sinocalligraphy.SCAConstants;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.InkType;
-import games.moegirl.sinocraft.sinocalligraphy.drawing.PaperType;
 import games.moegirl.sinocraft.sinocalligraphy.drawing.simple.SimpleDrawing;
 import games.moegirl.sinocraft.sinocalligraphy.utility.DrawingHelper;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,7 +25,7 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
     public void draw(GuiGraphics graphics, int x, int y, int width, int height) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-        graphics.fill(x, y, x + width, y + height, getBackgroundColor());
+        graphics.fill(x, y, x + width, y + height, DrawingHelper.appendAlpha(getBackgroundColor()));
 
         int unitX = width / drawing.getSize();
         int unitY = height / drawing.getSize();
@@ -111,10 +111,10 @@ public class SimpleDrawingRenderer implements IDrawingRenderer {
 
     protected int getBackgroundColor() {
         if (drawing != null) {
-            return drawing.getPaperType().getColor();
+            return drawing.getPaperColor();
         }
 
-        return PaperType.WHITE.getColor();
+        return SCAConstants.COLOR_WHITE;
     }
 
     protected int getForegroundColor() {
