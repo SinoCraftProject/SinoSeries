@@ -90,8 +90,6 @@ public class SFDItems {
     public static final RegistryObject<ItemNameBlockItem> SEED_RICE = item(SeedRice.class);
     public static final RegistryObject<ItemNameBlockItem> SEED_SESAME = seed(SFDBlocks.SESAME);
 
-    public static final RegistryObject<Item> ICON_BLOCK_INTERACT = ITEMS.register("icon_block_interact", () -> new Item(new Item.Properties()));
-
     public static <T extends Block> RegistryObject<Item> simple(RegistryObject<T> block) {
         return ITEMS.register(block.getId().getPath(), () -> new SimpleBlockItem(block));
     }
