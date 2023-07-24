@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.util;
 
-import games.moegirl.sinocraft.sinocore.crafting.RecipeHolder;
-import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipe;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.RecipeHolder;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;

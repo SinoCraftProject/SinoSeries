@@ -1,0 +1,19 @@
+{
+  "type": "sinocore:block_interacting",
+  "damage": 1,
+  "destination": {
+    "Name": "sinodivination:sophora_stripped_log",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "source": {
+    "block": "sinodivination:sophora_log",
+    "id": "sinocore:block"
+  },
+  "tool": {
+    "tag": "minecraft:axes"
+  }
+}xes"
+  }
+}

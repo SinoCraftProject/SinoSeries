@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinodivination.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import games.moegirl.sinocraft.sinocore.crafting.AbstractRecipeSerializer;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.AbstractRecipeSerializer;
 import games.moegirl.sinocraft.sinocore.utility.RecipeSerializers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

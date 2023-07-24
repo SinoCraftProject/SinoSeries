@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinodivination;
 
-import games.moegirl.sinocraft.sinocore.handler.BlockStrippingHandler;
 import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
@@ -11,7 +10,6 @@ import games.moegirl.sinocraft.sinodivination.blockentity.CotinusEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraDoorEntity;
 import games.moegirl.sinocraft.sinodivination.blockentity.SophoraEntity;
 import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDTags;
-import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -66,15 +64,7 @@ public class SDTrees {
             .tab(TreeBlockType.SAPLING, TabsRegistry.items(SinoSeriesTabs.AGRICULTURE))
             .build();
 
-    static {
-        for (var entry : BlockStrippingHandler.getDeferredBlockStrippingMap().entrySet()) {
-            BlockStrippingHandler.registerStripping(entry.getKey(), entry.getValue().getLeft(), entry.getValue().getMiddle(), SFDItems.TREE_BARK);
-        }
-    }
-
     public static void register(IEventBus bus) {
         TreeRegistry.register(SinoDivination.MODID, bus);
-        TreeRegistry.getTrees(SinoDivination.MODID)
-                .forEach(tree -> BlockStrippingHandler.registerStripping(tree, SFDItems.TREE_BARK));
     }
 }

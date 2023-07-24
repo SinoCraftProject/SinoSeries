@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.plugin.jei.category;
 
-import games.moegirl.sinocraft.sinocore.crafting.RecipeHolder;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.RecipeHolder;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;

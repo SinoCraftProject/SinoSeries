@@ -1,18 +1,14 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
-import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipe;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
-import java.util.Optional;
 
 public class ChangeSoupRecipe extends SimpleRecipe<Container, ChangeSoupRecipe, ChangeSoupRecipeSerializer> {
 

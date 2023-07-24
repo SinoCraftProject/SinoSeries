@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.crafting.bamboo_plaque;
 
-import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipe;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipe;
 import games.moegirl.sinocraft.sinofoundation.crafting.SFDRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

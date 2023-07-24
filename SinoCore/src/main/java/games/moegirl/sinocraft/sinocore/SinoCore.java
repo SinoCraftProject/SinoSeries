@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore;
 
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SCRecipes;
 import games.moegirl.sinocraft.sinocore.data.SCLootConditions;
 import games.moegirl.sinocraft.sinocore.world.gen.SCBiomeModifiers;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,6 +34,7 @@ public class SinoCore {
 
         SCLootConditions.register(bus);
         SCBiomeModifiers.register(bus);
+        SCRecipes.register(bus);
 
         LOGGER.info("SinoCore loaded!");
     }

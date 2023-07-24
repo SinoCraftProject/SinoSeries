@@ -2,9 +2,10 @@ package games.moegirl.sinocraft.sinodivination.data.gen;
 
 import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinocore.block.TrappedChestBlockBase;
-import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredients;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.block_ingredient.BlockIngredients;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
-import games.moegirl.sinocraft.sinofoundation.crafting.block_interact.BlockInteractRecipe;
+import games.moegirl.sinocraft.sinocore.crafting.block_interact.BlockInteractRecipe;
 import games.moegirl.sinocraft.sinodivination.SDTrees;
 import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDTags;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
@@ -21,7 +22,7 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
@@ -36,14 +37,14 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Consumer;
 
-class SDRecipeProvider extends RecipeProvider {
+class SDRecipeProvider extends AbstractRecipeProvider {
 
-    public SDRecipeProvider(DataGenerator pGenerator) {
-        super(pGenerator.getPackOutput());
+    public SDRecipeProvider(PackOutput output, String modid) {
+        super(output, modid);
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> writer) {
         shaped(SDBlocks.KETTLE_POT, Blocks.CAULDRON)
                 .pattern("Y Y")
                 .pattern("ZAZ")
@@ -51,28 +52,28 @@ class SDRecipeProvider extends RecipeProvider {
                 .define('A', Blocks.CAULDRON)
                 .define('Y', Tags.Items.INGOTS_IRON)
                 .define('Z', Tags.Items.STONE)
-                .save(consumer);
+                .save(writer);
         KettlePotRecipe.builder(SDItems.CHANGE_SOUP, 3)
                 .input(3, Items.BONE_MEAL)
                 .input(Items.EGG)
                 .input(Items.FERMENTED_SPIDER_EYE)
-                .save(consumer);
+                .save(writer);
         KettlePotRecipe.builder(SDItems.STICK_RICE, 1)
                 .input(3, SFDItems.RICE)
                 .input(SFDItems.JUJUBE)
                 .input(SFDItems.WORMWOOD_LEAF)
-                .save(consumer);
-        ChangeSoupRecipe.builder(Blocks.BIRCH_SAPLING, SDTrees.COTINUS.getBlock(TreeBlockType.SAPLING)).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.OAK_SAPLING, SFDTrees.JUJUBE.getBlock(TreeBlockType.SAPLING)).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.SPRUCE_SAPLING, SDTrees.SOPHORA.getBlock(TreeBlockType.SAPLING)).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.POPPY, SDBlocks.ZHU_CAO.get()).save(consumer);
-        ChangeSoupRecipe.builder(Blocks.CAVE_VINES, SDBlocks.BRIGHT_STEM_GRASS.get()).save(consumer);
+                .save(writer);
+        ChangeSoupRecipe.builder(Blocks.BIRCH_SAPLING, SDTrees.COTINUS.getBlock(TreeBlockType.SAPLING)).save(writer);
+        ChangeSoupRecipe.builder(Blocks.OAK_SAPLING, SFDTrees.JUJUBE.getBlock(TreeBlockType.SAPLING)).save(writer);
+        ChangeSoupRecipe.builder(Blocks.SPRUCE_SAPLING, SDTrees.SOPHORA.getBlock(TreeBlockType.SAPLING)).save(writer);
+        ChangeSoupRecipe.builder(Blocks.POPPY, SDBlocks.ZHU_CAO.get()).save(writer);
+        ChangeSoupRecipe.builder(Blocks.CAVE_VINES, SDBlocks.BRIGHT_STEM_GRASS.get()).save(writer);
         shaped(SDItems.HOOK, Items.STICK)
                 .pattern("YY")
                 .pattern("Y ")
                 .pattern("Y ")
                 .define('Y', Items.STICK)
-                .save(consumer);
+                .save(writer);
         shaped(Blocks.BLAST_FURNACE, Blocks.FURNACE)
                 .pattern("YYY")
                 .pattern("YXY")
@@ -80,7 +81,7 @@ class SDRecipeProvider extends RecipeProvider {
                 .define('X', Blocks.FURNACE)
                 .define('Y', Blocks.STONE)
                 .define('Z', Blocks.SMOOTH_STONE)
-                .save(consumer);
+                .save(writer);
         shaped(SDBlocks.BELLOWS, Items.STICK)
                 .pattern("AYY")
                 .pattern("A Z")
@@ -88,7 +89,7 @@ class SDRecipeProvider extends RecipeProvider {
                 .define('A', ItemTags.PLANKS)
                 .define('Y', Items.STICK)
                 .define('Z', Tags.Items.CHESTS)
-                .save(consumer);
+                .save(writer);
         shaped(SDBlocks.CARVING_TABLE, Items.OBSIDIAN)
                 .pattern("XYX")
                 .pattern("XZX")
@@ -97,7 +98,7 @@ class SDRecipeProvider extends RecipeProvider {
                 .define('X', Tags.Items.INGOTS_COPPER)
                 .define('Y', SFDItemTags.JADE)
                 .define('Z', Blocks.STONECUTTER)
-                .save(consumer);
+                .save(writer);
         shaped(SDBlocks.SILKWORM_PLAQUE, SDItems.SILKWORM_BABY.get())
                 .pattern("A A")
                 .pattern("AYA")
@@ -105,27 +106,27 @@ class SDRecipeProvider extends RecipeProvider {
                 .define('A', Items.STICK)
                 .define('Y', Items.STRING)
                 .define('Z', ItemTags.PLANKS)
-                .save(consumer);
+                .save(writer);
         shaped(SDBlocks.ALTAR, 2, Blocks.STONE)
                 .pattern("XXX")
                 .pattern("YYY")
                 .define('X', ItemTags.WOOL_CARPETS)
                 .define('Y', Tags.Items.STONE)
-                .save(consumer);
+                .save(writer);
         shaped(SDBlocks.TRIPOD, Items.COPPER_INGOT)
                 .pattern("Y Y")
                 .pattern("YYY")
                 .pattern("Z Z")
                 .define('Y', Tags.Items.INGOTS_COPPER)
                 .define('Z', Tags.Items.STORAGE_BLOCKS_COPPER)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.CANG_BI)
                 .pattern(" XX ")
                 .pattern("X  X")
                 .pattern(" XX ")
                 .define('X', SFDItems.GREEN_JADE)
                 .dye(DyeColor.BLUE)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.HUANG_CONG)
                 .pattern(" X ")
                 .pattern(" X ")
@@ -133,7 +134,7 @@ class SDRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .define('X', SFDItems.YELLOW_JADE)
                 .dye(DyeColor.GRAY)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.QING_GUI)
                 .pattern(" X ")
                 .pattern("XXX")
@@ -141,7 +142,7 @@ class SDRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .define('X', SFDItems.GREEN_JADE)
                 .dye(DyeColor.CYAN)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.CHI_ZHANG)
                 .pattern("X X")
                 .pattern("XXX")
@@ -149,7 +150,7 @@ class SDRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .define('X', SFDItems.RED_JADE)
                 .dye(DyeColor.WHITE)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.BAI_HU)
                 .pattern("XX  ")
                 .pattern(" X X")
@@ -157,67 +158,70 @@ class SDRecipeProvider extends RecipeProvider {
                 .pattern("XX X")
                 .define('X', SFDItems.WHITE_JADE)
                 .dye(DyeColor.RED)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.XUAN_HUANG)
                 .pattern("X  X")
                 .pattern("XXXX")
                 .pattern(" XX ")
                 .define('X', SFDItems.BLACK_JADE)
                 .dye(DyeColor.BLACK)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.COPPER_GOBLET)
                 .pattern("XX X")
                 .pattern(" XXX")
                 .pattern("  X ")
                 .pattern(" X X")
                 .define('X', Items.COPPER_INGOT)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.COPPER_DAGGER_AXE)
                 .pattern("X   ")
                 .pattern("XXXX")
                 .pattern("XX  ")
                 .pattern("X   ")
                 .define('X', Items.COPPER_INGOT)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.COPPER_MIRROR)
                 .pattern(" XX ")
                 .pattern("XXXX")
                 .pattern("XXXX")
                 .pattern(" XX ")
                 .define('X', Items.COPPER_INGOT)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.COPPER_MASK)
                 .pattern("XXX ")
                 .pattern(" X  ")
                 .pattern("XXX ")
                 .pattern("X X ")
                 .define('X', Items.COPPER_INGOT)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.COPPER_LAMP)
                 .pattern(" XX ")
                 .pattern("X  X")
                 .pattern("XXXX")
                 .define('X', Items.COPPER_INGOT)
-                .save(consumer);
+                .save(writer);
         CarvingTableRecipe.builder(SDItems.COPPER_BEAST)
                 .pattern("XX  ")
                 .pattern(" X X")
                 .pattern(" XXX")
                 .pattern("XX X")
                 .define('X', Items.COPPER_INGOT)
-                .save(consumer);
+                .save(writer);
 
-        addStick(SDTrees.COTINUS, SDItems.STICK_COTINUS, consumer);
-        addStick(SFDTrees.JUJUBE, SDItems.STICK_JUJUBE, consumer);
-        addStick(SDTrees.SOPHORA, SDItems.STICK_SOPHORA, consumer);
+        addStick(SDTrees.COTINUS, SDItems.STICK_COTINUS, writer);
+        addStick(SFDTrees.JUJUBE, SDItems.STICK_JUJUBE, writer);
+        addStick(SDTrees.SOPHORA, SDItems.STICK_SOPHORA, writer);
 
         BlockInteractRecipe.builder(new ItemStack(SDItems.MOXIBUSTION.get()))
-                .item(Ingredient.of(SFDItems.WORMWOOD_LEAF.get()))
-                .block(BlockIngredients.tag(SDTags.FIRE_SOURCE))
-                .save(consumer);
+                .tool(Ingredient.of(SFDItems.WORMWOOD_LEAF.get()))
+                .source(BlockIngredients.tag(SDTags.FIRE_SOURCE))
+                .save(writer);
 
-        chest(SDTrees.SOPHORA, consumer, SDBlocks.SOPHORA_CHEST, SDBlocks.SOPHORA_TRAPPED_CHEST);
-        chest(SDTrees.COTINUS, consumer, SDBlocks.COTINUS_CHEST, SDBlocks.COTINUS_TRAPPED_CHEST);
+        chest(SDTrees.SOPHORA, writer, SDBlocks.SOPHORA_CHEST, SDBlocks.SOPHORA_TRAPPED_CHEST);
+        chest(SDTrees.COTINUS, writer, SDBlocks.COTINUS_CHEST, SDBlocks.COTINUS_TRAPPED_CHEST);
+
+        treeStrippingRecipe(SDTrees.COTINUS, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
+        treeStrippingRecipe(SDTrees.SOPHORA, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
     }
 
     private ShapedRecipeBuilder shaped(RegistryObject<? extends ItemLike> result, ItemLike unlockedBy) {

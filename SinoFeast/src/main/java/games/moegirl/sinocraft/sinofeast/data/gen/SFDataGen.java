@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = SinoFeast.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SFDataGen {
     @SubscribeEvent
-    public static void onRegisterPredicates(GatherDataEvent event) {
+    public static void onGatherData(GatherDataEvent event) {
         var gen = event.getGenerator();
         var output = gen.getPackOutput();
         var exHelper = event.getExistingFileHelper();

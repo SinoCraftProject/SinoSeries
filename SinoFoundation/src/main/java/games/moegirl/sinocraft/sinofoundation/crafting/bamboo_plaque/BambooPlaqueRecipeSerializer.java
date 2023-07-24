@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.crafting.bamboo_plaque;
 
 import com.google.gson.JsonObject;
-import games.moegirl.sinocraft.sinocore.crafting.AbstractRecipeSerializer;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.AbstractRecipeSerializer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;

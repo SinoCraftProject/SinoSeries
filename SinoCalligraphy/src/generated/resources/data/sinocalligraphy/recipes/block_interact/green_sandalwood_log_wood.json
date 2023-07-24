@@ -1,0 +1,21 @@
+{
+  "type": "sinocore:block_interacting",
+  "damage": 1,
+  "destination": {
+    "Name": "sinocalligraphy:green_sandalwood_stripped_log_wood",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "output": {
+    "Count": 1,
+    "id": "sinocalligraphy:green_sandalwood_bark"
+  },
+  "source": {
+    "block": "sinocalligraphy:green_sandalwood_log_wood",
+    "id": "sinocore:block"
+  },
+  "tool": {
+    "tag": "sinofoundation:knives"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-20T10:18:28.53954	Recipes: sinofoundation
+// 1.20.1	2023-07-24T10:52:14.5127272	Recipes: sinofoundation
 7c006dd9e4083c5f811e4ebb8c9253fcaaba8bcf data/minecraft/advancements/recipes/misc/gunpowder.json
 9e7d1038fc3c75c7595ea17c8987385c2b5fd0a0 data/minecraft/recipes/gunpowder.json
 a3c0460d6b2ecc52afe9d725741d06dee7945fc5 data/sinofoundation/advancements/recipes/decorations/jujube_chest.json
@@ -13,6 +13,10 @@ aa5ec31862296b147bce08371e335d119cf34716 data/sinofoundation/advancements/recipe
 191d600d130ce021abcfd0d0d6cac075df8fad4a data/sinofoundation/advancements/recipes/tools/gold_knife_reverse.json
 e8fce89ae378b6c8fa319cb9734fbc1b20f022b7 data/sinofoundation/advancements/recipes/tools/iron_knife.json
 34dfac78985701eb6e25b5f0976c7711aa2a3c5d data/sinofoundation/advancements/recipes/tools/iron_knife_reverse.json
+9a389ea056a3fcd4f8657a7482243bef5c8bdeff data/sinofoundation/recipes/block_interact/jujube_log.json
+70526d4ff1f00ad73c2aa845585121522d65a2a2 data/sinofoundation/recipes/block_interact/jujube_log_wood.json
+e4ca0da50bc26aad63c97eb4c2fbcee00b89aaec data/sinofoundation/recipes/block_interact/mulberry_log.json
+9ed885ebb93e3e41a83733eaf6eaf0f69c23e639 data/sinofoundation/recipes/block_interact/mulberry_log_wood.json
 1dc03aa2de1c0339ccc6a732e65c45fe3af5bb5a data/sinofoundation/recipes/cabbage.json
 91c63de605ea4439316a1a225146cc30c62341de data/sinofoundation/recipes/chili_pepper.json
 161caf4cf6b57bf72e61d10a825c117f6fb5d4c9 data/sinofoundation/recipes/diamond_knife.json

@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-12T17:01:31.337846	Mod Tree Recipes: sinodivination
+// 1.20.1	2023-07-24T10:59:54.2980363	Mod Tree Recipes: sinodivination
 17ce186cfbd583a80a96c888c145ceb47a70c8cc data/sinodivination/advancements/recipes/building_blocks/cotinus_log_wood.json
 58579ba17048b25c781d24d3eee3aba8fcc824d5 data/sinodivination/advancements/recipes/building_blocks/cotinus_planks.json
 8303c6e95d1b54ba948745be62e27cbf7027990a data/sinodivination/advancements/recipes/building_blocks/cotinus_slab.json
@@ -25,6 +25,10 @@ c39efc343557b5b178795e9393272a55de47d0cd data/sinodivination/advancements/recipe
 a068364df78ebd2cf4b4ed597795153f1f7005d3 data/sinodivination/advancements/recipes/redstone/sophora_fence_gate.json
 03b730d20e7b10b87ed1431c4713e708d845b59d data/sinodivination/advancements/recipes/redstone/sophora_pressure_gate.json
 1f12fec59e6361971068bdfe51876e59b08f0fb9 data/sinodivination/advancements/recipes/redstone/sophora_trapdoor.json
+707773df1bd96f308e965214f3a8b04f060cd7b4 data/sinodivination/recipes/block_interact/cotinus_log_stripping.json
+0638336291103aa9924b8fa502a736e0af69479c data/sinodivination/recipes/block_interact/cotinus_log_wood_stripping.json
+e7711327ee2b0b740dd0c4a6efaf17fe0bdf5e3b data/sinodivination/recipes/block_interact/sophora_log_stripping.json
+6823f1bc06d4e80bc93fc29e9cf05433426c82f7 data/sinodivination/recipes/block_interact/sophora_log_wood_stripping.json
 120aeed25d609db1226adf6b98a90cc77a60f291 data/sinodivination/recipes/cotinus_button.json
 9ceca1155772f7af7fe6c06eb312d5756fc5da8d data/sinodivination/recipes/cotinus_door.json
 bcfddae23058ef79522dbdf900943d1c2a9a20e0 data/sinodivination/recipes/cotinus_fence.json

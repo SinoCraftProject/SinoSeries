@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
-import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipeBuilder;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipeBuilder;
 import it.unimi.dsi.fastutil.chars.CharArrayList;
 import it.unimi.dsi.fastutil.chars.CharList;
 import net.minecraft.resources.ResourceLocation;

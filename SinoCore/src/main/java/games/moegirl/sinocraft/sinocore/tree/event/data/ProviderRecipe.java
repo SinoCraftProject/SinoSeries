@@ -1,12 +1,17 @@
 package games.moegirl.sinocraft.sinocore.tree.event.data;
 
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.block_ingredient.TypeBlockIngredient;
+import games.moegirl.sinocraft.sinocore.crafting.block_interact.BlockInteractRecipe;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -44,6 +49,24 @@ public class ProviderRecipe extends AbstractRecipeProvider {
             generateRecipes(writer, family);
 
             hangingSign(writer, tree.getBlock(TreeBlockType.HANGING_SIGN), tree.getBlock(TreeBlockType.PLANKS));
+
+            var logId = TreeBlockType.LOG.makeResourceLoc(tree.getName());
+            BlockInteractRecipe.builder(new ResourceLocation(logId.getNamespace(), logId.getPath() + "_stripping"))
+                    .tool(Ingredient.of(ItemTags.AXES))
+                    .damage(1)
+                    .source(new TypeBlockIngredient(tree.getBlock(TreeBlockType.LOG)))
+                    .destination(tree.getBlock(TreeBlockType.STRIPPED_LOG).defaultBlockState())
+                    .output(ItemStack.EMPTY)
+                    .save(writer);
+
+            var woodId = TreeBlockType.LOG_WOOD.makeResourceLoc(tree.getName());
+            BlockInteractRecipe.builder(new ResourceLocation(woodId.getNamespace(), woodId.getPath() + "_stripping"))
+                    .tool(Ingredient.of(ItemTags.AXES))
+                    .damage(1)
+                    .source(new TypeBlockIngredient(tree.getBlock(TreeBlockType.LOG_WOOD)))
+                    .destination(tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD).defaultBlockState())
+                    .output(ItemStack.EMPTY)
+                    .save(writer);
         }
     }
 

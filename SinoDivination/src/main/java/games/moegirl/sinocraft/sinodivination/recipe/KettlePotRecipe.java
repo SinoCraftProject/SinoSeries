@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
-import games.moegirl.sinocraft.sinocore.crafting.CraftHelper;
-import games.moegirl.sinocraft.sinocore.crafting.fluid_ingredient.FluidIngredient;
-import games.moegirl.sinocraft.sinocore.crafting.ReadonlyItemFluidContainer;
-import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipe;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.CraftHelper;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.fluid_ingredient.FluidIngredient;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.ReadonlyItemFluidContainer;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipe;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;

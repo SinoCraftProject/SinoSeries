@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
+import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -11,6 +12,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -97,6 +99,9 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .save(writer);
 
         chest(SFDTrees.JUJUBE, writer, SFDBlocks.JUJUBE_CHEST, SFDBlocks.JUJUBE_TRAPPED_CHEST);
+
+        treeStrippingRecipe(SFDTrees.JUJUBE, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
+        treeStrippingRecipe(SFDTrees.MULBERRY, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
     }
 
     protected void fruitsToSeed(String name, ItemLike fruit, ItemLike seed, int count, Consumer<FinishedRecipe> writer) {

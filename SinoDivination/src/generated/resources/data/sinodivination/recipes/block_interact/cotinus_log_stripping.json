@@ -1,0 +1,17 @@
+{
+  "type": "sinocore:block_interacting",
+  "damage": 1,
+  "destination": {
+    "Name": "sinodivination:cotinus_stripped_log",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "source": {
+    "block": "sinodivination:cotinus_log",
+    "id": "sinocore:block"
+  },
+  "tool": {
+    "tag": "minecraft:axes"
+  }
+}

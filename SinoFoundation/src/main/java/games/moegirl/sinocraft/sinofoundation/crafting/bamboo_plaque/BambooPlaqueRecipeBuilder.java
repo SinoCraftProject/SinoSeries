@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.crafting.bamboo_plaque;
 
-import games.moegirl.sinocraft.sinocore.crafting.SimpleRecipeBuilder;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 
 public class BambooPlaqueRecipeBuilder extends SimpleRecipeBuilder<BambooPlaqueRecipe, BambooPlaqueRecipeBuilder> {

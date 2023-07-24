@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
-import games.moegirl.sinocraft.sinocore.crafting.ReadonlyItemFluidContainer;
-import games.moegirl.sinocraft.sinocore.crafting.RecipeHolder;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.ReadonlyItemFluidContainer;
+import games.moegirl.sinocraft.sinocore.crafting.abstracted.RecipeHolder;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import net.minecraft.world.Container;

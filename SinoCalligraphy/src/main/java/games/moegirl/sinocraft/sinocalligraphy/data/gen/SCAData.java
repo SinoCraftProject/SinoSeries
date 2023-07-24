@@ -37,6 +37,8 @@ public class SCAData {
 
             gen.addProvider(true, new ForgeAdvancementProvider(output, lookupProvider, exHelper, List.of(new SCAAdvancementGeneratorBrush(SinoCalligraphy.MODID))));
 
+            gen.addProvider(true, new SCARecipeProvider(output, SinoCalligraphy.MODID));
+
             gen.addProvider(true, new SCALanguageProviderZHCN(output, SinoCalligraphy.MODID, "zh_cn"));
             gen.addProvider(true, new SCALanguageProviderZHTW(output, SinoCalligraphy.MODID, "zh_tw"));
             gen.addProvider(true, new SCALanguageProviderZHTW(output, SinoCalligraphy.MODID, "zh_hk"));

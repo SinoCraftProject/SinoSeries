@@ -23,7 +23,7 @@ public class DataGen {
         generator.addProvider(true, new ProviderLanguageZh(generator));
         generator.addProvider(true, new ProviderLanguageLzh(generator));
         generator.addProvider(true, new SDLootTableProvider(generator));
-        generator.addProvider(true, new SDRecipeProvider(event.getGenerator()));
+        generator.addProvider(true, new SDRecipeProvider(generator.getPackOutput(), SinoDivination.MODID));
         SDBlockTagProvider provider;
         generator.addProvider(true, provider = new SDBlockTagProvider(event));
         generator.addProvider(true, new SDItemTagProvider(event, provider));
