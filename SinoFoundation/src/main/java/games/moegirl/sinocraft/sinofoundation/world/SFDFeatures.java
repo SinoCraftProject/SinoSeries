@@ -77,7 +77,7 @@ public class SFDFeatures {
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HOLDER_SULPHUR = context.register(SFDFeatures.SULPHUR, overworldStoneOre(SFDBlocks.SULPHUR_ORE, 6));
         HOLDER_NETHER_SULPHUR = context.register(SFDFeatures.NETHER_SULPHUR, netherrackOre(SFDBlocks.NETHER_SULPHUR_ORE, 6));
-        HOLDER_DEEPSLATE_SULPHUR = context.register(SFDFeatures.DEEPSLATE_SULPHUR, overworldDeepslateOre(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, 5));
+        HOLDER_DEEPSLATE_SULPHUR = context.register(SFDFeatures.DEEPSLATE_SULPHUR, overworldDeepslateOre(SFDBlocks.DEEPSLATE_SULPHUR_ORE, 5));
         HOLDER_NITER = context.register(SFDFeatures.NITER, overworldStoneOre(SFDBlocks.NITER_ORE, 8));
 
         HOLDER_BLACK_JADE = context.register(SFDFeatures.BLACK_JADE, overworldStoneOre(SFDBlocks.BLACK_JADE_ORE, 3));

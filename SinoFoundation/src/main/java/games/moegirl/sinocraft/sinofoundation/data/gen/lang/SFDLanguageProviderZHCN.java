@@ -83,7 +83,7 @@ public class SFDLanguageProviderZHCN extends AbstractLanguageProvider {
         addBlock(SFDBlocks.NITER_ORE, "硝石矿石");
         addBlock(SFDBlocks.SULPHUR_ORE, "硫磺矿石");
         addBlock(SFDBlocks.NETHER_SULPHUR_ORE, "下界硫磺矿石");
-        addBlock(SFDBlocks.DEEP_SLATE_SULPHUR_ORE, "深层硫磺矿石");
+        addBlock(SFDBlocks.DEEPSLATE_SULPHUR_ORE, "深层硫磺矿石");
         addBlock(SFDBlocks.JUJUBE_CHEST, "枣心木匣");
         addBlock(SFDBlocks.JUJUBE_TRAPPED_CHEST, "枣心木机关匣");
         addBlock(SFDBlocks.WORMWOOD, "艾草");

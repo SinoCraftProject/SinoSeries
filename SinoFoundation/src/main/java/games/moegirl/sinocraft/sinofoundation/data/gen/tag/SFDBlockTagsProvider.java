@@ -44,6 +44,15 @@ public class SFDBlockTagsProvider extends AbstractBlockTagsProvider {
                         SFDBlocks.YELLOW_JADE_ORE.get(), SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE.get());
         tag(SFDBlockTags.SPAWN_DRAGONLIVER_MELON).addTag(Tags.Blocks.GRAVEL).addTag(BlockTags.DIRT);
 
+        tag(SFDBlockTags.JADE)
+                .add(SFDBlocks.BLACK_JADE_ORE.get(), SFDBlocks.DEEPSLATE_BLACK_JADE_ORE.get(),
+                        SFDBlocks.GREEN_JADE_ORE.get(), SFDBlocks.DEEPSLATE_GREEN_JADE_ORE.get(),
+                        SFDBlocks.RED_JADE_ORE.get(), SFDBlocks.DEEPSLATE_RED_JADE_ORE.get(),
+                        SFDBlocks.WHITE_JADE_ORE.get(), SFDBlocks.DEEPSLATE_WHITE_JADE_ORE.get(),
+                        SFDBlocks.YELLOW_JADE_ORE.get(), SFDBlocks.DEEPSLATE_YELLOW_JADE_ORE.get());
+
+        tag(SFDBlockTags.ORES).addTag(SFDBlockTags.JADE).add(SFDBlocks.NITER_ORE.get(), SFDBlocks.SULPHUR_ORE.get(), SFDBlocks.DEEPSLATE_SULPHUR_ORE.get(), SFDBlocks.NETHER_SULPHUR_ORE.get());
+
         chest(SFDBlocks.JUJUBE_CHEST, SFDBlockTags.JUJUBE_BLOCK, false);
         chest(SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDBlockTags.JUJUBE_BLOCK, true);
     }

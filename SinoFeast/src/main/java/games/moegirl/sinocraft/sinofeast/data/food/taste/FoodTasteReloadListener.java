@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinofeast.SinoFeast;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,7 +32,13 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
             var isAdvanced = json.get("is_advanced").getAsBoolean();
             var likeWeight = json.get("like_weight").getAsInt();
             var dislikeWeight = json.get("dislike_weight").getAsInt();
-            FoodTastes.getInstance().addTaste(key, new FoodTaste(key, name, isAdvanced, likeWeight, dislikeWeight));
+            var tasteKey = json.get("taste_key").getAsString();
+            var tasteKeyPrimary = json.get("taste_key_primary").getAsString();
+            var tasteKeySecondary = json.get("taste_key_secondary").getAsString();
+            FoodTastes.getInstance().addTaste(key, new FoodTaste(key, name, isAdvanced, likeWeight, dislikeWeight,
+                    ItemTags.create(new ResourceLocation(tasteKey)),
+                    ItemTags.create(new ResourceLocation(tasteKeyPrimary)),
+                    ItemTags.create(new ResourceLocation(tasteKeySecondary))));
         }
     }
 

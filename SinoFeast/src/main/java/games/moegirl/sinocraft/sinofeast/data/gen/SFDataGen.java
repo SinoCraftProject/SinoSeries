@@ -5,6 +5,8 @@ import games.moegirl.sinocraft.sinofeast.block.SFBlockItems;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
 import games.moegirl.sinocraft.sinofeast.data.gen.lang.SFLanguageProviderENUS;
 import games.moegirl.sinocraft.sinofeast.data.gen.lang.SFLanguageProviderZHCN;
+import games.moegirl.sinocraft.sinofeast.data.gen.tag.SFBlockTagsProvider;
+import games.moegirl.sinocraft.sinofeast.data.gen.tag.SFItemTagsProvider;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +19,7 @@ public class SFDataGen {
         var gen = event.getGenerator();
         var output = gen.getPackOutput();
         var exHelper = event.getExistingFileHelper();
+        var lookupProvider = event.getLookupProvider();
 
         if (event.includeClient()) {
             gen.addProvider(true, new SFBlockStateProvider(output, SinoFeast.MODID, exHelper, SFBlocks.BLOCKS));
@@ -28,6 +31,10 @@ public class SFDataGen {
             gen.addProvider(true, new SFLanguageProviderENUS(output, SinoFeast.MODID));
 
             gen.addProvider(true, new SFLootTableProvider(output, SinoFeast.MODID));
+
+            var blockTagsProvider = new SFBlockTagsProvider(output, lookupProvider, SinoFeast.MODID, exHelper);
+            gen.addProvider(true, blockTagsProvider);
+            gen.addProvider(true, new SFItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoFeast.MODID, exHelper));
         }
     }
 }

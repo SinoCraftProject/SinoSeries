@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-20T10:18:28.5384749	Item Models: sinofoundation
+// 1.20.1	2023-07-27T07:24:22.3449784	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 75826318c84174a65f6057c2a52460b033de912a assets/sinofoundation/models/item/bamboo_plaque.json
 d392217821e735d258b160444be8eaa144ec17e8 assets/sinofoundation/models/item/black_jade.json
@@ -24,7 +24,6 @@ dedabd4dee4665317fc613792b6af78bedd8471c assets/sinofoundation/models/item/garli
 51b19097d696a35b071a3f00361e172cd9fd3ad0 assets/sinofoundation/models/item/green_pepper.json
 342b6637911eea19de4ea75b93ab3a1d95831857 assets/sinofoundation/models/item/green_pepper_seed.json
 0bfba18ee8943e64ec190d46a3478fb3b69da531 assets/sinofoundation/models/item/green_radish.json
-2de69ef6fd2bc1f648a9d635eba56f40ff526ed1 assets/sinofoundation/models/item/icon_block_interact.json
 ab8482fc5b2d794a5a323eedb850bb6ff4225c31 assets/sinofoundation/models/item/iron_knife.json
 624fe519ab57566201e14185cb6a26a3f941a0a8 assets/sinofoundation/models/item/jujube.json
 749efb11ef6da9b693dee12db38652bd892218a1 assets/sinofoundation/models/item/jujube_chest.json

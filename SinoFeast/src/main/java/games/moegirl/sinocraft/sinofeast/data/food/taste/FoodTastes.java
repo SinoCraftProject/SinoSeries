@@ -2,7 +2,9 @@ package games.moegirl.sinocraft.sinofeast.data.food.taste;
 
 import games.moegirl.sinocraft.sinofeast.SFConstants;
 import games.moegirl.sinocraft.sinofeast.SinoFeast;
+import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 
 import java.util.*;
 
@@ -21,8 +23,6 @@ public class FoodTastes {
 
         return INSTANCE;
     }
-
-    private static final FoodTaste EMPTY_TASTE = new FoodTaste(new ResourceLocation(SinoFeast.MODID, "empty"), SFConstants.TRANSLATE_TASTE_EMPTY, false, 0, 0);
 
     private final Map<ResourceLocation, FoodTaste> foodTastes = new LinkedHashMap<>();  // qyl27: the order is important.
 
@@ -45,8 +45,6 @@ public class FoodTastes {
 
         maxLikeWeight = 0;
         maxDislikeWeight = 0;
-
-        foodTastes.put(EMPTY_TASTE.key(), EMPTY_TASTE);
     }
 
     public FoodTaste randomLike() {

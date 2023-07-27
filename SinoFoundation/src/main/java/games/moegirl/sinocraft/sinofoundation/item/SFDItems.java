@@ -84,9 +84,9 @@ public class SFDItems {
 
     public static final RegistryObject<Item> JUJUBE = ITEMS.register("jujube", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
     public static final RegistryObject<Item> WORMWOOD_LEAF = ITEMS.register("wormwood_leaf", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<ItemNameBlockItem> SEED_WORMWOOD = seed(SFDBlocks.WORMWOOD);
     public static final RegistryObject<Item> RICE = food("rice", 1, false);
     public static final RegistryObject<Item> SESAME = food("sesame", 1, true);
+    public static final RegistryObject<ItemNameBlockItem> SEED_WORMWOOD = seed(SFDBlocks.WORMWOOD);
     public static final RegistryObject<ItemNameBlockItem> SEED_RICE = item(SeedRice.class);
     public static final RegistryObject<ItemNameBlockItem> SEED_SESAME = seed(SFDBlocks.SESAME);
 

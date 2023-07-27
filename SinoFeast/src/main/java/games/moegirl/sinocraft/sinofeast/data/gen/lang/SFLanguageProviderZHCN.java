@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinofeast.data.gen.lang;
 
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinofeast.SFConstants;
 import net.minecraft.data.PackOutput;
 
 public class SFLanguageProviderZHCN extends AbstractLanguageProvider {
@@ -10,6 +11,14 @@ public class SFLanguageProviderZHCN extends AbstractLanguageProvider {
 
     @Override
     public void translate() {
-
+        add(SFConstants.TRANSLATE_TASTE_EMPTY, "无");
+        add(SFConstants.TRANSLATE_TASTE_SOUR, "酸");
+        add(SFConstants.TRANSLATE_TASTE_SWEET, "甜");
+        add(SFConstants.TRANSLATE_TASTE_BITTER, "苦");
+        add(SFConstants.TRANSLATE_TASTE_SPICY, "辣");
+        add(SFConstants.TRANSLATE_TASTE_SALTY, "咸");
+        add(SFConstants.TRANSLATE_TASTE_PUNGENT, "麻");
+        add(SFConstants.TRANSLATE_TASTE_ACRID, "辛");
+        add(SFConstants.TRANSLATE_TASTE_FRESH, "鲜");
     }
 }
