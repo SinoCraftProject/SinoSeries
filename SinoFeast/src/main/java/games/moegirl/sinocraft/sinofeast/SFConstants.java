@@ -10,4 +10,8 @@ public class SFConstants {
     public static final String TRANSLATE_TASTE_PUNGENT = "sinofeast.taste.pungent"; // 麻
     public static final String TRANSLATE_TASTE_ACRID = "sinofeast.taste.acrid";     // 辛
     public static final String TRANSLATE_TASTE_FRESH = "sinofeast.taste.fresh";
+
+    public static final String TAG_PREFER_TASTE_NAME = "preferTaste";
+    public static final String TAG_LIKE_TASTE_NAME = "likeTaste";
+    public static final String TAG_DISLIKE_TASTE_NAME = "dislikeTaste";
 }

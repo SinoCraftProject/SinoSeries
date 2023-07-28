@@ -1,10 +1,6 @@
 package games.moegirl.sinocraft.sinofeast.data.food.taste;
 
-import games.moegirl.sinocraft.sinofeast.SFConstants;
-import games.moegirl.sinocraft.sinofeast.SinoFeast;
-import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 
 import java.util.*;
 
@@ -26,6 +22,7 @@ public class FoodTastes {
 
     private final Map<ResourceLocation, FoodTaste> foodTastes = new LinkedHashMap<>();  // qyl27: the order is important.
 
+    private int maxPreferWeight = 0;
     private int maxLikeWeight = 0;
     private int maxDislikeWeight = 0;
 
@@ -36,6 +33,10 @@ public class FoodTastes {
     void addTaste(ResourceLocation name, FoodTaste taste) {
         foodTastes.put(name, taste);
 
+        if (taste.isAdvanced()) {
+            maxPreferWeight += taste.likeWeight();
+        }
+
         maxLikeWeight += taste.likeWeight();
         maxDislikeWeight += taste.dislikeWeight();
     }
@@ -43,14 +44,26 @@ public class FoodTastes {
     void initTastes() {
         foodTastes.clear();
 
+        maxPreferWeight = 0;
         maxLikeWeight = 0;
         maxDislikeWeight = 0;
     }
 
-    public FoodTaste randomLike() {
-        var rand = RAND.nextInt(0, maxLikeWeight);
+    public FoodTaste randomPrefer(List<FoodTaste> eliminates) {
+        int maxWeight = maxPreferWeight;
+        for (var taste : eliminates) {
+            if (taste.isAdvanced()) {
+                maxWeight -= taste.likeWeight();
+            }
+        }
+
+        var rand = RAND.nextInt(0, maxWeight);
         for (var taste : foodTastes.values()) {
-            if (taste.likeWeight() == 0) {
+            if (taste.likeWeight() == 0 || !taste.isAdvanced()) {
+                continue;
+            }
+
+            if (eliminates.contains(taste)) {
                 continue;
             }
 
@@ -63,10 +76,48 @@ public class FoodTastes {
         throw new RuntimeException("Random Exception: number " + rand + " is out of bound " + maxLikeWeight);
     }
 
-    public FoodTaste randomDislike() {
-        var rand = RAND.nextInt(0, maxDislikeWeight);
+    public FoodTaste randomLike(List<FoodTaste> eliminates) {
+        int maxWeight = maxLikeWeight;
+        for (var taste : eliminates) {
+            if (taste.isAdvanced()) {
+                maxWeight -= taste.likeWeight();
+            }
+        }
+
+        var rand = RAND.nextInt(0, maxWeight);
+        for (var taste : foodTastes.values()) {
+            if (taste.likeWeight() == 0) {
+                continue;
+            }
+
+            if (eliminates.contains(taste)) {
+                continue;
+            }
+
+            rand -= taste.likeWeight();
+            if (rand <= 0) {
+                return taste;
+            }
+        }
+
+        throw new RuntimeException("Random Exception: number " + rand + " is out of bound " + maxLikeWeight);
+    }
+
+    public FoodTaste randomDislike(List<FoodTaste> eliminates) {
+        int maxWeight = maxDislikeWeight;
+        for (var taste : eliminates) {
+            if (taste.isAdvanced()) {
+                maxWeight -= taste.likeWeight();
+            }
+        }
+
+        var rand = RAND.nextInt(0, maxWeight);
         for (var taste : foodTastes.values()) {
             if (taste.dislikeWeight() == 0) {
+                continue;
+            }
+
+            if (eliminates.contains(taste)) {
                 continue;
             }
 
