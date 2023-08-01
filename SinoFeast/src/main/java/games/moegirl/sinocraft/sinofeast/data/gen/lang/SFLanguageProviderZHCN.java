@@ -20,5 +20,9 @@ public class SFLanguageProviderZHCN extends AbstractLanguageProvider {
         add(SFConstants.TRANSLATE_TASTE_PUNGENT, "麻");
         add(SFConstants.TRANSLATE_TASTE_ACRID, "辛");
         add(SFConstants.TRANSLATE_TASTE_FRESH, "鲜");
+
+        add(SFConstants.TRANSLATE_PREFER_TOOLTIP, "你特别喜欢这个食物。");
+        add(SFConstants.TRANSLATE_LIKE_TOOLTIP, "你喜欢这个食物。");
+        add(SFConstants.TRANSLATE_DISLIKE_TOOLTIP, "你不喜欢这个食物。");
     }
 }

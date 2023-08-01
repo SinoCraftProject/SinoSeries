@@ -14,4 +14,8 @@ public class SFConstants {
     public static final String TAG_PREFER_TASTE_NAME = "preferTaste";
     public static final String TAG_LIKE_TASTE_NAME = "likeTaste";
     public static final String TAG_DISLIKE_TASTE_NAME = "dislikeTaste";
+
+    public static final String TRANSLATE_PREFER_TOOLTIP = "sinofeast.tooltip.prefer";
+    public static final String TRANSLATE_LIKE_TOOLTIP = "sinofeast.tooltip.like";
+    public static final String TRANSLATE_DISLIKE_TOOLTIP = "sinofeast.tooltip.dislike";
 }

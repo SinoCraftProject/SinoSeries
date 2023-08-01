@@ -20,5 +20,9 @@ public class SFLanguageProviderENUS extends AbstractLanguageProvider {
         add(SFConstants.TRANSLATE_TASTE_PUNGENT, "Pungent");
         add(SFConstants.TRANSLATE_TASTE_ACRID, "Acrid");
         add(SFConstants.TRANSLATE_TASTE_FRESH, "Fresh");
+
+        add(SFConstants.TRANSLATE_PREFER_TOOLTIP, "You prefer this food.");
+        add(SFConstants.TRANSLATE_LIKE_TOOLTIP, "You like this food.");
+        add(SFConstants.TRANSLATE_DISLIKE_TOOLTIP, "You dislike this food.");
     }
 }

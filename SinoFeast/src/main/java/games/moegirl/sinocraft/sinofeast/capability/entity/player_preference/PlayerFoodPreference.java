@@ -21,7 +21,12 @@ public class PlayerFoodPreference implements IPlayerFoodPreference {
     public void randomPreference() {
         prefer = FoodTastes.getInstance().randomPrefer(List.of());
         like = FoodTastes.getInstance().randomLike(List.of(prefer));
-        dislike = FoodTastes.getInstance().randomDislike(List.of(prefer, dislike));
+        dislike = FoodTastes.getInstance().randomDislike(List.of(prefer, like));
+    }
+
+    @Override
+    public FoodTaste getPrefer() {
+        return prefer;
     }
 
     @Override
@@ -35,6 +40,11 @@ public class PlayerFoodPreference implements IPlayerFoodPreference {
     }
 
     @Override
+    public FoodTaste getLike() {
+        return like;
+    }
+
+    @Override
     public boolean isLike(FoodTaste taste) {
         return like == taste;
     }
@@ -42,6 +52,11 @@ public class PlayerFoodPreference implements IPlayerFoodPreference {
     @Override
     public void setLike(FoodTaste taste) {
         like = taste;
+    }
+
+    @Override
+    public FoodTaste getDislike() {
+        return dislike;
     }
 
     @Override
