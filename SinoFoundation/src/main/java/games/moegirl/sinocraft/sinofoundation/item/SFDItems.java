@@ -60,6 +60,9 @@ public class SFDItems {
                 .addItem(SULPHUR);
     }
 
+    public static final RegistryObject<Item> BAMBOO_NET = ITEMS.register("bamboo_net", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_HANDLE = ITEMS.register("wooden_handle", () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> IRON_KNIFE = ITEMS.register("iron_knife", () -> new KnifeItem(Tiers.IRON));
     public static final RegistryObject<Item> GOLD_KNIFE = ITEMS.register("gold_knife", () -> new KnifeItem(Tiers.GOLD));
     public static final RegistryObject<Item> DIAMOND_KNIFE = ITEMS.register("diamond_knife", () -> new KnifeItem(Tiers.DIAMOND));

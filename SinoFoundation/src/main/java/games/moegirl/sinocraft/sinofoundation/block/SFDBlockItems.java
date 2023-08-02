@@ -70,6 +70,8 @@ public class SFDBlockItems {
     public static final RegistryObject<BlockItem> WOOD_CHAIRS = ITEMS.register("wood_chairs", () -> new BlockItem(SFDBlocks.WOOD_CHAIRS.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> BAMBOO_PLAQUE = ITEMS.register("bamboo_plaque", () -> new BlockItem(SFDBlocks.BAMBOO_PLAQUE.get(), new Item.Properties()));
 
+    public static final RegistryObject<BlockItem> PURPLE_CLAY = ITEMS.register("purple_clay", () -> new BlockItem(SFDBlocks.PURPLE_CLAY.get(), new Item.Properties()));
+
     public static final RegistryObject<BlockItem> WHITE_RADISH = ITEMS.register("white_radish", () -> new BlockItem(SFDBlocks.WHITE_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
     public static final RegistryObject<BlockItem> SUMMER_RADISH = ITEMS.register("summer_radish", () -> new BlockItem(SFDBlocks.SUMMER_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
     public static final RegistryObject<BlockItem> GREEN_RADISH = ITEMS.register("green_radish", () -> new BlockItem(SFDBlocks.GREEN_RADISH_PLANT.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));

@@ -7,5 +7,8 @@
   "sinofeast.taste.salty": "Salty",
   "sinofeast.taste.sour": "Sour",
   "sinofeast.taste.spicy": "Spicy",
-  "sinofeast.taste.sweet": "Sweet"
+  "sinofeast.taste.sweet": "Sweet",
+  "sinofeast.tooltip.dislike": "You dislike this food.",
+  "sinofeast.tooltip.like": "You like this food.",
+  "sinofeast.tooltip.prefer": "You prefer this food."
 }

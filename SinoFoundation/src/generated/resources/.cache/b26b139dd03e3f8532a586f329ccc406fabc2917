@@ -1,5 +1,6 @@
-// 1.20.1	2023-07-27T07:24:22.3449784	Item Models: sinofoundation
+// 1.20.1	2023-08-02T08:04:50.8584371	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
+891f1680a920f589a2f8f0302d376293cb866fa6 assets/sinofoundation/models/item/bamboo_net.json
 75826318c84174a65f6057c2a52460b033de912a assets/sinofoundation/models/item/bamboo_plaque.json
 d392217821e735d258b160444be8eaa144ec17e8 assets/sinofoundation/models/item/black_jade.json
 8abfd626bfcada6814412e8883c369c707d4fd6e assets/sinofoundation/models/item/black_jade_ore.json
@@ -38,6 +39,7 @@ e692a7eecace55add0c8202adf345f6b5c1c8137 assets/sinofoundation/models/item/marbl
 bd6aed4696cd89b14d761aa2155e35caff1203ad assets/sinofoundation/models/item/nether_sulphur_ore.json
 be527b1cd03076482360d48b74b8f322b486a63e assets/sinofoundation/models/item/niter.json
 8105bb3ea0db45c49e6023ea44711a3dd2005d7b assets/sinofoundation/models/item/niter_ore.json
+fcbb751bbaa331dbc3ec0d02c413ca8b4331d0e6 assets/sinofoundation/models/item/purple_clay.json
 fa3351e8c422ea26b6203a01882a1f94484fd889 assets/sinofoundation/models/item/red_jade.json
 6918a56ce6f29372bebab34e9d8214412cd0bbab assets/sinofoundation/models/item/red_jade_ore.json
 dc10b85007b0123c9b6aeeaf83c62df5dc3370c1 assets/sinofoundation/models/item/rice.json
@@ -57,6 +59,7 @@ bb5fb5a2ad9efa8c96eab52f9d8758d2faf8aa27 assets/sinofoundation/models/item/tree_
 e09cc5f45ce4ad63cbf5e02764efa01bd203eb15 assets/sinofoundation/models/item/white_jade.json
 35d77ff7673b7f316bd6f82d9ede1ee2cb4320ff assets/sinofoundation/models/item/white_jade_ore.json
 eb98780071e32b8be7daa320793347d9874bc9f1 assets/sinofoundation/models/item/white_radish.json
+34f7f9d87c5bcd63ca7e4952a81f109044caf074 assets/sinofoundation/models/item/wooden_handle.json
 b8b299bc12aa0bb474b20de60aae17ccbe107ed9 assets/sinofoundation/models/item/wood_chairs.json
 700285b21c6ef2fcdc02081d1ef049651605e6ce assets/sinofoundation/models/item/wood_desk.json
 67ffc0a09c0ff169f71babe26c54dcb5557f6005 assets/sinofoundation/models/item/wormwood_leaf.json

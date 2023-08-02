@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-20T10:18:28.5404834	Block States: sinofoundation
+// 1.20.1	2023-08-02T08:04:50.8669523	Block States: sinofoundation
 f85e55ab091eacd8b72604edee8295b0aba13fee assets/sinofoundation/blockstates/bamboo_plaque.json
 cae35104c945f9bd6de1d0cd34f60f08c1bcaebd assets/sinofoundation/blockstates/black_jade_ore.json
 86cabb82c723f287e249ce414d11c65f491fd3c2 assets/sinofoundation/blockstates/cabbage_plant.json
@@ -25,6 +25,7 @@ a304162d529300363a02385fdb7290efc4f2cc51 assets/sinofoundation/blockstates/marbl
 320fcb4905761d0aa6fedf038fa0f47098290e11 assets/sinofoundation/blockstates/millet_plant.json
 5b81038fcbb9148a815af4cbf1d09737a3dd42e2 assets/sinofoundation/blockstates/nether_sulphur_ore.json
 e117a4e93753a98e2317cfa893232938a0ab68e9 assets/sinofoundation/blockstates/niter_ore.json
+5125cba0298169c1edf575be16b1598f81dbba3e assets/sinofoundation/blockstates/purple_clay.json
 f627763465f55bda1224e202c1bfbf25f0bb00ca assets/sinofoundation/blockstates/red_jade_ore.json
 bbb2e6c6b8dbe794b87efa0583992300b48bbe72 assets/sinofoundation/blockstates/rice.json
 647c5f1fd880ab53152d7bc95387c08a423922cc assets/sinofoundation/blockstates/sesame.json
@@ -108,6 +109,7 @@ f13d6a835f22f1a6fdd914c773df64b41eff364c assets/sinofoundation/models/block/mill
 1c122d6b14f3776ded836cf79ace27c30d101cfc assets/sinofoundation/models/block/millet_stage_7.json
 f673aed4b0f0f59373d9fa73ba59ff7eea7b8d66 assets/sinofoundation/models/block/nether_sulphur_ore.json
 e1bb477096346d50954f80380e3a89b40204d996 assets/sinofoundation/models/block/niter_ore.json
+c0c88706618c5c7fda6a92cd2e382f73ab1b0bd8 assets/sinofoundation/models/block/purple_clay.json
 b9f435b39bc264e79ce29c0be438dc76cf06a216 assets/sinofoundation/models/block/red_jade_ore.json
 2438df98f9c78bf246f51111bbe9bbe3ee561856 assets/sinofoundation/models/block/rice_stage_bottom_0.json
 b5a1de347cae3c84d717843398bfc86867682012 assets/sinofoundation/models/block/rice_stage_bottom_1.json
