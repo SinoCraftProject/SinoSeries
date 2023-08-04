@@ -30,8 +30,12 @@ public class FoodTastes {
         return foodTastes.get(name);
     }
 
-    void addTaste(ResourceLocation name, FoodTaste taste) {
-        foodTastes.put(name, taste);
+    public Map<ResourceLocation, FoodTaste> getTastes() {
+        return foodTastes;
+    }
+
+    public void addTaste(ResourceLocation key, FoodTaste taste) {
+        foodTastes.put(key, taste);
 
         if (taste.isAdvanced()) {
             maxPreferWeight += taste.likeWeight();
@@ -41,7 +45,7 @@ public class FoodTastes {
         maxDislikeWeight += taste.dislikeWeight();
     }
 
-    void initTastes() {
+    public void initTastes() {
         foodTastes.clear();
 
         maxPreferWeight = 0;

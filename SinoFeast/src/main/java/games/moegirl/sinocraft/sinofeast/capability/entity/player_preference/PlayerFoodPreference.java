@@ -14,7 +14,6 @@ public class PlayerFoodPreference implements IPlayerFoodPreference {
     private FoodTaste dislike;
 
     public PlayerFoodPreference() {
-        randomPreference();
     }
 
     @Override

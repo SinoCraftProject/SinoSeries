@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinofeast;
 import games.moegirl.sinocraft.sinofeast.block.SFBlockItems;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
+import games.moegirl.sinocraft.sinofeast.networking.SFNetworking;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -16,8 +17,12 @@ public class SinoFeast {
 
     private final Logger logger = LoggerFactory.getLogger("SinoFeast");
 
+    private final SFNetworking networking;
+
     public SinoFeast() {
         INSTANCE = this;
+
+        networking = new SFNetworking();
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -32,5 +37,9 @@ public class SinoFeast {
 
     public Logger getLogger() {
         return logger;
+    }
+
+    public SFNetworking getNetworking() {
+        return networking;
     }
 }
