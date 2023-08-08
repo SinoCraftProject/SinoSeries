@@ -1,0 +1,9 @@
+{
+  "dislike_weight": 0,
+  "is_advanced": false,
+  "like_weight": 0,
+  "name": "sinofeast:empty",
+  "taste_key": "sinofeast:tastes/empty",
+  "taste_key_primary": "sinofeast:tastes/primary/empty",
+  "taste_key_secondary": "sinofeast:tastes/secondary/empty"
+}

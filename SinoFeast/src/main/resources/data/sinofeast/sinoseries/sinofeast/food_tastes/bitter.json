@@ -1,9 +1,0 @@
-{
-    "name": "sinofeast.taste.bitter",
-    "is_advanced": false,
-    "like_weight": 5,
-    "dislike_weight": 5,
-    "taste_key": "sinofeast:tastes/bitter",
-    "taste_key_primary": "sinofeast:tastes/primary/bitter",
-    "taste_key_secondary": "sinofeast:tastes/secondary/bitter"
-}

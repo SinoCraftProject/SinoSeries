@@ -5,9 +5,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
-public record FoodTaste(ResourceLocation key, String name, boolean isAdvanced, int likeWeight, int dislikeWeight,
+public record FoodTaste(ResourceLocation key, boolean isAdvanced, int likeWeight, int dislikeWeight,
                         TagKey<Item> tasteKey, TagKey<Item> tasteKeyPrimary, TagKey<Item> tasteKeySecondary) {
     public Component getName() {
-        return Component.translatable(name());
+        return Component.translatable("sinofeast.taste."+key.getPath());
     }
 }

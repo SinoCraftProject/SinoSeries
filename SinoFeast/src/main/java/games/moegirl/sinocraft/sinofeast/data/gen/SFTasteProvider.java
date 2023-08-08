@@ -1,81 +1,102 @@
 package games.moegirl.sinocraft.sinofeast.data.gen;
 
-import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
-import games.moegirl.sinocraft.sinofeast.SFConstants;
 import games.moegirl.sinocraft.sinofeast.SinoFeast;
-import games.moegirl.sinocraft.sinofeast.taste.Taste;
-import games.moegirl.sinocraft.sinofeast.taste.TasteCodec;
-import net.minecraft.core.HolderLookup;
+import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTaste;
+import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTasteCodec;
+import games.moegirl.sinocraft.sinofeast.data.gen.tag.SFItemTags;
 import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.RegistryOps;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.JsonCodecProvider;
 
-import java.nio.file.Path;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class SFTasteProvider implements DataProvider {
-    private final PackOutput output;
-    private final CompletableFuture<HolderLookup.Provider> completableFuture;
-    public static final Set<Taste> tastes = new HashSet<>();
+public class SFTasteProvider extends JsonCodecProvider<FoodTaste> {
+    public static final Map<ResourceLocation, FoodTaste> tastes = new HashMap<>();
 
-    public SFTasteProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
-        this.output = output;
-        this.completableFuture = completableFuture;
+    public SFTasteProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, existingFileHelper, SinoFeast.MODID, JsonOps.INSTANCE, PackType.SERVER_DATA, "food_tastes", FoodTasteCodec.TASTE_CODEC, tastes);
     }
 
     @Override
     public CompletableFuture<?> run(CachedOutput output) {
-        start();
+        addTastes();
 
-        Path path = this.output.getOutputFolder(PackOutput.Target.DATA_PACK)
-                .resolve("sinoseries")
-                .resolve("sinofeast")
-                .resolve("food_tastes");
-
-        List<CompletableFuture<?>> tastesBuilder = new ArrayList<>();
-
-        //根据Codec来生成味道的json文件
-        return completableFuture.thenCompose(provider -> {
-            RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, provider);
-            var codec = TasteCodec.TASTE_CODEC;
-            tastes.forEach(taste -> {
-                Optional<JsonElement> jsonElement = codec.encodeStart(registryOps, taste).resultOrPartial(s -> LOGGER.error("Couldn't serialize element {}: {}", path, s));
-                tastesBuilder.add(DataProvider.saveStable(output,
-                        jsonElement.get(),
-                        path.resolve(taste.key().substring(taste.key().lastIndexOf(".") + 1) + ".json")));
-            });
-            return CompletableFuture.allOf(tastesBuilder.toArray(CompletableFuture[]::new));
-        });
-
-
+        return super.run(output);
     }
 
     /**
      * 在这个方法里面调用其他添加方法
      */
-    public void start() {
-        addTaste(SFConstants.TRANSLATE_TASTE_ACRID,
+    public void addTastes() {
+        addTaste(to("empty"),
                 false,
+                0,0,
+                SFItemTags.EMPTY_TASTES,
+                SFItemTags.PRIMARY_EMPTY_TASTES,
+                SFItemTags.SECONDARY_EMPTY_TASTES);
+        addTaste(to("sour"),
+                false,
+                5,5,
+                SFItemTags.SOUR_TASTES,
+                SFItemTags.PRIMARY_SOUR_TASTES,
+                SFItemTags.SECONDARY_SOUR_TASTES);
+        addTaste(to("sweet"),
+                false,
+                5,5,
+                SFItemTags.SWEET_TASTES,
+                SFItemTags.PRIMARY_SWEET_TASTES,
+                SFItemTags.SECONDARY_SWEET_TASTES);
+        addTaste(to("bitter"),
+                false,
+                5,5,
+                SFItemTags.BITTER_TASTES,
+                SFItemTags.PRIMARY_BITTER_TASTES,
+                SFItemTags.SECONDARY_BITTER_TASTES);
+        addTaste(to("spicy"),
+                false,
+                5,5,
+                SFItemTags.SPICY_TASTES,
+                SFItemTags.PRIMARY_SPICY_TASTES,
+                SFItemTags.SECONDARY_SPICY_TASTES);
+        addTaste(to("salty"),
+                false,
+                5,5,
+                SFItemTags.SALTY_TASTES,
+                SFItemTags.PRIMARY_SALTY_TASTES,
+                SFItemTags.SECONDARY_SALTY_TASTES);
+        addTaste(to("pungent"),
+                true,
+                5,5,
+                SFItemTags.PUNGENT_TASTES,
+                SFItemTags.PRIMARY_PUNGENT_TASTES,
+                SFItemTags.SECONDARY_PUNGENT_TASTES);
+        addTaste(to("acrid"),
+                true,
                 5, 5,
-                ItemTags.DIAMOND_ORES,
-                ItemTags.DIAMOND_ORES,
-                ItemTags.DIAMOND_ORES);
+                SFItemTags.ACRID_TASTES,
+                SFItemTags.PRIMARY_ACRID_TASTES,
+                SFItemTags.SECONDARY_ACRID_TASTES);
+        addTaste(to("fresh"),
+                true,
+                5,5,
+                SFItemTags.FRESH_TASTES,
+                SFItemTags.PRIMARY_FRESH_TASTES,
+                SFItemTags.SECONDARY_FRESH_TASTES);
     }
 
-    public void addTaste(String key, Boolean isAdvanced, int likeWeight, int dislikeWeight, TagKey<Item> tasteKey, TagKey<Item> tasteKeyPrimary, TagKey<Item> tasteKeySecondary) {
-        tastes.add(new Taste(key, isAdvanced, likeWeight, dislikeWeight, tasteKey, tasteKeyPrimary, tasteKeySecondary));
+    public static ResourceLocation to(String name) {
+        return new ResourceLocation(SinoFeast.MODID, name);
     }
 
-    @Override
-    public String getName() {
-        return "Taste Provider:" + SinoFeast.MODID;
+    public void addTaste(ResourceLocation key, Boolean isAdvanced, int likeWeight, int dislikeWeight, TagKey<Item> tasteKey, TagKey<Item> tasteKeyPrimary, TagKey<Item> tasteKeySecondary) {
+        tastes.put(key, new FoodTaste(key, isAdvanced, likeWeight, dislikeWeight, tasteKey, tasteKeyPrimary, tasteKeySecondary));
     }
-
-
 }

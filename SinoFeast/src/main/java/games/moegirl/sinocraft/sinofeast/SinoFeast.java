@@ -4,10 +4,8 @@ import games.moegirl.sinocraft.sinofeast.block.SFBlockItems;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
 import games.moegirl.sinocraft.sinofeast.networking.SFNetworking;
-import games.moegirl.sinocraft.sinofeast.taste.TasteCodec;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DataPackRegistryEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +29,6 @@ public class SinoFeast {
         SFBlocks.register(bus);
         SFBlockItems.register(bus);
         SFItems.register(bus);
-
-        bus.addListener((DataPackRegistryEvent.NewRegistry event) ->
-                event.dataPackRegistry(TasteCodec.TASTE_KEY, TasteCodec.TASTE_CODEC, TasteCodec.TASTE_CODEC));
 
     }
 

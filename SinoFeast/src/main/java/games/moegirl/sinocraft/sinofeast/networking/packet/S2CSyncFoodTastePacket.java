@@ -1,10 +1,10 @@
 package games.moegirl.sinocraft.sinofeast.networking.packet;
 
 import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTaste;
+import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTasteCodec;
 import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTastes;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.ArrayList;
@@ -23,11 +23,8 @@ public class S2CSyncFoodTastePacket {
         var count = buf.readVarInt();
 
         for (var i = 0; i < count; i++) {
-            tastes.add(new FoodTaste(new ResourceLocation(buf.readUtf()),
-                    buf.readUtf(), buf.readBoolean(), buf.readVarInt(), buf.readVarInt(),
-                    ItemTags.create(new ResourceLocation(buf.readUtf())),
-                    ItemTags.create(new ResourceLocation(buf.readUtf())),
-                    ItemTags.create(new ResourceLocation(buf.readUtf()))));
+            tastes.add(buf.readWithCodec(NbtOps.INSTANCE,FoodTasteCodec.TASTE_CODEC));
+
         }
     }
 
@@ -35,14 +32,7 @@ public class S2CSyncFoodTastePacket {
         buf.writeVarInt(tastes.size());
 
         for (var taste : tastes) {
-            buf.writeUtf(taste.key().toString());
-            buf.writeUtf(taste.name());
-            buf.writeBoolean(taste.isAdvanced());
-            buf.writeVarInt(taste.likeWeight());
-            buf.writeVarInt(taste.dislikeWeight());
-            buf.writeUtf(taste.tasteKey().location().toString());
-            buf.writeUtf(taste.tasteKeyPrimary().location().toString());
-            buf.writeUtf(taste.tasteKeySecondary().location().toString());
+            buf.writeWithCodec(NbtOps.INSTANCE,FoodTasteCodec.TASTE_CODEC,taste);
         }
     }
 
