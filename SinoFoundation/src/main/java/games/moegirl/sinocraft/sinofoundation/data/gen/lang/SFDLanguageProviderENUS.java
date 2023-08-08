@@ -89,6 +89,8 @@ public class SFDLanguageProviderENUS extends AbstractLanguageProvider {
         addBlock(SFDBlocks.WORMWOOD, "Wormwood");
         addBlock(SFDBlocks.RICE, "Glutinous Rise");
         addBlock(SFDBlocks.SESAME, "Jusheng");
+        addBlock(SFDBlocks.LANTERN, "Lantern");
+        addBlock(SFDBlocks.STONE_LANTERN, "Stone Lantern");
 
         addItem(SFDBlockItems.CHILI_PEPPER_SEED, "Chili Pepper Seed");
         addItem(SFDBlockItems.GREEN_PEPPER_SEED, "Green Pepper Seed");

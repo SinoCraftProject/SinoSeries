@@ -20,6 +20,8 @@ public class SFDBlockTags {
     public static final TagKey<Block> JUJUBE_BLOCK = block("jujube");
     public static final TagKey<Block> SPAWN_DRAGONLIVER_MELON = block("spawn_dragonliver_melon");
 
+    public static final TagKey<Block> LANTERN = block("lantern");
+
     private static TagKey<Block> block(String name) {
         return TagKey.create(Registries.BLOCK, new ResourceLocation(SinoFoundation.MODID, name));
     }

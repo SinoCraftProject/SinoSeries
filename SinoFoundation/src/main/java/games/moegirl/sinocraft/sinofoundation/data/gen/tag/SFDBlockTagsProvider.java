@@ -55,5 +55,7 @@ public class SFDBlockTagsProvider extends AbstractBlockTagsProvider {
 
         chest(SFDBlocks.JUJUBE_CHEST, SFDBlockTags.JUJUBE_BLOCK, false);
         chest(SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDBlockTags.JUJUBE_BLOCK, true);
+
+        tag(SFDBlockTags.LANTERN).add(SFDBlocks.LANTERN.get(), SFDBlocks.STONE_LANTERN.get());
     }
 }

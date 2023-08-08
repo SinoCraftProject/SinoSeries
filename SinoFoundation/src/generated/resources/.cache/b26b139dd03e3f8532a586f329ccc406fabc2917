@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-02T08:04:50.8584371	Item Models: sinofoundation
+// 1.20.1	2023-08-05T15:28:54.1261288	Item Models: sinofoundation
 483fd66ccb872a674f9fbde621dca7e565700792 assets/sinofoundation/models/item/ashes.json
 891f1680a920f589a2f8f0302d376293cb866fa6 assets/sinofoundation/models/item/bamboo_net.json
 75826318c84174a65f6057c2a52460b033de912a assets/sinofoundation/models/item/bamboo_plaque.json
@@ -29,6 +29,7 @@ ab8482fc5b2d794a5a323eedb850bb6ff4225c31 assets/sinofoundation/models/item/iron_
 624fe519ab57566201e14185cb6a26a3f941a0a8 assets/sinofoundation/models/item/jujube.json
 749efb11ef6da9b693dee12db38652bd892218a1 assets/sinofoundation/models/item/jujube_chest.json
 749efb11ef6da9b693dee12db38652bd892218a1 assets/sinofoundation/models/item/jujube_trapped_chest.json
+9affee0f0782a90143f3d975fd406a13e2200bbd assets/sinofoundation/models/item/lantern.json
 100cc24483aceefc1a312b8500c629707626d721 assets/sinofoundation/models/item/marble_block.json
 4d607f70aaec3c64b4c3c35b57e827455ab2cb6b assets/sinofoundation/models/item/marble_pillar.json
 13c7123a9d8331c84e8811f5da310a35eb666601 assets/sinofoundation/models/item/marble_slab.json
@@ -51,6 +52,7 @@ e45dff50f2fa5da8c5b0cd18839676c30355b6de assets/sinofoundation/models/item/seed_
 48eaa7d6ec2b3df51cefa17fcb7a5fb0f47594ac assets/sinofoundation/models/item/smooth_marble_slab.json
 12e6787df120a268f7c42844e7533e7a1648820b assets/sinofoundation/models/item/smooth_marble_stairs.json
 3f7a73d18b347f6bfdea24e279638f4be453598b assets/sinofoundation/models/item/soybean.json
+a880cd71ea93ab90ae4b7f9902d8337728c62753 assets/sinofoundation/models/item/stone_lantern.json
 6608973656121f0814f41042e4b8001c6df4ed2d assets/sinofoundation/models/item/stove.json
 e47da2372a1b7f59db8d839e73d1f26cad5ae3f5 assets/sinofoundation/models/item/sulfur.json
 d190664467f376559ce4224a82de03e5f493e62c assets/sinofoundation/models/item/sulphur_ore.json
