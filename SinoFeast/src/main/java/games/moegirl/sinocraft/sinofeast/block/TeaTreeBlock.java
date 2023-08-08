@@ -37,6 +37,8 @@ public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
     public static final IntegerProperty PERIODS = IntegerProperty.create("periods", 0, 60);
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 15);     // qyl27: according to document.
 
+    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
+
     public TeaTreeBlock() {
         super(Properties.copy(Blocks.GRASS)
                 .offsetType(OffsetType.NONE)
@@ -71,8 +73,13 @@ public class TeaTreeBlock extends BushBlock implements BonemealableBlock {
                 && entity instanceof LivingEntity
                 && entity.getType() != EntityType.FOX
                 && entity.getType() != EntityType.BEE) {
-            entity.makeStuckInBlock(state, new Vec3(0.8F, 1.0D, 0.8F));
+            entity.makeStuckInBlock(state, new Vec3(0.8, 1.0, 0.8));
         }
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override

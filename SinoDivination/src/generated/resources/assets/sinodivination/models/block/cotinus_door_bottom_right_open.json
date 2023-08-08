@@ -2,7 +2,7 @@
   "parent": "minecraft:block/door_bottom_right_open",
   "render_type": "minecraft:cutout_mipped",
   "textures": {
-    "bottom": "sinodivination:block/cotinus_planks",
-    "top": "sinodivination:block/cotinus_planks"
+    "bottom": "sinodivination:block/cotinus_door_bottom",
+    "top": "sinodivination:block/cotinus_door_top"
   }
 }

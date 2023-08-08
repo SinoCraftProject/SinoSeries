@@ -37,11 +37,11 @@
 		{
 			"name": "top-d",
 			"from": [1, 14, 0],
-			"to": [15, 15, 16],
+			"to": [16, 15, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 14, 1], "texture": "#1"},
+				"north": {"uv": [0, 0, 15, 1], "texture": "#1"},
 				"east": {"uv": [0, 0, 16, 1], "texture": "#1"},
-				"south": {"uv": [0, 0, 14, 1], "texture": "#1"},
+				"south": {"uv": [0, 0, 15, 1], "texture": "#1"},
 				"west": {"uv": [0, 0, 16, 1], "texture": "#1"},
 				"up": {"uv": [0, 0, 14, 16], "texture": "#1"},
 				"down": {"uv": [0, 0, 14, 16], "texture": "#1"}
@@ -75,6 +75,11 @@
 		}
 	],
 	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
 		"firstperson_righthand": {
 			"rotation": [0, 45, 0],
 			"scale": [0.4, 0.4, 0.4]
