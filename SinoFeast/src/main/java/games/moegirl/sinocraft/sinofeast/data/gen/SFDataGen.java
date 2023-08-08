@@ -35,6 +35,8 @@ public class SFDataGen {
             var blockTagsProvider = new SFBlockTagsProvider(output, lookupProvider, SinoFeast.MODID, exHelper);
             gen.addProvider(true, blockTagsProvider);
             gen.addProvider(true, new SFItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), SinoFeast.MODID, exHelper));
+
+            gen.addProvider(true, new SFTasteProvider(output, lookupProvider));
         }
     }
 }

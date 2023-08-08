@@ -1,0 +1,9 @@
+{
+  "dislike_weight": 5,
+  "is_advanced": false,
+  "like_weight": 5,
+  "name": "sinofeast.taste.acrid",
+  "taste_key": "minecraft:diamond_ores",
+  "taste_key_primary": "minecraft:diamond_ores",
+  "taste_key_secondary": "minecraft:diamond_ores"
+}

@@ -47,7 +47,7 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
 
     @Override
     public String getName() {
-        return "SinoFeast: Food Tastes Reload Listener";
+        return "SinoFeast: Food TasteCodec Reload Listener";
     }
 
     @SubscribeEvent
