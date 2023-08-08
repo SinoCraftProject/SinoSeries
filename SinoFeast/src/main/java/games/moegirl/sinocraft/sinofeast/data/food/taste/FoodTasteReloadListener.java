@@ -2,12 +2,12 @@ package games.moegirl.sinocraft.sinofeast.data.food.taste;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinofeast.SinoFeast;
 import games.moegirl.sinocraft.sinofeast.networking.packet.S2CSyncFoodTastePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
@@ -29,25 +29,16 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
         FoodTastes.getInstance().initTastes();
 
         for (var entry : map.entrySet()) {
-            var key = entry.getKey();
-            var json = entry.getValue().getAsJsonObject();
-            var name = json.get("name").getAsString();
-            var isAdvanced = json.get("is_advanced").getAsBoolean();
-            var likeWeight = json.get("like_weight").getAsInt();
-            var dislikeWeight = json.get("dislike_weight").getAsInt();
-            var tasteKey = json.get("taste_key").getAsString();
-            var tasteKeyPrimary = json.get("taste_key_primary").getAsString();
-            var tasteKeySecondary = json.get("taste_key_secondary").getAsString();
-            FoodTastes.getInstance().addTaste(key, new FoodTaste(key, name, isAdvanced, likeWeight, dislikeWeight,
-                    ItemTags.create(new ResourceLocation(tasteKey)),
-                    ItemTags.create(new ResourceLocation(tasteKeyPrimary)),
-                    ItemTags.create(new ResourceLocation(tasteKeySecondary))));
+
+            FoodTaste first = FoodTasteCodec.TASTE_CODEC.decode(JsonOps.INSTANCE, entry.getValue()).get().orThrow().getFirst();
+
+            FoodTastes.getInstance().addTaste(first.getKey(),first);
         }
     }
 
     @Override
     public String getName() {
-        return "SinoFeast: Food TasteCodec Reload Listener";
+        return "SinoFeast: Food Tastes Reload Listener";
     }
 
     @SubscribeEvent

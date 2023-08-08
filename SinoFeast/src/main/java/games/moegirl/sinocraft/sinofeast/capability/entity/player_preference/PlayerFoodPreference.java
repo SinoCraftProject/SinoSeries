@@ -72,9 +72,9 @@ public class PlayerFoodPreference implements IPlayerFoodPreference {
     public CompoundTag serializeNBT() {
         var tag = new CompoundTag();
 
-        tag.putString(SFConstants.TAG_PREFER_TASTE_NAME, prefer.key().toString());
-        tag.putString(SFConstants.TAG_LIKE_TASTE_NAME, like.key().toString());
-        tag.putString(SFConstants.TAG_DISLIKE_TASTE_NAME, dislike.key().toString());
+        tag.putString(SFConstants.TAG_PREFER_TASTE_NAME, prefer.getKey().toString());
+        tag.putString(SFConstants.TAG_LIKE_TASTE_NAME, like.getKey().toString());
+        tag.putString(SFConstants.TAG_DISLIKE_TASTE_NAME, dislike.getKey().toString());
 
         return tag;
     }

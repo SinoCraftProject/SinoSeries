@@ -2,7 +2,10 @@ package games.moegirl.sinocraft.sinofeast.data.food.taste;
 
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class FoodTastes {
     private static final Random RAND = new Random();

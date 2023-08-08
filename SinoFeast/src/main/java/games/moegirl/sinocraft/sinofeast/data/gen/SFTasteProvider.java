@@ -4,8 +4,8 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinofeast.SFConstants;
 import games.moegirl.sinocraft.sinofeast.SinoFeast;
-import games.moegirl.sinocraft.sinofeast.taste.Taste;
-import games.moegirl.sinocraft.sinofeast.taste.TasteCodec;
+import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTaste;
+import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTasteCodec;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -22,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 public class SFTasteProvider implements DataProvider {
     private final PackOutput output;
     private final CompletableFuture<HolderLookup.Provider> completableFuture;
-    public static final Set<Taste> tastes = new HashSet<>();
+    public static final Set<FoodTaste> tastes = new HashSet<>();
 
     public SFTasteProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
         this.output = output;
@@ -34,6 +34,7 @@ public class SFTasteProvider implements DataProvider {
         start();
 
         Path path = this.output.getOutputFolder(PackOutput.Target.DATA_PACK)
+                .resolve("sinofeast")
                 .resolve("sinoseries")
                 .resolve("sinofeast")
                 .resolve("food_tastes");
@@ -43,12 +44,12 @@ public class SFTasteProvider implements DataProvider {
         //根据Codec来生成味道的json文件
         return completableFuture.thenCompose(provider -> {
             RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, provider);
-            var codec = TasteCodec.TASTE_CODEC;
+            var codec = FoodTasteCodec.TASTE_CODEC;
             tastes.forEach(taste -> {
                 Optional<JsonElement> jsonElement = codec.encodeStart(registryOps, taste).resultOrPartial(s -> LOGGER.error("Couldn't serialize element {}: {}", path, s));
                 tastesBuilder.add(DataProvider.saveStable(output,
                         jsonElement.get(),
-                        path.resolve(taste.key().substring(taste.key().lastIndexOf(".") + 1) + ".json")));
+                        path.resolve(taste.getKey().getPath() + ".json")));
             });
             return CompletableFuture.allOf(tastesBuilder.toArray(CompletableFuture[]::new));
         });
@@ -68,8 +69,8 @@ public class SFTasteProvider implements DataProvider {
                 ItemTags.DIAMOND_ORES);
     }
 
-    public void addTaste(String key, Boolean isAdvanced, int likeWeight, int dislikeWeight, TagKey<Item> tasteKey, TagKey<Item> tasteKeyPrimary, TagKey<Item> tasteKeySecondary) {
-        tastes.add(new Taste(key, isAdvanced, likeWeight, dislikeWeight, tasteKey, tasteKeyPrimary, tasteKeySecondary));
+    public void addTaste(String name, Boolean isAdvanced, int likeWeight, int dislikeWeight, TagKey<Item> tasteKey, TagKey<Item> tasteKeyPrimary, TagKey<Item> tasteKeySecondary) {
+        tastes.add(new FoodTaste(name, isAdvanced, likeWeight, dislikeWeight, tasteKey, tasteKeyPrimary, tasteKeySecondary));
     }
 
     @Override

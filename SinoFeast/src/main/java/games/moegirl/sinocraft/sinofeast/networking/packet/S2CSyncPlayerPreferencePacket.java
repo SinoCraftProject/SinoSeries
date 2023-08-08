@@ -28,9 +28,9 @@ public class S2CSyncPlayerPreferencePacket {
     }
 
     public void serialize(FriendlyByteBuf buf) {
-        buf.writeUtf(prefer.key().toString());
-        buf.writeUtf(like.key().toString());
-        buf.writeUtf(dislike.key().toString());
+        buf.writeUtf(prefer.getKey().toString());
+        buf.writeUtf(like.getKey().toString());
+        buf.writeUtf(dislike.getKey().toString());
     }
 
     public void handle(Supplier<NetworkEvent.Context> context) {
