@@ -3,12 +3,13 @@ package games.moegirl.sinocraft.sinofeast.data.food.taste;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 
 public class FoodTasteCodec {
     public static final Codec<FoodTaste> TASTE_CODEC = RecordCodecBuilder.create(builder ->
             builder.group(
-                    Codec.STRING.fieldOf("name").forGetter(FoodTaste::name),
+                    ResourceLocation.CODEC.fieldOf("name").forGetter(FoodTaste::key),
                     Codec.BOOL.fieldOf("is_advanced").forGetter(FoodTaste::isAdvanced),
                     Codec.INT.fieldOf("like_weight").forGetter(FoodTaste::likeWeight),
                     Codec.INT.fieldOf("dislike_weight").forGetter(FoodTaste::dislikeWeight),

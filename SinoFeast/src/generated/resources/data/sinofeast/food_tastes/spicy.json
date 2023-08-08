@@ -1,0 +1,9 @@
+{
+  "dislike_weight": 5,
+  "is_advanced": false,
+  "like_weight": 5,
+  "name": "sinofeast:spicy",
+  "taste_key": "sinofeast:tastes/spicy",
+  "taste_key_primary": "sinofeast:tastes/primary/spicy",
+  "taste_key_secondary": "sinofeast:tastes/secondary/spicy"
+}

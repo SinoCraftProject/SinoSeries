@@ -1,0 +1,9 @@
+{
+  "dislike_weight": 5,
+  "is_advanced": false,
+  "like_weight": 5,
+  "name": "sinofeast:salty",
+  "taste_key": "sinofeast:tastes/salty",
+  "taste_key_primary": "sinofeast:tastes/primary/salty",
+  "taste_key_secondary": "sinofeast:tastes/secondary/salty"
+}

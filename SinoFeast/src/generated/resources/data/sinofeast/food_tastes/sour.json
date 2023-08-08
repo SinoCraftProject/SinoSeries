@@ -1,0 +1,9 @@
+{
+  "dislike_weight": 5,
+  "is_advanced": false,
+  "like_weight": 5,
+  "name": "sinofeast:sour",
+  "taste_key": "sinofeast:tastes/sour",
+  "taste_key_primary": "sinofeast:tastes/primary/sour",
+  "taste_key_secondary": "sinofeast:tastes/secondary/sour"
+}

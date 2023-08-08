@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinofeast.networking.packet;
 import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTaste;
 import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTasteCodec;
 import games.moegirl.sinocraft.sinofeast.data.food.taste.FoodTastes;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -22,7 +23,7 @@ public class S2CSyncFoodTastePacket {
         var count = buf.readVarInt();
 
         for (var i = 0; i < count; i++) {
-            tastes.add(buf.readJsonWithCodec(FoodTasteCodec.TASTE_CODEC));
+            tastes.add(buf.readWithCodec(NbtOps.INSTANCE,FoodTasteCodec.TASTE_CODEC));
 
         }
     }
@@ -31,7 +32,7 @@ public class S2CSyncFoodTastePacket {
         buf.writeVarInt(tastes.size());
 
         for (var taste : tastes) {
-            buf.writeJsonWithCodec(FoodTasteCodec.TASTE_CODEC,taste);
+            buf.writeWithCodec(NbtOps.INSTANCE,FoodTasteCodec.TASTE_CODEC,taste);
         }
     }
 
@@ -40,7 +41,7 @@ public class S2CSyncFoodTastePacket {
             FoodTastes.getInstance().initTastes();
 
             for (var taste : tastes) {
-                FoodTastes.getInstance().addTaste(taste.getKey(), taste);
+                FoodTastes.getInstance().addTaste(taste.key(), taste);
             }
         });
     }

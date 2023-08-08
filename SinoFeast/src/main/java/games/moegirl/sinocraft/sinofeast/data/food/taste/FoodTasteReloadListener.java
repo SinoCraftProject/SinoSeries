@@ -21,7 +21,7 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = new Gson();
 
     public FoodTasteReloadListener() {
-        super(GSON, "sinoseries/sinofeast/food_tastes");
+        super(GSON, "food_tastes");
     }
 
     @Override
@@ -30,9 +30,9 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
 
         for (var entry : map.entrySet()) {
 
-            FoodTaste first = FoodTasteCodec.TASTE_CODEC.decode(JsonOps.INSTANCE, entry.getValue()).get().orThrow().getFirst();
+            FoodTaste first = FoodTasteCodec.TASTE_CODEC.parse(JsonOps.INSTANCE, entry.getValue()).get().orThrow();
 
-            FoodTastes.getInstance().addTaste(first.getKey(),first);
+            FoodTastes.getInstance().addTaste(first.key(),first);
         }
     }
 

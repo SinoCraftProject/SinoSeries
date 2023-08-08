@@ -1,0 +1,9 @@
+{
+  "dislike_weight": 5,
+  "is_advanced": false,
+  "like_weight": 5,
+  "name": "sinofeast:sweet",
+  "taste_key": "sinofeast:tastes/sweet",
+  "taste_key_primary": "sinofeast:tastes/primary/sweet",
+  "taste_key_secondary": "sinofeast:tastes/secondary/sweet"
+}
