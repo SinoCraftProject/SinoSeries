@@ -205,13 +205,11 @@ public class TreeBuilder {
      * @param blockEntity   BlockEntity.
      * @return Builder
      */
-    public TreeBuilder blockEntity(TreeBlockType treeBlockType, @Nullable Function3<Tree, BlockPos, BlockState, BlockEntity> blockEntity) {
+    public TreeBuilder blockEntity(TreeBlockType treeBlockType, Function3<Tree, BlockPos, BlockState, BlockEntity> blockEntity) {
         TreeBlockFactory factory = treeBlocks.get(treeBlockType);
-        factory.blockEntityBuilder = factory.wrapBlockEntity(tree ->
-                BlockEntityType.Builder.of((pos, state) -> {
-                    assert blockEntity != null;
-                    return blockEntity.apply(tree, pos, state);
-                }, tree.getBlock(treeBlockType)).build(null));
+        factory.blockEntityBuilder = factory.wrapBlockEntity(tree -> BlockEntityType.Builder
+                .of((pos, state) -> blockEntity.apply(tree, pos, state), tree.getBlock(treeBlockType))
+                .build(null));
         return this;
     }
 
