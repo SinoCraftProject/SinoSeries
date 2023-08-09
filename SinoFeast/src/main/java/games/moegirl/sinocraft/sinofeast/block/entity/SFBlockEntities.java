@@ -16,11 +16,11 @@ public class SFBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SinoFeast.MODID);
 
-    public static final Supplier<BlockEntityType<CoppingBoardBlockEntity>> COPPING_BOARD_BLOCK_ENTITY = BLOCK_ENTITIES.register("copping_board", () ->
+    public static final Supplier<BlockEntityType<ChoppingBoardBlockEntity>> CHOPPING_BOARD_BLOCK_ENTITY = BLOCK_ENTITIES.register("chopping_board", () ->
             BlockEntityType
                     .Builder
-                    .of(CoppingBoardBlockEntity::new,
-                            SFBlocks.COPPING_BOARD_BLOCK.get()).build(null));
+                    .of(ChoppingBoardBlockEntity::new,
+                            SFBlocks.CHOPPING_BOARD_BLOCK.get()).build(null));
 
 
 }

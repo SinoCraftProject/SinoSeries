@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinofeast.block;
 
 import games.moegirl.sinocraft.sinocore.block.AbstractEntityBlock;
-import games.moegirl.sinocraft.sinofeast.block.entity.CoppingBoardBlockEntity;
+import games.moegirl.sinocraft.sinofeast.block.entity.ChoppingBoardBlockEntity;
 import games.moegirl.sinocraft.sinofeast.block.entity.SFBlockEntities;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
 import games.moegirl.sinocraft.sinofeast.utility.IFood;
@@ -22,11 +22,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 
-public class CoppingBoardBlock extends AbstractEntityBlock<CoppingBoardBlockEntity> {
+public class ChoppingBoardBlock extends AbstractEntityBlock<ChoppingBoardBlockEntity> {
     public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 2, 14);
 
-    public CoppingBoardBlock() {
-        super(Properties.of(), SFBlockEntities.COPPING_BOARD_BLOCK_ENTITY);
+    public ChoppingBoardBlock() {
+        super(Properties.of(), SFBlockEntities.CHOPPING_BOARD_BLOCK_ENTITY);
     }
 
     @Override
@@ -40,26 +40,26 @@ public class CoppingBoardBlock extends AbstractEntityBlock<CoppingBoardBlockEnti
         if (hand == InteractionHand.MAIN_HAND) {
 
             ItemStack itemInHand = player.getItemInHand(hand);
-            if (state.getBlock() instanceof CoppingBoardBlock coppingBoardBlock) {
-                CoppingBoardBlockEntity blockEntity = coppingBoardBlock.getBlockEntity(level, pos);
+            if (state.getBlock() instanceof ChoppingBoardBlock choppingBoardBlock) {
+                ChoppingBoardBlockEntity blockEntity = choppingBoardBlock.getBlockEntity(level, pos);
                 IItemHandler iItemHandler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(RuntimeException::new);
-                ItemStack inFood = iItemHandler.getStackInSlot(CoppingBoardBlockEntity.INPUT);
+                ItemStack inFood = iItemHandler.getStackInSlot(ChoppingBoardBlockEntity.INPUT);
                 if (itemInHand.is(SFItems.KITCHEN_KNIFE.get())) {
 
                     ItemStack copy = inFood.copy();
                     inFood.setCount(inFood.getCount() - 1);
                     copy.setCount(1);
                     copy.addTagElement("shred", ByteTag.valueOf(true));
-                    iItemHandler.insertItem(CoppingBoardBlockEntity.OUTPUT, copy, false);
+                    iItemHandler.insertItem(ChoppingBoardBlockEntity.OUTPUT, copy, false);
 
                 } else if (itemInHand.isEmpty()) {
                     if (player.isShiftKeyDown()) {
-                        ItemStack outItem = iItemHandler.extractItem(CoppingBoardBlockEntity.OUTPUT, 64, false);
+                        ItemStack outItem = iItemHandler.extractItem(ChoppingBoardBlockEntity.OUTPUT, 64, false);
                         if (!outItem.isEmpty()) {
                             level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY() + 0.5, pos.getZ(), outItem));
                         }
                     } else {
-                        ItemStack inItem = iItemHandler.extractItem(CoppingBoardBlockEntity.INPUT, 64, false);
+                        ItemStack inItem = iItemHandler.extractItem(ChoppingBoardBlockEntity.INPUT, 64, false);
                         if (!inItem.isEmpty()) {
                             level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY() + 0.5, pos.getZ(), inItem));
                         }
@@ -67,7 +67,7 @@ public class CoppingBoardBlock extends AbstractEntityBlock<CoppingBoardBlockEnti
 
 
                 } else if (itemInHand.getItem() instanceof IFood){
-                    player.setItemInHand(hand, iItemHandler.insertItem(CoppingBoardBlockEntity.INPUT, itemInHand, false));
+                    player.setItemInHand(hand, iItemHandler.insertItem(ChoppingBoardBlockEntity.INPUT, itemInHand, false));
                 }
             }
         }

@@ -14,21 +14,22 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CoppingBoardBlockEntity extends BlockEntity {
+public class ChoppingBoardBlockEntity extends BlockEntity {
     public static final int INPUT = 0;
     public static final int OUTPUT = 1;
     private LazyOptional<IItemHandler> foodHandler;
-    public static final String FOOD = "food";
-    public CoppingBoardBlockEntity(BlockPos arg2, BlockState arg3) {
-        super(SFBlockEntities.COPPING_BOARD_BLOCK_ENTITY.get(), arg2, arg3);
+    public static final String INPUT_FOOD = "input_food";
+    public static final String OUTPUT_FOOD = "output_food";
+    public ChoppingBoardBlockEntity(BlockPos arg2, BlockState arg3) {
+        super(SFBlockEntities.CHOPPING_BOARD_BLOCK_ENTITY.get(), arg2, arg3);
     }
 
     @Override
     public void handleUpdateTag(CompoundTag tag) {
         super.handleUpdateTag(tag);
         var food = getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(RuntimeException::new);
-        deserializeCaps(tag);
-        food.insertItem(0, ItemStack.of(tag.getCompound(FOOD)),false);
+        food.insertItem(INPUT, ItemStack.of(tag.getCompound(INPUT_FOOD)),false);
+        food.insertItem(OUTPUT,ItemStack.of(tag.getCompound(OUTPUT_FOOD)),false);
     }
 
     @NotNull
@@ -36,9 +37,8 @@ public class CoppingBoardBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag() {
         CompoundTag tag = super.getUpdateTag();
         var food = getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(RuntimeException::new);
-        invalidateCaps();
-        tag.put(FOOD, food.getStackInSlot(0).serializeNBT());
-
+        tag.put(INPUT_FOOD, food.getStackInSlot(INPUT).serializeNBT());
+        tag.put(OUTPUT_FOOD,food.getStackInSlot(OUTPUT).serializeNBT());
         return tag;
     }
 
