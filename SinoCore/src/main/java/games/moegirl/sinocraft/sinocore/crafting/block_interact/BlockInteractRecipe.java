@@ -18,6 +18,7 @@ import javax.annotation.Nullable;
 /**
  * @author luqin2007
  */
+@Deprecated
 public class BlockInteractRecipe extends SimpleRecipe<BlockInteractRecipeContainer, BlockInteractRecipe, BlockInteractRecipeSerializer> {
 
     final Ingredient tool;
