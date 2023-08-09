@@ -15,4 +15,6 @@ public class SFBlocks {
     }
 
     public static final RegistryObject<Block> TEA_TREE_BLOCK = BLOCKS.register("tea_tree", TeaTreeBlock::new);
+
+    public static final RegistryObject<Block> COPPING_BOARD_BLOCK = BLOCKS.register("copping_board", CoppingBoardBlock::new);
 }

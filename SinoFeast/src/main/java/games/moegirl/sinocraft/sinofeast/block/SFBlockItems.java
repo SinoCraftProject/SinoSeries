@@ -6,7 +6,6 @@ import games.moegirl.sinocraft.sinofoundation.item.SinoSeriesTabs;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,7 +19,11 @@ public class SFBlockItems {
 
         TabsRegistry.items(SinoSeriesTabs.AGRICULTURE)
                 .addItem(TEA_TREE);
+
+        TabsRegistry.items(SinoSeriesTabs.FUNCTIONAL_BLOCKS)
+                .addItem(COPPING_BOARD);
     }
 
     public static final RegistryObject<BlockItem> TEA_TREE = BLOCK_ITEMS.register("tea_tree", () -> new ItemNameBlockItem(SFBlocks.TEA_TREE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> COPPING_BOARD = BLOCK_ITEMS.register("copping_board", () -> new ItemNameBlockItem(SFBlocks.COPPING_BOARD_BLOCK.get(), new Item.Properties()));
 }
