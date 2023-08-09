@@ -10,6 +10,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -73,6 +74,9 @@ public class SFDBlocks {
     public static final RegistryObject<SimpleCropBlock<Item>> WORMWOOD = crop3(() -> SFDItems.WORMWOOD_LEAF, "wormwood", 2, 2);
     public static final RegistryObject<Rice> RICE = block(Rice.class);
     public static final RegistryObject<SimpleCropBlock<Item>> SESAME = crop3(() -> SFDItems.SESAME, "sesame", 3, 3);
+
+    public static final RegistryObject<Lantern> LANTERN = block("lantern", () -> new Lantern(3.5f, MapColor.METAL));
+    public static final RegistryObject<Lantern> STONE_LANTERN = block("stone_lantern", () -> new Lantern(5.0f, MapColor.STONE));
 
     private static <T extends Block> RegistryObject<T> block(Class<T> blockClass) {
         return BLOCKS.register(NameUtils.to_snake_name(blockClass.getSimpleName()), Functions.constructor(blockClass));

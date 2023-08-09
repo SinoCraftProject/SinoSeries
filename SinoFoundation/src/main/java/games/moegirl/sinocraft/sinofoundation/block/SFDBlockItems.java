@@ -62,7 +62,9 @@ public class SFDBlockItems {
                 .addItem(NITER_ORE)
                 .addItem(SULPHUR_ORE)
                 .addItem(NETHER_SULPHUR_ORE)
-                .addItem(DEEPSLATE_SULPHUR_ORE);
+                .addItem(DEEPSLATE_SULPHUR_ORE)
+                .addItem(LANTERN)
+                .addItem(STONE_LANTERN);
     }
 
     public static final RegistryObject<BlockItem> STOVE = ITEMS.register("stove", () -> new BlockItem(SFDBlocks.STOVE.get(), new Item.Properties()));
@@ -111,4 +113,7 @@ public class SFDBlockItems {
 
     public static final RegistryObject<BaseChestItem> JUJUBE_CHEST = ITEMS.register("jujube_chest", () -> BaseChestItem.create(SFDBlocks.JUJUBE_CHEST, SFDBlockEntities.JUJUBE_CHEST));
     public static final RegistryObject<BaseChestItem> JUJUBE_TRAPPED_CHEST = ITEMS.register("jujube_trapped_chest", () -> BaseChestItem.create(SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDBlockEntities.JUJUBE_TRAPPED_CHEST));
+
+    public static final RegistryObject<BlockItem> LANTERN = ITEMS.register("lantern", () -> new BlockItem(SFDBlocks.LANTERN.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> STONE_LANTERN = ITEMS.register("stone_lantern", () -> new BlockItem(SFDBlocks.STONE_LANTERN.get(), new Item.Properties()));
 }

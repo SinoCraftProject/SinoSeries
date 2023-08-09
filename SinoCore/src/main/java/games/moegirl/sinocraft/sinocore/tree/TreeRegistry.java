@@ -45,6 +45,7 @@ public final class TreeRegistry {
         var blockEntityRegister = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, modid);
         var itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
         blockRegister.register(bus);
+        blockEntityRegister.register(bus);
         itemRegister.register(bus);
 
         bus.register(new TreeGatherDataListener(modid));
