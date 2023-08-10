@@ -22,7 +22,7 @@ public class SFTasteProvider extends JsonCodecProvider<FoodTaste> {
     public static final Map<ResourceLocation, FoodTaste> tastes = new HashMap<>();
 
     public SFTasteProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, existingFileHelper, SinoFeast.MODID, JsonOps.INSTANCE, PackType.SERVER_DATA, "food_tastes", FoodTasteCodec.TASTE_CODEC, tastes);
+        super(output, existingFileHelper, SinoFeast.MODID, JsonOps.INSTANCE, PackType.SERVER_DATA, "sinoseries/food_tastes", FoodTasteCodec.TASTE_CODEC, tastes);
     }
 
     @Override

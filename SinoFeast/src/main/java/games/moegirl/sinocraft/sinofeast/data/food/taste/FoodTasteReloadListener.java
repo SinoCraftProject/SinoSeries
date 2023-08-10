@@ -21,7 +21,7 @@ public class FoodTasteReloadListener extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = new Gson();
 
     public FoodTasteReloadListener() {
-        super(GSON, "food_tastes");
+        super(GSON, "sinoseries/food_tastes");
     }
 
     @Override
