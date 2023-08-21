@@ -23,8 +23,7 @@ public class S2CSyncFoodTastePacket {
         var count = buf.readVarInt();
 
         for (var i = 0; i < count; i++) {
-            tastes.add(buf.readWithCodec(NbtOps.INSTANCE,FoodTasteCodec.TASTE_CODEC));
-
+            tastes.add(buf.readWithCodec(NbtOps.INSTANCE, FoodTasteCodec.TASTE_CODEC));
         }
     }
 
@@ -32,7 +31,7 @@ public class S2CSyncFoodTastePacket {
         buf.writeVarInt(tastes.size());
 
         for (var taste : tastes) {
-            buf.writeWithCodec(NbtOps.INSTANCE,FoodTasteCodec.TASTE_CODEC,taste);
+            buf.writeWithCodec(NbtOps.INSTANCE, FoodTasteCodec.TASTE_CODEC, taste);
         }
     }
 
