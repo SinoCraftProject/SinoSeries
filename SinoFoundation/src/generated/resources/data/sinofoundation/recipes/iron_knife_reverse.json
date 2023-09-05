@@ -6,7 +6,7 @@
       "item": "minecraft:iron_ingot"
     },
     "S": {
-      "item": "minecraft:stick"
+      "item": "sinofoundation:wooden_handle"
     }
   },
   "pattern": [

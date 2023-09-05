@@ -12,12 +12,14 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class SFDRecipeProvider extends AbstractRecipeProvider {
     public SFDRecipeProvider(PackOutput output, String modid) {
@@ -26,64 +28,9 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> writer) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.IRON_KNIFE.get())
-                .pattern("I ")
-                .pattern(" S")
-                .define('I', Items.IRON_INGOT)
-                .define('S', Items.STICK)
-                .showNotification(false)
-                .unlockedBy("got_iron", has(Items.IRON_INGOT))
-                .save(writer, modLoc("iron_knife"));
-
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.GOLD_KNIFE.get())
-                .pattern("I ")
-                .pattern(" S")
-                .define('I', Items.GOLD_INGOT)
-                .define('S', Items.STICK)
-                .showNotification(false)
-                .unlockedBy("got_gold", has(Items.GOLD_INGOT))
-                .save(writer, modLoc("gold_knife"));
-
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.DIAMOND_KNIFE.get())
-                .pattern("I ")
-                .pattern(" S")
-                .define('I', Items.DIAMOND)
-                .define('S', Items.STICK)
-                .showNotification(false)
-                .unlockedBy("got_diamond", has(Items.DIAMOND))
-                .save(writer, modLoc("diamond_knife"));
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.IRON_KNIFE.get())
-                .pattern(" I")
-                .pattern("S ")
-                .define('I', Items.IRON_INGOT)
-                .define('S', Items.STICK)
-                .showNotification(false)
-                .unlockedBy("got_iron", has(Items.IRON_INGOT))
-                .save(writer, modLoc("iron_knife_reverse"));
-
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.GOLD_KNIFE.get())
-                .pattern(" I")
-                .pattern("S ")
-                .define('I', Items.GOLD_INGOT)
-                .define('S', Items.STICK)
-                .showNotification(false)
-                .unlockedBy("got_gold", has(Items.GOLD_INGOT))
-                .save(writer, modLoc("gold_knife_reverse"));
-
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SFDItems.DIAMOND_KNIFE.get())
-                .pattern(" I")
-                .pattern("S ")
-                .define('I', Items.DIAMOND)
-                .define('S', Items.STICK)
-                .showNotification(false)
-                .unlockedBy("got_diamond", has(Items.DIAMOND))
-                .save(writer, modLoc("diamond_knife_reverse"));
-
+        addKnife("iron", Items.IRON_INGOT, SFDItems.IRON_KNIFE, writer);
+        addKnife("gold", Items.GOLD_INGOT, SFDItems.GOLD_KNIFE, writer);
+        addKnife("diamond", Items.DIAMOND, SFDItems.DIAMOND_KNIFE, writer);
 
         fruitsToSeed("chili_pepper", SFDItems.CHILI_PEPPER.get(), SFDBlockItems.CHILI_PEPPER_SEED.get(), 2, writer);
         fruitsToSeed("green_pepper", SFDItems.GREEN_PEPPER.get(), SFDBlockItems.GREEN_PEPPER_SEED.get(), 2, writer);
@@ -109,5 +56,25 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
                 .requires(fruit)
                 .unlockedBy("got_fruit", has(fruit))
                 .save(writer, modLoc(name));
+    }
+
+    protected void addKnife(String level, Item ingot, Supplier<? extends Item> result, Consumer<FinishedRecipe> writer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result.get())
+                .pattern("I ")
+                .pattern(" S")
+                .define('I', ingot)
+                .define('S', SFDItems.WOODEN_HANDLE.get())
+                .showNotification(false)
+                .unlockedBy("got_" + level, has(ingot))
+                .save(writer, modLoc(level + "_knife"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result.get())
+                .pattern(" I")
+                .pattern("S ")
+                .define('I', ingot)
+                .define('S', SFDItems.WOODEN_HANDLE.get())
+                .showNotification(false)
+                .unlockedBy("got_" + level, has(ingot))
+                .save(writer, modLoc(level + "_knife_reverse"));
     }
 }
