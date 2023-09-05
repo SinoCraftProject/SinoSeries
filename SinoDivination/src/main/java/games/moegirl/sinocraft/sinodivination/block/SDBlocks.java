@@ -53,7 +53,7 @@ public class SDBlocks {
     }
 
     private static RegistryObject<SimpleCropBlock<Item>> cropRehmannia() {
-        return block("rehmannia", () -> SimpleCropBlock.create(() -> SDItems.REHMANNIA, 3, 0, 1, 1, 1));
+        return block("rehmannia", () -> new SimpleCropBlock<>(() -> SDItems.REHMANNIA, 3, 0, 1, 1, 1));
     }
 
     public static void register(IEventBus bus) {

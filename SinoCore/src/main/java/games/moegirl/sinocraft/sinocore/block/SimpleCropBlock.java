@@ -24,6 +24,12 @@ import java.util.function.Supplier;
  */
 public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T> {
 
+    private boolean isObjectCreated = false;
+    private final Supplier<T> crop;
+    private final IntegerProperty ageProp;
+    private final int maxSeedCount, minSeedCount;
+    private final int maxCropCount, minCropCount;
+
     /**
      * 创建作物方块
      *
@@ -33,44 +39,31 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
      * @param maxSeedCount 成熟后额外掉落的最小种子数
      * @param minCropCount 成熟后掉落的最大作物数
      * @param maxCropCount 成熟后掉落的最小作物数
-     * @param <T>          作物物品
-     * @return 方块对象
      */
-    public static <T extends Item> SimpleCropBlock<T> create(Supplier<RegistryObject<T>> crop, int age,
-                                                             int minSeedCount, int maxSeedCount,
-                                                             int minCropCount, int maxCropCount) {
-        if (age == 7) return new SimpleCropBlock<>(crop, minSeedCount, maxSeedCount, minCropCount, maxCropCount);
-
-        final IntegerProperty ap = Crop.getAgeProperties(age);
-        return new SimpleCropBlock<>(crop, minSeedCount, maxSeedCount, minCropCount, maxCropCount) {
-            @Override
-            public IntegerProperty getAgeProperty() {
-                return ap;
-            }
-
-            @Override
-            public int getMaxAge() {
-                return age;
-            }
-        };
-    }
-
-    private final Supplier<T> crop;
-    private final int maxSeedCount, minSeedCount;
-    private final int maxCropCount, minCropCount;
-
-    public SimpleCropBlock(Supplier<RegistryObject<T>> crop, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
+    public SimpleCropBlock(Supplier<RegistryObject<T>> crop, int age, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
         super(Properties.copy(Blocks.CARROTS));
+        isObjectCreated = false;
         this.crop = Suppliers.memoize(() -> crop.get().get());
         this.minSeedCount = Math.min(minSeedCount, maxSeedCount);
         this.maxSeedCount = Math.max(minSeedCount, maxSeedCount);
         this.minCropCount = Math.min(maxCropCount, minCropCount);
         this.maxCropCount = Math.max(maxCropCount, minCropCount);
+        this.ageProp = Crop.getAgeProperties(age);
+
+        StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
+        builder.add(ageProp);
+        createBlockStateDefinition(builder);
+        stateDefinition = builder.create(Block::defaultBlockState, BlockState::new);
+        registerDefaultState(stateDefinition.any());
+        isObjectCreated = true;
+    }
+
+    public SimpleCropBlock(Supplier<RegistryObject<T>> crop, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
+        this(crop, 7, minSeedCount, maxSeedCount, minCropCount, maxCropCount);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(getAgeProperty());
     }
 
     @Override
@@ -84,6 +77,11 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
     }
 
     @Override
+    public int getMaxAge() {
+        return isObjectCreated ? ageProp.max : 7;
+    }
+
+    @Override
     public int getBonemealAgeIncrease(Level level) {
         return Crop.super.getBonemealAgeIncrease(level);
     }
@@ -93,10 +91,9 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
         return crop.get();
     }
 
-    // Todo: qyl27: test it.
     @Override
     public IntegerProperty getAgeProperty() {
-        return super.getAgeProperty();
+        return isObjectCreated ? ageProp : AGE;
     }
 
     @Override

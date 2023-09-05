@@ -89,7 +89,9 @@ public interface Crop<T extends Item> extends BonemealableBlock, ILootableBlock,
      *
      * @return 作物最大阶段
      */
-    int getMaxAge();
+    default int getMaxAge() {
+        return getAgeProperty().max;
+    }
 
     /**
      * 判断给定作物是否已经成熟
