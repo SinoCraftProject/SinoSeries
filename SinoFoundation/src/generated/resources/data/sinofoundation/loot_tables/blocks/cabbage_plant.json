@@ -10,7 +10,7 @@
             "block": "sinofoundation:cabbage_plant",
             "condition": "minecraft:block_state_property",
             "properties": {
-              "stage": "3"
+              "age": "3"
             }
           }
         }
@@ -41,7 +41,7 @@
           "block": "sinofoundation:cabbage_plant",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "stage": "3"
+            "age": "3"
           }
         }
       ],

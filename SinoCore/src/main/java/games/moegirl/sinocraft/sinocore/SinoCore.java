@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore;
 
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.SCRecipes;
+import games.moegirl.sinocraft.sinocore.crafting.SCRecipes;
 import games.moegirl.sinocraft.sinocore.data.SCLootConditions;
 import games.moegirl.sinocraft.sinocore.world.gen.SCBiomeModifiers;
 import net.minecraftforge.eventbus.api.IEventBus;

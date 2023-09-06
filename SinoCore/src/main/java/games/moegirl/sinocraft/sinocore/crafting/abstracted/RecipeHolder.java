@@ -38,6 +38,10 @@ public final class RecipeHolder<C extends Container, T extends Recipe<C>, S exte
         return new RecipeHolder<>(id, Suppliers.memoize(() -> sign.get().asItem()), serializer, rt, serializer.recipeClass());
     }
 
+    /**
+     * @deprecated Use {@link games.moegirl.sinocraft.sinocore.crafting.SCRecipes#register(ResourceLocation, Item, AbstractRecipeSerializer, DeferredRegister, DeferredRegister)}
+     */
+    @Deprecated
     public static <C extends Container,
             T extends Recipe<C>,
             S extends AbstractRecipeSerializer<T>>

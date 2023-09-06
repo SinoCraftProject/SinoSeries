@@ -1,27 +1,27 @@
 {
   "variants": {
-    "stage=0": {
+    "age=0": {
       "model": "sinofoundation:block/millet_stage_0"
     },
-    "stage=1": {
+    "age=1": {
       "model": "sinofoundation:block/millet_stage_1"
     },
-    "stage=2": {
+    "age=2": {
       "model": "sinofoundation:block/millet_stage_2"
     },
-    "stage=3": {
+    "age=3": {
       "model": "sinofoundation:block/millet_stage_3"
     },
-    "stage=4": {
+    "age=4": {
       "model": "sinofoundation:block/millet_stage_4"
     },
-    "stage=5": {
+    "age=5": {
       "model": "sinofoundation:block/millet_stage_5"
     },
-    "stage=6": {
+    "age=6": {
       "model": "sinofoundation:block/millet_stage_6"
     },
-    "stage=7": {
+    "age=7": {
       "model": "sinofoundation:block/millet_stage_7"
     }
   }

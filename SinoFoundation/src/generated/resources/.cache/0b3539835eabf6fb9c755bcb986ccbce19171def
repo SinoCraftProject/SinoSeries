@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-24T10:59:57.2034687	Mod Tree Recipes: sinofoundation
+// 1.20.1	2023-09-06T12:00:20.8942304	Mod Tree Recipes: sinofoundation
 08264be41f31e11006835a917674864d04739364 data/sinofoundation/advancements/recipes/building_blocks/jujube_log_wood.json
 40e05f2ead5a2372bb7b0dfd0afd4d6209864488 data/sinofoundation/advancements/recipes/building_blocks/jujube_planks.json
 cc27cc5161d82211fa447373e733233c780d8190 data/sinofoundation/advancements/recipes/building_blocks/jujube_slab.json
@@ -25,10 +25,6 @@ ce4f340a1c54f35df816726e68d835514d99cf69 data/sinofoundation/advancements/recipe
 d2bacd84f1163ece03d0bf2809f21dea097c9181 data/sinofoundation/advancements/recipes/redstone/mulberry_fence_gate.json
 54d292a9b884328a12aab01b5e96ff15133e05f9 data/sinofoundation/advancements/recipes/redstone/mulberry_pressure_gate.json
 223fd564b4fb245773c4ff08b3969b9d3c44673d data/sinofoundation/advancements/recipes/redstone/mulberry_trapdoor.json
-130c1f2b8cc429769bfb0b966aa1e27acc9ff5fc data/sinofoundation/recipes/block_interact/jujube_log_stripping.json
-accc0882fe391c014822da1cf70889c2c95cd7d6 data/sinofoundation/recipes/block_interact/jujube_log_wood_stripping.json
-24feff120c5eaa9278f55b9ac1473204c76688f3 data/sinofoundation/recipes/block_interact/mulberry_log_stripping.json
-954e2bbb5b3ed9a5c3153a4ab9f45ddbf54398f5 data/sinofoundation/recipes/block_interact/mulberry_log_wood_stripping.json
 25ecd8157e89c4f991e6c48af4850626ef390b16 data/sinofoundation/recipes/jujube_button.json
 26fcd25f9809bf37666b5dd5fe3608d2578cf268 data/sinofoundation/recipes/jujube_door.json
 964b09dcb9a8802f80755880f281f0865b0c99a2 data/sinofoundation/recipes/jujube_fence.json

@@ -49,13 +49,13 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
         this.minCropCount = Math.min(maxCropCount, minCropCount);
         this.maxCropCount = Math.max(maxCropCount, minCropCount);
         this.ageProp = Crop.getAgeProperties(age);
-
+        isObjectCreated = true;
+        
         StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
-        builder.add(ageProp);
+//        builder.add(ageProp);
         createBlockStateDefinition(builder);
         stateDefinition = builder.create(Block::defaultBlockState, BlockState::new);
         registerDefaultState(stateDefinition.any());
-        isObjectCreated = true;
     }
 
     public SimpleCropBlock(Supplier<RegistryObject<T>> crop, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
@@ -64,6 +64,7 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(getAgeProperty());
     }
 
     @Override

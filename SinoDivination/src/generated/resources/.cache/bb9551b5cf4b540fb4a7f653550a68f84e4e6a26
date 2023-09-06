@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-24T10:52:21.2299132	Recipes: sinodivination
+// 1.20.1	2023-09-06T11:56:55.0245569	Recipes: sinodivination
 d3a42f1f17f3f0161b063c830a39432f430fa1a5 data/minecraft/advancements/recipes/misc/blast_furnace.json
 9223c8164744bc2799b56be4dd9992fd13501fab data/minecraft/recipes/blast_furnace.json
 0771eca884733b99d98c020f4f78373dfa3ac2a0 data/sinodivination/advancements/recipes/decorations/cotinus_chest.json
@@ -39,7 +39,6 @@ ca9c160e357a08b8495b85e98ec7c7f617e75c0f data/sinodivination/recipes/cotinus_tra
 aea11c20edc4a80851c962bf1253679959d0314d data/sinodivination/recipes/hook.json
 1ed1e4e17d920d52d9b9cb2a0de41780889fa8ad data/sinodivination/recipes/huang_cong.json
 53ff4c8aebef9f3619e469f97e35c29be74cbcbd data/sinodivination/recipes/kettle_pot.json
-aa061d0e9bd19c560736e037900b30e359ec40b5 data/sinodivination/recipes/moxibustion.json
 c51bc9afe12a2a3b7e55ca24d08a1ccab708798f data/sinodivination/recipes/qing_gui.json
 d04b2baff75fda3831ee7f1dc21a312d54e68092 data/sinodivination/recipes/silkworm_plaque.json
 d2f4ab7251e529a8b6f63f303390242b63e057a7 data/sinodivination/recipes/sophora_chest.json

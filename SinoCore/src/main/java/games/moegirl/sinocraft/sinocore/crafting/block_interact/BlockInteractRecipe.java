@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.crafting.block_interact;
 
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.SCRecipes;
+import games.moegirl.sinocraft.sinocore.crafting.SCRecipes;
 import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipe;
 import games.moegirl.sinocraft.sinocore.crafting.abstracted.block_ingredient.BlockIngredient;
 import net.minecraft.core.RegistryAccess;

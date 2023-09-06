@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -48,6 +49,8 @@ public class Tree {
 
     private final ResourceLocation defaultLogTag;
 
+    private final Block[] axeBlocks = {null, null, null, null};
+
     Tree(TreeBuilder builder) {
         this.name = builder.name;
         this.translator = builder.languages;
@@ -72,6 +75,14 @@ public class Tree {
         TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
     }
 
+    public static TreeBuilder builder(ResourceLocation name) {
+        return new TreeBuilder(name);
+    }
+
+    public static TreeBuilder builder(String modid, String name) {
+        return builder(new ResourceLocation(modid, name));
+    }
+
     public void register(DeferredRegister<Block> blockRegister, DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister) {
         makeDefaultBlocks(blockRegister);
         makeDefaultBlockEntities(blockEntityRegister);
@@ -84,10 +95,36 @@ public class Tree {
                 .filter(p -> p.getKey().hasBlock())
                 .map(p -> {
                     String key = p.getKey().makeRegistryName(getName());
-                    RegistryObject<? extends Block> ro = p.getValue().blockBuilder.apply(blockRegister, key, this);
+                    var ro = p.getValue().blockBuilder.apply(blockRegister, key, this, ((type, block) -> {
+                        switch (type) {
+                            case LOG -> axeBlocks[0] = block;
+                            case STRIPPED_LOG -> axeBlocks[1] = block;
+                            case LOG_WOOD -> axeBlocks[2] = block;
+                            case STRIPPED_LOG_WOOD -> axeBlocks[3] = block;
+                        }
+
+                        if (axeBlocks[0] != null && axeBlocks[1] != null) {
+                            registerAxeInternal(axeBlocks[0], axeBlocks[1]);
+                            axeBlocks[0] = null;
+                            axeBlocks[1] = null;
+                        } else if (axeBlocks[2] != null && axeBlocks[3] != null) {
+                            registerAxeInternal(axeBlocks[2], axeBlocks[3]);
+                            axeBlocks[2] = null;
+                            axeBlocks[3] = null;
+                        }
+                    }));
                     return Map.entry(p.getKey(), ro);
                 })
                 .forEach(p -> blocks.put(p.getKey(), p.getValue()));
+    }
+
+    private void registerAxeInternal(Block in, Block out) {
+        try {
+            AxeItem.STRIPPABLES.put(in, out);
+        } catch (Exception e) {
+            AxeItem.STRIPPABLES = new HashMap<>(AxeItem.STRIPPABLES);
+            AxeItem.STRIPPABLES.put(in, out);
+        }
     }
 
     private void makeDefaultBlockEntities(DeferredRegister<BlockEntityType<?>> blockEntityRegister) {
@@ -202,13 +239,5 @@ public class Tree {
 
     public TreeBuilder getBuilder() {
         return builder;
-    }
-
-    public static TreeBuilder builder(ResourceLocation name) {
-        return new TreeBuilder(name);
-    }
-
-    public static TreeBuilder builder(String modid, String name) {
-        return builder(new ResourceLocation(modid, name));
     }
 }
