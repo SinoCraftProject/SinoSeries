@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinofeast;
 
 import games.moegirl.sinocraft.sinofeast.block.SFBlockItems;
 import games.moegirl.sinocraft.sinofeast.block.SFBlocks;
+import games.moegirl.sinocraft.sinofeast.block.entity.SFBlockEntities;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
 import games.moegirl.sinocraft.sinofeast.networking.SFNetworking;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +31,7 @@ public class SinoFeast {
         SFBlockItems.register(bus);
         SFItems.register(bus);
 
+        SFBlockEntities.register(bus);
     }
 
     public static SinoFeast getInstance() {

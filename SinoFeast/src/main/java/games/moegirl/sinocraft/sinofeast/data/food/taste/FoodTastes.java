@@ -114,7 +114,7 @@ public class FoodTastes {
         int maxWeight = maxDislikeWeight;
         for (var taste : eliminates) {
             if (taste.isAdvanced()) {
-                maxWeight -= taste.likeWeight();
+                maxWeight -= taste.dislikeWeight();
             }
         }
 
