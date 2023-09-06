@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.SimpleRecipeBuilder;
+import games.moegirl.sinocraft.sinocore.crafting.recipe.SimpleRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

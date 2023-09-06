@@ -1,19 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "group": "bark",
-  "key": {
-    "#": {
-      "item": "sinodivination:cotinus_stripped_log"
-    }
+  "type": "sinofoundation:knife",
+  "block": {
+    "block": "sinodivination:cotinus_log_wood",
+    "id": "sinocore:block"
   },
-  "pattern": [
-    "##",
-    "##"
-  ],
-  "result": {
-    "count": 3,
-    "item": "sinodivination:cotinus_stripped_log_wood"
+  "count": 1,
+  "drop": {
+    "Count": 1,
+    "id": "sinofoundation:tree_bark"
   },
-  "show_notification": true
+  "result": "sinodivination:cotinus_stripped_log_wood"
 }

@@ -1,9 +1,12 @@
 package games.moegirl.sinocraft.sinofoundation.data.gen;
 
+import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredients;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlockItems;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
+import games.moegirl.sinocraft.sinofoundation.crafting.knife.KnifeRecipe;
 import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.data.PackOutput;
@@ -47,8 +50,22 @@ public class SFDRecipeProvider extends AbstractRecipeProvider {
 
         chest(SFDTrees.JUJUBE, writer, SFDBlocks.JUJUBE_CHEST, SFDBlocks.JUJUBE_TRAPPED_CHEST);
 
-        treeStrippingRecipe(SFDTrees.JUJUBE, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
-        treeStrippingRecipe(SFDTrees.MULBERRY, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
+        KnifeRecipe.builder(SFDTrees.JUJUBE.getBlock(TreeBlockType.STRIPPED_LOG))
+                .setBlock(BlockIngredients.block(SFDTrees.JUJUBE.getBlock(TreeBlockType.LOG)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SFDTrees.JUJUBE.getBlock(TreeBlockType.STRIPPED_LOG_WOOD))
+                .setBlock(BlockIngredients.block(SFDTrees.JUJUBE.getBlock(TreeBlockType.LOG_WOOD)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SFDTrees.MULBERRY.getBlock(TreeBlockType.STRIPPED_LOG))
+                .setBlock(BlockIngredients.block(SFDTrees.MULBERRY.getBlock(TreeBlockType.LOG)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SFDTrees.MULBERRY.getBlock(TreeBlockType.STRIPPED_LOG_WOOD))
+                .setBlock(BlockIngredients.block(SFDTrees.MULBERRY.getBlock(TreeBlockType.LOG_WOOD)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
     }
 
     protected void fruitsToSeed(String name, ItemLike fruit, ItemLike seed, int count, Consumer<FinishedRecipe> writer) {

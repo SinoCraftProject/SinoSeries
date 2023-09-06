@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.tree;
 
 import com.mojang.datafixers.util.Function3;
-import com.mojang.datafixers.util.Function4;
 import games.moegirl.sinocraft.sinocore.tab.TabItemGenerator;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -14,7 +13,6 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -25,7 +23,7 @@ public class TreeBlockFactory {
 
     final TreeBlockType type;
 
-    Function4<DeferredRegister<Block>, String, Tree, BiConsumer<TreeBlockType, Block>, RegistryObject<? extends Block>> blockBuilder;
+    Function3<DeferredRegister<Block>, String, Tree, RegistryObject<? extends Block>> blockBuilder;
 
     Function<Tree, BlockBehaviour.Properties> blockPropBuilder;
 
@@ -67,12 +65,8 @@ public class TreeBlockFactory {
         return addDefaultItemTag;
     }
 
-    Function4<DeferredRegister<Block>, String, Tree, BiConsumer<TreeBlockType, Block>, RegistryObject<? extends Block>> wrapBlock(BiFunction<Tree, BlockBehaviour.Properties, Block> factory) {
-        return (dr, name, tree, cb) -> dr.register(name, () -> {
-            Block block = factory.apply(tree, blockPropBuilder.apply(tree));
-            cb.accept(type, block);
-            return block;
-        });
+    Function3<DeferredRegister<Block>, String, Tree, RegistryObject<? extends Block>> wrapBlock(BiFunction<Tree, BlockBehaviour.Properties, Block> factory) {
+        return (dr, name, tree) -> dr.register(name, () -> factory.apply(tree, blockPropBuilder.apply(tree)));
     }
 
     Function3<DeferredRegister<Item>, String, Tree, RegistryObject<? extends Item>> wrapItem(BiFunction<Tree, TreeBlockType, Item> factory) {

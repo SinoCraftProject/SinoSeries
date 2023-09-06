@@ -1,0 +1,13 @@
+{
+  "type": "sinofoundation:knife",
+  "block": {
+    "block": "sinodivination:sophora_log",
+    "id": "sinocore:block"
+  },
+  "count": 1,
+  "drop": {
+    "Count": 1,
+    "id": "sinofoundation:tree_bark"
+  },
+  "result": "sinodivination:sophora_stripped_log"
+}

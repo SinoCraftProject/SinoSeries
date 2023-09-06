@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinocore.block.TrappedChestBlockBase;
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.block_ingredient.TypeBlockIngredient;
-import games.moegirl.sinocraft.sinocore.crafting.block_interact.BlockInteractRecipe;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import net.minecraft.advancements.critereon.*;
@@ -20,7 +18,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -31,7 +28,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -458,22 +457,4 @@ public abstract class AbstractRecipeProvider implements DataProvider {
     }
 
     /// </editor-fold>
-
-    public static void treeStrippingRecipe(Tree tree, TagKey<Item> tag, ItemStack output, Consumer<FinishedRecipe> writer) {
-        BlockInteractRecipe.builder(TreeBlockType.LOG.makeResourceLoc(tree.getName()))
-                .tool(Ingredient.of(tag))
-                .damage(1)
-                .source(new TypeBlockIngredient(tree.getBlock(TreeBlockType.LOG)))
-                .destination(tree.getBlock(TreeBlockType.STRIPPED_LOG).defaultBlockState())
-                .output(output)
-                .save(writer);
-
-        BlockInteractRecipe.builder(TreeBlockType.LOG_WOOD.makeResourceLoc(tree.getName()))
-                .tool(Ingredient.of(tag))
-                .damage(1)
-                .source(new TypeBlockIngredient(tree.getBlock(TreeBlockType.LOG_WOOD)))
-                .destination(tree.getBlock(TreeBlockType.STRIPPED_LOG_WOOD).defaultBlockState())
-                .output(output)
-                .save(writer);
-    }
 }

@@ -1,8 +1,10 @@
 package games.moegirl.sinocraft.sinofoundation.item;
 
+import games.moegirl.sinocraft.sinofoundation.crafting.SFDRecipes;
+import games.moegirl.sinocraft.sinofoundation.crafting.knife.KnifeRecipe;
+import games.moegirl.sinocraft.sinofoundation.crafting.knife.KnifeRecipeContainer;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,11 +16,11 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 
-import java.util.List;
 import java.util.Optional;
 
 public class KnifeItem extends SwordItem {
@@ -29,46 +31,46 @@ public class KnifeItem extends SwordItem {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        // qyl27: Codes below are come from AxeItem.useOn.
         Level level = context.getLevel();
-        BlockPos blockpos = context.getClickedPos();
-        Player player = context.getPlayer();
-        BlockState blockstate = level.getBlockState(blockpos);
-        Optional<BlockState> optional = Optional.ofNullable(blockstate.getToolModifiedState(context, ToolActions.AXE_STRIP, false));
-        Optional<BlockState> optional1 = optional.isPresent() ? Optional.empty() : Optional.ofNullable(blockstate.getToolModifiedState(context, ToolActions.AXE_SCRAPE, false));
-        Optional<BlockState> optional2 = !optional.isPresent() && !optional1.isPresent() ? Optional.ofNullable(blockstate.getToolModifiedState(context, ToolActions.AXE_WAX_OFF, false)) : Optional.empty();
-        ItemStack itemstack = context.getItemInHand();
-        Optional<BlockState> optional3 = Optional.empty();
-        if (optional.isPresent()) {
-            level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-            optional3 = optional;
-        } else if (optional1.isPresent()) {
-            level.playSound(player, blockpos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            level.levelEvent(player, 3005, blockpos, 0);
-            optional3 = optional1;
-        } else if (optional2.isPresent()) {
-            level.playSound(player, blockpos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);
-            level.levelEvent(player, 3004, blockpos, 0);
-            optional3 = optional2;
-        }
+        if (!level.isClientSide()) {
+            BlockPos pos = context.getClickedPos();
+            Player player = context.getPlayer();
+            BlockState blockState = level.getBlockState(pos);
 
-        if (optional3.isPresent()) {
-            if (player instanceof ServerPlayer) {
-                CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockpos, itemstack);
-            }
-
-            level.setBlock(blockpos, optional3.get(), 11);
-            level.gameEvent(GameEvent.BLOCK_CHANGE, blockpos, GameEvent.Context.of(player, optional3.get()));
+            // 削皮
             if (player != null) {
-                itemstack.hurtAndBreak(1, player, (arg2) -> {
-                    arg2.broadcastBreakEvent(context.getHand());
-                });
+                KnifeRecipeContainer container = new KnifeRecipeContainer(level, pos, player, context.getHand());
+                Optional<KnifeRecipe> recipeOptional = SFDRecipes.KNIFE_RECIPE.match(level, container);
+                if (recipeOptional.isPresent()) {
+                    recipeOptional.get().assemble(container, level.registryAccess());
+                    return InteractionResult.sidedSuccess(false);
+                }
             }
 
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        } else {
-            return InteractionResult.PASS;
+            // 斧
+            BlockState modifiedState = blockState.getToolModifiedState(context, ToolActions.AXE_STRIP, false);
+            if (modifiedState != null) {
+                level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                if (player instanceof ServerPlayer sp) {
+                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(sp, pos, context.getItemInHand());
+                }
+
+                for (Property property : blockState.getProperties()) {
+                    if (modifiedState.hasProperty(property)) {
+                        modifiedState = modifiedState.setValue(property, blockState.getValue(property));
+                    }
+                }
+                level.setBlock(pos, modifiedState, 11);
+
+                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, modifiedState));
+                if (player != null) {
+                    context.getItemInHand().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(context.getHand()));
+                }
+                return InteractionResult.sidedSuccess(false);
+            }
         }
+        return InteractionResult.PASS;
     }
 
     @Override

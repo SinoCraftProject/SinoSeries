@@ -20,6 +20,7 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -95,36 +96,10 @@ public class Tree {
                 .filter(p -> p.getKey().hasBlock())
                 .map(p -> {
                     String key = p.getKey().makeRegistryName(getName());
-                    var ro = p.getValue().blockBuilder.apply(blockRegister, key, this, ((type, block) -> {
-                        switch (type) {
-                            case LOG -> axeBlocks[0] = block;
-                            case STRIPPED_LOG -> axeBlocks[1] = block;
-                            case LOG_WOOD -> axeBlocks[2] = block;
-                            case STRIPPED_LOG_WOOD -> axeBlocks[3] = block;
-                        }
-
-                        if (axeBlocks[0] != null && axeBlocks[1] != null) {
-                            registerAxeInternal(axeBlocks[0], axeBlocks[1]);
-                            axeBlocks[0] = null;
-                            axeBlocks[1] = null;
-                        } else if (axeBlocks[2] != null && axeBlocks[3] != null) {
-                            registerAxeInternal(axeBlocks[2], axeBlocks[3]);
-                            axeBlocks[2] = null;
-                            axeBlocks[3] = null;
-                        }
-                    }));
+                    var ro = p.getValue().blockBuilder.apply(blockRegister, key, this);
                     return Map.entry(p.getKey(), ro);
                 })
                 .forEach(p -> blocks.put(p.getKey(), p.getValue()));
-    }
-
-    private void registerAxeInternal(Block in, Block out) {
-        try {
-            AxeItem.STRIPPABLES.put(in, out);
-        } catch (Exception e) {
-            AxeItem.STRIPPABLES = new HashMap<>(AxeItem.STRIPPABLES);
-            AxeItem.STRIPPABLES.put(in, out);
-        }
     }
 
     private void makeDefaultBlockEntities(DeferredRegister<BlockEntityType<?>> blockEntityRegister) {
@@ -186,9 +161,19 @@ public class Tree {
         return (T) blocks.get(treeBlockType).get();
     }
 
+    @Nullable
+    public Block getBlockOrNull(TreeBlockType treeBlockType) {
+        RegistryObject<? extends Block> object = blocks.get(treeBlockType);
+        return (object != null && object.isPresent()) ? object.get() : null;
+    }
+
     public <T extends Block> RegistryObject<T> getBlockObj(TreeBlockType treeBlockType) {
         //noinspection unchecked
         return (RegistryObject<T>) blocks.get(treeBlockType);
+    }
+
+    public boolean hasBlock(TreeBlockType treeBlockType) {
+        return blocks.containsKey(treeBlockType);
     }
 
     public List<Block> getBlocks() {

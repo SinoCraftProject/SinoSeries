@@ -2,8 +2,10 @@ package games.moegirl.sinocraft.sinocalligraphy.data.gen;
 
 import games.moegirl.sinocraft.sinocalligraphy.block.tree.SCATrees;
 import games.moegirl.sinocraft.sinocalligraphy.item.SCAItems;
+import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredients;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
-import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
+import games.moegirl.sinocraft.sinofoundation.crafting.knife.KnifeRecipe;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +19,13 @@ public class SCARecipeProvider extends AbstractRecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> writer) {
-        treeStrippingRecipe(SCATrees.GREEN_SANDALWOOD, SFDItemTags.KNIVES, new ItemStack(SCAItems.GREEN_SANDALWOOD_BARK.get()), writer);
+        KnifeRecipe.builder(SCATrees.GREEN_SANDALWOOD.getBlock(TreeBlockType.STRIPPED_LOG))
+                .setBlock(BlockIngredients.block(SCATrees.GREEN_SANDALWOOD.getBlock(TreeBlockType.LOG)))
+                .setOutput(new ItemStack(SCAItems.GREEN_SANDALWOOD_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SCATrees.GREEN_SANDALWOOD.getBlock(TreeBlockType.STRIPPED_LOG_WOOD))
+                .setBlock(BlockIngredients.block(SCATrees.GREEN_SANDALWOOD.getBlock(TreeBlockType.LOG_WOOD)))
+                .setOutput(new ItemStack(SCAItems.GREEN_SANDALWOOD_BARK.get()))
+                .save(writer);
     }
 }

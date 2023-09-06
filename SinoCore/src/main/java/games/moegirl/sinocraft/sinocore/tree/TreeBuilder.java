@@ -131,7 +131,7 @@ public class TreeBuilder {
      * @return Builder
      */
     public TreeBuilder block(TreeBlockType treeBlockType, RegistryObject<? extends Block> block) {
-        treeBlocks.get(treeBlockType).blockBuilder = (v1, v2, v3, v4) -> block;
+        treeBlocks.get(treeBlockType).blockBuilder = (v1, v2, v3) -> block;
         return this;
     }
 

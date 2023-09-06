@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodivination.plugin.jei;
 
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.RecipeHolder;
+import games.moegirl.sinocraft.sinocore.crafting.recipe.RecipeHolder;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
