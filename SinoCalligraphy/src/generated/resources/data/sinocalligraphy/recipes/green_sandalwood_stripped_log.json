@@ -1,0 +1,13 @@
+{
+  "type": "sinofoundation:knife",
+  "block": {
+    "block": "sinocalligraphy:green_sandalwood_log",
+    "id": "sinocore:block"
+  },
+  "count": 1,
+  "drop": {
+    "Count": 1,
+    "id": "sinocalligraphy:green_sandalwood_bark"
+  },
+  "result": "sinocalligraphy:green_sandalwood_stripped_log"
+}

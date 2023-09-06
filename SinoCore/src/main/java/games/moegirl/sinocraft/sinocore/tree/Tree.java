@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocore.tab.TabsRegistry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,6 +20,7 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,8 @@ public class Tree {
 
     private final ResourceLocation defaultLogTag;
 
+    private final Block[] axeBlocks = {null, null, null, null};
+
     Tree(TreeBuilder builder) {
         this.name = builder.name;
         this.translator = builder.languages;
@@ -72,6 +76,14 @@ public class Tree {
         TreeRegistry.getRegistry().computeIfAbsent(name.getNamespace(), id -> new ArrayList<>()).add(this);
     }
 
+    public static TreeBuilder builder(ResourceLocation name) {
+        return new TreeBuilder(name);
+    }
+
+    public static TreeBuilder builder(String modid, String name) {
+        return builder(new ResourceLocation(modid, name));
+    }
+
     public void register(DeferredRegister<Block> blockRegister, DeferredRegister<BlockEntityType<?>> blockEntityRegister, DeferredRegister<Item> itemRegister) {
         makeDefaultBlocks(blockRegister);
         makeDefaultBlockEntities(blockEntityRegister);
@@ -84,7 +96,7 @@ public class Tree {
                 .filter(p -> p.getKey().hasBlock())
                 .map(p -> {
                     String key = p.getKey().makeRegistryName(getName());
-                    RegistryObject<? extends Block> ro = p.getValue().blockBuilder.apply(blockRegister, key, this);
+                    var ro = p.getValue().blockBuilder.apply(blockRegister, key, this);
                     return Map.entry(p.getKey(), ro);
                 })
                 .forEach(p -> blocks.put(p.getKey(), p.getValue()));
@@ -149,9 +161,19 @@ public class Tree {
         return (T) blocks.get(treeBlockType).get();
     }
 
+    @Nullable
+    public Block getBlockOrNull(TreeBlockType treeBlockType) {
+        RegistryObject<? extends Block> object = blocks.get(treeBlockType);
+        return (object != null && object.isPresent()) ? object.get() : null;
+    }
+
     public <T extends Block> RegistryObject<T> getBlockObj(TreeBlockType treeBlockType) {
         //noinspection unchecked
         return (RegistryObject<T>) blocks.get(treeBlockType);
+    }
+
+    public boolean hasBlock(TreeBlockType treeBlockType) {
+        return blocks.containsKey(treeBlockType);
     }
 
     public List<Block> getBlocks() {
@@ -202,13 +224,5 @@ public class Tree {
 
     public TreeBuilder getBuilder() {
         return builder;
-    }
-
-    public static TreeBuilder builder(ResourceLocation name) {
-        return new TreeBuilder(name);
-    }
-
-    public static TreeBuilder builder(String modid, String name) {
-        return builder(new ResourceLocation(modid, name));
     }
 }

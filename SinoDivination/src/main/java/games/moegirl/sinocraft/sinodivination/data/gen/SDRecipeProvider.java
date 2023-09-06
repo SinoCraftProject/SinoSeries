@@ -2,34 +2,35 @@ package games.moegirl.sinocraft.sinodivination.data.gen;
 
 import games.moegirl.sinocraft.sinocore.block.ChestBlockBase;
 import games.moegirl.sinocraft.sinocore.block.TrappedChestBlockBase;
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.block_ingredient.BlockIngredients;
+import games.moegirl.sinocraft.sinocore.crafting.block_ingredient.BlockIngredients;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
-import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
-import games.moegirl.sinocraft.sinocore.crafting.block_interact.BlockInteractRecipe;
-import games.moegirl.sinocraft.sinodivination.SDTrees;
-import games.moegirl.sinocraft.sinodivination.data.gen.tag.SDTags;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
 import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
+import games.moegirl.sinocraft.sinodivination.SDTrees;
 import games.moegirl.sinocraft.sinodivination.SinoDivination;
 import games.moegirl.sinocraft.sinodivination.block.SDBlocks;
 import games.moegirl.sinocraft.sinodivination.item.SDItems;
 import games.moegirl.sinocraft.sinodivination.recipe.CarvingTableRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.ChangeSoupRecipe;
 import games.moegirl.sinocraft.sinodivination.recipe.KettlePotRecipe;
-import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
+import games.moegirl.sinocraft.sinofoundation.crafting.knife.KnifeRecipe;
+import games.moegirl.sinocraft.sinofoundation.data.gen.tag.SFDItemTags;
+import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -212,16 +213,25 @@ class SDRecipeProvider extends AbstractRecipeProvider {
         addStick(SFDTrees.JUJUBE, SDItems.STICK_JUJUBE, writer);
         addStick(SDTrees.SOPHORA, SDItems.STICK_SOPHORA, writer);
 
-        BlockInteractRecipe.builder(new ItemStack(SDItems.MOXIBUSTION.get()))
-                .tool(Ingredient.of(SFDItems.WORMWOOD_LEAF.get()))
-                .source(BlockIngredients.tag(SDTags.FIRE_SOURCE))
-                .save(writer);
-
         chest(SDTrees.SOPHORA, writer, SDBlocks.SOPHORA_CHEST, SDBlocks.SOPHORA_TRAPPED_CHEST);
         chest(SDTrees.COTINUS, writer, SDBlocks.COTINUS_CHEST, SDBlocks.COTINUS_TRAPPED_CHEST);
 
-        treeStrippingRecipe(SDTrees.COTINUS, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
-        treeStrippingRecipe(SDTrees.SOPHORA, SFDItemTags.KNIVES, new ItemStack(SFDItems.TREE_BARK.get()), writer);
+        KnifeRecipe.builder(SDTrees.COTINUS.getBlock(TreeBlockType.STRIPPED_LOG))
+                .setBlock(BlockIngredients.block(SDTrees.COTINUS.getBlock(TreeBlockType.LOG)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SDTrees.COTINUS.getBlock(TreeBlockType.STRIPPED_LOG_WOOD))
+                .setBlock(BlockIngredients.block(SDTrees.COTINUS.getBlock(TreeBlockType.LOG_WOOD)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SDTrees.SOPHORA.getBlock(TreeBlockType.STRIPPED_LOG))
+                .setBlock(BlockIngredients.block(SDTrees.SOPHORA.getBlock(TreeBlockType.LOG)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
+        KnifeRecipe.builder(SDTrees.SOPHORA.getBlock(TreeBlockType.STRIPPED_LOG_WOOD))
+                .setBlock(BlockIngredients.block(SDTrees.SOPHORA.getBlock(TreeBlockType.LOG_WOOD)))
+                .setOutput(new ItemStack(SFDItems.TREE_BARK.get()))
+                .save(writer);
     }
 
     private ShapedRecipeBuilder shaped(RegistryObject<? extends ItemLike> result, ItemLike unlockedBy) {

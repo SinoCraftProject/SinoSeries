@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinodivination.recipe;
 
 import com.google.gson.JsonObject;
-import games.moegirl.sinocraft.sinocore.crafting.abstracted.AbstractRecipeSerializer;
-import games.moegirl.sinocraft.sinocore.utility.RecipeSerializers;
+import games.moegirl.sinocraft.sinocore.crafting.serializer.AbstractRecipeSerializer;
+import games.moegirl.sinocraft.sinocore.crafting.serializer.RecipeSerializers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

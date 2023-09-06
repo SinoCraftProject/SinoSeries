@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.Block;
 /**
  * 糯稻种子
  */
-// todo 如果正确运行，该类可移除
-@Deprecated(forRemoval = true)
+// todo 糯稻
+@Deprecated
 public class SeedRice extends ItemNameBlockItem {
 
     public SeedRice(Properties properties) {

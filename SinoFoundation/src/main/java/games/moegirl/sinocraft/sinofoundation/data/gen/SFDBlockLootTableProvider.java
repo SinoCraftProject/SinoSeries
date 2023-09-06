@@ -45,10 +45,10 @@ public class SFDBlockLootTableProvider extends AbstructLootTableProvider {
     }
 
     protected LootPool.Builder dropWhenMature(PlantBlock block, ItemLike item, int minDrop, int maxDrop) {
-        return dropWhenIntPropertyByChance(block, item, block.getStageProperty(), block.getStageProperty().getMax(), minDrop, maxDrop);
+        return dropWhenIntPropertyByChance(block, item, block.getStageProperty(), block.getMaxAge(), minDrop, maxDrop);
     }
 
     protected LootPool.Builder dropWhenNotMature(PlantBlock block, ItemLike item) {
-        return dropWhenNotIntPropertyByChance(block, item, block.getStageProperty(), block.getStageProperty().getMax(), 1, 1);
+        return dropWhenNotIntPropertyByChance(block, item, block.getStageProperty(), block.getMaxAge(), 1, 1);
     }
 }

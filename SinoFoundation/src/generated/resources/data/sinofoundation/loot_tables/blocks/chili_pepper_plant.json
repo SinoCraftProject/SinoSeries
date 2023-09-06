@@ -10,7 +10,7 @@
             "block": "sinofoundation:chili_pepper_plant",
             "condition": "minecraft:block_state_property",
             "properties": {
-              "stage": "7"
+              "age": "7"
             }
           }
         }
@@ -41,7 +41,7 @@
           "block": "sinofoundation:chili_pepper_plant",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "stage": "7"
+            "age": "7"
           }
         }
       ],

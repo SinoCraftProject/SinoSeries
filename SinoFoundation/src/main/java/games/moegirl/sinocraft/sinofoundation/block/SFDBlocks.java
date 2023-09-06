@@ -87,6 +87,6 @@ public class SFDBlocks {
     }
 
     private static <T extends Item> RegistryObject<SimpleCropBlock<T>> crop3(Supplier<RegistryObject<T>> crop, String name, int minCropCount, int maxCropCount) {
-        return block(name, () -> SimpleCropBlock.create(crop, 3, 0, 1, minCropCount, maxCropCount));
+        return block(name, () -> new SimpleCropBlock<>(crop, 3, 0, 1, minCropCount, maxCropCount));
     }
 }

@@ -1,15 +1,15 @@
 {
   "variants": {
-    "stage=0": {
+    "age=0": {
       "model": "sinofoundation:block/white_radish_plant_stage_0"
     },
-    "stage=1": {
+    "age=1": {
       "model": "sinofoundation:block/white_radish_plant_stage_1"
     },
-    "stage=2": {
+    "age=2": {
       "model": "sinofoundation:block/white_radish_plant_stage_2"
     },
-    "stage=3": {
+    "age=3": {
       "model": "sinofoundation:block/white_radish_plant_stage_3"
     }
   }

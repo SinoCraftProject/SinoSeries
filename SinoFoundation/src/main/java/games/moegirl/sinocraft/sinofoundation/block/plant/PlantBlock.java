@@ -1,8 +1,7 @@
 package games.moegirl.sinocraft.sinofoundation.block.plant;
 
+import games.moegirl.sinocraft.sinocore.block.Crop;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -28,6 +27,7 @@ public class PlantBlock extends CropBlock {
 
     private final PlantType plantType;
     private final Supplier<? extends ItemLike> seed;
+    private final IntegerProperty property;
 
     protected final StateDefinition<Block, BlockState> stateDefinition;
 
@@ -36,6 +36,7 @@ public class PlantBlock extends CropBlock {
 
         this.plantType = plantType;
         this.seed = seed;
+        this.property = Crop.getAgeProperties(plantType.getMaxAge());
 
         StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
         builder.add(getStageProperty());
@@ -47,13 +48,13 @@ public class PlantBlock extends CropBlock {
         return plantType;
     }
 
-    public @NotNull StageProperty getStageProperty() {
-        return getPlantType().getStageProperty();
+    public @NotNull IntegerProperty getStageProperty() {
+        return property;
     }
 
     @Override
     public IntegerProperty getAgeProperty() {
-        return plantType == null ? AGE : plantType.getStageProperty();
+        return plantType == null ? AGE : property;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class PlantBlock extends CropBlock {
 
     @Override
     public int getMaxAge() {
-        return getStageProperty().getMax();
+        return plantType.getMaxAge();
     }
 
     @Override
@@ -84,7 +85,7 @@ public class PlantBlock extends CropBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         int age = state.getValue(getStageProperty());
-        int stage = age / ((getStageProperty().getMax() + 1) / 4);
+        int stage = age / ((getMaxAge() + 1) / 4);
         return SHAPES[stage];
     }
 
