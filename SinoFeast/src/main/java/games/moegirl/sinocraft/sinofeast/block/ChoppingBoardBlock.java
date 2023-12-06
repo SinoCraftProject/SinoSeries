@@ -4,7 +4,6 @@ import games.moegirl.sinocraft.sinocore.block.AbstractEntityBlock;
 import games.moegirl.sinocraft.sinofeast.block.entity.ChoppingBoardBlockEntity;
 import games.moegirl.sinocraft.sinofeast.block.entity.SFBlockEntities;
 import games.moegirl.sinocraft.sinofeast.item.SFItems;
-import games.moegirl.sinocraft.sinofeast.utility.IFood;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.world.InteractionHand;
@@ -44,29 +43,39 @@ public class ChoppingBoardBlock extends AbstractEntityBlock<ChoppingBoardBlockEn
                 ChoppingBoardBlockEntity blockEntity = choppingBoardBlock.getBlockEntity(level, pos);
                 IItemHandler iItemHandler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(RuntimeException::new);
                 ItemStack inFood = iItemHandler.getStackInSlot(ChoppingBoardBlockEntity.INPUT);
-                if (itemInHand.is(SFItems.KITCHEN_KNIFE.get())) {
+                ItemStack outFood = iItemHandler.getStackInSlot(ChoppingBoardBlockEntity.OUTPUT);
 
-                    ItemStack copy = inFood.copy();
-                    inFood.setCount(inFood.getCount() - 1);
-                    copy.setCount(1);
-                    copy.addTagElement("shred", ByteTag.valueOf(true));
-                    iItemHandler.insertItem(ChoppingBoardBlockEntity.OUTPUT, copy, false);
+                if (itemInHand.is(SFItems.KITCHEN_KNIFE.get())) {
+                    if (!inFood.isEmpty() && outFood.getCount() < outFood.getMaxStackSize()) {
+                        ItemStack newFood;
+                        if (outFood.isEmpty()) {
+                            newFood = inFood.copy();
+                            newFood.addTagElement("shred", ByteTag.valueOf(true));
+                        }else {
+                            newFood = outFood.copy();
+                        }
+                        newFood.setCount(1);
+
+                        iItemHandler.extractItem(ChoppingBoardBlockEntity.INPUT, 1, false);
+                        iItemHandler.insertItem(ChoppingBoardBlockEntity.OUTPUT, newFood, false);
+                    }
 
                 } else if (itemInHand.isEmpty()) {
                     if (player.isShiftKeyDown()) {
-                        ItemStack outItem = iItemHandler.extractItem(ChoppingBoardBlockEntity.OUTPUT, 64, false);
+                        ItemStack outItem = iItemHandler.extractItem(ChoppingBoardBlockEntity.OUTPUT, outFood.getMaxStackSize(), false);
                         if (!outItem.isEmpty()) {
                             level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY() + 0.5, pos.getZ(), outItem));
                         }
                     } else {
-                        ItemStack inItem = iItemHandler.extractItem(ChoppingBoardBlockEntity.INPUT, 64, false);
+                        ItemStack inItem = iItemHandler.extractItem(ChoppingBoardBlockEntity.INPUT, inFood.getMaxStackSize(), false);
                         if (!inItem.isEmpty()) {
                             level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY() + 0.5, pos.getZ(), inItem));
                         }
                     }
 
-
-                } else if (itemInHand.getItem() instanceof IFood){
+                } else if (itemInHand.getItem().isEdible()
+//                        && !Objects.requireNonNull(itemInHand.getItem().getFoodProperties()).canAlwaysEat()
+                ) {
                     player.setItemInHand(hand, iItemHandler.insertItem(ChoppingBoardBlockEntity.INPUT, itemInHand, false));
                 }
             }
