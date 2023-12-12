@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "sinofoundation:mulberry_checked",
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": "sinofoundation:mulberry"
+      }
+    ]
+  }
+}
