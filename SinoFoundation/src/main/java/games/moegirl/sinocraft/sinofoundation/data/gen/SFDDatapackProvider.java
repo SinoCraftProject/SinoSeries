@@ -17,9 +17,9 @@ import java.util.concurrent.CompletableFuture;
  * 世界生成
  * @author luqin2007
  */
-public class SFDDatapackProviderStep1 extends DatapackBuiltinEntriesProvider {
+public class SFDDatapackProvider extends DatapackBuiltinEntriesProvider {
 
-    public SFDDatapackProviderStep1(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+    public SFDDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
         super(output, provider, new RegistrySetBuilder()
                         .add(Registries.DAMAGE_TYPE, SFDDamages::bootstrap) // 伤害类型
                         .add(Registries.CONFIGURED_FEATURE, SFDFeatures::bootstrap) // 世界生成（局部）
