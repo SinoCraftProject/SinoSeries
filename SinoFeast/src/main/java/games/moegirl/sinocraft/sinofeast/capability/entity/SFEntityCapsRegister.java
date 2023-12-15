@@ -11,14 +11,14 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = SinoFeast.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(modid = SinoFeast.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SFEntityCapsRegister {
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         event.register(IPlayerFoodPreference.class);
     }
 
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void onAttachEntity(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             var provider = new PlayerFoodPreferenceProvider();

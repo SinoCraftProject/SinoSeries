@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_plains",
+  "features": "sinofoundation:trees_mulberry",
+  "step": "vegetal_decoration"
+}

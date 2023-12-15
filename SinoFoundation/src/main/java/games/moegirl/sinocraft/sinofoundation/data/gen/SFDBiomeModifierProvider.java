@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinofoundation.world.SFDFeatures;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.common.Tags;
 
 /**
  * 用于生成 BiomeModifier，应当在所有 {@link net.minecraft.data.DataProvider} 之后调用
@@ -34,5 +35,10 @@ public class SFDBiomeModifierProvider extends AbstractBiomeModifierProvider {
         add(new Feature(SFDFeatures.DEEPSLATE_WHITE_JADE, GenerationStep.Decoration.UNDERGROUND_ORES, SFDBiomeTags.WHITE_JADE_GENERATION));
         add(new Feature(SFDFeatures.YELLOW_JADE, GenerationStep.Decoration.UNDERGROUND_ORES, SFDBiomeTags.YELLOW_JADE_GENERATION));
         add(new Feature(SFDFeatures.DEEPSLATE_YELLOW_JADE, GenerationStep.Decoration.UNDERGROUND_ORES, SFDBiomeTags.YELLOW_JADE_GENERATION));
+
+        add(new Feature(SFDFeatures.RICE, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
+        add(new Feature(SFDFeatures.WORMWOOD, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
+        add(new Feature(SFDFeatures.SESAME, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
+        add(new Feature(SFDFeatures.TREES_MULBERRY, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_PLAINS));
     }
 }
