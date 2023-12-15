@@ -8,9 +8,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = SinoFeast.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(modid = SinoFeast.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class RandomPlayerPreferenceHandler {
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         var player = event.getEntity();
         if (!event.isEndConquered()) {
@@ -22,7 +22,7 @@ public class RandomPlayerPreferenceHandler {
         }
     }
 
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         var player = event.getEntity();
 

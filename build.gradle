@@ -227,6 +227,7 @@ dependencies {
     implementation project(path: ':SinoTest', configuration: 'namedElements')
 
     // Add compile only api to any subproject.
+    // https://docs.modrinth.com/maven
 //    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
     modRuntimeOnly("maven.modrinth:jei:${project.jei_version}")  // JEI
     modRuntimeOnly("maven.modrinth:the-one-probe:${project.top_version}")  // TOP
