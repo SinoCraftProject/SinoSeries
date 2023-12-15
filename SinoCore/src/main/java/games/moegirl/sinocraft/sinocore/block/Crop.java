@@ -227,6 +227,14 @@ public interface Crop<T extends Item> extends BonemealableBlock, ILootableBlock,
 
     // ILootableBlock 掉落物 ============================================================================================
 
+    /**
+     * 生成掉落物
+     *
+     * @param minSeedCount 成熟后种子掉落的最小值
+     * @param maxSeedCount 成熟后种子掉落的最大值
+     * @param minCropCount 成熟后作物掉落的最小值
+     * @param maxCropCount 成熟后作物掉落的最大值
+     */
     default LootTable.Builder createLootBuilder(BlockLootables helper,
                                                 int minSeedCount, int maxSeedCount,
                                                 int minCropCount, int maxCropCount) {
