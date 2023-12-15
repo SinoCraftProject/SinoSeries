@@ -220,7 +220,9 @@ public interface Crop<T extends Item> extends BonemealableBlock, ILootableBlock,
      * @return 阶段数
      */
     default int getBonemealAgeIncrease(Level level) {
-        return Mth.nextInt(level.random, 2, 5);
+        return getMaxAge() == 3 // age=3: [0, 2]
+                ? Mth.nextInt(level.random, 0, 2)
+                : Mth.nextInt(level.random, 2, 5);
     }
 
     // ILootableBlock 掉落物 ============================================================================================

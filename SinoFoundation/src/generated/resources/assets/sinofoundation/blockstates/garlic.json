@@ -11,6 +11,18 @@
     },
     "age=3": {
       "model": "sinofoundation:block/garlic_stage_3"
+    },
+    "age=4": {
+      "model": "sinofoundation:block/garlic_stage_4"
+    },
+    "age=5": {
+      "model": "sinofoundation:block/garlic_stage_5"
+    },
+    "age=6": {
+      "model": "sinofoundation:block/garlic_stage_6"
+    },
+    "age=7": {
+      "model": "sinofoundation:block/garlic_stage_7"
     }
   }
 }

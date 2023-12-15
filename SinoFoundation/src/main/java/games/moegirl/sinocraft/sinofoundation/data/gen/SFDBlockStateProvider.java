@@ -6,7 +6,6 @@ import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import games.moegirl.sinocraft.sinofoundation.block.StoveBlock;
 import games.moegirl.sinocraft.sinofoundation.block.WoodChairsBlock;
 import games.moegirl.sinocraft.sinofoundation.block.WoodDeskBlock;
-import games.moegirl.sinocraft.sinofoundation.block.plant.PlantBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -90,22 +89,19 @@ public class SFDBlockStateProvider extends AbstractAutoBlockStateProvider {
     }
 
     private void addCrops() {
-        cropsStaged(SFDBlocks.WHITE_RADISH_PLANT.get(), "white_radish_plant");
-        cropsStaged(SFDBlocks.SUMMER_RADISH_PLANT.get(), "summer_radish_plant");
-        cropsStaged(SFDBlocks.GREEN_RADISH_PLANT.get(), "green_radish_plant");
-        cropsStaged(SFDBlocks.GREEN_PEPPER_PLANT.get(), "green_pepper_plant");
-        cropsStaged(SFDBlocks.CHILI_PEPPER_PLANT.get(), "chili_pepper_plant");
-        cropsStaged(SFDBlocks.CABBAGE_PLANT.get(), "celery_cabbage");
-        cropsStaged(SFDBlocks.EGGPLANT_PLANT.get());
-        cropsStaged(SFDBlocks.MILLET_PLANT.get());
-        cropsStaged(SFDBlocks.SOYBEAN_PLANT.get());
-        cropsStaged(SFDBlocks.GARLIC_PLANT.get(), "garlic");
-
+        crop(SFDBlocks.WHITE_RADISH_PLANT);
+        crop(SFDBlocks.SUMMER_RADISH_PLANT);
+        crop(SFDBlocks.GREEN_RADISH_PLANT);
+        crop(SFDBlocks.GREEN_PEPPER_PLANT);
+        crop(SFDBlocks.CHILI_PEPPER_PLANT);
+        crop(SFDBlocks.CABBAGE_PLANT);
+        crop(SFDBlocks.EGGPLANT_PLANT);
+        crop(SFDBlocks.MILLET_PLANT);
+        crop(SFDBlocks.SOYBEAN_PLANT);
+        crop(SFDBlocks.GARLIC_PLANT);
         crop(SFDBlocks.WORMWOOD);
         crop(SFDBlocks.RICE);
         crop(SFDBlocks.SESAME);
-
-        // Todo: qyl27: double crops.
     }
 
     private void addWoodDesk() {
@@ -129,37 +125,4 @@ public class SFDBlockStateProvider extends AbstractAutoBlockStateProvider {
     private void addChest() {
         chest(SFDBlocks.JUJUBE_CHEST, SFDBlocks.JUJUBE_TRAPPED_CHEST, SFDTrees.JUJUBE);
     }
-
-    /// <editor-fold desc="Utility methods.">
-
-    protected void cropsStaged(PlantBlock plant) {
-        cropsStaged(plant, plant.getPlantType().getName());
-    }
-
-    protected void cropsStaged(PlantBlock plant, String name) {
-        var builder = getVariantBuilder(plant);
-        var type = plant.getPlantType();
-        if (type.getMaxHeightCount() > 1) {
-            for (int i = 0; i <= plant.getMaxAge(); i++) {
-//                builder.partialState().with(plant.getStageProperty(), i).with(DoublePlantBlock.TOP, true).modelForState()
-//                        .modelFile(models().crop("block/" + name + "_stage_top_" + i,
-//                                modLoc("block/" + name + "_stage_top_" + i)).renderType("cutout"))
-//                        .addModel();
-//                builder.partialState().with(plant.getStageProperty(), i).with(DoublePlantBlock.TOP, false).modelForState()
-//                        .modelFile(models().crop("block/" + name + "_stage_bottom_" + i,
-//                                modLoc("block/" + name + "_stage_bottom_" + i)).renderType("cutout"))
-//                        .addModel();
-                throw new RuntimeException("DoubleCropBlock 已移除，双格作物现使用 games.moegirl.sinocraft.sinocore.block.DoubleCropBlock");
-            }
-        } else {
-            for (int i = 0; i <= plant.getMaxAge(); i++) {
-                builder.partialState().with(plant.getStageProperty(), i).modelForState()
-                        .modelFile(models().crop("block/" + name + "_stage_" + i,
-                                modLoc("block/" + name + "_stage_" + i)).renderType("cutout"))
-                        .addModel();
-            }
-        }
-    }
-
-    /// </editor-fold>
 }
