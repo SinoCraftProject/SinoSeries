@@ -1,5 +1,5 @@
 {
-  "feature": "sinofoundation:no_op",
+  "feature": "sinofoundation:mulberry_fancy",
   "placement": [
     {
       "type": "minecraft:block_predicate_filter",
@@ -12,9 +12,6 @@
           }
         }
       }
-    },
-    {
-      "type": "minecraft:biome"
     }
   ]
 }

@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinofoundation.world;
 
+import com.mojang.datafixers.kinds.Const;
 import games.moegirl.sinocraft.sinocore.tree.Tree;
+import games.moegirl.sinocraft.sinocore.tree.TreeBlockType;
 import games.moegirl.sinocraft.sinofoundation.SFDTrees;
 import games.moegirl.sinocraft.sinofoundation.block.SFDBlocks;
 import net.minecraft.core.Holder;
@@ -11,12 +13,16 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -24,6 +30,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Map;
+import java.util.OptionalInt;
 
 import static games.moegirl.sinocraft.sinofoundation.SinoFoundation.MODID;
 
@@ -58,7 +65,8 @@ public class SFDFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> WORMWOOD = featureKey("wormwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SESAME = featureKey("sesame");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MULBERRY = featureKey("mulberry");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MULBERRY_PLAIN = featureKey("mulberry_plain");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MULBERRY_FANCY = featureKey("mulberry_fancy");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_MULBERRY = featureKey("trees_mulberry");
 
     public static Holder.Reference<ConfiguredFeature<?, ?>> HOLDER_NO_OP;
 
@@ -83,7 +91,8 @@ public class SFDFeatures {
     public static Holder.Reference<ConfiguredFeature<?, ?>> HOLDER_SESAME;
 
     public static Holder.Reference<ConfiguredFeature<?, ?>> HOLDER_MULBERRY;
-    public static Holder.Reference<ConfiguredFeature<?, ?>> HOLDER_MULBERRY_PLAIN;
+    public static Holder.Reference<ConfiguredFeature<?, ?>> HOLDER_MULBERRY_FANCY;
+    public static Holder.Reference<ConfiguredFeature<?, ?>> HOLDER_TREES_MULBERRY;
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HOLDER_NO_OP = context.register(NO_OP, new ConfiguredFeature<>(Feature.NO_OP, NoneFeatureConfiguration.INSTANCE));
@@ -108,12 +117,13 @@ public class SFDFeatures {
         HOLDER_RICE = context.register(RICE, cropConfiguration(SFDBlocks.RICE));
         HOLDER_SESAME = context.register(SESAME, cropConfiguration(SFDBlocks.SESAME));
         HOLDER_MULBERRY = context.register(MULBERRY, tree(SFDTrees.MULBERRY));
+        HOLDER_MULBERRY_FANCY = context.register(MULBERRY_FANCY, treeFancy(SFDTrees.MULBERRY));
 
         HolderGetter<PlacedFeature> lookup = context.lookup(Registries.PLACED_FEATURE);
 
-        Holder.Reference<PlacedFeature> mulberry = lookup.get(SFDPlacements.MULBERRY).orElseThrow();
-        Holder.Reference<PlacedFeature> mulberryChecked = lookup.get(SFDPlacements.MULBERRY_CHECKED).orElseThrow();
-        HOLDER_MULBERRY_PLAIN = context.register(MULBERRY_PLAIN, random(Map.of(mulberry, 0.1f), mulberryChecked));
+        Holder.Reference<PlacedFeature> mulberry = lookup.get(SFDPlacements.MULBERRY_FANCY).orElseThrow();
+        Holder.Reference<PlacedFeature> no_op = lookup.get(SFDPlacements.NO_OP).orElseThrow();
+        HOLDER_TREES_MULBERRY = context.register(TREES_MULBERRY, random(Map.of(mulberry, 0.1f), no_op));
     }
 
     /**
@@ -176,6 +186,22 @@ public class SFDFeatures {
      */
     private static ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>> tree(Tree tree) {
         return new ConfiguredFeature<>(Feature.TREE, tree.getFeaturedConfiguration().get());
+    }
+
+    /**
+     * 从树中生成奇异树 Feature
+     *
+     * @param tree 树
+     * @return 生成配置
+     */
+    private static ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>> treeFancy(Tree tree) {
+        return new ConfiguredFeature<>(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(tree.getBlock(TreeBlockType.LOG)),
+                new FancyTrunkPlacer(3, 11, 0),
+                BlockStateProvider.simple(tree.getBlock(TreeBlockType.LEAVES)),
+                new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
+                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))
+        ).ignoreVines().build());
     }
 
     /**

@@ -39,6 +39,6 @@ public class SFDBiomeModifierProvider extends AbstractBiomeModifierProvider {
         add(new Feature(SFDFeatures.RICE, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
         add(new Feature(SFDFeatures.WORMWOOD, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
         add(new Feature(SFDFeatures.SESAME, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
-        add(new Feature(SFDFeatures.MULBERRY_PLAIN, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_PLAINS));
+        add(new Feature(SFDFeatures.TREES_MULBERRY, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_PLAINS));
     }
 }
