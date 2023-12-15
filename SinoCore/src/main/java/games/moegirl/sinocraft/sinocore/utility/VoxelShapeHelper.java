@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.utility.shape;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.shapes.Shapes;

@@ -4,10 +4,19 @@
 
 <instance-profile id="sinoseries_document"
                  name="SinoSeries Document"
-                 start-page="starter-topic.md">
+                 start-page="sinocore.md">
 
     <toc-element topic="sinocore.md">
-        <toc-element topic="sinocore-block.md"/>
+        <toc-element topic="sinocore-block.md">
+            <toc-element topic="sinocore-block-ILootableBlock.md"/>
+            <toc-element topic="sinocore-block-Crop.md"/>
+            <toc-element topic="sinocore-block-CropBlock.md"/>
+            <toc-element topic="sinocore-block-BlockWithBlockEntity.md"/>
+            <toc-element topic="sinocore-block-chest.md"/>
+            <toc-element topic="sinocore-block-BlockLootables.md"/>
+            <toc-element topic="sinocore-block-VoxelShapeHelper.md"/>
+        </toc-element>
+        <toc-element topic="sinocore-item.md"/>
     </toc-element>
     <toc-element topic="starter-topic.md"/>
 </instance-profile>

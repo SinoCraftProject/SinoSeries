@@ -3,7 +3,7 @@
 SinoSeries 相关依赖。该 mod 不提供任何影响游戏体验的内容，仅为其他 SinoSeries Mod 提供代码支持。
 
 - [方块 Block](sinocore-block.md)
-- 物品 Item
+- [物品 Item](sinocore-item.md)
 - 流体 Fluid
 - 配方 Recipe
 - 数据生成 DataProvider
