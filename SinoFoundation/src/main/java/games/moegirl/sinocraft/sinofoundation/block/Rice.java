@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinofoundation.block.plant;
+package games.moegirl.sinocraft.sinofoundation.block;
 
 import games.moegirl.sinocraft.sinocore.block.DoubleCropBlock;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;

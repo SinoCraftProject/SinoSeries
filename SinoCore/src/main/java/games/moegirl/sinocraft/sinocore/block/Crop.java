@@ -220,11 +220,21 @@ public interface Crop<T extends Item> extends BonemealableBlock, ILootableBlock,
      * @return 阶段数
      */
     default int getBonemealAgeIncrease(Level level) {
-        return Mth.nextInt(level.random, 2, 5);
+        return getMaxAge() == 3 // age=3: [0, 2]
+                ? Mth.nextInt(level.random, 0, 2)
+                : Mth.nextInt(level.random, 2, 5);
     }
 
     // ILootableBlock 掉落物 ============================================================================================
 
+    /**
+     * 生成掉落物
+     *
+     * @param minSeedCount 成熟后种子掉落的最小值
+     * @param maxSeedCount 成熟后种子掉落的最大值
+     * @param minCropCount 成熟后作物掉落的最小值
+     * @param maxCropCount 成熟后作物掉落的最大值
+     */
     default LootTable.Builder createLootBuilder(BlockLootables helper,
                                                 int minSeedCount, int maxSeedCount,
                                                 int minCropCount, int maxCropCount) {

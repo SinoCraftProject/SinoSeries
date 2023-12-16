@@ -1,17 +1,29 @@
 {
   "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
   "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sinofoundation:cabbage_seed"
+        }
+      ],
+      "rolls": 1.0
+    },
     {
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:inverted",
-          "term": {
-            "block": "sinofoundation:eggplant_plant",
-            "condition": "minecraft:block_state_property",
-            "properties": {
-              "age": "7"
-            }
+          "block": "sinofoundation:celery_cabbage",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3"
           }
         }
       ],
@@ -24,28 +36,13 @@
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
-                "min": 1.0
+                "min": 0.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "sinofoundation:eggplant_seed"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "block": "sinofoundation:eggplant_plant",
-          "condition": "minecraft:block_state_property",
-          "properties": {
-            "age": "7"
-          }
-        }
-      ],
-      "entries": [
+          "name": "sinofoundation:cabbage_seed"
+        },
         {
           "type": "minecraft:item",
           "functions": [
@@ -59,11 +56,11 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "sinofoundation:eggplant"
+          "name": "sinofoundation:cabbage"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "sinofoundation:blocks/eggplant_plant"
+  "random_sequence": "sinofoundation:blocks/celery_cabbage"
 }

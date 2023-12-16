@@ -52,14 +52,33 @@ public class SimpleCropBlock<T extends Item> extends CropBlock implements Crop<T
         isObjectCreated = true;
         
         StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
-//        builder.add(ageProp);
         createBlockStateDefinition(builder);
         stateDefinition = builder.create(Block::defaultBlockState, BlockState::new);
         registerDefaultState(stateDefinition.any());
     }
 
-    public SimpleCropBlock(Supplier<RegistryObject<T>> crop, int minSeedCount, int maxSeedCount, int minCropCount, int maxCropCount) {
-        this(crop, 7, minSeedCount, maxSeedCount, minCropCount, maxCropCount);
+    /**
+     * 创建作物方块，适用于种子与作物物品重合的情况
+     *
+     * @param age     成熟阶段数
+     * @param minCrop 最少掉落数量
+     * @param maxCrop 最多掉落数量
+     */
+    public SimpleCropBlock(int age, int minCrop, int maxCrop) {
+        super(Properties.copy(Blocks.CARROTS));
+        isObjectCreated = false;
+        this.crop = Suppliers.memoize(() -> (T) this.getBaseSeedId().asItem());
+        this.minSeedCount = 0;
+        this.maxSeedCount = 0;
+        this.minCropCount = Math.min(minCrop, maxCrop);
+        this.maxCropCount = Math.max(minCrop, maxCrop);
+        this.ageProp = Crop.getAgeProperties(age);
+        isObjectCreated = true;
+
+        StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
+        createBlockStateDefinition(builder);
+        stateDefinition = builder.create(Block::defaultBlockState, BlockState::new);
+        registerDefaultState(stateDefinition.any());
     }
 
     @Override

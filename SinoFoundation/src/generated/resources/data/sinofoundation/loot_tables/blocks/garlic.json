@@ -1,22 +1,16 @@
 {
   "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
   "pools": [
     {
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "sinofoundation:garlic"
         }
       ],
@@ -26,14 +20,29 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "sinofoundation:garlic_plant",
+          "block": "sinofoundation:garlic",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "3"
+            "age": "7"
           }
         }
       ],
       "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 0.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "sinofoundation:garlic"
+        },
         {
           "type": "minecraft:item",
           "functions": [
@@ -53,5 +62,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "sinofoundation:blocks/garlic_plant"
+  "random_sequence": "sinofoundation:blocks/garlic"
 }
