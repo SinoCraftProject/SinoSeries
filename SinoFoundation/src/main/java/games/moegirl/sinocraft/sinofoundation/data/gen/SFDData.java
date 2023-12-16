@@ -43,10 +43,10 @@ public class SFDData {
 
         gen.addProvider(true, new SFDRecipeProvider(output, SinoFoundation.MODID));
         gen.addProvider(true, new SFDBlockLootTableProvider(output, SinoFoundation.MODID));
-        gen.addProvider(true, new SFDDropModifierProvider(output, SinoFoundation.MODID));
 
         gen.addProvider(true, new ProviderList("sinofoundation datapack and biome modifier")
-                .then(() -> new SFDDatapackProvider(output, lookupProvider))
+                .then(() -> new SFDDatapackProviderStep1(output, lookupProvider))
+                .then(() -> new SFDDatapackProviderStep2(output, lookupProvider))
                 .then(() -> new SFDBiomeModifierProvider(output, SinoFoundation.MODID))
         );
     }

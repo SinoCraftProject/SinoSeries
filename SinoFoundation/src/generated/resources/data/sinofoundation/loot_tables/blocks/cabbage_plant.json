@@ -7,10 +7,10 @@
         {
           "condition": "minecraft:inverted",
           "term": {
-            "block": "sinofoundation:green_pepper_plant",
+            "block": "sinofoundation:cabbage_plant",
             "condition": "minecraft:block_state_property",
             "properties": {
-              "age": "7"
+              "age": "3"
             }
           }
         }
@@ -29,7 +29,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "sinofoundation:green_pepper_seed"
+          "name": "sinofoundation:cabbage_seed"
         }
       ],
       "rolls": 1.0
@@ -38,10 +38,10 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "sinofoundation:green_pepper_plant",
+          "block": "sinofoundation:cabbage_plant",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "7"
+            "age": "3"
           }
         }
       ],
@@ -53,17 +53,17 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 4.0,
+                "max": 5.0,
                 "min": 2.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "sinofoundation:green_pepper"
+          "name": "sinofoundation:cabbage"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "sinofoundation:blocks/green_pepper_plant"
+  "random_sequence": "sinofoundation:blocks/cabbage_plant"
 }

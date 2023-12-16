@@ -3,18 +3,6 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "block": "sinofoundation:green_pepper_plant",
-            "condition": "minecraft:block_state_property",
-            "properties": {
-              "age": "7"
-            }
-          }
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -23,13 +11,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1.0,
+                "max": 2.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "sinofoundation:green_pepper_seed"
+          "name": "sinofoundation:garlic"
         }
       ],
       "rolls": 1.0
@@ -38,10 +26,10 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "sinofoundation:green_pepper_plant",
+          "block": "sinofoundation:garlic_plant",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "7"
+            "age": "3"
           }
         }
       ],
@@ -59,11 +47,11 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "sinofoundation:green_pepper"
+          "name": "sinofoundation:garlic"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "sinofoundation:blocks/green_pepper_plant"
+  "random_sequence": "sinofoundation:blocks/garlic_plant"
 }

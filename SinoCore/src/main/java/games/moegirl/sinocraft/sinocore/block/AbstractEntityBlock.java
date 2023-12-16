@@ -50,6 +50,10 @@ public abstract class AbstractEntityBlock<T extends BlockEntity> extends BaseEnt
         this.typeClass = getGenericClass(0);
     }
 
+    public AbstractEntityBlock(Supplier<BlockEntityType<T>> entityType) {
+        this(Properties.of(), entityType);
+    }
+
     public AbstractEntityBlock(BlockBehaviour block, float strength, Supplier<BlockEntityType<T>> entityType) {
         this(Properties.copy(block).strength(strength), entityType);
     }

@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.block.SimpleCropBlock;
 import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.NameUtils;
 import games.moegirl.sinocraft.sinofoundation.SinoFoundation;
+import games.moegirl.sinocraft.sinofoundation.block.plant.*;
 import games.moegirl.sinocraft.sinofoundation.item.SFDItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.Item;
@@ -31,16 +32,16 @@ public class SFDBlocks {
 
     public static final RegistryObject<Block> PURPLE_CLAY = BLOCKS.register("purple_clay", () -> new Block(BlockBehaviour.Properties.of()));
 
-    public static final RegistryObject<CropBlockWith4Shape<Item>> WHITE_RADISH_PLANT = crop3("white_radish_plant", 0, 4);
-    public static final RegistryObject<CropBlockWith4Shape<Item>> SUMMER_RADISH_PLANT = crop3("summer_radish_plant", 0, 4);
-    public static final RegistryObject<CropBlockWith4Shape<Item>> GREEN_RADISH_PLANT = crop3("green_radish_plant", 0, 4);
-    public static final RegistryObject<CropBlockWith4Shape<Item>> CHILI_PEPPER_PLANT = pepper(() -> SFDItems.CHILI_PEPPER, "chili_pepper_plant");
-    public static final RegistryObject<CropBlockWith4Shape<Item>> GREEN_PEPPER_PLANT = pepper(() -> SFDItems.CHILI_PEPPER, "green_pepper_plant");
-    public static final RegistryObject<CropBlockWith4Shape<Item>> CABBAGE_PLANT = block("celery_cabbage", () -> new CropBlockWith4Shape<>(() -> SFDItems.CABBAGE, 3, 0, 1, 2, 5));
-    public static final RegistryObject<CropBlockWith4Shape<Item>> EGGPLANT_PLANT = crop7(() -> SFDItems.EGGPLANT, "eggplant", 5);
-    public static final RegistryObject<CropBlockWith4Shape<Item>> MILLET_PLANT = crop7(() -> SFDItems.MILLET, "millet", 6);
-    public static final RegistryObject<CropBlockWith4Shape<Item>> SOYBEAN_PLANT = crop7("soybean", 1, 4);
-    public static final RegistryObject<CropBlockWith4Shape<Item>> GARLIC_PLANT = crop7("garlic", 2, 4);
+    public static final RegistryObject<PlantBlock> WHITE_RADISH_PLANT = BLOCKS.register("white_radish_plant", () -> new PlantBlock(PlantType.WHITE_RADISH, SFDBlockItems.WHITE_RADISH));
+    public static final RegistryObject<PlantBlock> SUMMER_RADISH_PLANT = BLOCKS.register("summer_radish_plant", () -> new PlantBlock(PlantType.SUMMER_RADISH, SFDBlockItems.SUMMER_RADISH));
+    public static final RegistryObject<PlantBlock> GREEN_RADISH_PLANT = BLOCKS.register("green_radish_plant", () -> new PlantBlock(PlantType.GREEN_RADISH, SFDBlockItems.GREEN_RADISH));
+    public static final RegistryObject<PlantBlock> CHILI_PEPPER_PLANT = BLOCKS.register("chili_pepper_plant", () -> new PlantBlock(PlantType.CHILI_PEPPER, SFDBlockItems.CHILI_PEPPER_SEED));
+    public static final RegistryObject<PlantBlock> GREEN_PEPPER_PLANT = BLOCKS.register("green_pepper_plant", () -> new PlantBlock(PlantType.GREEN_PEPPER, SFDBlockItems.GREEN_PEPPER_SEED));
+    public static final RegistryObject<PlantBlock> EGGPLANT_PLANT = BLOCKS.register("eggplant_plant", () -> new PlantBlock(PlantType.EGGPLANT, SFDBlockItems.EGGPLANT_SEED));
+    public static final RegistryObject<PlantBlock> CABBAGE_PLANT = BLOCKS.register("cabbage_plant", () -> new PlantBlock(PlantType.CABBAGE, SFDBlockItems.CABBAGE_SEED));
+    public static final RegistryObject<PlantBlock> MILLET_PLANT = BLOCKS.register("millet_plant", () -> new PlantBlock(PlantType.MILLET, SFDBlockItems.MILLET_SEED));
+    public static final RegistryObject<PlantBlock> SOYBEAN_PLANT = BLOCKS.register("soybean_plant", () -> new PlantBlock(PlantType.SOYBEAN, SFDBlockItems.SOYBEAN));
+    public static final RegistryObject<PlantBlock> GARLIC_PLANT = BLOCKS.register("garlic_plant", () -> new PlantBlock(PlantType.GARLIC, SFDBlockItems.GARLIC));
 
     public static final RegistryObject<Block> MARBLE_BLOCK = BLOCKS.register("marble_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
     public static final RegistryObject<Block> SMOOTH_MARBLE = BLOCKS.register("smooth_marble", () -> new Block(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
@@ -87,21 +88,5 @@ public class SFDBlocks {
 
     private static <T extends Item> RegistryObject<SimpleCropBlock<T>> crop3(Supplier<RegistryObject<T>> crop, String name, int minCropCount, int maxCropCount) {
         return block(name, () -> new SimpleCropBlock<>(crop, 3, 0, 1, minCropCount, maxCropCount));
-    }
-
-    private static RegistryObject<CropBlockWith4Shape<Item>> pepper(Supplier<RegistryObject<Item>> crop, String name) {
-        return block(name, () -> new CropBlockWith4Shape<>(crop, 7, 0, 1, 2, 4));
-    }
-
-    private static RegistryObject<CropBlockWith4Shape<Item>> crop7(Supplier<RegistryObject<Item>> crop, String name, int maxDrop) {
-        return block(name, () -> new CropBlockWith4Shape<>(crop, 7, 0, 1, 2, maxDrop));
-    }
-
-    private static RegistryObject<CropBlockWith4Shape<Item>> crop7(String name, int minDrop, int maxDrop) {
-        return block(name, () -> new CropBlockWith4Shape<>(7, minDrop, maxDrop));
-    }
-
-    private static RegistryObject<CropBlockWith4Shape<Item>> crop3(String name, int minCrop, int maxCrop) {
-        return block(name, () -> new CropBlockWith4Shape<>(3, minCrop, maxCrop));
     }
 }
