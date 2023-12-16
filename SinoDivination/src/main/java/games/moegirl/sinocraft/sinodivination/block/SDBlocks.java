@@ -49,7 +49,7 @@ public class SDBlocks {
     }
 
     private static RegistryObject<SimpleCropBlock<Item>> cropDragonliverMelon() {
-        return block("dragonliver_melon", () -> new SimpleCropBlock<>(() -> SDItems.DRAGONLIVER_MELON, 0, 1, 1, 1));
+        return block("dragonliver_melon", () -> new SimpleCropBlock<>(() -> SDItems.DRAGONLIVER_MELON, 7, 0, 1, 1, 1));
     }
 
     private static RegistryObject<SimpleCropBlock<Item>> cropRehmannia() {

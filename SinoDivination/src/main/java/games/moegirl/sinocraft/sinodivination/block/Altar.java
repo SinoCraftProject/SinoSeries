@@ -18,7 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class Altar extends AbstractEntityBlock<AltarEntity> {
 
     public Altar() {
-        super(SDBlockEntities.ALTAR);
+        super(Properties.of(), SDBlockEntities.ALTAR);
     }
 
     @Override
