@@ -16,7 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class Tripod extends AbstractEntityBlock<TripodEntity> {
 
     public Tripod() {
-        super(Properties.of(), SDBlockEntities.TRIPOD);
+        super(SDBlockEntities.TRIPOD);
     }
 
     @Override
