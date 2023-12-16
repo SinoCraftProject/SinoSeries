@@ -3,23 +3,21 @@ package games.moegirl.sinocraft.sinocore.data.gen.loottable;
 import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
 import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author skyinr
  */
 public class SimpleBlockLootTables extends BlockLootSubProvider {
 
-    private final List<Block> blocks = new ArrayList<>();
+    private final Set<Block> blocks = new HashSet<>();
 
     public SimpleBlockLootTables() {
         super(new HashSet<>(), FeatureFlags.DEFAULT_FLAGS);

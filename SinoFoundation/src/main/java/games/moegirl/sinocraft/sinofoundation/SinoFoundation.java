@@ -28,6 +28,7 @@ public class SinoFoundation {
         SFDBlockEntities.register(bus);
         SFDTrees.register(bus);
         SFDRecipes.register(bus);
+        SFDCodecs.register(bus);
         SinoSeriesTabs.register(bus);
 
         LOGGER.info("Shake it, baby!");
