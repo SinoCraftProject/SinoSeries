@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinofoundation.block;
 
-import games.moegirl.sinocraft.sinocore.utility.VoxelShapeHelper;
+import games.moegirl.sinocraft.sinocore.utility.shape.VoxelShapeHelper;
 import games.moegirl.sinocraft.sinofoundation.SFDConstants;
 import games.moegirl.sinocraft.sinofoundation.block.entity.StoveBlockEntity;
 import games.moegirl.sinocraft.sinofoundation.block.entity.ticker.StoveBlockEntityTicker;
