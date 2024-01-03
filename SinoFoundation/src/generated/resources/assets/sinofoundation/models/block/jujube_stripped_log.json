@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "sinofoundation:block/jujube_stripped_log_top",
-    "side": "sinofoundation:block/jujube_stripped_log"
-  }
-}

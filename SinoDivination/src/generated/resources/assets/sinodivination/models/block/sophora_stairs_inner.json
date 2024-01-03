@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "sinodivination:block/sophora_planks",
-    "side": "sinodivination:block/sophora_planks",
-    "top": "sinodivination:block/sophora_planks"
-  }
-}

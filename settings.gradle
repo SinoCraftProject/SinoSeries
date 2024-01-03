@@ -1,17 +1,12 @@
 pluginManagement {
     repositories {
-        maven { url 'https://maven.fabricmc.net/' }
         maven { url 'https://maven.architectury.dev/' }
-        maven { url 'https://files.minecraftforge.net/maven/' }
+        maven { url 'https://maven.fabricmc.net/' }
         gradlePluginPortal()
+        mavenCentral()
+        maven { url 'https://files.minecraftforge.net/maven/' }
     }
 }
 
-rootProject.name = 'SinoSeries'
-
-include ':SinoCore'
-include ':SinoFoundation'
-include ':SinoFeast'
-include ':SinoDivination'
-include ':SinoCalligraphy'
-include ':SinoTest'
+rootProject.name = 'sinoseries'
+include 'sino-core'

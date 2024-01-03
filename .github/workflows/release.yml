@@ -1,13 +1,12 @@
 name: Java CI
 
 on:
-  push:
-    branches: []
   workflow_dispatch: 
 
 jobs:
   build:
     env:
+      SINOSERIES_RELEASE: true
       SINOSERIES_MAVEN_USER: ${{ secrets.SINOSERIES_MAVEN_USER }}
       SINOSERIES_MAVEN_PASS: ${{ secrets.SINOSERIES_MAVEN_PASS }}
     runs-on: ubuntu-latest

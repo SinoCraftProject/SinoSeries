@@ -1,9 +1,0 @@
-{
-  "dislike_weight": 5,
-  "is_advanced": true,
-  "like_weight": 5,
-  "name": "sinofeast:acrid",
-  "taste_key": "sinofeast:tastes/acrid",
-  "taste_key_primary": "sinofeast:tastes/primary/acrid",
-  "taste_key_secondary": "sinofeast:tastes/secondary/acrid"
-}
