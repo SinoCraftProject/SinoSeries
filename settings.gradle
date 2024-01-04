@@ -9,4 +9,11 @@ pluginManagement {
 }
 
 rootProject.name = 'sinoseries'
+
 include 'sino-core'
+include 'sino-core:forge'
+include 'sino-core:fabric'
+
+include 'test'
+include 'test:forge-test'
+include 'test:fabric-test'

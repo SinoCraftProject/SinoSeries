@@ -1,79 +1,75 @@
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
-//    id 'java'
-    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'architectury-plugin' version "${architect_plugin_version}" apply false
     id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
+    id 'com.github.johnrengelman.shadow' version "${shadow_plugin_version}" apply false
     id 'org.ajoberstar.grgit' version "${grgit_plugin_version}"
 }
 
-architectury {
-    minecraft = project.minecraft_version
-}
-
-import java.nio.file.Files
-import java.nio.file.Path
-
-reGenRunConfig()
-
-def reGenRunConfig() {
-    if (gradle.startParameter.taskRequests.args.any { it.contains('ideaSyncTask') }) {
-        Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
-        if (Files.isDirectory(ideaCache)) {
-            Files.walk(ideaCache, 1)
-                    .filter { Files.isRegularFile(it) }
-                    .forEach { Files.delete(it) }
-
-            logger.info('IDEA run configurations successfully cleared.')
-        }
-    }
-}
-
-def getCommit(project) {
-    if (grgit == null) {
-        return 'nogit'
-    }
-
-    def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
-
-    if (latestCommits.isEmpty()) {
-        return 'uncommited'
-    }
-
-    return latestCommits.get(0).id.substring(0, 8)
-}
-
-def getMavenVersion() {
-    def ENV = System.getenv()
-
-    def result = project.sinoseries_version
-
-    if (!ENV.SINOSERIES_RELEASE) {
-        result += '-SNAPSHOT'
-    } else {
-        result += '-RELEASE'
-    }
-
-    result += "+mc${project.minecraft_version}"
-
-    if (!ENV.SINOSERIES_RELEASE) {
-        result += "-${(ENV.GITHUB_RUN_NUMBER ? '' : 'local-')}${getCommit(project)}"
-    }
-
-    return result;
-}
+apply from: 'scripts/helper.gradle'
 
 def ENV = System.getenv()
 
 allprojects {
     apply plugin: 'maven-publish'
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'dev.architectury.loom'
 
     group = 'games.moegirl.sinocraft'
-    version = getMavenVersion()
+    version = helpers.getMavenVersion(project)
+
+    architectury {
+        minecraft = rootProject.minecraft_version
+    }
+
+    loom {
+        silentMojangMappingsLicense()
+        setEnableTransitiveAccessWideners true
+        setEnableModProvidedJavadoc true
+    }
 
     repositories {
         maven {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'
         }
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
+        }
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    sourceSets.main.resources {
+        srcDir 'src/main/resources'
+        srcDir 'src/generated/resources'
+    }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        def copyDetails = (copy) -> {
+            expand(project.properties)
+        }
+
+        filesMatching('*/**/mods.toml', copyDetails)
+        filesMatching('fabric.mod.json', copyDetails)
+        filesMatching('quilt.mod.json', copyDetails)
+        filesMatching('pack.mcmeta', copyDetails)
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release = 17
     }
 
     publishing {
@@ -93,32 +89,207 @@ allprojects {
                 }
             }
         }
+    }
+}
 
-        publications {
+((List<Project>) subMod).each { Project mod ->
+    configure(mod) {
+        architectury {
+            common(((String) mod.mod_platforms).split(','))
+        }
 
+        var awFile = file("src/main/resources/${mod.modid}.accesswidener")
+        if (awFile.exists()) {
+            loom {
+                accessWidenerPath = awFile
+            }
+        }
+
+        dependencies {
+        }
+    }
+
+    configure(mod.subprojects) { Project sub ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        configurations {
+            common
+            shadowCommon
+            compileClasspath.extendsFrom common
+            runtimeClasspath.extendsFrom common
+            developmentForge.extendsFrom common
+            developmentFabric.extendsFrom common
+        }
+
+        shadowJar {
+            configurations = [project.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+
+        remapJar {
+            input.set shadowJar.archiveFile
+            dependsOn shadowJar
+        }
+
+        sourcesJar {
+            var commonSources = mod.sourcesJar
+            dependsOn commonSources
+            from commonSources.archiveFile.map { zipTree(it) }
+        }
+
+        components.java {
+            withVariantsFromConfiguration(sub.configurations.shadowRuntimeElements) {
+                skip()
+            }
+        }
+
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    artifactId = "${mod.modid}-${sub.name}"
+                    from components.java
+                }
+            }
+        }
+    }
+
+    configure(helpers.getSubForgeMod(mod)) { Project forgeMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        architectury {
+            platformSetupLoomIde()
+            forge()
+        }
+
+        loom {
+            forge {
+                if (loom.accessWidenerPath.isPresent()) {
+                    convertAccessWideners = true
+                    extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+                }
+
+                mixinConfig "${mod.modid}-common.mixins.json"
+                mixinConfig "${mod.modid}.mixins.json"
+            }
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+
+            runs {
+                runData {
+                    data()
+
+                    ideConfigGenerated = true
+                    configName = "Data Generator"
+
+                    programArgs '--all', '--mod', "${mod.modid}",
+                            '--output', helpers.getProjectGeneratedResourcesDir(mod).absolutePath
+
+                    subMod.each { sub ->
+                        helpers.getProjectResourcesDirs(sub).each { dir ->
+                            programArgs '--existing', dir.absolutePath
+                        }
+                    }
+                }
+            }
+        }
+
+        dependencies {
+            forge "net.minecraftforge:forge:${mod.minecraft_version}-${forgeMod.forge_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionForge')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'fabric.mod.json'
+            exclude 'architectury.common.json'
+
+            configurations = [project.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+    }
+
+    configure(helpers.getSubFabricMod(mod)) { Project fabricMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        architectury {
+            platformSetupLoomIde()
+            fabric()
+        }
+
+        loom {
+            accessWidenerPath = mod.loom.accessWidenerPath
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+        }
+
+        dependencies {
+            modImplementation "net.fabricmc:fabric-loader:${fabricMod.fabric_loader_version}"
+            modApi "net.fabricmc.fabric-api:fabric-api:${fabricMod.fabric_api_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionFabric')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'architectury.common.json'
+
+            configurations = [fabricMod.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
         }
     }
 }
 
-
-subprojects {
-    apply plugin: 'dev.architectury.loom'
-
-    loom {
-        silentMojangMappingsLicense()
+loom {
+    runConfigs.configureEach { config ->
+        ideConfigGenerated = false
     }
 }
 
-dependencies {
-//    include project(':sino-core')
-//    implementation project(path: ':sino-core', configuration: 'namedElements') transitive true
+//configurations {
+//    includeForge.extendsFrom include
+//    includeFabric.extendsFrom include
+//}
 //
-//    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+//dependencies {
+//    ((List<Project>) subMod).each { mod ->
+//        helpers.getSubForgeMod(mod).each { forgeMod ->
+//            include(forgeMod) {transitive = true}
+//        }
 //
-//    mappings loom.layered() {
-//        officialMojangMappings()
-//        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
+//        helpers.getSubFabricMod(mod).each { fabricMod ->
+//            include(fabricMod) {transitive = true}
+//        }
 //    }
-}
+//}
+
+//tasks.register('remapForgeJar', RemapJarTask.class) {
+//    dependsOn remapJar
+//
+//    inputFile.set remapJar.archiveFile
+//    addNestedDependencies = true
+//
+//    configurations.includeForge.artifacts.each {
+//        nestedJars.from(it)
+//    }
+//}
+//
+//prepareRemapForgeJar.getDependsOn().clear()
+//
+//build.dependsOn(remapForgeJar)
+
+//remapJar.getDependsOn().each {
+//    println it
+//}
+//
+//tasks.getByPath(':sino-core:forge:jar').getDependsOn().each {
+//    println it
+//}
+
 
 logger.lifecycle("Building SinoSeries Ver: ${project.version}")
+helpers.reGenRunConfig()

@@ -1,0 +1,122 @@
+import java.nio.file.Files
+import java.nio.file.Path
+
+void reGenRunConfig() {
+    if (gradle.startParameter.taskRequests.args.any { it.contains('ideaSyncTask') }) {
+        Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
+        if (Files.isDirectory(ideaCache)) {
+            logger.lifecycle('Clearing IDEA run configurations')
+
+            Files.walk(ideaCache, 1)
+                    .filter { Files.isRegularFile(it) }
+                    .forEach { Files.delete(it) }
+        }
+    }
+
+    var dirs = [
+            new File(project(':test:forge-test').projectDir, 'run/client'),
+            new File(project(':test:forge-test').projectDir, 'run/server'),
+            new File(project(':test:fabric-test').projectDir, 'run/client'),
+            new File(project(':test:fabric-test').projectDir, 'run/server')
+    ]
+    dirs.each {dir ->
+        if (!dir.isDirectory()) {
+            dir.delete()
+        }
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
+}
+
+String getCommit(project) {
+    if (grgit == null) {
+        return 'nogit'
+    }
+
+    def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
+
+    if (latestCommits.isEmpty()) {
+        return 'uncommited'
+    }
+
+    return latestCommits.get(0).id.substring(0, 8)
+}
+
+String getMavenVersion(Project project) {
+    var ENV = System.getenv()
+
+    String result = project.sinoseries_version
+
+    if (!ENV.SINOSERIES_RELEASE) {
+        result += '-SNAPSHOT'
+    } else {
+        result += '-RELEASE'
+    }
+
+    result += "+mc${project.minecraft_version}"
+
+    if (!ENV.SINOSERIES_RELEASE) {
+        result += "-${(ENV.GITHUB_RUN_NUMBER ? '' : 'local-')}${getCommit(project)}"
+    }
+
+    return result;
+}
+
+List<Project> getProjectsStartsBy(String prefix) {
+    var list = new ArrayList<Project>()
+
+    rootProject.childProjects.each {
+        if (it.value.name.startsWith(prefix)) {
+            list.add(it.value)
+        }
+    }
+
+    return list
+}
+
+static List<Project> getChildProjectsEndsBy(Project parent, String suffix) {
+    return parent.subprojects.stream().filter {it.path.endsWith(suffix)}.toList()
+}
+
+List<File> getProjectResourcesDirs(Project project) {
+    var list = new ArrayList<File>()
+
+    project.sourceSets.each {it ->
+        var sourceSet = (SourceSet) it
+        if (sourceSet.name != 'test') {
+            list.addAll(sourceSet.resources.srcDirs)
+        }
+    }
+
+    return list
+}
+
+File getProjectGeneratedResourcesDir(Project project) {
+    return new File(project.projectDir, 'src/generated/resources')
+}
+
+ext.subMod = getProjectsStartsBy('sino')
+
+// qyl27: We're not used two below for now.
+//ext.subModNeoForge = getChildProjectsEndsBy(subMod, 'neoforge')
+//ext.subModQuilt = getChildProjectsEndsBy(subMod, 'quilt')
+
+List<Project> getSubForgeMod(Project project) {
+    return getChildProjectsEndsBy(project, 'forge');
+}
+
+List<Project> getSubFabricMod(Project project) {
+    return getChildProjectsEndsBy(project, 'fabric');
+}
+
+ext.helpers = {
+    reGenRunConfig = this.&reGenRunConfig
+    getMavenVersion = this.&getMavenVersion
+    getProjectResourcesDirs = this.&getProjectResourcesDirs
+    getProjectGeneratedResourcesDir = this.&getProjectGeneratedResourcesDir
+
+    getSubForgeMod = this.&getSubForgeMod
+    getSubFabricMod = this.&getSubFabricMod
+}

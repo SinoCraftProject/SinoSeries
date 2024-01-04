@@ -1,0 +1,52 @@
+plugins {
+    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
+}
+
+architectury {
+    forge()
+}
+
+loom {
+    forge {
+
+    }
+
+    runs {
+        forgeClient {
+            client()
+
+            runDir = 'run/client'
+            ideConfigGenerated = true
+        }
+
+        forgeServer {
+            server()
+
+            runDir = 'run/server'
+            ideConfigGenerated = true
+        }
+    }
+
+    mods.clear()
+
+    mods {
+        ((List<Project>) subMod).each { Project mod ->
+            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+                "${mod.modid}" {
+                    sourceSet mod.sourceSets.main
+                    sourceSet forgeMod.sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    ((List<Project>) subMod).each { Project mod ->
+        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            implementation project(path: forgeMod.path, configuration: 'namedElements')
+        }
+    }
+}
