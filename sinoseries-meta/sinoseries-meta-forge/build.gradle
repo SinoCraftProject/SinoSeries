@@ -31,7 +31,7 @@ loom {
     mods.clear()
 
     mods {
-        ((List<Project>) subMod).each { Project mod ->
+        subMod.each { Project mod ->
             helpers.getSubForgeMod(mod).each { Project forgeMod ->
                 "${mod.modid}" {
                     sourceSet mod.sourceSets.main
@@ -44,9 +44,28 @@ loom {
 
 dependencies {
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-    ((List<Project>) subMod).each { Project mod ->
+
+    subMod.each { Project mod ->
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            implementation project(path: forgeMod.path, configuration: 'namedElements')
+            include project(path: forgeMod.path, configuration: 'namedElements')
+        }
+    }
+}
+
+classes {
+    subMod.each { Project mod ->
+        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            dependsOn("${mod.path}:classes")
+            dependsOn("${forgeMod.path}:classes")
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'sinoseries-forge-meta'
+            from components.java
         }
     }
 }

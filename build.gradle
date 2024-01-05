@@ -1,5 +1,3 @@
-import net.fabricmc.loom.task.RemapJarTask
-
 plugins {
     id 'architectury-plugin' version "${architect_plugin_version}" apply false
     id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
@@ -17,7 +15,7 @@ allprojects {
     apply plugin: 'dev.architectury.loom'
 
     group = 'games.moegirl.sinocraft'
-    version = helpers.getMavenVersion(project)
+    version = project.sinoseries_version
 
     architectury {
         minecraft = rootProject.minecraft_version
@@ -34,6 +32,19 @@ allprojects {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'
         }
+
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = "Modrinth"
+                    url = "https://api.modrinth.com/maven"
+                }
+            }
+
+            filter {
+                includeGroup "maven.modrinth"
+            }
+        }
     }
 
     dependencies {
@@ -47,6 +58,10 @@ allprojects {
 
     java {
         withSourcesJar()
+    }
+
+    sourcesJar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 
     sourceSets.main.resources {
@@ -63,7 +78,7 @@ allprojects {
 
         filesMatching('*/**/mods.toml', copyDetails)
         filesMatching('fabric.mod.json', copyDetails)
-        filesMatching('quilt.mod.json', copyDetails)
+//        filesMatching('quilt.mod.json', copyDetails)
         filesMatching('pack.mcmeta', copyDetails)
     }
 
@@ -92,25 +107,39 @@ allprojects {
     }
 }
 
-((List<Project>) subMod).each { Project mod ->
+subMod.each { Project mod ->
     configure(mod) {
+        version = project.sinoseries_version
+
         architectury {
             common(((String) mod.mod_platforms).split(','))
         }
 
-        var awFile = file("src/main/resources/${mod.modid}.accesswidener")
-        if (awFile.exists()) {
-            loom {
+        loom {
+            var awFile = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
+            if (awFile.exists()) {
                 accessWidenerPath = awFile
+            }
+
+            var commonFile = new File(mod.projectDir, 'src/main/resources/architectury.common.json')
+            if (commonFile.exists()) {
+                interfaceInjection {
+                    enableDependencyInterfaceInjection = true
+                }
             }
         }
 
         dependencies {
+            if (!mod.name.startsWith('sinocore')) {
+                api project(path: ':sinocore', configuration: 'namedElements')
+            }
         }
     }
 
     configure(mod.subprojects) { Project sub ->
         apply plugin: 'com.github.johnrengelman.shadow'
+
+        version = project.sinoseries_version
 
         configurations {
             common
@@ -146,7 +175,7 @@ allprojects {
         publishing {
             publications {
                 mavenJava(MavenPublication) {
-                    artifactId = "${mod.modid}-${sub.name}"
+                    version = helpers.getMavenVersion(sub)
                     from components.java
                 }
             }
@@ -250,46 +279,5 @@ loom {
     }
 }
 
-//configurations {
-//    includeForge.extendsFrom include
-//    includeFabric.extendsFrom include
-//}
-//
-//dependencies {
-//    ((List<Project>) subMod).each { mod ->
-//        helpers.getSubForgeMod(mod).each { forgeMod ->
-//            include(forgeMod) {transitive = true}
-//        }
-//
-//        helpers.getSubFabricMod(mod).each { fabricMod ->
-//            include(fabricMod) {transitive = true}
-//        }
-//    }
-//}
-
-//tasks.register('remapForgeJar', RemapJarTask.class) {
-//    dependsOn remapJar
-//
-//    inputFile.set remapJar.archiveFile
-//    addNestedDependencies = true
-//
-//    configurations.includeForge.artifacts.each {
-//        nestedJars.from(it)
-//    }
-//}
-//
-//prepareRemapForgeJar.getDependsOn().clear()
-//
-//build.dependsOn(remapForgeJar)
-
-//remapJar.getDependsOn().each {
-//    println it
-//}
-//
-//tasks.getByPath(':sino-core:forge:jar').getDependsOn().each {
-//    println it
-//}
-
-
-logger.lifecycle("Building SinoSeries Ver: ${project.version}")
+logger.lifecycle("Building SinoSeries Ver: ${helpers.getMavenVersion(project)}")
 helpers.reGenRunConfig()

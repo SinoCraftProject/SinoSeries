@@ -10,10 +10,14 @@ pluginManagement {
 
 rootProject.name = 'sinoseries'
 
-include 'sino-core'
-include 'sino-core:forge'
-include 'sino-core:fabric'
+include 'sinocore'
+include 'sinocore:sinocore-forge'
+include 'sinocore:sinocore-fabric'
 
-include 'test'
-include 'test:forge-test'
-include 'test:fabric-test'
+include 'sinobrush'
+include 'sinobrush:sinobrush-forge'
+include 'sinobrush:sinobrush-fabric'
+
+include 'sinoseries-meta'
+include 'sinoseries-meta:sinoseries-meta-forge'
+include 'sinoseries-meta:sinoseries-meta-fabric'

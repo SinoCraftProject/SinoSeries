@@ -14,10 +14,10 @@ void reGenRunConfig() {
     }
 
     var dirs = [
-            new File(project(':test:forge-test').projectDir, 'run/client'),
-            new File(project(':test:forge-test').projectDir, 'run/server'),
-            new File(project(':test:fabric-test').projectDir, 'run/client'),
-            new File(project(':test:fabric-test').projectDir, 'run/server')
+            new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/client'),
+            new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/server'),
+            new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/client'),
+            new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/server')
     ]
     dirs.each {dir ->
         if (!dir.isDirectory()) {
@@ -58,7 +58,8 @@ String getMavenVersion(Project project) {
     result += "+mc${project.minecraft_version}"
 
     if (!ENV.SINOSERIES_RELEASE) {
-        result += "-${(ENV.GITHUB_RUN_NUMBER ? '' : 'local-')}${getCommit(project)}"
+//        result += "-${(ENV.GITHUB_RUN_NUMBER ? '' : 'local-')}${getCommit(project)}"
+        result += "${ENV.GITHUB_RUN_NUMBER ? '-' + ENV.GITHUB_RUN_NUMBER : ''}"
     }
 
     return result;
@@ -68,7 +69,9 @@ List<Project> getProjectsStartsBy(String prefix) {
     var list = new ArrayList<Project>()
 
     rootProject.childProjects.each {
-        if (it.value.name.startsWith(prefix)) {
+
+        if (it.value.name.startsWith(prefix)
+                && (!it.value.name.contains('meta'))) {
             list.add(it.value)
         }
     }
@@ -99,9 +102,9 @@ File getProjectGeneratedResourcesDir(Project project) {
 
 ext.subMod = getProjectsStartsBy('sino')
 
-// qyl27: We're not used two below for now.
-//ext.subModNeoForge = getChildProjectsEndsBy(subMod, 'neoforge')
-//ext.subModQuilt = getChildProjectsEndsBy(subMod, 'quilt')
+List<Project> getSubMod(Project project) {
+    return getChildProjectsEndsBy(project, '');
+}
 
 List<Project> getSubForgeMod(Project project) {
     return getChildProjectsEndsBy(project, 'forge');
@@ -117,6 +120,7 @@ ext.helpers = {
     getProjectResourcesDirs = this.&getProjectResourcesDirs
     getProjectGeneratedResourcesDir = this.&getProjectGeneratedResourcesDir
 
+    getSubMod = this.&getSubMod
     getSubForgeMod = this.&getSubForgeMod
     getSubFabricMod = this.&getSubFabricMod
 }
