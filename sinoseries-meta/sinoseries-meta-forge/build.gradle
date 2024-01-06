@@ -62,6 +62,7 @@ classes {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            version = helpers.getMavenVersion(project)
             from components.java
         }
     }
