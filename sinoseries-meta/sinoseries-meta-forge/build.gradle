@@ -28,8 +28,6 @@ loom {
         }
     }
 
-    mods.clear()
-
     mods {
         subMod.each { Project mod ->
             helpers.getSubForgeMod(mod).each { Project forgeMod ->
@@ -64,7 +62,6 @@ classes {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'sinoseries-forge-meta'
             from components.java
         }
     }
