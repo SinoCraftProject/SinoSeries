@@ -49,17 +49,16 @@ String getMavenVersion(Project project) {
 
     String result = project.sinoseries_version
 
+    result += "+mc${project.minecraft_version}"
+
+    if (!ENV.SINOSERIES_RELEASE) {
+        result += "${ENV.GITHUB_RUN_NUMBER ? '-' + ENV.GITHUB_RUN_NUMBER : ''}"
+    }
+
     if (!ENV.SINOSERIES_RELEASE) {
         result += '-SNAPSHOT'
     } else {
         result += '-RELEASE'
-    }
-
-    result += "+mc${project.minecraft_version}"
-
-    if (!ENV.SINOSERIES_RELEASE) {
-//        result += "-${(ENV.GITHUB_RUN_NUMBER ? '' : 'local-')}${getCommit(project)}"
-        result += "${ENV.GITHUB_RUN_NUMBER ? '-' + ENV.GITHUB_RUN_NUMBER : ''}"
     }
 
     return result;

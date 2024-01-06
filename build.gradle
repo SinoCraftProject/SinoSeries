@@ -78,7 +78,6 @@ allprojects {
 
         filesMatching('*/**/mods.toml', copyDetails)
         filesMatching('fabric.mod.json', copyDetails)
-//        filesMatching('quilt.mod.json', copyDetails)
         filesMatching('pack.mcmeta', copyDetails)
     }
 
