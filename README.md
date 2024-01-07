@@ -2,16 +2,19 @@
 Main repository of SinoSeries mods.
 华夏系列模组仓库。
 
-| 模组名称 | 英文名称 (English Name) | 状态 (Status) |
-|------|---------------------|-------------|
-| 华夏核心 | SinoCore            | ✅ Available |
-| 华夏基础 | SinoFoundation      | ⚠️ WIP      |
-| 华夏飨宴 | SinoFeast           | ⚠️ WIP      |
-| 华夏丹青 | SinoCalligraphy     | ⚠️ WIP      |
-| 华夏九筮 | SinoDivination      | ⚠️ WIP      |
-| 华夏八音 | SinoMusical         | ❌ Preparing |
-| 华夏七诰 | SinoTaoism          | ❌ Preparing |
-| 华夏六爻 | SinoYi              | ❌ Preparing |
+Current Minecraft Version: **1.20.2**  
+当前 Minecraft 版本：**1.20.2**  
+
+| 模组名称 | 英文名称 (Name) | 状态 (Status) |
+|------|-------------|-------------|
+| 华夏核心 | SinoCore    | ⚠️ WIP      |
+| 华夏云墨 | SinoBrush   | ⚠️ WIP      |
+
+<!-- | 华夏？？ | SinoDeco       | ❌ Preparing | -->
+<!-- | 华夏？？ | SinoBuild      | ❌ Preparing | -->
+
+## Documents / 模组文档
+[SinoSeries 中文文档](https://docs.sino.moegirl.games/)
 
 ## License / 许可协议
 See [LICENSE](https://github.com/SinoCraftProject/SinoSeries/blob/main/LICENSE) of this repository.  
