@@ -4,6 +4,7 @@ plugins {
 }
 
 architectury {
+    platformSetupLoomIde()
     forge()
 }
 
@@ -13,18 +14,14 @@ loom {
     }
 
     runs {
-        forgeClient {
-            client()
-
+        client {
+            configName = 'Forge Client'
             runDir = 'run/client'
-            ideConfigGenerated = true
         }
 
-        forgeServer {
-            server()
-
+        server {
+            configName = 'Forge Server'
             runDir = 'run/server'
-            ideConfigGenerated = true
         }
     }
 

@@ -4,23 +4,20 @@ plugins {
 }
 
 architectury {
+    platformSetupLoomIde()
     fabric()
 }
 
 loom {
     runs {
-        fabricClient {
-            client()
-
+        client {
+            configName = 'Fabric Client'
             runDir = 'run/client'
-            ideConfigGenerated = true
         }
 
-        fabricServer {
-            server()
-
+        server {
+            configName = 'Fabric Server'
             runDir = 'run/server'
-            ideConfigGenerated = true
         }
     }
 
