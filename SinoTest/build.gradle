@@ -1,4 +1,0 @@
-dependencies {
-    implementation project(path: ':SinoCore', configuration: 'namedElements')
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
-}

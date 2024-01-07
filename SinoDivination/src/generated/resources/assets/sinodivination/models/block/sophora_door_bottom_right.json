@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_right",
-  "render_type": "minecraft:cutout_mipped",
-  "textures": {
-    "bottom": "sinodivination:block/sophora_door_bottom",
-    "top": "sinodivination:block/sophora_door_top"
-  }
-}

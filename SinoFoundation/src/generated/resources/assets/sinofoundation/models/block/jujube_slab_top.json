@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "sinofoundation:block/jujube_planks",
-    "side": "sinofoundation:block/jujube_planks",
-    "top": "sinofoundation:block/jujube_planks"
-  }
-}

@@ -1,0 +1,66 @@
+plugins {
+    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+loom {
+    forge {
+
+    }
+
+    runs {
+        client {
+            configName = 'Forge Client'
+            runDir = 'run/client'
+        }
+
+        server {
+            configName = 'Forge Server'
+            runDir = 'run/server'
+        }
+    }
+
+    mods {
+        subMod.each { Project mod ->
+            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+                "${mod.modid}" {
+                    sourceSet mod.sourceSets.main
+                    sourceSet forgeMod.sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    subMod.each { Project mod ->
+        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            include project(path: forgeMod.path, configuration: 'namedElements')
+        }
+    }
+}
+
+classes {
+    subMod.each { Project mod ->
+        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            dependsOn("${mod.path}:classes")
+            dependsOn("${forgeMod.path}:classes")
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            version = helpers.getMavenVersion(project)
+            from components.java
+        }
+    }
+}

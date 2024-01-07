@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "sinofoundation:block/black_jade_ore"
-  }
-}

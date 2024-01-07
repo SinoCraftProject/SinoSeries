@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "sinofoundation:block/smooth_marble",
-    "side": "sinofoundation:block/smooth_marble",
-    "top": "sinofoundation:block/smooth_marble"
-  }
-}

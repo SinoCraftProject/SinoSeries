@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "sinocalligraphy:block/green_sandalwood_log_top",
-    "side": "sinocalligraphy:block/green_sandalwood_log"
-  }
-}

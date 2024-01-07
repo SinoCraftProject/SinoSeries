@@ -26,4 +26,5 @@ forge*changelog.txt
 
 publish/
 output/
-/SinoTest/src/generated/resources/
+
+.architectury-transformer/

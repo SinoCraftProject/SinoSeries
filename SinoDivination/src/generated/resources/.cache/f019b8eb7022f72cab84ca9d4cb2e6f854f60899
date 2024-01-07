@@ -1,8 +1,0 @@
-// 1.20.1	2023-07-20T10:44:12.6295893	Tags for minecraft:item mod id sinodivination
-d075a005b182f676fdbdee8a66a0bcffe5b59014 data/forge/tags/items/chests/trapped.json
-485c212d8146b3f9d5788de39b369741773877e7 data/forge/tags/items/chests/wooden.json
-fac082a2e9f272fc7b373b32213497b1ee7bb355 data/sinodivination/tags/items/copper_sacrificial_utensil.json
-7c9099ae414dee69749c90c8a3e1cb4386e464af data/sinodivination/tags/items/jade_sacrificial_utensil.json
-e14d4a6e7ee059a1d7b295b305588447a07847de data/sinodivination/tags/items/sacrificial_utensil.json
-c0ed60cd88937b82219544f851ecc8739044c5a5 data/sinodivination/tags/items/sacrificial_utensil_material.json
-aeea164ff6cdbe5caa10f01e68e34c0547094d6f data/sinofoundation/tags/items/sophora_stack.json

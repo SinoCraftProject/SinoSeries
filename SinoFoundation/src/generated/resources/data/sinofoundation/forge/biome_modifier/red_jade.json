@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#sinofoundation:red_jade_generation",
-  "features": "sinofoundation:red_jade",
-  "step": "underground_ores"
-}
