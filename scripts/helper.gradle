@@ -16,6 +16,8 @@ void reGenRunConfig() {
     var dirs = [
             new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/client'),
             new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/server'),
+            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
+            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
             new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/client'),
             new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/server')
     ]
@@ -102,15 +104,23 @@ File getProjectGeneratedResourcesDir(Project project) {
 ext.subMod = getProjectsStartsBy('sino')
 
 List<Project> getSubMod(Project project) {
-    return getChildProjectsEndsBy(project, '');
+    return getChildProjectsEndsBy(project, '')
 }
 
 List<Project> getSubForgeMod(Project project) {
-    return getChildProjectsEndsBy(project, 'forge');
+    return getChildProjectsEndsBy(project, 'forge').stream()
+            .filter {it ->
+                !getChildProjectsEndsBy(project, 'neoforge').contains(it)
+            }
+            .toList()
+}
+
+List<Project> getSubNeoForgeMod(Project project) {
+    return getChildProjectsEndsBy(project, 'neoforge')
 }
 
 List<Project> getSubFabricMod(Project project) {
-    return getChildProjectsEndsBy(project, 'fabric');
+    return getChildProjectsEndsBy(project, 'fabric')
 }
 
 ext.helpers = {
@@ -121,5 +131,6 @@ ext.helpers = {
 
     getSubMod = this.&getSubMod
     getSubForgeMod = this.&getSubForgeMod
+    getSubNeoForgeMod = this.&getSubNeoForgeMod
     getSubFabricMod = this.&getSubFabricMod
 }

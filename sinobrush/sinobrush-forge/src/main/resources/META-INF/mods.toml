@@ -20,7 +20,7 @@ ${mod_description}
 [[dependencies.${modid}]]
 modId = "forge"
 mandatory = true
-versionRange = "[${fmlloader_version},${next_fmlloader_version})"
+versionRange = "[${forge_version},${next_forge_version})"
 ordering = "NONE"
 side = "BOTH"
 
