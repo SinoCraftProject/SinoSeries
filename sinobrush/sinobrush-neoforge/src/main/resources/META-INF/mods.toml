@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[${fmlloader_version},${next_fmlloader_version})"
+loaderVersion = "[${neoforge_loader_version},${next_neoforge_loader_version})"
 license = "${sinoseries_license}"
 issueTrackerURL = "${sinoseries_issues}"
 
@@ -18,9 +18,9 @@ ${mod_description}
 '''
 
 [[dependencies.${modid}]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[${forge_version},${next_forge_version})"
+versionRange = "[${neoforge_version},${next_neoforge_version})"
 ordering = "NONE"
 side = "BOTH"
 
@@ -29,4 +29,11 @@ modId = "minecraft"
 mandatory = true
 versionRange = "[${minecraft_version},${next_minecraft_version})"
 ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modid}]]
+modId = "sinocore"
+mandatory = true
+versionRange = "[${sinoseries_version},)"
+ordering = "AFTER"
 side = "BOTH"

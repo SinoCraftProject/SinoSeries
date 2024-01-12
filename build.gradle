@@ -33,6 +33,11 @@ allprojects {
             url = 'https://maven.parchmentmc.org'
         }
 
+        maven {
+            name = 'NeoForge'
+            url = 'https://maven.neoforged.net/releases/'
+        }
+
         exclusiveContent {
             forRepository {
                 maven {
@@ -104,6 +109,9 @@ allprojects {
             }
         }
     }
+
+    // Fixme: qyl27: Due to an unknown issue that forge-like projects can't clean the output resources dir.
+    compileJava.dependsOn(clean)
 }
 
 subMod.each { Project mod ->
@@ -147,6 +155,7 @@ subMod.each { Project mod ->
             runtimeClasspath.extendsFrom common
             developmentForge.extendsFrom common
             developmentFabric.extendsFrom common
+            developmentNeoForge.extendsFrom common
         }
 
         shadowJar {
@@ -196,8 +205,15 @@ subMod.each { Project mod ->
                     extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
                 }
 
-                mixinConfig "${mod.modid}-common.mixins.json"
-                mixinConfig "${mod.modid}.mixins.json"
+                if (forgeMod.file("/src/main/resources/${mod.modid}.mixins.json").exists()) {
+                    mixinConfig "${mod.modid}.mixins.json"
+                    println "mixinConfig ${mod.modid}.mixins.json"
+                }
+
+                if (forgeMod.parent.file("/src/main/resources/${mod.modid}-common.mixins.json").exists()) {
+                    mixinConfig "${mod.modid}-common.mixins.json"
+                    println "mixinConfig ${mod.modid}-common.mixins.json"
+                }
             }
 
             runConfigs.configureEach { config ->
@@ -221,6 +237,11 @@ subMod.each { Project mod ->
                     }
                 }
             }
+        }
+
+        sourceSets.main.resources {
+            srcDir(new File(mod.projectDir, 'src/main/resources'))
+            srcDir(new File(mod.projectDir, 'src/generated/resources'))
         }
 
         dependencies {
@@ -267,6 +288,43 @@ subMod.each { Project mod ->
             exclude 'architectury.common.json'
 
             configurations = [fabricMod.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+    }
+
+    configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        architectury {
+            platformSetupLoomIde()
+            neoForge()
+        }
+
+        loom {
+            accessWidenerPath = mod.loom.accessWidenerPath
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+        }
+
+        sourceSets.main.resources {
+            srcDir(new File(mod.projectDir, 'src/main/resources'))
+            srcDir(new File(mod.projectDir, 'src/generated/resources'))
+        }
+
+        dependencies {
+            neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionNeoForge')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'fabric.mod.json'
+            exclude 'architectury.common.json'
+
+            configurations = [project.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
         }
     }

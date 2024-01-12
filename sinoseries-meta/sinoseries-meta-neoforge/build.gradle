@@ -10,31 +10,27 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 loom {
-    forge {
-
-    }
-
     runs {
         client {
-            configName = 'Forge Client'
+            configName = 'NeoForge Client'
             runDir = 'run/client'
         }
 
         server {
-            configName = 'Forge Server'
+            configName = 'NeoForge Server'
             runDir = 'run/server'
         }
     }
 
     mods {
         subMod.each { Project mod ->
-            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
                 "${mod.modid}" {
-                    sourceSet forgeMod.sourceSets.main
+                    sourceSet neoForgeMod.sourceSets.main
                 }
             }
         }
@@ -42,20 +38,20 @@ loom {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    neoForge "net.neoforged:neoforge:${project.neoforge_version}"
 
     subMod.each { Project mod ->
-        helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            include project(path: forgeMod.path, configuration: 'namedElements')
+        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
+            include project(path: neoForgeMod.path, configuration: 'namedElements')
         }
     }
 }
 
 classes {
     subMod.each { Project mod ->
-        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
             dependsOn("${mod.path}:classes")
-            dependsOn("${forgeMod.path}:classes")
+            dependsOn("${neoForgeMod.path}:classes")
         }
     }
 }
@@ -66,8 +62,8 @@ processResources {
     java.nio.file.Files.createFile(projectTransformsFile.toPath())
 
     subMod.each { Project mod ->
-        helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            var subModTransformsFile = new File(forgeMod.projectDir, '/.gradle/architectury/.transforms')
+        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
+            var subModTransformsFile = new File(neoForgeMod.projectDir, '/.gradle/architectury/.transforms')
             var lines = java.nio.file.Files.readString(subModTransformsFile.toPath())
             Files.asCharSink(projectTransformsFile, StandardCharsets.UTF_8, FileWriteMode.APPEND)
                     .write(lines)
