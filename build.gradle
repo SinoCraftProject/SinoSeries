@@ -6,6 +6,7 @@ plugins {
 }
 
 apply from: 'scripts/helper.gradle'
+apply from: 'scripts/meta.gradle'
 
 def ENV = System.getenv()
 
