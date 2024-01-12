@@ -302,7 +302,12 @@ subMod.each { Project mod ->
         }
 
         loom {
-            accessWidenerPath = mod.loom.accessWidenerPath
+            neoForge {
+                if (loom.accessWidenerPath.isPresent()) {
+                    convertAccessWideners = true
+                    accessTransformer loom.accessWidenerPath.get().asFile.name
+                }
+            }
 
             runConfigs.configureEach { config ->
                 ideConfigGenerated = false

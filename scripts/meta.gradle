@@ -5,61 +5,93 @@ import java.nio.file.StandardOpenOption
 void injectForgeTransformers(Project project) {
     var file = initTransformers(project)
 
-    subMod.each { Project mod ->
-        helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            appendTransformers(file, forgeMod)
+    if (file != null) {
+        subMod.each { Project mod ->
+            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+                appendTransformers(file, forgeMod)
+            }
         }
-    }
 
-    println 'Architectury transformers injected.'
+        println 'Architectury transformers injected.'
+    }
+}
+
+void injectFabricTransformers(Project project) {
+    var file = initTransformers(project)
+
+    if (file != null) {
+        subMod.each { Project mod ->
+            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+                appendTransformersFabric(file, forgeMod)  // qyl27: Yes, copy from forge mod.
+            }
+        }
+
+        println 'Architectury transformers injected.'
+    }
 }
 
 void injectNeoForgeTransformers(Project project) {
     var file = initTransformers(project)
 
-    subMod.each { Project mod ->
-        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
-            appendTransformers(file, neoForgeMod)
+    if (file != null) {
+        subMod.each { Project mod ->
+            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+                appendTransformers(file, forgeMod)  // qyl27: Yes, copy from forge mod.
+            }
         }
-    }
 
-    println 'Architectury transformers injected.'
+        println 'Architectury transformers injected.'
+    }
 }
 
 File initTransformers(Project project) {
     var projectTransformsDir = new File(project.projectDir, '/.gradle/architectury')
 
     if (projectTransformsDir.exists()) {
-        projectTransformsDir.mkdirs()
+        var projectTransformsFile = new File(projectTransformsDir, '.transforms')
+
+        Files.deleteIfExists(projectTransformsFile.toPath())
+        Files.createFile(projectTransformsFile.toPath())
+
+        return projectTransformsFile
     }
 
-    var projectTransformsFile = new File(projectTransformsDir, '.transforms')
-
-    Files.deleteIfExists(projectTransformsFile.toPath())
-    Files.createFile(projectTransformsFile.toPath())
-
-    return projectTransformsFile
+    return null
 }
 
 void appendTransformers(File file, Project project) {
+    var projectTransformsFile = new File(project.projectDir, '/.gradle/architectury/.transforms')
+    var text = Files.readString(projectTransformsFile.toPath())
+    appendText(file, text)
+}
 
-    var projectTransformsDir = new File(project.projectDir, '/.gradle/architectury')
+void appendTransformersFabric(File file, Project project) {
+    var projectTransformsFile = new File(project.projectDir, '/.gradle/architectury/.transforms')
+    var text = Files.readString(projectTransformsFile.toPath())
 
-    if (projectTransformsDir.exists()) {
-        projectTransformsDir.mkdirs()
+    var lines = text.split(';')
+    for (def line : lines) {
+        if (line.contains('Forge')) {
+            continue
+        }
+
+        appendText(file, "${line};")
     }
 
-    var projectTransformsFile = new File(projectTransformsDir, '.transforms')
-
-    if (!projectTransformsFile.exists()) {
-        Files.createFile(projectTransformsFile.toPath())
+    if (lines.length >= 1) {
+        var line = lines[0].split('\\|')
+        appendText(file, "${line[0]}|dev.architectury.transformer.transformers.GenerateFakeFabricMod;")
     }
+}
 
-    var lines = Files.readString(projectTransformsFile.toPath())
-    Files.write(file.toPath(), lines.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND)
+void appendText(File file, String string) {
+    if (file.exists()) {
+        Files.write(file.toPath(), string.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND)
+    }
 }
 
 ext.metaHelpers = {
     injectForgeTransformers = this.&injectForgeTransformers
+    injectFabricTransformers = this.&injectFabricTransformers
     injectNeoForgeTransformers = this.&injectNeoForgeTransformers
 }
