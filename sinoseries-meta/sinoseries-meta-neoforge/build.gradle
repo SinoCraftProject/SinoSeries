@@ -1,8 +1,3 @@
-import com.google.common.io.FileWriteMode
-import com.google.common.io.Files
-
-import java.nio.charset.StandardCharsets
-
 plugins {
     id 'architectury-plugin' version "${architect_plugin_version}"
     id 'dev.architectury.loom' version "${architectury_loom_version}"
@@ -57,25 +52,7 @@ classes {
 }
 
 processResources {
-    var projectTransformsFile = new File(projectDir, '/.gradle/architectury/.transforms')
-    Files.createParentDirs(projectTransformsFile)
-    java.nio.file.Files.deleteIfExists(projectTransformsFile.toPath())
-    java.nio.file.Files.createFile(projectTransformsFile.toPath())
-
-    subMod.each { Project mod ->
-        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
-            var subModTransformsFile = new File(neoForgeMod.projectDir, '/.gradle/architectury/.transforms')
-            if (!subModTransformsFile.isFile()) {
-                Files.createParentDirs(subModTransformsFile)
-                java.nio.file.Files.createFile(subModTransformsFile.toPath())
-            }
-            var lines = java.nio.file.Files.readString(subModTransformsFile.toPath())
-            Files.asCharSink(projectTransformsFile, StandardCharsets.UTF_8, FileWriteMode.APPEND)
-                    .write(lines)
-        }
-    }
-
-    println 'Architectury transformers injected.'
+    metaHelpers.injectNeoForgeTransformers(project)
 }
 
 publishing {
