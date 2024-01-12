@@ -239,6 +239,11 @@ subMod.each { Project mod ->
             }
         }
 
+        sourceSets.main.resources {
+            srcDir(new File(mod.projectDir, 'src/main/resources'))
+            srcDir(new File(mod.projectDir, 'src/generated/resources'))
+        }
+
         dependencies {
             forge "net.minecraftforge:forge:${mod.minecraft_version}-${forgeMod.forge_version}"
 
@@ -301,6 +306,11 @@ subMod.each { Project mod ->
             runConfigs.configureEach { config ->
                 ideConfigGenerated = false
             }
+        }
+
+        sourceSets.main.resources {
+            srcDir(new File(mod.projectDir, 'src/main/resources'))
+            srcDir(new File(mod.projectDir, 'src/generated/resources'))
         }
 
         dependencies {
