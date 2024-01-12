@@ -104,6 +104,9 @@ allprojects {
             }
         }
     }
+
+    // Fixme: qyl27: Due to an unknown issue that forge-like projects can't clean the output resources dir.
+    compileJava.dependsOn(clean)
 }
 
 subMod.each { Project mod ->
