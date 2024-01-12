@@ -58,12 +58,17 @@ classes {
 
 processResources {
     var projectTransformsFile = new File(projectDir, '/.gradle/architectury/.transforms')
+    Files.createParentDirs(projectTransformsFile)
     java.nio.file.Files.deleteIfExists(projectTransformsFile.toPath())
     java.nio.file.Files.createFile(projectTransformsFile.toPath())
 
     subMod.each { Project mod ->
         helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
             var subModTransformsFile = new File(neoForgeMod.projectDir, '/.gradle/architectury/.transforms')
+            if (!subModTransformsFile.isFile()) {
+                Files.createParentDirs(subModTransformsFile)
+                java.nio.file.Files.createFile(subModTransformsFile.toPath())
+            }
             var lines = java.nio.file.Files.readString(subModTransformsFile.toPath())
             Files.asCharSink(projectTransformsFile, StandardCharsets.UTF_8, FileWriteMode.APPEND)
                     .write(lines)
