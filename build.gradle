@@ -141,6 +141,8 @@ subMod.each { Project mod ->
             if (!mod.name.startsWith('sinocore')) {
                 api project(path: ':sinocore', configuration: 'namedElements')
             }
+
+            compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
         }
     }
 
