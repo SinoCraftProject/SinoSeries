@@ -5,4 +5,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod(SinoCore.MODID)
 public class SinoCoreForge {
+
+    public SinoCoreForge() {
+        SinoCore.registerAll();
+    }
 }
