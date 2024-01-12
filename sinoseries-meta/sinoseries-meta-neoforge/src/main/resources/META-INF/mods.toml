@@ -1,5 +1,5 @@
-modLoader = "javafml"
-loaderVersion = "[${fmlloader_version},${next_fmlloader_version})"
+modLoader = "lowcodefml"
+loaderVersion = "[${neoforge_loader_version},${next_neoforge_loader_version})"
 license = "${sinoseries_license}"
 issueTrackerURL = "${sinoseries_issues}"
 
@@ -18,9 +18,9 @@ ${mod_description}
 '''
 
 [[dependencies.${modid}]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[${forge_version},${next_forge_version})"
+versionRange = "[${neoforge_version},${next_neoforge_version})"
 ordering = "NONE"
 side = "BOTH"
 

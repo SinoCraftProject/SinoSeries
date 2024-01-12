@@ -33,6 +33,11 @@ allprojects {
             url = 'https://maven.parchmentmc.org'
         }
 
+        maven {
+            name = 'NeoForge'
+            url = 'https://maven.neoforged.net/releases/'
+        }
+
         exclusiveContent {
             forRepository {
                 maven {
@@ -150,6 +155,7 @@ subMod.each { Project mod ->
             runtimeClasspath.extendsFrom common
             developmentForge.extendsFrom common
             developmentFabric.extendsFrom common
+            developmentNeoForge.extendsFrom common
         }
 
         shadowJar {
@@ -270,6 +276,38 @@ subMod.each { Project mod ->
             exclude 'architectury.common.json'
 
             configurations = [fabricMod.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+    }
+
+    configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        architectury {
+            platformSetupLoomIde()
+            neoForge()
+        }
+
+        loom {
+            accessWidenerPath = mod.loom.accessWidenerPath
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+        }
+
+        dependencies {
+            neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionNeoForge')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'fabric.mod.json'
+            exclude 'architectury.common.json'
+
+            configurations = [project.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
         }
     }
