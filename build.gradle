@@ -208,12 +208,10 @@ subMod.each { Project mod ->
 
                 if (forgeMod.file("/src/main/resources/${mod.modid}.mixins.json").exists()) {
                     mixinConfig "${mod.modid}.mixins.json"
-                    println "mixinConfig ${mod.modid}.mixins.json"
                 }
 
-                if (forgeMod.parent.file("/src/main/resources/${mod.modid}-common.mixins.json").exists()) {
+                if (mod.file("/src/main/resources/${mod.modid}-common.mixins.json").exists()) {
                     mixinConfig "${mod.modid}-common.mixins.json"
-                    println "mixinConfig ${mod.modid}-common.mixins.json"
                 }
             }
 

@@ -1,0 +1,7 @@
+{
+    "injected_interfaces": {
+        "net/minecraft/class_1792$class_1793": [
+            "games/moegirl/sinocraft/sinocore/injectables/ITabItemProperties"
+        ]
+    }
+}
