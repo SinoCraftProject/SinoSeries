@@ -4,6 +4,8 @@ import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -27,6 +29,11 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
+    public String getModId() {
+        return modId;
+    }
+
+    @Override
     public void register() {
         if (!registered) {
             dr.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -37,5 +44,10 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
     @Override
     public <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier) {
         return new ForgeRefImpl<>(dr.register(name, supplier));
+    }
+
+    @Override
+    public TagKey<T> createTag(ResourceLocation name) {
+        return dr.createTagKey(name);
     }
 }

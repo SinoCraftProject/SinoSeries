@@ -8,6 +8,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 
 import java.util.function.Supplier;
 
@@ -33,6 +34,11 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
+    public String getModId() {
+        return modId;
+    }
+
+    @Override
     public void register() {
     }
 
@@ -41,5 +47,10 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
         ResourceLocation id = new ResourceLocation(modId, name);
         ResourceKey<T> eKey = ResourceKey.create(key, id);
         return (IRef<T, R>) new FabricRefImpl<>(Registry.registerForHolder(registry, eKey, supplier.get()));
+    }
+
+    @Override
+    public TagKey<T> createTag(ResourceLocation name) {
+        return TagKey.create(key, name);
     }
 }
