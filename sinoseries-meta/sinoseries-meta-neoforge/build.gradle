@@ -25,7 +25,6 @@ loom {
         subMod.each { Project mod ->
             helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
                 "${mod.modid}" {
-                    sourceSet mod.sourceSets.main
                     sourceSet neoForgeMod.sourceSets.main
                 }
             }
@@ -50,6 +49,10 @@ classes {
             dependsOn("${neoForgeMod.path}:classes")
         }
     }
+}
+
+processResources {
+    metaHelpers.injectNeoForgeTransformers(project)
 }
 
 publishing {

@@ -29,7 +29,6 @@ loom {
         subMod.each { Project mod ->
             helpers.getSubForgeMod(mod).each { Project forgeMod ->
                 "${mod.modid}" {
-                    sourceSet mod.sourceSets.main
                     sourceSet forgeMod.sourceSets.main
                 }
             }
@@ -54,6 +53,10 @@ classes {
             dependsOn("${forgeMod.path}:classes")
         }
     }
+}
+
+processResources {
+    metaHelpers.injectForgeTransformers(project)
 }
 
 publishing {
