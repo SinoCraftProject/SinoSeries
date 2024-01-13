@@ -4,6 +4,11 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+/**
+ * 可空类型接口，类似 {@link java.util.Optional}
+ *
+ * @param <T>
+ */
 public interface IOptional<T> {
 
     boolean isPresent();
