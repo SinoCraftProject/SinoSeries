@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
+import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.TabItemGenerator;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -29,34 +30,29 @@ public class FabricTabRegistryImpl implements ITabRegistry {
     }
 
     @Override
-    public ResourceKey<CreativeModeTab> register(String name) {
+    public IRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
-        Supplier<CreativeModeTab> supplier = () -> FabricItemGroup.builder()
-                .title(Component.translatable("tab." + modId + "." + name))
-                .displayItems(generator)
-                .icon(generator::displayItem)
-                .build();
         ResourceLocation id = new ResourceLocation(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
         GENERATORS.put(key, generator);
-        Registry.register(registry, key, supplier.get());
-        return key;
+        return registerForRef(name, () -> FabricItemGroup.builder()
+                .title(Component.translatable("tab." + modId + "." + name))
+                .displayItems(generator)
+                .icon(generator::displayItem)
+                .build());
     }
 
     @Override
-    public ResourceKey<CreativeModeTab> register(String name, Supplier<CreativeModeTab> supplier) {
+    public <T extends CreativeModeTab> IRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
         ResourceLocation id = new ResourceLocation(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
-        Registry.register(registry, key, supplier.get());
-        return key;
+        return (IRef<CreativeModeTab, T>) new FabricRefImpl<>(Registry.registerForHolder(registry, key, supplier.get()));
     }
 
     @Override
-    public TabItemGenerator tabItems(ResourceKey<CreativeModeTab> tab) {
-        synchronized (ITabRegistry.class) {
-            if (GENERATORS.containsKey(tab)) {
-                return GENERATORS.get(tab);
-            }
+    public synchronized TabItemGenerator tabItems(ResourceKey<CreativeModeTab> tab) {
+        if (GENERATORS.containsKey(tab)) {
+            return GENERATORS.get(tab);
         }
         return VANILLA_GENERATORS.computeIfAbsent(tab, __ -> {
             TabItemGenerator generator = TabItemGenerator.vanilla(tab);

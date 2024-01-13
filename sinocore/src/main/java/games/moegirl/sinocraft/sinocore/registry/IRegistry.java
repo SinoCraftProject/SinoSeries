@@ -6,5 +6,5 @@ public interface IRegistry<T> {
 
     void register();
 
-    <R extends T> Supplier<R> register(String name, Supplier<? extends R> supplier);
+    <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier);
 }

@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore;
 
+import com.mojang.logging.LogUtils;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
@@ -11,11 +12,13 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.slf4j.Logger;
 
 import java.util.function.Supplier;
 
 public class SinoCore {
     public static final String MODID = "sinocore";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public static IRegistry<Item> ITEMS;
     public static IRegistry<Block> BLOCKS;
@@ -26,13 +29,13 @@ public class SinoCore {
         BLOCKS = RegistryManager.obtain(MODID, Registries.BLOCK);
         TABS = RegistryManager.obtainTab(MODID);
 
-        ITEMS.register();
-        BLOCKS.register();
-        TABS.register();
-
         registerTabs();
         registerBlocks();
         registerItems();
+
+        ITEMS.register();
+        BLOCKS.register();
+        TABS.register();
     }
 
     public static ResourceKey<CreativeModeTab> TEST_TAB;
