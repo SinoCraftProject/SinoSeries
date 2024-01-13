@@ -304,8 +304,8 @@ subMod.each { Project mod ->
         loom {
             neoForge {
                 if (loom.accessWidenerPath.isPresent()) {
-                    convertAccessWideners = true
-                    accessTransformer loom.accessWidenerPath.get().asFile.name
+//                    convertAccessWideners = true
+//                    accessTransformer loom.accessWidenerPath.get().asFile.name
                 }
             }
 

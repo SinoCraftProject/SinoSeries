@@ -17,11 +17,15 @@ loom {
         client {
             configName = 'Forge Client'
             runDir = 'run/client'
+
+//            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
         }
 
         server {
             configName = 'Forge Server'
             runDir = 'run/server'
+
+//            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
         }
     }
 
