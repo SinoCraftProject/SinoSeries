@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryBuilder;
+import net.minecraftforge.registries.RegistryManager;
 
 import java.util.function.Supplier;
 
@@ -23,8 +25,10 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
         this.modId = modId;
         this.key = key;
 
-        // todo 自定义注册表
         dr = DeferredRegister.create(key, modId);
+        if (RegistryManager.ACTIVE.getRegistry((ResourceKey) key) == null) {
+            dr.makeRegistry(RegistryBuilder::new);
+        }
         registered = false;
     }
 

@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.registry.neoforge;
 import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -23,8 +24,10 @@ public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
         this.modId = modId;
         this.key = key;
 
-        // todo 自定义注册表
         dr = DeferredRegister.create(key, modId);
+        if (!BuiltInRegistries.REGISTRY.containsKey((ResourceKey) key)) {
+            dr.makeRegistry(builder -> builder.sync(true));
+        }
         registered = false;
     }
 

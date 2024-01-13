@@ -25,11 +25,9 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
         registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(key.location());
         if (registry == null) {
             // 不存在的注册表 -- 创建自定义注册表
-            // todo 待测试
             registry = FabricRegistryBuilder.createSimple(key)
                     .attribute(RegistryAttribute.SYNCED)
                     .buildAndRegister();
-            throw new RuntimeException();
         }
     }
 

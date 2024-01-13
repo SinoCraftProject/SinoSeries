@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 
 /**
  * 用于注册元素的注册表类型
- * // todo 注册 tag
  *
  * @param <T> 元素类型
  */
