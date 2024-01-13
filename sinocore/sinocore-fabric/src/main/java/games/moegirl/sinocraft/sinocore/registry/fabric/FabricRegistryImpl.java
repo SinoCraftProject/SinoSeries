@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
+import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
@@ -16,9 +17,6 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     final ResourceKey<Registry<T>> key;
     Registry<T> registry;
 
-    ResourceLocation lastId;
-    ResourceKey<T> lastKey;
-
     FabricRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
         this.modId = modId;
         this.key = key;
@@ -26,6 +24,7 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
         registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(key.location());
         if (registry == null) {
             // 不存在的注册表 -- 创建自定义注册表
+            // todo 待测试
             registry = FabricRegistryBuilder.createSimple(key)
                     .attribute(RegistryAttribute.SYNCED)
                     .buildAndRegister();
@@ -38,10 +37,9 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
-    public <R extends T> Supplier<R> register(String name, Supplier<? extends R> supplier) {
-        lastId = new ResourceLocation(modId, name);
-        lastKey = ResourceKey.create(key, lastId);
-        R v = Registry.register(registry, lastKey, supplier.get());
-        return () -> v;
+    public <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier) {
+        ResourceLocation id = new ResourceLocation(modId, name);
+        ResourceKey<T> eKey = ResourceKey.create(key, id);
+        return (IRef<T, R>) new FabricRefImpl<>(Registry.registerForHolder(registry, eKey, supplier.get()));
     }
 }

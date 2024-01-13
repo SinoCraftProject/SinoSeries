@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.registry.forge;
+package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
 import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
@@ -7,20 +7,20 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ForgeTabRegistryImpl implements ITabRegistry {
+public class NeoForgeTabRegistryImpl implements ITabRegistry {
 
     private final String modId;
     private final DeferredRegister<CreativeModeTab> dr;
 
-    ForgeTabRegistryImpl(String modId) {
+    NeoForgeTabRegistryImpl(String modId) {
         this.modId = modId;
         this.dr = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modId);
     }
@@ -33,18 +33,18 @@ public class ForgeTabRegistryImpl implements ITabRegistry {
     @Override
     public IRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
-        IRef<CreativeModeTab, CreativeModeTab> ref = registerForRef(name, () -> CreativeModeTab.builder()
+        IRef<CreativeModeTab, CreativeModeTab> tab = registerForRef(name, () -> CreativeModeTab.builder()
                 .title(Component.translatable("tab." + modId + "." + name))
                 .displayItems(generator)
                 .icon(generator::displayItem)
                 .build());
-        GENERATORS.put(ref.getKey(), generator);
-        return ref;
+        GENERATORS.put(tab.getKey(), generator);
+        return tab;
     }
 
     @Override
     public <T extends CreativeModeTab> IRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
-        return new ForgeRefImpl<>(dr.register(name, supplier));
+        return new NeoForgeRefImpl<>(dr.register(name, supplier));
     }
 
     @Override
