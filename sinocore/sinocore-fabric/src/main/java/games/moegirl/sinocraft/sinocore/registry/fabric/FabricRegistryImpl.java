@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
+import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
@@ -38,10 +39,9 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
-    public <R extends T> Supplier<R> register(String name, Supplier<? extends R> supplier) {
+    public <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier) {
         lastId = new ResourceLocation(modId, name);
         lastKey = ResourceKey.create(key, lastId);
-        R v = Registry.register(registry, lastKey, supplier.get());
-        return () -> v;
+        return (IRef<T, R>) new FabricRefImpl<>(Registry.registerForHolder(registry, lastKey, supplier.get()));
     }
 }

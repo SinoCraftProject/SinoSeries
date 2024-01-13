@@ -1,15 +1,15 @@
-package games.moegirl.sinocraft.sinocore.registry.forge;
+package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
 import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class ForgeRegistryImpl<T> implements IRegistry<T> {
+public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
 
     final ResourceKey<Registry<T>> key;
     final String modId;
@@ -17,7 +17,7 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
     DeferredRegister<T> dr;
     boolean registered;
 
-    ForgeRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
+    NeoForgeRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
         this.modId = modId;
         this.key = key;
 
@@ -36,6 +36,6 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
 
     @Override
     public <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier) {
-        return new ForgeRefImpl<>(dr.register(name, supplier));
+        return new NeoForgeRefImpl<>(dr.register(name, supplier));
     }
 }
