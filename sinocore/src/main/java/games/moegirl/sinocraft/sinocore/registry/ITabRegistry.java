@@ -14,9 +14,17 @@ public interface ITabRegistry {
 
     void register();
 
-    ResourceKey<CreativeModeTab> register(String name);
+    IRef<CreativeModeTab, CreativeModeTab> registerForRef(String name);
 
-    ResourceKey<CreativeModeTab> register(String name, Supplier<CreativeModeTab> supplier);
+    default ResourceKey<CreativeModeTab> register(String name) {
+        return registerForRef(name).getKey();
+    }
+
+    <T extends CreativeModeTab> IRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier);
+
+    default <T extends CreativeModeTab> ResourceKey<CreativeModeTab> register(String name, Supplier<? extends T> supplier) {
+        return registerForRef(name, supplier).getKey();
+    }
 
     TabItemGenerator tabItems(ResourceKey<CreativeModeTab> tab);
 }
