@@ -12,8 +12,8 @@ public class SBRConstants {
     public static final byte DRAWING_COLOR_MAX = (byte) Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2);
 
     public static final int DRAWING_MIN_LENGTH = 16;
-    public static final int DRAWING_MAX_LENGTH = 256;   // Todo: qyl27: Larger than max packet size?
-    public static final int XUAN_PAPER_MAX_EXPEND = 4;     // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
+    public static final int DRAWING_MAX_LENGTH = 256;   // Todo: qyl27: Is it larger than max packet size?
+    public static final int XUAN_PAPER_MAX_EXPEND = 4;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
 
     public static class TagName {
         public static final String DRAWING = "drawing";    // Compound
@@ -31,6 +31,9 @@ public class SBRConstants {
 
         public static final String XUAN_PAPER = "xuan_paper";  // Compound
         public static final String XUAN_PAPER_EXPENDS = "expends";  // Int
+
+        public static final String FAN = "fan";  // Compound
+        public static final String FAN_LINES = "lines";  // ListTag {String}
     }
 
     public static class Translation {
@@ -39,5 +42,12 @@ public class SBRConstants {
         public static final String KEY_DRAWING_AUTHOR_UNKNOWN = "sinobrush.drawing.author.unknown";
         public static final String KEY_DRAWING_DATE_LABEL = "sinobrush.drawing.date.label";
 //        public static final String KEY_DRAWING_DATE_UNKNOWN = "sinobrush.drawing.date.unknown";
+
+        public static final String KEY_DESCRIPTION_FAN_1 = "sinobrush.description.fan.1";
+        public static final String KEY_DESCRIPTION_FAN_2 = "sinobrush.description.fan.2";
+        public static final String KEY_DESCRIPTION_FOLDED_FAN_1 = "sinobrush.description.folded_fan.1";
+        public static final String KEY_DESCRIPTION_FOLDED_FAN_2 = "sinobrush.description.folded_fan.2";
+        public static final String KEY_DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
+        public static final String KEY_DESCRIPTION_FOLDED_FAN_WROTE = "sinobrush.description.folded_fan.wrote";
     }
 }
