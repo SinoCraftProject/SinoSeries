@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
+import com.google.common.base.Suppliers;
 import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.Registry;
@@ -18,13 +19,15 @@ public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
     final String modId;
 
     DeferredRegister<T> dr;
+    Supplier<Registry<T>> reg;
     boolean registered;
 
     NeoForgeRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
         this.modId = modId;
         this.key = key;
+        this.dr = DeferredRegister.create(key, modId);
+        this.reg = Suppliers.memoize(() -> BuiltInRegistries.REGISTRY.get((ResourceKey) key));
 
-        dr = DeferredRegister.create(key, modId);
         if (!BuiltInRegistries.REGISTRY.containsKey((ResourceKey) key)) {
             dr.makeRegistry(builder -> builder.sync(true));
         }
@@ -52,5 +55,10 @@ public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
     @Override
     public TagKey<T> createTag(ResourceLocation name) {
         return dr.createTagKey(name);
+    }
+
+    @Override
+    public Registry<T> getRegistry() {
+        return reg.get();
     }
 }

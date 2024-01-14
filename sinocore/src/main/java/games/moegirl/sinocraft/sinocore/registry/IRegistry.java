@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry;
 
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 
@@ -39,6 +40,13 @@ public interface IRegistry<T> {
      * @return TagKey
      */
     TagKey<T> createTag(ResourceLocation name);
+
+    /**
+     * 获取注册器对应的注册表
+     *
+     * @return 注册表
+     */
+    Registry<T> getRegistry();
 
     /**
      * 创建或获取某个 Tag

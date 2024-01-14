@@ -10,6 +10,6 @@ public class LevelEventHandler {
 
     @SubscribeEvent
     public static void onLevelSave(LevelEvent.Save event) {
-        System.out.println("Saved");
+        System.out.print("");
     }
 }
