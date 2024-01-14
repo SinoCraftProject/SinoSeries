@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
+import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,13 +29,26 @@ public class FoldedFanItem extends FanItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        // Todo: waiting for dev/register
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+
+
+        var lines = getLines(stack);
+        if (lines.isEmpty()) {
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FOLDED_FAN_1).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FOLDED_FAN_2).withStyle(ChatFormatting.GRAY));
+        } else {
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FOLDED_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+        }
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        // Todo: waiting for dev/register
-        return super.use(level, player, usedHand);
+        var stack = player.getItemInHand(usedHand);
+
+        if (!player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResultHolder.success(changeItemStack(player, stack, SBRItems.FAN.get(), 100));
+        }
+
+        return InteractionResultHolder.pass(stack);
     }
 }

@@ -2,8 +2,15 @@ package games.moegirl.sinocraft.sinobrush.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -63,31 +70,67 @@ public class FanItem extends Item implements Vanishable {
                                 List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
 
-        // Todo: waiting for dev/register
-//        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
-//        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_FOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
-//        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_1).withStyle(ChatFormatting.GRAY));
-//        tooltip.add(Component.translatable(SCAConstants.TRANSLATE_UNFOLDED_DESCRIPTION_LINE_2).withStyle(ChatFormatting.GRAY));
+        var lines = getLines(stack);
+        if (lines.isEmpty()) {
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FAN_1).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FAN_2).withStyle(ChatFormatting.GRAY));
+        } else {
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
+        }
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         var stack = player.getItemInHand(usedHand);
 
-        // Todo: waiting for dev/register
-//        if (!player.getCooldowns().isOnCooldown(this)) {
-//            return InteractionResultHolder.success(newStack);
-//        }
+        if (!player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResultHolder.success(changeItemStack(player, stack, SBRItems.FOLDED_FAN.get(), 100));
+        }
 
         return InteractionResultHolder.pass(stack);
     }
 
-    private ItemStack changeItemStack(Player player, ItemStack prevItemStack, ItemStack newItemStack, int cooldown) {
+    protected ItemStack changeItemStack(Player player, ItemStack prevItemStack, Item newItem, int cooldown) {
+        var newItemStack = new ItemStack(newItem);
+
         if (prevItemStack.hasTag()) {
             newItemStack.setTag(prevItemStack.getTag());
         }
-        player.getCooldowns().addCooldown(newItemStack.getItem(), cooldown);
+        player.getCooldowns().addCooldown(newItem, cooldown);
 
         return newItemStack;
+    }
+
+    public List<MutableComponent> getLines(ItemStack stack) {
+       if (stack.hasTag()) {
+           var tag = stack.getTag();
+           if (tag.contains(SBRConstants.TagName.FAN)) {
+               var fan = tag.getCompound(SBRConstants.TagName.FAN);
+               if (fan.contains(SBRConstants.TagName.FAN_LINES)) {
+                   var lines = fan.getList(SBRConstants.TagName.FAN_LINES, Tag.TAG_STRING);
+                   return lines.stream().map(l -> Component.Serializer.fromJson(l.getAsString())).toList();
+               }
+           }
+       }
+
+       return List.of();
+    }
+
+    public void setLines(ItemStack stack, List<Component> lines) {
+        var linesTag = new ListTag();
+        linesTag.addAll(lines.stream().map(Component.Serializer::toJson).map(StringTag::valueOf).toList());
+
+        var fan = new CompoundTag();
+        fan.put(SBRConstants.TagName.FAN_LINES, linesTag);
+
+        var tag = stack.getOrCreateTag();
+        tag.put(SBRConstants.TagName.FAN, fan);
+
+        stack.setTag(tag);
+    }
+
+    public boolean hasLines(ItemStack stack) {
+        return !getLines(stack).isEmpty();
     }
 }
