@@ -1,11 +1,15 @@
 package games.moegirl.sinocraft.sinocore.registry.forge;
 
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Lifecycle;
 import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.*;
 
 import java.util.function.Supplier;
 
@@ -15,15 +19,24 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
     final String modId;
 
     DeferredRegister<T> dr;
+    Supplier<Registry<T>> reg;
     boolean registered;
 
     ForgeRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
         this.modId = modId;
         this.key = key;
+        this.dr = DeferredRegister.create(key, modId);
+        this.reg = Suppliers.memoize(() -> GameData.getWrapper(key, Lifecycle.stable()));
 
-        // todo 自定义注册表
-        dr = DeferredRegister.create(key, modId);
+        if (RegistryManager.ACTIVE.getRegistry((ResourceKey) key) == null) {
+            dr.makeRegistry(() -> new RegistryBuilder<T>().hasTags());
+        }
         registered = false;
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 
     @Override
@@ -37,5 +50,15 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
     @Override
     public <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier) {
         return new ForgeRefImpl<>(dr.register(name, supplier));
+    }
+
+    @Override
+    public TagKey<T> createTag(ResourceLocation name) {
+        return dr.createTagKey(name);
+    }
+
+    @Override
+    public Registry<T> getRegistry() {
+        return reg.get();
     }
 }
