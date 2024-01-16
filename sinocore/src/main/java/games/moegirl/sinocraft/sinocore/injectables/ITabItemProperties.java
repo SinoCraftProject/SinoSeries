@@ -5,7 +5,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -48,8 +50,8 @@ public interface ITabItemProperties {
     /**
      * 获取所有应加入此物品的 CreativeModeTab
      */
-    default Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$getTabs() {
-        return Map.of();
+    default List<Pair<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>>> sino$getTabs() {
+        return List.of();
     }
 
     /**

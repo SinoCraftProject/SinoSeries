@@ -16,8 +16,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.slf4j.Logger;
 
-import java.util.function.Supplier;
-
 public class SinoCore {
     public static final String MODID = "sinocore";
     public static final Logger LOGGER = LogUtils.getLogger();

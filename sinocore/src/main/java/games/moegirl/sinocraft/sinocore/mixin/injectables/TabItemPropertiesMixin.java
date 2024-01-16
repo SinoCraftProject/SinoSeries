@@ -10,7 +10,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -18,19 +20,19 @@ import java.util.function.Function;
 public abstract class TabItemPropertiesMixin implements ITabItemProperties {
 
     @Unique
-    private final Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$tabs = new HashMap<>();
+    private final List<Pair<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>>> sino$tabs = new ArrayList<>();
     @Unique
     private final Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$tabIcons = new HashMap<>();
 
     @Override
     public Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab) {
-        sino$tabs.put(tab, ItemStack::new);
+        sino$tabs.add(Pair.of(tab, ItemStack::new));
         return sino$getThis();
     }
 
     @Override
     public Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
-        sino$tabs.put(tab, sup);
+        sino$tabs.add(Pair.of(tab, sup));
         return sino$getThis();
     }
 
@@ -47,7 +49,7 @@ public abstract class TabItemPropertiesMixin implements ITabItemProperties {
     }
 
     @Override
-    public Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$getTabs() {
+    public List<Pair<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>>> sino$getTabs() {
         return sino$tabs;
     }
 
