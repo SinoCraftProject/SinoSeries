@@ -1,9 +1,11 @@
 package games.moegirl.sinocraft.sinocore;
 
 import com.mojang.logging.LogUtils;
+import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
+import games.moegirl.sinocraft.sinocore.test.TestRegistryData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,28 +24,32 @@ public class SinoCore {
 
     public static IRegistry<Item> ITEMS;
     public static IRegistry<Block> BLOCKS;
+    public static IRegistry<TestRegistryData> TEST_DATA;
     public static ITabRegistry TABS;
 
     public static void registerAll() {
         ITEMS = RegistryManager.obtain(MODID, Registries.ITEM);
         BLOCKS = RegistryManager.obtain(MODID, Registries.BLOCK);
         TABS = RegistryManager.obtainTab(MODID);
+        TEST_DATA = RegistryManager.obtain(MODID, ResourceKey.createRegistryKey(new ResourceLocation(MODID, "test_data")));
 
         registerTabs();
         registerBlocks();
         registerItems();
+        registerCustomRegistry();
 
         ITEMS.register();
         BLOCKS.register();
         TABS.register();
+        TEST_DATA.register();
     }
 
     public static ResourceKey<CreativeModeTab> TEST_TAB;
-    public static Supplier<Item> TEST_ITEM_MOD_TAB;
-    public static Supplier<Item> TEST_ITEM_MC_TAB;
-    public static Supplier<Item> TEST_ITEM_MOD_MC_TAB;
-    public static Supplier<Block> TEST_BLOCK;
-    public static Supplier<Item> TEST_BLOCK_ITEM;
+    public static IRef<Item, Item> TEST_ITEM_MOD_TAB;
+    public static IRef<Item, Item> TEST_ITEM_MC_TAB;
+    public static IRef<Item, Item> TEST_ITEM_MOD_MC_TAB;
+    public static IRef<Block, Block> TEST_BLOCK;
+    public static IRef<Item, BlockItem> TEST_BLOCK_ITEM;
 
     private static void registerTabs() {
         TEST_TAB = TABS.register("sinocore_test");
@@ -65,5 +71,10 @@ public class SinoCore {
         TEST_BLOCK_ITEM = ITEMS.register("test_block", () -> new BlockItem(TEST_BLOCK.get(), new Item.Properties()));
 
         TABS.tabItems(TEST_TAB).addItem(TEST_BLOCK_ITEM);
+    }
+
+    private static void registerCustomRegistry() {
+        TEST_DATA.register("test_hello", () -> new TestRegistryData("Hello"));
+        TEST_DATA.register("test_sino", () -> new TestRegistryData(MODID));
     }
 }

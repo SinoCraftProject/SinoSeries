@@ -8,5 +8,6 @@ public class SinoCoreFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         SinoCore.registerAll();
+        System.out.println("OK");
     }
 }
