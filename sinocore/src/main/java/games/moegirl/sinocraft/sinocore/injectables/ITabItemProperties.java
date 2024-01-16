@@ -14,38 +14,50 @@ import java.util.function.Function;
 public interface ITabItemProperties {
 
     /**
-     * 将物品注册到某个 CreativeModeTab
+     * 将物品放入某个 CreativeModeTab
      * @param tab CreativeModeTab
      */
-    Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab);
+    default Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab) {
+        return null;
+    }
 
     /**
-     * 将物品注册到某个 CreativeModeTab
-     * @param tab CreativeModeTab
-     * @param sup ItemStack 构造方法
-     */
-    Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup);
-
-    /**
-     * 将物品注册到某个 CreativeModeTab 并作为图标使用
-     * @param tab CreativeModeTab
-     */
-    Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab);
-
-    /**
-     * 将物品注册到某个 CreativeModeTab 并作为图标使用
+     * 将物品放入某个 CreativeModeTab
      * @param tab CreativeModeTab
      * @param sup ItemStack 构造方法
      */
-    Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup);
+    default Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
+        return null;
+    }
 
     /**
-     * 获取所有被注册到的 CreativeModeTab 用于注册
+     * 将物品作为某个 CreativeModeTab 的图标使用
+     * @param tab CreativeModeTab
      */
-    List<Pair<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>>> sino$getAllTabs();
+    default Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab) {
+        return null;
+    }
 
     /**
-     * 获取注册的 CreativeModeTab 图标
+     * 将物品作为某个 CreativeModeTab 的图标使用
+     * @param tab CreativeModeTab
+     * @param sup ItemStack 构造方法
      */
-    Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$getTabIcon();
+    default Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
+        return null;
+    }
+
+    /**
+     * 获取所有应加入此物品的 CreativeModeTab
+     */
+    default Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$getTabs() {
+        return Map.of();
+    }
+
+    /**
+     * 获取所有应把此物品作为图标的 CreativeModeTab
+     */
+    default Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$getTabIcon() {
+        return Map.of();
+    }
 }
