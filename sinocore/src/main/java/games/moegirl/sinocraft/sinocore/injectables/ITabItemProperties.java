@@ -5,9 +5,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
