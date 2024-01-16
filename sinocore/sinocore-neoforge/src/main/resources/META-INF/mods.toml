@@ -17,6 +17,9 @@ description = '''
 ${mod_description}
 '''
 
+[[mixins]]
+config = "sinocore-common.mixins.json"
+
 [[dependencies.${modid}]]
 modId = "neoforge"
 mandatory = true
