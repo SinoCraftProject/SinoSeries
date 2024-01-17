@@ -15,12 +15,14 @@ public abstract class ItemMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void injectConstructor(Item.Properties properties, CallbackInfo ci) {
-        properties.sino$getTabs().forEach((k, v) -> RegistryManager
-                .obtainTab(k.location().getNamespace())
-                .tabItems(k)
-                .addStack(() -> v.apply(asItem())));
+        // todo 获取注册时的 ModId
+        String currentMod = "???";
+        properties.sino$getTabs().forEach(p -> RegistryManager
+                .obtainTab(p.getKey().location().getNamespace() /* currentMod */)
+                .tabItems(p.getKey())
+                .addStack(() -> p.getValue().apply(asItem())));
         properties.sino$getTabIcon().forEach((key, icon) -> RegistryManager
-                .obtainTab(key.location().getNamespace())
+                .obtainTab(key.location().getNamespace() /* currentMod */)
                 .tabItems(key)
                 .setIcon(() -> icon.apply(asItem())));
     }
