@@ -5,12 +5,16 @@ import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import games.moegirl.sinocraft.sinocore.network.PacketTarget;
 import games.moegirl.sinocraft.sinocore.util.Reference;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.metadata.ModEnvironment;
 import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
@@ -53,11 +57,14 @@ public class FabricNetworkChannelImpl implements INetworkChannel {
         // 注册事件
         ResourceLocation pId = new ResourceLocation(id.getNamespace(), type.getSimpleName().toLowerCase(Locale.ROOT));
         if (direction == PacketFlow.CLIENTBOUND) {
-            ClientPlayConnectionEvents.INIT.register((h, c) ->
-                    ClientPlayNetworking.registerGlobalReceiver(pId, (client, handler, buf, responseSender) -> {
-                        T packet = decoder.apply(buf);
-                        client.execute(() -> packet.handle(new NetworkContext(handler.getConnection(), null)));
-                    }));
+            // 客户端处理器仅能在客户端注册
+            if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+                ClientPlayConnectionEvents.INIT.register((h, c) ->
+                        ClientPlayNetworking.registerGlobalReceiver(pId, (client, handler, buf, responseSender) -> {
+                            T packet = decoder.apply(buf);
+                            client.execute(() -> packet.handle(new NetworkContext(handler.getConnection(), null)));
+                        }));
+            }
         } else {
             ServerPlayConnectionEvents.INIT.register((h, s) ->
                     ServerPlayNetworking.registerGlobalReceiver(pId, (server, player, handler, buf, responseSender) -> {
