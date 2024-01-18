@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin.injectables;
+package games.moegirl.sinocraft.sinocore.mixin;
 
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import net.minecraft.world.item.Item;
