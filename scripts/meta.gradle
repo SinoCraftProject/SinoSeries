@@ -61,12 +61,20 @@ File initTransformers(Project project) {
 
 void appendTransformers(File file, Project project) {
     var projectTransformsFile = new File(project.projectDir, '/.gradle/architectury/.transforms')
+    if (!projectTransformsFile.exists()) {
+        return
+    }
+
     var text = Files.readString(projectTransformsFile.toPath())
     appendText(file, text)
 }
 
 void appendTransformersFabric(File file, Project project) {
     var projectTransformsFile = new File(project.projectDir, '/.gradle/architectury/.transforms')
+    if (!projectTransformsFile.exists()) {
+        return
+    }
+
     var text = Files.readString(projectTransformsFile.toPath())
 
     var lines = text.split(';')

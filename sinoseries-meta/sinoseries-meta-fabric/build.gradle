@@ -38,6 +38,8 @@ dependencies {
 
     modImplementation "maven.modrinth:modmenu:${project.mod_menu_version}"
 
+    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+
     subMod.each { Project mod ->
         helpers.getSubFabricMod(mod).each { Project fabricMod ->
             include project(path: fabricMod.path, configuration: 'namedElements')

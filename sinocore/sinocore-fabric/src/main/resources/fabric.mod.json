@@ -13,7 +13,6 @@
         "issues": "${sinoseries_issues}"
     },
     "license": "${sinoseries_license}",
-    "icon": "assets/modid/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
@@ -21,6 +20,7 @@
         ]
     },
     "mixins": [
+        "sinocore-common.mixins.json"
     ],
     "depends": {
         "java": ">=17",
