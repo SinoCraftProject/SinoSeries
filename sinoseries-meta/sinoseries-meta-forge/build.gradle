@@ -43,6 +43,8 @@ loom {
 dependencies {
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
+    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+
     subMod.each { Project mod ->
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
             include project(path: forgeMod.path, configuration: 'namedElements')
