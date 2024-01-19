@@ -1,0 +1,67 @@
+plugins {
+    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
+}
+
+architectury {
+    platformSetupLoomIde()
+    neoForge()
+}
+
+loom {
+    runs {
+        client {
+            configName = 'NeoForge Client'
+            runDir = 'run/client'
+        }
+
+        server {
+            configName = 'NeoForge Server'
+            runDir = 'run/server'
+        }
+    }
+
+    mods {
+        subMod.each { Project mod ->
+            helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
+                "${mod.modid}" {
+                    sourceSet neoForgeMod.sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+
+    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+
+    subMod.each { Project mod ->
+        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
+            include project(path: neoForgeMod.path, configuration: 'namedElements')
+        }
+    }
+}
+
+classes {
+    subMod.each { Project mod ->
+        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
+            dependsOn("${mod.path}:classes")
+            dependsOn("${neoForgeMod.path}:classes")
+        }
+    }
+}
+
+processResources {
+    metaHelpers.injectNeoForgeTransformers(project)
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            version = helpers.getMavenVersion(project)
+            from components.java
+        }
+    }
+}

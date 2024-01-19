@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "sinocalligraphy:block/green_sandalwood_planks",
-    "side": "sinocalligraphy:block/green_sandalwood_planks",
-    "top": "sinocalligraphy:block/green_sandalwood_planks"
-  }
-}

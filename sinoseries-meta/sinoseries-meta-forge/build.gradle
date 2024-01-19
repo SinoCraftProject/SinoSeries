@@ -1,0 +1,75 @@
+plugins {
+    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+loom {
+    forge {
+
+    }
+
+    runs {
+        client {
+            configName = 'Forge Client'
+            runDir = 'run/client'
+
+//            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
+        }
+
+        server {
+            configName = 'Forge Server'
+            runDir = 'run/server'
+
+//            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
+        }
+    }
+
+    mods {
+        subMod.each { Project mod ->
+            helpers.getSubForgeMod(mod).each { Project forgeMod ->
+                "${mod.modid}" {
+                    sourceSet forgeMod.sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+
+    subMod.each { Project mod ->
+        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            include project(path: forgeMod.path, configuration: 'namedElements')
+        }
+    }
+}
+
+classes {
+    subMod.each { Project mod ->
+        helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            dependsOn("${mod.path}:classes")
+            dependsOn("${forgeMod.path}:classes")
+        }
+    }
+}
+
+processResources {
+    metaHelpers.injectForgeTransformers(project)
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            version = helpers.getMavenVersion(project)
+            from components.java
+        }
+    }
+}

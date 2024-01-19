@@ -1,0 +1,71 @@
+plugins {
+    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
+}
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+loom {
+    runs {
+        client {
+            configName = 'Fabric Client'
+            runDir = 'run/client'
+        }
+
+        server {
+            configName = 'Fabric Server'
+            runDir = 'run/server'
+        }
+    }
+
+    mods {
+        subMod.each { Project mod ->
+            helpers.getSubFabricMod(mod).each { Project fabricMod ->
+                "${mod.modid}" {
+                    sourceSet fabricMod.sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    modImplementation "maven.modrinth:modmenu:${project.mod_menu_version}"
+
+    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+
+    subMod.each { Project mod ->
+        helpers.getSubFabricMod(mod).each { Project fabricMod ->
+            include project(path: fabricMod.path, configuration: 'namedElements')
+            implementation project(path: fabricMod.path, configuration: 'namedElements')
+        }
+    }
+}
+
+classes {
+    subMod.each { Project mod ->
+        helpers.getSubFabricMod(mod).each { Project fabricMod ->
+            dependsOn("${mod.path}:classes")
+            dependsOn("${fabricMod.path}:classes")
+        }
+    }
+}
+
+processResources {
+    metaHelpers.injectFabricTransformers(project)
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            version = helpers.getMavenVersion(project)
+            from components.java
+        }
+    }
+}

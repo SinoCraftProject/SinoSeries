@@ -1,9 +1,0 @@
-{
-  "dislike_weight": 5,
-  "is_advanced": true,
-  "like_weight": 5,
-  "name": "sinofeast:pungent",
-  "taste_key": "sinofeast:tastes/pungent",
-  "taste_key_primary": "sinofeast:tastes/primary/pungent",
-  "taste_key_secondary": "sinofeast:tastes/secondary/pungent"
-}

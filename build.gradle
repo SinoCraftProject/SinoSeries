@@ -1,43 +1,31 @@
 plugins {
-    id 'maven-publish'
-    id 'architectury-plugin' version "${architectury_plugin_version}"
-    id 'dev.architectury.loom' version "${architectury_loom_version}"
+    id 'architectury-plugin' version "${architect_plugin_version}" apply false
+    id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
+    id 'com.github.johnrengelman.shadow' version "${shadow_plugin_version}" apply false
+    id 'org.ajoberstar.grgit' version "${grgit_plugin_version}"
 }
 
-println "Java: ${System.getProperty 'java.version'}, " +
-        "JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), " +
-        "Arch: ${System.getProperty 'os.arch'}"
+apply from: 'scripts/helper.gradle'
+apply from: 'scripts/meta.gradle'
 
-// 重新加载任务时清理 runConfigurations
-import java.nio.file.Files
-import java.nio.file.Path
-
-if (gradle.startParameter.taskRequests.args.any { it.contains("ideaSyncTask") }) {
-    Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
-    if (Files.isDirectory(ideaCache))
-        Files.walk(ideaCache, 1)
-                .filter { Files.isRegularFile(it) }
-                .forEach { Files.delete(it) }
-}
+def ENV = System.getenv()
 
 allprojects {
-    group 'games.moegirl.sinocraft'
-    version "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
+    apply plugin: 'maven-publish'
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'dev.architectury.loom'
 
-//    if (System.getenv('GITHUB_SHA') != null) {
-//        version += "-${System.getenv('GITHUB_SHA').substring(0, 7)}"
-//    } else if (System.getenv('JITPACK') == 'true') {
-//        version += "-${System.getenv('VERSION')}"
-//    }
-
-    var release = false
-    if (release || (System.getenv('SINOSERIES_RELEASE') == 'true')) {
-        version += '-release'
-    }
+    group = 'games.moegirl.sinocraft'
+    version = project.sinoseries_version
 
     architectury {
-        platformSetupLoomIde()
-        forge()
+        minecraft = rootProject.minecraft_version
+    }
+
+    loom {
+        silentMojangMappingsLicense()
+        setEnableTransitiveAccessWideners true
+        setEnableModProvidedJavadoc true
     }
 
     repositories {
@@ -47,100 +35,26 @@ allprojects {
         }
 
         maven {
-            name = 'Jitpack'
-            url = 'https://jitpack.io'
+            name = 'NeoForge'
+            url = 'https://maven.neoforged.net/releases/'
         }
 
-        maven {
-            name = 'Curse Maven'
-            url = 'https://cursemaven.com'
-            content {
-                includeGroup 'curse.maven'
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = "Modrinth"
+                    url = "https://api.modrinth.com/maven"
+                }
             }
-        }
 
-        maven {
-            name = "Modrinth"
-            url = "https://api.modrinth.com/maven"
-            content {
+            filter {
                 includeGroup "maven.modrinth"
             }
-        }
-
-        maven {
-            // location of the maven that hosts JEI files since January 2023
-            name = "Jared's maven"
-            url = "https://maven.blamejared.com/"
-        }
-        maven {
-            // location of a maven mirror for JEI files, as a fallback
-            name = "ModMaven"
-            url = "https://modmaven.dev"
-        }
-    }
-
-    tasks.withType(GenerateModuleMetadata) {
-        enabled = false
-    }
-}
-
-subprojects {
-    apply plugin: 'dev.architectury.loom'
-
-    apply plugin: 'java'
-    apply plugin: 'eclipse'
-
-    if (System.getenv('GITHUB_SHA') != null) {
-        println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}-${System.getenv('GITHUB_SHA').substring(0, 7)}."
-    } else if (System.getenv('JITPACK') == 'true') {
-        println "Mod ${project.name} of ${rootProject.name}, ver ${project.version}."
-    }
-
-    archivesBaseName = "${project.modid}"
-
-    java {
-        withSourcesJar()
-    }
-
-    loom {
-        silentMojangMappingsLicense()
-
-        forge {}
-    }
-
-    sourceSets.main.resources {
-        srcDir 'src/generated/resources'
-    }
-
-    processResources {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-        filesMatching("*/**/*.toml") {
-            expand(project.properties)
-        }
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = 'UTF-8'
-    }
-
-    jar {
-        manifest {
-            attributes([
-                    "Specification-Title"     : project.mod_name,
-                    "Specification-Vendor"    : project.sinoseries_authors,
-                    "Specification-Version"   : "1", // We are version 1 of ourselves
-                    "Implementation-Title"    : project.mod_name,
-                    "Implementation-Version"  : project.jar.archiveVersion,
-                    "Implementation-Vendor"   : project.sinoseries_authors,
-                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-            ])
         }
     }
 
     dependencies {
         minecraft "com.mojang:minecraft:${project.minecraft_version}"
-        forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
         mappings loom.layered() {
             officialMojangMappings()
@@ -148,201 +62,287 @@ subprojects {
         }
     }
 
-    remapJar {
-        archiveClassifier = null
-        destinationDirectory.set(file("${rootProject.projectDir}/output"))
+    java {
+        withSourcesJar()
     }
 
-    remapSourcesJar {
-        archiveClassifier = 'sources'
-        destinationDirectory.set(file("${rootProject.projectDir}/output"))
+    sourcesJar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    sourceSets.main.resources {
+        srcDir 'src/main/resources'
+        srcDir 'src/generated/resources'
+    }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        def copyDetails = (copy) -> {
+            expand(project.properties)
+        }
+
+        filesMatching('*/**/mods.toml', copyDetails)
+        filesMatching('fabric.mod.json', copyDetails)
+        filesMatching('pack.mcmeta', copyDetails)
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release = 17
     }
 
     publishing {
-        publications {
-            "$project.modid"(MavenPublication) {
-                groupId = 'games.moegirl.sinocraft'
-                artifactId = project.modid
-                version = System.getenv('GITHUB_REF_NAME') == 'main'
-                        ? "${project.minecraft_version}-${project.sinoseries_version}-SNAPSHOT"
-                        : project.version
-                from components.java
+        repositories {
+            mavenLocal()
 
-                pom.withXml {
-                    if ("$project.modid" != "sinocore") {
-                        asNode().remove(asNode().get('dependencies'))
-                        def dependenciesNode = asNode().appendNode('dependencies')
-                        if ("$project.modid" == "sinofoundation") {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', 'games.moegirl.sinocraft')
-                            dependencyNode.appendNode('artifactId', 'sinocore')
-                            dependencyNode.appendNode('version', project.version)
-                        } else {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', 'games.moegirl.sinocraft')
-                            dependencyNode.appendNode('artifactId', 'sinocore')
-                            dependencyNode.appendNode('version', project.version)
+            maven {
+                name = 'YuluoMaven'
 
-                            def dependencyNode2 = dependenciesNode.appendNode('dependency')
-                            dependencyNode2.appendNode('groupId', 'games.moegirl.sinocraft')
-                            dependencyNode2.appendNode('artifactId', 'sinofoundation')
-                            dependencyNode2.appendNode('version', project.version)
-                        }
-                    }
+                def releaseUrl = 'https://maven.yuluo.dev/repository/maven-releases/'
+                def snapshotUrl = 'https://maven.yuluo.dev/repository/maven-snapshots/'
+                url = ENV.SINOSERIES_RELEASE ? releaseUrl : snapshotUrl
 
+                credentials {
+                    username System.getenv('SINOSERIES_MAVEN_USER')
+                    password System.getenv('SINOSERIES_MAVEN_PASS')
                 }
             }
         }
     }
+
+    // Fixme: qyl27: Due to an unknown issue that forge-like projects can't clean the output resources dir.
+    compileJava.dependsOn(clean)
 }
 
-publishing {
-    repositories {
-        maven {
-            name = 'YuLuoMaven'
-            url = 'https://maven.yuluo.dev/repository/minecraft-repo/'
+subMod.each { Project mod ->
+    configure(mod) {
+        version = project.sinoseries_version
 
-            credentials {
-                username System.getenv('SINOSERIES_MAVEN_USER')
-                password System.getenv('SINOSERIES_MAVEN_PASS')
+        architectury {
+            common(((String) mod.mod_platforms).split(','))
+        }
+
+        loom {
+            var awFile = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
+            if (awFile.exists()) {
+                accessWidenerPath = awFile
+            }
+
+            var commonFile = new File(mod.projectDir, 'src/main/resources/architectury.common.json')
+            if (commonFile.exists()) {
+                interfaceInjection {
+                    enableDependencyInterfaceInjection = true
+                }
+            }
+        }
+
+        dependencies {
+            if (!mod.name.startsWith('sinocore')) {
+                api project(path: ':sinocore', configuration: 'namedElements')
+            }
+
+            compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+        }
+    }
+
+    configure(mod.subprojects) { Project sub ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        version = project.sinoseries_version
+
+        configurations {
+            common
+            shadowCommon
+            compileClasspath.extendsFrom common
+            runtimeClasspath.extendsFrom common
+            developmentForge.extendsFrom common
+            developmentFabric.extendsFrom common
+            developmentNeoForge.extendsFrom common
+        }
+
+        shadowJar {
+            configurations = [project.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+
+        remapJar {
+            input.set shadowJar.archiveFile
+            dependsOn shadowJar
+        }
+
+        sourcesJar {
+            var commonSources = mod.sourcesJar
+            dependsOn commonSources
+            from commonSources.archiveFile.map { zipTree(it) }
+        }
+
+        components.java {
+            withVariantsFromConfiguration(sub.configurations.shadowRuntimeElements) {
+                skip()
+            }
+        }
+
+        if (mod.name != 'sinotest') {
+            publishing {
+                publications {
+                    mavenJava(MavenPublication) {
+                        version = helpers.getMavenVersion(sub)
+                        from components.java
+                    }
+                }
             }
         }
     }
-}
 
-dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    configure(helpers.getSubForgeMod(mod)) { Project forgeMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
 
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
+        architectury {
+            platformSetupLoomIde()
+            forge()
+        }
+
+        loom {
+            forge {
+                if (loom.accessWidenerPath.isPresent()) {
+                    convertAccessWideners = true
+                    extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+                }
+
+                if (forgeMod.file("/src/main/resources/${mod.modid}.mixins.json").exists()) {
+                    mixinConfig "${mod.modid}.mixins.json"
+                }
+
+                if (mod.file("/src/main/resources/${mod.modid}-common.mixins.json").exists()) {
+                    mixinConfig "${mod.modid}-common.mixins.json"
+                }
+            }
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+
+            runs {
+                runData {
+                    data()
+
+                    ideConfigGenerated = true
+                    configName = "Data Generator"
+
+                    programArgs '--all', '--mod', "${mod.modid}",
+                            '--output', helpers.getProjectGeneratedResourcesDir(mod).absolutePath
+
+                    subMod.each { sub ->
+                        helpers.getProjectResourcesDirs(sub).each { dir ->
+                            programArgs '--existing', dir.absolutePath
+                        }
+                    }
+                }
+            }
+        }
+
+        sourceSets.main.resources {
+            srcDir(new File(mod.projectDir, 'src/main/resources'))
+            srcDir(new File(mod.projectDir, 'src/generated/resources'))
+        }
+
+        dependencies {
+            forge "net.minecraftforge:forge:${mod.minecraft_version}-${forgeMod.forge_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionForge')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'fabric.mod.json'
+            exclude 'architectury.common.json'
+
+            configurations = [project.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
     }
 
-    implementation project(path: ':SinoCore', configuration: 'namedElements')
-    implementation project(path: ':SinoFoundation', configuration: 'namedElements')
-    implementation project(path: ':SinoFeast', configuration: 'namedElements')
-    implementation project(path: ':SinoDivination', configuration: 'namedElements')
-    implementation project(path: ':SinoCalligraphy', configuration: 'namedElements')
-    implementation project(path: ':SinoTest', configuration: 'namedElements')
+    configure(helpers.getSubFabricMod(mod)) { Project fabricMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
 
-    // Add compile only api to any subproject.
-//    modRuntimeOnly("curse.maven:jei-${project.jei_project_id}:${project.jei_file_id}")
-    modRuntimeOnly("maven.modrinth:jei:${project.jei_version}")  // JEI
-//    modRuntimeOnly("curse.maven:nbtedit-reborn-${project.nbtedit_project_id}:${project.nbtedit_file_id}")
-//    modRuntimeOnly("com.ptsmods:devlogin:3.1.1")
+        architectury {
+            platformSetupLoomIde()
+            fabric()
+        }
+
+        loom {
+            accessWidenerPath = mod.loom.accessWidenerPath
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+        }
+
+        dependencies {
+            modImplementation "net.fabricmc:fabric-loader:${fabricMod.fabric_loader_version}"
+            modApi "net.fabricmc.fabric-api:fabric-api:${fabricMod.fabric_api_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionFabric')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'architectury.common.json'
+
+            configurations = [fabricMod.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+    }
+
+    configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
+        apply plugin: 'com.github.johnrengelman.shadow'
+
+        architectury {
+            platformSetupLoomIde()
+            neoForge()
+        }
+
+        loom {
+            neoForge {
+                if (loom.accessWidenerPath.isPresent()) {
+//                    convertAccessWideners = true
+//                    accessTransformer loom.accessWidenerPath.get().asFile.name
+                }
+            }
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+        }
+
+        sourceSets.main.resources {
+            srcDir(new File(mod.projectDir, 'src/main/resources'))
+            srcDir(new File(mod.projectDir, 'src/generated/resources'))
+        }
+
+        dependencies {
+            neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+
+            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
+            shadowCommon(project(path: mod.path, configuration: 'transformProductionNeoForge')) { transitive = false }
+        }
+
+        shadowJar {
+            exclude 'fabric.mod.json'
+            exclude 'architectury.common.json'
+
+            configurations = [project.configurations.shadowCommon]
+            archiveClassifier = 'dev-shadow'
+        }
+    }
 }
-
-evaluationDependsOn ':SinoCore'
-evaluationDependsOn ':SinoFoundation'
-evaluationDependsOn ':SinoFeast'
-evaluationDependsOn ':SinoDivination'
-evaluationDependsOn ':SinoCalligraphy'
-evaluationDependsOn ':SinoTest'
 
 loom {
-    silentMojangMappingsLicense()
-
-    forge {
-//        useForgeLoggerConfig = true
-        mixinConfig 'sinocore.mixins.json'
-        mixinConfig 'sinodivination.mixins.json'
-
-        accessTransformer new File(project(':SinoCore').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
-        accessTransformer new File(project(':SinoDivination').projectDir, 'src/main/resources/META-INF/accesstransformer.cfg')
-    }
-
-    mods {
-        sinocore {
-            sourceSet project(':SinoCore').sourceSets.main
-        }
-
-        sinofoundation {
-            sourceSet project(':SinoFoundation').sourceSets.main
-        }
-
-        sinofeast {
-            sourceSet project(':SinoFeast').sourceSets.main
-        }
-
-        sinodivination {
-            sourceSet project(':SinoDivination').sourceSets.main
-        }
-
-        sinocalligraphy {
-            sourceSet project(':SinoCalligraphy').sourceSets.main
-        }
-
-        sinotest {
-            sourceSet project(':SinoTest').sourceSets.main
-        }
-    }
-
-    runs {
-        sinoCoreData {
-            data()
-
-            programArgs '--all', '--mod', "sinocore",
-                    '--output', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath
-        }
-
-        sinoFoundationData {
-            data()
-
-            programArgs '--all', '--mod', "sinofoundation",
-                    '--output', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath,
-                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath
-        }
-
-        sinoFeastData {
-            data()
-
-            programArgs '--all', '--mod', "sinofeast",
-                    '--output', file('SinoFeast/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFeast/src/main/resources').absolutePath,
-                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
-        }
-
-        sinoDivinationData {
-            data()
-
-            programArgs '--all', '--mod', "sinodivination",
-                    '--output', file('SinoDivination/src/generated/resources').absolutePath,
-                    '--existing', file('SinoDivination/src/main/resources').absolutePath,
-                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
-        }
-
-        sinoCalligraphyData {
-            data()
-
-            programArgs '--all', '--mod', "sinocalligraphy",
-                    '--output', file('SinoCalligraphy/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCalligraphy/src/main/resources').absolutePath,
-                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
-        }
-
-        sinoTestData {
-            data()
-
-            programArgs '--all', '--mod', "sinotest",
-                    '--output', file('SinoTest/src/generated/resources').absolutePath,
-                    '--existing', file('SinoTest/src/main/resources').absolutePath,
-                    '--existing', file('SinoCore/src/generated/resources').absolutePath,
-                    '--existing', file('SinoCore/src/main/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/generated/resources').absolutePath,
-                    '--existing', file('SinoFoundation/src/main/resources').absolutePath
-        }
+    runConfigs.configureEach { config ->
+        ideConfigGenerated = false
     }
 }
+
+logger.lifecycle("Building SinoSeries Ver: ${helpers.getMavenVersion(project)}")
+helpers.reGenRunConfig()
