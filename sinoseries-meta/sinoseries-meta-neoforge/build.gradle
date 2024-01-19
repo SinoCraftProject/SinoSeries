@@ -35,6 +35,8 @@ loom {
 dependencies {
     neoForge "net.neoforged:neoforge:${project.neoforge_version}"
 
+    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+
     subMod.each { Project mod ->
         helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
             include project(path: neoForgeMod.path, configuration: 'namedElements')
