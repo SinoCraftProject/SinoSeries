@@ -17,12 +17,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.slf4j.Logger;
 
 public class SinoTest {
-    public static final String MODID = "sinocore";
+    public static final String MODID = "sinotest";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static IRegistry<Item> ITEMS;
     public static IRegistry<Block> BLOCKS;
-    public static IRegistry<games.moegirl.sinocraft.sinotest.test.TestRegistryData> TEST_DATA;
+    public static IRegistry<TestRegistryData> TEST_DATA;
     public static ITabRegistry TABS;
 
     public static void registerAll() {
