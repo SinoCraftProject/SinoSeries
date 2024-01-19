@@ -13,7 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import static games.moegirl.sinocraft.sinocore.SinoCore.MODID;
+import static games.moegirl.sinocraft.sinotest.SinoTest.MODID;
 
 public class TestRegistry {
 
