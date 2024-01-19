@@ -7,11 +7,6 @@ public class SinoCore {
     public static final String MODID = "sinocore";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public SinoCore() {
-
-    }
-
     public void init() {
-
     }
 }
