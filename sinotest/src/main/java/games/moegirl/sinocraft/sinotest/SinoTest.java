@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinotest.network.TestNetwork;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 
 public class SinoTest {
-    public static final String MODID = "sinocore";
+    public static final String MODID = "sinotest";
 
     public static void registerAll() {
         TestRegistry.registerAll();
