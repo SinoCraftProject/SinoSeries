@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.test;
+package games.moegirl.sinocraft.sinotest.test;
 
 public record TestRegistryData(String value) {
 }

@@ -183,11 +183,13 @@ subMod.each { Project mod ->
             }
         }
 
-        publishing {
-            publications {
-                mavenJava(MavenPublication) {
-                    version = helpers.getMavenVersion(sub)
-                    from components.java
+        if (mod.name != 'sinotest') {
+            publishing {
+                publications {
+                    mavenJava(MavenPublication) {
+                        version = helpers.getMavenVersion(sub)
+                        from components.java
+                    }
                 }
             }
         }
