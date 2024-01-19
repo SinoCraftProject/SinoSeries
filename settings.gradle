@@ -4,7 +4,7 @@ pluginManagement {
         maven { url 'https://maven.fabricmc.net/' }
         gradlePluginPortal()
         mavenCentral()
-        maven { url "https://maven.neoforged.net/releases/" }
+        maven { url 'https://maven.neoforged.net/releases/' }
         maven { url 'https://files.minecraftforge.net/maven/' }
     }
 }
@@ -20,6 +20,11 @@ include 'sinobrush'
 include 'sinobrush:sinobrush-forge'
 include 'sinobrush:sinobrush-neoforge'
 include 'sinobrush:sinobrush-fabric'
+
+include 'sinotest'
+include 'sinotest:sinotest-forge'
+include 'sinotest:sinotest-neoforge'
+include 'sinotest:sinotest-fabric'
 
 include 'sinoseries-meta'
 include 'sinoseries-meta:sinoseries-meta-forge'

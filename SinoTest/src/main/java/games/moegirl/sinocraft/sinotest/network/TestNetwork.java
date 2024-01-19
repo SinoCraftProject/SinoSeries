@@ -1,8 +1,8 @@
-package games.moegirl.sinocraft.sinocore.test.network;
+package games.moegirl.sinocraft.sinotest.network;
 
 import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
-import games.moegirl.sinocraft.sinocore.test.registry.TestRegistry;
+import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.network.protocol.PacketFlow;
 
 import static games.moegirl.sinocraft.sinocore.SinoCore.MODID;

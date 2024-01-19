@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.test.registry;
+package games.moegirl.sinocraft.sinotest.registry;
 
 import games.moegirl.sinocraft.sinocore.registry.IRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.test.network;
+package games.moegirl.sinocraft.sinotest.network;
 
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
