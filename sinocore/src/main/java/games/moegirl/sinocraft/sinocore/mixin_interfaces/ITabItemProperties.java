@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.injectables;
+package games.moegirl.sinocraft.sinocore.mixin_interfaces;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;

@@ -4,9 +4,10 @@
   "package": "games.moegirl.sinocraft.sinocore.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "IServerCommonPacketListenerImplAccessor",
     "ItemMixin",
-    "injectables.TabItemPropertiesMixin",
-    "IServerCommonPacketListenerImplAccessor"
+    "RecipeProviderMixin",
+    "injectables.TabItemPropertiesMixin"
   ],
   "client": [
   ],
