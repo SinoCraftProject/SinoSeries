@@ -80,4 +80,8 @@ public interface ITabRegistry {
     static String buildDefaultTranslationKey(String modId, String name) {
         return "tab." + modId + "." + name;
     }
+
+    static String buildDefaultTranslationKey(ResourceKey<CreativeModeTab> name) {
+        return buildDefaultTranslationKey(name.location().getNamespace(), name.location().getPath());
+    }
 }
