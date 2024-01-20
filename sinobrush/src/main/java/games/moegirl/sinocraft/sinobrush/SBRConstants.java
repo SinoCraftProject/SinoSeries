@@ -37,17 +37,20 @@ public class SBRConstants {
     }
 
     public static class Translation {
-        public static final String KEY_DRAWING_TITLE_UNKNOWN = "sinobrush.drawing.title.unknown";
-        public static final String KEY_DRAWING_AUTHOR_LABEL = "sinobrush.drawing.author.label";
-        public static final String KEY_DRAWING_AUTHOR_UNKNOWN = "sinobrush.drawing.author.unknown";
-        public static final String KEY_DRAWING_DATE_LABEL = "sinobrush.drawing.date.label";
-//        public static final String KEY_DRAWING_DATE_UNKNOWN = "sinobrush.drawing.date.unknown";
+        public static final String DRAWING_TITLE_UNKNOWN = "sinobrush.drawing.title.unknown";
+        public static final String DRAWING_AUTHOR_LABEL = "sinobrush.drawing.author.label";
+        public static final String DRAWING_AUTHOR_UNKNOWN = "sinobrush.drawing.author.unknown";
+        public static final String DRAWING_DATE_LABEL = "sinobrush.drawing.date.label";
 
-        public static final String KEY_DESCRIPTION_FAN_1 = "sinobrush.description.fan.1";
-        public static final String KEY_DESCRIPTION_FAN_2 = "sinobrush.description.fan.2";
-        public static final String KEY_DESCRIPTION_FOLDED_FAN_1 = "sinobrush.description.folded_fan.1";
-        public static final String KEY_DESCRIPTION_FOLDED_FAN_2 = "sinobrush.description.folded_fan.2";
-        public static final String KEY_DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
-        public static final String KEY_DESCRIPTION_FOLDED_FAN_WROTE = "sinobrush.description.folded_fan.wrote";
+        public static final String DESCRIPTION_FAN = "sinobrush.description.fan";
+        public static final String DESCRIPTION_FOLDED_FAN = "sinobrush.description.folded_fan";
+        public static final String DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
+
+        public static final String HUD_FAN_PREFIX = "sinobrush.hud.fan.prefix";
+
+        public static final String ADVANCEMENT_FAN_NAME = "sinobrush.advancement.fan.name";
+        public static final String ADVANCEMENT_FAN_DESC = "sinobrush.advancement.fan.description";
+        public static final String ADVANCEMENT_UNFOLD_FAN_NAME = "sinobrush.advancement.unfold_fan.name";
+        public static final String ADVANCEMENT_UNFOLD_FAN_DESC = "sinobrush.advancement.unfold_fan.description";
     }
 }

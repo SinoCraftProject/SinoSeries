@@ -12,9 +12,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class XuanPaperItem extends Item implements DyeableLeatherItem {
-    public XuanPaperItem() {
-        super(new Properties()
-                .stacksTo(1));
+    public XuanPaperItem(Properties properties) {
+        super(properties);
     }
 
     @Override

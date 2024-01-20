@@ -23,8 +23,8 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
 
     private DrawingVersion version = DrawingVersion.latest();
 
-    private Component title = Component.translatable(SBRConstants.Translation.KEY_DRAWING_TITLE_UNKNOWN);
-    private Component author = Component.translatable(SBRConstants.Translation.KEY_DRAWING_AUTHOR_UNKNOWN);
+    private Component title = Component.translatable(SBRConstants.Translation.DRAWING_TITLE_UNKNOWN);
+    private Component author = Component.translatable(SBRConstants.Translation.DRAWING_AUTHOR_UNKNOWN);
 
     private long date = 1680220800;   // 2023.3.31 8:00 by default.
 

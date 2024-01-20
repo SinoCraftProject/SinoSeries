@@ -17,7 +17,7 @@ public class SBRItems {
 
     public static Supplier<Item> FAN = ITEMS.register("fan", FanItem::new);
     public static Supplier<Item> FOLDED_FAN = ITEMS.register("folded_fan", FoldedFanItem::new);
-    public static Supplier<Item> XUAN_PAPER = ITEMS.register("xuan_paper", XuanPaperItem::new);
+    public static Supplier<Item> XUAN_PAPER = ITEMS.register("xuan_paper", () -> new XuanPaperItem(new Item.Properties().sino$tab(SBRItems.SINO_BRUSH_TAB)));
     public static Supplier<Item> FILLED_XUAN_PAPER = ITEMS.register("filled_xuan_paper", FilledXuanPaperItem::new);
     public static Supplier<Item> INK = ITEMS.register("ink", InkItem::new);
     public static Supplier<Item> BRUSH = ITEMS.register("brush", InkItem::new);
@@ -25,13 +25,6 @@ public class SBRItems {
     public static ResourceKey<CreativeModeTab> SINO_BRUSH_TAB = TABS.register("sinobrush");
 
     public static void register() {
-        TABS.tabItems(SINO_BRUSH_TAB)
-                .addItemAsIcon(BRUSH)
-                .addItem(FAN)
-                .addItem(FOLDED_FAN)
-                .addItem(XUAN_PAPER)
-                .addItem(INK);
-
         ITEMS.register();
         TABS.register();
     }

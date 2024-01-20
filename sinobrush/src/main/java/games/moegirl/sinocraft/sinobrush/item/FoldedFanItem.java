@@ -5,6 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,13 +18,8 @@ import java.util.List;
 public class FoldedFanItem extends FanItem {
 
     @Override
-    public double getDamage() {
-        return 0.5;
-    }
-
-    @Override
-    public double getAttackSpeed() {
-        return -1.6;
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        return false;
     }
 
     @Override
@@ -34,10 +30,10 @@ public class FoldedFanItem extends FanItem {
 
         var lines = getLines(stack);
         if (lines.isEmpty()) {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FOLDED_FAN_1).withStyle(ChatFormatting.GRAY));
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FOLDED_FAN_2).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FOLDED_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
         }
     }
 
