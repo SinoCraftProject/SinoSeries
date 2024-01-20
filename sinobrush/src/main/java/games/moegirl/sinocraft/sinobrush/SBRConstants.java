@@ -46,6 +46,9 @@ public class SBRConstants {
         public static final String DESCRIPTION_FOLDED_FAN = "sinobrush.description.folded_fan";
         public static final String DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
 
+        public static final String DESCRIPTION_ITEM_COLORED = "sinobrush.description.item.colored";
+        public static final String DESCRIPTION_XUAN_PAPER_EXPENDED = "sinobrush.description.xuan_paper.expended";
+
         public static final String HUD_FAN_PREFIX = "sinobrush.hud.fan.prefix";
 
         public static final String ADVANCEMENT_FAN_NAME = "sinobrush.advancement.fan.name";

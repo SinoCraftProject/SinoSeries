@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -30,9 +31,28 @@ public class FilledXuanPaperItem extends XuanPaperItem {
     }
 
     @Override
-    public Component getName(ItemStack stack) {
+    public @NotNull Component getName(ItemStack stack) {
         var drawing = getDrawing(stack);
         return drawing.getTitle();
+    }
+
+    @Override
+    public int getColor(ItemStack stack) {
+        var drawing = getDrawing(stack);
+        return drawing.getPaperColor();
+    }
+
+    @Override
+    public void setColor(ItemStack stack, int color) {
+    }
+
+    @Override
+    public void clearColor(ItemStack stack) {
+    }
+
+    @Override
+    public boolean hasCustomColor(ItemStack stack) {
+        return true;
     }
 
     public Drawing getDrawing(ItemStack stack) {
