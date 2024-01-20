@@ -14,6 +14,7 @@ import java.util.List;
 public class InkItem extends Item implements DyeableLeatherItem {
     public InkItem() {
         super(new Properties()
+                .sino$tab(SBRItems.SINO_BRUSH_TAB)
                 .stacksTo(16));
     }
 
@@ -22,6 +23,7 @@ public class InkItem extends Item implements DyeableLeatherItem {
         if (hasCustomColor(stack)) {
             return DyeableLeatherItem.super.getColor(stack);
         } else {
+            setColor(stack, SBRConstants.COLOR_BLACK);
             return SBRConstants.COLOR_BLACK;
         }
     }
@@ -29,6 +31,5 @@ public class InkItem extends Item implements DyeableLeatherItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-        // Todo: Expend.
     }
 }

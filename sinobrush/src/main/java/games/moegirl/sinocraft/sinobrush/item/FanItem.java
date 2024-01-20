@@ -32,8 +32,8 @@ public class FanItem extends Item implements Vanishable {
 
     public FanItem() {
         super(new Properties()
-                .durability(255)
-                .rarity(Rarity.RARE));
+                .stacksTo(1)
+                .sino$tab(SBRItems.SINO_BRUSH_TAB));
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", getDamage(), AttributeModifier.Operation.ADDITION));
@@ -42,11 +42,11 @@ public class FanItem extends Item implements Vanishable {
     }
 
     public double getDamage() {
-        return 2.5;
+        return 0;
     }
 
     public double getAttackSpeed() {
-        return -2;
+        return -4;
     }
 
     @Override
@@ -72,10 +72,9 @@ public class FanItem extends Item implements Vanishable {
 
         var lines = getLines(stack);
         if (lines.isEmpty()) {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FAN_1).withStyle(ChatFormatting.GRAY));
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FAN_2).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.KEY_DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
             tooltipComponents.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
         }
     }
