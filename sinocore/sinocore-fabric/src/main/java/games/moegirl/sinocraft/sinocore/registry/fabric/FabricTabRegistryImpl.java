@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.TabItemGenerator;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -30,23 +30,23 @@ public class FabricTabRegistryImpl implements ITabRegistry {
     }
 
     @Override
-    public IRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
+    public IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
         ResourceLocation id = new ResourceLocation(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
         GENERATORS.put(key, generator);
         return registerForRef(name, () -> FabricItemGroup.builder()
-                .title(Component.translatable("tab." + modId + "." + name))
+                .title(Component.translatable(ITabRegistry.buildDefaultTranslationKey(modId, name)))
                 .displayItems(generator)
                 .icon(generator::displayItem)
                 .build());
     }
 
     @Override
-    public <T extends CreativeModeTab> IRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
+    public <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
         ResourceLocation id = new ResourceLocation(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
-        return (IRef<CreativeModeTab, T>) new FabricRefImpl<>(Registry.registerForHolder(registry, key, supplier.get()));
+        return (IRegRef<CreativeModeTab, T>) new FabricRegRefImpl<>(Registry.registerForHolder(registry, key, supplier.get()));
     }
 
     @Override

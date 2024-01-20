@@ -1,22 +1,22 @@
-package games.moegirl.sinocraft.sinocore.registry.forge;
+package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-public class ForgeRefImpl<T, O extends T> implements IRef<T, O> {
+public class NeoForgeRegRefImpl<T, O extends T> implements IRegRef<T, O> {
 
-    private final RegistryObject<O> obj;
+    private final DeferredHolder<T, O> obj;
 
-    public ForgeRefImpl(RegistryObject<O> obj) {
+    public NeoForgeRegRefImpl(DeferredHolder<T, O> obj) {
         this.obj = obj;
     }
 
     @Override
     public ResourceKey<T> getKey() {
-        return (ResourceKey<T>) obj.getKey();
+        return obj.getKey();
     }
 
     @Override
@@ -26,12 +26,12 @@ public class ForgeRefImpl<T, O extends T> implements IRef<T, O> {
 
     @Override
     public Holder<T> getHolder() {
-        return (Holder<T>) obj.getHolder().orElseThrow();
+        return obj;
     }
 
     @Override
     public boolean isPresent() {
-        return obj.isPresent();
+        return obj.isBound();
     }
 
     @Override

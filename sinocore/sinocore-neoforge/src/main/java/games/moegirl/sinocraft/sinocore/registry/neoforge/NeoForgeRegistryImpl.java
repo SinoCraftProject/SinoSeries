@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
 import com.google.common.base.Suppliers;
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,8 +48,8 @@ public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
-    public <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier) {
-        return new NeoForgeRefImpl<>(dr.register(name, supplier));
+    public <R extends T> IRegRef<T, R> register(String name, Supplier<? extends R> supplier) {
+        return new NeoForgeRegRefImpl<>(dr.register(name, supplier));
     }
 
     @Override

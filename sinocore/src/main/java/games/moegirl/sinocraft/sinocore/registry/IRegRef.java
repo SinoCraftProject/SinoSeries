@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  * @param <T> 元素类型
  * @param <O> 实际类型
  */
-public interface IRef<T, O extends T> extends Supplier<O>, IOptional<O> {
+public interface IRegRef<T, O extends T> extends Supplier<O>, IOptional<O> {
 
     ResourceKey<T> getKey();
 

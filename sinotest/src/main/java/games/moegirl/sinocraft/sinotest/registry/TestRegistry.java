@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinotest.registry;
 
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
@@ -23,11 +23,11 @@ public class TestRegistry {
     public static ITabRegistry TABS;
 
     public static ResourceKey<CreativeModeTab> TEST_TAB;
-    public static IRef<Item, Item> TEST_ITEM_MOD_TAB;
-    public static IRef<Item, Item> TEST_ITEM_MC_TAB;
-    public static IRef<Item, Item> TEST_ITEM_MOD_MC_TAB;
-    public static IRef<Block, Block> TEST_BLOCK;
-    public static IRef<Item, BlockItem> TEST_BLOCK_ITEM;
+    public static IRegRef<Item, Item> TEST_ITEM_MOD_TAB;
+    public static IRegRef<Item, Item> TEST_ITEM_MC_TAB;
+    public static IRegRef<Item, Item> TEST_ITEM_MOD_MC_TAB;
+    public static IRegRef<Block, Block> TEST_BLOCK;
+    public static IRegRef<Item, BlockItem> TEST_BLOCK_ITEM;
 
     public static void registerAll() {
         ITEMS = RegistryManager.obtain(MODID, Registries.ITEM);

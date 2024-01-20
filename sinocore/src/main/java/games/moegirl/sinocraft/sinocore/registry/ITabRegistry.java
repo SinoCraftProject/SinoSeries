@@ -33,7 +33,7 @@ public interface ITabRegistry {
      * @param name 注册名
      * @return CreativeModeTab 的引用
      */
-    IRef<CreativeModeTab, CreativeModeTab> registerForRef(String name);
+    IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name);
 
     /**
      * 注册一个默认的 CreativeModeTab 并返回其 Key
@@ -51,7 +51,7 @@ public interface ITabRegistry {
      * @param name 注册名
      * @return CreativeModeTab 的引用
      */
-    <T extends CreativeModeTab> IRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier);
+    <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier);
 
     /**
      * 注册一个自定义 CreativeModeTab 并返回其 Key
@@ -69,4 +69,15 @@ public interface ITabRegistry {
      * @param tab CreativeModeTab Key
      */
     TabItemGenerator tabItems(ResourceKey<CreativeModeTab> tab);
+
+    /**
+     * 生成默认 CreativeModeTab 标签名的语言文件键
+     *
+     * @param modId modId
+     * @param name  tab名
+     * @return CreativeModeTab 的语言键
+     */
+    static String buildDefaultTranslationKey(String modId, String name) {
+        return "tab." + modId + "." + name;
+    }
 }
