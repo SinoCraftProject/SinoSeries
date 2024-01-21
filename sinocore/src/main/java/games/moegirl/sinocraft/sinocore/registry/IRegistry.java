@@ -31,7 +31,7 @@ public interface IRegistry<T> {
      * @param name 注册名，实际为 modid:name
      * @return 对象引用
      */
-    <R extends T> IRef<T, R> register(String name, Supplier<? extends R> supplier);
+    <R extends T> IRegRef<T, R> register(String name, Supplier<? extends R> supplier);
 
     /**
      * 创建或获取某个 Tag

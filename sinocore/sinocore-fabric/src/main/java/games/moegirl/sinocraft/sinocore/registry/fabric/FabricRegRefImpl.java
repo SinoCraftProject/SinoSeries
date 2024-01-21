@@ -1,15 +1,15 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-public class FabricRefImpl<T, O extends T> implements IRef<T, O> {
+public class FabricRegRefImpl<T, O extends T> implements IRegRef<T, O> {
 
     private final Holder.Reference<O> obj;
 
-    public FabricRefImpl(Holder.Reference<O> obj) {
+    public FabricRegRefImpl(Holder.Reference<O> obj) {
         this.obj = obj;
     }
 

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.forge;
 
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.TabItemGenerator;
 import net.minecraft.core.registries.Registries;
@@ -31,10 +31,10 @@ public class ForgeTabRegistryImpl implements ITabRegistry {
     }
 
     @Override
-    public IRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
+    public IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
-        IRef<CreativeModeTab, CreativeModeTab> ref = registerForRef(name, () -> CreativeModeTab.builder()
-                .title(Component.translatable("tab." + modId + "." + name))
+        IRegRef<CreativeModeTab, CreativeModeTab> ref = registerForRef(name, () -> CreativeModeTab.builder()
+                .title(Component.translatable(ITabRegistry.buildDefaultTranslationKey(modId, name)))
                 .displayItems(generator)
                 .icon(generator::displayItem)
                 .build());
@@ -43,8 +43,8 @@ public class ForgeTabRegistryImpl implements ITabRegistry {
     }
 
     @Override
-    public <T extends CreativeModeTab> IRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
-        return new ForgeRefImpl<>(dr.register(name, supplier));
+    public <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
+        return new ForgeRegRefImpl<>(dr.register(name, supplier));
     }
 
     @Override
