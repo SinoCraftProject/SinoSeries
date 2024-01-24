@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.copy.loottable;
 
-import games.moegirl.sinocraft.sinocore.block.ILootableBlock;
-import games.moegirl.sinocraft.sinocore.utility.BlockLootables;
+import games.moegirl.sinocraft.sinocore.datagen.loottable.ILootableBlock;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
@@ -32,7 +31,7 @@ public class SimpleBlockLootTables extends BlockLootSubProvider {
 
     public void add(Block block) {
         if (block instanceof ILootableBlock lb) {
-            add(block, lb.createLootBuilder(BlockLootables.INSTANCE));
+            add(block, lb.createLootBuilder());
         } else {
             add(block, createSingleItemTable(block));
         }

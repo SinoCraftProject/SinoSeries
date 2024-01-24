@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Calendar;
+import java.util.Optional;
 
 public class ParityDaysTrigger extends SimpleCriterionTrigger<ParityDaysTrigger.TriggerInstance> {
     private final ResourceLocation id;
@@ -23,28 +24,26 @@ public class ParityDaysTrigger extends SimpleCriterionTrigger<ParityDaysTrigger.
         even = isEven ? 1 : 0;
     }
 
-    @Override
     public ResourceLocation getId() {
         return id;
     }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate contextAwarePredicate,
-                                             DeserializationContext deserializationContext) {
+    protected TriggerInstance createInstance(JsonObject json, Optional<ContextAwarePredicate> player, DeserializationContext deserializationContext) {
         if (even == 0) {
-            return new TriggerInstance(getId(), contextAwarePredicate, false);
+            return new TriggerInstance(getId(), player.get(), false);
         } else if (even == 1) {
-            return new TriggerInstance(getId(), contextAwarePredicate, true);
+            return new TriggerInstance(getId(), player.get(), true);
         }
 
-        return new TriggerInstance(getId(), contextAwarePredicate, json.get("isEven").getAsBoolean());
+        return new TriggerInstance(getId(), player.get(), json.get("isEven").getAsBoolean());
     }
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
         private final boolean even;
 
         public TriggerInstance(ResourceLocation id, ContextAwarePredicate contextAwarePredicate, boolean isEven) {
-            super(id, contextAwarePredicate);
+            super(Optional.ofNullable(contextAwarePredicate));
             even = isEven;
         }
 
@@ -59,8 +58,8 @@ public class ParityDaysTrigger extends SimpleCriterionTrigger<ParityDaysTrigger.
         }
 
         @Override
-        public JsonObject serializeToJson(SerializationContext context) {
-            var json = super.serializeToJson(context);
+        public JsonObject serializeToJson() {
+            JsonObject json = super.serializeToJson();
             json.addProperty("isEven", even);
             return json;
         }

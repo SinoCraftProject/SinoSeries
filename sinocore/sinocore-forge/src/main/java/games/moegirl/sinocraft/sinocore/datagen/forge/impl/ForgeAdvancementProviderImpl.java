@@ -42,7 +42,7 @@ public class ForgeAdvancementProviderImpl extends ForgeAdvancementProvider imple
         @Override
         public ForgeAdvancementProviderImpl get() {
             return new ForgeAdvancementProviderImpl(context.getOutput(), context.registriesFuture(),
-                    context.getExistingFileHelper().helper(), generators, context.getModId());
+                    context.getExistingFileHelper(), generators, context.getModId());
         }
     }
 }

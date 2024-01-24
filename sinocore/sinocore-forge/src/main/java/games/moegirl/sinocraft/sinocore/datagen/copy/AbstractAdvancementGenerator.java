@@ -1,9 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.copy;
 
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.DisplayInfo;
-import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
@@ -15,6 +12,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public abstract class AbstractAdvancementGenerator implements ForgeAdvancementProvider.AdvancementGenerator {
@@ -26,21 +25,21 @@ public abstract class AbstractAdvancementGenerator implements ForgeAdvancementPr
         this.background = background;
     }
 
-    public abstract void addAdvancements(Consumer<Advancement> consumer);
+    public abstract void addAdvancements(Consumer<AdvancementHolder> consumer);
 
     @Override
-    public void generate(HolderLookup.Provider arg, Consumer<Advancement> consumer, ExistingFileHelper existingFileHelper) {
+    public void generate(HolderLookup.Provider arg, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
         addAdvancements(consumer);
     }
 
     public CriterionTriggerInstance triggerGotItems(ItemLike... item) {
-        return InventoryChangeTrigger.TriggerInstance.hasItems(item);
+        return InventoryChangeTrigger.TriggerInstance.hasItems(item).triggerInstance();
     }
 
     public CriterionTriggerInstance triggerGotItems(TagKey<Item> tag) {
-        return InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate(tag,
-                null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, EnchantmentPredicate.NONE,
-                EnchantmentPredicate.NONE, null, NbtPredicate.ANY));
+        return InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate(Optional.of(tag),
+                Optional.empty(), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, List.of(),
+                List.of(), Optional.empty(), Optional.empty())).triggerInstance();
     }
 
     public String moddedId(String id) {

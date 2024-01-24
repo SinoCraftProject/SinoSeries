@@ -1,18 +1,15 @@
 package games.moegirl.sinocraft.sinocore.datagen.copy.loottable;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
+import com.mojang.serialization.Codec;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.Calendar;
 
 public class ParityDaysCondition implements LootItemCondition {
-    public static final LootItemConditionType PARITY_DAYS_CONDITION_TYPE =
-            new LootItemConditionType(new ConditionSerializer());
+    public static final Codec<ParityDaysCondition> CODEC = null; // todo NULL
+    public static final LootItemConditionType PARITY_DAYS_CONDITION_TYPE = new LootItemConditionType(CODEC);
 
     private final boolean even;
 
@@ -52,17 +49,4 @@ public class ParityDaysCondition implements LootItemCondition {
             return new ParityDaysCondition(even);
         }
     }
-
-    public static class ConditionSerializer implements Serializer<ParityDaysCondition> {
-        @Override
-        public void serialize(JsonObject json, ParityDaysCondition value, JsonSerializationContext serializationContext) {
-            json.addProperty("isEven", value.even);
-        }
-
-        @Override
-        public ParityDaysCondition deserialize(JsonObject json, JsonDeserializationContext serializationContext) {
-            return new ParityDaysCondition(json.get("isEven").getAsBoolean());
-        }
-    }
-
 }

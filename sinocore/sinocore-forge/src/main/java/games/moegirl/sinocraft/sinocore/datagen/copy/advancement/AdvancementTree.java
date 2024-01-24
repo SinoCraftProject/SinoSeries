@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.copy.advancement;
 
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -8,12 +9,12 @@ import java.util.function.Consumer;
 
 public class AdvancementTree {
 
-    protected Consumer<Advancement> save;
+    protected Consumer<AdvancementHolder> save;
 
-    protected Advancement root;
-    protected Deque<Advancement> cursor = new ArrayDeque<>();
+    protected AdvancementHolder root;
+    protected Deque<AdvancementHolder> cursor = new ArrayDeque<>();
 
-    public AdvancementTree(Consumer<Advancement> saveConsumer) {
+    public AdvancementTree(Consumer<AdvancementHolder> saveConsumer) {
         this.save = saveConsumer;
     }
 
@@ -29,14 +30,13 @@ public class AdvancementTree {
 
     public AdvancementTree child(String id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
-        cursor.getFirst().addChild(advancement.save(save, id));
+        advancement.save(save, id);
         return this;
     }
 
     public AdvancementTree push(String id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
         var adv = advancement.save(save, id);
-        cursor.getFirst().addChild(adv);
         cursor.push(adv);
         return this;
     }
