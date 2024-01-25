@@ -49,6 +49,13 @@ public interface IRegistry<T> {
     Registry<T> getRegistry();
 
     /**
+     * 获取注册的所有对象
+     *
+     * @return 所有对象
+     */
+    Iterable<IRegRef<T, ?>> getEntries();
+
+    /**
      * 创建或获取某个 Tag
      *
      * @param name Tag 名，实际为 modid:name

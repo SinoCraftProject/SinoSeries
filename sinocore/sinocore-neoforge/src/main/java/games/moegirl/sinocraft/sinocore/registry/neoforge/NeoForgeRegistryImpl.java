@@ -11,12 +11,17 @@ import net.minecraft.tags.TagKey;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
 
     final ResourceKey<Registry<T>> key;
     final String modId;
+    final List<IRegRef<T, ?>> elementReferences = new ArrayList<>();
+    final List<IRegRef<T, ?>> elementView = Collections.unmodifiableList(elementReferences);
 
     DeferredRegister<T> dr;
     Supplier<Registry<T>> reg;
@@ -60,5 +65,10 @@ public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
     @Override
     public Registry<T> getRegistry() {
         return reg.get();
+    }
+
+    @Override
+    public Iterable<IRegRef<T, ?>> getEntries() {
+        return elementView;
     }
 }

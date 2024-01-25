@@ -10,7 +10,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class FabricRegistryImpl<T> implements IRegistry<T> {
@@ -19,6 +24,8 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     final ResourceKey<Registry<T>> key;
     Registry<T> registry;
     Supplier<Registry<T>> sup;
+    final List<IRegRef<T, ?>> elementReferences = new ArrayList<>();
+    final List<IRegRef<T, ?>> elementView = Collections.unmodifiableList(elementReferences);
 
     FabricRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
         this.modId = modId;
@@ -47,7 +54,9 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     public <R extends T> IRegRef<T, R> register(String name, Supplier<? extends R> supplier) {
         ResourceLocation id = new ResourceLocation(modId, name);
         ResourceKey<T> eKey = ResourceKey.create(key, id);
-        return (IRegRef<T, R>) new FabricRegRefImpl<>(Registry.registerForHolder(registry, eKey, supplier.get()));
+        FabricRegRefImpl<T, T> ref = new FabricRegRefImpl<>(Registry.registerForHolder(registry, eKey, supplier.get()));
+        elementReferences.add(ref);
+        return (IRegRef<T, R>) ref;
     }
 
     @Override
@@ -58,5 +67,10 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     @Override
     public Registry<T> getRegistry() {
         return sup.get();
+    }
+
+    @Override
+    public Iterable<IRegRef<T, ?>> getEntries() {
+        return elementView;
     }
 }
