@@ -35,7 +35,7 @@ loom {
 dependencies {
     neoForge "net.neoforged:neoforge:${project.neoforge_version}"
 
-    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
+//    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
 
     subMod.each { Project mod ->
         helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
@@ -53,9 +53,13 @@ classes {
     }
 }
 
-processResources {
-    metaHelpers.injectNeoForgeTransformers(project)
+task processTransformers {
+    doFirst {
+        metaHelpers.injectForgeTransformers(project)
+    }
 }
+
+processResources.dependsOn(processTransformers)
 
 publishing {
     publications {
