@@ -25,7 +25,7 @@ public class BrushItem extends Item {
         // qyl27: The argument "limitedTag" is true in general.
         // lq2007: writeItem equals to writeItemStack(item, true)
         if (!level.isClientSide) {
-            if (offhandItem.is(SBRItemTags.UNFOLDED_FAN)) {
+            if (offhandItem.is(SBRItems.FAN.get())) {
 
             }
 //            NetworkHooks.openScreen((ServerPlayer) player, new BrushMenuProvider(item),

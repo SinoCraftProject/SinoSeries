@@ -138,6 +138,9 @@ subMod.each { Project mod ->
         }
 
         dependencies {
+            // qyl27: Use fabric-loader in order to use EnvType class.
+            modImplementation "net.fabricmc:fabric-loader:${mod.fabric_loader_version}"
+
             if (!mod.name.startsWith('sinocore')) {
                 api project(path: ':sinocore', configuration: 'namedElements')
             }
@@ -150,6 +153,12 @@ subMod.each { Project mod ->
         apply plugin: 'com.github.johnrengelman.shadow'
 
         version = project.sinoseries_version
+
+        loom {
+            interfaceInjection {
+                enableDependencyInterfaceInjection = true
+            }
+        }
 
         configurations {
             common
