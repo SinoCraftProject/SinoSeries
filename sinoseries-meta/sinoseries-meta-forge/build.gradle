@@ -27,24 +27,6 @@ loom {
 
 //            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
         }
-
-        subMod.each { Project mod ->
-            "data_${mod.modid}" {
-                data()
-
-                ideConfigGenerated = true
-                configName = "Data Generator ${mod.modid}"
-
-                programArgs '--all', '--mod', "${mod.modid}",
-                        '--output', helpers.getProjectGeneratedResourcesDir(mod).absolutePath
-
-                subMod.each { sub ->
-                    helpers.getProjectResourcesDirs(sub).each { dir ->
-                        programArgs '--existing', dir.absolutePath
-                    }
-                }
-            }
-        }
     }
 
     mods {
@@ -79,18 +61,13 @@ classes {
     }
 }
 
-processResources {
+task processTransformers {
     doFirst {
         metaHelpers.injectForgeTransformers(project)
-
-        subMod.each { Project mod ->
-            File dir = helpers.getProjectGeneratedResourcesDir(mod)
-            if (!dir.exists()) {
-                dir.mkdirs()
-            }
-        }
     }
 }
+
+processResources.dependsOn(processTransformers)
 
 publishing {
     publications {
