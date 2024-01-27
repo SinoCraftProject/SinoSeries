@@ -53,13 +53,11 @@ classes {
     }
 }
 
-task processTransformers {
+processResources {
     doFirst {
-        metaHelpers.injectForgeTransformers(project)
+        metaHelpers.injectNeoForgeTransformers(project)
     }
 }
-
-processResources.dependsOn(processTransformers)
 
 publishing {
     publications {
