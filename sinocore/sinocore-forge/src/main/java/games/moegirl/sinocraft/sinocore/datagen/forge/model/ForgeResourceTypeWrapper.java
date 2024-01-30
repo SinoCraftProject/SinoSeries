@@ -1,10 +1,10 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.model;
 
-import games.moegirl.sinocraft.sinocore.datagen.model.IResourceType;
+import games.moegirl.sinocraft.sinocore.datagen.model.IModelResourceHelper;
 import net.minecraft.server.packs.PackType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public record ForgeResourceTypeWrapper(ExistingFileHelper.IResourceType type) implements IResourceType {
+public record ForgeResourceTypeWrapper(ExistingFileHelper.IResourceType type) implements IModelResourceHelper.IResourceType {
     @Override
     public PackType getPackType() {
         return type.getPackType();

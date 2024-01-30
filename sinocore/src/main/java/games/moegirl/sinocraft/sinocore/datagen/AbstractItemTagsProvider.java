@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocore.datagen;
 import games.moegirl.sinocraft.sinocore.mixin_interfaces.IRenamedProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -27,15 +26,10 @@ public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvid
     protected final CompletableFuture<TagLookup<Block>> blockTags;
     protected final Map<TagKey<Block>, TagKey<Item>> tagsToCopy = new HashMap<>();
 
-    public AbstractItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                                    CompletableFuture<TagLookup<Block>> blockTagsProvider, String modId) {
-        super(output, Registries.ITEM, lookupProvider, item -> item.builtInRegistryHolder().key());
-        this.modId = modId;
-        this.blockTags = blockTagsProvider;
-    }
-
     public AbstractItemTagsProvider(IDataGenContext context, TagsProvider<Block> blockTagsProvider) {
-        this(context.getOutput(), context.registriesFuture(), blockTagsProvider.contentsGetter(), context.getModId());
+        super(context.getOutput(), Registries.ITEM, context.registriesFuture(), item -> item.builtInRegistryHolder().key());
+        this.modId = context.getModId();
+        this.blockTags = blockTagsProvider.contentsGetter();
     }
 
     protected void copy(TagKey<Block> blockTag, TagKey<Item> itemTag) {

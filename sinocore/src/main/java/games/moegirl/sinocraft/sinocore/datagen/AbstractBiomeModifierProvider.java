@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinocore.datagen;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -14,6 +13,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -39,28 +39,26 @@ public abstract class AbstractBiomeModifierProvider implements DataProvider {
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
         registerBiomeModifiers();
-
-        var path = output.getOutputFolder(PackOutput.Target.DATA_PACK)
+        Path path = output.getOutputFolder(PackOutput.Target.DATA_PACK)
                 .resolve(modid)
                 .resolve("forge")
                 .resolve("biome_modifier");
+        return CompletableFuture.allOf(features.stream()
+                .map(f -> beginWriteFeature(f, path, cachedOutput))
+                .toArray(CompletableFuture[]::new));
+    }
 
-        var futuresBuilder = ImmutableList.<CompletableFuture<?>>builder();
+    private CompletableFuture<?> beginWriteFeature(Feature f, Path parentDir, CachedOutput output) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "forge:add_features");
+        json.add("biomes", GSON.toJsonTree(f.hasBiomes()
+                ? f.biomes().stream().map(k -> k.location().toString())
+                : f.hasTag() ? "#" + f.biomesTag().location() : null));
+        json.addProperty("features", f.feature().location().toString());
+        json.addProperty("step", f.step().getName());
 
-        features.forEach(f -> {
-            JsonObject json = new JsonObject();
-            json.addProperty("type", "forge:add_features");
-            json.add("biomes", GSON.toJsonTree(f.hasBiomes()
-                    ? f.biomes().stream().map(k -> k.location().toString())
-                    : f.hasTag() ? "#" + f.biomesTag().location() : null));
-            json.addProperty("features", f.feature().location().toString());
-            json.addProperty("step", f.step().getName());
-
-            var p = path.resolve(f.feature().location().getPath() + ".json");
-            futuresBuilder.add(DataProvider.saveStable(cachedOutput, json, p));
-        });
-
-        return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
+        Path p = parentDir.resolve(f.feature().location().getPath() + ".json");
+        return DataProvider.saveStable(output, json, p);
     }
 
     @Override

@@ -23,21 +23,11 @@ public abstract class ItemModelProviderDelegateBase<T extends IItemModelBuilder<
 
     public abstract void skipItem(Item... items);
 
-    public abstract IModelFile getExistingFile(ResourceLocation path);
-
-    public abstract IModelFile weakCheckModel(ResourceLocation path);
-
     public abstract void printExceptions();
-
-    public abstract ResourceLocation blockLoc(ResourceLocation path);
-
-    public abstract ResourceLocation foldedLoc(ResourceLocation path);
 
     public abstract T basicItem(Item item);
 
     public abstract T basicItem(ResourceLocation item);
-
-    public abstract T withBlockParent(Block block);
 
     public abstract T withBlockParent(IRegRef<Block, ?> block);
 
@@ -45,11 +35,7 @@ public abstract class ItemModelProviderDelegateBase<T extends IItemModelBuilder<
 
     public abstract void handheld(ItemLike item);
 
-    public abstract void handheld(Block block);
-
     public abstract void blockItem(Block block);
 
     public abstract void blockItem(Block block, String statedModel);
-
-//    public abstract void chest(IRegRef<? extends Item, ?> chest, IRegRef<? extends Item, ?> trappedChest, Tree tree);
 }

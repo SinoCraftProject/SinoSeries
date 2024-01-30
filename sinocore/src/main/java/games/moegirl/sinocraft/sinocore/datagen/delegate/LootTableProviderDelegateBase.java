@@ -7,7 +7,6 @@ import games.moegirl.sinocraft.sinocore.datagen.loottable.SimpleLootTableSubProv
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ItemLike;
@@ -24,7 +23,6 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 

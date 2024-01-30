@@ -25,6 +25,7 @@ public class ForgeLanguageProviderDelegateImpl extends LanguageProviderDelegateB
     public ForgeLanguageProviderDelegateImpl(PackOutput output, String modId, String locale) {
         super(new ForgeLanguageProviderImpl(output, modId, locale));
         provider = getForgeProvider();
+        provider.setDelegate(this);
     }
 
     @Override

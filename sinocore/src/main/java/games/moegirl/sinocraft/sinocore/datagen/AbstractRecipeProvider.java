@@ -11,14 +11,11 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -69,17 +66,15 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
                                                String packedName, @Nullable String packedGroup, String unpackedName,
                                                @Nullable String unpackedGroup) {
         ShapelessRecipeBuilder.shapeless(unpackedCategory, unpacked, 9)
-                .requires(packed)
-                .group(unpackedGroup)
+                .requires(packed).group(unpackedGroup)
                 .unlockedBy(getHasName(packed), has(packed))
                 .save(recipeOutput, new ResourceLocation(unpackedName));
         ShapedRecipeBuilder.shaped(packedCategory, packed)
+                .group(packedGroup).unlockedBy(getHasName(unpacked), has(unpacked))
                 .define('#', unpacked)
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
-                .group(packedGroup)
-                .unlockedBy(getHasName(unpacked), has(unpacked))
                 .save(recipeOutput, new ResourceLocation(packedName));
     }
 
@@ -124,76 +119,6 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
     public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
         return CriteriaTriggers.INVENTORY_CHANGED.createCriterion(new InventoryChangeTrigger.TriggerInstance(
                 Optional.empty(), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, List.of(predicates)));
-    }
-
-    // endregion
-
-    // region RecipeBuilders
-
-    public static RecipeBuilder buttonBuilder(ItemLike button, Ingredient material) {
-        return ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button).requires(material);
-    }
-
-    public static RecipeBuilder fenceBuilder(ItemLike fence, Ingredient material) {
-        int i = fence == Blocks.NETHER_BRICK_FENCE ? 6 : 3;
-        Item item = fence == Blocks.NETHER_BRICK_FENCE ? Items.NETHER_BRICK : Items.STICK;
-        return ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, fence, i)
-                .define('W', material)
-                .define('#', item)
-                .pattern("W#W")
-                .pattern("W#W");
-    }
-
-    public static RecipeBuilder fenceGateBuilder(ItemLike fenceGate, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, fenceGate)
-                .define('#', Items.STICK)
-                .define('W', material)
-                .pattern("#W#")
-                .pattern("#W#");
-    }
-
-    public static RecipeBuilder pressurePlateBuilder(RecipeCategory category, ItemLike pressurePlate, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(category, pressurePlate)
-                .define('#', material)
-                .pattern("##");
-    }
-
-    public static RecipeBuilder trapdoorBuilder(ItemLike trapdoor, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, trapdoor, 2)
-                .define('#', material)
-                .pattern("###")
-                .pattern("###");
-    }
-
-    public static RecipeBuilder signBuilder(ItemLike sign, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, sign, 3)
-                .group("sign")
-                .define('#', material)
-                .define('X', Items.STICK)
-                .pattern("###")
-                .pattern("###")
-                .pattern(" X ");
-    }
-
-    public static RecipeBuilder wallBuilder(RecipeCategory category, ItemLike wall, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(category, wall, 6)
-                .define('#', material)
-                .pattern("###")
-                .pattern("###");
-    }
-
-    public static RecipeBuilder polishedBuilder(RecipeCategory category, ItemLike result, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(category, result, 4)
-                .define('S', material)
-                .pattern("SS")
-                .pattern("SS");
-    }
-
-    public static ShapedRecipeBuilder cutBuilder(RecipeCategory category, ItemLike cutResult, Ingredient material) {
-        return ShapedRecipeBuilder.shaped(category, cutResult, 4)
-                .define('#', material)
-                .pattern("##")
-                .pattern("##");
     }
 
     // endregion

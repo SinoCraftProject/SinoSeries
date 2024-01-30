@@ -1,19 +1,16 @@
 package games.moegirl.sinocraft.sinocore.datagen.delegate;
 
 import games.moegirl.sinocraft.sinocore.datagen.advancement.AdvancementTree;
+import games.moegirl.sinocraft.sinocore.datagen.advancement.DisplayInfoBuilder;
 import games.moegirl.sinocraft.sinocore.datagen.advancement.IAdvancementGenerator;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.DisplayInfo;
-import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.DataProvider;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.List;
@@ -44,23 +41,7 @@ public abstract class AdvancementProviderDelegateBase extends ProviderDelegateBa
                 List.of(), List.of(), Optional.empty(), Optional.empty()));
     }
 
-    public DisplayInfo display(Item item, String name, String desc, FrameType frameType, ResourceLocation background) {
-        return display(item, name, desc, frameType, background, false);
-    }
-
-    public DisplayInfo display(Item item, String name, String desc, FrameType frameType, ResourceLocation background,
-                               boolean showToast) {
-        return display(item, name, desc, frameType, background, showToast, true);
-    }
-
-    public DisplayInfo display(Item item, String name, String desc, FrameType frameType, ResourceLocation background,
-                               boolean showToast, boolean announceToChat) {
-        return display(item, name, desc, frameType, background, showToast, announceToChat, false);
-    }
-
-    public DisplayInfo display(Item item, String name, String desc, FrameType frameType, ResourceLocation background,
-                               boolean showToast, boolean announceToChat, boolean hidden) {
-        return new DisplayInfo(new ItemStack(item), Component.translatable(name), Component.translatable(desc),
-                background, frameType, showToast, announceToChat, hidden);
+    public DisplayInfoBuilder display(ResourceLocation background) {
+        return new DisplayInfoBuilder(background);
     }
 }
