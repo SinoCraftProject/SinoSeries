@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry.forge;
 
+import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import net.minecraft.core.Registry;
@@ -13,5 +14,9 @@ public class RegistryManagerImpl {
 
     public static ITabRegistry _createTab(String modId) {
         return new ForgeTabRegistryImpl(modId);
+    }
+
+    public static IDataProviderRegister _createDataProvider(String modId) {
+        return new ForgeDataProviderRegisterImpl();
     }
 }

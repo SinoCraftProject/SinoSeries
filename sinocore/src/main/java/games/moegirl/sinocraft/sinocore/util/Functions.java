@@ -20,6 +20,16 @@ public class Functions {
         };
     }
 
+    public static <T> Consumer<T> compose(Consumer<T> first, Consumer<T> second) {
+        if (first == null && second == null) return t -> {};
+        if (first == null) return second;
+        if (second == null) return first;
+        return t -> {
+            first.accept(t);
+            second.accept(t);
+        };
+    }
+
     public static <T, R> Function<T, R> ext(Supplier<R> sup) {
         return __ -> sup.get();
     }

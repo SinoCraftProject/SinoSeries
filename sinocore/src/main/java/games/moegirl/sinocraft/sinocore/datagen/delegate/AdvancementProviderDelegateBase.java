@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 
 public abstract class AdvancementProviderDelegateBase extends ProviderDelegateBase<AdvancementProviderDelegateBase> {
 
-    protected AdvancementProviderDelegateBase(String name, Supplier<DataProvider> provider) {
-        super(name, provider);
+    protected AdvancementProviderDelegateBase(DataProviderBuilderBase<?, ?> builder) {
+        super(builder);
     }
 
     public abstract void addAdvancement(IAdvancementGenerator generator);

@@ -95,9 +95,10 @@ public class ForgeLanguageProviderDelegateImpl extends LanguageProviderDelegateB
         if (group != null) {
             if (group.getDisplayName().getContents() instanceof TranslatableContents lang) {
                 add(lang.getKey(), name);
+            } else {
+                // 若对应 Tab 不需要语言文件，直接跳过
+                getLogger().warn("Skipped add language to a tab without translatable name: {}", name);
             }
-            // 若对应 Tab 不需要语言文件，直接跳过
-            getLogger().warn("Skipped add language to a tab without translatable name: {}", name);
         } else {
             // Tab 并未注册，只添加
             String lang = ITabRegistry.buildDefaultTranslationKey(key);

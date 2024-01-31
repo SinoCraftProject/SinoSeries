@@ -1,0 +1,9 @@
+{
+  "block.sinotest.test_block": "Test Block",
+  "item.sinotest.test_item_mc_tab": "Test Item: In building tab",
+  "item.sinotest.test_item_mod_mc_tab": "Test Item: In mod and building tab",
+  "item.sinotest.test_item_mod_tab": "Test Item: In mod tab",
+  "sinotest.test.block": "You clicked a block with test tag.",
+  "sinotest.test.item": "Your offhand has item with test tag.",
+  "tab.sinotest.sinocore_test": "SinoTest: Test Tab"
+}

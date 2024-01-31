@@ -29,7 +29,7 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class AbstractCodecProvider implements DataProvider {
 
-    private final CompletableFuture<HolderLookup.Provider> provider;
+    protected final CompletableFuture<HolderLookup.Provider> provider;
     private final PackOutput packOutput;
     private final String modId;
     private final Map<ResourceKey<Registry>, List<Triple<ResourceLocation, Codec, Object>>> map = new HashMap<>();

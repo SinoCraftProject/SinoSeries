@@ -6,8 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * 持有 Forge 的 DataProvider 实现，并负责收集数据
@@ -16,7 +14,7 @@ public abstract class ProviderDelegateBase<T extends ProviderDelegateBase<T>> {
 
     private ForgeDataProviderBase<T> provider;
     private DataProvider forgeProvider;
-    private Supplier<DataProvider> forgeProviderBuilder;
+    private DataProviderBuilderBase<?, ?> forgeProviderBuilder;
     private final Logger logger;
 
     protected ProviderDelegateBase(DataProvider provider) {
@@ -24,9 +22,9 @@ public abstract class ProviderDelegateBase<T extends ProviderDelegateBase<T>> {
         this.logger = LogManager.getLogger(provider.getName());
     }
 
-    protected ProviderDelegateBase(String name, Supplier<DataProvider> provider) {
-        this.forgeProviderBuilder = provider;
-        this.logger = LogManager.getLogger(name);
+    protected ProviderDelegateBase(DataProviderBuilderBase<?, ?> builder) {
+        this.forgeProviderBuilder = builder.bind(this);
+        this.logger = LogManager.getLogger(builder.getDataProviderName());
     }
 
     public void setDelegateProvider(ForgeDataProviderBase<T> provider) {
@@ -36,20 +34,20 @@ public abstract class ProviderDelegateBase<T extends ProviderDelegateBase<T>> {
     public <V extends DataProvider> V getForgeProvider() {
         if (forgeProvider == null) {
             Objects.requireNonNull(forgeProviderBuilder);
-            forgeProvider = forgeProviderBuilder.get();
+            forgeProvider = forgeProviderBuilder.build();
         }
-        return (V) forgeProvider;
+        return (V) Objects.requireNonNull(forgeProvider);
     }
 
     public void generateData() {
         provider.generateData((T) this);
     }
 
-    public Optional<Supplier<DataProvider>> getDataProviderIfExist() {
-        return Optional.ofNullable(forgeProviderBuilder);
-    }
-
     public synchronized Logger getLogger() {
         return logger;
+    }
+
+    public String getName() {
+        return forgeProvider == null ? forgeProviderBuilder.getDataProviderName() : forgeProvider.getName();
     }
 }

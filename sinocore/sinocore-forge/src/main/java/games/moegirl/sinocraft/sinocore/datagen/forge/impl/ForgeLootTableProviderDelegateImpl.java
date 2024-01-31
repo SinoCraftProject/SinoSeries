@@ -11,6 +11,7 @@ public class ForgeLootTableProviderDelegateImpl extends LootTableProviderDelegat
 
     public ForgeLootTableProviderDelegateImpl(ForgeDataGenContextImpl context) {
         super(new ForgeLootTableProviderImpl(context), context.getModId());
+        ((ForgeLootTableProviderImpl) getForgeProvider()).setDelegate(this);
     }
 
     public void collectSubProviders(List<LootTableProvider.SubProviderEntry> tables) {
