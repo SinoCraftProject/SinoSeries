@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.mixin;
 
 import games.moegirl.sinocraft.sinocore.mixin_interfaces.IRenamedProvider;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagsProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

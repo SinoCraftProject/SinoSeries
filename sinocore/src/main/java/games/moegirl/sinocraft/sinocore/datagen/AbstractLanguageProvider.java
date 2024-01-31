@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocore.datagen;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
-import net.minecraft.data.PackOutput;
 
 public abstract class AbstractLanguageProvider extends ForgeDataProviderBase<LanguageProviderDelegateBase> {
 

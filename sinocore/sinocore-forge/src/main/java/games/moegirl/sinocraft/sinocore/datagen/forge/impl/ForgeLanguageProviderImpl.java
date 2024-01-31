@@ -1,13 +1,13 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import net.minecraft.data.PackOutput;
+import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ForgeLanguageProviderImpl extends LanguageProvider {
     private ForgeLanguageProviderDelegateImpl delegate;
 
-    ForgeLanguageProviderImpl(PackOutput output, String modId, String locale) {
-        super(output, modId, locale);
+    ForgeLanguageProviderImpl(IDataGenContext context, String locale) {
+        super(context.getOutput(), context.getModId(), locale);
     }
 
     public void setDelegate(ForgeLanguageProviderDelegateImpl delegate) {
@@ -16,17 +16,6 @@ public class ForgeLanguageProviderImpl extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-//        addTreeTranslates();
-        translate();
-    }
-
-    public void translate() {
         delegate.generateData();
     }
-
-//    protected void addTreeTranslates() {
-//        for (Tree tree : TreeRegistry.getTrees(modid)) {
-//            tree.getTranslator().addTranslatesForLocale(locale, tree, this);
-//        }
-//    }
 }

@@ -16,6 +16,7 @@ public class RegistryManager {
 
     private static final Map<String, Map<ResourceKey<?>, IRegistry<?>>> DEF_MAP = new HashMap<>();
     private static final Map<String, ITabRegistry> TAB_MAP = new HashMap<>();
+    private static final Map<String, IDataProviderRegister> DATA_PROVIDER_TAB = new HashMap<>();
 
     /**
      * 创建一个新的注册器
@@ -93,6 +94,10 @@ public class RegistryManager {
         return TAB_MAP.computeIfAbsent(modId, RegistryManager::_createTab);
     }
 
+    public synchronized static IDataProviderRegister obtainDataProvider(String modId) {
+        return DATA_PROVIDER_TAB.computeIfAbsent(modId, RegistryManager::_createDataProvider);
+    }
+
     @ExpectPlatform
     public static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
         throw new AssertionError();
@@ -100,6 +105,11 @@ public class RegistryManager {
 
     @ExpectPlatform
     public static ITabRegistry _createTab(String modId) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static IDataProviderRegister _createDataProvider(String modId) {
         throw new AssertionError();
     }
 }

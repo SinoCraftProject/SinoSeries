@@ -188,7 +188,7 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
         return strict;
     }
 
-    protected ModelFile.ExistingModelFile weakCheckModel(ResourceLocation path) {
+    public ModelFile.ExistingModelFile weakCheckModel(ResourceLocation path) {
         return new WeakCheckModelFile(path, existingFileHelper, strict, resourceLocation -> {
             errModels.add(new Pair<>(resourceLocation, foldedLoc(resourceLocation)));
             return true;
@@ -197,11 +197,11 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
 
     // 工具方法与默认模型 =================================================================================================
 
-    protected ResourceLocation blockLoc(ResourceLocation path) {
+    public ResourceLocation blockLoc(ResourceLocation path) {
         return new ResourceLocation(path.getNamespace(), BLOCK_FOLDER + "/" + path.getPath());
     }
 
-    protected ResourceLocation foldedLoc(ResourceLocation path) {
+    public ResourceLocation foldedLoc(ResourceLocation path) {
         return path.getPath().contains("/") ? path :
                 new ResourceLocation(path.getNamespace(), folder + "/" + path.getPath());
     }

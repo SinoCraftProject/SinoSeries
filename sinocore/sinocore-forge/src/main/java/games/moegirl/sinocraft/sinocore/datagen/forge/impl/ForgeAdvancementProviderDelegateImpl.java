@@ -20,11 +20,12 @@ public class ForgeAdvancementProviderDelegateImpl extends AdvancementProviderDel
     private final ForgeDataGenContextImpl context;
 
     public ForgeAdvancementProviderDelegateImpl(ForgeDataGenContextImpl context) {
-        super("Advancements: " + context.getModId(), new ForgeAdvancementProviderImpl.Builder(context));
+        super(new ForgeAdvancementProviderBuilderImpl(context));
         this.context = context;
-        this.getDataProviderIfExist()
-                .map(sup -> (ForgeAdvancementProviderImpl.Builder) sup)
-                .ifPresent(b -> b.setGenerators(generators));
+    }
+
+    public List<ForgeAdvancementProvider.AdvancementGenerator> getGenerators() {
+        return generators;
     }
 
     @Override

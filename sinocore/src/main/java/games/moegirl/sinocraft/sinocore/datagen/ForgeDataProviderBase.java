@@ -38,6 +38,6 @@ public abstract class ForgeDataProviderBase<T extends ProviderDelegateBase<T>> i
 
     @Override
     public String getName() {
-        return delegate.getForgeProvider().getName();
+        return delegate.getName();
     }
 }

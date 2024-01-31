@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
+import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,9 +22,10 @@ public class ForgeLanguageProviderDelegateImpl extends LanguageProviderDelegateB
 
     private final ForgeLanguageProviderImpl provider;
 
-    public ForgeLanguageProviderDelegateImpl(PackOutput output, String modId, String locale) {
-        super(new ForgeLanguageProviderImpl(output, modId, locale));
+    public ForgeLanguageProviderDelegateImpl(IDataGenContext context, String locale) {
+        super(new ForgeLanguageProviderImpl(context, locale));
         provider = getForgeProvider();
+        provider.setDelegate(this);
     }
 
     @Override
@@ -94,9 +95,10 @@ public class ForgeLanguageProviderDelegateImpl extends LanguageProviderDelegateB
         if (group != null) {
             if (group.getDisplayName().getContents() instanceof TranslatableContents lang) {
                 add(lang.getKey(), name);
+            } else {
+                // 若对应 Tab 不需要语言文件，直接跳过
+                getLogger().warn("Skipped add language to a tab without translatable name: {}", name);
             }
-            // 若对应 Tab 不需要语言文件，直接跳过
-            getLogger().warn("Skipped add language to a tab without translatable name: {}", name);
         } else {
             // Tab 并未注册，只添加
             String lang = ITabRegistry.buildDefaultTranslationKey(key);
