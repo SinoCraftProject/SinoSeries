@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
+import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,8 +22,8 @@ public class ForgeLanguageProviderDelegateImpl extends LanguageProviderDelegateB
 
     private final ForgeLanguageProviderImpl provider;
 
-    public ForgeLanguageProviderDelegateImpl(PackOutput output, String modId, String locale) {
-        super(new ForgeLanguageProviderImpl(output, modId, locale));
+    public ForgeLanguageProviderDelegateImpl(IDataGenContext context, String locale) {
+        super(new ForgeLanguageProviderImpl(context, locale));
         provider = getForgeProvider();
         provider.setDelegate(this);
     }

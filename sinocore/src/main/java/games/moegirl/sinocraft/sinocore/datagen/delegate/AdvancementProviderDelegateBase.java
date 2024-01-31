@@ -7,7 +7,6 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.ItemLike;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public abstract class AdvancementProviderDelegateBase extends ProviderDelegateBase<AdvancementProviderDelegateBase> {
 

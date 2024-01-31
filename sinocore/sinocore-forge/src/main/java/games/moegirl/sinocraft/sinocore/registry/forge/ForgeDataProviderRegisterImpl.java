@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 public class ForgeDataProviderRegisterImpl implements IDataProviderRegister, Consumer<GatherDataEvent> {
 
     private final List<Function<IDataGenContext, DataProvider>> providers = new ArrayList<>();
+    private final List<Function<IDataGenContext, DataProvider>> providersNotRun = new ArrayList<>();
 
     public ForgeDataProviderRegisterImpl() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -26,9 +27,9 @@ public class ForgeDataProviderRegisterImpl implements IDataProviderRegister, Con
     }
 
     @Override
-    public <T extends DataProvider> Supplier<T> put(Function<IDataGenContext, ? extends T> builder) {
+    public <T extends DataProvider> Supplier<T> put(Function<IDataGenContext, ? extends T> builder, boolean run) {
         Reference<T> reference = new Reference<>();
-        providers.add(ctx -> {
+        (run ? providers : providersNotRun).add(ctx -> {
             T provider = builder.apply(ctx);
             reference.set(provider);
             return provider;
@@ -40,6 +41,7 @@ public class ForgeDataProviderRegisterImpl implements IDataProviderRegister, Con
     public void accept(GatherDataEvent event) {
         IDataGenContext context = SinoCorePlatform.buildDataGeneratorContext(event, event.getLookupProvider());
         DataGenerator generator = event.getGenerator();
+        providersNotRun.forEach(builder -> generator.addProvider(false, builder.apply(context)));
         providers.forEach(builder -> generator.addProvider(true, builder.apply(context)));
     }
 }

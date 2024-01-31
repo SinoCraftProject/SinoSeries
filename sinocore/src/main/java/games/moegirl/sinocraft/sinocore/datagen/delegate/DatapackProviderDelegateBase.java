@@ -1,12 +1,10 @@
 package games.moegirl.sinocraft.sinocore.datagen.delegate;
 
 import net.minecraft.core.Registry;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public abstract class DatapackProviderDelegateBase extends ProviderDelegateBase<DatapackProviderDelegateBase> {
 

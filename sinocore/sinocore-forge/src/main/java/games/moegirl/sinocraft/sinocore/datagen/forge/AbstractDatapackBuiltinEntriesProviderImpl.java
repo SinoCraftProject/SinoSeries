@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocore.datagen.forge;
 
 import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.DatapackProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeDatapackProviderDelegateImpl;
 
 public class AbstractDatapackBuiltinEntriesProviderImpl {

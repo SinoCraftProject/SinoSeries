@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.delegate;
 
 import games.moegirl.sinocraft.sinocore.datagen.model.IItemModelBuilder;
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelFile;
 import games.moegirl.sinocraft.sinocore.datagen.model.IModelProvider;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.minecraft.data.DataProvider;
