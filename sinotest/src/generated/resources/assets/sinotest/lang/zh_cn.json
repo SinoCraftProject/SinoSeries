@@ -1,0 +1,9 @@
+{
+  "block.sinotest.test_block": "测试方块",
+  "item.sinotest.test_item_mc_tab": "测试物品：位于建筑物品标签",
+  "item.sinotest.test_item_mod_mc_tab": "测试物品：位于两个标签",
+  "item.sinotest.test_item_mod_tab": "测试物品：位于 Mod 标签",
+  "sinotest.test.block": "你点击的方块带有测试标签。",
+  "sinotest.test.item": "你的副手物品携带了测试标签。",
+  "tab.sinotest.sinocore_test": "SinoTest: 测试标签"
+}
