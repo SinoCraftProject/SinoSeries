@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinotest.datagen;
 
+import games.moegirl.sinocraft.sinocore.datagen.ForgeProvider;
 import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import games.moegirl.sinocraft.sinotest.SinoTest;
@@ -26,6 +27,7 @@ public class TestDatagen {
         register.put(ctx -> new TestItemTagsProvider(ctx, blockTags.get()));
         register.put(TestLootTableProvider::new);
         register.put(TestRecipeProvider::new);
+        register.put(ForgeProvider::new);
     }
 
     private static void registerData() {

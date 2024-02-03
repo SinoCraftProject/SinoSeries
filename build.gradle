@@ -192,6 +192,12 @@ subMod.each { Project mod ->
             }
         }
 
+        dependencies {
+            if (!mod.name.startsWith('sinocore')) {
+                api project(path: ':sinocore', configuration: 'namedElements')
+            }
+        }
+
         if (mod.name != 'sinotest') {
             publishing {
                 publications {
