@@ -1,11 +1,15 @@
 package games.moegirl.sinocraft.sinocore.util;
 
+import org.apache.logging.log4j.Logger;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.function.BiFunction;
+import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * 提供一些函数功能
@@ -28,25 +32,6 @@ public class Functions {
             first.accept(t);
             second.accept(t);
         };
-    }
-
-    public static <T, R> Function<T, R> ext(Supplier<R> sup) {
-        return __ -> sup.get();
-    }
-
-    public static <T, U, R> BiFunction<T, U, R> lExt(Function<U, R> sup) {
-        return (__, u) -> sup.apply(u);
-    }
-
-    public static <T, U, R> BiFunction<T, U, R> rExt(Function<T, R> sup) {
-        return (t, __) -> sup.apply(t);
-    }
-
-    /**
-     * 生成一个 Supplier，可以根据给定构造函数构造出无参构造，并通过 Function 对其修饰
-     */
-    public static <T, R> Supplier<R> constructor(Supplier<T> constructor, Function<T, R> decorator) {
-        return () -> decorator.apply(constructor.get());
     }
 
     /**
@@ -83,4 +68,21 @@ public class Functions {
         }
     }
 
+    public static <P> Optional<P> getOrEmpty(Callable<P> sup, Logger logger) {
+        try {
+            return Optional.ofNullable(sup.call());
+        } catch (Exception e) {
+            logger.error(e);
+            return Optional.empty();
+        }
+    }
+
+    public static <P> Stream<P> getStreamOrEmpty(Callable<Stream<P>> sup, Logger logger) {
+        try {
+            return sup.call();
+        } catch (Exception e) {
+            logger.error(e);
+            return Stream.empty();
+        }
+    }
 }
