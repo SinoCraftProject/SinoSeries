@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry;
 
-import games.moegirl.sinocraft.sinocore.util.IOptional;
+import games.moegirl.sinocraft.sinocore.utility.IOptional;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

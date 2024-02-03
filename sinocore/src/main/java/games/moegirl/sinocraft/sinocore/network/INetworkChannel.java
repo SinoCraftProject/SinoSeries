@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.network;
 
-import games.moegirl.sinocraft.sinocore.util.Functions;
+import games.moegirl.sinocraft.sinocore.utility.Functions;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.PacketFlow;

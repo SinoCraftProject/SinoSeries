@@ -3,8 +3,8 @@ package games.moegirl.sinocraft.sinocore.datagen.forge.model;
 import com.google.gson.JsonObject;
 import games.moegirl.sinocraft.sinocore.datagen.model.IItemModelBuilder;
 import games.moegirl.sinocraft.sinocore.datagen.model.IModelFile;
-import games.moegirl.sinocraft.sinocore.util.ISelf;
-import games.moegirl.sinocraft.sinocore.util.IWrapper;
+import games.moegirl.sinocraft.sinocore.utility.ISelf;
+import games.moegirl.sinocraft.sinocore.utility.IWrapper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 

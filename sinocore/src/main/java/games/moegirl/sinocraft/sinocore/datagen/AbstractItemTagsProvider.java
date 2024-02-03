@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen;
 
-import games.moegirl.sinocraft.sinocore.util.Functions;
-import games.moegirl.sinocraft.sinocore.util.ModList;
+import games.moegirl.sinocraft.sinocore.utility.Functions;
+import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 

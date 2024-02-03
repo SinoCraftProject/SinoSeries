@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.util.forge;
+package games.moegirl.sinocraft.sinocore.utility.forge;
 
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
@@ -19,21 +19,21 @@ public class ModListImpl {
     private static final FileSystemProvider UFSP = FileSystemProvider.installedProviders().stream()
             .filter(f -> "union".equalsIgnoreCase(f.getScheme())).findFirst().orElseThrow();
 
-    private static final List<games.moegirl.sinocraft.sinocore.util.ModList.IModContainer> containers = new ArrayList<>();
+    private static final List<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> containers = new ArrayList<>();
 
-    public static Stream<games.moegirl.sinocraft.sinocore.util.ModList.IModContainer> getAllMods() {
+    public static Stream<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> getAllMods() {
         if (containers.isEmpty()) {
             ModList.get().forEachModContainer((name, mc) -> containers.add(new ForgeModContainerWrapper(mc)));
         }
         return containers.stream();
     }
 
-    public static Optional<games.moegirl.sinocraft.sinocore.util.ModList.IModContainer> findMod(String modId) {
+    public static Optional<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> findMod(String modId) {
         return ModList.get().getModContainerById(modId).map(ForgeModContainerWrapper::new);
     }
 
     record ForgeModContainerWrapper(ModContainer container)
-            implements games.moegirl.sinocraft.sinocore.util.ModList.IModContainer {
+            implements games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer {
 
         @Override
         public String getId() {

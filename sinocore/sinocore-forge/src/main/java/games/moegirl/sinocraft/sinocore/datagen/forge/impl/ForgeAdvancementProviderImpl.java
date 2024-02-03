@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
 import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.DatapackProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.util.Functions;
+import games.moegirl.sinocraft.sinocore.utility.Functions;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.util;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import org.apache.logging.log4j.Logger;
 

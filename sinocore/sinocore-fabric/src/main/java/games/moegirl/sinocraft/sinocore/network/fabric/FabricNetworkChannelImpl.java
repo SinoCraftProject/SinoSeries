@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocore.mixin.IServerCommonPacketListenerImplAcc
 import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import games.moegirl.sinocraft.sinocore.network.PacketTarget;
-import games.moegirl.sinocraft.sinocore.util.Reference;
+import games.moegirl.sinocraft.sinocore.utility.Reference;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

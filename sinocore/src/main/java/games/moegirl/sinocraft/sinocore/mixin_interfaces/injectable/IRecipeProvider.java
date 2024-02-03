@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin_interfaces;
+package games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable;
 
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.RecipeBuilder;

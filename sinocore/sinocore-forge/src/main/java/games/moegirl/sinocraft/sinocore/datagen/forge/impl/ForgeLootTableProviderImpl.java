@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;

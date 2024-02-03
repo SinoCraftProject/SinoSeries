@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.util.fabric;
+package games.moegirl.sinocraft.sinocore.utility.fabric;
 
-import games.moegirl.sinocraft.sinocore.util.ModList;
+import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 
