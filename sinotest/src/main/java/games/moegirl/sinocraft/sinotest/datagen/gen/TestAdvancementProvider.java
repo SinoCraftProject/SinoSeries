@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinotest.datagen.gen;
 
 import games.moegirl.sinocraft.sinocore.datagen.AbstractAdvancementProvider;
 import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.datagen.advancement.AdvancementTree;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.AdvancementProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.advancements.Advancement;
@@ -17,7 +18,7 @@ public class TestAdvancementProvider extends AbstractAdvancementProvider {
 
     @Override
     public void generateData(AdvancementProviderDelegateBase delegate) {
-        delegate.addAdvancement(builder -> builder
+        delegate.addAdvancementTree(saver -> new AdvancementTree(saver)
                 .root("test_adv", Advancement.Builder.advancement()
                         .display(new ItemStack(TestRegistry.TEST_ITEM_MC_TAB.get()),
                                 Component.literal("测试成就"),

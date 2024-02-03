@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.datagen.delegate;
 import games.moegirl.sinocraft.sinocore.datagen.advancement.AdvancementTree;
 import games.moegirl.sinocraft.sinocore.datagen.advancement.DisplayInfoBuilder;
 import games.moegirl.sinocraft.sinocore.datagen.advancement.IAdvancementGenerator;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -14,7 +15,9 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class AdvancementProviderDelegateBase extends ProviderDelegateBase<AdvancementProviderDelegateBase> {
 
@@ -24,10 +27,9 @@ public abstract class AdvancementProviderDelegateBase extends ProviderDelegateBa
 
     public abstract void addAdvancement(IAdvancementGenerator generator);
 
-    public void addAdvancement(Consumer<AdvancementTree> advancementBuilder) {
-        addAdvancement((registries, saver, helper) -> advancementBuilder.accept(new AdvancementTree(saver)));
+    public void addAdvancementTree(Function<Consumer<AdvancementHolder>, AdvancementTree> tree) {
+        addAdvancement((registries, saver, context) -> tree.apply(saver));
     }
-
 
     public Criterion<InventoryChangeTrigger.TriggerInstance> triggerGotItems(ItemLike... items) {
         return InventoryChangeTrigger.TriggerInstance.hasItems(items);
