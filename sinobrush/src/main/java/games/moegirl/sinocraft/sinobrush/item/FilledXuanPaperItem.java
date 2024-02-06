@@ -33,7 +33,7 @@ public class FilledXuanPaperItem extends XuanPaperItem {
     @Override
     public @NotNull Component getName(ItemStack stack) {
         var drawing = getDrawing(stack);
-        return drawing.getTitle();
+        return Component.translatable(SBRConstants.Translation.DRAWING_TITLE_LABEL).append(drawing.getTitle());
     }
 
     @Override

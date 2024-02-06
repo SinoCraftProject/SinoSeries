@@ -1,6 +1,5 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
-import games.moegirl.sinocraft.sinobrush.data.SBRItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

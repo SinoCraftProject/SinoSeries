@@ -37,6 +37,7 @@ public class SBRConstants {
     }
 
     public static class Translation {
+        public static final String DRAWING_TITLE_LABEL = "sinobrush.drawing.title.label";
         public static final String DRAWING_TITLE_UNKNOWN = "sinobrush.drawing.title.unknown";
         public static final String DRAWING_AUTHOR_LABEL = "sinobrush.drawing.author.label";
         public static final String DRAWING_AUTHOR_UNKNOWN = "sinobrush.drawing.author.unknown";
@@ -51,6 +52,8 @@ public class SBRConstants {
 
         public static final String HUD_FAN_PREFIX = "sinobrush.hud.fan.prefix";
 
+        public static final String ADVANCEMENT_BRUSH_NAME = "sinobrush.advancement.brush.name";
+        public static final String ADVANCEMENT_BRUSH_DESC = "sinobrush.advancement.brush.desc";
         public static final String ADVANCEMENT_FAN_NAME = "sinobrush.advancement.fan.name";
         public static final String ADVANCEMENT_FAN_DESC = "sinobrush.advancement.fan.description";
         public static final String ADVANCEMENT_UNFOLD_FAN_NAME = "sinobrush.advancement.unfold_fan.name";
