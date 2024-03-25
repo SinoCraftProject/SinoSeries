@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinocore.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.Callable;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -11,26 +12,6 @@ import java.util.function.Supplier;
  * 提供一些函数功能
  */
 public class Functions {
-
-    public static <T, R> Function<T, R> compose(Function<T, R> first, Consumer<R> second) {
-        return t -> {
-            R tt = first.apply(t);
-            second.accept(tt);
-            return tt;
-        };
-    }
-
-    public static <T, R> Function<T, R> ext(Supplier<R> sup) {
-        return __ -> sup.get();
-    }
-
-    public static <T, U, R> BiFunction<T, U, R> lExt(Function<U, R> sup) {
-        return (__, u) -> sup.apply(u);
-    }
-
-    public static <T, U, R> BiFunction<T, U, R> rExt(Function<T, R> sup) {
-        return (t, __) -> sup.apply(t);
-    }
 
     /**
      * 生成一个 Supplier，可以根据给定构造函数构造出无参构造，并通过 Function 对其修饰
@@ -73,4 +54,17 @@ public class Functions {
         }
     }
 
+    public static <T, R> Function<T, R> toFunction(Callable<T, R> callable) {
+        return t -> {
+            try {
+                return callable.call(t);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Failed to call function with " + t, e);
+            }
+        };
+    }
+
+    public interface Callable<T, R> {
+        R call(T t) throws Exception;
+    }
 }

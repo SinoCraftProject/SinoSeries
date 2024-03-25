@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinobrush.gui;
+package games.moegirl.sinocraft.sinobrush.gui.screen;
 
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import net.minecraft.client.gui.GuiGraphics;
