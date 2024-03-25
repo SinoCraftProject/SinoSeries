@@ -1,0 +1,79 @@
+package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
+
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+public final class ProgressEntry extends AbstractWidgetEntry {
+
+    public static final Codec<ProgressEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                    Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
+                    Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
+                    Codec.STRING.optionalFieldOf("texture", null).forGetter(ProgressEntry::getTexture),
+                    Codec.STRING.fieldOf("texture_filled").forGetter(ProgressEntry::getTextureFilled),
+                    Codec.STRING.optionalFieldOf("direction", null).forGetter(ProgressEntry::direction))
+            .apply(instance, ProgressEntry::new));
+
+    private final int x, y, width, height;
+    @Nullable
+    private final String texture;
+    private final String textureFilled;
+    private final boolean isVertical;
+    private final boolean isOpposite;
+
+    ProgressEntry(List<Integer> pos, List<Integer> size, @Nullable String texture, String textureFilled, @Nullable String direction) {
+        super("progress");
+        this.x = pos.get(0);
+        this.y = pos.get(1);
+        this.width = size.get(0);
+        this.height = size.get(1);
+        this.texture = texture;
+        this.textureFilled = textureFilled;
+
+        if (direction != null) {
+            isVertical = direction.endsWith("vertical");
+            isOpposite = direction.startsWith("-");
+        } else {
+            isVertical = isOpposite = false;
+        }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    @Nullable
+    public String getTexture() {
+        return texture;
+    }
+
+    public String getTextureFilled() {
+        return textureFilled;
+    }
+
+    public boolean isVertical() {
+        return isVertical;
+    }
+
+    public boolean isOpposite() {
+        return isOpposite;
+    }
+
+    private String direction() {
+        return isVertical ? isOpposite ? "-vertical" : "vertical" : isOpposite ? "-horizontal" : "horizontal";
+    }
+}

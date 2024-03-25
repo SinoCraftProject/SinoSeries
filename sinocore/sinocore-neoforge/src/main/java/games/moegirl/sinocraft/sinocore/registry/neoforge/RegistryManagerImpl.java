@@ -1,8 +1,10 @@
 package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
+import games.moegirl.sinocraft.sinocore.registry.IMenuRegister;
 import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
+import games.moegirl.sinocraft.sinocore.registry.IScreenRegister;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataProvider;
@@ -19,6 +21,13 @@ public class RegistryManagerImpl {
 
     public static ITabRegistry _createTab(String modId) {
         return new NeoForgeTabRegistryImpl(modId);
+    }
+    public static IMenuRegister _createMenu(String modId) {
+        return new NeoForgeMenuRegister(modId);
+    }
+
+    public static IScreenRegister _createScreen(String modId) {
+        return new NeoForgeScreenRegister();
     }
 
     public static IDataProviderRegister _createDataProvider(String modId) {
