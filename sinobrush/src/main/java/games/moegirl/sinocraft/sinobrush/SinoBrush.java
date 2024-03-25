@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinobrush;
 
 import games.moegirl.sinocraft.sinobrush.data.SBRDataGen;
 import games.moegirl.sinocraft.sinobrush.gui.SBRGui;
+import games.moegirl.sinocraft.sinobrush.gui.SBRScreen;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 
 public class SinoBrush {
@@ -16,5 +17,9 @@ public class SinoBrush {
         SBRGui.register();
 
         SBRDataGen.register();
+    }
+
+    public void initClient() {
+        SBRScreen.register();
     }
 }
