@@ -26,8 +26,8 @@ public class XuanPaperMenu extends WidgetMenuBase {
     public XuanPaperMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
         super(SBRGui.XUAN_PAPER.get(), id, MENU_LOCATION);
 
-        addSlots(inventory, "slots_left", 0, SlotStrategy.simple());
-        addSlots(inventory, "slot_bottom", 27, SlotStrategy.simple());
+        addSlots(inventory, "slots_left", 9, SlotStrategy.simple());
+        addSlots(inventory, "slot_bottom", 0, SlotStrategy.simple());
         addSlots(rightContainer, "slots_right", 0, SlotStrategy.simple());
         addSlot(bottomContainer, "slot_right_bottom", 0, SlotStrategy.simple());
     }

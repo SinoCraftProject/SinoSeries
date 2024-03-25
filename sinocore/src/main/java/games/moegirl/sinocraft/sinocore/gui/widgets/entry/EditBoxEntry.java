@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author luqin2007
@@ -17,15 +18,15 @@ public final class EditBoxEntry extends AbstractWidgetEntry {
     public static final Codec<EditBoxEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
                     Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
-                    Codec.STRING.optionalFieldOf("title", null).forGetter(EditBoxEntry::title),
-                    Codec.STRING.optionalFieldOf("hint", null).forGetter(EditBoxEntry::hint),
+                    Codec.STRING.optionalFieldOf("title").forGetter(EditBoxEntry::title),
+                    Codec.STRING.optionalFieldOf("hint").forGetter(EditBoxEntry::hint),
                     Codec.INT.optionalFieldOf("max_length", 32).forGetter(EditBoxEntry::getMaxLength),
-                    Codec.STRING.optionalFieldOf("suggestion", null).forGetter(EditBoxEntry::getSuggestion),
+                    Codec.STRING.optionalFieldOf("suggestion").forGetter(EditBoxEntry::getSuggestion),
                     Codec.STRING.optionalFieldOf("default", "").forGetter(EditBoxEntry::getDefaultValue),
                     Codec.INT.optionalFieldOf("color", 0xE0E0E0).forGetter(EditBoxEntry::getColor),
                     Codec.INT.optionalFieldOf("color_uneditable", 0xE0E0E0).forGetter(EditBoxEntry::getUneditableColor),
                     Codec.floatRange(0.0F, 1.0F).optionalFieldOf("alpha", 1.0F).forGetter(EditBoxEntry::getAlpha),
-                    Codec.STRING.optionalFieldOf("tooltip", null).forGetter(EditBoxEntry::tooltip),
+                    Codec.STRING.optionalFieldOf("tooltip").forGetter(EditBoxEntry::tooltip),
                     Codec.BOOL.optionalFieldOf("bordered", true).forGetter(EditBoxEntry::getBordered))
             .apply(instance, EditBoxEntry::new));
 
@@ -33,20 +34,20 @@ public final class EditBoxEntry extends AbstractWidgetEntry {
     private final int y;
     private final int w;
     private final int h;
-    private final @Nullable String title;
-    private final @Nullable String hint;
+    private final Optional<String> title;
+    private final Optional<String> hint;
     private final int maxLength;
-    private final @Nullable String suggestion;
+    private final Optional<String> suggestion;
     private final String defVal;
     private final int color;
     private final int uneditableColor;
     private final float alpha;
-    private final @Nullable String tooltip;
+    private final Optional<String> tooltip;
     private final boolean bordered;
 
-    EditBoxEntry(List<Integer> position, List<Integer> size, @Nullable String title,
-                 @Nullable String hint, int maxLength, @Nullable String suggestion, String defVal, int color,
-                 int uneditableColor, float alpha, @Nullable String tooltip, boolean bordered) {
+    EditBoxEntry(List<Integer> position, List<Integer> size, Optional<String> title,
+                 Optional<String> hint, int maxLength, Optional<String> suggestion, String defVal, int color,
+                 int uneditableColor, float alpha, Optional<String> tooltip, boolean bordered) {
         super("editbox");
         this.x = position.get(0);
         this.y = position.get(1);
@@ -84,8 +85,7 @@ public final class EditBoxEntry extends AbstractWidgetEntry {
         return maxLength;
     }
 
-    @Nullable
-    public String getSuggestion() {
+    public Optional<String> getSuggestion() {
         return suggestion;
     }
 
@@ -110,31 +110,26 @@ public final class EditBoxEntry extends AbstractWidgetEntry {
     }
 
     public Component getTitle() {
-        return title == null ? CommonComponents.EMPTY : Component.translatable(title);
+        return title.map(Component::translatable).orElseGet(Component::empty);
     }
 
-    @Nullable
-    public Tooltip getTooltip() {
-        return tooltip == null ? null : Tooltip.create(Component.translatable(tooltip));
+    public Optional<Tooltip> getTooltip() {
+        return tooltip.map(Component::translatable).map(Tooltip::create);
     }
 
-    @Nullable
-    public Component getHint() {
-        return hint == null ? null : Component.translatable(hint);
+    public Optional<Component> getHint() {
+        return hint.map(Component::translatable);
     }
 
-    @Nullable
-    private String title() {
+    private Optional<String> title() {
         return title;
     }
 
-    @Nullable
-    private String tooltip() {
+    private Optional<String> tooltip() {
         return tooltip;
     }
 
-    @Nullable
-    private String hint() {
+    private Optional<String> hint() {
         return hint;
     }
 }

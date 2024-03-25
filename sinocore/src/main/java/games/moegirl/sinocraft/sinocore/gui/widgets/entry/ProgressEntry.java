@@ -2,28 +2,27 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public final class ProgressEntry extends AbstractWidgetEntry {
 
     public static final Codec<ProgressEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
                     Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
-                    Codec.STRING.optionalFieldOf("texture", null).forGetter(ProgressEntry::getTexture),
+                    Codec.STRING.optionalFieldOf("texture").forGetter(ProgressEntry::getTexture),
                     Codec.STRING.fieldOf("texture_filled").forGetter(ProgressEntry::getTextureFilled),
-                    Codec.STRING.optionalFieldOf("direction", null).forGetter(ProgressEntry::direction))
+                    Codec.STRING.optionalFieldOf("direction", "horizontal").forGetter(ProgressEntry::direction))
             .apply(instance, ProgressEntry::new));
 
     private final int x, y, width, height;
-    @Nullable
-    private final String texture;
+    private final Optional<String> texture;
     private final String textureFilled;
     private final boolean isVertical;
     private final boolean isOpposite;
 
-    ProgressEntry(List<Integer> pos, List<Integer> size, @Nullable String texture, String textureFilled, @Nullable String direction) {
+    ProgressEntry(List<Integer> pos, List<Integer> size, Optional<String> texture, String textureFilled, String direction) {
         super("progress");
         this.x = pos.get(0);
         this.y = pos.get(1);
@@ -56,8 +55,7 @@ public final class ProgressEntry extends AbstractWidgetEntry {
         return height;
     }
 
-    @Nullable
-    public String getTexture() {
+    public Optional<String> getTexture() {
         return texture;
     }
 

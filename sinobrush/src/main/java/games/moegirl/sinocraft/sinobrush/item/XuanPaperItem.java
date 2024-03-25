@@ -89,8 +89,6 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
         }
     }
 
-    // todo
-
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         if (!level.isClientSide && player instanceof ServerPlayer sp) {

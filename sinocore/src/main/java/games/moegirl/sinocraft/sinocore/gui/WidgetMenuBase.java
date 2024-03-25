@@ -31,13 +31,6 @@ public abstract class WidgetMenuBase extends AbstractContainerMenu {
         return addSlot(slot);
     }
 
-    protected <C extends Container> Slot addSlot(C container, String slotsName, int index, int indexForSlots, SlotStrategy<C> slotType) {
-        SlotsEntry slots = (SlotsEntry) widgets.getWidget(slotsName);
-        SlotEntry entry = slots.getSlot(indexForSlots);
-        Slot slot = slotType.createSlot(container, index, entry.getX(), entry.getY());
-        return addSlot(slot);
-    }
-
     protected void addSlots(Container container, String name, int beginIndex, SlotStrategy<Container> slotType) {
         SlotsEntry slots = (SlotsEntry) widgets.getWidget(name);
         for (int i = 0; i < slots.slotCount(); i++) {

@@ -1,11 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
-import games.moegirl.sinocraft.sinocore.registry.IMenuRegister;
+import games.moegirl.sinocraft.sinocore.registry.*;
 import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
-import games.moegirl.sinocraft.sinocore.registry.IRegistry;
-import games.moegirl.sinocraft.sinocore.registry.IScreenRegister;
-import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
@@ -28,6 +24,10 @@ public class RegistryManagerImpl {
 
     public static IScreenRegister _createScreen(String modId) {
         return new NeoForgeScreenRegister();
+    }
+
+    public static ICommandRegistry _createCommand(String modId) {
+        return new NeoForgeCommandRegister();
     }
 
     public static IDataProviderRegister _createDataProvider(String modId) {

@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.component;
 
+import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.ProgressEntry;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
-import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.util.GLSwitcher;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -28,13 +28,13 @@ public class ProgressWidget extends AbstractWidget {
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         GLSwitcher b = GLSwitcher.blend();
-        if (widgets.containsWidget(entry.getTexture())) {
-            TextureEntry texture = (TextureEntry) widgets.getWidget(entry.getTexture());
+        if (entry.getTexture().isPresent() && widgets.containsWidget(entry.getTexture().get())) {
+            TextureEntry texture = (TextureEntry) widgets.getWidget(entry.getTexture().get());
             guiGraphics.blit(widgets.getTexture(), getX(), getY(), getWidth(), getHeight(),
                     texture.getTextureX(), texture.getTextureY(), texture.getTextureWidth(), texture.getTextureHeight(),
                     widgets.getWidth(), widgets.getHeight());
         }
-        double progress = this.progressSupplier.getAsDouble();
+        double progress = getProgress();
         if (progress > 0) {
             TextureEntry p = (TextureEntry) widgets.getWidget(entry.getTextureFilled());
             int x = getX(), y = getY();
