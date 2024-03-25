@@ -4,14 +4,15 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 public final class TextureEntry extends AbstractWidgetEntry {
 
     public static final Codec<TextureEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.listOf().fieldOf("uv").forGetter(e -> List.of(e.getTextureX(), e.getTextureY())),
             Codec.INT.listOf().fieldOf("size").forGetter(e -> List.of(e.getWidth(), e.getHeight())),
-            Codec.INT.listOf().optionalFieldOf("uv_size", List.of()).forGetter(e -> List.of(e.getTextureWidth(), e.getTextureHeight())),
-            Codec.INT.listOf().optionalFieldOf("position", List.of()).forGetter(e -> List.of(e.getX(), e.getY()))
+            Codec.INT.listOf().optionalFieldOf("uv_size").forGetter(TextureEntry::uvSize),
+            Codec.INT.listOf().optionalFieldOf("position").forGetter(TextureEntry::position)
     ).apply(instance, TextureEntry::new));
 
     private final int x;
@@ -23,16 +24,16 @@ public final class TextureEntry extends AbstractWidgetEntry {
     private final int tw;
     private final int th;
 
-    TextureEntry(List<Integer> uv, List<Integer> size, List<Integer> uvSize, List<Integer> position) {
+    TextureEntry(List<Integer> uv, List<Integer> size, Optional<List<Integer>> uvSize, Optional<List<Integer>> position) {
         super("texture");
-        this.x = (position.isEmpty() ? uv : position).get(0);
-        this.y = (position.isEmpty() ? uv : position).get(1);
+        this.x = position.orElse(uv).get(0);
+        this.y = position.orElse(uv).get(1);
         this.w = size.get(0);
         this.h = size.get(1);
         this.tx = uv.get(0);
         this.ty = uv.get(1);
-        this.tw = (uvSize.isEmpty() ? size : uvSize).get(0);
-        this.th = (uvSize.isEmpty() ? size : uvSize).get(1);
+        this.tw = uvSize.orElse(size).get(0);
+        this.th = uvSize.orElse(size).get(1);
     }
 
     public int getX() {
@@ -70,5 +71,13 @@ public final class TextureEntry extends AbstractWidgetEntry {
     // [u0, u1, v0, v1]
     public float[] normalized(float width, float height) {
         return new float[]{(float) tx / width, (float) (tx + tw) / width, (float) ty / height, (float) (ty + th) / height};
+    }
+
+    private Optional<List<Integer>> uvSize() {
+        return tw == w && th == h ? Optional.empty() : Optional.of(List.of(tw, th));
+    }
+
+    private Optional<List<Integer>> position() {
+        return x == tx && y == ty ? Optional.empty() : Optional.of(List.of(x, y));
     }
 }

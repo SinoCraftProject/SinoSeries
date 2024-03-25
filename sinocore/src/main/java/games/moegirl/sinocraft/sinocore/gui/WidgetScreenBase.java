@@ -9,7 +9,6 @@ import games.moegirl.sinocraft.sinocore.util.GLSwitcher;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,21 +23,25 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
     public WidgetScreenBase(T menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.widgets = menu.widgets;
+
+        if (widgets.containsWidget("background")) {
+            TextureEntry entry = (TextureEntry) widgets.getWidget("background");
+            imageWidth = entry.getWidth();
+            imageHeight = entry.getHeight();
+        }
     }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         if (widgets.containsWidget("background")) {
-            // todo ???
-            guiGraphics.blit(widgets.getTexture(), leftPos, topPos, 0, 0, imageWidth, imageHeight);
+            blitTexture(guiGraphics, "background", 0, 0);
         }
     }
 
     protected ImageButtonWidget addButton(String name, Button.OnPress onPress) {
         ButtonEntry entry = (ButtonEntry) widgets.getWidget(name);
-        Component tooltip = entry.getTooltip();
-        WidgetSprites sprites = new WidgetSprites(widgets.getTexture(), widgets.getTexture());
-        ImageButtonWidget button = new ImageButtonWidget(this, entry, sprites, onPress, tooltip);
+        Component tooltip = entry.getTooltip().map(Component::translatable).orElseGet(Component::empty);
+        ImageButtonWidget button = new ImageButtonWidget(this, entry, onPress, tooltip);
         addRenderableWidget(button);
         return button;
     }
@@ -98,7 +101,7 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
 
     public void blitTexture(GuiGraphics guiGraphics, String name) {
         TextureEntry entry = (TextureEntry) widgets.getWidget(name);
-        blitTexture(guiGraphics, name, leftPos + entry.getX(), topPos + entry.getY(), entry.getWidth(), entry.getHeight());
+        blitTexture(guiGraphics, name, entry.getX(), entry.getY(), entry.getWidth(), entry.getHeight());
     }
 
     public void blitTexture(GuiGraphics guiGraphics, String name, int x, int y) {
@@ -108,7 +111,7 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
 
     public void blitTexture(GuiGraphics guiGraphics, String name, int x, int y, int width, int height) {
         TextureEntry entry = (TextureEntry) widgets.getWidget(name);
-        guiGraphics.blit(widgets.getTexture(), x, y, width, height, entry.getTextureX(), entry.getTextureY(),
+        guiGraphics.blit(widgets.getTexture(), leftPos + x, topPos + y, width, height, entry.getTextureX(), entry.getTextureY(),
                 entry.getTextureWidth(), entry.getTextureHeight(), widgets.getWidth(), widgets.getHeight());
     }
 
@@ -129,5 +132,9 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
 
     public Font getFont() {
         return font;
+    }
+
+    public Widgets getWidgets() {
+        return widgets;
     }
 }

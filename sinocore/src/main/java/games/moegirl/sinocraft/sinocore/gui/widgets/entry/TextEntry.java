@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +11,8 @@ public final class TextEntry extends AbstractWidgetEntry {
     public static final Codec<TextEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(e -> List.of(e.getX(), e.getY())),
                     Codec.INT.optionalFieldOf("color", 0x808080).forGetter(TextEntry::getColor),
-                    Codec.STRING.optionalFieldOf("text", null).forGetter(e -> e.getText().orElse(null)),
-                    Codec.STRING.optionalFieldOf("rawText", null).forGetter(e -> e.getRawText().orElse(null)),
+                    Codec.STRING.optionalFieldOf("text").forGetter(TextEntry::getText),
+                    Codec.STRING.optionalFieldOf("rawText").forGetter(TextEntry::getRawText),
                     Codec.BOOL.optionalFieldOf("shadow", false).forGetter(TextEntry::hasShadow),
                     Codec.BOOL.optionalFieldOf("center", false).forGetter(TextEntry::isCenter))
             .apply(instance, TextEntry::new));
@@ -21,12 +20,12 @@ public final class TextEntry extends AbstractWidgetEntry {
     private final int x;
     private final int y;
     private final int color;
-    private final @Nullable String text;
-    private final @Nullable String rawText;
+    private final Optional<String> text;
+    private final Optional<String> rawText;
     private final boolean shadow;
     private final boolean center;
 
-    TextEntry(List<Integer> position, int color, @Nullable String text, @Nullable String rawText,
+    TextEntry(List<Integer> position, int color, Optional<String> text, Optional<String> rawText,
               boolean shadow, boolean center) {
         super("text");
         this.x = position.get(0);
@@ -51,11 +50,11 @@ public final class TextEntry extends AbstractWidgetEntry {
     }
 
     public Optional<String> getText() {
-        return Optional.ofNullable(text);
+        return text;
     }
 
     public Optional<String> getRawText() {
-        return Optional.ofNullable(rawText);
+        return rawText;
     }
 
     public boolean hasShadow() {

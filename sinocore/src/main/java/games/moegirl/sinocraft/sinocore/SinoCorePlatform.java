@@ -9,4 +9,9 @@ public class SinoCorePlatform {
     public static MinecraftServer getServer() {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static boolean isDevelopmentEnvironment() {
+        throw new AssertionError();
+    }
 }

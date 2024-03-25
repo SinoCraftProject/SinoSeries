@@ -11,14 +11,14 @@ public class EditBoxWidget extends EditBox {
 
     public EditBoxWidget(Font font, EditBoxEntry entry, int leftPos, int topPos) {
         super(font, leftPos + entry.getX(), topPos + entry.getY(), entry.getWidth(), entry.getHeight(), entry.getTitle());
-        setHint(entry.getHint());
+        entry.getHint().ifPresent(this::setHint);
         setMaxLength(entry.getMaxLength());
-        setSuggestion(entry.getSuggestion());
+        entry.getSuggestion().ifPresent(this::setSuggestion);
         setValue(entry.getDefaultValue());
         setTextColor(entry.getColor());
         setTextColorUneditable(entry.getUneditableColor());
         setAlpha(entry.getAlpha());
-        setTooltip(entry.getTooltip());
+        entry.getTooltip().ifPresent(this::setTooltip);
         setBordered(entry.getBordered());
     }
 

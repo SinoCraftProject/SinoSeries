@@ -33,15 +33,19 @@ public final class SlotsEntry extends AbstractWidgetEntry {
         super("slots");
         this.isVertical = "vertical".equals(direction);
         this.size = size;
-        this.counts = count.map(i -> isVertical ? new int[] {i, 1} : new int[] {1, i}, list -> list.stream().mapToInt(i -> i).toArray());
+        this.counts = count.map(i -> new int[] {1, i}, list -> list.stream().mapToInt(i -> i).toArray());
         this.x = position.get(0);
         this.y = position.get(1);
-        this.offsets = count.map(i -> isVertical ? new int[] {i, 0} : new int[] {0, i}, list -> list.stream().mapToInt(i -> i).toArray());
+        this.offsets = offset.map(i -> new int[] {0, i}, list -> list.stream().mapToInt(i -> i).toArray());
 
         ImmutableList.Builder<SlotEntry> slots = ImmutableList.builder();
         for (int i = 0; i < counts[0]; i++) {
             for (int j = 0; j < counts[1]; j++) {
-                slots.add(new SlotEntry(size, List.of(x + j * size + j * offsets[0], y + i * size + i * offsets[1])));
+                if (isVertical) {
+                    slots.add(new SlotEntry(size, List.of(x + i * size + i * offsets[0], y + j * size + j * offsets[1])));
+                } else {
+                    slots.add(new SlotEntry(size, List.of(x + j * size + j * offsets[0], y + i * size + i * offsets[1])));
+                }
             }
         }
         this.slots = slots.build();
