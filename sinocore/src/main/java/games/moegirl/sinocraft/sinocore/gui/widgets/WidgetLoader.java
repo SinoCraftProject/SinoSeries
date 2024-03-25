@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
-import games.moegirl.sinocraft.sinocore.gui.widgets.entry.AbstractWidgetEntry;
+import games.moegirl.sinocraft.sinocore.gui.widgets.entry.*;
 import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraft.resources.ResourceLocation;
 
@@ -13,13 +13,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@SuppressWarnings("UnreachableCode")
 public class WidgetLoader {
 
     private static final Map<String, Codec<? extends AbstractWidgetEntry>> CODEC_MAP = new HashMap<>();
-    private static final Map<Class<?>, String> CODEC_NAME_MAP = new HashMap<>();
 
     public static final Codec<AbstractWidgetEntry> WIDGET_CODEC = Codec.STRING.dispatch(AbstractWidgetEntry::getType, CODEC_MAP::get);
 
@@ -29,18 +30,14 @@ public class WidgetLoader {
     public static boolean FORCE_RELOAD_WIDGETS = SinoCorePlatform.isDevelopmentEnvironment();
 
     static {
-        for (Class<?> subclass : AbstractWidgetEntry.class.getPermittedSubclasses()) {
-            try {
-                Codec<? extends AbstractWidgetEntry> codec =
-                        (Codec<? extends AbstractWidgetEntry>) subclass.getField("CODEC").get(null);
-                String className = subclass.getSimpleName();
-                String name = className.substring(0, className.length() - "Entry".length()).toLowerCase(Locale.ROOT);
-                CODEC_MAP.put(name, codec);
-                CODEC_NAME_MAP.put(subclass, name);
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        CODEC_MAP.put("button", ButtonEntry.CODEC);
+        CODEC_MAP.put("editbox", EditBoxEntry.CODEC);
+        CODEC_MAP.put("point", PointEntry.CODEC);
+        CODEC_MAP.put("progress", ProgressEntry.CODEC);
+        CODEC_MAP.put("slot", SlotEntry.CODEC);
+        CODEC_MAP.put("slots", SlotsEntry.CODEC);
+        CODEC_MAP.put("text", TextEntry.CODEC);
+        CODEC_MAP.put("texture", TextureEntry.CODEC);
     }
 
     private static final Map<ResourceLocation, Widgets> WIDGETS = new HashMap<>();
@@ -57,6 +54,7 @@ public class WidgetLoader {
         Path path = container.findResource(name, ".json");
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             JsonElement jsonElement = JsonParser.parseReader(reader);
+            System.out.println(jsonElement);
             Widgets widgets = Widgets.CODEC.decode(JsonOps.INSTANCE, jsonElement)
                     .getOrThrow(false, err -> {
                         throw new RuntimeException("Failed to load widget " + name + ": " + err);
@@ -79,9 +77,5 @@ public class WidgetLoader {
         for (ResourceLocation name : names) {
             loadWidgets(name);
         }
-    }
-
-    public static String getTypeName(Class<? extends AbstractWidgetEntry> entryClass) {
-        return CODEC_NAME_MAP.get(entryClass);
     }
 }

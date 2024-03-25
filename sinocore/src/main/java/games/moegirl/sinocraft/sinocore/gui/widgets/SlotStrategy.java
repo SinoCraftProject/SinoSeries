@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets;
 
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -9,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public interface SlotStrategy<C extends Container> {
 
@@ -66,7 +66,7 @@ public interface SlotStrategy<C extends Container> {
         return insertFilter(is -> is.is(item));
     }
 
-    static SlotStrategy<Container> insertFilter(Supplier<? extends ItemLike> item) {
+    static SlotStrategy<Container> insertFilter(IRegRef<? extends ItemLike, ?> item) {
         return insertFilter(is -> is.is(item.get().asItem()));
     }
 
