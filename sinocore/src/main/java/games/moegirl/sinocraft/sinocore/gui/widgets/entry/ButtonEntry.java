@@ -3,11 +3,10 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public final class ButtonEntry extends AbstractWidgetEntry {
 
@@ -26,7 +25,7 @@ public final class ButtonEntry extends AbstractWidgetEntry {
                     Codec.either(Codec.STRING, Codec.STRING.listOf())
                             .optionalFieldOf("texture_disable", Either.right(List.of()))
                             .forGetter(e -> Either.right(e.getTextureDisable())),
-                    Codec.STRING.optionalFieldOf("tooltip", null).forGetter(ButtonEntry::tooltip))
+                    Codec.STRING.optionalFieldOf("tooltip").forGetter(ButtonEntry::getTooltip))
             .apply(instance, ButtonEntry::new));
 
     private final int x, y;
@@ -35,11 +34,11 @@ public final class ButtonEntry extends AbstractWidgetEntry {
     private final List<String> textureHover;
     private final List<String> texturePressed;
     private final List<String> textureDisable;
-    private final @Nullable String tooltip;
+    private final Optional<String> tooltip;
 
     ButtonEntry(List<Integer> position, List<Integer> size, Either<String, List<String>> texture,
                 Either<String, List<String>> textureHover, Either<String, List<String>> texturePressed,
-                Either<String, List<String>> textureDisable, @Nullable String tooltip) {
+                Either<String, List<String>> textureDisable, Optional<String> tooltip) {
         super("button");
         this.x = position.get(0);
         this.y = position.get(1);
@@ -84,12 +83,7 @@ public final class ButtonEntry extends AbstractWidgetEntry {
         return textureDisable;
     }
 
-    public Component getTooltip() {
-        return tooltip == null ? CommonComponents.EMPTY : Component.translatable(tooltip);
-    }
-
-    @Nullable
-    private String tooltip() {
+    public Optional<String> getTooltip() {
         return tooltip;
     }
 }

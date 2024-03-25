@@ -19,6 +19,7 @@ public class RegistryManager {
     private static final Map<String, ITabRegistry> TAB_MAP = new HashMap<>();
     private static final Map<String, IMenuRegister> MENU_MAP = new HashMap<>();
     private static final Map<String, IScreenRegister> SCREEN_MAP = new HashMap<>();
+    private static final Map<String, ICommandRegistry> COMMAND_MAP = new HashMap<>();
     private static final Map<String, IDataProviderRegister> DATA_PROVIDER_TAB = new HashMap<>();
 
     /**
@@ -101,6 +102,16 @@ public class RegistryManager {
         return SCREEN_MAP.computeIfAbsent(modId, RegistryManager::_createScreen);
     }
 
+    /**
+     * 注册指令
+     *
+     * @param modId 对应 mod id
+     * @return 最后一个或新注册器
+     */
+    public synchronized static ICommandRegistry obtainCommand(String modId) {
+        return COMMAND_MAP.computeIfAbsent(modId, RegistryManager::_createCommand);
+    }
+
     public synchronized static IDataProviderRegister obtainDataProvider(String modId) {
         return DATA_PROVIDER_TAB.computeIfAbsent(modId, RegistryManager::_createDataProvider);
     }
@@ -127,6 +138,11 @@ public class RegistryManager {
 
     @ExpectPlatform
     public static IScreenRegister _createScreen(String modId) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ICommandRegistry _createCommand(String modId) {
         throw new AssertionError();
     }
 }

@@ -21,7 +21,7 @@ public sealed class AbstractWidgetEntry
     }
 
     public void setName(String name) {
-        if (!UNNAMED.equals(name)) {
+        if (!UNNAMED.equals(this.name)) {
             throw new IllegalStateException("Cannot set name to a widget: already has name " + name);
         }
         this.name = name;
