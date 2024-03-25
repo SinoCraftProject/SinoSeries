@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.chat.CommonComponents;
@@ -13,10 +14,18 @@ public final class ButtonEntry extends AbstractWidgetEntry {
     public static final Codec<ButtonEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
                     Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
-                    Codec.STRING.listOf().optionalFieldOf("texture", List.of()).forGetter(ButtonEntry::getTexture),
-                    Codec.STRING.listOf().optionalFieldOf("texture_hover", List.of()).forGetter(ButtonEntry::getTextureHover),
-                    Codec.STRING.listOf().optionalFieldOf("texture_pressed", List.of()).forGetter(ButtonEntry::getTexturePressed),
-                    Codec.STRING.listOf().optionalFieldOf("texture_disable", List.of()).forGetter(ButtonEntry::getTextureDisable),
+                    Codec.either(Codec.STRING, Codec.STRING.listOf())
+                            .optionalFieldOf("texture", Either.right(List.of()))
+                            .forGetter(e -> Either.right(e.getTexture())),
+                    Codec.either(Codec.STRING, Codec.STRING.listOf())
+                            .optionalFieldOf("texture_hover", Either.right(List.of()))
+                            .forGetter(e -> Either.right(e.getTextureHover())),
+                    Codec.either(Codec.STRING, Codec.STRING.listOf())
+                            .optionalFieldOf("texture_pressed", Either.right(List.of()))
+                            .forGetter(e -> Either.right(e.getTexturePressed())),
+                    Codec.either(Codec.STRING, Codec.STRING.listOf())
+                            .optionalFieldOf("texture_disable", Either.right(List.of()))
+                            .forGetter(e -> Either.right(e.getTextureDisable())),
                     Codec.STRING.optionalFieldOf("tooltip", null).forGetter(ButtonEntry::tooltip))
             .apply(instance, ButtonEntry::new));
 
@@ -28,17 +37,18 @@ public final class ButtonEntry extends AbstractWidgetEntry {
     private final List<String> textureDisable;
     private final @Nullable String tooltip;
 
-    ButtonEntry(List<Integer> position, List<Integer> size, List<String> texture, List<String> textureHover,
-                List<String> texturePressed, List<String> textureDisable, @Nullable String tooltip) {
+    ButtonEntry(List<Integer> position, List<Integer> size, Either<String, List<String>> texture,
+                Either<String, List<String>> textureHover, Either<String, List<String>> texturePressed,
+                Either<String, List<String>> textureDisable, @Nullable String tooltip) {
         super("button");
         this.x = position.get(0);
         this.y = position.get(1);
         this.w = size.get(0);
         this.h = size.get(1);
-        this.texture = List.copyOf(texture);
-        this.textureHover = List.copyOf(textureHover);
-        this.texturePressed = List.copyOf(texturePressed);
-        this.textureDisable = List.copyOf(textureDisable);
+        this.texture = texture.map(List::of, List::copyOf);
+        this.textureHover = textureHover.map(List::of, List::copyOf);
+        this.texturePressed = texturePressed.map(List::of, List::copyOf);
+        this.textureDisable = textureDisable.map(List::of, List::copyOf);
         this.tooltip = tooltip;
     }
 
