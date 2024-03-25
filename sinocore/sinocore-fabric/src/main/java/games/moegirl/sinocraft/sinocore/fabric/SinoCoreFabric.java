@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocore.fabric;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.minecraft.server.MinecraftServer;
 
 public class SinoCoreFabric implements ModInitializer {
     @Override
