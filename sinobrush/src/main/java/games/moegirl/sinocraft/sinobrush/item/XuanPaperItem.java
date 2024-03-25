@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinobrush.item;
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.gui.menu.XuanPaperMenu;
 import games.moegirl.sinocraft.sinobrush.utility.TooltipHelper;
-import games.moegirl.sinocraft.sinocore.util.MenuHelper;
+import games.moegirl.sinocraft.sinocore.utility.MenuHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

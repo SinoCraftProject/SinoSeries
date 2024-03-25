@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.utility.forge;
 
+import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,31 +9,29 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.spi.FileSystemProvider;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class ModListImpl {
 
     private static final FileSystemProvider UFSP = FileSystemProvider.installedProviders().stream()
             .filter(f -> "union".equalsIgnoreCase(f.getScheme())).findFirst().orElseThrow();
 
-    private static final List<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> containers = new ArrayList<>();
+    public static Optional<ModList.IModContainer> findModById(String modId) {
+        return net.minecraftforge.fml.ModList.get().getModContainerById(modId).map(ForgeModListImpl::new);
+    }
 
-    public static Stream<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> getAllMods() {
-        if (containers.isEmpty()) {
-            ModList.get().forEachModContainer((name, mc) -> containers.add(new ForgeModContainerWrapper(mc)));
+    public static boolean isModExists(String modId) {
+        return net.minecraftforge.fml.ModList.get().isLoaded(modId);
+    }
+
+    public static class ForgeModListImpl implements ModList.IModContainer {
+
+        private final ModContainer container;
+
+        public ForgeModListImpl(ModContainer container) {
+            this.container = container;
         }
-        return containers.stream();
-    }
-
-    public static Optional<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> findMod(String modId) {
-        return ModList.get().getModContainerById(modId).map(ForgeModContainerWrapper::new);
-    }
-
-    record ForgeModContainerWrapper(ModContainer container)
-            implements games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer {
 
         @Override
         public String getId() {
@@ -47,22 +45,17 @@ public class ModListImpl {
 
         @Override
         public String getVersion() {
-            return container.getModInfo().getVersion().getQualifier();
+            return container.getModInfo().getVersion().toString();
         }
 
         @Override
-        public String getDescription() {
-            return container.getModInfo().getDescription();
+        public Path findModFile(String... subPaths) {
+            return container.getModInfo().getOwningFile().getFile().findResource(subPaths);
         }
 
         @Override
-        public Object getPlatformContainer() {
+        public Object getModContainer() {
             return container;
-        }
-
-        @Override
-        public Optional<Object> getForgeMainObject() {
-            return Optional.ofNullable(container.getMod());
         }
 
         @Override

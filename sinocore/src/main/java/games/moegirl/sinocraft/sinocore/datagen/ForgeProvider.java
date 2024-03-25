@@ -33,7 +33,7 @@ public class ForgeProvider implements DataProvider {
 
     private void initDataProviders(IDataGenContext context) {
         try {
-            ModList.findMod(context.getModId()).stream()
+            ModList.findModById(context.getModId()).stream()
                     .flatMap(ModList.IModContainer::walkClasses)
                     .filter(IForgeProviders.class::isAssignableFrom)
                     .filter(c -> !c.isInterface() && !Modifier.isAbstract(c.getModifiers()))

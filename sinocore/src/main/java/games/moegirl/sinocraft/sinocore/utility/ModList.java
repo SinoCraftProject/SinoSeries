@@ -1,25 +1,35 @@
-package games.moegirl.sinocraft.sinocore.util;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
-public interface ModList {
+public class ModList {
+
+    public static Logger LOGGER = LogManager.getLogger(ModList.class);
 
     @ExpectPlatform
-    static Optional<ModContainer> findModById(String modId) {
+    public static Optional<IModContainer> findModById(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    static boolean isModExists(String modId) {
+    public static boolean isModExists(String modId) {
         throw new AssertionError();
     }
 
-    interface ModContainer {
+    public interface IModContainer {
 
         /**
          * 获取 mod id

@@ -6,7 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.*;
-import games.moegirl.sinocraft.sinocore.util.ModList;
+import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraft.resources.ResourceLocation;
 
 import java.io.BufferedReader;
@@ -50,7 +50,7 @@ public class WidgetLoader {
      */
     public static Widgets loadWidgets(ResourceLocation name) {
         if (!FORCE_RELOAD_WIDGETS && WIDGETS.containsKey(name)) return (WIDGETS.get(name));
-        ModList.ModContainer container = ModList.findModById(name.getNamespace()).orElseThrow(() -> new RuntimeException("Not found mod " + name.getNamespace()));
+        ModList.IModContainer container = ModList.findModById(name.getNamespace()).orElseThrow(() -> new RuntimeException("Not found mod " + name.getNamespace()));
         Path path = container.findResource(name, ".json");
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             JsonElement jsonElement = JsonParser.parseReader(reader);

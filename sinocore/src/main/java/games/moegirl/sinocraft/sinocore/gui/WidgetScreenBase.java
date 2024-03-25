@@ -5,7 +5,7 @@ import games.moegirl.sinocraft.sinocore.gui.widgets.component.EditBoxWidget;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.ImageButtonWidget;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.ProgressWidget;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.*;
-import games.moegirl.sinocraft.sinocore.util.GLSwitcher;
+import games.moegirl.sinocraft.sinocore.utility.GLSwitcher;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.component;
 import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.ProgressEntry;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
-import games.moegirl.sinocraft.sinocore.util.GLSwitcher;
+import games.moegirl.sinocraft.sinocore.utility.GLSwitcher;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;

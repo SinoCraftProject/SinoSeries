@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.util;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import org.lwjgl.opengl.GL11;
