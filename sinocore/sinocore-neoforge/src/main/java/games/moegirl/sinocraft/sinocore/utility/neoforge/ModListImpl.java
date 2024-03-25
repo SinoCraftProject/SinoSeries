@@ -1,31 +1,29 @@
 package games.moegirl.sinocraft.sinocore.utility.neoforge;
 
+import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class ModListImpl {
 
-    private static final List<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> containers = new ArrayList<>();
+    public static Optional<ModList.IModContainer> findModById(String modId) {
+        return net.neoforged.fml.ModList.get().getModContainerById(modId).map(NeoForgeModListImpl::new);
+    }
 
-    public static Stream<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> getAllMods() {
-        if (containers.isEmpty()) {
-            ModList.get().forEachModContainer((name, mc) -> containers.add(new NeoForgeModContainerWrapper(mc)));
+    public static boolean isModExists(String modId) {
+        return net.neoforged.fml.ModList.get().isLoaded(modId);
+    }
+
+    public static class NeoForgeModListImpl implements ModList.IModContainer {
+
+        private final ModContainer container;
+
+        public NeoForgeModListImpl(ModContainer container) {
+            this.container = container;
         }
-        return containers.stream();
-    }
-
-    public static Optional<games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer> findMod(String modId) {
-        return ModList.get().getModContainerById(modId).map(NeoForgeModContainerWrapper::new);
-    }
-
-    record NeoForgeModContainerWrapper(ModContainer container)
-            implements games.moegirl.sinocraft.sinocore.utility.ModList.IModContainer {
 
         @Override
         public String getId() {
@@ -39,22 +37,17 @@ public class ModListImpl {
 
         @Override
         public String getVersion() {
-            return container.getModInfo().getVersion().getQualifier();
+            return container.getModInfo().getVersion().toString();
         }
 
         @Override
-        public String getDescription() {
-            return container.getModInfo().getDescription();
+        public Path findModFile(String... subPaths) {
+            return container.getModInfo().getOwningFile().getFile().findResource(subPaths);
         }
 
         @Override
-        public Object getPlatformContainer() {
+        public Object getModContainer() {
             return container;
-        }
-
-        @Override
-        public Optional<Object> getForgeMainObject() {
-            return Optional.ofNullable(container.getMod());
         }
 
         @Override

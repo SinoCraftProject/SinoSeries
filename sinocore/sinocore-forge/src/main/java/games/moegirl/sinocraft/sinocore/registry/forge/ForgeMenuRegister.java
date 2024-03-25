@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.forge;
 
 import games.moegirl.sinocraft.sinocore.registry.IMenuRegister;
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,7 +15,7 @@ public class ForgeMenuRegister extends ForgeRegistryImpl<MenuType<?>> implements
     }
 
     @Override
-    public <T extends AbstractContainerMenu> IRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
+    public <T extends AbstractContainerMenu> IRegRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
         return register(name, () -> new MenuType<>((IContainerFactory<T>) factory::create, FeatureFlagSet.of()));
     }
 }

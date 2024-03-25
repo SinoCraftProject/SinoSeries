@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.util.fabric;
+package games.moegirl.sinocraft.sinocore.utility.fabric;
 
-import games.moegirl.sinocraft.sinocore.util.MenuHelper;
+import games.moegirl.sinocraft.sinocore.utility.MenuHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

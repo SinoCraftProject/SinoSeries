@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.util;
+package games.moegirl.sinocraft.sinocore.utility;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.network.FriendlyByteBuf;

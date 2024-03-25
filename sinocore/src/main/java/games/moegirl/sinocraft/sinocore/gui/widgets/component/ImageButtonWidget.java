@@ -4,7 +4,7 @@ import games.moegirl.sinocraft.sinocore.gui.WidgetScreenBase;
 import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.ButtonEntry;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
-import games.moegirl.sinocraft.sinocore.util.GLSwitcher;
+import games.moegirl.sinocraft.sinocore.utility.GLSwitcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.util.forge;
+package games.moegirl.sinocraft.sinocore.utility.forge;
 
-import games.moegirl.sinocraft.sinocore.util.MenuHelper;
+import games.moegirl.sinocraft.sinocore.utility.MenuHelper;
 import net.minecraft.server.level.ServerPlayer;
 
 public class MenuHelperImpl {
