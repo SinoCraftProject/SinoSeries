@@ -4,22 +4,29 @@ import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class ModListImpl {
 
-    public static Stream<ModList.IModContainer> getAllMods() {
-        return FabricLoader.getInstance().getAllMods().stream().map(FabricModContainerWrapper::new);
+    public static Optional<ModList.IModContainer> findModById(String modId) {
+        return FabricLoader.getInstance().getModContainer(modId).map(FabricModListImpl::new);
     }
 
-    public static Optional<ModList.IModContainer> findMod(String modId) {
-        return FabricLoader.getInstance().getModContainer(modId).map(FabricModContainerWrapper::new);
+    public static boolean isModExists(String modId) {
+        return FabricLoader.getInstance().isModLoaded(modId);
     }
 
-    record FabricModContainerWrapper(ModContainer container) implements ModList.IModContainer {
+    public static class FabricModListImpl implements ModList.IModContainer {
+
+        private final ModContainer container;
+
+        public FabricModListImpl(ModContainer container) {
+            this.container = container;
+        }
 
         @Override
         public String getId() {
@@ -37,18 +44,23 @@ public class ModListImpl {
         }
 
         @Override
-        public String getDescription() {
-            return container.getMetadata().getDescription();
+        public Path findModFile(String... subPaths) {
+            List<Path> paths = container.getRootPaths();
+            // 首先，Mod 必须得有个根路径
+            if (paths.isEmpty()) throw new RuntimeException("Mod " + getName() + " has no root path");
+            String joinedPath = String.join(File.separator, subPaths);
+            for (Path path : paths) {
+                // 有多个路径的话，找一个存在的
+                Path resolve = path.resolve(joinedPath);
+                if (Files.exists(resolve) || Files.isDirectory(resolve)) return resolve;
+            }
+            // 都没 返回第一个
+            return paths.get(0).resolve(joinedPath);
         }
 
         @Override
-        public Object getPlatformContainer() {
+        public Object getModContainer() {
             return container;
-        }
-
-        @Override
-        public Optional<Object> getForgeMainObject() {
-            return Optional.empty();
         }
 
         @Override

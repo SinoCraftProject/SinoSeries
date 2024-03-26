@@ -1,9 +1,15 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import games.moegirl.sinocraft.sinobrush.gui.menu.XuanPaperMenu;
 import games.moegirl.sinocraft.sinobrush.utility.TooltipHelper;
+import games.moegirl.sinocraft.sinocore.utility.MenuHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -81,5 +87,13 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
             tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED,
                     expend).withStyle(ChatFormatting.GRAY));
         }
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        if (!level.isClientSide && player instanceof ServerPlayer sp) {
+            MenuHelper.openMenu(sp, (i, inventory, p) -> new XuanPaperMenu(i, inventory, null));
+        }
+        return super.use(level, player, usedHand);
     }
 }

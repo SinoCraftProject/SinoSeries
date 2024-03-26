@@ -16,24 +16,6 @@ import java.util.stream.Stream;
  */
 public class Functions {
 
-    public static <T, R> Function<T, R> compose(Function<T, R> first, Consumer<R> second) {
-        return t -> {
-            R tt = first.apply(t);
-            second.accept(tt);
-            return tt;
-        };
-    }
-
-    public static <T> Consumer<T> compose(Consumer<T> first, Consumer<T> second) {
-        if (first == null && second == null) return t -> {};
-        if (first == null) return second;
-        if (second == null) return first;
-        return t -> {
-            first.accept(t);
-            second.accept(t);
-        };
-    }
-
     /**
      * 将一个无参构造转换成 Supplier
      */
@@ -46,6 +28,16 @@ public class Functions {
             } catch (Exception e) {
                 throw new IllegalArgumentException("Can't create " + aClass.getCanonicalName() + " by no-parameter public constructor.", e);
             }
+        };
+    }
+
+    public static <T> Consumer<T> compose(Consumer<T> first, Consumer<T> second) {
+        if (first == null && second == null) return t -> {};
+        if (first == null) return second;
+        if (second == null) return first;
+        return t -> {
+            first.accept(t);
+            second.accept(t);
         };
     }
 

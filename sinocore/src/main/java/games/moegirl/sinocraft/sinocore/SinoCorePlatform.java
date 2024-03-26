@@ -14,6 +14,11 @@ public class SinoCorePlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static boolean isDevelopmentEnvironment() {
+        throw new AssertionError();
+    }
+
     /**
      * 创建用于创建 DataProvider 对象的上下文，不同平台使用不同类型的上下文对象。其中第一个参数类型如下：
      * <ul>
