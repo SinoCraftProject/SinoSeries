@@ -20,7 +20,6 @@
         ]
     },
     "mixins": [
-        "sinotest-common.mixins.json"
     ],
     "depends": {
         "java": ">=17",
