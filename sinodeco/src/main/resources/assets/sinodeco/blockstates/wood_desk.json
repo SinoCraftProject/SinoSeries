@@ -1,5 +1,26 @@
 {
     "multipart": [
-        {"apply": {"model": "sinodeco:block/wood_desk_top"}}
+        {"when": {"connection": "none"}, "apply": {"model": "sinodeco:block/wood_desk_none", "uvlock": true}},
+        {"when": {"connection": "single", "facing": "north"}, "apply": {"model": "sinodeco:block/wood_desk_single", "y": 180, "uvlock": true}},
+        {"when": {"connection": "single", "facing": "west"}, "apply": {"model": "sinodeco:block/wood_desk_single", "y": 90, "uvlock": true}},
+        {"when": {"connection": "single", "facing": "south"}, "apply": {"model": "sinodeco:block/wood_desk_single", "y": 0, "uvlock": true}},
+        {"when": {"connection": "single", "facing": "east"}, "apply": {"model": "sinodeco:block/wood_desk_single", "y": 270, "uvlock": true}},
+        {"when": {"connection": "para", "facing": "north"}, "apply": {"model": "sinodeco:block/wood_desk_para", "y": 0, "uvlock": true}},
+        {"when": {"connection": "para", "facing": "west"}, "apply": {"model": "sinodeco:block/wood_desk_para", "y": 90, "uvlock": true}},
+        {"when": {"connection": "para", "facing": "south"}, "apply": {"model": "sinodeco:block/wood_desk_para", "y": 180, "uvlock": true}},
+        {"when": {"connection": "para", "facing": "east"}, "apply": {"model": "sinodeco:block/wood_desk_para", "y": 270, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 0, "facing": "north"}, "apply": {"model": "sinodeco:block/wood_desk_ortho", "y": 180, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 0, "facing": "west"}, "apply": {"model": "sinodeco:block/wood_desk_ortho", "y": 90, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 0, "facing": "south"}, "apply": {"model": "sinodeco:block/wood_desk_ortho", "y": 0, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 0, "facing": "east"}, "apply": {"model": "sinodeco:block/wood_desk_ortho", "y": 270, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 1, "facing": "north"}, "apply": {"model": "sinodeco:block/wood_desk_ortho_1", "y": 180, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 1, "facing": "west"}, "apply": {"model": "sinodeco:block/wood_desk_ortho_1", "y": 90, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 1, "facing": "south"}, "apply": {"model": "sinodeco:block/wood_desk_ortho_1", "y": 0, "uvlock": true}},
+        {"when": {"connection": "ortho", "extra_model": 1, "facing": "east"}, "apply": {"model": "sinodeco:block/wood_desk_ortho_1", "y": 270, "uvlock": true}},
+        {"when": {"connection": "vicinal", "facing": "north"}, "apply": {"model": "sinodeco:block/wood_desk_vicinal", "y": 90, "uvlock": true}},
+        {"when": {"connection": "vicinal", "facing": "west"}, "apply": {"model": "sinodeco:block/wood_desk_vicinal", "y": 0, "uvlock": true}},
+        {"when": {"connection": "vicinal", "facing": "south"}, "apply": {"model": "sinodeco:block/wood_desk_vicinal", "y": 270, "uvlock": true}},
+        {"when": {"connection": "vicinal", "facing": "east"}, "apply": {"model": "sinodeco:block/wood_desk_vicinal", "y": 180, "uvlock": true}},
+        {"when": {"connection": "all"}, "apply": {"model": "sinodeco:block/wood_desk_all", "uvlock": true}}
     ]
 }

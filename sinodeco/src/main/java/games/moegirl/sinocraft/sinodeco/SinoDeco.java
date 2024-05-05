@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodeco;
 
-import games.moegirl.sinocraft.sinodeco.block.item.SDBlocks;
+import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
 
 public class SinoDeco {
