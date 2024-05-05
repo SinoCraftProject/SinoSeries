@@ -9,8 +9,8 @@ Current Minecraft Version: **1.20.2**
 |------|-------------|-------------|
 | 华夏核心 | SinoCore    | ⚠️ WIP      |
 | 华夏云墨 | SinoBrush   | ⚠️ WIP      |
+| 华夏工缀 | SinoDeco    | ⚠️ WIP      |
 
-<!-- | 华夏？？ | SinoDeco       | ❌ Preparing | -->
 <!-- | 华夏？？ | SinoBuild      | ❌ Preparing | -->
 
 ## Documents / 模组文档
