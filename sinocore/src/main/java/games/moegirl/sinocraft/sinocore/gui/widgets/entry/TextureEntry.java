@@ -25,7 +25,6 @@ public final class TextureEntry extends AbstractWidgetEntry {
     private final int th;
 
     TextureEntry(List<Integer> uv, List<Integer> size, Optional<List<Integer>> uvSize, Optional<List<Integer>> position) {
-        super("texture");
         this.x = position.orElse(uv).get(0);
         this.y = position.orElse(uv).get(1);
         this.w = size.get(0);

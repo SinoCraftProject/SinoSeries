@@ -23,7 +23,6 @@ public final class ProgressEntry extends AbstractWidgetEntry {
     private final boolean isOpposite;
 
     ProgressEntry(List<Integer> pos, List<Integer> size, Optional<String> texture, String textureFilled, String direction) {
-        super("progress");
         this.x = pos.get(0);
         this.y = pos.get(1);
         this.width = size.get(0);

@@ -14,7 +14,6 @@ public final class PointEntry extends AbstractWidgetEntry {
     private final int x, y;
 
     PointEntry(List<Integer> xy) {
-        super("point");
         this.x = xy.get(0);
         this.y = xy.get(1);
     }
