@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 
 public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Void, Void> {
     public static final Drawing EMPTY;
@@ -99,7 +100,7 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         var indexInArray = index / SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE;
         var shift = SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE - (index % SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE);
 
-        if (getPixels().length >= indexInArray) {
+        if (getPixels().length <= indexInArray) {
             throw new IllegalArgumentException("Index out of pixels bound: " + index);
         }
 
@@ -128,7 +129,7 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         var indexInArray = index / SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE;
         var shift = SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE - (index % SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE);
 
-        if (getPixels().length >= indexInArray) {
+        if (getPixels().length <= indexInArray) {
             throw new IllegalArgumentException("Index out of pixels bound: " + index);
         }
 
@@ -147,11 +148,11 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
     public boolean isEmpty() {
         for (var l : pixels) {
             if (l != 0) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     public int getWidth() {
@@ -184,6 +185,10 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
 
     public void setInkColor(int inkColor) {
         this.inkColor = inkColor;
+    }
+
+    public void clear() {
+        Arrays.fill(pixels, (byte) 0);
     }
 
     // </editor-fold>
