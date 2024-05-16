@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.datagen;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public final class ProviderList implements DataProvider {
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     private final List<DataProvider> providers = new ArrayList<>();
 
@@ -41,7 +41,6 @@ public final class ProviderList implements DataProvider {
                     p.run(output).get();
                 } catch (InterruptedException | ExecutionException e) {
                     LOGGER.error("  Failed to run provider {}", p.getName(), e);
-                    e.printStackTrace();
                 }
             }
         });

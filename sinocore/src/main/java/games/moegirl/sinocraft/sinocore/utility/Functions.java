@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.utility;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -64,7 +64,7 @@ public class Functions {
         try {
             return Optional.ofNullable(sup.call());
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Error", e);
             return Optional.empty();
         }
     }
@@ -73,7 +73,7 @@ public class Functions {
         try {
             return sup.call();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Error", e);
             return Stream.empty();
         }
     }

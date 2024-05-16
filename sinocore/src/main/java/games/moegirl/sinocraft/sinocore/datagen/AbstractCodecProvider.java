@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen;
 
 import com.google.gson.JsonElement;
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.HolderLookup;
@@ -14,8 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.apache.commons.lang3.tuple.Triple;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,13 +33,12 @@ public abstract class AbstractCodecProvider implements DataProvider {
     private final PackOutput packOutput;
     private final String modId;
     private final Map<ResourceKey<Registry>, List<Triple<ResourceLocation, Codec, Object>>> map = new HashMap<>();
-    private final Logger logger;
+    private final Logger logger = LogUtils.getLogger();
 
     public AbstractCodecProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId) {
         this.provider = provider;
         this.packOutput = output;
         this.modId = modId;
-        this.logger = LogManager.getLogger("CodecProvider");
     }
 
     public AbstractCodecProvider(IDataGenContext context) {

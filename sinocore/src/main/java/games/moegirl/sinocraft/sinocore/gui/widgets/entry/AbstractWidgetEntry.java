@@ -1,15 +1,17 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
+import games.moegirl.sinocraft.sinocore.gui.widgets.WidgetLoader;
+
 public sealed class AbstractWidgetEntry
-        permits ButtonEntry, EditBoxEntry, PointEntry, ProgressEntry, SlotEntry, SlotsEntry, TextEntry, TextureEntry {
+        permits ButtonEntry, EditBoxEntry, PointEntry, ProgressEntry, RectEntry, SlotEntry, SlotsEntry, TextEntry, TextureEntry {
 
     public static final String UNNAMED = "_UNNAMED_WIDGET_";
 
     protected String name = UNNAMED;
     protected final String type;
 
-    protected AbstractWidgetEntry(String type) {
-        this.type = type;
+    protected AbstractWidgetEntry() {
+        this.type = WidgetLoader.getTypeName(getClass());
     }
 
     public String getName() {
