@@ -1,5 +1,8 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
+import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
+import games.moegirl.sinocraft.sinocore.utility.MenuHelper;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -17,20 +20,10 @@ public class BrushItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        var item = player.getItemInHand(usedHand);
-        var offhandItem = player.getOffhandItem();
-
-        // Todo: qyl27: open the GUI.
-        // qyl27: The argument "limitedTag" is true in general.
-        // lq2007: writeItem equals to writeItemStack(item, true)
-        if (!level.isClientSide) {
-            if (offhandItem.is(SBRItems.FAN.get())) {
-
-            }
-//            NetworkHooks.openScreen((ServerPlayer) player, new BrushMenuProvider(item),
-//                    (FriendlyByteBuf byteBuf) -> byteBuf.writeItem(item));
+        if (!level.isClientSide() && player instanceof ServerPlayer sp) {
+            MenuHelper.openMenu(sp, (i, inventory, p) -> new BrushMenu(i, inventory, null));
+            return InteractionResultHolder.success(player.getItemInHand(usedHand));
         }
-
-        return InteractionResultHolder.success(item);
+        return super.use(level, player, usedHand);
     }
 }

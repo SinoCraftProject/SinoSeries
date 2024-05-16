@@ -7,24 +7,26 @@
       "uv": [0, 0],
       "size": [279, 245]
     },
-    "slots_left": {
+    "slots_inventory": {
       "type": "slots",
       "position": [9, 44],
       "direction": "vertical",
       "count": [3, 9]
     },
-    "slots_right": {
-      "type": "slots",
-      "position": [255, 44],
-      "direction": "vertical",
-      "count": 2
-    },
-    "slot_bottom": {
+    "slot_items": {
       "type": "slots",
       "position": [78, 221],
       "count": 9
     },
-    "slot_right_bottom": {
+    "slot_ink": {
+      "type": "slot",
+      "position": [255, 44]
+    },
+    "slot_paper": {
+      "type": "slot",
+      "position": [255, 62]
+    },
+    "slot_drawing": {
       "type": "slot",
       "position": [255, 188]
     },
@@ -179,6 +181,11 @@
       "size": [10, 5],
       "texture_disable": "button_color_selected",
       "texture_hover": "button_color_hover"
+    },
+    "canvas": {
+      "type": "rect",
+      "position": [76, 42],
+      "size": [160, 160]
     },
 
     "file_name": {

@@ -22,7 +22,7 @@ public class SBRItems {
     public static Supplier<Item> XUAN_PAPER = ITEMS.register("xuan_paper", () -> new XuanPaperItem(new Item.Properties().sino$tab(SBRItems.SINO_BRUSH_TAB)));
     public static Supplier<Item> FILLED_XUAN_PAPER = ITEMS.register("filled_xuan_paper", FilledXuanPaperItem::new);
     public static Supplier<Item> INK_BOTTLE = ITEMS.register("ink_bottle", InkItem::new);
-    public static Supplier<Item> BRUSH = ITEMS.register("brush", InkItem::new);
+    public static Supplier<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
 
     public static void register() {
         ITEMS.register();

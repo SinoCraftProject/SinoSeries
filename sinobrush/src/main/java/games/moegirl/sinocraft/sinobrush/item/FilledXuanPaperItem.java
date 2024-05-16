@@ -55,7 +55,11 @@ public class FilledXuanPaperItem extends XuanPaperItem {
         return true;
     }
 
-    public Drawing getDrawing(ItemStack stack) {
+    public static void setDrawing(ItemStack stack, Drawing drawing) {
+        stack.getOrCreateTag().put(SBRConstants.TagName.DRAWING, drawing.writeToCompound());
+    }
+
+    public static Drawing getDrawing(ItemStack stack) {
         if (stack.hasTag()) {
             var tag = stack.getTag();
             assert tag != null;
