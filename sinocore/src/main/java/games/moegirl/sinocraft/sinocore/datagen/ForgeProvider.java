@@ -4,8 +4,8 @@ import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -42,9 +42,8 @@ public class ForgeProvider implements DataProvider {
                     .flatMap(p -> p.allProviders(context).stream())
                     .forEach(providers::add);
         } catch (Exception e) {
-            Logger logger = LogManager.getLogger(context.getModId());
-            logger.error("Can't get files from mod {}", context.getModId());
-            logger.error(e);
+            Logger logger = LoggerFactory.getLogger(context.getModId());
+            logger.error("Can't get files", e);
         }
     }
 

@@ -1,11 +1,10 @@
 package games.moegirl.sinocraft.sinocore.utility;
 
+import com.mojang.logging.LogUtils;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -17,7 +16,7 @@ import java.util.stream.Stream;
 
 public class ModList {
 
-    public static Logger LOGGER = LogManager.getLogger(ModList.class);
+    public static Logger LOGGER = LogUtils.getLogger();
 
     @ExpectPlatform
     public static Optional<IModContainer> findModById(String modId) {
@@ -120,19 +119,28 @@ public class ModList {
         /**
          * 遍历 Mod 所有文件，第一个值表示该文件所在的根目录
          */
-        default Stream<Pair<Path, Path>> walkRootAndFiles() {
-            return getRootFiles().stream().flatMap(p -> Functions.getStreamOrEmpty(() -> Files.walk(p).map(c -> Pair.of(p, c)), LOGGER));
+        default Stream<ModPath> walkRootAndFiles() {
+            return getRootFiles().stream().flatMap(p -> Functions.getStreamOrEmpty(() -> Files.walk(p).map(c -> new ModPath(p, c)), LOGGER));
+        }
+
+        /**
+         * 遍历 Mod 所有类文件，第一个值表示类文件，第二个值表示类名
+         */
+        default Stream<ClassPath> walkClassFiles() {
+            return walkRootAndFiles()
+                    .filter(pr -> pr.file.getFileName().toString().endsWith(".class"))
+                    .filter(pr -> !Objects.equals("package-info.class", pr.file.getFileName().toString()))
+                    .map(pr -> new ClassPath(pr.file, parseClassName(pr.root, pr.file)));
         }
 
         /**
          * 遍历 Mod 所有类
+         * <p></p>
+         * 注意，这将加载 Mod 中尚未加载的类
          */
         default Stream<Class<?>> walkClasses() {
-            return walkRootAndFiles()
-                    .filter(pr -> pr.getValue().getFileName().toString().endsWith(".class"))
-                    .filter(pr -> !Objects.equals("package-info.class", pr.getValue().getFileName().toString()))
-                    .map(pr -> parseClassName(pr.getKey(), pr.getValue()))
-                    .map(s -> Functions.getOrEmpty(() -> Class.forName(s), ModList.LOGGER))
+            return walkClassFiles()
+                    .map(s -> Functions.getOrEmpty(() -> Class.forName(s.className), ModList.LOGGER))
                     .filter(Optional::isPresent)
                     .map(Optional::get);
         }
@@ -161,4 +169,8 @@ public class ModList {
             return className;
         }
     }
+
+    public record ModPath(Path root, Path file) {}
+
+    public record ClassPath(Path file, String className) {}
 }
