@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
 import com.mojang.datafixers.util.Pair;
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IScreenRegister;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
@@ -15,17 +15,17 @@ import java.util.List;
 
 public class NeoForgeScreenRegister implements IScreenRegister {
 
-    private final List<Pair<IRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
+    private final List<Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
 
     @Override
     public void register() {
-        for (Pair<IRef<MenuType<?>, ?>, IScreenFactory<?>> screen : screens) {
+        for (Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>> screen : screens) {
             MenuScreens.register(screen.getFirst().get(), new ScreenFactoryWrapper(screen.getSecond()));
         }
     }
 
     @Override
-    public <T extends AbstractContainerMenu> void register(IRef<MenuType<?>, ?> menuType, IScreenFactory<T> screenFactory) {
+    public <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>, ?> menuType, IScreenFactory<T> screenFactory) {
         screens.add(Pair.of(menuType, screenFactory));
     }
 
