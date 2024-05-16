@@ -27,7 +27,6 @@ public final class TextEntry extends AbstractWidgetEntry {
 
     TextEntry(List<Integer> position, int color, Optional<String> text, Optional<String> rawText,
               boolean shadow, boolean center) {
-        super("text");
         this.x = position.get(0);
         this.y = position.get(1);
         this.color = color;
