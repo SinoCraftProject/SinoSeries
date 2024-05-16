@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.chat.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +38,6 @@ public final class ButtonEntry extends AbstractWidgetEntry {
     ButtonEntry(List<Integer> position, List<Integer> size, Either<String, List<String>> texture,
                 Either<String, List<String>> textureHover, Either<String, List<String>> texturePressed,
                 Either<String, List<String>> textureDisable, Optional<String> tooltip) {
-        super("button");
         this.x = position.get(0);
         this.y = position.get(1);
         this.w = size.get(0);

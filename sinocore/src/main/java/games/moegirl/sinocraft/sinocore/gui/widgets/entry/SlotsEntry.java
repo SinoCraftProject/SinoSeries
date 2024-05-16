@@ -30,7 +30,6 @@ public final class SlotsEntry extends AbstractWidgetEntry {
 
     SlotsEntry(String direction, int size, Either<Integer, List<Integer>> count, List<Integer> position,
                Either<Integer, List<Integer>> offset) {
-        super("slots");
         this.isVertical = "vertical".equals(direction);
         this.size = size;
         this.counts = count.map(i -> new int[] {1, i}, list -> list.stream().mapToInt(i -> i).toArray());

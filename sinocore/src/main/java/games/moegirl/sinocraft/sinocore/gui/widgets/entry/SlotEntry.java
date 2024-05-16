@@ -15,7 +15,6 @@ public final class SlotEntry extends AbstractWidgetEntry {
     private final int size, x, y;
 
     SlotEntry(int size, List<Integer> position) {
-        super("slot");
         this.size = size;
         this.x = position.get(0);
         this.y = position.get(1);

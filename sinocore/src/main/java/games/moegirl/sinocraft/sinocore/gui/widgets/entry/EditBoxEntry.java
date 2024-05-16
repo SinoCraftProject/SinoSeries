@@ -3,9 +3,7 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +46,6 @@ public final class EditBoxEntry extends AbstractWidgetEntry {
     EditBoxEntry(List<Integer> position, List<Integer> size, Optional<String> title,
                  Optional<String> hint, int maxLength, Optional<String> suggestion, String defVal, int color,
                  int uneditableColor, float alpha, Optional<String> tooltip, boolean bordered) {
-        super("editbox");
         this.x = position.get(0);
         this.y = position.get(1);
         this.w = size.get(0);
