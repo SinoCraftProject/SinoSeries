@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
  *
  * @author luqin2007
  */
-public abstract class GLSwitcher {
+public abstract class GLSwitcher implements AutoCloseable {
 
     private final boolean isEnabled;
 
@@ -45,6 +45,11 @@ public abstract class GLSwitcher {
         } else {
             disableInternal();
         }
+    }
+
+    @Override
+    public void close() {
+        resume();
     }
 
     public static GLSwitcher blend() {
