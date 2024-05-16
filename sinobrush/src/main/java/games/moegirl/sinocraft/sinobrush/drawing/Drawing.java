@@ -101,7 +101,8 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         var shift = SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE - (index % SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE);
 
         if (getPixels().length <= indexInArray) {
-            throw new IllegalArgumentException("Index out of pixels bound: " + index);
+            //throw new IllegalArgumentException("Index out of pixels bound: " + index);
+            return 0;
         }
 
         var cell = getPixels()[indexInArray];
@@ -127,6 +128,9 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         }
 
         var indexInArray = index / SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE;
+        if (indexInArray >= getPixels().length) {
+            pixels = Arrays.copyOf(pixels, indexInArray + 1);
+        }
         var shift = SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE - (index % SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE);
 
         if (getPixels().length <= indexInArray) {
