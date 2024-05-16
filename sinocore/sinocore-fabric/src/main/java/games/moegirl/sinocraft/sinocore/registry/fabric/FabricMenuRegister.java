@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
 import games.moegirl.sinocraft.sinocore.registry.IMenuRegister;
-import games.moegirl.sinocraft.sinocore.registry.IRef;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -14,7 +14,7 @@ public class FabricMenuRegister extends FabricRegistryImpl<MenuType<?>> implemen
     }
 
     @Override
-    public <T extends AbstractContainerMenu> IRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
+    public <T extends AbstractContainerMenu> IRegRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
         return register(name, () -> new ExtendedScreenHandlerType<>(factory::create));
     }
 }
