@@ -1,9 +1,10 @@
 package games.moegirl.sinocraft.sinocore.utility;
 
+import com.mojang.logging.LogUtils;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.resources.ResourceLocation;
+import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -15,37 +16,98 @@ import java.util.stream.Stream;
 
 public class ModList {
 
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static Logger LOGGER = LogUtils.getLogger();
 
     @ExpectPlatform
-    public static Stream<IModContainer> getAllMods() {
+    public static Optional<IModContainer> findModById(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Optional<IModContainer> findMod(String modId) {
+    public static boolean isModExists(String modId) {
         throw new AssertionError();
     }
 
-    /**
-     * Mod 信息
-     */
     public interface IModContainer {
 
+        /**
+         * 获取 mod id
+         *
+         * @return Mod id
+         */
         String getId();
 
+        /**
+         * 获取 mod 名称
+         *
+         * @return 返回 mod （显示）名称
+         */
         String getName();
 
+        /**
+         * 获取版本号
+         *
+         * @return 一个可读的版本号
+         */
         String getVersion();
 
-        String getDescription();
-
-        Object getPlatformContainer();
+        /**
+         * 从 Mod 包里获取一个文件或目录的路径，不保证一定存在该文件或该目录
+         *
+         * @param subPaths 子路径
+         * @return 返回该文件或目录的路径
+         */
+        Path findModFile(String... subPaths);
 
         /**
-         * 获取 Forge Mod 的主类，Fabric 返回 empty
+         * 获取该 Mod 的原始 ModContainer 对象以获取更多信息，具体实现由平台决定
+         *
+         * @return 返回该 Mod 的 ModContainer 对象
          */
-        Optional<Object> getForgeMainObject();
+        Object getModContainer();
+
+        /**
+         * 从 Mod 包里获取一个 assets 资源，不保证一定存在该文件或该目录
+         *
+         * @param name 资源名
+         * @return 返回该资源的路径
+         */
+        default Path findResource(ResourceLocation name) {
+            String[] paths = name.getPath().split("/");
+            paths = ArrayUtils.insert(0, paths, "assets", name.getNamespace());
+            return findModFile(paths);
+        }
+
+        /**
+         * 从 Mod 包里获取一个 assets 资源，不保证一定存在该文件或该目录
+         *
+         * @param name      资源名
+         * @param extension 资源扩展名
+         * @return 返回该资源的路径
+         */
+        default Path findResource(ResourceLocation name, String extension) {
+            String[] paths = name.getPath().split("/");
+            if (!extension.startsWith(".")) extension = "." + extension;
+            paths[paths.length - 1] = paths[paths.length - 1] + extension;
+            paths = ArrayUtils.insert(0, paths, "assets", name.getNamespace());
+            return findModFile(paths);
+        }
+
+        /**
+         * 从 Mod 包里获取一个 data 资源，不保证一定存在该文件或该目录
+         *
+         * @param name 资源名
+         * @return 返回该资源的路径
+         */
+        default Path findData(ResourceLocation name) {
+            String[] paths = name.getPath().split("/");
+            paths = ArrayUtils.insert(0, paths, "data", name.getNamespace());
+            return findModFile(paths);
+        }
+
+        default ResourceLocation modLoc(String name) {
+            return new ResourceLocation(this.getId(), name);
+        }
 
         /**
          * 遍历 Mod 所有文件
@@ -57,19 +119,28 @@ public class ModList {
         /**
          * 遍历 Mod 所有文件，第一个值表示该文件所在的根目录
          */
-        default Stream<Pair<Path, Path>> walkRootAndFiles() {
-            return getRootFiles().stream().flatMap(p -> Functions.getStreamOrEmpty(() -> Files.walk(p).map(c -> Pair.of(p, c)), LOGGER));
+        default Stream<ModPath> walkRootAndFiles() {
+            return getRootFiles().stream().flatMap(p -> Functions.getStreamOrEmpty(() -> Files.walk(p).map(c -> new ModPath(p, c)), LOGGER));
+        }
+
+        /**
+         * 遍历 Mod 所有类文件，第一个值表示类文件，第二个值表示类名
+         */
+        default Stream<ClassPath> walkClassFiles() {
+            return walkRootAndFiles()
+                    .filter(pr -> pr.file.getFileName().toString().endsWith(".class"))
+                    .filter(pr -> !Objects.equals("package-info.class", pr.file.getFileName().toString()))
+                    .map(pr -> new ClassPath(pr.file, parseClassName(pr.root, pr.file)));
         }
 
         /**
          * 遍历 Mod 所有类
+         * <p></p>
+         * 注意，这将加载 Mod 中尚未加载的类
          */
         default Stream<Class<?>> walkClasses() {
-            return walkRootAndFiles()
-                    .filter(pr -> pr.getValue().getFileName().toString().endsWith(".class"))
-                    .filter(pr -> !Objects.equals("package-info.class", pr.getValue().getFileName().toString()))
-                    .map(pr -> parseClassName(pr.getKey(), pr.getValue()))
-                    .map(s -> Functions.getOrEmpty(() -> Class.forName(s), ModList.LOGGER))
+            return walkClassFiles()
+                    .map(s -> Functions.getOrEmpty(() -> Class.forName(s.className), ModList.LOGGER))
                     .filter(Optional::isPresent)
                     .map(Optional::get);
         }
@@ -98,4 +169,8 @@ public class ModList {
             return className;
         }
     }
+
+    public record ModPath(Path root, Path file) {}
+
+    public record ClassPath(Path file, String className) {}
 }

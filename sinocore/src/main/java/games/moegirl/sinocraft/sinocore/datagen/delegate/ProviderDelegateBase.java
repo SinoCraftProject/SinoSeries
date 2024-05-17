@@ -2,8 +2,8 @@ package games.moegirl.sinocraft.sinocore.datagen.delegate;
 
 import games.moegirl.sinocraft.sinocore.datagen.ForgeDataProviderBase;
 import net.minecraft.data.DataProvider;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -19,12 +19,12 @@ public abstract class ProviderDelegateBase<T extends ProviderDelegateBase<T>> {
 
     protected ProviderDelegateBase(DataProvider provider) {
         this.forgeProvider = provider;
-        this.logger = LogManager.getLogger(provider.getName());
+        this.logger = LoggerFactory.getLogger(provider.getName());
     }
 
     protected ProviderDelegateBase(DataProviderBuilderBase<?, ?> builder) {
         this.forgeProviderBuilder = builder.bind(this);
-        this.logger = LogManager.getLogger(builder.getDataProviderName());
+        this.logger = LoggerFactory.getLogger(builder.getDataProviderName());
     }
 
     public void setDelegateProvider(ForgeDataProviderBase<T> provider) {

@@ -1,0 +1,268 @@
+{
+  "width": 512,
+  "height": 512,
+  "widgets": {
+    "background": {
+      "type": "texture",
+      "uv": [0, 0],
+      "size": [279, 245]
+    },
+    "slots_inventory": {
+      "type": "slots",
+      "position": [9, 44],
+      "direction": "vertical",
+      "count": [3, 9]
+    },
+    "slot_items": {
+      "type": "slots",
+      "position": [78, 221],
+      "count": 9
+    },
+    "slot_ink": {
+      "type": "slot",
+      "position": [255, 44]
+    },
+    "slot_paper": {
+      "type": "slot",
+      "position": [255, 62]
+    },
+    "slot_drawing": {
+      "type": "slot",
+      "position": [255, 188]
+    },
+
+    "button_clear": {
+      "type": "button",
+      "position": [44, 10],
+      "size": [20, 20],
+      "texture_hover": "button_clear_hover",
+      "texture_pressed": "button_clear_pressed",
+      "texture_disable": "button_clear_disable"
+    },
+    "button_brush": {
+      "type": "button",
+      "position": [221, 8],
+      "size": [20, 20],
+      "texture_hover": "button_brush_hover",
+      "texture_pressed": "button_brush_pressed",
+      "texture_disable": "button_brush_disable"
+    },
+    "button_download": {
+      "type": "button",
+      "position": [22, 216],
+      "size": [20, 20],
+      "texture_hover": "button_download_hover",
+      "texture_pressed": "button_download_pressed",
+      "texture_disable": "button_download_disable"
+    },
+    "button_copy": {
+      "type": "button",
+      "position": [46, 216],
+      "size": [20, 20],
+      "texture_hover": "button_copy_hover",
+      "texture_pressed": "button_copy_pressed",
+      "texture_disable": "button_copy_disable"
+    },
+    "button_color_0": {
+      "type": "button",
+      "position": [257, 177],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_selected"
+    },
+    "button_color_1": {
+      "type": "button",
+      "position": [257, 172],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_2": {
+      "type": "button",
+      "position": [257, 167],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_3": {
+      "type": "button",
+      "position": [257, 162],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_4": {
+      "type": "button",
+      "position": [257, 157],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_5": {
+      "type": "button",
+      "position": [257, 152],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_6": {
+      "type": "button",
+      "position": [257, 147],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_7": {
+      "type": "button",
+      "position": [257, 142],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_8": {
+      "type": "button",
+      "position": [257, 137],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_9": {
+      "type": "button",
+      "position": [257, 132],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_10": {
+      "type": "button",
+      "position": [257, 127],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_11": {
+      "type": "button",
+      "position": [257, 122],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_12": {
+      "type": "button",
+      "position": [257, 117],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_13": {
+      "type": "button",
+      "position": [257, 112],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_14": {
+      "type": "button",
+      "position": [257, 107],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_15": {
+      "type": "button",
+      "position": [257, 102],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "button_color_16": {
+      "type": "button",
+      "position": [257, 97],
+      "size": [10, 5],
+      "texture_disable": "button_color_selected",
+      "texture_hover": "button_color_hover"
+    },
+    "canvas": {
+      "type": "rect",
+      "position": [76, 42],
+      "size": [160, 160]
+    },
+
+    "file_name": {
+      "type": "editbox",
+      "position": [78, 9],
+      "size": [139, 18]
+    },
+
+    "button_clear_hover": {
+      "type": "texture",
+      "uv": [58, 352],
+      "size": [20, 20]
+    },
+    "button_clear_pressed": {
+      "type": "texture",
+      "uv": [58, 292],
+      "size": [20, 20]
+    },
+    "button_clear_disable": {
+      "type": "texture",
+      "uv": [58, 312],
+      "size": [20, 20]
+    },
+    "button_brush_hover": {
+      "type": "texture",
+      "uv": [79, 352],
+      "size": [20, 20]
+    },
+    "button_brush_pressed": {
+      "type": "texture",
+      "uv": [79, 292],
+      "size": [20, 20]
+    },
+    "button_brush_disable": {
+      "type": "texture",
+      "uv": [79, 312],
+      "size": [20, 20]
+    },
+    "button_download_hover": {
+      "type": "texture",
+      "uv": [16, 352],
+      "size": [20, 20]
+    },
+    "button_download_pressed": {
+      "type": "texture",
+      "uv": [16, 292],
+      "size": [20, 20]
+    },
+    "button_download_disable": {
+      "type": "texture",
+      "uv": [16, 312],
+      "size": [20, 20]
+    },
+    "button_copy_hover": {
+      "type": "texture",
+      "uv": [37, 352],
+      "size": [20, 20]
+    },
+    "button_copy_pressed": {
+      "type": "texture",
+      "uv": [37, 292],
+      "size": [20, 20]
+    },
+    "button_copy_disable": {
+      "type": "texture",
+      "uv": [37, 312],
+      "size": [20, 20]
+    },
+    "button_color_selected": {
+      "type": "texture",
+      "uv": [280, 177],
+      "size": [10, 5]
+    },
+    "button_color_hover": {
+      "type": "texture",
+      "uv": [280, 182],
+      "size": [10, 5]
+    }
+  }
+}

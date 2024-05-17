@@ -33,7 +33,7 @@ public class FilledXuanPaperItem extends XuanPaperItem {
     @Override
     public @NotNull Component getName(ItemStack stack) {
         var drawing = getDrawing(stack);
-        return drawing.getTitle();
+        return Component.translatable(SBRConstants.Translation.DRAWING_TITLE_LABEL).append(drawing.getTitle());
     }
 
     @Override
@@ -55,7 +55,11 @@ public class FilledXuanPaperItem extends XuanPaperItem {
         return true;
     }
 
-    public Drawing getDrawing(ItemStack stack) {
+    public static void setDrawing(ItemStack stack, Drawing drawing) {
+        stack.getOrCreateTag().put(SBRConstants.TagName.DRAWING, drawing.writeToCompound());
+    }
+
+    public static Drawing getDrawing(ItemStack stack) {
         if (stack.hasTag()) {
             var tag = stack.getTag();
             assert tag != null;
