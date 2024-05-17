@@ -1,6 +1,4 @@
 {
-	"ambientocclusion": false,
-	"render_type": "minecraft:cutout",
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
@@ -9,16 +7,17 @@
 	},
 	"elements": [
 		{
+			"name": "桌板",
 			"from": [0, 14, 0],
 			"to": [16, 16, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 15, 8]},
 			"faces": {
 				"north": {"uv": [4, 8, 8, 8.5], "texture": "#0"},
-				"east": {"uv": [12, 8, 16, 8.5], "texture": "#0"},
+				"east": {"uv": [4, 2.5, 8, 3], "texture": "#0"},
 				"south": {"uv": [4, 7.5, 8, 8], "texture": "#0"},
 				"west": {"uv": [4, 3.5, 8, 4], "texture": "#0"},
 				"up": {"uv": [4, 16, 0, 12], "texture": "#0"},
-				"down": {"uv": [4, 12, 0, 16], "texture": "#0"}
+				"down": {"uv": [4, 8, 0, 12], "texture": "#0"}
 			}
 		}
 	],
@@ -55,7 +54,7 @@
 	},
 	"groups": [
 		{
-			"name": "group",
+			"name": "桌子创世",
 			"origin": [0, 0, 0],
 			"color": 0,
 			"children": [0]
