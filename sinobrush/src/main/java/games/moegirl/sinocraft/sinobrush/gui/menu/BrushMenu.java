@@ -1,7 +1,9 @@
 package games.moegirl.sinocraft.sinobrush.gui.menu;
 
 import games.moegirl.sinocraft.sinobrush.gui.SBRMenu;
+import games.moegirl.sinocraft.sinobrush.gui.screen.BrushScreen;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
+import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinocore.gui.WidgetMenuBase;
 import games.moegirl.sinocraft.sinocore.gui.widgets.SlotStrategy;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,6 +14,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class BrushMenu extends WidgetMenuBase {
 
@@ -19,10 +22,13 @@ public class BrushMenu extends WidgetMenuBase {
     public static final int PAPER_SLOT = 1;
     public static final int DRAW_SLOT = 2;
 
-    public final Container inkAndPaperContainer = new SimpleContainer(3);
+    public final SimpleContainer inkAndPaperContainer = new SimpleContainer(3);
 
     private int lastInkSlot = -1;
     private int lastPaperSlot = -1;
+
+    @Nullable
+    private BrushScreen screen;
 
     public BrushMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
         super(SBRMenu.BRUSH_PAPER.get(), id, new ResourceLocation("sinobrush", "textures/gui/brush"));
@@ -32,6 +38,18 @@ public class BrushMenu extends WidgetMenuBase {
         addSlot(inkAndPaperContainer, "slot_ink", INK_SLOT, SlotStrategy.insertFilter(SBRItems.INK_BOTTLE));
         addSlot(inkAndPaperContainer, "slot_paper", PAPER_SLOT, SlotStrategy.insertFilter(SBRItems.XUAN_PAPER));
         addSlot(inkAndPaperContainer, "slot_drawing", DRAW_SLOT, SlotStrategy.onlyTake());
+    }
+
+    public void setScreen(BrushScreen screen) {
+        this.screen = screen;
+
+        inkAndPaperContainer.addListener(container -> {
+            var ink = inkAndPaperContainer.getItem(INK_SLOT);
+            var paper = inkAndPaperContainer.getItem(PAPER_SLOT);
+            screen.updateCanvas(SBRItems.XUAN_PAPER.get().getColor(paper),
+                    SBRItems.INK_BOTTLE.get().getColor(ink),
+                    XuanPaperItem.getExpend(paper));
+        });
     }
 
     @Override
@@ -64,7 +82,7 @@ public class BrushMenu extends WidgetMenuBase {
 
     @Override
     public boolean stillValid(Player player) {
-        return true;
+        return player.isAlive();
     }
 
     @Override

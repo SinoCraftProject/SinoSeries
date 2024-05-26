@@ -34,9 +34,9 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
         }
     }
 
-    public int getExpend(ItemStack stack) {
+    public static int getExpend(ItemStack stack) {
         if (!stack.is(SBRItems.XUAN_PAPER.get())) {
-            return -1;
+            return 0;
         }
 
         if (stack.hasTag()) {
@@ -45,19 +45,17 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
 
             var paper = tag.getCompound(SBRConstants.TagName.XUAN_PAPER);
             var expends = paper.getInt(SBRConstants.TagName.XUAN_PAPER_EXPENDS);
-            if (expends > 0 && expends < SBRConstants.XUAN_PAPER_MAX_EXPEND) {
-                return expends;
-            }
+            return Math.min(SBRConstants.XUAN_PAPER_MAX_EXPEND, Math.max(expends, 0));
         }
 
         return 0;
     }
 
-    public boolean canExpend(ItemStack stack) {
+    public static boolean canExpend(ItemStack stack) {
         return stack.is(SBRItems.XUAN_PAPER.get()) && getExpend(stack) < SBRConstants.XUAN_PAPER_MAX_EXPEND;
     }
 
-    public void setExpend(ItemStack stack, int expend) {
+    public static void setExpend(ItemStack stack, int expend) {
         if (!stack.is(SBRItems.XUAN_PAPER.get())) {
             return;
         }
@@ -69,7 +67,7 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
         stack.setTag(tag);
     }
 
-    public void expend(ItemStack stack) {
+    public static void expend(ItemStack stack) {
         if (canExpend(stack)) {
             setExpend(stack, getExpend(stack) + 1);
         }

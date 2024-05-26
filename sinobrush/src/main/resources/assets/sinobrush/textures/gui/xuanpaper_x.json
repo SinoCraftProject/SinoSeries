@@ -170,7 +170,7 @@
 
     "button_clear_hover": {
       "type": "texture",
-      "uv": [58, 352],
+      "uv": [58, 272],
       "size": [20, 20]
     },
     "button_clear_pressed": {
@@ -185,7 +185,7 @@
     },
     "button_brush_hover": {
       "type": "texture",
-      "uv": [79, 352],
+      "uv": [79, 272],
       "size": [20, 20]
     },
     "button_brush_pressed": {
@@ -200,7 +200,7 @@
     },
     "button_download_hover": {
       "type": "texture",
-      "uv": [16, 352],
+      "uv": [16, 272],
       "size": [20, 20]
     },
     "button_download_pressed": {
@@ -215,7 +215,7 @@
     },
     "button_copy_hover": {
       "type": "texture",
-      "uv": [16, 352],
+      "uv": [16, 272],
       "size": [20, 20]
     },
     "button_copy_pressed": {

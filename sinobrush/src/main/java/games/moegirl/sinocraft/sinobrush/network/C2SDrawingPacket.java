@@ -1,15 +1,20 @@
 package games.moegirl.sinocraft.sinobrush.network;
 
+import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
+import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
+
+import java.time.ZonedDateTime;
 
 public class C2SDrawingPacket implements Packet<NetworkContext> {
 
@@ -43,6 +48,19 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
                 SBRNetworks.NETWORKS.send(S2CDrawingPacket.hasDraw(), sender);
             } else {
                 drawing.setAuthor(sender);
+                drawing.setZonedDate(ZonedDateTime.now());
+
+                var size = SBRConstants.DRAWING_MIN_LENGTH << XuanPaperItem.getExpend(paperStack);
+                if (drawing.getWidth() != size) {
+                    drawing.setWidth(size);
+                }
+                if (drawing.getHeight() != size) {
+                    drawing.setHeight(size);
+                }
+
+                drawing.setPaperColor(SBRItems.XUAN_PAPER.get().getColor(paperStack));
+                drawing.setInkColor(SBRItems.INK_BOTTLE.get().getColor(inkSlot));
+
                 paperStack.shrink(1);
                 container.setItem(BrushMenu.PAPER_SLOT, paperStack);
                 inkSlot.shrink(1);

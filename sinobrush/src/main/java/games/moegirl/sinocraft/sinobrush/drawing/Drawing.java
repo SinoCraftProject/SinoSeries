@@ -123,7 +123,7 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
             throw new IllegalArgumentException("Value out of colors max bound: " + value);
         }
 
-        if (value < 0) {
+        if (value < SBRConstants.DRAWING_COLOR_MIN) {
             throw new IllegalArgumentException("Value out of colors min bound: " + value);
         }
 
