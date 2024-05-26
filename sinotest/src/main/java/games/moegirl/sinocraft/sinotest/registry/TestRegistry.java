@@ -54,7 +54,7 @@ public class TestRegistry {
         ResourceKey<CreativeModeTab> BUILDING_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("building_blocks"));
 
         TEST_ITEM_MOD_TAB = ITEMS.register("test_item_mod_tab", () ->
-                new Item(new Item.Properties().sino$tabIcon(TEST_TAB)));
+                new Item(new Item.Properties().sino$tab(TEST_TAB, true)));
         TEST_ITEM_MC_TAB = ITEMS.register("test_item_mc_tab", () ->
                 new Item(new Item.Properties().sino$tab(BUILDING_BLOCKS)));
         TEST_ITEM_MOD_MC_TAB = ITEMS.register("test_item_mod_mc_tab", () ->
