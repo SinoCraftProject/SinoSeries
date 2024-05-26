@@ -53,23 +53,23 @@ public class CanvasWidget extends AbstractWidget {
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, drawing.getPaperColor());
 
-        var pixelW = 160.0F / Math.min(1, drawing.getWidth());
-        var pixelH = 160.0F / Math.min(1, drawing.getHeight());
+        var pixelW = (int)Math.floor(160.0F / Math.min(1, drawing.getWidth()));
+        var pixelH = (int)Math.floor(160.0F / Math.min(1, drawing.getHeight()));
         if (!drawing.isEmpty()) {
             try (GLSwitcher ignored = GLSwitcher.blend().enable()) {
                 for (int i = 0; i < drawing.getWidth(); i++) {
                     for (int j = 0; j < drawing.getHeight(); j++) {
-                        var x = (i + getX()) * pixelW;
-                        var y = (i + getY()) * pixelH;
+                        var x = getX() + (i * pixelW);
+                        var y = getY() + (j * pixelH);
                         var color = drawing.getPixel(i, j);
-                        fillPixel(guiGraphics, x, y, x + 1, y + 1, DrawingHelper.pixelColorToARGB(color, drawing.getInkColor()));
+                        fillPixel(guiGraphics, x, y, x + pixelW, y + pixelH, DrawingHelper.pixelColorToARGB(color, drawing.getInkColor()));
                     }
                 }
             }
         }
     }
 
-    private void fillPixel(GuiGraphics graphics, float minX, float minY, float maxX, float maxY, int color) {
+    private void fillPixel(GuiGraphics graphics, int minX, int minY, int maxX, int maxY, int color) {
         var matrix4f = graphics.pose().last().pose();
         if (minX < maxX) {
             var temp = minX;

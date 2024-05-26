@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -71,6 +72,14 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
         if (canExpend(stack)) {
             setExpend(stack, getExpend(stack) + 1);
         }
+    }
+
+    @Override
+    public @NotNull ItemStack getDefaultInstance() {
+        var stack = new ItemStack(this);
+        setExpend(stack, 0);
+        setColor(stack, SBRConstants.COLOR_WHITE);
+        return stack;
     }
 
     @Override
