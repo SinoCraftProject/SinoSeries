@@ -25,26 +25,13 @@ public abstract class ItemPropertiesExtension implements ITabItemProperties {
     private final Map<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>> sino$tabIcons = new HashMap<>();
 
     @Override
-    public Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab) {
-        sino$tabs.add(Pair.of(tab, ItemStack::new));
-        return sino$getThis();
-    }
-
-    @Override
-    public Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
+    public Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup, boolean asIcon) {
         sino$tabs.add(Pair.of(tab, sup));
-        return sino$getThis();
-    }
 
-    @Override
-    public Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab) {
-        sino$tabIcons.put(tab, ItemStack::new);
-        return sino$getThis();
-    }
+        if (asIcon) {
+            sino$tabIcons.put(tab, sup);
+        }
 
-    @Override
-    public Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
-        sino$tabIcons.put(tab, sup);
         return sino$getThis();
     }
 
