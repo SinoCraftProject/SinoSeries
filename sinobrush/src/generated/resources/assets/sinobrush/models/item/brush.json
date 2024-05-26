@@ -2,7 +2,7 @@
   "parent": "minecraft:item/generated",
   "overrides": [
     {
-      "model": "sinobrush:item/brush_inked",
+      "model": "sinobrush:item/inked_brush",
       "predicate": {
         "minecraft:damaged": 1.0
       }
