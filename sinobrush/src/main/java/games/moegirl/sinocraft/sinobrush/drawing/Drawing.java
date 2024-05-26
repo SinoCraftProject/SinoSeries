@@ -165,6 +165,7 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
 
     public void setWidth(int x) {
         this.xSize = x;
+        resize();
     }
 
     public int getHeight() {
@@ -173,6 +174,19 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
 
     public void setHeight(int y) {
         this.ySize = y;
+        resize();
+    }
+
+    private void resize() {
+        var pixels = new byte[getWidth() * getHeight()];
+        for (var i = 0; i < getPixels().length; i++) {
+            if (pixels.length <= i) {
+                break;
+            }
+
+            pixels[i] = getPixels()[i];
+        }
+        setPixels(pixels);
     }
 
     public int getPaperColor() {
