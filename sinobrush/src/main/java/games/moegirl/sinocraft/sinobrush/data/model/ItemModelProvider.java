@@ -17,18 +17,18 @@ public class ItemModelProvider extends AbstractItemModelProvider {
 
     @Override
     public void generateModels(ItemModelProviderDelegateBase<?> delegate) {
-        // Todo: qyl27: modLoc and mcLoc.
         delegate.basicItem(SBRItems.BRUSH.get())
                 .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/brush"))
                 .override().predicate(new ResourceLocation("damaged"), 1).model(delegate
-                        .getBuilder("item/brush_inked")
-                        .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/brush_inked")));
+                        .getBuilder("item/inked_brush")
+                        .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/inked_brush")));
 
         delegate.basicItem(SBRItems.INK_BOTTLE.get())
                 .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/ink_bottle_body"))
                 .texture("layer1", new ResourceLocation(SinoBrush.MODID, "item/ink_bottle_cap"));
 
         delegate.basicItem(SBRItems.FILLED_XUAN_PAPER.get())
+                .texture("inventory", new ResourceLocation(SinoBrush.MODID, "item/xuan_paper"))
                 .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/xuan_paper"));
 
         delegate.skipItem(SBRItems.FAN.get(), SBRItems.FOLDED_FAN.get());
