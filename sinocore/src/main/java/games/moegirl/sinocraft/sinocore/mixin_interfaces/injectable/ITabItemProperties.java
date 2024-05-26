@@ -18,7 +18,16 @@ public interface ITabItemProperties {
      * @param tab CreativeModeTab
      */
     default Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab) {
-        return null;
+        return sino$tab(tab, ItemStack::new);
+    }
+
+    /**
+     * 将物品放入某个 CreativeModeTab
+     * @param tab CreativeModeTab
+     * @param asIcon 同时作为图标使用
+     */
+    default Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, boolean asIcon) {
+        return sino$tab(tab, ItemStack::new, asIcon);
     }
 
     /**
@@ -27,23 +36,16 @@ public interface ITabItemProperties {
      * @param sup ItemStack 构造方法
      */
     default Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
-        return null;
+        return sino$tab(tab, sup, false);
     }
 
     /**
-     * 将物品作为某个 CreativeModeTab 的图标使用
-     * @param tab CreativeModeTab
-     */
-    default Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab) {
-        return null;
-    }
-
-    /**
-     * 将物品作为某个 CreativeModeTab 的图标使用
+     * 将物品放入某个 CreativeModeTab
      * @param tab CreativeModeTab
      * @param sup ItemStack 构造方法
+     * @param asIcon 同时作为图标使用
      */
-    default Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
+    default Item.Properties sino$tab(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup, boolean asIcon) {
         return null;
     }
 

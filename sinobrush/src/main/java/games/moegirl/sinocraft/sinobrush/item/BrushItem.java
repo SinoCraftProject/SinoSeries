@@ -13,8 +13,7 @@ import net.minecraft.world.level.Level;
 public class BrushItem extends Item {
     public BrushItem() {
         super(new Properties()
-                .sino$tab(SBRItems.SINO_BRUSH_TAB)
-                .sino$tabIcon(SBRItems.SINO_BRUSH_TAB)
+                .sino$tab(SBRItems.SINO_BRUSH_TAB, true)
                 .durability(127));
     }
 
