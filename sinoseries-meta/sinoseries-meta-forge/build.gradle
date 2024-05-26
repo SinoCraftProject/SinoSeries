@@ -92,6 +92,19 @@ processResources {
     }
 }
 
+configureLaunch {
+    doLast {
+        metaHelpers.injectForgeTransformers(project)
+
+        subMod.each { Project mod ->
+            File dir = helpers.getProjectGeneratedResourcesDir(mod)
+            if (!dir.exists()) {
+                dir.mkdirs()
+            }
+        }
+    }
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {

@@ -11,8 +11,9 @@ public class SinoBrushNeoForge {
     private final SinoBrush mod = new SinoBrush();
 
     public SinoBrushNeoForge() {
-        mod.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+
+        mod.init();
     }
 
     private void clientSetup(FMLClientSetupEvent event) {

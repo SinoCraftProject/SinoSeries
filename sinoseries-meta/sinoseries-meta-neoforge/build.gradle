@@ -59,6 +59,12 @@ processResources {
     }
 }
 
+configureLaunch {
+    doLast {
+        metaHelpers.injectNeoForgeTransformers(project)
+    }
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {

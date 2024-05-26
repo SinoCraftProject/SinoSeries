@@ -9,11 +9,12 @@ public class SBRConstants {
     public static final int DRAWING_COLOR_LENGTH = 4;   // qyl27: Timicasto said the future is not a 4-bit canvas, but a colorful world!
     public static final int DRAWING_COLOR_COUNT_IN_BYTE = 8 / SBRConstants.DRAWING_COLOR_LENGTH;
     public static final byte DRAWING_COLOR_MASK = 0b1111;
-    public static final byte DRAWING_COLOR_MAX = (byte) Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2);
+    public static final byte DRAWING_COLOR_MIN = 0;
+    public static final byte DRAWING_COLOR_MAX = (byte)Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2);
 
-    public static final int DRAWING_MIN_LENGTH = 16;
-    public static final int DRAWING_MAX_LENGTH = 256;   // Todo: qyl27: Is it larger than max packet size?
     public static final int XUAN_PAPER_MAX_EXPEND = 4;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
+    public static final int DRAWING_MIN_LENGTH = 16;
+    public static final int DRAWING_MAX_LENGTH = DRAWING_MIN_LENGTH << XUAN_PAPER_MAX_EXPEND;   // Todo: qyl27: Is it larger than max packet size?
 
     public static class TagName {
         public static final String DRAWING = "drawing";    // Compound
@@ -51,6 +52,19 @@ public class SBRConstants {
         public static final String DESCRIPTION_XUAN_PAPER_EXPENDED = "sinobrush.description.xuan_paper.expended";
 
         public static final String HUD_FAN_PREFIX = "sinobrush.hud.fan.prefix";
+
+        public static final String GUI_BRUSH_TOOLTIP_SAVE = "sinobrush.gui.brush.tooltip_save";
+        public static final String GUI_BRUSH_TOOLTIP_COPY = "sinobrush.gui.brush.tooltip_copy";
+        public static final String GUI_BRUSH_TOOLTIP_BRUSH = "sinobrush.gui.brush.tooltip_brush";
+        public static final String GUI_BRUSH_TOOLTIP_CLEAR = "sinobrush.gui.brush.tooltip_clear";
+        public static final String GUI_BRUSH_HINT_NAME = "sinobrush.gui.brush.hint_name";
+        public static final String GUI_BRUSH_CANVAS_COPIED = "sinobrush.gui.brush.canvas_copied";
+        public static final String GUI_BRUSH_CANVAS_PASTED = "sinobrush.gui.brush.canvas_pasted";
+        public static final String GUI_BRUSH_CANVAS_SAVED = "sinobrush.gui.brush.canvas_saved";
+        public static final String GUI_BRUSH_SAVE_SUCCESSFUL = "sinobrush.gui.brush.save_successful";
+        public static final String GUI_BRUSH_SAVE_FAILED_NO_INK = "sinobrush.gui.brush.save_failed_no_ink";
+        public static final String GUI_BRUSH_SAVE_FAILED_NO_PAPER = "sinobrush.gui.brush.save_failed_no_paper";
+        public static final String GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED = "sinobrush.gui.brush.save_failed_output_occupied";
 
         public static final String ADVANCEMENT_BRUSH_NAME = "sinobrush.advancement.brush.name";
         public static final String ADVANCEMENT_BRUSH_DESC = "sinobrush.advancement.brush.desc";

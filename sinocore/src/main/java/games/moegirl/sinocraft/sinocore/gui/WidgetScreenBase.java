@@ -32,6 +32,11 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
     }
 
     @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        // qyl27: Do nothing. To prevent render "Inventory" in our GUI.
+    }
+
+    @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         if (widgets.containsWidget("background")) {
             blitTexture(guiGraphics, "background", 0, 0);

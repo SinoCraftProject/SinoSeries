@@ -63,6 +63,12 @@ processResources {
     }
 }
 
+configureLaunch {
+    doLast {
+        metaHelpers.injectFabricTransformers(project)
+    }
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
