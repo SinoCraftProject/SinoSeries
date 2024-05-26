@@ -39,13 +39,13 @@ public abstract class ItemPropertiesExtension implements ITabItemProperties {
     @Override
     public Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab) {
         sino$tabIcons.put(tab, ItemStack::new);
-        return sino$tab(tab);
+        return sino$getThis();
     }
 
     @Override
     public Item.Properties sino$tabIcon(ResourceKey<CreativeModeTab> tab, Function<ItemLike, ItemStack> sup) {
         sino$tabIcons.put(tab, sup);
-        return sino$tab(tab, sup);
+        return sino$getThis();
     }
 
     @Override
