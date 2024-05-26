@@ -2,7 +2,7 @@
 	"credit": "Made by qyl27 with Blockbench",
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "sinobrush:item/fan_folded"
+		"layer0": "sinobrush:item/folded_fan"
 	},
 	"display": {
 		"thirdperson_righthand": {
