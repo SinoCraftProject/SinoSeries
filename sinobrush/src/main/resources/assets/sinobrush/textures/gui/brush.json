@@ -37,7 +37,8 @@
       "size": [20, 20],
       "texture_hover": "button_clear_hover",
       "texture_pressed": "button_clear_pressed",
-      "texture_disable": "button_clear_disable"
+      "texture_disable": "button_clear_disable",
+      "tooltip": "sinobrush.gui.brush.tooltip_clear"
     },
     "button_brush": {
       "type": "button",
@@ -45,15 +46,17 @@
       "size": [20, 20],
       "texture_hover": "button_brush_hover",
       "texture_pressed": "button_brush_pressed",
-      "texture_disable": "button_brush_disable"
+      "texture_disable": "button_brush_disable",
+      "tooltip": "sinobrush.gui.brush.tooltip_brush"
     },
-    "button_download": {
+    "button_save": {
       "type": "button",
       "position": [22, 216],
       "size": [20, 20],
-      "texture_hover": "button_download_hover",
-      "texture_pressed": "button_download_pressed",
-      "texture_disable": "button_download_disable"
+      "texture_hover": "button_save_hover",
+      "texture_pressed": "button_save_pressed",
+      "texture_disable": "button_save_disable",
+      "tooltip": "sinobrush.gui.brush.tooltip_save"
     },
     "button_copy": {
       "type": "button",
@@ -61,7 +64,8 @@
       "size": [20, 20],
       "texture_hover": "button_copy_hover",
       "texture_pressed": "button_copy_pressed",
-      "texture_disable": "button_copy_disable"
+      "texture_disable": "button_copy_disable",
+      "tooltip": "sinobrush.gui.brush.tooltip_copy"
     },
     "button_color_0": {
       "type": "button",
@@ -175,13 +179,6 @@
       "texture_disable": "button_color_selected",
       "texture_hover": "button_color_hover"
     },
-    "button_color_16": {
-      "type": "button",
-      "position": [257, 97],
-      "size": [10, 5],
-      "texture_disable": "button_color_selected",
-      "texture_hover": "button_color_hover"
-    },
     "canvas": {
       "type": "rect",
       "position": [76, 42],
@@ -191,12 +188,13 @@
     "file_name": {
       "type": "editbox",
       "position": [78, 9],
-      "size": [139, 18]
+      "size": [139, 18],
+      "hint": "sinobrush.gui.brush.hint_name"
     },
 
     "button_clear_hover": {
       "type": "texture",
-      "uv": [58, 352],
+      "uv": [58, 272],
       "size": [20, 20]
     },
     "button_clear_pressed": {
@@ -216,7 +214,7 @@
     },
     "button_brush_pressed": {
       "type": "texture",
-      "uv": [79, 292],
+      "uv": [79, 272],
       "size": [20, 20]
     },
     "button_brush_disable": {
@@ -224,17 +222,17 @@
       "uv": [79, 312],
       "size": [20, 20]
     },
-    "button_download_hover": {
+    "button_save_hover": {
       "type": "texture",
       "uv": [16, 352],
       "size": [20, 20]
     },
-    "button_download_pressed": {
+    "button_save_pressed": {
       "type": "texture",
-      "uv": [16, 292],
+      "uv": [16, 272],
       "size": [20, 20]
     },
-    "button_download_disable": {
+    "button_save_disable": {
       "type": "texture",
       "uv": [16, 312],
       "size": [20, 20]
@@ -246,7 +244,7 @@
     },
     "button_copy_pressed": {
       "type": "texture",
-      "uv": [37, 292],
+      "uv": [37, 272],
       "size": [20, 20]
     },
     "button_copy_disable": {
