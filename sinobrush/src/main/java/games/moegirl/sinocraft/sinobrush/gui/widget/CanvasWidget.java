@@ -29,6 +29,10 @@ public class CanvasWidget extends AbstractWidget {
         this.drawable = drawable;
     }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public int getColor() {
         return color;
     }
@@ -178,6 +182,8 @@ public class CanvasWidget extends AbstractWidget {
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         // Todo: qyl27: check it.
 
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX) {
         if (isMouseOver(mouseX, mouseY) && scrollX != 0) {
             var color = getColor();
             if (scrollX > 0) {
@@ -194,7 +200,7 @@ public class CanvasWidget extends AbstractWidget {
             return true;
         }
 
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        return super.mouseScrolled(mouseX, mouseY, scrollX);
     }
 
     @Override

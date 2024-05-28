@@ -3,10 +3,7 @@ package games.moegirl.sinocraft.sinocore.datagen;
 import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.EnterBlockTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -21,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public abstract class AbstractRecipeProvider extends RecipeProvider implements IRenamedProvider {
 
@@ -42,7 +40,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
 
     // region Recipes
 
-    public static void oreCooking(RecipeOutput recipeOutput,
+    public static void oreCooking(Consumer<FinishedRecipe> recipeOutput,
                                   RecipeSerializer<? extends AbstractCookingRecipe> serializer,
                                   List<ItemLike> ingredients, RecipeCategory category, ItemLike result,
                                   float experience, int cookingTime, String group, String suffix) {
@@ -54,14 +52,14 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
         }
     }
 
-    public static void smeltingResultFromBase(RecipeOutput recipeOutput, ItemLike result, ItemLike ingredient) {
+    public static void smeltingResultFromBase(Consumer<FinishedRecipe> recipeOutput, ItemLike result, ItemLike ingredient) {
         SimpleCookingRecipeBuilder
                 .smelting(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, result, 0.1f, 200)
                 .unlockedBy(getHasName(ingredient), has(ingredient))
                 .save(recipeOutput);
     }
 
-    public static void nineBlockStorageRecipes(RecipeOutput recipeOutput, RecipeCategory unpackedCategory,
+    public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> recipeOutput, RecipeCategory unpackedCategory,
                                                ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed,
                                                String packedName, @Nullable String packedGroup, String unpackedName,
                                                @Nullable String unpackedGroup) {
@@ -78,7 +76,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
                 .save(recipeOutput, new ResourceLocation(packedName));
     }
 
-    public static void simpleCookingRecipe(RecipeOutput recipeOutput, String cookingMethod,
+    public static void simpleCookingRecipe(Consumer<FinishedRecipe> recipeOutput, String cookingMethod,
                                            RecipeSerializer<? extends AbstractCookingRecipe> cookingSerializer,
                                            int cookingTime, ItemLike material, ItemLike result, float experience) {
         SimpleCookingRecipeBuilder
@@ -103,22 +101,21 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
 
     // region CriterionInstances
 
-    public static Criterion<EnterBlockTrigger.TriggerInstance> insideOf(Block block) {
-        return CriteriaTriggers.ENTER_BLOCK.createCriterion(
-                new EnterBlockTrigger.TriggerInstance(Optional.empty(), block, Optional.empty()));
+    public static EnterBlockTrigger.TriggerInstance insideOf(Block block) {
+        return new EnterBlockTrigger.TriggerInstance(ContextAwarePredicate.ANY, block, StatePropertiesPredicate.ANY);
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(MinMaxBounds.Ints count, ItemLike item) {
+    public static InventoryChangeTrigger.TriggerInstance has(MinMaxBounds.Ints count, ItemLike item) {
         return inventoryTrigger(ItemPredicate.Builder.item().of(item).withCount(count));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate.Builder... items) {
+    public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate.Builder... items) {
         return inventoryTrigger(Arrays.stream(items).map(ItemPredicate.Builder::build).toArray(ItemPredicate[]::new));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
-        return CriteriaTriggers.INVENTORY_CHANGED.createCriterion(new InventoryChangeTrigger.TriggerInstance(
-                Optional.empty(), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, List.of(predicates)));
+    public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate... predicates) {
+        return new InventoryChangeTrigger.TriggerInstance(
+                ContextAwarePredicate.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
     }
 
     // endregion
