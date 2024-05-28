@@ -33,7 +33,8 @@ loom {
 }
 
 dependencies {
-    neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+//    neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+    neoForge "net.neoforged:forge:${project.minecraft_version}-${project.neoforge_version}"
 
 //    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
 

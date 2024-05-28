@@ -320,7 +320,8 @@ subMod.each { Project mod ->
         }
 
         dependencies {
-            neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+//            neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+            neoForge "net.neoforged:forge:${mod.minecraft_version}-${project.neoforge_version}"
 
             common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
             shadowCommon(project(path: mod.path, configuration: 'transformProductionNeoForge')) { transitive = false }

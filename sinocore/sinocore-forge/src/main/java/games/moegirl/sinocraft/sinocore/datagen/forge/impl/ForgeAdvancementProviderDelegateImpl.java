@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 import games.moegirl.sinocraft.sinocore.datagen.advancement.IAdvancementGenerator;
 import games.moegirl.sinocraft.sinocore.datagen.delegate.AdvancementProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
-import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -32,7 +32,8 @@ public class ForgeAdvancementProviderDelegateImpl extends AdvancementProviderDel
     public void addAdvancement(IAdvancementGenerator generator) {
         generators.add(new ForgeAdvancementProvider.AdvancementGenerator() {
             @Override
-            public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
+            public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer,
+                                 ExistingFileHelper existingFileHelper) {
                 generator.generate(provider, consumer, context);
             }
 
