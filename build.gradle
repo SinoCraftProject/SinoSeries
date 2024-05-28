@@ -257,6 +257,11 @@ subMod.each { Project mod ->
                     extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
                 }
 
+                var aw = new File(forgeMod.projectDir, "src/main/resources/${mod.modid}-forge.accesswidener")
+                if (aw.exists()) {
+                    extraAccessWideners.add aw.name
+                }
+
                 if (forgeMod.file("/src/main/resources/${mod.modid}.mixins.json").exists()) {
                     mixinConfig "${mod.modid}.mixins.json"
                 }
