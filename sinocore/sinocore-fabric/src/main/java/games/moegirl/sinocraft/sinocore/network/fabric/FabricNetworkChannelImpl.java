@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import games.moegirl.sinocraft.sinocore.network.PacketTarget;
 import games.moegirl.sinocraft.sinocore.utility.Reference;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -90,7 +91,9 @@ public class FabricNetworkChannelImpl implements INetworkChannel {
     @Override
     public <T extends Packet<NetworkContext>> void send(T packet, PacketTarget target) {
         Reference<PacketType<PacketWrapper<?>>> type = findType(packet.getClass(), PacketFlow.CLIENTBOUND);
-        target.send(ServerPlayNetworking.createS2CPacket(new PacketWrapper<>(packet, type)));
+        var buf = new FriendlyByteBuf(Unpooled.buffer());
+        new PacketWrapper<>(packet, type).write(buf);
+        target.send(ServerPlayNetworking.createS2CPacket(id, buf));
     }
 
     @Override
@@ -138,7 +141,8 @@ public class FabricNetworkChannelImpl implements INetworkChannel {
      * @param <T>    包类型
      */
     public record PacketWrapper<T extends Packet<NetworkContext>>(T packet,
-                                                                  Reference<PacketType<PacketWrapper<?>>> type) implements FabricPacket {
+                                                                  Reference<PacketType<PacketWrapper<?>>> type)
+            implements FabricPacket {
 
         @Override
         public void write(FriendlyByteBuf buf) {

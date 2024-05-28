@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +29,8 @@ public class ImageButtonWidget extends ImageButton {
 
     public ImageButtonWidget(WidgetScreenBase<?> screen, ButtonEntry entry, OnPress onPress, Component tooltip) {
         super(entry.getX() + screen.getLeftPos(), entry.getY() + screen.getTopPos(), entry.getWidth(), entry.getHeight(),
-                new WidgetSprites(screen.getWidgets().getTexture(), screen.getWidgets().getTexture()), onPress, tooltip);
+                screen.getWidgets().getWidth(), screen.getWidgets().getHeight(), entry.getHeight(),
+                screen.getWidgets().getTexture(), 512, 512, onPress, tooltip);
         this.entry = entry;
         this.font = screen.getFont();
         this.widgets = screen.getWidgets();
