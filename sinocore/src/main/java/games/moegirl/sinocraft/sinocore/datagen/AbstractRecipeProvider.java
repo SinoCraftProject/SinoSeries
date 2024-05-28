@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinocore.datagen;
 
 import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
