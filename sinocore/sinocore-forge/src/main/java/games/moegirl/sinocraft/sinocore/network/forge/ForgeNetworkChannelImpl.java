@@ -46,7 +46,7 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
 
     @Override
     public <T extends Packet<NetworkContext>> void registerPacket(PacketFlow direction, Class<T> type, Function<FriendlyByteBuf, T> decoder) {
-        channel.messageBuilder(type, packetId)
+        channel.messageBuilder(type, nextPacketId())
                 .encoder(Packet::write)
                 .decoder(decoder)
                 .consumerMainThread((p, ctx) -> p.handle(new NetworkContext(ctx.get().getNetworkManager(), ctx.get().getSender())))
@@ -60,8 +60,8 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
 
     @Override
     public <T extends Packet<NetworkContext>> void send(T packet, PacketTarget target) {
-        target.send(packet);
 //        channel.send(toTarget(target), packet);
+        target.send(packet);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     }
 
     private PacketDistributor.PacketTarget toTarget(PacketTarget target) {
+        return PacketDistributor.ALL.noArg();
 //        return new PacketDistributor.PacketTarget(target.sender(), toDirection(target.direction()));
-        return PacketDistributor.SERVER.noArg();
     }
 }
