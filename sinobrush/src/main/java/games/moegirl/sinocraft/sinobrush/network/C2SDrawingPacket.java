@@ -11,7 +11,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.time.ZonedDateTime;
@@ -37,7 +36,7 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
     public void handle(NetworkContext handler) {
         ServerPlayer sender = handler.sender();
         if (sender.containerMenu instanceof BrushMenu brushMenu) {
-            Container container = brushMenu.inkAndPaperContainer;
+            Container container = brushMenu.container;
             ItemStack paperStack = container.getItem(BrushMenu.PAPER_SLOT);
             ItemStack inkSlot = container.getItem(BrushMenu.INK_SLOT);
             if (paperStack.isEmpty()) {

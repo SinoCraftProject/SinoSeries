@@ -77,16 +77,18 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
+        super.appendHoverText(stack, level, tooltip, isAdvanced);
 
-        var color = getColor(stack);
-        tooltipComponents.add(TooltipHelper.getColor(color));
+        if (stack.getItem() instanceof XuanPaperItem) {
+            var color = getColor(stack);
+            tooltip.add(TooltipHelper.getColor(color));
 
-        var expend = getExpend(stack);
-        if (expend != 0) {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED,
-                    expend).withStyle(ChatFormatting.GRAY));
+            var expend = getExpend(stack);
+            if (expend != 0) {
+                tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, expend)
+                        .withStyle(ChatFormatting.GRAY));
+            }
         }
     }
 }

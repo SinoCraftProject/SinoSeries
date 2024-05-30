@@ -17,7 +17,7 @@ import java.util.function.BooleanSupplier;
 public class CanvasWidget extends AbstractWidget {
 
     private final BrushScreen screen;
-    private final BooleanSupplier canDrawable;
+    private final BooleanSupplier drawable;
 
     private int color = 0;
     private Drawing drawing;
@@ -26,7 +26,7 @@ public class CanvasWidget extends AbstractWidget {
         super(x, y, width, height, Component.empty());
         this.screen = screen;
         this.drawing = new Drawing();
-        this.canDrawable = drawable;
+        this.drawable = drawable;
     }
 
     public int getColor() {
@@ -53,8 +53,8 @@ public class CanvasWidget extends AbstractWidget {
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, drawing.getPaperColor());
 
-        var pixelW = (int)Math.floor(160.0F / Math.min(1, drawing.getWidth()));
-        var pixelH = (int)Math.floor(160.0F / Math.min(1, drawing.getHeight()));
+        var pixelW = (int)Math.floor(160.0F / Math.max(1, drawing.getWidth()));
+        var pixelH = (int)Math.floor(160.0F / Math.max(1, drawing.getHeight()));
         if (!drawing.isEmpty()) {
             try (GLSwitcher ignored = GLSwitcher.blend().enable()) {
                 for (int i = 0; i < drawing.getWidth(); i++) {
@@ -110,16 +110,16 @@ public class CanvasWidget extends AbstractWidget {
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-            mouseButton &= 1;
+            mouseButton ^= 1;
         } else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-            mouseButton &= 2;
+            mouseButton ^= 2;
         }
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
     public void onClick(double mouseX, double mouseY) {
-        if (canDrawable.getAsBoolean()) {
+        if (drawable.getAsBoolean()) {
             if ((mouseButton & 1) != 0) {
                 if (altPressed) {
                     selectColor(pickColor(mouseX, mouseY));
@@ -134,7 +134,7 @@ public class CanvasWidget extends AbstractWidget {
 
     @Override
     protected void onDrag(double mouseX, double mouseY, double dragX, double dragY) {
-        if (canDrawable.getAsBoolean()) {
+        if (drawable.getAsBoolean()) {
             if (isMouseOver(mouseX, mouseY)) {
                 isDragging = true;
             }
