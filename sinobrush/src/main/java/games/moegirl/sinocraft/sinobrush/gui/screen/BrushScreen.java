@@ -101,7 +101,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     }
 
     private boolean isCanvasDrawable() {
-        return !isSaving && !menu.inkAndPaperContainer.getItem(0).isEmpty() && !menu.inkAndPaperContainer.getItem(1).isEmpty();
+        return !isSaving && !menu.container.getItem(0).isEmpty() && !menu.container.getItem(1).isEmpty();
     }
 
     private void clearCanvas(Button button) {
