@@ -27,6 +27,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import org.apache.commons.lang3.StringUtils;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.io.IOException;
@@ -253,5 +254,48 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private void setDrawString(String value) {
         CompoundTag tag = (CompoundTag) JsonOps.INSTANCE.convertTo(NbtOps.INSTANCE, JsonParser.parseString(value));
         canvas.setDrawing(Drawing.fromTag(tag));
+    }
+
+    @Override
+    public void mouseMoved(double mouseX, double mouseY) {
+        super.mouseMoved(mouseX, mouseY);
+
+        if (canvas.isMouseOver(mouseX, mouseY)) {
+            canvas.mouseMoved(mouseX, mouseY);
+        }
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        if (canvas.isMouseOver(mouseX, mouseY)) {
+            return canvas.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        }
+
+        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (canvas.isMouseOver(mouseX, mouseY)) {
+            return canvas.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+        }
+
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (title.isFocused() && Minecraft.getInstance().options.keyInventory.matches(keyCode, scanCode)) {
+            return true;
+        }
+
+        canvas.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+        canvas.keyReleased(keyCode, scanCode, modifiers);
+        return super.keyReleased(keyCode, scanCode, modifiers);
     }
 }
