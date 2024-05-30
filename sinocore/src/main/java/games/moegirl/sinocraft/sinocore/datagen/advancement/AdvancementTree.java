@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.advancement;
 
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -9,12 +8,12 @@ import java.util.function.Consumer;
 
 public class AdvancementTree {
 
-    protected Consumer<AdvancementHolder> saver;
+    protected Consumer<Advancement> saver;
 
-    protected AdvancementHolder root;
-    protected Deque<AdvancementHolder> cursor = new ArrayDeque<>();
+    protected Advancement root;
+    protected Deque<Advancement> cursor = new ArrayDeque<>();
 
-    public AdvancementTree(Consumer<AdvancementHolder> saver) {
+    public AdvancementTree(Consumer<Advancement> saver) {
         this.saver = saver;
     }
 

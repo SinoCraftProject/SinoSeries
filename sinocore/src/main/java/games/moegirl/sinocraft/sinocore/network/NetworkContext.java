@@ -54,15 +54,15 @@ public record NetworkContext(Connection connection, ServerPlayer sender) impleme
 
     // region From PacketListener
 
-    @Override
-    public PacketFlow flow() {
-        return connection.getReceiving();
-    }
-
-    @Override
-    public ConnectionProtocol protocol() {
-        return ConnectionProtocol.PLAY;
-    }
+//    @Override
+//    public PacketFlow flow() {
+//        return connection.getReceiving();
+//    }
+//
+//    @Override
+//    public ConnectionProtocol protocol() {
+//        return ConnectionProtocol.PLAY;
+//    }
 
     @Override
     public void onDisconnect(Component reason) {

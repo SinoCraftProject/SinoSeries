@@ -10,10 +10,10 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.SimpleChannel;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -23,12 +23,15 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     private final ResourceLocation id;
     private final SimpleChannel channel;
 
+    private int packetId = 0;
+
     public ForgeNetworkChannelImpl(ResourceLocation id) {
         this.id = id;
-        this.channel = ChannelBuilder.named(id)
-                .networkProtocolVersion(1)
+        this.channel = NetworkRegistry.ChannelBuilder.named(id)
+                .networkProtocolVersion(() -> "1")
                 // 当客户端/服务端缺失 Channel 时，允许继续发送
-                .optional()
+                .clientAcceptedVersions(s -> true)
+                .serverAcceptedVersions(s -> true)
                 .simpleChannel();
     }
 
@@ -37,30 +40,35 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
         return id;
     }
 
+    private int nextPacketId() {
+        return packetId++;
+    }
+
     @Override
     public <T extends Packet<NetworkContext>> void registerPacket(PacketFlow direction, Class<T> type, Function<FriendlyByteBuf, T> decoder) {
-        channel.messageBuilder(type, toDirection(direction))
+        channel.messageBuilder(type, nextPacketId())
                 .encoder(Packet::write)
                 .decoder(decoder)
-                .consumerMainThread((p, ctx) -> p.handle(new NetworkContext(ctx.getConnection(), ctx.getSender())))
+                .consumerMainThread((p, ctx) -> p.handle(new NetworkContext(ctx.get().getNetworkManager(), ctx.get().getSender())))
                 .add();
     }
 
     @Override
     public <T extends Packet<NetworkContext>> void send(T packet, ServerPlayer player) {
-        channel.send(packet, player.connection.getConnection());
+        channel.sendTo(packet, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
     public <T extends Packet<NetworkContext>> void send(T packet, PacketTarget target) {
-        channel.send(packet, toTarget(target));
+//        channel.send(toTarget(target), packet);
+        target.send(packet);
     }
 
     @Override
     public <T extends Packet<NetworkContext>> void sendToServer(T packet) {
         Minecraft instance = Minecraft.getInstance();
         ClientPacketListener connection = Objects.requireNonNull(instance).getConnection();
-        channel.send(packet, Objects.requireNonNull(connection).getConnection());
+        channel.sendToServer(packet);
     }
 
     private NetworkDirection toDirection(PacketFlow direction) {
@@ -70,6 +78,7 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     }
 
     private PacketDistributor.PacketTarget toTarget(PacketTarget target) {
-        return new PacketDistributor.PacketTarget(target.sender(), toDirection(target.direction()));
+        return PacketDistributor.ALL.noArg();
+//        return new PacketDistributor.PacketTarget(target.sender(), toDirection(target.direction()));
     }
 }
