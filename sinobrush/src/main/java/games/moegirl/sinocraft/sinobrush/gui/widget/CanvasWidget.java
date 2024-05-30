@@ -56,9 +56,9 @@ public class CanvasWidget extends AbstractWidget {
         var pixelW = (int)Math.floor(160.0F / Math.max(1, drawing.getWidth()));
         var pixelH = (int)Math.floor(160.0F / Math.max(1, drawing.getHeight()));
         if (!drawing.isEmpty()) {
-            try (GLSwitcher ignored = GLSwitcher.blend().enable()) {
-                for (int i = 0; i < drawing.getWidth(); i++) {
-                    for (int j = 0; j < drawing.getHeight(); j++) {
+            try (var ignored = GLSwitcher.blend().enable()) {
+                for (var i = 0; i < drawing.getWidth(); i++) {
+                    for (var j = 0; j < drawing.getHeight(); j++) {
                         var x = getX() + (i * pixelW);
                         var y = getY() + (j * pixelH);
                         var color = drawing.getPixel(i, j);
@@ -94,51 +94,71 @@ public class CanvasWidget extends AbstractWidget {
     }
 
     private boolean isDragging = false;
-    private int mouseButton = 0;       // qyl27: 0 for none, 1 for left, 2 for right, 3 for both, ignore others.
+    private boolean leftMouseButton = false;
+    private boolean rightMouseButton = false;
     private boolean altPressed = false;
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-            mouseButton |= 1;
-        } else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-            mouseButton |= 2;
+        var result = super.mouseClicked(mouseX, mouseY, button);
+
+        if (result) {
+            if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+                leftMouseButton = true;
+            }
+
+            if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+                rightMouseButton = true;
+            }
+
+            if (drawable.getAsBoolean()) {
+                if (leftMouseButton) {
+                    if (altPressed) {
+                        selectColor(pickColor(mouseX, mouseY));
+                    } else {
+                        setPixel(mouseX, mouseY, color);
+                    }
+                } else if (rightMouseButton) {
+                    setPixel(mouseX, mouseY, 0);
+                }
+            }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+
+        return result;
     }
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-            mouseButton ^= 1;
-        } else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-            mouseButton ^= 2;
+        var result = super.mouseReleased(mouseX, mouseY, button);
+
+        if (result) {
+            isDragging = false;
+
+            if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+                leftMouseButton = false;
+            }
+
+            if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+                rightMouseButton = false;
+            }
         }
-        return super.mouseReleased(mouseX, mouseY, button);
+
+        return result;
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
-        if (drawable.getAsBoolean()) {
-            if ((mouseButton & 1) != 0) {
-                if (altPressed) {
-                    selectColor(pickColor(mouseX, mouseY));
-                } else {
-                    setPixel(mouseX, mouseY, color);
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        var result = super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+
+        if (result) {
+            if (drawable.getAsBoolean()) {
+                if (isMouseOver(mouseX, mouseY)) {
+                    isDragging = true;
                 }
-            } else if ((mouseButton & 2) != 0) {
-                setPixel(mouseX, mouseY, 0);
             }
         }
-    }
 
-    @Override
-    protected void onDrag(double mouseX, double mouseY, double dragX, double dragY) {
-        if (drawable.getAsBoolean()) {
-            if (isMouseOver(mouseX, mouseY)) {
-                isDragging = true;
-            }
-        }
+        return result;
     }
 
     @Override
@@ -146,22 +166,18 @@ public class CanvasWidget extends AbstractWidget {
         super.mouseMoved(mouseX, mouseY);
 
         if (isMouseOver(mouseX, mouseY) && isDragging) {
-            if ((mouseButton & 1) != 0) {
+            if (leftMouseButton) {
                 setPixel(mouseX, mouseY, color);
-            } else if ((mouseButton & 2) != 0) {
+            } else if (rightMouseButton) {
                 setPixel(mouseX, mouseY, 0);
             }
         }
     }
 
     @Override
-    public void onRelease(double mouseX, double mouseY) {
-        super.onRelease(mouseX, mouseY);
-        isDragging = false;
-    }
-
-    @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        // Todo: qyl27: check it.
+
         if (isMouseOver(mouseX, mouseY) && scrollX != 0) {
             var color = getColor();
             if (scrollX > 0) {
@@ -172,7 +188,7 @@ public class CanvasWidget extends AbstractWidget {
 
             color += 16;
             color %= 16;
-            color = Math.min(SBRConstants.DRAWING_COLOR_MAX - 1, Math.max(SBRConstants.DRAWING_COLOR_MIN, color));
+            color = Math.max(1, color);
 
             selectColor(color);
             return true;
@@ -202,22 +218,24 @@ public class CanvasWidget extends AbstractWidget {
     }
 
     private void setPixel(double mouseX, double mouseY, int color) {
-        var pixelW = 160.0 / Math.min(1, drawing.getWidth());
-        var pixelH = 160.0 / Math.min(1, drawing.getHeight());
+        var pixelW = 160.0 / Math.max(1, drawing.getWidth());
+        var pixelH = 160.0 / Math.max(1, drawing.getHeight());
 
         var i = (int) Math.floor((mouseX - getX()) / pixelW);
         var j = (int) Math.floor((mouseY - getY()) / pixelH);
 
+        System.out.println("i: " + i + ", j: " + j);
         getDrawing().setPixel(i, j, (byte) color);
     }
 
     private byte pickColor(double mouseX, double mouseY) {
-        var pixelW = 160.0 / Math.min(1, drawing.getWidth());
-        var pixelH = 160.0 / Math.min(1, drawing.getHeight());
+        var pixelW = 160.0 / Math.max(1, drawing.getWidth());
+        var pixelH = 160.0 / Math.max(1, drawing.getHeight());
 
         var i = (int) Math.floor((mouseX - getX()) / pixelW);
         var j = (int) Math.floor((mouseY - getY()) / pixelH);
 
+        System.out.println("i: " + i + ", j: " + j);
         return getDrawing().getPixel(i, j);
     }
 }
