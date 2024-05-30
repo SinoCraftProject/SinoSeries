@@ -179,10 +179,6 @@ public class CanvasWidget extends AbstractWidget {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        // Todo: qyl27: check it.
-
-    @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX) {
         if (isMouseOver(mouseX, mouseY) && scrollX != 0) {
             var color = getColor();

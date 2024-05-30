@@ -266,12 +266,12 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX) {
         if (canvas.isMouseOver(mouseX, mouseY)) {
-            return canvas.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            return canvas.mouseScrolled(mouseX, mouseY, scrollX);
         }
 
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        return super.mouseScrolled(mouseX, mouseY, scrollX);
     }
 
     @Override
