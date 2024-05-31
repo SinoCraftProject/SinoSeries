@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinodeco;
 
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
+import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
 
 public class SinoDeco {
@@ -13,5 +14,6 @@ public class SinoDeco {
     public void init() {
         SDItems.register();
         SDBlocks.register();
+        SDBlockItems.register();
     }
 }
