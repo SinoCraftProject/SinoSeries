@@ -1,8 +1,10 @@
 package games.moegirl.sinocraft.sinobrush.data;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
+import games.moegirl.sinocraft.sinobrush.data.advancement.AdvancementProvider;
 import games.moegirl.sinocraft.sinobrush.data.lang.ZhCnLangProvider;
 import games.moegirl.sinocraft.sinobrush.data.model.ItemModelProvider;
+import games.moegirl.sinocraft.sinobrush.data.recipe.RecipeProvider;
 import games.moegirl.sinocraft.sinobrush.data.tag.BlockTagProvider;
 import games.moegirl.sinocraft.sinobrush.data.tag.ItemTagProvider;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
@@ -16,6 +18,9 @@ public class SBRDataGen {
 
         var blockTagProvider = register.put(context -> new BlockTagProvider(context.getOutput(), context.registriesFuture()));
         register.put(context -> new ItemTagProvider(context, blockTagProvider.get()));
+
+        register.put(AdvancementProvider::new);
+        register.put(RecipeProvider::new);
 
         register.put(context -> new ItemModelProvider(context, SBRItems.ITEMS));
     }

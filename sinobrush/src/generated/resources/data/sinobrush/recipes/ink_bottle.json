@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinoseries:sinobrush",
+  "key": {
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "BCB",
+    "BWB",
+    "BCB"
+  ],
+  "result": {
+    "count": 67,
+    "item": "sinobrush:ink_bottle"
+  },
+  "show_notification": true
+}

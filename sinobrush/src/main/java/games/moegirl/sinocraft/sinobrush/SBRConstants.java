@@ -66,6 +66,8 @@ public class SBRConstants {
         public static final String GUI_BRUSH_SAVE_FAILED_NO_PAPER = "sinobrush.gui.brush.save_failed_no_paper";
         public static final String GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED = "sinobrush.gui.brush.save_failed_output_occupied";
 
+        public static final String ADVANCEMENT_ROOT_NAME = "sinobrush.advancement.root.name";
+        public static final String ADVANCEMENT_ROOT_DESC = "sinobrush.advancement.root.desc";
         public static final String ADVANCEMENT_BRUSH_NAME = "sinobrush.advancement.brush.name";
         public static final String ADVANCEMENT_BRUSH_DESC = "sinobrush.advancement.brush.desc";
         public static final String ADVANCEMENT_FAN_NAME = "sinobrush.advancement.fan.name";

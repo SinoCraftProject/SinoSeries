@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -42,6 +43,7 @@ public class FoldedFanItem extends FanItem {
         var stack = player.getItemInHand(usedHand);
 
         if (!player.getCooldowns().isOnCooldown(this)) {
+            player.awardStat(SBRStats.UNFOLD_FAN.get());
             return InteractionResultHolder.success(changeItemStack(player, stack, SBRItems.FAN.get(), 100));
         }
 

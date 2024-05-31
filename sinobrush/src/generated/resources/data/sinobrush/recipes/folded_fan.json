@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinoseries:sinobrush",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SPP",
+    "SPP",
+    " SS"
+  ],
+  "result": {
+    "item": "sinobrush:folded_fan"
+  },
+  "show_notification": true
+}
