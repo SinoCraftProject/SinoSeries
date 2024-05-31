@@ -60,8 +60,8 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
 
     @Override
     public <T extends Packet<NetworkContext>> void send(T packet, PacketTarget target) {
-//        channel.send(toTarget(target), packet);
         target.send(packet);
+//        channel.send(toTarget(target), packet);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     }
 
     private PacketDistributor.PacketTarget toTarget(PacketTarget target) {
-        return PacketDistributor.ALL.noArg();
 //        return new PacketDistributor.PacketTarget(target.sender(), toDirection(target.direction()));
+        return PacketDistributor.SERVER.noArg();
     }
 }

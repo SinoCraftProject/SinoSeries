@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -68,16 +69,26 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public @NotNull ItemStack getDefaultInstance() {
+        var stack = new ItemStack(this);
+        setExpend(stack, 0);
+        setColor(stack, SBRConstants.COLOR_WHITE);
+        return stack;
+    }
 
-        var color = getColor(stack);
-        tooltipComponents.add(TooltipHelper.getColor(color));
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
+        super.appendHoverText(stack, level, tooltip, isAdvanced);
 
-        var expend = getExpend(stack);
-        if (expend != 0) {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED,
-                    expend).withStyle(ChatFormatting.GRAY));
+        if (stack.getItem() instanceof XuanPaperItem) {
+            var color = getColor(stack);
+            tooltip.add(TooltipHelper.getColor(color));
+
+            var expend = getExpend(stack);
+            if (expend != 0) {
+                tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, expend)
+                        .withStyle(ChatFormatting.GRAY));
+            }
         }
     }
 }

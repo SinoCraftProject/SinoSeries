@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinoseries:sinobrush",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    " S",
+    "W "
+  ],
+  "result": {
+    "item": "sinobrush:brush"
+  },
+  "show_notification": true
+}

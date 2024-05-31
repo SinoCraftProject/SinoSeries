@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinobrush.gui.SBRMenu;
 import games.moegirl.sinocraft.sinobrush.gui.SBRScreen;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.network.SBRNetworks;
+import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import org.slf4j.Logger;
 
 public class SinoBrush {
@@ -20,6 +21,7 @@ public class SinoBrush {
         SBRItems.register();
         SBRMenu.register();
         SBRNetworks.register();
+        SBRStats.register();
 
         SBRDataGen.register();
     }

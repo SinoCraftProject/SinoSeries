@@ -6,12 +6,12 @@ import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
+import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.time.ZonedDateTime;
@@ -37,7 +37,7 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
     public void handle(NetworkContext handler) {
         ServerPlayer sender = handler.sender();
         if (sender.containerMenu instanceof BrushMenu brushMenu) {
-            Container container = brushMenu.inkAndPaperContainer;
+            Container container = brushMenu.container;
             ItemStack paperStack = container.getItem(BrushMenu.PAPER_SLOT);
             ItemStack inkSlot = container.getItem(BrushMenu.INK_SLOT);
             if (paperStack.isEmpty()) {
@@ -68,6 +68,7 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
                 ItemStack drawStack = new ItemStack(SBRItems.FILLED_XUAN_PAPER.get());
                 FilledXuanPaperItem.setDrawing(drawStack, drawing);
                 container.setItem(BrushMenu.DRAW_SLOT, drawStack);
+                sender.awardStat(SBRStats.DRAW_BY_BRUSH.get());
                 SBRNetworks.NETWORKS.send(S2CDrawingPacket.ok(), sender);
             }
         }

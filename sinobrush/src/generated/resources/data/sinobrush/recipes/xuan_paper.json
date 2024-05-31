@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sinoseries:sinobrush",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    "PP",
+    "PP"
+  ],
+  "result": {
+    "item": "sinobrush:xuan_paper"
+  },
+  "show_notification": true
+}
