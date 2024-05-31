@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
+import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
@@ -67,6 +68,7 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
                 ItemStack drawStack = new ItemStack(SBRItems.FILLED_XUAN_PAPER.get());
                 FilledXuanPaperItem.setDrawing(drawStack, drawing);
                 container.setItem(BrushMenu.DRAW_SLOT, drawStack);
+                sender.awardStat(SBRStats.DRAW_BY_BRUSH.get());
                 SBRNetworks.NETWORKS.send(S2CDrawingPacket.ok(), sender);
             }
         }

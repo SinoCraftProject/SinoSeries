@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin;
+package games.moegirl.sinocraft.sinocore.mixin.data;
 
 import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
 import net.minecraft.data.loot.LootTableProvider;

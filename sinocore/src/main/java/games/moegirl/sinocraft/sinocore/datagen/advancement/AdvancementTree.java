@@ -29,6 +29,7 @@ public class AdvancementTree {
 
     public AdvancementTree child(String id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
+        advancement.save(saver, id);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.data.tag;
 
+import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.datagen.AbstractItemTagsProvider;
 import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
 import net.minecraft.core.HolderLookup;
@@ -13,7 +14,8 @@ public class ItemTagProvider extends AbstractItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        // Todo: qyl27: datagen.
-//        add(ItemTags.FAN);
+        tag(SBRItemTags.FAN).add(SBRItems.FAN.get(), SBRItems.FOLDED_FAN.get());
+        tag(SBRItemTags.XUAN_PAPER).add(SBRItems.XUAN_PAPER.get(), SBRItems.FILLED_XUAN_PAPER.get());
+
     }
 }
