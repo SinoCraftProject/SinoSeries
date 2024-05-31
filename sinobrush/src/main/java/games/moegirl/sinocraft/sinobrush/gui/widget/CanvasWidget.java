@@ -29,10 +29,6 @@ public class CanvasWidget extends AbstractWidget {
         this.canDrawable = drawable;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public int getColor() {
         return color;
     }
