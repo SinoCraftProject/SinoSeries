@@ -33,10 +33,6 @@ public class CanvasWidget extends AbstractWidget {
         this.height = height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public int getColor() {
         return color;
     }
