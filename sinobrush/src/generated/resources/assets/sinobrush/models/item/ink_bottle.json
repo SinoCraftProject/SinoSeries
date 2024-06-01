@@ -2,6 +2,6 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "sinobrush:item/ink_bottle",
-    "layer1": "sinobrush:item/ink_bottle_cap"
+    "layer1": "sinobrush:item/ink_bottle"
   }
 }
