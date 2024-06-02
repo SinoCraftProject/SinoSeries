@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.utility.block.shape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class BlockShapeHelper {
@@ -30,6 +31,14 @@ public class BlockShapeHelper {
         shape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
                 result.set(Shapes.or(result.get(), Shapes.create(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX))));
         return result.get();
+    }
+
+    public static VoxelShape or(VoxelShape[] shapes) {
+        if (shapes.length > 1) {
+            var first = shapes[0];
+            return Arrays.stream(shapes).reduce(first, Shapes::or);
+        }
+        return Shapes.empty();
     }
 
 //    /**

@@ -23,7 +23,7 @@ include 'sinobrush:sinobrush-fabric'
 
 include 'sinodeco'
 include 'sinodeco:sinodeco-forge'
-include 'sinodeco:sinodeco-neoforge'
+//include 'sinodeco:sinodeco-neoforge'
 include 'sinodeco:sinodeco-fabric'
 
 include 'sinotest'

@@ -15,10 +15,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class WoodDeskBlock extends Block {
 
@@ -32,6 +29,7 @@ public class WoodDeskBlock extends Block {
     public static final BooleanProperty SOUTH_WEST = BooleanProperty.create("south_west");
     public static final BooleanProperty NORTH_EAST = BooleanProperty.create("north_east");
     public static final BooleanProperty SOUTH_EAST = BooleanProperty.create("south_east");
+
     public static final BooleanProperty[] CONNECTION_PROPERTIES = {NORTH_WEST, NORTH, NORTH_EAST, EAST, SOUTH_EAST, SOUTH, SOUTH_WEST, WEST};
 
     @Override
@@ -101,29 +99,129 @@ public class WoodDeskBlock extends Block {
 
     /// <editor-fold desc="Shapes.">
 
-    public static final VoxelShape[][] SHAPES = new VoxelShape[16][2];
+    public static final DeskPart[][][] PARTS = new DeskPart[16][2][];
+    public static final VoxelShape[][] SHAPES = new VoxelShape[16][];
 
     static {
-        var desktop = Block.box(0, 14, 0, 16, 16, 16);
-        var leg1 = Block.box(1, 0, 1, 4, 14, 4);
-        var leg2 = BlockShapeHelper.rotateY(leg1);
-        var leg3 = BlockShapeHelper.rotateY(leg2);
-        var leg4 = BlockShapeHelper.rotateY(leg3);
+        var top = new DeskPart("top", 0, Block.box(0, 14, 0, 16, 16, 16));
+        var leg1 = new DeskPart("leg", 0, Block.box(1, 0, 1, 4, 14, 4));
+        var leg2 = new DeskPart("leg", 90, BlockShapeHelper.rotateY(leg1.shape()));
+        var leg3 = new DeskPart("leg", 180, BlockShapeHelper.rotateY(leg2.shape()));
+        var leg4 = new DeskPart("leg", 270, BlockShapeHelper.rotateY(leg3.shape()));
 
-        var desktopWaist1 = Block.box(4, 10, 1.6, 12, 14, 2.4);
-        var desktopWaist2 = BlockShapeHelper.rotateY(desktopWaist1);
-        var desktopWaist3 = BlockShapeHelper.rotateY(desktopWaist2);
-        var desktopWaist4 = BlockShapeHelper.rotateY(desktopWaist3);
-        var desktopLeftSideWaist1 = Block.box(0, 10, 1.6, 13, 14, 2.4);
-        var desktopLeftSideWaist2 = BlockShapeHelper.rotateY(desktopLeftSideWaist1);
-//        var desktopLeftSideWaist3 = BlockShapeHelper.rotateY(desktopLeftSideWaist2);
-//        var desktopLeftSideWaist4 = BlockShapeHelper.rotateY(desktopLeftSideWaist3);
-        var desktopRightSideWaist3 = Block.box(0, 10, 13.6, 12, 14, 14.4);
-//        var desktopRightSideWaist4 = BlockShapeHelper.rotateY(desktopRightSideWaist3);
-        var desktopLongWaist1 = Block.box(0, 10, 1.6, 16, 14, 2.4);
-        var desktopLongWaist2 = BlockShapeHelper.rotateY(desktopLongWaist1);
-        var desktopLongWaist3 = BlockShapeHelper.rotateY(desktopLongWaist2);
-//        var desktopLongWaist4 = BlockShapeHelper.rotateY(desktopLongWaist3);
+        DeskPart desktopWaistBoth1;
+        {
+            var waistPart1 = Block.box(10, 11, 1.6, 16, 12, 2.4);
+            var waistPart2 = Block.box(14, 12, 1.6, 15, 14, 2.4);
+            var waistPart3 = Block.box(12, 12, 1.6, 13, 14, 2.4);
+            var waistPart4 = Block.box(5, 12, 1.6, 11, 13, 2.4);
+            var waistPart5 = Block.box(5, 10, 1.6, 11, 11, 2.4);
+            var waistPart6 = Block.box(0, 11, 1.6, 6, 12, 2.4);
+            var waistPart7 = Block.box(3, 12, 1.6, 4, 14, 2.4);
+            var waistPart8 = Block.box(1, 12, 1.6, 2, 14, 2.4);
+            desktopWaistBoth1 = new DeskPart("waist_both", 0, Shapes.or(waistPart1, waistPart2, waistPart3, waistPart4, waistPart5, waistPart6, waistPart7, waistPart8));
+        }
+        var desktopWaistBoth2 = new DeskPart("waist_both", 90, BlockShapeHelper.rotateY(desktopWaistBoth1.shape()));
+        var desktopWaistBoth3 = new DeskPart("waist_both", 180, BlockShapeHelper.rotateY(desktopWaistBoth2.shape()));
+        var desktopWaistBoth4 = new DeskPart("waist_both", 270, BlockShapeHelper.rotateY(desktopWaistBoth3.shape()));
+
+        DeskPart desktopWaistNone1;
+        {
+            var waistPart1 = Block.box(9, 13, 1.6, 12, 14, 2.4);
+            var waistPart2 = Block.box(11, 11, 1.6, 12, 13, 2.4);
+            var waistPart3 = Block.box(9, 12, 1.6, 10, 13, 2.4);
+            var waistPart4 = Block.box(4, 10, 1.6, 12, 11, 2.4);
+            var waistPart5 = Block.box(6, 12, 1.6, 7, 13, 2.4);
+            var waistPart6 = Block.box(4, 13, 1.6, 7, 14, 2.4);
+            var waistPart7 = Block.box(4, 11, 1.6, 5, 13, 2.4);
+            desktopWaistNone1 = new DeskPart("waist_none", 0, Shapes.or(waistPart1, waistPart2, waistPart3, waistPart4, waistPart5, waistPart6, waistPart7));
+        }
+        var desktopWaistNone2 = new DeskPart("waist_none", 90, BlockShapeHelper.rotateY(desktopWaistNone1.shape()));
+        var desktopWaistNone3 = new DeskPart("waist_none", 180, BlockShapeHelper.rotateY(desktopWaistNone2.shape()));
+        var desktopWaistNone4 = new DeskPart("waist_none", 270, BlockShapeHelper.rotateY(desktopWaistNone3.shape()));
+
+        DeskPart desktopWaistLink1;
+        {
+            var waistPart1 = Block.box(1.6, 11, 1.6, 2.4, 14, 2.4);
+            var waistPart2 = Block.box(1.6, 11, 0, 2.4, 12, 1.6);
+            var waistPart3 = Block.box(0, 11, 1.6, 1.6, 12, 2.4);
+            desktopWaistLink1 = new DeskPart("waist_link", 0, Shapes.or(waistPart1, waistPart2, waistPart3), NORTH_EAST);
+        }
+        var desktopWaistLink2 = new DeskPart("waist_link", 90, BlockShapeHelper.rotateY(desktopWaistLink1.shape()), SOUTH_WEST);
+        var desktopWaistLink3 = new DeskPart("waist_link", 180, BlockShapeHelper.rotateY(desktopWaistLink2.shape()), SOUTH_EAST);
+        var desktopWaistLink4 = new DeskPart("waist_link", 270, BlockShapeHelper.rotateY(desktopWaistLink3.shape()), NORTH_WEST);
+
+        DeskPart desktopWaistLeft1;
+        {
+            var waistPart1 = Block.box(11, 11, 1.6, 12, 13, 2.4);
+            var waistPart2 = Block.box(10, 12, 1.6, 11, 13, 2.4);
+            var waistPart3 = Block.box(2, 10, 1.6, 12, 11, 2.4);
+            var waistPart4 = Block.box(8, 13, 1.6, 9, 14, 2.4);
+            var waistPart5 = Block.box(4, 12, 1.6, 9, 13, 2.4);
+            var waistPart6 = Block.box(7, 11, 1.6, 8, 12, 2.4);
+            var waistPart7 = Block.box(5, 11, 1.6, 6, 12, 2.4);
+            var waistPart8 = Block.box(4, 13, 1.6, 5, 14, 2.4);
+            var waistPart9 = Block.box(0, 11, 1.6, 3, 12, 2.4);
+            var waistPart10 = Block.box(1, 12, 1.6, 2, 14, 2.4);
+            desktopWaistLeft1 = new DeskPart("waist_left", 0, Shapes.or(waistPart1, waistPart2, waistPart3, waistPart4, waistPart5, waistPart6, waistPart7, waistPart8, waistPart9, waistPart10));
+        }
+        var desktopWaistLeft2 = new DeskPart("waist_left", 90, BlockShapeHelper.rotateY(desktopWaistLeft1.shape()));
+        var desktopWaistLeft3 = new DeskPart("waist_left", 180, BlockShapeHelper.rotateY(desktopWaistLeft2.shape()));
+        var desktopWaistLeft4 = new DeskPart("waist_left", 270, BlockShapeHelper.rotateY(desktopWaistLeft3.shape()));
+
+        DeskPart desktopWaistRight1;
+        {
+            var waistPart1 = Block.box(14, 12, 1.6, 15, 14, 2.4);
+            var waistPart2 = Block.box(13, 11, 1.6, 16, 12, 2.4);
+            var waistPart3 = Block.box(4, 10, 1.6, 14, 11, 2.4);
+            var waistPart4 = Block.box(11, 13, 1.6, 12, 14, 2.4);
+            var waistPart5 = Block.box(7, 12, 1.6, 12, 13, 2.4);
+            var waistPart6 = Block.box(10, 11, 1.6, 8, 12, 2.4);
+            var waistPart7 = Block.box(8, 11, 1.6, 9, 12, 2.4);
+            var waistPart8 = Block.box(7, 13, 1.6, 8, 14, 2.4);
+            var waistPart9 = Block.box(5, 12, 1.6, 6, 13, 2.4);
+            var waistPart10 = Block.box(4, 11, 1.6, 5, 13, 2.4);
+            desktopWaistRight1 = new DeskPart("waist_right", 0, Shapes.or(waistPart1, waistPart2, waistPart3, waistPart4, waistPart5, waistPart6, waistPart7, waistPart8, waistPart9, waistPart10));
+        }
+        var desktopWaistRight2 = new DeskPart("waist_right", 90, BlockShapeHelper.rotateY(desktopWaistRight1.shape()));
+        var desktopWaistRight3 = new DeskPart("waist_right", 180, BlockShapeHelper.rotateY(desktopWaistRight2.shape()));
+        var desktopWaistRight4 = new DeskPart("waist_right", 270, BlockShapeHelper.rotateY(desktopWaistRight3.shape()));
+
+        PARTS[0][0] = new DeskPart[] {top, leg1, desktopWaistNone1, leg2, desktopWaistNone2, leg3, desktopWaistNone3, leg4, desktopWaistNone4};
+        PARTS[1][0] = new DeskPart[] {top, desktopWaistLeft1, leg3, desktopWaistRight3, leg4, desktopWaistNone4};
+        PARTS[2][0] = new DeskPart[] {top, leg1, desktopWaistNone1, desktopWaistLeft2, leg4, desktopWaistRight4};
+        PARTS[3][0] = new DeskPart[] {top, desktopWaistLeft1, leg4, desktopWaistRight4};
+        PARTS[3][1] = new DeskPart[] {top, desktopWaistLeft1, leg4, desktopWaistRight4, desktopWaistLink2};
+        PARTS[4][0] = new DeskPart[] {top, leg1, desktopWaistRight1, leg2, desktopWaistBoth2, desktopWaistLeft3};
+        PARTS[5][0] = new DeskPart[] {top, desktopWaistBoth1, desktopWaistBoth3};
+        PARTS[6][0] = new DeskPart[] {top, leg1, desktopWaistRight1, desktopWaistLeft2};
+        PARTS[6][1] = new DeskPart[] {top, leg1, desktopWaistRight1, desktopWaistLeft2, desktopWaistLink3};
+        PARTS[7][0] = new DeskPart[] {top, leg1};
+        PARTS[8][0] = new DeskPart[] {top, leg2, desktopWaistRight2, leg3, desktopWaistNone3, desktopWaistLeft4};
+        PARTS[9][0] = new DeskPart[] {top, desktopWaistRight2, leg3, desktopWaistLeft4};
+        PARTS[9][1] = new DeskPart[] {top, desktopWaistRight2, leg3, desktopWaistLeft4, desktopWaistLink1};
+        PARTS[10][0] = new DeskPart[] {top, desktopWaistBoth2, desktopWaistBoth4};
+        PARTS[11][0] = new DeskPart[] {top, desktopWaistBoth4};
+        PARTS[12][0] = new DeskPart[] {top, desktopWaistRight1, leg2, desktopWaistLeft3};
+        PARTS[12][1] = new DeskPart[] {top, desktopWaistRight1, leg2, desktopWaistLeft3, desktopWaistLink4};
+        PARTS[13][0] = new DeskPart[] {top, desktopWaistBoth3};
+        PARTS[14][0] = new DeskPart[] {top, desktopWaistBoth2};
+        PARTS[15][0] = new DeskPart[] {top};
+
+        for (var i = 0; i < PARTS.length; i++) {
+            SHAPES[i] = new VoxelShape[PARTS[i].length];
+            for (var j = 0; j < PARTS[i].length; j++) {
+                SHAPES[i][j] = BlockShapeHelper.or(Arrays.stream(PARTS[i][j])
+                        .map(DeskPart::shape)
+                        .toArray(VoxelShape[]::new));
+            }
+        }
+    }
+
+    public record DeskPart(String name, int rotate, VoxelShape shape, @Nullable BooleanProperty extra) {
+        public DeskPart(String name, int rotate, VoxelShape shape) {
+            this(name, rotate, shape, null);
+        }
     }
 
     private VoxelShape getIndexedShape(boolean north, boolean east, boolean south, boolean west, boolean extra) {
@@ -192,5 +290,4 @@ public class WoodDeskBlock extends Block {
     public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
         return 1;
     }
-
 }
