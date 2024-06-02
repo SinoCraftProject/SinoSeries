@@ -5,7 +5,7 @@ import games.moegirl.sinocraft.sinocore.data.gen.delegate.DataProviderBuilderBas
 import net.minecraft.core.RegistrySetBuilder;
 
 public class ForgeDatapackProviderBuilderImpl
-        extends DataProviderBuilderBase<ForgeDatapackProviderDelegateImpl, ForgeDatapackBuiltinEntriesProviderImpl> {
+        extends DataProviderBuilderBase<ForgeDatapackProviderDelegate, ForgeDatapackBuiltinEntriesProviderImpl> {
 
     private final IDataGenContext context;
 
@@ -14,7 +14,7 @@ public class ForgeDatapackProviderBuilderImpl
     }
 
     @Override
-    public ForgeDatapackBuiltinEntriesProviderImpl build(ForgeDatapackProviderDelegateImpl delegate) {
+    public ForgeDatapackBuiltinEntriesProviderImpl build(ForgeDatapackProviderDelegate delegate) {
         RegistrySetBuilder builder = new RegistrySetBuilder();
         delegate.getData().forEach(entry -> builder.add(entry.type, ctx -> entry.consumer.accept(ctx)));
         return new ForgeDatapackBuiltinEntriesProviderImpl(context, builder, getDataProviderName());

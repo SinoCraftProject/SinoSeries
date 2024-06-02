@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.forge;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeLootTableProviderDelegateImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeLootTableProviderDelegate;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -34,7 +34,7 @@ public class AbstractLootTableProviderImpl {
 
     public static LootTableProviderDelegateBase createDelegate(IDataGenContext context) {
         if (context instanceof ForgeDataGenContextImpl impl) {
-            return new ForgeLootTableProviderDelegateImpl(impl);
+            return new ForgeLootTableProviderDelegate(impl);
         }
         throw new ClassCastException("Can't cast " + context + " to ForgeDataGenContextImpl at Forge Platform. " +
                 "Use SinoCorePlatform#buildDataGeneratorContext to create this context. " +

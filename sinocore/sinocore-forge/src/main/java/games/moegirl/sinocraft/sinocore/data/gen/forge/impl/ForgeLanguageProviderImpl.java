@@ -4,13 +4,13 @@ import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ForgeLanguageProviderImpl extends LanguageProvider {
-    private ForgeLanguageProviderDelegateImpl delegate;
+    private ForgeLanguageProviderDelegate delegate;
 
     ForgeLanguageProviderImpl(IDataGenContext context, String locale) {
         super(context.getOutput(), context.getModId(), locale);
     }
 
-    public void setDelegate(ForgeLanguageProviderDelegateImpl delegate) {
+    public void setDelegate(ForgeLanguageProviderDelegate delegate) {
         this.delegate = delegate;
     }
 

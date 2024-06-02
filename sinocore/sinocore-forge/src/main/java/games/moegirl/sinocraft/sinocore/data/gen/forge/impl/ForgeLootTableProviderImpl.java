@@ -15,14 +15,14 @@ import java.util.Set;
 public class ForgeLootTableProviderImpl extends LootTableProvider implements IRenamedProvider {
 
     private final String modId;
-    private ForgeLootTableProviderDelegateImpl delegate;
+    private ForgeLootTableProviderDelegate delegate;
 
     public ForgeLootTableProviderImpl(ForgeDataGenContextImpl context) {
         super(context.getOutput(), Set.of(), new ArrayList<>());
         modId = context.getModId();
     }
 
-    public void setDelegate(ForgeLootTableProviderDelegateImpl delegate) {
+    public void setDelegate(ForgeLootTableProviderDelegate delegate) {
         this.delegate = delegate;
     }
 

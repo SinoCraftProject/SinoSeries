@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class ForgeAdvancementProviderDelegateImpl extends AdvancementProviderDelegateBase {
+public class ForgeAdvancementProviderDelegate extends AdvancementProviderDelegateBase {
 
     private final List<ForgeAdvancementProvider.AdvancementGenerator> generators = new ArrayList<>();
     private final ForgeDataGenContextImpl context;
 
-    public ForgeAdvancementProviderDelegateImpl(ForgeDataGenContextImpl context) {
-        super(new ForgeAdvancementProviderBuilderImpl(context));
+    public ForgeAdvancementProviderDelegate(ForgeDataGenContextImpl context) {
+        super(new ForgeAdvancementProviderBuilder(context));
         this.context = context;
     }
 

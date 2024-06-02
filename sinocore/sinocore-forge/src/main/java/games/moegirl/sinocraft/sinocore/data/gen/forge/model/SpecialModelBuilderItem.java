@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.forge.model;
 
-import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderDelegateImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderDelegate;
 import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderImpl;
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.model.ISpecialModelBuilder;
@@ -9,9 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 public class SpecialModelBuilderItem implements ISpecialModelBuilder<ForgeItemModelBuilderWrapper> {
 
     private final ForgeItemModelProviderImpl impl;
-    private final ForgeItemModelProviderDelegateImpl provider;
+    private final ForgeItemModelProviderDelegate provider;
 
-    public SpecialModelBuilderItem(ForgeItemModelProviderImpl impl, ForgeItemModelProviderDelegateImpl provider) {
+    public SpecialModelBuilderItem(ForgeItemModelProviderImpl impl, ForgeItemModelProviderDelegate provider) {
         this.impl = impl;
         this.provider = provider;
     }

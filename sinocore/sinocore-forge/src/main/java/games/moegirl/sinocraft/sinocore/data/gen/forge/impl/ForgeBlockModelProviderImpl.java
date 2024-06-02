@@ -22,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class ForgeBlockModelProviderImpl extends BlockModelProvider {
-    private ForgeBlockModelProviderDelegateImpl delegate;
+    private ForgeBlockModelProviderDelegate delegate;
 
     @SafeVarargs
     public ForgeBlockModelProviderImpl(ForgeDataGenContextImpl context, boolean strict, IRegistry<? extends Block>... modRegisters) {
@@ -36,7 +36,7 @@ public class ForgeBlockModelProviderImpl extends BlockModelProvider {
         delegate.generateData();
     }
 
-    public void setDelegate(ForgeBlockModelProviderDelegateImpl delegate) {
+    public void setDelegate(ForgeBlockModelProviderDelegate delegate) {
         this.delegate = delegate;
     }
 

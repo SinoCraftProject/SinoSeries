@@ -33,7 +33,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ForgeItemModelProviderImpl extends ItemModelProvider {
 
-    private ForgeItemModelProviderDelegateImpl delegate;
+    private ForgeItemModelProviderDelegate delegate;
 
     // default strict is false
     @SafeVarargs
@@ -51,7 +51,7 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
         delegate.generateData();
     }
 
-    public void setDelegate(ForgeItemModelProviderDelegateImpl delegate) {
+    public void setDelegate(ForgeItemModelProviderDelegate delegate) {
         this.delegate = delegate;
     }
 

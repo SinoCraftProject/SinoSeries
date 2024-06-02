@@ -18,11 +18,11 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
 
-public class ForgeLanguageProviderDelegateImpl extends LanguageProviderDelegateBase {
+public class ForgeLanguageProviderDelegate extends LanguageProviderDelegateBase {
 
     private final ForgeLanguageProviderImpl provider;
 
-    public ForgeLanguageProviderDelegateImpl(IDataGenContext context, String locale) {
+    public ForgeLanguageProviderDelegate(IDataGenContext context, String locale) {
         super(new ForgeLanguageProviderImpl(context, locale));
         provider = getForgeProvider();
         provider.setDelegate(this);

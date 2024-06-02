@@ -12,12 +12,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
-public class ForgeItemModelProviderDelegateImpl extends ItemModelProviderDelegateBase<ForgeItemModelBuilderWrapper> {
+public class ForgeItemModelProviderDelegate extends ItemModelProviderDelegateBase<ForgeItemModelBuilderWrapper> {
 
     private final ForgeItemModelProviderImpl impl;
 
     @SafeVarargs
-    public ForgeItemModelProviderDelegateImpl(ForgeDataGenContextImpl context, IRegistry<Item>... registries) {
+    public ForgeItemModelProviderDelegate(ForgeDataGenContextImpl context, IRegistry<Item>... registries) {
         super(new ForgeItemModelProviderImpl(context, false, registries));
         impl = getForgeProvider();
         impl.setDelegate(this);

@@ -7,9 +7,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.List;
 
-public class ForgeLootTableProviderDelegateImpl extends LootTableProviderDelegateBase {
+public class ForgeLootTableProviderDelegate extends LootTableProviderDelegateBase {
 
-    public ForgeLootTableProviderDelegateImpl(ForgeDataGenContextImpl context) {
+    public ForgeLootTableProviderDelegate(ForgeDataGenContextImpl context) {
         super(new ForgeLootTableProviderImpl(context), context.getModId());
         ((ForgeLootTableProviderImpl) getForgeProvider()).setDelegate(this);
     }

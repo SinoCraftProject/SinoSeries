@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.forge.model;
 
-import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeBlockModelProviderDelegateImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeBlockModelProviderDelegate;
 import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeBlockModelProviderImpl;
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.model.ISpecialModelBuilder;
@@ -9,9 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 public class SpecialModelBuilderBlock implements ISpecialModelBuilder<ForgeBlockModelBuilderWrapper> {
 
     private final ForgeBlockModelProviderImpl impl;
-    private final ForgeBlockModelProviderDelegateImpl provider;
+    private final ForgeBlockModelProviderDelegate provider;
 
-    public SpecialModelBuilderBlock(ForgeBlockModelProviderImpl impl, ForgeBlockModelProviderDelegateImpl provider) {
+    public SpecialModelBuilderBlock(ForgeBlockModelProviderImpl impl, ForgeBlockModelProviderDelegate provider) {
         this.impl = impl;
         this.provider = provider;
     }

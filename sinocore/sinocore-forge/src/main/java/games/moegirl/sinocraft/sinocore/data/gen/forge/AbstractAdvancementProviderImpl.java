@@ -2,13 +2,13 @@ package games.moegirl.sinocraft.sinocore.data.gen.forge;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeAdvancementProviderDelegateImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeAdvancementProviderDelegate;
 
 public abstract class AbstractAdvancementProviderImpl {
 
     public static AdvancementProviderDelegateBase createDelegate(IDataGenContext context) {
         if (context instanceof ForgeDataGenContextImpl impl) {
-            return new ForgeAdvancementProviderDelegateImpl(impl);
+            return new ForgeAdvancementProviderDelegate(impl);
         }
         throw new ClassCastException("Can't cast " + context + " to ForgeDataGenContextImpl at Forge Platform. " +
                 "Use SinoCorePlatform#buildDataGeneratorContext to create this context. " +

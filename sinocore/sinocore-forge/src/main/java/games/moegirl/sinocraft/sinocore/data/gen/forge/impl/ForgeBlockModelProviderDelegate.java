@@ -11,11 +11,11 @@ import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
-public class ForgeBlockModelProviderDelegateImpl extends BlockModelProviderDelegateBase<ForgeBlockModelBuilderWrapper> {
+public class ForgeBlockModelProviderDelegate extends BlockModelProviderDelegateBase<ForgeBlockModelBuilderWrapper> {
     private final ForgeBlockModelProviderImpl impl;
 
     @SafeVarargs
-    public ForgeBlockModelProviderDelegateImpl(ForgeDataGenContextImpl context, IRegistry<Block>... registries) {
+    public ForgeBlockModelProviderDelegate(ForgeDataGenContextImpl context, IRegistry<Block>... registries) {
         super(new ForgeBlockModelProviderImpl(context, false, registries));
         impl = getForgeProvider();
         impl.setDelegate(this);

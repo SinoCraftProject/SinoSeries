@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.forge;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderDelegateImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderDelegate;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.world.item.Item;
 
@@ -11,7 +11,7 @@ public class AbstractItemModelProviderImpl {
     @SafeVarargs
     public static ItemModelProviderDelegateBase<?> createDelegate(IDataGenContext context, IRegistry<Item>... registries) {
         if (context instanceof ForgeDataGenContextImpl impl) {
-            return new ForgeItemModelProviderDelegateImpl(impl, registries);
+            return new ForgeItemModelProviderDelegate(impl, registries);
         }
         throw new ClassCastException("Can't cast " + context + " to ForgeDataGenContextImpl at Forge Platform. " +
                 "Use SinoCorePlatform#buildDataGeneratorContext to create this context. " +

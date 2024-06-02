@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class ForgeDatapackProviderDelegateImpl extends DatapackProviderDelegateBase {
+public class ForgeDatapackProviderDelegate extends DatapackProviderDelegateBase {
 
     // RegistryBootstrap 内 key 依赖于注册先后顺序
     private List<Entry> entries = new ArrayList<>();
     private Entry lastEntry = null;
 
-    public ForgeDatapackProviderDelegateImpl(IDataGenContext context) {
+    public ForgeDatapackProviderDelegate(IDataGenContext context) {
         super(new ForgeDatapackProviderBuilderImpl(context));
     }
 
