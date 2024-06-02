@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.forge;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.ForgeDataGenContextImpl;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.loading.FMLLoader;

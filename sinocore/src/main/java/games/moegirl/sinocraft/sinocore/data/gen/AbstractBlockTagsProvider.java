@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public abstract class AbstractBlockTagsProvider extends IntrinsicHolderTagsProvider<Block> implements IRenamedProvider {
+public abstract class AbstractBlockTagsProvider extends IntrinsicHolderTagsProvider<Block> implements IRenamedProvider, ISinoDataProvider {
 
     protected static final TagKey<Block> FORGE_CHESTS_WOODEN = forgeTag("chests/wooden");
     protected static final TagKey<Block> FORGE_CHESTS_TRAPPED = forgeTag("chests/trapped");
@@ -75,6 +75,11 @@ public abstract class AbstractBlockTagsProvider extends IntrinsicHolderTagsProvi
     @Override
     public String getNewName() {
         return "Tags for Block: " + modId;
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 
     protected void chest(Supplier<? extends Block> block, TagKey<Block> material, boolean trapped) {

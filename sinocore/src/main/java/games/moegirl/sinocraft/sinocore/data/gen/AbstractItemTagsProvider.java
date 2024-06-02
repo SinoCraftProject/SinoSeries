@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvider<Item> implements IRenamedProvider {
+public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvider<Item> implements IRenamedProvider, ISinoDataProvider {
 
     protected static final TagKey<Item> FORGE_CHESTS_WOODEN = forgeTag("chests/wooden");
     protected static final TagKey<Item> FORGE_CHESTS_TRAPPED = forgeTag("chests/trapped");
@@ -51,6 +51,11 @@ public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvid
     @Override
     public String getNewName() {
         return "Tags for Item: " + modId;
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 
     @Override

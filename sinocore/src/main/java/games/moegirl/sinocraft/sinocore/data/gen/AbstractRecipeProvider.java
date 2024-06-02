@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class AbstractRecipeProvider extends RecipeProvider implements IRenamedProvider {
+public abstract class AbstractRecipeProvider extends RecipeProvider implements IRenamedProvider, ISinoDataProvider {
 
-    private final String modId;
+    protected final String modId;
 
     public AbstractRecipeProvider(PackOutput output, String modId) {
         super(output);
@@ -33,6 +33,11 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
     @Override
     public String getNewName() {
         return "Recipes: " + modId;
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 
     // region Recipes

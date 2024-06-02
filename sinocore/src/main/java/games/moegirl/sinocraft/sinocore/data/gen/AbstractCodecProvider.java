@@ -27,11 +27,11 @@ import java.util.concurrent.CompletableFuture;
  * 使用 CODEC 或 DIRECT_CODEC 直接导出 json 文件的的 Provider
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public abstract class AbstractCodecProvider implements DataProvider {
+public abstract class AbstractCodecProvider implements ISinoDataProvider {
 
     protected final CompletableFuture<HolderLookup.Provider> provider;
     private final PackOutput packOutput;
-    private final String modId;
+    protected final String modId;
     private final Map<ResourceKey<Registry>, List<Triple<ResourceLocation, Codec, Object>>> map = new HashMap<>();
     private final Logger logger = LogUtils.getLogger();
 
@@ -81,5 +81,10 @@ public abstract class AbstractCodecProvider implements DataProvider {
     @Override
     public String getName() {
         return "Codec Provider: " + modId;
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -19,17 +20,17 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 // 明明有 CODEC，但搞不到 Holder，只能用这玩意，就很气
-public abstract class AbstractBiomeModifierProvider implements DataProvider {
+public abstract class AbstractBiomeModifierProvider implements ISinoDataProvider {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     protected final PackOutput output;
-    protected final String modid;
+    protected final String modId;
 
     protected final List<Feature> features = new ArrayList<>();
 
-    public AbstractBiomeModifierProvider(PackOutput output, String modid) {
+    public AbstractBiomeModifierProvider(PackOutput output, String modId) {
         this.output = output;
-        this.modid = modid;
+        this.modId = modId;
     }
 
     public AbstractBiomeModifierProvider(IDataGenContext context) {
@@ -40,12 +41,17 @@ public abstract class AbstractBiomeModifierProvider implements DataProvider {
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
         registerBiomeModifiers();
         Path path = output.getOutputFolder(PackOutput.Target.DATA_PACK)
-                .resolve(modid)
+                .resolve(modId)
                 .resolve("forge")
                 .resolve("biome_modifier");
         return CompletableFuture.allOf(features.stream()
                 .map(f -> beginWriteFeature(f, path, cachedOutput))
                 .toArray(CompletableFuture[]::new));
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 
     private CompletableFuture<?> beginWriteFeature(Feature f, Path parentDir, CachedOutput output) {
@@ -63,7 +69,7 @@ public abstract class AbstractBiomeModifierProvider implements DataProvider {
 
     @Override
     public String getName() {
-        return modid + ": Biome Modifiers";
+        return modId + ": Biome Modifiers";
     }
 
     protected abstract void registerBiomeModifiers();

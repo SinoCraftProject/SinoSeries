@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,9 @@ import java.util.stream.Collectors;
  * <p></p>
  * 要求 Forge 部分需要存在实现 IForgeProviders 的类并存在无参构造
  */
-public class ForgeProvider implements DataProvider {
+public class ForgeProvider implements ISinoDataProvider {
+
+    protected final String modId;
 
     private final List<DataProvider> providers;
     private final String name;
@@ -26,6 +29,7 @@ public class ForgeProvider implements DataProvider {
     public ForgeProvider(IDataGenContext context) {
         this.providers = new ArrayList<>();
         initDataProviders(context);
+        this.modId = context.getModId();
         this.name = "Forge Provider[" + context.getModId() + "]: " + providers.stream()
                 .map(DataProvider::getName)
                 .collect(Collectors.joining(", ", "[", "]"));
@@ -57,6 +61,11 @@ public class ForgeProvider implements DataProvider {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getModId() {
+        return modId;
     }
 
     public interface IForgeProviders {

@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
  *     <li>{@link ProviderDelegateBase}: 代理平台相关的 provider 实现，并负责收集数据</li>
  * </ul>
  */
-public abstract class ForgeDataProviderBase<T extends ProviderDelegateBase<T>> implements DataProvider {
+public abstract class ForgeDataProviderBase<T extends ProviderDelegateBase<T>> implements ISinoDataProvider {
 
     private final T delegate;
 
