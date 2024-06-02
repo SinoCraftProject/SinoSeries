@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.datagen.AbstractAdvancementProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.advancement.AdvancementTree;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.AdvancementProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractAdvancementProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.advancement.AdvancementTree;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;

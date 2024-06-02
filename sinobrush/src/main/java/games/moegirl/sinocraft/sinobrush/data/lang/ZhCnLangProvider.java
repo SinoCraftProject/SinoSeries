@@ -2,9 +2,9 @@ package games.moegirl.sinocraft.sinobrush.data.lang;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
-import games.moegirl.sinocraft.sinocore.datagen.AbstractLanguageProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 
 public class ZhCnLangProvider extends AbstractLanguageProvider {
     public ZhCnLangProvider(IDataGenContext context) {

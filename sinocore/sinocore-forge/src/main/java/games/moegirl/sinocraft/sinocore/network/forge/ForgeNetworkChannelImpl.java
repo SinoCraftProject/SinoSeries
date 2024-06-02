@@ -61,6 +61,7 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     @Override
     public <T extends Packet<NetworkContext>> void send(T packet, PacketTarget target) {
         target.send(packet);
+        // Fixme: qyl27
 //        channel.send(toTarget(target), packet);
     }
 
@@ -78,6 +79,7 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     }
 
     private PacketDistributor.PacketTarget toTarget(PacketTarget target) {
+        // Fixme: qyl27
 //        return new PacketDistributor.PacketTarget(target.sender(), toDirection(target.direction()));
         return PacketDistributor.SERVER.noArg();
     }

@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinobrush.data.tag;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
-import games.moegirl.sinocraft.sinocore.datagen.AbstractItemTagsProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.block.Block;

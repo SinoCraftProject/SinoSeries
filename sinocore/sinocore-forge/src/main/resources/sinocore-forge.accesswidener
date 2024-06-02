@@ -1,2 +1,7 @@
 accessWidener   v2  named
 accessible method net/minecraftforge/network/PacketDistributor$PacketTarget <init> (Ljava/util/function/Consumer;Lnet/minecraftforge/network/PacketDistributor;)V
+accessible field net/minecraftforge/client/model/generators/ModelProvider TEXTURE Lnet/minecraftforge/common/data/ExistingFileHelper$ResourceType;
+accessible field net/minecraftforge/client/model/generators/ModelProvider MODEL Lnet/minecraftforge/common/data/ExistingFileHelper$ResourceType;
+accessible field net/minecraftforge/client/model/generators/ModelProvider MODEL_WITH_EXTENSION Lnet/minecraftforge/common/data/ExistingFileHelper$ResourceType;
+accessible field net/minecraftforge/client/model/generators/ModelProvider folder Ljava/lang/String;
+accessible method net/minecraftforge/client/model/generators/ModelProvider getPath (Lnet/minecraftforge/client/model/generators/ModelBuilder;)Ljava/nio/file/Path;

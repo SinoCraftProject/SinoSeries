@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.MinecraftServer;
 

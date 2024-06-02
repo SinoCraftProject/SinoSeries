@@ -124,9 +124,9 @@ subMod.each { Project mod ->
         }
 
         loom {
-            var awFile = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
-            if (awFile.exists()) {
-                accessWidenerPath = awFile
+            var aw = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
+            if (aw.exists()) {
+                accessWidenerPath = aw
             }
 
             var commonFile = new File(mod.projectDir, 'src/main/resources/architectury.common.json')
@@ -252,14 +252,14 @@ subMod.each { Project mod ->
 
         loom {
             forge {
+                var aw = new File(forgeMod.projectDir, "src/main/resources/${mod.modid}-forge.accesswidener")
+                if (aw.exists()) {
+                    accessWidenerPath = aw
+                }
+
                 if (loom.accessWidenerPath.isPresent()) {
                     convertAccessWideners = true
                     extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-                }
-
-                var aw = new File(forgeMod.projectDir, "src/main/resources/${mod.modid}-forge.accesswidener")
-                if (aw.exists()) {
-                    extraAccessWideners.add aw.name
                 }
 
                 if (forgeMod.file("/src/main/resources/${mod.modid}.mixins.json").exists()) {

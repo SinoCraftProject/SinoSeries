@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinotest.datagen;
 
-import games.moegirl.sinocraft.sinocore.datagen.ForgeProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.ForgeProvider;
 import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import games.moegirl.sinocraft.sinotest.SinoTest;

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinotest.forge.datagen;
 
-import games.moegirl.sinocraft.sinocore.datagen.ForgeProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.ForgeProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinotest.SinoTest;
 import net.minecraft.data.DataProvider;
 
