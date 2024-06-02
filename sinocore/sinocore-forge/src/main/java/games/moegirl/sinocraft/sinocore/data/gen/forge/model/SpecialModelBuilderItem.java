@@ -3,15 +3,15 @@ package games.moegirl.sinocraft.sinocore.data.gen.forge.model;
 import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderDelegateImpl;
 import games.moegirl.sinocraft.sinocore.data.gen.forge.impl.ForgeItemModelProviderImpl;
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.model.ISpecialBlockModelBuilder;
+import games.moegirl.sinocraft.sinocore.data.gen.model.ISpecialModelBuilder;
 import net.minecraft.resources.ResourceLocation;
 
-public class ForgeSpecialBlockModelBuilderImpl implements ISpecialBlockModelBuilder<ForgeItemModelBuilderWrapper> {
+public class SpecialModelBuilderItem implements ISpecialModelBuilder<ForgeItemModelBuilderWrapper> {
 
     private final ForgeItemModelProviderImpl impl;
     private final ForgeItemModelProviderDelegateImpl provider;
 
-    public ForgeSpecialBlockModelBuilderImpl(ForgeItemModelProviderImpl impl, ForgeItemModelProviderDelegateImpl provider) {
+    public SpecialModelBuilderItem(ForgeItemModelProviderImpl impl, ForgeItemModelProviderDelegateImpl provider) {
         this.impl = impl;
         this.provider = provider;
     }
@@ -250,5 +250,4 @@ public class ForgeSpecialBlockModelBuilderImpl implements ISpecialBlockModelBuil
     public ForgeItemModelBuilderWrapper nested() {
         return new ForgeItemModelBuilderWrapper(impl.nested());
     }
-
 }

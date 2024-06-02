@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.model;
 
 import net.minecraft.resources.ResourceLocation;
 
-public interface ISpecialBlockModelBuilder<T extends IModelBuilder<T>> {
+public interface ISpecialModelBuilder<T extends IModelBuilder<T>> {
 
     IModelProvider<T> getModelProvider();
 

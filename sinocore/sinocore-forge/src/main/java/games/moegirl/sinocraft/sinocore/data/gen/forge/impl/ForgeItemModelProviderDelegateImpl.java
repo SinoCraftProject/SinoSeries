@@ -2,9 +2,9 @@ package games.moegirl.sinocraft.sinocore.data.gen.forge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.forge.model.ForgeItemModelBuilderWrapper;
-import games.moegirl.sinocraft.sinocore.data.gen.forge.model.ForgeModelResourceHelperImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.model.ForgeItemModelResourceHelper;
 import games.moegirl.sinocraft.sinocore.data.gen.forge.ForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.data.gen.forge.model.ForgeSpecialBlockModelBuilderImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.forge.model.SpecialModelBuilderItem;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -29,13 +29,13 @@ public class ForgeItemModelProviderDelegateImpl extends ItemModelProviderDelegat
     }
 
     @Override
-    public ForgeSpecialBlockModelBuilderImpl getSpecialBuilder() {
-        return new ForgeSpecialBlockModelBuilderImpl(impl, this);
+    public SpecialModelBuilderItem getSpecialBuilder() {
+        return new SpecialModelBuilderItem(impl, this);
     }
 
     @Override
-    public ForgeModelResourceHelperImpl getResourceHelper() {
-        return new ForgeModelResourceHelperImpl(impl);
+    public ForgeItemModelResourceHelper getResourceHelper() {
+        return new ForgeItemModelResourceHelper(impl);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class ForgeItemModelProviderDelegateImpl extends ItemModelProviderDelegat
 
     @Override
     public void skipItem(Item... items) {
-        impl.skipItem(items);
+        impl.skip(items);
     }
 
     @Override

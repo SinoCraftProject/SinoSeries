@@ -5,14 +5,15 @@ import games.moegirl.sinocraft.sinocore.data.gen.model.IModelFile;
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelResourceHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelProvider;
 
 import java.nio.file.Path;
 
-public class ForgeModelResourceHelperImpl implements IModelResourceHelper<ForgeItemModelBuilderWrapper> {
+public class ForgeItemModelResourceHelper implements IModelResourceHelper<ForgeItemModelBuilderWrapper> {
 
     private final ForgeItemModelProviderImpl impl;
 
-    public ForgeModelResourceHelperImpl(ForgeItemModelProviderImpl impl) {
+    public ForgeItemModelResourceHelper(ForgeItemModelProviderImpl impl) {
         this.impl = impl;
     }
 
@@ -28,22 +29,22 @@ public class ForgeModelResourceHelperImpl implements IModelResourceHelper<ForgeI
 
     @Override
     public IModelResourceHelper.IResourceType getTextureResource() {
-        return new ForgeResourceTypeWrapper(impl.getTextureResource());
+        return new ForgeResourceTypeWrapper(ModelProvider.TEXTURE);
     }
 
     @Override
     public IModelResourceHelper.IResourceType getModelResource() {
-        return new ForgeResourceTypeWrapper(impl.getModelResource());
+        return new ForgeResourceTypeWrapper(ModelProvider.MODEL);
     }
 
     @Override
     public IModelResourceHelper.IResourceType getModelWithExtensionResource() {
-        return new ForgeResourceTypeWrapper(impl.getModelWithExtensionResource());
+        return new ForgeResourceTypeWrapper(ModelProvider.MODEL_WITH_EXTENSION);
     }
 
     @Override
     public String getFolder() {
-        return impl.getFolder();
+        return impl.folder;
     }
 
     @Override
@@ -62,23 +63,23 @@ public class ForgeModelResourceHelperImpl implements IModelResourceHelper<ForgeI
     }
 
     @Override
-    public Path getPath(ForgeItemModelBuilderWrapper model) {
-        return impl.getPath(model.getOrigin());
-    }
-
-    @Override
     public IModelFile weakCheckModel(ResourceLocation path) {
         return new ForgeModelFileWrapper<>(impl.weakCheckModel(path));
     }
 
     @Override
+    public Path getPath(ForgeItemModelBuilderWrapper model) {
+        return impl.getPath(model.getOrigin());
+    }
+
+    @Override
     public ResourceLocation blockLoc(ResourceLocation path) {
-        return impl.blockLoc(path);
+        return new ResourceLocation(path.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + path.getPath());
     }
 
     @Override
     public ResourceLocation foldedLoc(ResourceLocation path) {
-        return impl.foldedLoc(path);
+        return path.getPath().contains("/") ? path :
+                new ResourceLocation(path.getNamespace(), impl.folder + "/" + path.getPath());
     }
-
 }

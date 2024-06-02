@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,20 +32,6 @@ import java.util.concurrent.CompletableFuture;
  * @author qyl27
  */
 public class ForgeItemModelProviderImpl extends ItemModelProvider {
-    public static final ResourceLocation GENERATED = new ResourceLocation("minecraft", "item/generated");
-    public static final ResourceLocation HANDHELD = new ResourceLocation("minecraft", "item/handheld");
-
-    // 异常纹理与警告
-    // strict: 严格模式，当纹理缺失时产生异常而不是警告
-    private final boolean strict;
-    private final Logger logger;
-    private final List<Pair<ResourceLocation, ResourceLocation>> errModels = new ArrayList<>();
-
-    // DR 适配
-    private final IRegistry<? extends ItemLike>[] modRegisters;
-    private final Set<Item> skipItems = new HashSet<>();
-    private final Set<String> addedItems = new HashSet<>();
-    private boolean adding = false;
 
     private ForgeItemModelProviderDelegateImpl delegate;
 
@@ -70,6 +55,22 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
         this.delegate = delegate;
     }
 
+    /// <editor-fold desc="内部实现">
+
+    public static final ResourceLocation GENERATED = new ResourceLocation("minecraft", "item/generated");
+    public static final ResourceLocation HANDHELD = new ResourceLocation("minecraft", "item/handheld");
+
+    // 异常纹理与警告
+    // strict: 严格模式，当纹理缺失时产生异常而不是警告
+    private final boolean strict;
+    private final Logger logger;
+    private final List<Pair<ResourceLocation, ResourceLocation>> errModels = new ArrayList<>();
+
+    // DR 适配
+    private final IRegistry<? extends ItemLike>[] modRegisters;
+    private final Set<Item> skip = new HashSet<>();
+    private final Set<String> added = new HashSet<>();
+    private boolean adding = false;
     /**
      * Register item model.
      */
@@ -82,9 +83,9 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
         Arrays.stream(modRegisters)
                 .flatMap(reg -> Streams.stream(reg.getEntries()))
                 // 跳过手动跳过的物品
-                .filter(ref -> !skipItems.contains(ref.get().asItem()))
+                .filter(ref -> !skip.contains(ref.get().asItem()))
                 // 跳过直接或间接通过 getBuilder 创建模型的物品
-                .filter(ref -> !addedItems.contains(ref.getId().getPath()))
+                .filter(ref -> !added.contains(ref.getId().getPath()))
                 .map(ref -> ref.get().asItem())
                 .forEach(this::genDefaultItemModel);
     }
@@ -133,24 +134,26 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
 
     @Override
     public ItemModelBuilder getBuilder(String path) {
-        if (adding) addedItem(path);
-
         Preconditions.checkNotNull(path, "Path must not be null");
+        if (adding) {
+            added(path);
+        }
+
         var loc = path.contains(":") ? mcLoc(path) : modLoc(path);
         var outputLoc = foldedLoc(loc);
         this.existingFileHelper.trackGenerated(outputLoc, MODEL);
         return generatedModels.computeIfAbsent(outputLoc, (p) -> new UnexceptionalItemModelBuilder(p, existingFileHelper));
     }
 
-    protected void skipItem(Item... items) {
-        skipItems.addAll(Arrays.asList(items));
+    protected void skip(Item... items) {
+        skip.addAll(Arrays.asList(items));
     }
 
-    private void addedItem(String... items) {
-        addedItems.addAll(Arrays.asList(items));
+    private void added(String... items) {
+        added.addAll(Arrays.asList(items));
     }
 
-    // 异常纹理处理 ======================================================================================================
+    // 异常纹理处理
 
     @Override
     public ModelFile.ExistingModelFile getExistingFile(ResourceLocation path) {
@@ -195,7 +198,7 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
         });
     }
 
-    // 工具方法与默认模型 =================================================================================================
+    // 工具方法与默认模型
 
     public ResourceLocation blockLoc(ResourceLocation path) {
         return new ResourceLocation(path.getNamespace(), BLOCK_FOLDER + "/" + path.getPath());
@@ -252,33 +255,10 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
         withExistingParent(path, modLoc("block/" + path + "_" + statedModel));
     }
 
-    public ExistingFileHelper.ResourceType getTextureResource() {
-        return TEXTURE;
-    }
-
-    public ExistingFileHelper.ResourceType getModelResource() {
-        return MODEL;
-    }
-
-    public ExistingFileHelper.ResourceType getModelWithExtensionResource() {
-        return MODEL_WITH_EXTENSION;
-    }
-
-    public String getFolder() {
-        return folder;
-    }
-
     @Override
     public Path getPath(ItemModelBuilder model) {
         return super.getPath(model);
     }
 
-//    protected void chest(RegistryObject<? extends Item> chest, RegistryObject<? extends Item> trappedChest, Tree tree) {
-//        skipItem(chest.get(), trappedChest.get());
-//
-//        ResourceLocation name = tree.getBlockObj(TreeBlockType.PLANKS).getId();
-//        ResourceLocation texPlank = new ResourceLocation(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath());
-//        singleTexture(chest.getId().getPath(), mcLoc("item/chest"), "particle", texPlank);
-//        singleTexture(trappedChest.getId().getPath(), mcLoc("item/chest"), "particle", texPlank);
-//    }
+    /// </editor-fold>
 }

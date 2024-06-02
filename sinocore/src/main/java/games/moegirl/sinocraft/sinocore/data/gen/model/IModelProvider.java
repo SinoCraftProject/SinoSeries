@@ -4,7 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface IModelProvider<T extends IModelBuilder<T>> {
 
-    ISpecialBlockModelBuilder<T> getSpecialBuilder();
+    ISpecialModelBuilder<T> getSpecialBuilder();
 
     IModelResourceHelper<T> getResourceHelper();
 
