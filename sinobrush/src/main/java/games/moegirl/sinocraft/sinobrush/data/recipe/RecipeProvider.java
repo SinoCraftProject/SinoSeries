@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinobrush.data.recipe;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
-import games.moegirl.sinocraft.sinocore.datagen.AbstractRecipeProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;

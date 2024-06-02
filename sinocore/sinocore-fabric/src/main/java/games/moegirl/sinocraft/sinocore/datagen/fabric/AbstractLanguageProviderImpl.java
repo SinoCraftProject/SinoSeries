@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.fabric;
 
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import net.minecraft.data.PackOutput;
 
 public class AbstractLanguageProviderImpl {

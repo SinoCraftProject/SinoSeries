@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LootTableProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;

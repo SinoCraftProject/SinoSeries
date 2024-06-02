@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import games.moegirl.sinocraft.sinocore.datagen.advancement.IAdvancementGenerator;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.AdvancementProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.advancement.IAdvancementGenerator;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;

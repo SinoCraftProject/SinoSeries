@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.forge;
 
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
 import games.moegirl.sinocraft.sinocore.utility.Reference;
 import net.minecraft.data.DataGenerator;

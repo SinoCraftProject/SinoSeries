@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.forge;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.MinecraftServer;

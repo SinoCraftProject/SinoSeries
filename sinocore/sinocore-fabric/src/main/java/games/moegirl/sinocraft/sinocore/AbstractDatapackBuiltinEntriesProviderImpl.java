@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.DatapackProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.DatapackProviderDelegateBase;
 
 public abstract class AbstractDatapackBuiltinEntriesProviderImpl {
 

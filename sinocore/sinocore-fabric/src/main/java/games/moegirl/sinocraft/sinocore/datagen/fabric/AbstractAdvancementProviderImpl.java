@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.fabric;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.AdvancementProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
 
 public abstract class AbstractAdvancementProviderImpl {
 

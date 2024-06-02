@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.ItemModelProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeItemModelProviderDelegateImpl;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.world.item.Item;

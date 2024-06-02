@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import games.moegirl.sinocraft.sinocore.datagen.delegate.ItemModelProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
 import games.moegirl.sinocraft.sinocore.datagen.forge.model.ForgeItemModelBuilderWrapper;
 import games.moegirl.sinocraft.sinocore.datagen.forge.model.ForgeModelResourceHelperImpl;

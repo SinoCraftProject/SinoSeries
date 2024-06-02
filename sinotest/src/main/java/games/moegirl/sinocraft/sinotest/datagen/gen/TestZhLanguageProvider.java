@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.datagen.AbstractLanguageProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.datagen.TestLangKeys;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 

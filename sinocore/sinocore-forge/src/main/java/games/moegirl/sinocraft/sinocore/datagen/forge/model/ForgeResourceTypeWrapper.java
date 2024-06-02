@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.model;
 
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelResourceHelper;
+import games.moegirl.sinocraft.sinocore.data.gen.model.IModelResourceHelper;
 import net.minecraft.server.packs.PackType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 

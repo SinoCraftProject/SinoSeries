@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
 import games.moegirl.sinocraft.sinocore.registry.*;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;

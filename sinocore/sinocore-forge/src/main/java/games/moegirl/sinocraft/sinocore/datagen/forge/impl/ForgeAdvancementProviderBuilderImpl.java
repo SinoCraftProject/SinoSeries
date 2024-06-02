@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import games.moegirl.sinocraft.sinocore.datagen.delegate.DataProviderBuilderBase;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.DataProviderBuilderBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.ForgeDataGenContextImpl;
 
 public class ForgeAdvancementProviderBuilderImpl

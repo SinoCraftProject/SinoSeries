@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.datagen.AbstractBiomeModifierProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractBiomeModifierProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinotest.datagen.TestKeys;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep;

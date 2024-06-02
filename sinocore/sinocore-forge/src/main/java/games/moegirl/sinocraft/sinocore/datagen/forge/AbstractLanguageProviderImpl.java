@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LanguageProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeLanguageProviderDelegateImpl;
 
 public class AbstractLanguageProviderImpl {

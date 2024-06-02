@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.datagen.AbstractItemModelProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.ItemModelProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 
 public class TestItemModelProvider extends AbstractItemModelProvider {

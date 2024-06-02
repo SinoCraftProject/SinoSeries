@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.datagen.AbstractDatapackBuiltinEntriesProvider;
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.DatapackProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.AbstractDatapackBuiltinEntriesProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.DatapackProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.datagen.TestKeys;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.core.Holder;

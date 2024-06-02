@@ -1,10 +1,10 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LootTableProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeLootTableProviderDelegateImpl;
-import games.moegirl.sinocraft.sinocore.datagen.loottable.IBlockLootTableSubProvider;
-import games.moegirl.sinocraft.sinocore.datagen.loottable.IEntityLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.EntityLootSubProvider;

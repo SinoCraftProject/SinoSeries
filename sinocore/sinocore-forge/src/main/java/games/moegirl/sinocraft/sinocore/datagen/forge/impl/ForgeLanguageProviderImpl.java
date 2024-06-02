@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ForgeLanguageProviderImpl extends LanguageProvider {

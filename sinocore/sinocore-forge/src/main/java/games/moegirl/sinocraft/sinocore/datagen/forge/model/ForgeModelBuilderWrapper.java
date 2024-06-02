@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.model;
 
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelBuilder;
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelFile;
+import games.moegirl.sinocraft.sinocore.data.gen.model.IModelBuilder;
+import games.moegirl.sinocraft.sinocore.data.gen.model.IModelFile;
 import games.moegirl.sinocraft.sinocore.utility.ISelf;
 import games.moegirl.sinocraft.sinocore.utility.IWrapper;
 import net.minecraft.client.renderer.block.model.BlockModel;

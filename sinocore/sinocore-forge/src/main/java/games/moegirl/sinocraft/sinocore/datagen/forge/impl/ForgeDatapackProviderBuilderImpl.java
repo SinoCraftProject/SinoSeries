@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.impl;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.DataProviderBuilderBase;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.DataProviderBuilderBase;
 import net.minecraft.core.RegistrySetBuilder;
 
 public class ForgeDatapackProviderBuilderImpl

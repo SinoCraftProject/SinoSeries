@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.datagen.fabric;
 
-import games.moegirl.sinocraft.sinocore.datagen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.datagen.delegate.LootTableProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.datagen.loottable.IBlockLootTableSubProvider;
-import games.moegirl.sinocraft.sinocore.datagen.loottable.IEntityLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
+import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
 
 public class AbstractLootTableProviderImpl {
 

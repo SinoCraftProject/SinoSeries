@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.datagen.forge.model;
 
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeItemModelProviderImpl;
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelFile;
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelResourceHelper;
+import games.moegirl.sinocraft.sinocore.data.gen.model.IModelFile;
+import games.moegirl.sinocraft.sinocore.data.gen.model.IModelResourceHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 

@@ -2,8 +2,8 @@ package games.moegirl.sinocraft.sinocore.datagen.forge.model;
 
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeItemModelProviderDelegateImpl;
 import games.moegirl.sinocraft.sinocore.datagen.forge.impl.ForgeItemModelProviderImpl;
-import games.moegirl.sinocraft.sinocore.datagen.model.IModelProvider;
-import games.moegirl.sinocraft.sinocore.datagen.model.ISpecialBlockModelBuilder;
+import games.moegirl.sinocraft.sinocore.data.gen.model.IModelProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.model.ISpecialBlockModelBuilder;
 import net.minecraft.resources.ResourceLocation;
 
 public class ForgeSpecialBlockModelBuilderImpl implements ISpecialBlockModelBuilder<ForgeItemModelBuilderWrapper> {
