@@ -208,7 +208,21 @@ public class WoodDeskBlock extends Block {
         PARTS[13][0] = new DeskPart[] {top, desktopWaistBoth3};
         PARTS[14][0] = new DeskPart[] {top, desktopWaistBoth2};
         PARTS[15][0] = new DeskPart[] {top};
-        PARTS[15][1] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
+        PARTS[15][1] = new DeskPart[] {top, desktopWaistLink4};
+        PARTS[15][2] = new DeskPart[] {top, desktopWaistLink3};
+        PARTS[15][3] = new DeskPart[] {top, desktopWaistLink3, desktopWaistLink4};
+        PARTS[15][4] = new DeskPart[] {top, desktopWaistLink2};
+        PARTS[15][5] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink4};
+        PARTS[15][6] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink3};
+        PARTS[15][7] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
+        PARTS[15][8] = new DeskPart[] {top, desktopWaistLink1};
+        PARTS[15][9] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink4};
+        PARTS[15][10] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink3};
+        PARTS[15][11] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink3, desktopWaistLink4};
+        PARTS[15][12] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2};
+        PARTS[15][13] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink4};
+        PARTS[15][14] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3};
+        PARTS[15][15] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
 
         for (var i = 0; i < PARTS.length; i++) {
             SHAPES[i] = new VoxelShape[PARTS[i].length];
@@ -233,15 +247,21 @@ public class WoodDeskBlock extends Block {
         }
     }
 
-    private VoxelShape getIndexedShape(boolean north, boolean east, boolean south, boolean west, boolean extra) {
-        var index = north ? 1 : 0;
-        index <<= 1;
-        index += east ? 1 : 0;
-        index <<= 1;
-        index += south ? 1 : 0;
-        index <<= 1;
-        index += west ? 1 : 0;
-        return SHAPES[index][extra ? 1 : 0];
+    private int compress(boolean b1, boolean b2, boolean b3, boolean b4) {
+        var result = b1 ? 1 : 0;
+        result <<= 1;
+        result += b2 ? 1 : 0;
+        result <<= 1;
+        result += b3 ? 1 : 0;
+        result <<= 1;
+        result += b4 ? 1 : 0;
+        return result;
+    }
+
+    private VoxelShape getIndexedShape(boolean north, boolean east, boolean south, boolean west, int extra) {
+        var index = compress(north, east, south, west);
+
+        return SHAPES[index][extra];
     }
 
     @Override
@@ -251,15 +271,19 @@ public class WoodDeskBlock extends Block {
         var south = state.getValue(SOUTH);
         var west = state.getValue(WEST);
 
-        var extra = false;
+        var extra = 0;
+        if (north && west && south && east) {
+            extra = compress(state.getValue(NORTH_EAST), state.getValue(SOUTH_WEST), state.getValue(SOUTH_EAST), state.getValue(NORTH_WEST));
+        }
+
         if (north && west && !south && !east) {
-            extra = state.getValue(NORTH_WEST);
+            extra = state.getValue(NORTH_WEST) ? 1 : 0;
         } else if (!north && west && south && !east) {
-            extra = state.getValue(SOUTH_WEST);
+            extra = state.getValue(SOUTH_WEST) ? 1 : 0;
         } else if (north && !west && !south && east) {
-            extra = state.getValue(NORTH_EAST);
+            extra = state.getValue(NORTH_EAST) ? 1 : 0;
         } else if (!north &&  !west &&south && east) {
-            extra = state.getValue(SOUTH_EAST);
+            extra = state.getValue(SOUTH_EAST) ? 1 : 0;
         }
 
         return getIndexedShape(north, east, south, west, extra);
