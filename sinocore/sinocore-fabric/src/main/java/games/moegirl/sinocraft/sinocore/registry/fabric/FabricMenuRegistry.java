@@ -1,15 +1,15 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
-import games.moegirl.sinocraft.sinocore.registry.IMenuRegister;
+import games.moegirl.sinocraft.sinocore.registry.IMenuRegistry;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
-public class FabricMenuRegister extends FabricRegistryImpl<MenuType<?>> implements IMenuRegister {
+public class FabricMenuRegistry extends FabricRegistryImpl<MenuType<?>> implements IMenuRegistry {
 
-    FabricMenuRegister(String modId) {
+    FabricMenuRegistry(String modId) {
         super(modId, Registries.MENU);
     }
 

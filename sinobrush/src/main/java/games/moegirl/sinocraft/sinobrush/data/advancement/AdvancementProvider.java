@@ -24,36 +24,36 @@ public class AdvancementProvider extends AbstractAdvancementProvider {
     @Override
     public void generateData(AdvancementProviderDelegateBase delegate) {
         delegate.addAdvancementTree(saver -> new AdvancementTree(saver)
-                .root("sinobrush", Advancement.Builder.advancement()
+                .root(modLoc("sinobrush"), Advancement.Builder.advancement()
                         .display(SBRItems.BRUSH.get(),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC),
-                                new ResourceLocation(SinoBrush.MODID, "advancement/background"),
+                                modLoc("advancement/background.png"),
                                 FrameType.TASK, false, false, false)
                         .addCriterion("join_game", PlayerTrigger.TriggerInstance.tick())
                 )
-                .push("fan", Advancement.Builder.advancement()
+                .push(modLoc("fan"), Advancement.Builder.advancement()
                         .display(SBRItems.FOLDED_FAN.get(),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_FAN_NAME),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_FAN_DESC),
-                                new ResourceLocation(SinoBrush.MODID, "advancement/background"),
+                                modLoc("advancement/background.png"),
                                 FrameType.TASK, true, true, false)
                         .addCriterion("got_fan", delegate.triggerGotItems(SBRItemTags.FAN))
                 )
-                .child("open_fan", Advancement.Builder.advancement()
+                .child(modLoc("open_fan"), Advancement.Builder.advancement()
                         .display(SBRItems.FAN.get(),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_NAME),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_DESC),
-                                new ResourceLocation(SinoBrush.MODID, "advancement/background"),
+                                modLoc("advancement/background.png"),
                                 FrameType.TASK, true, true, false)
                         .addCriterion("open_fan", CustomStatTrigger.Instance.create(SBRStats.UNFOLD_FAN.get(), 1))
                 )
                 .pop()
-                .child("draw_on_paper", Advancement.Builder.advancement()
+                .child(modLoc("draw_on_paper"), Advancement.Builder.advancement()
                         .display(SBRItems.FILLED_XUAN_PAPER.get(),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_BRUSH_NAME),
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC),
-                                new ResourceLocation(SinoBrush.MODID, "advancement/background"),
+                                modLoc("advancement/background.png"),
                                 FrameType.TASK, true, true, false)
                         .addCriterion("draw_on_paper", CustomStatTrigger.Instance.create(SBRStats.DRAW_BY_BRUSH.get(), 1))
                 )

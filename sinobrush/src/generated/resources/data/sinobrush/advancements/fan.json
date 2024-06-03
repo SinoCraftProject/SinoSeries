@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:sinobrush",
+  "parent": "sinobrush:sinobrush",
   "criteria": {
     "got_fan": {
       "conditions": {
@@ -14,7 +14,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "sinobrush:advancement/background",
+    "background": "sinobrush:advancement/background.png",
     "description": {
       "translate": "sinobrush.advancement.fan.description"
     },

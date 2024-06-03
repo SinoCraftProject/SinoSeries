@@ -6,7 +6,7 @@ import net.minecraft.data.DataProvider;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public interface IDataProviderRegister {
+public interface IDataProviderRegistry {
 
     <T extends DataProvider> Supplier<T> put(Function<IDataGenContext, ? extends T> builder, boolean run);
 

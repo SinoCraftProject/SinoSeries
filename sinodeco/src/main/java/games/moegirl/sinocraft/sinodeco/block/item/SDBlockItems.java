@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Supplier;
 
 public class SDBlockItems {
-    public static IRegistry<Item> ITEMS = RegistryManager.obtain(SinoDeco.MODID, Registries.ITEM);
+    public static final IRegistry<Item> ITEMS = RegistryManager.obtain(SinoDeco.MODID, Registries.ITEM);
 
     public static void register() {
         ITEMS.register();

@@ -10,10 +10,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
 public class SDItems {
-    public static IRegistry<Item> ITEMS = RegistryManager.obtain(SinoDeco.MODID, Registries.ITEM);
-    public static ITabRegistry TABS = RegistryManager.obtainTab(SinoDeco.MODID);
+    public static final IRegistry<Item> ITEMS = RegistryManager.obtain(SinoDeco.MODID, Registries.ITEM);
+    public static final ITabRegistry TABS = RegistryManager.obtainTab(SinoDeco.MODID);
 
-    public static ResourceKey<CreativeModeTab> SINO_DECO_TAB = TABS.register("sinodeco");
+    public static final ResourceKey<CreativeModeTab> SINO_DECO_TAB = TABS.register("sinodeco");
 
     public static void register() {
         ITEMS.register();

@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.registry.fabric;
 
 import com.mojang.datafixers.util.Pair;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
-import games.moegirl.sinocraft.sinocore.registry.IScreenRegister;
+import games.moegirl.sinocraft.sinocore.registry.IScreenRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.MenuType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FabricScreenRegister implements IScreenRegister {
+public class FabricScreenRegistry implements IScreenRegistry {
 
     private final List<Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
 

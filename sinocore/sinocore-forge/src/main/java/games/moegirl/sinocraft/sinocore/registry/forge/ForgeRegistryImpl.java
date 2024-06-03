@@ -43,7 +43,7 @@ public class ForgeRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
-    public String getModId() {
+    public String modId() {
         return modId;
     }
 

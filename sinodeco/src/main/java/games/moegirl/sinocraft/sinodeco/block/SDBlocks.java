@@ -9,10 +9,11 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Supplier;
 
 public class SDBlocks {
-    public static IRegistry<Block> BLOCKS = RegistryManager.obtain(SinoDeco.MODID, Registries.BLOCK);
+    public static final IRegistry<Block> BLOCKS = RegistryManager.obtain(SinoDeco.MODID, Registries.BLOCK);
 
     public static void register() {
+        BLOCKS.register();
     }
 
-    public static Supplier<Block> WOOD_DESK = BLOCKS.register("wood_desk", WoodDeskBlock::new);
+    public static final Supplier<Block> WOOD_DESK = BLOCKS.register("wood_desk", WoodDeskBlock::new);
 }

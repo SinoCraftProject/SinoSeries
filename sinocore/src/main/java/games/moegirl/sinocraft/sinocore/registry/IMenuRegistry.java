@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
-public interface IMenuRegister extends IRegistry<MenuType<?>> {
+public interface IMenuRegistry extends IRegistry<MenuType<?>> {
 
     /**
      * 向该注册表注册内容

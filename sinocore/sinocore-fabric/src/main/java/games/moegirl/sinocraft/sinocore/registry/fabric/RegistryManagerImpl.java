@@ -19,20 +19,20 @@ public class RegistryManagerImpl {
         return new FabricTabRegistryImpl(modId);
     }
 
-    public static IMenuRegister _createMenu(String modId) {
-        return new FabricMenuRegister(modId);
+    public static IMenuRegistry _createMenu(String modId) {
+        return new FabricMenuRegistry(modId);
     }
 
-    public static IScreenRegister _createScreen(String modId) {
-        return new FabricScreenRegister();
+    public static IScreenRegistry _createScreen(String modId) {
+        return new FabricScreenRegistry();
     }
 
     public static ICommandRegistry _createCommand(String modId) {
         return new FabricCommandRegister();
     }
 
-    public static IDataProviderRegister _createDataProvider(String modId) {
-        return new IDataProviderRegister() {
+    public static IDataProviderRegistry _createDataProvider(String modId) {
+        return new IDataProviderRegistry() {
             @Override
             public <T extends DataProvider> Supplier<T> put(Function<IDataGenContext, ? extends T> builder, boolean run) {
                 return () -> null;

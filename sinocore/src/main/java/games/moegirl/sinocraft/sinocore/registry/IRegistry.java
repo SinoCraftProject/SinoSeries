@@ -18,7 +18,7 @@ public interface IRegistry<T> {
      *
      * @return Mod id
      */
-    String getModId();
+    String modId();
 
     /**
      * 向 MC 注册该注册表修改
@@ -62,6 +62,6 @@ public interface IRegistry<T> {
      * @return TagKey
      */
     default TagKey<T> createTag(String name) {
-        return createTag(new ResourceLocation(getModId(), name));
+        return createTag(new ResourceLocation(modId(), name));
     }
 }

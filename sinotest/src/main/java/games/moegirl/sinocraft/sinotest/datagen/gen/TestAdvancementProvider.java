@@ -19,7 +19,7 @@ public class TestAdvancementProvider extends AbstractAdvancementProvider {
     @Override
     public void generateData(AdvancementProviderDelegateBase delegate) {
         delegate.addAdvancementTree(saver -> new AdvancementTree(saver)
-                .root("test_adv", Advancement.Builder.advancement()
+                .root(modLoc("test_adv"), Advancement.Builder.advancement()
                         .display(new ItemStack(TestRegistry.TEST_ITEM_MC_TAB.get()),
                                 Component.literal("测试成就"),
                                 Component.literal("这是一个用于测试的成就"),

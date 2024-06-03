@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.registry.forge;
 
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegister;
+import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegistry;
 import games.moegirl.sinocraft.sinocore.utility.Reference;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -16,12 +16,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ForgeDataProviderRegisterImpl implements IDataProviderRegister, Consumer<GatherDataEvent> {
+public class ForgeDataProviderRegistryImpl implements IDataProviderRegistry, Consumer<GatherDataEvent> {
 
     private final List<Function<IDataGenContext, DataProvider>> providers = new ArrayList<>();
     private final List<Function<IDataGenContext, DataProvider>> providersNotRun = new ArrayList<>();
 
-    public ForgeDataProviderRegisterImpl() {
+    public ForgeDataProviderRegistryImpl() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this);
     }

@@ -62,6 +62,7 @@ public class ForgeBlockModelProviderImpl extends BlockModelProvider {
                 .filter(ref -> !skip.contains(ref.get()))
                 .filter(ref -> !added.contains(ref.getId().getPath()))
                 .map(Supplier::get)
+                .map(o -> (Block) o)
                 .forEach(this::genDefaultBlockModel);
         delegate.generateData();
     }

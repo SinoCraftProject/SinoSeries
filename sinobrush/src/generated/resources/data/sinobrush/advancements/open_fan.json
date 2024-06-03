@@ -1,9 +1,9 @@
 {
-  "parent": "minecraft:sinobrush",
+  "parent": "sinobrush:fan",
   "criteria": {
-    "draw_on_paper": {
+    "open_fan": {
       "conditions": {
-        "custom_stat": "sinobrush:draw_by_brush",
+        "custom_stat": "sinobrush:unfold_fan",
         "value_greater_than": 1
       },
       "trigger": "sinocore:custom_stat"
@@ -11,23 +11,23 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "sinobrush:advancement/background",
+    "background": "sinobrush:advancement/background.png",
     "description": {
-      "translate": "sinobrush.advancement.brush.desc"
+      "translate": "sinobrush.advancement.unfold_fan.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "sinobrush:filled_xuan_paper"
+      "item": "sinobrush:fan"
     },
     "show_toast": true,
     "title": {
-      "translate": "sinobrush.advancement.brush.name"
+      "translate": "sinobrush.advancement.unfold_fan.name"
     }
   },
   "requirements": [
     [
-      "draw_on_paper"
+      "open_fan"
     ]
   ],
   "sends_telemetry_event": true

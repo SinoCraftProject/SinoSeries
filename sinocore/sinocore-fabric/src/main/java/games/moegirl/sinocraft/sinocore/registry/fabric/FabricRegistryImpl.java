@@ -40,7 +40,7 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
-    public String getModId() {
+    public String modId() {
         return modId;
     }
 

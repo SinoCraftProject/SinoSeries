@@ -14,19 +14,19 @@ public class RegistryManagerImpl {
         return new ForgeTabRegistryImpl(modId);
     }
 
-    public static IMenuRegister _createMenu(String modId) {
-        return new ForgeMenuRegister(modId);
+    public static IMenuRegistry _createMenu(String modId) {
+        return new ForgeMenuRegistry(modId);
     }
 
-    public static IScreenRegister _createScreen(String modId) {
-        return new ForgeScreenRegister();
+    public static IScreenRegistry _createScreen(String modId) {
+        return new ForgeScreenRegistry();
     }
 
     public static ICommandRegistry _createCommand(String modId) {
         return new ForgeCommandRegister();
     }
 
-    public static IDataProviderRegister _createDataProvider(String modId) {
-        return new ForgeDataProviderRegisterImpl();
+    public static IDataProviderRegistry _createDataProvider(String modId) {
+        return new ForgeDataProviderRegistryImpl();
     }
 }

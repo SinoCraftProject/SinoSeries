@@ -176,7 +176,7 @@ public class WoodDeskBlock extends Block {
             var waistPart3 = Block.box(4, 10, 1.6, 14, 11, 2.4);
             var waistPart4 = Block.box(11, 13, 1.6, 12, 14, 2.4);
             var waistPart5 = Block.box(7, 12, 1.6, 12, 13, 2.4);
-            var waistPart6 = Block.box(10, 11, 1.6, 8, 12, 2.4);
+            var waistPart6 = Block.box(10, 11, 1.6, 12, 12, 2.4);
             var waistPart7 = Block.box(8, 11, 1.6, 9, 12, 2.4);
             var waistPart8 = Block.box(7, 13, 1.6, 8, 14, 2.4);
             var waistPart9 = Block.box(5, 12, 1.6, 6, 13, 2.4);
@@ -211,9 +211,11 @@ public class WoodDeskBlock extends Block {
         for (var i = 0; i < PARTS.length; i++) {
             SHAPES[i] = new VoxelShape[PARTS[i].length];
             for (var j = 0; j < PARTS[i].length; j++) {
-                SHAPES[i][j] = BlockShapeHelper.or(Arrays.stream(PARTS[i][j])
-                        .map(DeskPart::shape)
-                        .toArray(VoxelShape[]::new));
+                if (PARTS[i][j] != null) {
+                    SHAPES[i][j] = BlockShapeHelper.or(Arrays.stream(PARTS[i][j])
+                            .map(DeskPart::shape)
+                            .toArray(VoxelShape[]::new));
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.advancement;
 
 import net.minecraft.advancements.Advancement;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -17,25 +18,25 @@ public class AdvancementTree {
         this.saver = saver;
     }
 
-    public AdvancementTree root(String id, Advancement.Builder advancement) {
+    public AdvancementTree root(ResourceLocation id, Advancement.Builder advancement) {
         if (root != null) {
             throw new IllegalStateException("There should only one root.");
         }
 
-        root = advancement.save(saver, id);
+        root = advancement.save(saver, id.toString());
         cursor.push(root);
         return this;
     }
 
-    public AdvancementTree child(String id, Advancement.Builder advancement) {
+    public AdvancementTree child(ResourceLocation id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
-        advancement.save(saver, id);
+        advancement.save(saver, id.toString());
         return this;
     }
 
-    public AdvancementTree push(String id, Advancement.Builder advancement) {
+    public AdvancementTree push(ResourceLocation id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
-        var adv = advancement.save(saver, id);
+        var adv = advancement.save(saver, id.toString());
         cursor.push(adv);
         return this;
     }

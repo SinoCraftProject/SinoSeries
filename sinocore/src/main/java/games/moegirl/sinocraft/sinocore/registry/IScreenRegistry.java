@@ -8,7 +8,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
-public interface IScreenRegister {
+public interface IScreenRegistry {
+    // Todo: qyl27: can it extends IRegistry?
 
     void register();
 

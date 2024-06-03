@@ -7,7 +7,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "sinobrush:advancement/background",
+    "background": "sinobrush:advancement/background.png",
     "description": {
       "translate": "sinobrush.advancement.root.desc"
     },

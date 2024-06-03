@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.Instance> {
 
@@ -30,10 +31,11 @@ public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.
     }
 
     public static class Instance extends AbstractCriterionTriggerInstance {
+        @NotNull
         private final ResourceLocation customStat;
         private final int valueGreaterThan;
 
-        public Instance(ResourceLocation customStat, int valueGreaterThan, ContextAwarePredicate predicate) {
+        public Instance(@NotNull ResourceLocation customStat, int valueGreaterThan, ContextAwarePredicate predicate) {
             super(ID, predicate);
             this.customStat = customStat;
             this.valueGreaterThan = valueGreaterThan;
@@ -52,6 +54,11 @@ public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.
         }
 
         public boolean matches(ServerPlayer player) {
+            if (!Stats.CUSTOM.contains(customStat)) {
+                // Fixme: qyl27: Custom stats was not registered!
+                return false;
+            }
+
             return player.getStats().getValue(Stats.CUSTOM.get(customStat)) > valueGreaterThan;
         }
     }

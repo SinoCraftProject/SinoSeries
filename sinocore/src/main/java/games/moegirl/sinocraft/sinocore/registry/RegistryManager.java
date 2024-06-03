@@ -17,10 +17,10 @@ public class RegistryManager {
 
     private static final Map<String, Map<ResourceKey<?>, IRegistry<?>>> DEF_MAP = new HashMap<>();
     private static final Map<String, ITabRegistry> TAB_MAP = new HashMap<>();
-    private static final Map<String, IMenuRegister> MENU_MAP = new HashMap<>();
-    private static final Map<String, IScreenRegister> SCREEN_MAP = new HashMap<>();
+    private static final Map<String, IMenuRegistry> MENU_MAP = new HashMap<>();
+    private static final Map<String, IScreenRegistry> SCREEN_MAP = new HashMap<>();
     private static final Map<String, ICommandRegistry> COMMAND_MAP = new HashMap<>();
-    private static final Map<String, IDataProviderRegister> DATA_PROVIDER_TAB = new HashMap<>();
+    private static final Map<String, IDataProviderRegistry> DATA_PROVIDER_MAP = new HashMap<>();
 
     /**
      * 创建一个新的注册器
@@ -78,7 +78,7 @@ public class RegistryManager {
     }
 
     /**
-     * 获取该 mod 最后一个专用于注册 CreativeModeTab 的注册器，如果不存在则创建一个新对象
+     * 获取该 mod 最后一个专用于注册 Menu 的注册器，如果不存在则创建一个新对象
      *
      * <p>
      *
@@ -88,7 +88,7 @@ public class RegistryManager {
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
      */
-    public synchronized static IMenuRegister obtainMenu(String modId) {
+    public synchronized static IMenuRegistry obtainMenu(String modId) {
         return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
     }
 
@@ -98,7 +98,7 @@ public class RegistryManager {
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
      */
-    public synchronized static IScreenRegister obtainScreen(String modId) {
+    public synchronized static IScreenRegistry obtainScreen(String modId) {
         return SCREEN_MAP.computeIfAbsent(modId, RegistryManager::_createScreen);
     }
 
@@ -112,8 +112,8 @@ public class RegistryManager {
         return COMMAND_MAP.computeIfAbsent(modId, RegistryManager::_createCommand);
     }
 
-    public synchronized static IDataProviderRegister obtainDataProvider(String modId) {
-        return DATA_PROVIDER_TAB.computeIfAbsent(modId, RegistryManager::_createDataProvider);
+    public synchronized static IDataProviderRegistry obtainDataProvider(String modId) {
+        return DATA_PROVIDER_MAP.computeIfAbsent(modId, RegistryManager::_createDataProvider);
     }
 
     @ExpectPlatform
@@ -127,17 +127,17 @@ public class RegistryManager {
     }
 
     @ExpectPlatform
-    public static IDataProviderRegister _createDataProvider(String modId) {
+    public static IDataProviderRegistry _createDataProvider(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static IMenuRegister _createMenu(String modId) {
+    public static IMenuRegistry _createMenu(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static IScreenRegister _createScreen(String modId) {
+    public static IScreenRegistry _createScreen(String modId) {
         throw new AssertionError();
     }
 
