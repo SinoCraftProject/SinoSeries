@@ -36,16 +36,20 @@ public class SDBlockStateProvider extends BlockStateProvider {
 
                 if (ps[1] != null) {
                     for (var p : ps[1]) {
-                        if (p.extra() != null) {
-                            builder.part()
-                                    .modelFile(models().getExistingFile(modLoc("block/wood_desk_" + p.name())))
-                                    .rotationY(p.rotate())
-                                    .addModel()
-                                    .condition(p.extra(), true)
-                                    .condition(WoodDeskBlock.NORTH, north)
-                                    .condition(WoodDeskBlock.EAST, east)
-                                    .condition(WoodDeskBlock.SOUTH, south)
-                                    .condition(WoodDeskBlock.WEST, west);
+                        var part = builder.part()
+                                .modelFile(models().getExistingFile(modLoc("block/wood_desk_" + p.name())))
+                                .rotationY(p.rotate())
+                                .addModel()
+                                .condition(WoodDeskBlock.NORTH, north)
+                                .condition(WoodDeskBlock.EAST, east)
+                                .condition(WoodDeskBlock.SOUTH, south)
+                                .condition(WoodDeskBlock.WEST, west);
+                        if (p.condition() != null) {
+                            part.condition(p.condition(), true);
+                        }
+
+                        if (p.conditionNot() != null) {
+                            part.condition(p.conditionNot(), false);
                         }
                     }
                 }

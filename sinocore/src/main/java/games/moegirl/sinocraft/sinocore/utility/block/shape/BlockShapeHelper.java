@@ -37,8 +37,9 @@ public class BlockShapeHelper {
         if (shapes.length > 1) {
             var first = shapes[0];
             return Arrays.stream(shapes).reduce(first, Shapes::or);
+        } else {
+            return shapes[0];
         }
-        return Shapes.empty();
     }
 
 //    /**
