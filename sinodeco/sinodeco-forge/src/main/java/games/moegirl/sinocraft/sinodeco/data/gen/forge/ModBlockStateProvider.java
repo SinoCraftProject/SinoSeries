@@ -6,15 +6,15 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class SDBlockStateProvider extends BlockStateProvider {
-    public SDBlockStateProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
+public class ModBlockStateProvider extends BlockStateProvider {
+    public ModBlockStateProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
         super(output, modid, exFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
         {
-            var builder = getMultipartBuilder(SDBlocks.WOOD_DESK.get());
+            var builder = getMultipartBuilder(SDBlocks.WOODEN_TABLE.get());
 
             for (var i = 0; i < WoodDeskBlock.PARTS.length; i++) {
                 var north = (i & 0b1000) != 0;
