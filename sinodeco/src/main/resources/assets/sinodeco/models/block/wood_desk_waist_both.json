@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "sinodeco:block/wood_desk",
-		"particle": "sinodeco:block/wood_desk"
+		"particle": "sinodeco:block/wood_desk_particle"
 	},
 	"elements": [
 		{
@@ -149,7 +149,7 @@
 			"color": 0,
 			"children": [
 				{
-					"name": "桌腰样式3",
+					"name": "桌腰",
 					"origin": [10, 10, 10.6],
 					"color": 0,
 					"children": [0, 1, 2, 3, 4, 5, 6, 7]

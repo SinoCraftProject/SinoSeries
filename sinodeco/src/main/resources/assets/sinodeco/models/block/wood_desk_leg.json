@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "sinodeco:block/wood_desk",
-		"particle": "sinodeco:block/wood_desk"
+		"particle": "sinodeco:block/wood_desk_particle"
 	},
 	"elements": [
 		{
@@ -54,7 +54,7 @@
 	},
 	"groups": [
 		{
-			"name": "桌子创世",
+			"name": "桌子",
 			"origin": [0, 0, 0],
 			"color": 0,
 			"children": [0]
