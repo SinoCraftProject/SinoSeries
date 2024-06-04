@@ -45,11 +45,7 @@ public class SDBlockStateProvider extends BlockStateProvider {
                                 .condition(WoodDeskBlock.SOUTH, south)
                                 .condition(WoodDeskBlock.WEST, west);
                         if (p.condition() != null) {
-                            part.condition(p.condition(), true);
-                        }
-
-                        if (p.conditionNot() != null) {
-                            part.condition(p.conditionNot(), false);
+                            part.condition(p.condition(), p.conditionValue());
                         }
                     }
                 }

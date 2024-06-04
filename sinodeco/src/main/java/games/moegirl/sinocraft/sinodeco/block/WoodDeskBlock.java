@@ -101,7 +101,7 @@ public class WoodDeskBlock extends Block {
     /// <editor-fold desc="Shapes.">
 
     public static final DeskPart[][][] PARTS = new DeskPart[16][16][];
-    public static final VoxelShape[][] SHAPES = new VoxelShape[16][];
+    public static final VoxelShape[][] SHAPES = new VoxelShape[16][16];
 
     static {
         var top = new DeskPart("top", 0, Block.box(0, 14, 0, 16, 16, 16));
@@ -110,10 +110,10 @@ public class WoodDeskBlock extends Block {
         var leg3 = new DeskPart("leg", 180, BlockShapeHelper.rotateY(leg2.shape()));
         var leg4 = new DeskPart("leg", 270, BlockShapeHelper.rotateY(leg3.shape()));
 
-        var legConditional1 = new DeskPart(leg1.name(), leg1.rotate(), leg1.shape(), null, NORTH_WEST);
-        var legConditional2 = new DeskPart(leg2.name(), leg2.rotate(), leg2.shape(), null, NORTH_EAST);
-        var legConditional3 = new DeskPart(leg3.name(), leg3.rotate(), leg3.shape(), null, SOUTH_EAST);
-        var legConditional4 = new DeskPart(leg4.name(), leg4.rotate(), leg4.shape(), null, SOUTH_WEST);
+        var notWaistLeg1 = new DeskPart(leg1.name(), leg1.rotate(), leg1.shape(), NORTH_WEST, false);
+        var notWaistLeg2 = new DeskPart(leg2.name(), leg2.rotate(), leg2.shape(), NORTH_EAST, false);
+        var notWaistLeg3 = new DeskPart(leg3.name(), leg3.rotate(), leg3.shape(), SOUTH_EAST, false);
+        var notWaistLeg4 = new DeskPart(leg4.name(), leg4.rotate(), leg4.shape(), SOUTH_WEST, false);
 
         DeskPart desktopWaistBoth1;
         {
@@ -197,62 +197,52 @@ public class WoodDeskBlock extends Block {
         PARTS[1][0] = new DeskPart[] {top, desktopWaistLeft1, leg2, desktopWaistNone2, leg3, desktopWaistRight3};
         PARTS[2][0] = new DeskPart[] {top, leg1, desktopWaistNone1, leg2, desktopWaistRight2, desktopWaistLeft4};
         PARTS[3][0] = new DeskPart[] {top, desktopWaistLeft1, leg2, desktopWaistRight2, desktopWaistLink4};
-        PARTS[3][1] = new DeskPart[] {top, desktopWaistLeft1, leg2, desktopWaistRight2, leg4};
+        PARTS[3][0b0001] = new DeskPart[] {top, desktopWaistLeft1, leg2, desktopWaistRight2, notWaistLeg4};
         PARTS[4][0] = new DeskPart[] {top, leg1, desktopWaistRight1, desktopWaistLeft3, leg4, desktopWaistNone4};
         PARTS[5][0] = new DeskPart[] {top, desktopWaistBoth1, desktopWaistBoth3};
         PARTS[6][0] = new DeskPart[] {top, leg1, desktopWaistRight1, desktopWaistLeft4, desktopWaistLink3};
-        PARTS[6][1] = new DeskPart[] {top, leg1, desktopWaistRight1, desktopWaistLeft4, leg3};
-        PARTS[7][0] = new DeskPart[] {top, leg1};
+        PARTS[6][0b0010] = new DeskPart[] {top, leg1, desktopWaistRight1, desktopWaistLeft4, notWaistLeg3};
+        PARTS[7][0] = new DeskPart[] {top, desktopWaistBoth1, desktopWaistLink3, desktopWaistLink4};
+        PARTS[7][0b0010] = new DeskPart[] {top, desktopWaistBoth1, notWaistLeg3, desktopWaistLink4};
+        PARTS[7][0b0001] = new DeskPart[] {top, desktopWaistBoth1, desktopWaistLink3, notWaistLeg4};
+        PARTS[7][0b0011] = new DeskPart[] {top, desktopWaistBoth1, notWaistLeg3, notWaistLeg4};
         PARTS[8][0] = new DeskPart[] {top, desktopWaistLeft2, leg3, desktopWaistNone3, leg4, desktopWaistRight4};
         PARTS[9][0] = new DeskPart[] {top, desktopWaistLeft2, leg3, desktopWaistRight3, desktopWaistLink2};
-        PARTS[9][1] = new DeskPart[] {top, desktopWaistLeft2, leg3, desktopWaistRight3, leg2};
+        PARTS[9][0b1000] = new DeskPart[] {top, desktopWaistLeft2, leg3, desktopWaistRight3, notWaistLeg2};
         PARTS[10][0] = new DeskPart[] {top, desktopWaistBoth2, desktopWaistBoth4};
-        PARTS[11][0] = new DeskPart[] {top, desktopWaistBoth4};
-        PARTS[12][0] = new DeskPart[] {top, desktopWaistLeft3, leg4, desktopWaistRight4, desktopWaistLink1};
-        PARTS[12][1] = new DeskPart[] {top, desktopWaistLeft3, leg4, desktopWaistRight4, leg1};
-        PARTS[13][0] = new DeskPart[] {top, desktopWaistBoth3};
-        PARTS[14][0] = new DeskPart[] {top, desktopWaistBoth2};
-        PARTS[15][0] = new DeskPart[] {top};
-        PARTS[15][1] = new DeskPart[] {top, desktopWaistLink4};
-        PARTS[15][2] = new DeskPart[] {top, desktopWaistLink3};
-        PARTS[15][3] = new DeskPart[] {top, desktopWaistLink3, desktopWaistLink4};
-        PARTS[15][4] = new DeskPart[] {top, desktopWaistLink2};
-        PARTS[15][5] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink4};
-        PARTS[15][6] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink3};
-        PARTS[15][7] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
-        PARTS[15][8] = new DeskPart[] {top, desktopWaistLink1};
-        PARTS[15][9] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink4};
-        PARTS[15][10] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink3};
-        PARTS[15][11] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink3, desktopWaistLink4};
-        PARTS[15][12] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2};
-        PARTS[15][13] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink4};
-        PARTS[15][14] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3};
-        PARTS[15][15] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
-//        PARTS[15][0] = new DeskPart[] {top, legConditional1, legConditional2, legConditional3, legConditional4};
-//        PARTS[15][1] = new DeskPart[] {top, legConditional1, legConditional2, legConditional3, desktopWaistLink4};
-//        PARTS[15][2] = new DeskPart[] {top, legConditional1, legConditional2, legConditional4, desktopWaistLink3};
-//        PARTS[15][3] = new DeskPart[] {top, legConditional1, legConditional2, desktopWaistLink3, desktopWaistLink4};
-//        PARTS[15][4] = new DeskPart[] {top, legConditional1, legConditional3, legConditional4, desktopWaistLink2};
-//        PARTS[15][5] = new DeskPart[] {top, legConditional1, legConditional3, desktopWaistLink2, desktopWaistLink4};
-//        PARTS[15][6] = new DeskPart[] {top, legConditional1, legConditional4, desktopWaistLink2, desktopWaistLink3};
-//        PARTS[15][7] = new DeskPart[] {top, legConditional1, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
-//        PARTS[15][8] = new DeskPart[] {top, legConditional2, legConditional3, legConditional4, desktopWaistLink1};
-//        PARTS[15][9] = new DeskPart[] {top, legConditional2, legConditional3, desktopWaistLink1, desktopWaistLink4};
-//        PARTS[15][10] = new DeskPart[] {top, legConditional2, legConditional4, desktopWaistLink1, desktopWaistLink3};
-//        PARTS[15][11] = new DeskPart[] {top, legConditional2, desktopWaistLink1, desktopWaistLink3, desktopWaistLink4};
-//        PARTS[15][12] = new DeskPart[] {top, legConditional3, legConditional4, desktopWaistLink1, desktopWaistLink2};
-//        PARTS[15][13] = new DeskPart[] {top, legConditional3, desktopWaistLink1, desktopWaistLink2, desktopWaistLink4};
-//        PARTS[15][14] = new DeskPart[] {top, legConditional4, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3};
-//        PARTS[15][15] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
+        PARTS[11][0] = new DeskPart[] {top, desktopWaistBoth4, desktopWaistLink2, desktopWaistLink3};
+        PARTS[11][0b0100] = new DeskPart[] {top, desktopWaistBoth4, notWaistLeg2, desktopWaistLink3};
+        PARTS[11][0b0010] = new DeskPart[] {top, desktopWaistBoth4, desktopWaistLink2, notWaistLeg3};
+        PARTS[11][0b0110] = new DeskPart[] {top, desktopWaistBoth4, notWaistLeg2, notWaistLeg3};
+        PARTS[12][0] = new DeskPart[] {top, desktopWaistLeft3, leg4, desktopWaistRight4, desktopWaistLink2};
+        PARTS[12][0b0100] = new DeskPart[] {top, desktopWaistLeft3, leg4, desktopWaistRight4, notWaistLeg2};
+        PARTS[13][0] = new DeskPart[] {top, desktopWaistBoth3, desktopWaistLink1, desktopWaistLink2};
+        PARTS[13][0b1000] = new DeskPart[] {top, desktopWaistBoth3, notWaistLeg1, desktopWaistLink2};
+        PARTS[13][0b0100] = new DeskPart[] {top, desktopWaistBoth3, desktopWaistLink1, notWaistLeg2};
+        PARTS[13][0b1100] = new DeskPart[] {top, desktopWaistBoth3, notWaistLeg1, notWaistLeg2};
+        PARTS[14][0] = new DeskPart[] {top, desktopWaistBoth2, desktopWaistLink1, desktopWaistLink4};
+        PARTS[14][0b1000] = new DeskPart[] {top, desktopWaistBoth2, notWaistLeg1, desktopWaistLink4};
+        PARTS[14][0b0001] = new DeskPart[] {top, desktopWaistBoth2, desktopWaistLink1, notWaistLeg4};
+        PARTS[14][0b1001] = new DeskPart[] {top, desktopWaistBoth2, notWaistLeg1, notWaistLeg4};
+        PARTS[15][0] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4};
+        PARTS[15][1] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink3, notWaistLeg4};
+        PARTS[15][2] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, desktopWaistLink4, notWaistLeg3};
+        PARTS[15][3] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink2, notWaistLeg3, notWaistLeg4};
+        PARTS[15][4] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink3, desktopWaistLink4, notWaistLeg2};
+        PARTS[15][5] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink3, notWaistLeg2, notWaistLeg4};
+        PARTS[15][6] = new DeskPart[] {top, desktopWaistLink1, desktopWaistLink4, notWaistLeg2, notWaistLeg3};
+        PARTS[15][7] = new DeskPart[] {top, desktopWaistLink1, notWaistLeg2, notWaistLeg3, notWaistLeg4};
+        PARTS[15][8] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink3, desktopWaistLink4, notWaistLeg1};
+        PARTS[15][9] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink3, notWaistLeg1, notWaistLeg4};
+        PARTS[15][10] = new DeskPart[] {top, desktopWaistLink2, desktopWaistLink4, notWaistLeg1, notWaistLeg3};
+        PARTS[15][11] = new DeskPart[] {top, desktopWaistLink2, notWaistLeg1, notWaistLeg3, notWaistLeg4};
+        PARTS[15][12] = new DeskPart[] {top, desktopWaistLink3, desktopWaistLink4, notWaistLeg1, notWaistLeg2};
+        PARTS[15][13] = new DeskPart[] {top, desktopWaistLink3, notWaistLeg1, notWaistLeg2, notWaistLeg4};
+        PARTS[15][14] = new DeskPart[] {top, desktopWaistLink4, notWaistLeg1, notWaistLeg2, notWaistLeg3};
+        PARTS[15][15] = new DeskPart[] {top, notWaistLeg1, notWaistLeg2, notWaistLeg3, notWaistLeg4};
 
         for (var i = 0; i < PARTS.length; i++) {
-            var jMax = 2;
-            if (i == 15) {
-                jMax = 16;
-            }
-
-            SHAPES[i] = new VoxelShape[jMax];
-            for (var j = 0; j < jMax; j++) {
+            for (var j = 0; j < PARTS[i].length; j++) {
                 if (PARTS[i][j] != null) {
                     SHAPES[i][j] = BlockShapeHelper.or(Arrays.stream(PARTS[i][j])
                             .map(DeskPart::shape)
@@ -262,13 +252,13 @@ public class WoodDeskBlock extends Block {
         }
     }
 
-    public record DeskPart(String name, int rotate, VoxelShape shape, @Nullable BooleanProperty condition, @Nullable BooleanProperty conditionNot) {
+    public record DeskPart(String name, int rotate, VoxelShape shape, @Nullable BooleanProperty condition, boolean conditionValue) {
         public DeskPart(String name, int rotate, VoxelShape shape) {
             this(name, rotate, shape, null);
         }
 
         public DeskPart(String name, int rotate, VoxelShape shape, @Nullable BooleanProperty condition) {
-            this(name, rotate, shape, condition, null);
+            this(name, rotate, shape, condition, true);
         }
     }
 
@@ -283,35 +273,17 @@ public class WoodDeskBlock extends Block {
         return result;
     }
 
-    private VoxelShape getIndexedShape(boolean north, boolean east, boolean south, boolean west, int extra) {
-        var index = compress(north, east, south, west);
-
-        return SHAPES[index][extra];
-    }
-
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        var north = state.getValue(NORTH);
-        var east = state.getValue(EAST);
-        var south = state.getValue(SOUTH);
-        var west = state.getValue(WEST);
+        var neighbor = compress(state.getValue(NORTH), state.getValue(EAST),
+                state.getValue(SOUTH), state.getValue(WEST));
+        var extra = compress(state.getValue(NORTH_WEST), state.getValue(NORTH_EAST),
+                state.getValue(SOUTH_EAST), state.getValue(SOUTH_WEST));
 
-        var extra = 0;
-        if (north && west && south && east) {
-            extra = compress(state.getValue(NORTH_EAST), state.getValue(SOUTH_WEST), state.getValue(SOUTH_EAST), state.getValue(NORTH_WEST));
+        if (neighbor == 1 || neighbor == 2 || neighbor == 4 || neighbor == 8) {
+            extra = 0;
         }
-
-        if (north && west && !south && !east) {
-            extra = state.getValue(NORTH_WEST) ? 1 : 0;
-        } else if (!north && west && south && !east) {
-            extra = state.getValue(SOUTH_WEST) ? 1 : 0;
-        } else if (north && !west && !south && east) {
-            extra = state.getValue(NORTH_EAST) ? 1 : 0;
-        } else if (!north &&  !west &&south && east) {
-            extra = state.getValue(SOUTH_EAST) ? 1 : 0;
-        }
-
-        return getIndexedShape(north, east, south, west, extra);
+        return SHAPES[neighbor][extra];
     }
 
     /// </editor-fold>

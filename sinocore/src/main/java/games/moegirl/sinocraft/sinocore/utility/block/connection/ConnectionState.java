@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.utility.block.connection;
 
+import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
@@ -204,5 +205,8 @@ public enum ConnectionState implements StringRepresentable {
     @Override
     public @NotNull String getSerializedName() {
         return getName();
+    }
+
+    public record ConnectUpdateResult(Direction facing, ConnectionState state) {
     }
 }
