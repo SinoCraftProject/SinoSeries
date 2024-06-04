@@ -4,12 +4,13 @@ import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
+import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
+import games.moegirl.sinocraft.sinodeco.item.SDItems;
 import net.minecraft.world.item.Item;
 
-public class SDItemModelProvider extends AbstractItemModelProvider {
-    @SafeVarargs
-    public SDItemModelProvider(IDataGenContext context, IRegistry<Item>... registries) {
-        super(context, registries);
+public class ItemModelProvider extends AbstractItemModelProvider {
+    public ItemModelProvider(IDataGenContext context) {
+        super(context, SDBlockItems.ITEMS, SDItems.ITEMS);
     }
 
     @Override

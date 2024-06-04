@@ -15,5 +15,5 @@ public class SDBlocks {
         BLOCKS.register();
     }
 
-    public static final Supplier<Block> WOOD_DESK = BLOCKS.register("wood_desk", WoodDeskBlock::new);
+    public static final Supplier<Block> WOODEN_TABLE = BLOCKS.register("wooden_table", WoodDeskBlock::new);
 }

@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "sinodeco:block/wood_desk",
-		"particle": "sinodeco:block/wood_desk"
+		"particle": "sinodeco:block/wood_desk_particle"
 	},
 	"elements": [
 		{
@@ -474,30 +474,30 @@
 	},
 	"groups": [
 		{
-			"name": "桌子创世",
+			"name": "桌子",
 			"origin": [0, 0, 0],
 			"color": 0,
 			"children": [
 				{
-					"name": "桌腰样式1",
+					"name": "桌腰",
 					"origin": [0, 0, 0],
 					"color": 0,
 					"children": [0, 1, 2, 3, 4, 5, 6]
 				},
 				{
-					"name": "桌腰样式1",
+					"name": "桌腰",
 					"origin": [0, 0, 0],
 					"color": 0,
 					"children": [7, 8, 9, 10, 11, 12, 13]
 				},
 				{
-					"name": "桌腰样式1",
+					"name": "桌腰",
 					"origin": [0, 0, 0],
 					"color": 0,
 					"children": [14, 15, 16, 17, 18, 19, 20]
 				},
 				{
-					"name": "桌腰样式1",
+					"name": "桌腰",
 					"origin": [0, 0, 0],
 					"color": 0,
 					"children": [21, 22, 23, 24, 25, 26, 27]

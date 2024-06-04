@@ -18,7 +18,7 @@ public class SDForgeProvider implements ForgeProvider.IForgeProviders {
     @Override
     public @NotNull List<DataProvider> allProviders(IDataGenContext context) {
         return List.of(
-                new SDBlockStateProvider(context.getOutput(), context.getModId(), (ExistingFileHelper) context.getExistingFileHelper())
+                new ModBlockStateProvider(context.getOutput(), context.getModId(), (ExistingFileHelper) context.getExistingFileHelper())
         );
     }
 }

@@ -8,7 +8,6 @@ import games.moegirl.sinocraft.sinodeco.item.SDItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
 
@@ -19,5 +18,5 @@ public class SDBlockItems {
         ITEMS.register();
     }
 
-    public static final Supplier<Item> WOOD_DESK = ITEMS.register("wood_desk", () -> new BlockItem(SDBlocks.WOOD_DESK.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
+    public static final Supplier<Item> WOODEN_TABLE = ITEMS.register("wooden_table", () -> new BlockItem(SDBlocks.WOODEN_TABLE.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
 }
