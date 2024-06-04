@@ -33,3 +33,10 @@ mandatory = true
 versionRange = "[${minecraft_version},${next_minecraft_version})"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.${modid}]]
+modId = "sinocore"
+mandatory = true
+versionRange = "[${sinoseries_version},)"
+ordering = "AFTER"
+side = "BOTH"
