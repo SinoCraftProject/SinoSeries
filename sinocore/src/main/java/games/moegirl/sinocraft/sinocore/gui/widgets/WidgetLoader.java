@@ -6,15 +6,12 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.AbstractWidgetEntry;
-import games.moegirl.sinocraft.sinocore.utility.ModList;
 import games.moegirl.sinocraft.sinocore.utility.Resources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 @SuppressWarnings("UnreachableCode")
