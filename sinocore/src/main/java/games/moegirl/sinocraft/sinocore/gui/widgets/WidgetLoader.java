@@ -7,7 +7,9 @@ import com.mojang.serialization.JsonOps;
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.AbstractWidgetEntry;
 import games.moegirl.sinocraft.sinocore.utility.ModList;
+import games.moegirl.sinocraft.sinocore.utility.Resources;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,9 +55,11 @@ public class WidgetLoader {
      */
     public static Widgets loadWidgets(ResourceLocation name) {
         if (!FORCE_RELOAD_WIDGETS && WIDGETS.containsKey(name)) return (WIDGETS.get(name));
-        ModList.IModContainer container = ModList.findModById(name.getNamespace()).orElseThrow(() -> new RuntimeException("Not found mod " + name.getNamespace()));
-        Path path = container.findResource(name, ".json");
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
+        ResourceLocation jsonFile = new ResourceLocation(name.getNamespace(), name.getPath() + ".json");
+        Resource resource = Resources.getResourceManager()
+                .getResource(jsonFile)
+                .orElseThrow(() -> new RuntimeException("Failed to load widget " + name + ": " + jsonFile + " not found"));
+        try (BufferedReader reader = resource.openAsReader()) {
             JsonElement jsonElement = JsonParser.parseReader(reader);
             Widgets widgets = Widgets.CODEC.decode(JsonOps.INSTANCE, jsonElement)
                     .getOrThrow(false, err -> {
@@ -66,7 +70,7 @@ public class WidgetLoader {
             WIDGETS.put(name, widgets);
             return widgets;
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load widget " + name + " (" + path + ")", e);
+            throw new RuntimeException("Failed to load widget " + name + " (" + jsonFile + ")", e);
         }
     }
 
