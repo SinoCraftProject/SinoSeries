@@ -21,6 +21,7 @@ public class RegistryManager {
     private static final Map<String, IScreenRegistry> SCREEN_MAP = new HashMap<>();
     private static final Map<String, ICommandRegistry> COMMAND_MAP = new HashMap<>();
     private static final Map<String, IDataProviderRegistry> DATA_PROVIDER_MAP = new HashMap<>();
+    private static final Map<String, ICustomStatRegister> CUSTOM_STAT_MAP = new HashMap<>();
 
     /**
      * 创建一个新的注册器
@@ -116,6 +117,13 @@ public class RegistryManager {
         return DATA_PROVIDER_MAP.computeIfAbsent(modId, RegistryManager::_createDataProvider);
     }
 
+    /**
+     * 注册自定义记录
+     */
+    public synchronized static ICustomStatRegister obtainCustomStat(String modId) {
+        return CUSTOM_STAT_MAP.computeIfAbsent(modId, RegistryManager::_createCustomStat);
+    }
+
     @ExpectPlatform
     public static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
         throw new AssertionError();
@@ -143,6 +151,11 @@ public class RegistryManager {
 
     @ExpectPlatform
     public static ICommandRegistry _createCommand(String modId) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ICustomStatRegister _createCustomStat(String modId) {
         throw new AssertionError();
     }
 }

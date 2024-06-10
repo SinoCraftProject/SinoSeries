@@ -29,4 +29,8 @@ public class RegistryManagerImpl {
     public static IDataProviderRegistry _createDataProvider(String modId) {
         return new ForgeDataProviderRegistryImpl();
     }
+
+    public static ICustomStatRegister _createCustomStat(String modId) {
+        return new ForgeCustomStatRegister(modId);
+    }
 }

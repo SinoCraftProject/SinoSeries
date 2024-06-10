@@ -68,7 +68,7 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
                 ItemStack drawStack = new ItemStack(SBRItems.FILLED_XUAN_PAPER.get());
                 FilledXuanPaperItem.setDrawing(drawStack, drawing);
                 container.setItem(BrushMenu.DRAW_SLOT, drawStack);
-                sender.awardStat(SBRStats.DRAW_BY_BRUSH.get());
+                sender.awardStat(SBRStats.DRAW_BY_BRUSH);
                 SBRNetworks.NETWORKS.send(S2CDrawingPacket.ok(), sender);
             }
         }

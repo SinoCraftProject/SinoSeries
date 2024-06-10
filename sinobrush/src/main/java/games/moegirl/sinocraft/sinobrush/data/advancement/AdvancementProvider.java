@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.data.advancement;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.data.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
@@ -14,7 +13,6 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 
 public class AdvancementProvider extends AbstractAdvancementProvider {
     public AdvancementProvider(IDataGenContext context) {
@@ -46,7 +44,7 @@ public class AdvancementProvider extends AbstractAdvancementProvider {
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_DESC),
                                 modLoc("advancement/background.png"),
                                 FrameType.TASK, true, true, false)
-                        .addCriterion("open_fan", CustomStatTrigger.Instance.create(SBRStats.UNFOLD_FAN.get(), 1))
+                        .addCriterion("open_fan", CustomStatTrigger.Instance.create(SBRStats.UNFOLD_FAN, 1))
                 )
                 .pop()
                 .child(modLoc("draw_on_paper"), Advancement.Builder.advancement()
@@ -55,7 +53,7 @@ public class AdvancementProvider extends AbstractAdvancementProvider {
                                 Component.translatable(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC),
                                 modLoc("advancement/background.png"),
                                 FrameType.TASK, true, true, false)
-                        .addCriterion("draw_on_paper", CustomStatTrigger.Instance.create(SBRStats.DRAW_BY_BRUSH.get(), 1))
+                        .addCriterion("draw_on_paper", CustomStatTrigger.Instance.create(SBRStats.DRAW_BY_BRUSH, 1))
                 )
         );
     }
