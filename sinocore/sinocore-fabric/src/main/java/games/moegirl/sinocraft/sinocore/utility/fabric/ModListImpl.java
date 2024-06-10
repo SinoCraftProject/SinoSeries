@@ -4,7 +4,8 @@ import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -54,8 +55,12 @@ public class ModListImpl {
                 Path resolve = path.resolve(joinedPath);
                 if (Files.exists(resolve) || Files.isDirectory(resolve)) return resolve;
             }
-            // 都没 返回第一个
-            return paths.get(0).resolve(joinedPath);
+            // 都没
+            StringBuilder exceptionMessage = new StringBuilder("Mod ").append(getName()).append(" not found file: ");
+            for (Path path : paths) {
+                exceptionMessage.append("\n\t").append(path.resolve(joinedPath)).append(", ");
+            }
+            throw new RuntimeException(new FileNotFoundException(exceptionMessage.toString()));
         }
 
         @Override
