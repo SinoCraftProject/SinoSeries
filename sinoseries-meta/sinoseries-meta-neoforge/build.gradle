@@ -40,7 +40,9 @@ dependencies {
 
     subMod.each { Project mod ->
         helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
-            include project(path: neoForgeMod.path, configuration: 'namedElements')
+            if (neoForgeMod.modid != 'sinotest') {
+                include project(path: neoForgeMod.path, configuration: 'namedElements')
+            }
         }
     }
 }
