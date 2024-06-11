@@ -55,7 +55,6 @@ public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.
 
         public boolean matches(ServerPlayer player) {
             if (!Stats.CUSTOM.contains(customStat)) {
-                // Fixme: qyl27: Custom stats was not registered!
                 return false;
             }
 
