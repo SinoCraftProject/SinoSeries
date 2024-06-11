@@ -39,4 +39,8 @@ public class RegistryManagerImpl {
             }
         };
     }
+
+    public static ICustomStatRegister _createCustomStat(String modId) {
+        return new FabricCustomStatRegister(modId);
+    }
 }

@@ -19,9 +19,6 @@
             "games.moegirl.sinocraft.sinodeco.fabric.SinoDecoFabric"
         ]
     },
-    "mixins": [
-        "sinotest-common.mixins.json"
-    ],
     "depends": {
         "java": ">=17",
         "minecraft": "~${minecraft_version}",

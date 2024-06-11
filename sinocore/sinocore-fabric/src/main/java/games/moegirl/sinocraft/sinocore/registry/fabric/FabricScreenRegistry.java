@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.registry.fabric;
 import com.mojang.datafixers.util.Pair;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IScreenRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -40,6 +41,11 @@ public class FabricScreenRegistry implements IScreenRegistry {
         @Override
         public Screen create(AbstractContainerMenu menu, Inventory inventory, Component title) {
             return factory.create(menu, inventory, title);
+        }
+
+        @Override
+        public void fromPacket(Component title, MenuType type, Minecraft mc, int windowId) {
+            factory.fromPacket(title, type, mc, windowId);
         }
     }
 }

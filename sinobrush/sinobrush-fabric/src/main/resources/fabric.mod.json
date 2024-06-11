@@ -18,6 +18,9 @@
     "entrypoints": {
         "main": [
             "games.moegirl.sinocraft.sinobrush.fabric.SinoBrushFabric"
+        ],
+        "client": [
+            "games.moegirl.sinocraft.sinobrush.fabric.SinoBrushFabric"
         ]
     },
     "mixins": [

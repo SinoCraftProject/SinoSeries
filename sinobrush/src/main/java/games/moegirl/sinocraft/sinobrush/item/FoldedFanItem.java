@@ -43,7 +43,7 @@ public class FoldedFanItem extends FanItem {
         var stack = player.getItemInHand(usedHand);
 
         if (!player.getCooldowns().isOnCooldown(this)) {
-            player.awardStat(SBRStats.UNFOLD_FAN.get());
+            player.awardStat(SBRStats.UNFOLD_FAN);
             return InteractionResultHolder.success(changeItemStack(player, stack, SBRItems.FAN.get(), 100));
         }
 
