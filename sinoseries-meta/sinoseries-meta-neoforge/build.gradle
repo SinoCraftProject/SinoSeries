@@ -60,6 +60,13 @@ processResources {
     doFirst {
         metaHelpers.injectNeoForgeTransformers(project)
     }
+
+    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project)
+    List<String> filesToMatch = helpers.getFilesToMatchExpand()
+
+    filesMatching(filesToMatch, (copy) -> {
+        expand(propertiesToExpend)
+    })
 }
 
 configureLaunch {
