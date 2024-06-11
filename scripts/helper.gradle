@@ -123,9 +123,32 @@ List<Project> getSubFabricMod(Project project) {
     return getChildProjectsEndsBy(project, 'fabric')
 }
 
+Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = false) {
+    var map = new HashMap<String, ?>(subMod.properties)
+
+    var file = new File(subMod.projectDir, 'src/main/resources/mod_desc.txt')
+    if (file.exists()) {
+        var desc = Files.readString(file.toPath())
+        desc = desc.replace('\r', '')
+        if (replaceBreakLine) {
+            desc = desc.replace('\n', '\\n')
+        }
+        map.put('mod_description', desc)
+    }
+
+    return map
+}
+
+List<String> getFilesToMatchExpand() {
+    return ['pack.mcmeta', '*/**/mods.toml', 'fabric.mod.json']
+}
+
 ext.helpers = {
     reGenRunConfig = this.&reGenRunConfig
     getMavenVersion = this.&getMavenVersion
+    getPropertiesToExpand = this.&getPropertiesToExpand
+    getFilesToMatchExpand = this.&getFilesToMatchExpand
+
     getProjectResourcesDirs = this.&getProjectResourcesDirs
     getProjectGeneratedResourcesDir = this.&getProjectGeneratedResourcesDir
 

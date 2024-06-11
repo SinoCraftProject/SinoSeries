@@ -77,14 +77,7 @@ allprojects {
 
     processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-        def copyDetails = (copy) -> {
-            expand(project.properties)
-        }
-
-        filesMatching('*/**/mods.toml', copyDetails)
-        filesMatching('fabric.mod.json', copyDetails)
-        filesMatching('pack.mcmeta', copyDetails)
+        exclude('mod_desc.txt')
     }
 
     tasks.withType(JavaCompile).configureEach {
@@ -116,6 +109,10 @@ allprojects {
 }
 
 subMod.each { Project mod ->
+    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(mod)
+    Map<String, ?> propertiesToExpendFabric = helpers.getPropertiesToExpand(mod, true)
+    List<String> filesToMatch = helpers.getFilesToMatchExpand()
+
     configure(mod) {
         version = project.sinoseries_version
 
@@ -146,6 +143,12 @@ subMod.each { Project mod ->
             }
 
             compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+        }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpend)
+            })
         }
     }
 
@@ -198,13 +201,11 @@ subMod.each { Project mod ->
             }
         }
 
-        if (mod.name != 'sinotest') {
-            publishing {
-                publications {
-                    mavenJava(MavenPublication) {
-                        version = helpers.getMavenVersion(sub)
-                        from components.java
-                    }
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    version = helpers.getMavenVersion(sub)
+                    from components.java
                 }
             }
         }
@@ -239,6 +240,12 @@ subMod.each { Project mod ->
 
             configurations = [fabricMod.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
+        }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpendFabric)
+            })
         }
     }
 
@@ -295,6 +302,12 @@ subMod.each { Project mod ->
             configurations = [project.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
         }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpend)
+            })
+        }
     }
 
     configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
@@ -338,6 +351,12 @@ subMod.each { Project mod ->
 
             configurations = [project.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
+        }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpend)
+            })
         }
     }
 }

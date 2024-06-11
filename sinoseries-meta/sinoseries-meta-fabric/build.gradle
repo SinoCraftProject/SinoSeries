@@ -42,7 +42,10 @@ dependencies {
 
     subMod.each { Project mod ->
         helpers.getSubFabricMod(mod).each { Project fabricMod ->
-            include project(path: fabricMod.path, configuration: 'namedElements')
+            if (fabricMod.modid != 'sinotest') {
+                include project(path: fabricMod.path, configuration: 'namedElements')
+            }
+
             implementation project(path: fabricMod.path, configuration: 'namedElements')
         }
     }
@@ -61,6 +64,13 @@ processResources {
     doFirst {
         metaHelpers.injectFabricTransformers(project)
     }
+
+    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project, true)
+    List<String> filesToMatch = helpers.getFilesToMatchExpand()
+
+    filesMatching(filesToMatch, (copy) -> {
+        expand(propertiesToExpend)
+    })
 }
 
 configureLaunch {

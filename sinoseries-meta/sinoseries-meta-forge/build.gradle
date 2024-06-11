@@ -17,15 +17,11 @@ loom {
         client {
             configName = 'Forge Client'
             runDir = 'run/client'
-
-//            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
         }
 
         server {
             configName = 'Forge Server'
             runDir = 'run/server'
-
-//            log4jConfigs.from(new File(project(':sinocore').projectDir, '.gradle/loom-cache/log4j.xml'))
         }
 
         subMod.each { Project mod ->
@@ -65,7 +61,9 @@ dependencies {
 
     subMod.each { Project mod ->
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            include project(path: forgeMod.path, configuration: 'namedElements')
+            if (forgeMod.modid != 'sinotest') {
+                include project(path: forgeMod.path, configuration: 'namedElements')
+            }
         }
     }
 }
@@ -90,6 +88,13 @@ processResources {
             }
         }
     }
+
+    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project)
+    List<String> filesToMatch = helpers.getFilesToMatchExpand()
+
+    filesMatching(filesToMatch, (copy) -> {
+        expand(propertiesToExpend)
+    })
 }
 
 configureLaunch {
