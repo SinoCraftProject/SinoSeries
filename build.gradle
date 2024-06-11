@@ -110,6 +110,7 @@ allprojects {
 
 subMod.each { Project mod ->
     Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(mod)
+    Map<String, ?> propertiesToExpendFabric = helpers.getPropertiesToExpand(mod, true)
     List<String> filesToMatch = helpers.getFilesToMatchExpand()
 
     configure(mod) {
@@ -200,12 +201,6 @@ subMod.each { Project mod ->
             }
         }
 
-        processResources {
-            filesMatching(filesToMatch, (copy) -> {
-                expand(propertiesToExpend)
-            })
-        }
-
         publishing {
             publications {
                 mavenJava(MavenPublication) {
@@ -245,6 +240,12 @@ subMod.each { Project mod ->
 
             configurations = [fabricMod.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
+        }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpendFabric)
+            })
         }
     }
 
@@ -301,6 +302,12 @@ subMod.each { Project mod ->
             configurations = [project.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
         }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpend)
+            })
+        }
     }
 
     configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
@@ -344,6 +351,12 @@ subMod.each { Project mod ->
 
             configurations = [project.configurations.shadowCommon]
             archiveClassifier = 'dev-shadow'
+        }
+
+        processResources {
+            filesMatching(filesToMatch, (copy) -> {
+                expand(propertiesToExpend)
+            })
         }
     }
 }

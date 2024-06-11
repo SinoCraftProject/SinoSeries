@@ -65,7 +65,7 @@ processResources {
         metaHelpers.injectFabricTransformers(project)
     }
 
-    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project)
+    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project, true)
     List<String> filesToMatch = helpers.getFilesToMatchExpand()
 
     filesMatching(filesToMatch, (copy) -> {
