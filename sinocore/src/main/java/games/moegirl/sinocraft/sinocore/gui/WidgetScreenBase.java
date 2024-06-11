@@ -32,6 +32,12 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
     }
 
     @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         // qyl27: Do nothing. To prevent render "Inventory" in our GUI.
     }
