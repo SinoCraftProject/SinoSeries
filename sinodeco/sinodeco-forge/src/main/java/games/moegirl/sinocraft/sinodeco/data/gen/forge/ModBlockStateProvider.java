@@ -22,20 +22,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 var south = (i & 0b0010) != 0;
                 var west = (i & 0b0001) != 0;
 
-                var ps = WoodDeskBlock.PARTS[i];
-                for (var p : ps[0]) {
-                    builder.part()
-                            .modelFile(models().getExistingFile(modLoc("block/wood_desk_" + p.name())))
-                            .rotationY(p.rotate())
-                            .addModel()
-                            .condition(WoodDeskBlock.NORTH, north)
-                            .condition(WoodDeskBlock.EAST, east)
-                            .condition(WoodDeskBlock.SOUTH, south)
-                            .condition(WoodDeskBlock.WEST, west);
-                }
+                var extras = WoodDeskBlock.PARTS[i];
+                for (var parts : extras) {
+                    if (parts == null) {
+                        continue;
+                    }
 
-                if (ps[1] != null) {
-                    for (var p : ps[1]) {
+                    for (var p : parts) {
+                        if (p == null) {
+                            continue;
+                        }
+
                         var part = builder.part()
                                 .modelFile(models().getExistingFile(modLoc("block/wood_desk_" + p.name())))
                                 .rotationY(p.rotate())
@@ -44,6 +41,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                 .condition(WoodDeskBlock.EAST, east)
                                 .condition(WoodDeskBlock.SOUTH, south)
                                 .condition(WoodDeskBlock.WEST, west);
+
                         if (p.condition() != null) {
                             part.condition(p.condition(), p.conditionValue());
                         }
@@ -51,6 +49,5 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 }
             }
         }
-
     }
 }
