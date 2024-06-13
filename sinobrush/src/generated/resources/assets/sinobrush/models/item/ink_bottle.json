@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sinobrush:item/ink_bottle_mask",
+    "layer1": "sinobrush:item/ink_bottle"
+  }
+}
