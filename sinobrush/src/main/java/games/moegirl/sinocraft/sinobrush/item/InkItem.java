@@ -23,12 +23,11 @@ public class InkItem extends Item implements DyeableLeatherItem {
 
     @Override
     public int getColor(ItemStack stack) {
-        if (hasCustomColor(stack)) {
-            return DyeableLeatherItem.super.getColor(stack);
-        } else {
+        if (!hasCustomColor(stack)) {
             setColor(stack, SBRConstants.COLOR_BLACK);
-            return SBRConstants.COLOR_BLACK;
         }
+
+        return DyeableLeatherItem.super.getColor(stack);
     }
 
     @Override

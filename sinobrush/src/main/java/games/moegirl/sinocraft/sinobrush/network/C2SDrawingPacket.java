@@ -51,11 +51,8 @@ public class C2SDrawingPacket implements Packet<NetworkContext> {
                 drawing.setZonedDate(ZonedDateTime.now());
 
                 var size = SBRConstants.DRAWING_MIN_LENGTH << XuanPaperItem.getExpend(paperStack);
-                if (drawing.getWidth() != size) {
-                    drawing.setWidth(size);
-                }
-                if (drawing.getHeight() != size) {
-                    drawing.setHeight(size);
+                if (drawing.getWidth() != size || drawing.getHeight() != size) {
+                    drawing.resize(size, size);
                 }
 
                 drawing.setPaperColor(SBRItems.XUAN_PAPER.get().getColor(paperStack));

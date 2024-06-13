@@ -17,7 +17,7 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
 
     static {
         EMPTY = new Drawing();
-        EMPTY.pixels = new byte[16 * 16 / 2];
+        EMPTY.pixels = new byte[16 * 16];
         EMPTY.xSize = 16;
         EMPTY.ySize = 16;
     }
@@ -97,17 +97,12 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
     }
 
     public byte getPixel(int index) {
-        var indexInArray = index / SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE;
-        var shift = SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE - (index % SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE);
-
-        if (getPixels().length <= indexInArray) {
+        if (getPixels().length <= index) {
             //throw new IllegalArgumentException("Index out of pixels bound: " + index);
             return 0;
         }
 
-        var cell = getPixels()[indexInArray];
-        cell >>= (shift * SBRConstants.DRAWING_COLOR_LENGTH);
-        return cell;
+        return getPixels()[index];
     }
 
     public byte getPixel(int x, int y) {
@@ -119,7 +114,7 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
     }
 
     public void setPixel(int index, byte value) {
-        if (value >= SBRConstants.DRAWING_COLOR_MAX) {
+        if (value > SBRConstants.DRAWING_COLOR_MAX) {
             throw new IllegalArgumentException("Value out of colors max bound: " + value);
         }
 
@@ -127,22 +122,12 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
             throw new IllegalArgumentException("Value out of colors min bound: " + value);
         }
 
-        var indexInArray = index / SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE;
-        if (indexInArray >= getPixels().length) {
-            pixels = Arrays.copyOf(pixels, indexInArray + 1);
-        }
-        var shift = SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE - (index % SBRConstants.DRAWING_COLOR_COUNT_IN_BYTE);
-
-        if (getPixels().length <= indexInArray) {
+        if (index >= getPixels().length) {
+            pixels = Arrays.copyOf(pixels, index + 1);
             throw new IllegalArgumentException("Index out of pixels bound: " + index);
         }
 
-        var cell = getPixels()[indexInArray];
-        var mask = SBRConstants.DRAWING_COLOR_MASK << (shift * SBRConstants.DRAWING_COLOR_LENGTH);
-        cell &= (byte) ~mask;
-        var shiftedValue = value << shift;
-        cell |= (byte) shiftedValue;
-        getPixels()[indexInArray] = cell;
+        getPixels()[index] = value;
     }
 
     public void setPixel(int x, int y, byte value) {
@@ -163,30 +148,34 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         return xSize;
     }
 
-    public void setWidth(int x) {
-        this.xSize = x;
-        resize();
+    public void setWidth(int w) {
+        this.xSize = w;
     }
 
     public int getHeight() {
         return ySize;
     }
 
-    public void setHeight(int y) {
-        this.ySize = y;
-        resize();
+    public void setHeight(int h) {
+        this.ySize = h;
     }
 
-    private void resize() {
-        var pixels = new byte[getWidth() * getHeight()];
-        for (var i = 0; i < getPixels().length; i++) {
-            if (pixels.length <= i) {
-                break;
-            }
+    public void resize(int w, int h) {
+        var pixels = new byte[w * h];
+        for (var i = 0; i < getWidth(); i++) {
+            for (var j = 0; j < getHeight(); j++) {
+                var in = i * getWidth() + j;
+                if (in >= getPixels().length) {
+                    break;
+                }
 
-            pixels[i] = getPixels()[i];
+                pixels[in] = getPixels()[in];
+            }
         }
+
         setPixels(pixels);
+        setWidth(w);
+        setHeight(h);
     }
 
     public int getPaperColor() {
@@ -233,9 +222,6 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
             setDate(date);
         }
 
-        var pixels = tag.getByteArray(SBRConstants.TagName.DRAWING_PIXELS);
-        setPixels(pixels);
-
         var size = tag.getCompound(SBRConstants.TagName.DRAWING_SIZE);
         var x = size.getInt(SBRConstants.TagName.DRAWING_SIZE_X);
         if (x != 0) {
@@ -245,6 +231,9 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         if (y != 0) {
             setHeight(y);
         }
+
+        var pixels = tag.getByteArray(SBRConstants.TagName.DRAWING_PIXELS);
+        setPixels(pixels);
 
         var color = tag.getCompound(SBRConstants.TagName.DRAWING_COLOR);
         var paper = color.getInt(SBRConstants.TagName.DRAWING_COLOR_PAPER);
@@ -261,12 +250,13 @@ public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Vo
         tag.putString(SBRConstants.TagName.DRAWING_TITLE, Component.Serializer.toJson(getTitle()));
         tag.putString(SBRConstants.TagName.DRAWING_AUTHOR, Component.Serializer.toJson(getAuthor()));
         tag.putLong(SBRConstants.TagName.DRAWING_DATE, getDate());
-        tag.putByteArray(SBRConstants.TagName.DRAWING_PIXELS, getPixels());
 
         var size = new CompoundTag();
         size.putInt(SBRConstants.TagName.DRAWING_SIZE_X, getWidth());
         size.putInt(SBRConstants.TagName.DRAWING_SIZE_Y, getHeight());
         tag.put(SBRConstants.TagName.DRAWING_SIZE, size);
+
+        tag.putByteArray(SBRConstants.TagName.DRAWING_PIXELS, getPixels());
 
         var color = new CompoundTag();
         color.putInt(SBRConstants.TagName.DRAWING_COLOR_PAPER, getPaperColor());

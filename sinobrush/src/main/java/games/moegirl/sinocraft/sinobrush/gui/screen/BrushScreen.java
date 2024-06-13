@@ -9,9 +9,12 @@ import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.gui.widget.CanvasWidget;
+import games.moegirl.sinocraft.sinobrush.item.SBRItems;
+import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.network.C2SDrawingPacket;
 import games.moegirl.sinocraft.sinobrush.network.S2CDrawingPacket;
 import games.moegirl.sinocraft.sinobrush.network.SBRNetworks;
+import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinocore.gui.WidgetScreenBase;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.EditBoxWidget;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.ImageButtonWidget;
@@ -26,8 +29,6 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
-import org.apache.commons.lang3.StringUtils;
-import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,10 +43,12 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
 
     private EditBoxWidget title;
     private CanvasWidget canvas;
+
     private boolean isSaving = false;
+    private int selectedColor = 0;
 
     public BrushScreen(BrushMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, Component.empty());
+        super(menu, playerInventory, title);
     }
 
     @Override
@@ -73,36 +76,36 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         colorButtons[13] = addButton("button_color_13", btn -> selectColor(13));
         colorButtons[14] = addButton("button_color_14", btn -> selectColor(14));
         colorButtons[15] = addButton("button_color_15", btn -> selectColor(15));
-//        colorButtons[16] = addButton("button_color_16", btn -> selectColor(16));
         title = addEditBox("file_name");
-        addRenderableWidget(getOrBuildCanvas());
+
+        var rect = (RectEntry) widgets.getWidget("canvas");
+        canvas = new CanvasWidget(this, rect.getX() + leftPos, rect.getY() + topPos, rect.getWidth(), rect.getHeight(), this::isCanvasDrawable);
+
+        addRenderableWidget(canvas);
         selectColor(15);
 
-        menu.setScreen(this);
+        menu.container.addListener(container -> {
+            var ink = menu.container.getItem(BrushMenu.INK_SLOT);
+            var paper = menu.container.getItem(BrushMenu.PAPER_SLOT);
+            updateState(SBRItems.XUAN_PAPER.get().getColor(paper),
+                    SBRItems.INK_BOTTLE.get().getColor(ink),
+                    XuanPaperItem.getExpend(paper));
+        });
     }
 
-    private CanvasWidget getOrBuildCanvas() {
-        RectEntry rect = (RectEntry) widgets.getWidget("canvas");
-        if (canvas == null) {
-            canvas = new CanvasWidget(this, rect.getX() + leftPos, rect.getY() + topPos, rect.getWidth(), rect.getHeight(), this::isCanvasDrawable);
-        } else {
-            canvas.setX(rect.getX() + leftPos);
-            canvas.setY(rect.getY() + topPos);
-            canvas.setWidth(rect.getWidth());
-            canvas.setHeight(rect.getHeight());
-        }
-        return canvas;
+    public int getSelectedColor() {
+        return selectedColor;
     }
 
-    public void updateCanvas(int paperColor, int inkColor, int paperExpend) {
+    public void updateState(int paperColor, int inkColor, int paperExpend) {
         canvas.getDrawing().setPaperColor(paperColor);
         canvas.getDrawing().setInkColor(inkColor);
-        canvas.getDrawing().setWidth(SBRConstants.DRAWING_MIN_LENGTH << paperExpend);
-        canvas.getDrawing().setHeight(SBRConstants.DRAWING_MIN_LENGTH << paperExpend);
+        var size = SBRConstants.DRAWING_MIN_LENGTH << paperExpend;
+        canvas.getDrawing().resize(size, size);
     }
 
     private boolean isCanvasDrawable() {
-        return !isSaving && !menu.container.getItem(0).isEmpty() && !menu.container.getItem(1).isEmpty();
+        return !isSaving && menu.isDrawable();
     }
 
     private void clearCanvas(Button button) {
@@ -110,7 +113,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     }
 
     private void saveCanvas(Button button) {
-        Drawing drawing = canvas.getDrawing();
+        var drawing = canvas.getDrawing();
         drawing.setTitle(title.getValue());
         C2SDrawingPacket packet = new C2SDrawingPacket(drawing);
         SBRNetworks.NETWORKS.sendToServer(packet);
@@ -119,7 +122,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
 
     private void saveCanvasToPng(Button button) {
         try {
-            Path saveTarget = prepareSaveFile(".png");
+            var saveTarget = prepareSaveFile(".png");
             if (!RenderSystem.isOnRenderThread()) {
                 RenderSystem.recordRenderCall(() -> saveDrawFile(saveTarget));
             } else {
@@ -127,7 +130,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
             }
         } catch (IOException e) {
             SinoBrush.LOGGER.error("BrushScreen downloadCanvas", e);
-            sendMessage(e.getMessage(), false);
+            sendErrorMessage(e.getMessage());
         }
     }
 
@@ -138,46 +141,46 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
 
         assert minecraft != null;
         assert minecraft.player != null;
-        LocalPlayer player = minecraft.player;
-        Path saveDir = new File(minecraft.gameDirectory, "sinobrush").toPath();
+        var player = minecraft.player;
+        var saveDir = new File(minecraft.gameDirectory, "sinoseries/sinobrush/drawings").toPath();
         Files.createDirectories(saveDir);
-        String title = this.title.getValue();
-        if (StringUtils.isBlank(title)) {
+        var title = this.title.getValue();
+        if (title.isBlank()) {
             title = "untitled";
         }
-        String fileName = title + " by " + player.getName().getString();
-        Path saveTarget = saveDir.resolve(fileName + ext);
-        if (Files.isRegularFile(saveTarget)) {
-            saveTarget = saveDir.resolve(fileName + "-" + Instant.now().getEpochSecond() + ext);
+        var author = player.getName().getString();
+        if (author.isBlank()) {
+            author = "anonymous";
         }
+        var saveTarget = saveDir.resolve(title + "-" + author + "-" + Instant.now().getEpochSecond() + ext);
         Files.createFile(saveTarget);
         return saveTarget;
     }
 
     private void saveDrawFile(Path file) {
-        Drawing drawing = canvas.getDrawing();
-        NativeImage nativeImage = new NativeImage(drawing.getWidth(), drawing.getHeight(), false);
+        var drawing = canvas.getDrawing();
+        var nativeImage = new NativeImage(drawing.getWidth(), drawing.getHeight(), false);
         nativeImage.fillRect(0, 0, drawing.getWidth(), drawing.getHeight(), drawing.getPaperColor());
-        for (int i = 0; i < drawing.getWidth(); i++) {
-            for (int j = 0; j < drawing.getHeight(); j++) {
-                nativeImage.setPixelRGBA(i, j, drawing.getPixel(i, j));
+        for (var i = 0; i < drawing.getWidth(); i++) {
+            for (var j = 0; j < drawing.getHeight(); j++) {
+                nativeImage.setPixelRGBA(i, j, ColorHelper.pixelColorToARGB(drawing.getPixel(i, j), drawing.getInkColor()));
             }
         }
         try (nativeImage) {
             nativeImage.writeToFile(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
     private void copyCanvas(Button button) {
         assert minecraft != null;
         try {
-            minecraft.keyboardHandler.setClipboard(getDrawString());
+            minecraft.keyboardHandler.setClipboard(drawToString());
             sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_CANVAS_COPIED), true);
         } catch (Exception e) {
             SinoBrush.LOGGER.error("BrushScreen copyCanvas", e);
-            sendMessage(e.getMessage(), false);
+            sendErrorMessage(e.getMessage());
         }
     }
 
@@ -185,11 +188,11 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         assert minecraft != null;
         try {
             var str = minecraft.keyboardHandler.getClipboard();
-            setDrawString(str);
+            drawFromString(str);
             sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_CANVAS_PASTED), true);
         } catch (Exception e) {
             SinoBrush.LOGGER.error("BrushScreen pasteCanvas", e);
-            sendMessage(e.getMessage(), false);
+            sendErrorMessage(e.getMessage());
         }
     }
 
@@ -198,7 +201,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
             button.active = true;
         }
         colorButtons[color].active = false;
-        canvas.setColor(color);
+        selectedColor = color;
     }
 
     public void handleServiceData(int status) {
@@ -235,8 +238,8 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         btnBrush.active = true;
     }
 
-    private void sendMessage(String message, boolean ok) {
-        sendMessage(Component.literal(message), ok);
+    private void sendErrorMessage(String message) {
+        sendMessage(Component.literal(message), false);
     }
 
     private void sendMessage(MutableComponent message, boolean ok) {
@@ -246,32 +249,36 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         minecraft.player.sendSystemMessage(message);
     }
 
-    private String getDrawString() {
+    private String drawToString() {
         CompoundTag tag = canvas.getDrawing().writeToCompound();
         return NbtOps.INSTANCE.convertTo(JsonOps.INSTANCE, tag).toString();
     }
 
-    private void setDrawString(String value) {
+    private void drawFromString(String value) {
         CompoundTag tag = (CompoundTag) JsonOps.INSTANCE.convertTo(NbtOps.INSTANCE, JsonParser.parseString(value));
         canvas.setDrawing(Drawing.fromTag(tag));
     }
 
     @Override
     public void mouseMoved(double mouseX, double mouseY) {
-        super.mouseMoved(mouseX, mouseY);
-
         if (canvas.isMouseOver(mouseX, mouseY)) {
             canvas.mouseMoved(mouseX, mouseY);
+            return;
         }
+
+        super.mouseMoved(mouseX, mouseY);
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX) {
-        if (canvas.isMouseOver(mouseX, mouseY)) {
-            return canvas.mouseScrolled(mouseX, mouseY, scrollX);
-        }
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        canvas.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
 
-        return super.mouseScrolled(mouseX, mouseY, scrollX);
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        canvas.mouseReleased(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
@@ -284,18 +291,46 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     }
 
     @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollY) {
+        if (canvas.isMouseOver(mouseX, mouseY)) {
+            if (scrollY != 0) {
+                var color = getSelectedColor();
+                if (scrollY > 0) {
+                    color += 1;
+                } else if (scrollY < 0) {
+                    color -= 1;
+                }
+
+                color += 16;
+                color %= 16;
+
+                selectColor(color);
+                return true;
+            }
+        }
+
+        return super.mouseScrolled(mouseX, mouseY, scrollY);
+    }
+
+    @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (title.isFocused() && Minecraft.getInstance().options.keyInventory.matches(keyCode, scanCode)) {
             return true;
         }
 
-        canvas.keyPressed(keyCode, scanCode, modifiers);
+        if (canvas.isHovered()) {
+            return canvas.keyPressed(keyCode, scanCode, modifiers);
+        }
+
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
     public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-        canvas.keyReleased(keyCode, scanCode, modifiers);
+        if (canvas.isHovered()) {
+            return canvas.keyReleased(keyCode, scanCode, modifiers);
+        }
+
         return super.keyReleased(keyCode, scanCode, modifiers);
     }
 }

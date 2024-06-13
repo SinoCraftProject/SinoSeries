@@ -7,10 +7,8 @@ public class SBRConstants {
     public static final int COLOR_BLACK = FastColor.ARGB32.color(255, 0, 0, 0);
 
     public static final int DRAWING_COLOR_LENGTH = 4;   // qyl27: Timicasto said the future is not a 4-bit canvas, but a colorful world!
-    public static final int DRAWING_COLOR_COUNT_IN_BYTE = 8 / SBRConstants.DRAWING_COLOR_LENGTH;
-    public static final byte DRAWING_COLOR_MASK = 0b1111;
     public static final byte DRAWING_COLOR_MIN = 0;
-    public static final byte DRAWING_COLOR_MAX = (byte)Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2);
+    public static final byte DRAWING_COLOR_MAX = (byte)(Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2) - 1);
 
     public static final int XUAN_PAPER_MAX_EXPEND = 4;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
     public static final int DRAWING_MIN_LENGTH = 16;

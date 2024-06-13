@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BrushMenu extends WidgetMenuBase {
 
@@ -35,14 +34,8 @@ public class BrushMenu extends WidgetMenuBase {
         addSlot(container, "slot_drawing", DRAW_SLOT, SlotStrategy.onlyTake());
     }
 
-    public void setScreen(BrushScreen screen) {
-        container.addListener(container -> {
-            var ink = this.container.getItem(INK_SLOT);
-            var paper = this.container.getItem(PAPER_SLOT);
-            screen.updateCanvas(SBRItems.XUAN_PAPER.get().getColor(paper),
-                    SBRItems.INK_BOTTLE.get().getColor(ink),
-                    XuanPaperItem.getExpend(paper));
-        });
+    public boolean isDrawable() {
+        return !container.getItem(INK_SLOT).isEmpty() && !container.getItem(PAPER_SLOT).isEmpty();
     }
 
     @Override
