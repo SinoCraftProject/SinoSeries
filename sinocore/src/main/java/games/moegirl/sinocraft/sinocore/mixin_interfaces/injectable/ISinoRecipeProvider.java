@@ -7,7 +7,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public interface IRecipeProvider {
+public interface ISinoRecipeProvider {
 
     default Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> sino$getShapeBuilders() {
         throw new AssertionError();

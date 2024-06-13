@@ -269,12 +269,15 @@ subMod.each { Project mod ->
                     extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
                 }
 
-                if (forgeMod.file("/src/main/resources/${mod.modid}.mixins.json").exists()) {
-                    mixinConfig "${mod.modid}.mixins.json"
+                var commonMixin = mod.file("/src/main/resources/${mod.modid}-common.mixins.json")
+                var forgeMixin = forgeMod.file("/src/main/resources/${mod.modid}-forge.mixins.json")
+
+                if (commonMixin.exists()) {
+                    mixinConfig "${mod.modid}-common.mixins.json"
                 }
 
-                if (mod.file("/src/main/resources/${mod.modid}-common.mixins.json").exists()) {
-                    mixinConfig "${mod.modid}-common.mixins.json"
+                if (forgeMixin.exists()) {
+                    mixinConfig "${mod.modid}-forge.mixins.json"
                 }
             }
 

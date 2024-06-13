@@ -1,9 +1,10 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "games.moegirl.sinocraft.sinodeco.mixin",
+    "package": "games.moegirl.sinocraft.sinocore.forge.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "ItemMixin_Forge"
     ],
     "client": [
     ],

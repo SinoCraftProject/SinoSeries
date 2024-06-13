@@ -29,10 +29,6 @@ public class ItemModelProvider extends AbstractItemModelProvider {
                 .texture("layer0", modLoc("item/ink_bottle_mask"))
                 .texture("layer1", modLoc("item/ink_bottle"));
 
-        delegate.basicItem(SBRItems.FILLED_XUAN_PAPER.get())
-                .texture("layer0", modLoc("item/xuan_paper"))
-                .texture("layer1", modLoc("item/filled_xuan_paper"));
-
         delegate.skipItem(SBRItems.FAN.get(), SBRItems.FOLDED_FAN.get(),
                 SBRItems.INK_BOTTLE.get(), SBRItems.FILLED_XUAN_PAPER.get());
     }
