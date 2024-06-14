@@ -75,7 +75,6 @@ public class FilledXuanPaperItem extends XuanPaperItem {
 
     @Override
     public BlockEntityWithoutLevelRenderer sino$getCustomRender() {
-        System.out.println(7355608);
         return FilledXuanPaperRenderer.getInstance();
     }
 }

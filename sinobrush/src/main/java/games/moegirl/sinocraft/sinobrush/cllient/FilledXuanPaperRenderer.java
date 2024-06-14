@@ -31,7 +31,6 @@ public class FilledXuanPaperRenderer extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack,
                              MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        System.out.println(1);
         var drawing = FilledXuanPaperItem.getDrawing(stack);
         DrawingRenderer.renderInHand(poseStack, buffer, displayContext, packedLight, packedOverlay, drawing);
     }
