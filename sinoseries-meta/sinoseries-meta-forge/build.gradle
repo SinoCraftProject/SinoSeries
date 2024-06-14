@@ -12,6 +12,9 @@ loom {
     forge {
         // qyl27: Workaround for forge subMod mixin.
         mixinConfig 'sinocore-forge.mixins.json'
+
+        enableTransitiveAccessWideners = true
+        convertAccessWideners = true
     }
 
     runs {
@@ -65,6 +68,8 @@ dependencies {
             if (forgeMod.modid != 'sinotest') {
                 include project(path: forgeMod.path, configuration: 'namedElements')
             }
+
+            implementation project(path: forgeMod.path, configuration: 'namedElements')
         }
     }
 }
