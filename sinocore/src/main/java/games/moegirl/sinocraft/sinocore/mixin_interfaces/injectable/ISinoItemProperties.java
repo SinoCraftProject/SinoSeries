@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public interface ITabItemProperties {
+public interface ISinoItemProperties {
 
     /**
      * 将物品放入某个 CreativeModeTab

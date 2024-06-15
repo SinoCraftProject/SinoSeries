@@ -20,7 +20,8 @@
         ]
     },
     "mixins": [
-        "sinocore-common.mixins.json"
+        "sinocore-common.mixins.json",
+        "sinocore-fabric.mixins.json"
     ],
     "depends": {
         "java": ">=17",

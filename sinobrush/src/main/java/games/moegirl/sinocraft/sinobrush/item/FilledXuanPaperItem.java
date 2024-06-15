@@ -1,7 +1,9 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import games.moegirl.sinocraft.sinobrush.cllient.FilledXuanPaperRenderer;
 import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -69,5 +71,10 @@ public class FilledXuanPaperItem extends XuanPaperItem {
         }
 
         return Drawing.EMPTY;
+    }
+
+    @Override
+    public BlockEntityWithoutLevelRenderer sino$getCustomRender() {
+        return FilledXuanPaperRenderer.getInstance();
     }
 }

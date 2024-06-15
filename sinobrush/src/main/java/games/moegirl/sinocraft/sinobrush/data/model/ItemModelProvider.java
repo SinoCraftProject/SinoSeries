@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.data.model;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
+import games.moegirl.sinocraft.sinobrush.data.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
@@ -18,19 +19,17 @@ public class ItemModelProvider extends AbstractItemModelProvider {
     @Override
     public void generateModels(ItemModelProviderDelegateBase<?> delegate) {
         delegate.basicItem(SBRItems.BRUSH.get())
-                .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/brush"))
-                .override().predicate(new ResourceLocation("damaged"), 1).model(delegate
-                        .getBuilder("item/inked_brush")
-                        .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/inked_brush")));
+                .texture("layer0", modLoc("item/brush"))
+                .override()
+                .predicate(mcLoc("damaged"), 1)
+                .model(delegate.getBuilder("item/inked_brush")
+                        .texture("layer0", modLoc("item/inked_brush")));
 
         delegate.basicItem(SBRItems.INK_BOTTLE.get())
-                .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/ink_bottle"))
-                .texture("layer1", new ResourceLocation(SinoBrush.MODID, "item/ink_bottle_cap"));
+                .texture("layer0", modLoc("item/ink_bottle_mask"))
+                .texture("layer1", modLoc("item/ink_bottle"));
 
-        delegate.basicItem(SBRItems.FILLED_XUAN_PAPER.get())
-                .texture("#inventory", new ResourceLocation(SinoBrush.MODID, "item/xuan_paper"))
-                .texture("layer0", new ResourceLocation(SinoBrush.MODID, "item/xuan_paper"));
-
-        delegate.skipItem(SBRItems.FAN.get(), SBRItems.FOLDED_FAN.get());
+        delegate.skipItem(SBRItems.FAN.get(), SBRItems.FOLDED_FAN.get(),
+                SBRItems.INK_BOTTLE.get(), SBRItems.FILLED_XUAN_PAPER.get());
     }
 }

@@ -10,7 +10,8 @@ architectury {
 
 loom {
     forge {
-
+        // qyl27: Workaround for forge subMod mixin.
+        mixinConfig 'sinocore-forge.mixins.json'
     }
 
     runs {

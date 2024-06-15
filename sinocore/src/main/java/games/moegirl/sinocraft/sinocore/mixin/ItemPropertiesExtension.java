@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.mixin;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable.ITabItemProperties;
+import games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable.ISinoItemProperties;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Mixin(Item.Properties.class)
-public abstract class ItemPropertiesExtension implements ITabItemProperties {
+public abstract class ItemPropertiesExtension implements ISinoItemProperties {
 
     @Unique
     private final List<Pair<ResourceKey<CreativeModeTab>, Function<ItemLike, ItemStack>>> sino$tabs = new ArrayList<>();

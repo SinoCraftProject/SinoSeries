@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "#inventory": "sinobrush:item/xuan_paper",
-    "layer0": "sinobrush:item/filled_xuan_paper"
-  }
-}

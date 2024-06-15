@@ -1,6 +1,5 @@
-// 1.20.1	2024-05-31T17:30:28.5215556	Item Models: sinobrush
+// 1.20.1	2024-06-13T15:44:09.2144575	Item Models: sinobrush
 129c8de8c8386e9c4b55220fd0efccb1662c1ce2 assets/sinobrush/models/item/brush.json
-8ca2e5b43a2f33372d5803bcecbd785557df216b assets/sinobrush/models/item/filled_xuan_paper.json
 90cf6d55de870c9713880bdaf1a7075baae5b210 assets/sinobrush/models/item/inked_brush.json
-1ee1d1b296558ac040cbb916ac3ac49d91b56bc8 assets/sinobrush/models/item/ink_bottle.json
+89082cdaeb5fd2c5b268aa0ea873695f40058bb4 assets/sinobrush/models/item/ink_bottle.json
 cabf7c9091e9bc955beb13ef0154a3481ea38864 assets/sinobrush/models/item/xuan_paper.json
