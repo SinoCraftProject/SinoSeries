@@ -37,8 +37,7 @@ public class DrawingRenderer {
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         poseStack.scale(0.38F, 0.38F, 0.38F);
         poseStack.translate(-0.5D, -0.5D, 0.0D);
-        poseStack.scale(0.0078125F, 0.0078125F, 0.0078125F);
-        poseStack.scale(32, 32, 1);
+        poseStack.scale(0.0625F, 0.0625F, 0.0078125F);
 
         try (var ignored1 = GLSwitcher.blend().enable(); var ignored2 = GLSwitcher.depth().enable()) {
             blitHandheldBackground(poseStack, buffer, 0, 0, drawing.getWidth(), drawing.getHeight(), combinedLight);
