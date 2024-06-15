@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.forge.listener;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
+import games.moegirl.sinocraft.sinobrush.client.FilledXuanPaperItemColor;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,6 +18,8 @@ public class RegisterColorHandlersListener {
                 return dyeable.getColor(stack);
             }
             return -1;
-        }, SBRItems.XUAN_PAPER.get(), SBRItems.FILLED_XUAN_PAPER.get(), SBRItems.INK_BOTTLE.get());
+        }, SBRItems.XUAN_PAPER.get(), SBRItems.INK_BOTTLE.get());
+
+        event.register(new FilledXuanPaperItemColor(), SBRItems.FILLED_XUAN_PAPER.get());
     }
 }

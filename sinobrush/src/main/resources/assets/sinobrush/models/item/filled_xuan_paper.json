@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:builtin/entity",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "sinobrush:item/xuan_paper",
-    "layer1": "sinobrush:item/filled_xuan_paper"
+    "layer1": "sinobrush:item/filled_xuan_paper_mask"
   }
 }

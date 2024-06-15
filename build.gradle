@@ -323,11 +323,6 @@ subMod.each { Project mod ->
 
         loom {
             neoForge {
-                if (loom.accessWidenerPath.isPresent()) {
-                    // Fixme: qyl27: aw for neoforge?
-//                    convertAccessWideners = true
-//                    accessTransformer loom.accessWidenerPath.get().asFile.name
-                }
             }
 
             runConfigs.configureEach { config ->

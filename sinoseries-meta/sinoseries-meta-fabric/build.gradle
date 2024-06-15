@@ -42,20 +42,11 @@ dependencies {
 
     subMod.each { Project mod ->
         helpers.getSubFabricMod(mod).each { Project fabricMod ->
+            implementation project(path: fabricMod.path, configuration: 'namedElements')
+
             if (fabricMod.modid != 'sinotest') {
                 include project(path: fabricMod.path, configuration: 'namedElements')
             }
-
-            implementation project(path: fabricMod.path, configuration: 'namedElements')
-        }
-    }
-}
-
-classes {
-    subMod.each { Project mod ->
-        helpers.getSubFabricMod(mod).each { Project fabricMod ->
-            dependsOn("${mod.path}:classes")
-            dependsOn("${fabricMod.path}:classes")
         }
     }
 }

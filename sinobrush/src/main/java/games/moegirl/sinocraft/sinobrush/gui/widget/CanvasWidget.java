@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinobrush.gui.widget;
 
 import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
 import games.moegirl.sinocraft.sinobrush.gui.screen.BrushScreen;
-import games.moegirl.sinocraft.sinobrush.utility.DrawingRenderer;
+import games.moegirl.sinocraft.sinobrush.client.DrawingRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
