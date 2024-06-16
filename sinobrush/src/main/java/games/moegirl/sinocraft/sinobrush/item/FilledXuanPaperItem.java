@@ -1,10 +1,11 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinobrush.cllient.FilledXuanPaperRenderer;
 import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import games.moegirl.sinocraft.sinobrush.utility.TooltipHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -13,11 +14,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FilledXuanPaperItem extends XuanPaperItem {
+public class FilledXuanPaperItem extends Item {
     public FilledXuanPaperItem() {
         super(new Properties()
                 .sino$tab(SBRItems.SINO_BRUSH_TAB)
                 .stacksTo(1));
+    }
+
+    @Override
+    public @NotNull ItemStack getDefaultInstance() {
+        var stack = super.getDefaultInstance();
+        setDrawing(stack, new Drawing());
+        return stack;
     }
 
     @Override
@@ -30,31 +38,17 @@ public class FilledXuanPaperItem extends XuanPaperItem {
 
         var date = drawing.getZonedDate();
         tooltip.add(Component.translatable(SBRConstants.Translation.DRAWING_DATE_LABEL, date.getYear(), date.getMonth().getValue(), date.getDayOfMonth(), date.getHour(), date.getMinute(), date.getSecond()));
+
+        tooltip.add(TooltipHelper.getColor(drawing.getPaperColor()));
+        tooltip.add(Component
+                .translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, drawing.getWidth(), drawing.getHeight())
+                .withStyle(ChatFormatting.GRAY));
     }
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
         var drawing = getDrawing(stack);
         return Component.translatable(SBRConstants.Translation.DRAWING_TITLE_LABEL).append(drawing.getTitle());
-    }
-
-    @Override
-    public int getColor(ItemStack stack) {
-        var drawing = getDrawing(stack);
-        return drawing.getPaperColor();
-    }
-
-    @Override
-    public void setColor(ItemStack stack, int color) {
-    }
-
-    @Override
-    public void clearColor(ItemStack stack) {
-    }
-
-    @Override
-    public boolean hasCustomColor(ItemStack stack) {
-        return true;
     }
 
     public static void setDrawing(ItemStack stack, Drawing drawing) {
@@ -71,10 +65,5 @@ public class FilledXuanPaperItem extends XuanPaperItem {
         }
 
         return Drawing.EMPTY;
-    }
-
-    @Override
-    public BlockEntityWithoutLevelRenderer sino$getCustomRender() {
-        return FilledXuanPaperRenderer.getInstance();
     }
 }

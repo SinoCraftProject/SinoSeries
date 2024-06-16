@@ -24,6 +24,7 @@
         ]
     },
     "mixins": [
+        "sinobrush-common.mixins.json"
     ],
     "depends": {
         "java": ">=17",

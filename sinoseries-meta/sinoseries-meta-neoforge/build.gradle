@@ -40,18 +40,11 @@ dependencies {
 
     subMod.each { Project mod ->
         helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
+            compileOnly project(path: neoForgeMod.path, configuration: 'namedElements')
+
             if (neoForgeMod.modid != 'sinotest') {
                 include project(path: neoForgeMod.path, configuration: 'namedElements')
             }
-        }
-    }
-}
-
-classes {
-    subMod.each { Project mod ->
-        helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
-            dependsOn("${mod.path}:classes")
-            dependsOn("${neoForgeMod.path}:classes")
         }
     }
 }

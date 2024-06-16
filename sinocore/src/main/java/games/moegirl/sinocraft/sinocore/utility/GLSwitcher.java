@@ -53,7 +53,7 @@ public abstract class GLSwitcher implements AutoCloseable {
     }
 
     public static GLSwitcher blend() {
-        return new GLSwitcher(GL11.GL_DEPTH_TEST) {
+        return new GLSwitcher(GL11.GL_BLEND) {
             @Override
             protected void enableInternal() {
                 RenderSystem.enableBlend();
@@ -77,6 +77,20 @@ public abstract class GLSwitcher implements AutoCloseable {
             @Override
             protected void disableInternal() {
                 RenderSystem.disableDepthTest();
+            }
+        };
+    }
+
+    public static GLSwitcher cull() {
+        return new GLSwitcher(GL11.GL_CULL_FACE) {
+            @Override
+            protected void enableInternal() {
+                RenderSystem.enableCull();
+            }
+
+            @Override
+            protected void disableInternal() {
+                RenderSystem.disableCull();
             }
         };
     }

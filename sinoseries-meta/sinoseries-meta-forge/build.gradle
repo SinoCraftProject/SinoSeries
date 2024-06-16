@@ -1,3 +1,5 @@
+import net.fabricmc.loom.configuration.accesswidener.AccessWidenerFile
+
 plugins {
     id 'architectury-plugin' version "${architect_plugin_version}"
     id 'dev.architectury.loom' version "${architectury_loom_version}"
@@ -10,8 +12,19 @@ architectury {
 
 loom {
     forge {
-        // qyl27: Workaround for forge subMod mixin.
+        // Workaround: qyl27: for forge subMod mixin.
         mixinConfig 'sinocore-forge.mixins.json'
+
+        convertAccessWideners = true
+
+//        subMod.each { Project mod ->
+//            var file = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
+//            if (file.exists()) {
+//                var content = file.readBytes()
+//                addTransitiveAccessWideners([new AccessWidenerFile(file.toString(), mod.modid, content)])
+//                extraAccessWideners.add file.toString()
+//            }
+//        }
     }
 
     runs {
@@ -62,18 +75,11 @@ dependencies {
 
     subMod.each { Project mod ->
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
+            compileOnly project(path: forgeMod.path, configuration: 'namedElements')
+
             if (forgeMod.modid != 'sinotest') {
                 include project(path: forgeMod.path, configuration: 'namedElements')
             }
-        }
-    }
-}
-
-classes {
-    subMod.each { Project mod ->
-        helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            dependsOn("${mod.path}:classes")
-            dependsOn("${forgeMod.path}:classes")
         }
     }
 }
