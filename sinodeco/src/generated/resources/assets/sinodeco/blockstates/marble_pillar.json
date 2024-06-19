@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "sinodeco:block/marble_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "sinodeco:block/marble_pillar"
+    },
+    "axis=z": {
+      "model": "sinodeco:block/marble_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

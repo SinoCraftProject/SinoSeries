@@ -49,5 +49,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 }
             }
         }
+
+        {
+            simpleBlock(SDBlocks.MARBLE_BLOCK.get(), models().cubeColumn("marble_block", modLoc("block/marble_block"), modLoc("block/marble_block_top")));
+            simpleBlock(SDBlocks.CHISELED_MARBLE.get(), models().cubeColumn("chiseled_marble", modLoc("block/chiseled_marble"), modLoc("block/chiseled_marble_top")));
+            axisBlock(SDBlocks.MARBLE_PILLAR.get(), modLoc("block/marble_pillar"), modLoc("block/marble_pillar_top"));
+            stairsBlock(SDBlocks.MARBLE_STAIRS.get(), modLoc("block/marble_block"), modLoc("block/marble_block_top"), modLoc("block/marble_block_top"));
+            slabBlock(SDBlocks.MARBLE_SLAB.get(), modLoc("block/marble_block"), modLoc("block/marble_block"));
+            simpleBlock(SDBlocks.SMOOTH_MARBLE.get());
+            stairsBlock(SDBlocks.SMOOTH_MARBLE_STAIRS.get(), modLoc("block/smooth_marble"), modLoc("block/smooth_marble_top"), modLoc("block/smooth_marble_top"));
+            slabBlock(SDBlocks.SMOOTH_MARBLE_SLAB.get(), modLoc("block/smooth_marble"), modLoc("block/smooth_marble"));
+            simpleBlock(SDBlocks.MARBLE_BRICKS.get());
+        }
     }
 }

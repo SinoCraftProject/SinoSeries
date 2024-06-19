@@ -1,4 +1,14 @@
 {
+  "block.sinodeco.chiseled_marble": "Chiseled Marble Block",
+  "block.sinodeco.marble_block": "Marble Block",
+  "block.sinodeco.marble_bricks": "Marble Bricks",
+  "block.sinodeco.marble_pillar": "Marble Pillar",
+  "block.sinodeco.marble_slab": "Marble Slab",
+  "block.sinodeco.marble_stairs": "Marble Stairs",
+  "block.sinodeco.marble_wall": "Marble Wall",
+  "block.sinodeco.smooth_marble": "Smooth Marble Block",
+  "block.sinodeco.smooth_marble_slab": "Smooth Marble Slab",
+  "block.sinodeco.smooth_marble_stairs": "Smooth Marble Stairs",
   "block.sinodeco.wooden_table": "Wooden Table",
   "tab.sinodeco.sinodeco": "SinoDeco"
 }
