@@ -2,10 +2,18 @@
   "multipart": [
     {
       "apply": {
+        "model": "sinodeco:block/marble_wall_post_low"
+      },
+      "when": {
+        "up": 1
+      }
+    },
+    {
+      "apply": {
         "model": "sinodeco:block/marble_wall_post"
       },
       "when": {
-        "up": "true"
+        "up": 2
       }
     },
     {
@@ -14,7 +22,7 @@
         "uvlock": true
       },
       "when": {
-        "north": "low"
+        "north": "true"
       }
     },
     {
@@ -24,7 +32,7 @@
         "y": 90
       },
       "when": {
-        "east": "low"
+        "east": "true"
       }
     },
     {
@@ -34,7 +42,7 @@
         "y": 180
       },
       "when": {
-        "south": "low"
+        "south": "true"
       }
     },
     {
@@ -44,46 +52,7 @@
         "y": 270
       },
       "when": {
-        "west": "low"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/marble_wall_side_tall",
-        "uvlock": true
-      },
-      "when": {
-        "north": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/marble_wall_side_tall",
-        "uvlock": true,
-        "y": 90
-      },
-      "when": {
-        "east": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/marble_wall_side_tall",
-        "uvlock": true,
-        "y": 180
-      },
-      "when": {
-        "south": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/marble_wall_side_tall",
-        "uvlock": true,
-        "y": 270
-      },
-      "when": {
-        "west": "tall"
+        "west": "true"
       }
     }
   ]

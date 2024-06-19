@@ -28,5 +28,5 @@ public class SDBlocks {
     public static final Supplier<ModStairBlock> SMOOTH_MARBLE_STAIRS = BLOCKS.register("smooth_marble_stairs", () -> new ModStairBlock(SMOOTH_MARBLE.get().defaultBlockState(), BlockBehaviour.Properties.copy(SMOOTH_MARBLE.get())));
     public static final Supplier<SlabBlock> SMOOTH_MARBLE_SLAB = BLOCKS.register("smooth_marble_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(SMOOTH_MARBLE.get())));
     public static final Supplier<Block> MARBLE_BRICKS = BLOCKS.register("marble_bricks", () -> new Block(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
-    public static final Supplier<WallBlock> MARBLE_WALL = BLOCKS.register("marble_wall", () -> new MarbleWallBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get()).forceSolidOn()));
+    public static final Supplier<Block> MARBLE_WALL = BLOCKS.register("marble_wall", () -> new MarbleWallBlock(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get()).forceSolidOn()));
 }
