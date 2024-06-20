@@ -29,5 +29,5 @@ public class SDBlockItems {
     public static final Supplier<Item> SMOOTH_MARBLE_STAIRS = ITEMS.register("smooth_marble_stairs", () -> new BlockItem(SDBlocks.SMOOTH_MARBLE_STAIRS.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
     public static final Supplier<Item> SMOOTH_MARBLE_SLAB = ITEMS.register("smooth_marble_slab", () -> new BlockItem(SDBlocks.SMOOTH_MARBLE_SLAB.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
     public static final Supplier<Item> MARBLE_BRICKS = ITEMS.register("marble_bricks", () -> new BlockItem(SDBlocks.MARBLE_BRICKS.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
-    public static final Supplier<Item> MARBLE_WALL = ITEMS.register("marble_wall", () -> new BlockItem(SDBlocks.MARBLE_WALL.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
+    public static final Supplier<Item> MARBLE_BALUSTRADE = ITEMS.register("marble_balustrade", () -> new BlockItem(SDBlocks.MARBLE_BALUSTRADE.get(), new Item.Properties().sino$tab(SDItems.SINO_DECO_TAB)));
 }

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:marble_wall_from_marble_block_stonecutting"
+        "recipe": "minecraft:marble_balustrade_from_marble_block_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:marble_wall_from_marble_block_stonecutting"
+      "minecraft:marble_balustrade_from_marble_block_stonecutting"
     ]
   },
   "sends_telemetry_event": false

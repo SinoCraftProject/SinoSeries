@@ -52,7 +52,7 @@ public class RecipeProvider extends AbstractRecipeProvider {
             slabBuilder(RecipeCategory.BUILDING_BLOCKS, SDBlockItems.SMOOTH_MARBLE_SLAB.get(), Ingredient.of(SDBlockItems.SMOOTH_MARBLE.get()))
                     .unlockedBy("has_smooth_marble_block", has(SDBlockItems.SMOOTH_MARBLE.get()))
                     .save(writer);
-            wall(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_WALL.get(), SDBlockItems.MARBLE_BLOCK.get());
+            wall(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_BALUSTRADE.get(), SDBlockItems.MARBLE_BLOCK.get());
 
             smeltingResultFromBase(writer, SDBlockItems.SMOOTH_MARBLE.get(), SDBlockItems.MARBLE_BLOCK.get());
 
@@ -63,7 +63,7 @@ public class RecipeProvider extends AbstractRecipeProvider {
             stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_SLAB.get(), SDBlockItems.MARBLE_BLOCK.get(), 2);
             stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.SMOOTH_MARBLE_STAIRS.get(), SDBlockItems.SMOOTH_MARBLE.get());
             stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.SMOOTH_MARBLE_SLAB.get(), SDBlockItems.SMOOTH_MARBLE.get(), 2);
-            stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_WALL.get(), SDBlockItems.MARBLE_BLOCK.get());
+            stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_BALUSTRADE.get(), SDBlockItems.MARBLE_BLOCK.get());
         }
     }
 }

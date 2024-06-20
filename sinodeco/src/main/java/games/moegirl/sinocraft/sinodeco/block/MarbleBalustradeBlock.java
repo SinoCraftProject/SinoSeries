@@ -22,7 +22,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MarbleWallBlock extends Block implements SimpleWaterloggedBlock {
+public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlock {
     // 0 for none, 1 for low, 2 for high
     public static final IntegerProperty UP = IntegerProperty.create("up", 0, 2);
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
@@ -30,7 +30,7 @@ public class MarbleWallBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     public static final BooleanProperty WEST = BooleanProperty.create("west");
 
-    public MarbleWallBlock(Properties properties) {
+    public MarbleBalustradeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(UP, 0)
                 .setValue(NORTH, false)
@@ -51,6 +51,7 @@ public class MarbleWallBlock extends Block implements SimpleWaterloggedBlock {
     // Up, North, East, South, West
     // False = 0, True = 1
     public static final VoxelShape[][][][][] SHAPES = new VoxelShape[3][2][2][2][2];
+    public static final VoxelShape[][][][][] COLLISION_SHAPES = new VoxelShape[3][2][2][2][2];
 
     static {
         VoxelShape upTall;
@@ -87,7 +88,6 @@ public class MarbleWallBlock extends Block implements SimpleWaterloggedBlock {
         VoxelShape sideE = BlockShapeHelper.rotateY(sideN);
         VoxelShape sideS = BlockShapeHelper.rotateY(sideE);
         VoxelShape sideW = BlockShapeHelper.rotateY(sideS);
-
 
         SHAPES[0][0][0][0][0] = Shapes.empty();
         SHAPES[0][0][0][0][1] = Shapes.or(sideW);
@@ -137,6 +137,61 @@ public class MarbleWallBlock extends Block implements SimpleWaterloggedBlock {
         SHAPES[2][1][1][0][1] = Shapes.or(upTall, sideN, sideE, sideW);
         SHAPES[2][1][1][1][0] = Shapes.or(upTall, sideN, sideE, sideS);
         SHAPES[2][1][1][1][1] = Shapes.or(upTall, sideN, sideE, sideS, sideW);
+
+        VoxelShape collisionUp = box(3, 0, 3, 10, 24, 10);
+        VoxelShape collisionSideN = box(5, 0, 0, 11, 24, 8);
+        VoxelShape collisionSideE = BlockShapeHelper.rotateY(collisionSideN);
+        VoxelShape collisionSideS = BlockShapeHelper.rotateY(collisionSideE);
+        VoxelShape collisionSideW = BlockShapeHelper.rotateY(collisionSideS);
+
+        COLLISION_SHAPES[0][0][0][0][0] = Shapes.empty();
+        COLLISION_SHAPES[0][0][0][0][1] = Shapes.or(collisionSideW);
+        COLLISION_SHAPES[0][0][0][1][0] = Shapes.or(collisionSideS);
+        COLLISION_SHAPES[0][0][0][1][1] = Shapes.or(collisionSideS, collisionSideW);
+        COLLISION_SHAPES[0][0][1][0][0] = Shapes.or(collisionSideE);
+        COLLISION_SHAPES[0][0][1][0][1] = Shapes.or(collisionSideE, collisionSideW);
+        COLLISION_SHAPES[0][0][1][1][0] = Shapes.or(collisionSideE, collisionSideS);
+        COLLISION_SHAPES[0][0][1][1][1] = Shapes.or(collisionSideE, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[0][1][0][0][0] = Shapes.or(collisionSideN);
+        COLLISION_SHAPES[0][1][0][0][1] = Shapes.or(collisionSideN, collisionSideW);
+        COLLISION_SHAPES[0][1][0][1][0] = Shapes.or(collisionSideN, collisionSideS);
+        COLLISION_SHAPES[0][1][0][1][1] = Shapes.or(collisionSideN, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[0][1][1][0][0] = Shapes.or(collisionSideN, collisionSideE);
+        COLLISION_SHAPES[0][1][1][0][1] = Shapes.or(collisionSideN, collisionSideE, collisionSideW);
+        COLLISION_SHAPES[0][1][1][1][0] = Shapes.or(collisionSideN, collisionSideE, collisionSideS);
+        COLLISION_SHAPES[0][1][1][1][1] = Shapes.or(collisionSideN, collisionSideE, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[1][0][0][0][0] = Shapes.or(collisionUp);
+        COLLISION_SHAPES[1][0][0][0][1] = Shapes.or(collisionUp, collisionSideW);
+        COLLISION_SHAPES[1][0][0][1][0] = Shapes.or(collisionUp, collisionSideS);
+        COLLISION_SHAPES[1][0][0][1][1] = Shapes.or(collisionUp, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[1][0][1][0][0] = Shapes.or(collisionUp, collisionSideE);
+        COLLISION_SHAPES[1][0][1][0][1] = Shapes.or(collisionUp, collisionSideE, collisionSideW);
+        COLLISION_SHAPES[1][0][1][1][0] = Shapes.or(collisionUp, collisionSideE, collisionSideS);
+        COLLISION_SHAPES[1][0][1][1][1] = Shapes.or(collisionUp, collisionSideE, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[1][1][0][0][0] = Shapes.or(collisionUp, collisionSideN);
+        COLLISION_SHAPES[1][1][0][0][1] = Shapes.or(collisionUp, collisionSideN, collisionSideW);
+        COLLISION_SHAPES[1][1][0][1][0] = Shapes.or(collisionUp, collisionSideN, collisionSideS);
+        COLLISION_SHAPES[1][1][0][1][1] = Shapes.or(collisionUp, collisionSideN, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[1][1][1][0][0] = Shapes.or(collisionUp, collisionSideN, collisionSideE);
+        COLLISION_SHAPES[1][1][1][0][1] = Shapes.or(collisionUp, collisionSideN, collisionSideE, collisionSideW);
+        COLLISION_SHAPES[1][1][1][1][0] = Shapes.or(collisionUp, collisionSideN, collisionSideE, collisionSideS);
+        COLLISION_SHAPES[1][1][1][1][1] = Shapes.or(collisionUp, collisionSideN, collisionSideE, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[2][0][0][0][0] = Shapes.or(collisionUp);
+        COLLISION_SHAPES[2][0][0][0][1] = Shapes.or(collisionUp, collisionSideW);
+        COLLISION_SHAPES[2][0][0][1][0] = Shapes.or(collisionUp, collisionSideS);
+        COLLISION_SHAPES[2][0][0][1][1] = Shapes.or(collisionUp, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[2][0][1][0][0] = Shapes.or(collisionUp, collisionSideE);
+        COLLISION_SHAPES[2][0][1][0][1] = Shapes.or(collisionUp, collisionSideE, collisionSideW);
+        COLLISION_SHAPES[2][0][1][1][0] = Shapes.or(collisionUp, collisionSideE, collisionSideS);
+        COLLISION_SHAPES[2][0][1][1][1] = Shapes.or(collisionUp, collisionSideE, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[2][1][0][0][0] = Shapes.or(collisionUp, collisionSideN);
+        COLLISION_SHAPES[2][1][0][0][1] = Shapes.or(collisionUp, collisionSideN, collisionSideW);
+        COLLISION_SHAPES[2][1][0][1][0] = Shapes.or(collisionUp, collisionSideN, collisionSideS);
+        COLLISION_SHAPES[2][1][0][1][1] = Shapes.or(collisionUp, collisionSideN, collisionSideS, collisionSideW);
+        COLLISION_SHAPES[2][1][1][0][0] = Shapes.or(collisionUp, collisionSideN, collisionSideE);
+        COLLISION_SHAPES[2][1][1][0][1] = Shapes.or(collisionUp, collisionSideN, collisionSideE, collisionSideW);
+        COLLISION_SHAPES[2][1][1][1][0] = Shapes.or(collisionUp, collisionSideN, collisionSideE, collisionSideS);
+        COLLISION_SHAPES[2][1][1][1][1] = Shapes.or(collisionUp, collisionSideN, collisionSideE, collisionSideS, collisionSideW);
     }
 
     @Override
@@ -148,6 +203,17 @@ public class MarbleWallBlock extends Block implements SimpleWaterloggedBlock {
         var west = state.getValue(WEST) ? 1 : 0;
 
         return SHAPES[up][north][east][south][west];
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        var up = state.getValue(UP);
+        var north = state.getValue(NORTH) ? 1 : 0;
+        var east = state.getValue(EAST) ? 1 : 0;
+        var south = state.getValue(SOUTH) ? 1 : 0;
+        var west = state.getValue(WEST) ? 1 : 0;
+
+        return COLLISION_SHAPES[up][north][east][south][west];
     }
 
     @Override

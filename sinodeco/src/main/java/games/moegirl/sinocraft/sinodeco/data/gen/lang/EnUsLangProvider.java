@@ -24,7 +24,7 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
         delegate.addBlock(SDBlocks.SMOOTH_MARBLE_STAIRS.get(), "Smooth Marble Stairs");
         delegate.addBlock(SDBlocks.SMOOTH_MARBLE_SLAB.get(), "Smooth Marble Slab");
         delegate.addBlock(SDBlocks.MARBLE_BRICKS.get(), "Marble Bricks");
-        delegate.addBlock(SDBlocks.MARBLE_WALL.get(), "Marble Bars");
+        delegate.addBlock(SDBlocks.MARBLE_BALUSTRADE.get(), "Marble Balustrade");
 
         delegate.addTab(SDItems.SINO_DECO_TAB, "SinoDeco");
     }

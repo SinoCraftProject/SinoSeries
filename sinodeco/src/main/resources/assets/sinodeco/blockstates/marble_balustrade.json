@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "sinodeco:block/marble_wall_post_low"
+        "model": "sinodeco:block/marble_balustrade_post_low"
       },
       "when": {
         "up": 1
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/marble_wall_post"
+        "model": "sinodeco:block/marble_balustrade_post"
       },
       "when": {
         "up": 2
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/marble_wall_side",
+        "model": "sinodeco:block/marble_balustrade_side",
         "uvlock": true
       },
       "when": {
@@ -27,7 +27,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/marble_wall_side",
+        "model": "sinodeco:block/marble_balustrade_side",
         "uvlock": true,
         "y": 90
       },
@@ -37,7 +37,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/marble_wall_side",
+        "model": "sinodeco:block/marble_balustrade_side",
         "uvlock": true,
         "y": 180
       },
@@ -47,7 +47,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/marble_wall_side",
+        "model": "sinodeco:block/marble_balustrade_side",
         "uvlock": true,
         "y": 270
       },

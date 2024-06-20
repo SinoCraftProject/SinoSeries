@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sinodeco:marble_wall"
+        "recipe": "sinodeco:marble_balustrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "sinodeco:marble_wall"
+      "sinodeco:marble_balustrade"
     ]
   },
   "sends_telemetry_event": false
