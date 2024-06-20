@@ -1,11 +1,11 @@
-// 1.20.1	2024-06-19T18:17:20.5687509	Item Models: sinodeco
+// 1.20.1	2024-06-20T18:02:39.0603468	Item Models: sinodeco
 fe490000e61f30f6fc83e31b876d3c49e582e115 assets/sinodeco/models/item/chiseled_marble.json
+5a71ec3cffdfa2e0815d6b97d64846de3b6ed4d0 assets/sinodeco/models/item/marble_balustrade.json
 5cefa7c5824ea4859af3b0f35db0d3a9588c5ae3 assets/sinodeco/models/item/marble_block.json
 962471e274de93dcf717039f7c2e1a483eaeb431 assets/sinodeco/models/item/marble_bricks.json
 3a0586f6fc48f72f747ab5e77a8b1c269b492714 assets/sinodeco/models/item/marble_pillar.json
 42ac0c317b4d2d53f8b4a4ac1d7eec1545ad0951 assets/sinodeco/models/item/marble_slab.json
 cf9bb2c4e30581106bcd2cf53e7feb4fc206a149 assets/sinodeco/models/item/marble_stairs.json
-602932f20fc4dfe57f62f95ea1aaf150ec50feb5 assets/sinodeco/models/item/marble_wall.json
 d3bca20c46d90358953d83a01a2a7b7f193c7d43 assets/sinodeco/models/item/smooth_marble.json
 315e8c195e235b08ca9dc572cfbad9614b004295 assets/sinodeco/models/item/smooth_marble_slab.json
 ed7fa3086649eccc476011a19b937dcc19f84300 assets/sinodeco/models/item/smooth_marble_stairs.json

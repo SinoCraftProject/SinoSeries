@@ -24,7 +24,7 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.addBlock(SDBlocks.SMOOTH_MARBLE_STAIRS.get(), "平滑大理石楼梯");
         delegate.addBlock(SDBlocks.SMOOTH_MARBLE_SLAB.get(), "平滑大理石台阶");
         delegate.addBlock(SDBlocks.MARBLE_BRICKS.get(), "大理石砖");
-        delegate.addBlock(SDBlocks.MARBLE_WALL.get(), "大理石栏杆");
+        delegate.addBlock(SDBlocks.MARBLE_BALUSTRADE.get(), "大理石栏杆");
 
         delegate.addTab(SDItems.SINO_DECO_TAB, "华夏工缀");
     }

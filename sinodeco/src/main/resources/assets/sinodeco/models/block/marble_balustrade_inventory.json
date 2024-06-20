@@ -2,9 +2,9 @@
 	"credit": "Made by yao_z",
 	"parent": "block/wall_inventory",
 	"textures": {
-		"1": "sinodeco:block/marble_walls",
+		"1": "sinodeco:block/marble_balustrade",
 		"2": "sinodeco:block/chiseled_marble",
-		"particle": "sinodeco:block/marble_walls"
+		"particle": "sinodeco:block/marble_balustrade"
 	},
 	"elements": [
 		{
