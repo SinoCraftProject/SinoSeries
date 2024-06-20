@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "sinodeco:block/marble_slab"
+    },
+    "type=double": {
+      "model": "sinodeco:block/marble_block"
+    },
+    "type=top": {
+      "model": "sinodeco:block/marble_slab_top"
+    }
+  }
+}

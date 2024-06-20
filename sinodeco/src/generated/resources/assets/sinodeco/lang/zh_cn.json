@@ -1,4 +1,14 @@
 {
+  "block.sinodeco.chiseled_marble": "雕纹大理石块",
+  "block.sinodeco.marble_block": "大理石块",
+  "block.sinodeco.marble_bricks": "大理石砖",
+  "block.sinodeco.marble_pillar": "大理石柱",
+  "block.sinodeco.marble_slab": "大理石台阶",
+  "block.sinodeco.marble_stairs": "大理石楼梯",
+  "block.sinodeco.marble_wall": "大理石栏杆",
+  "block.sinodeco.smooth_marble": "平滑大理石块",
+  "block.sinodeco.smooth_marble_slab": "平滑大理石台阶",
+  "block.sinodeco.smooth_marble_stairs": "平滑大理石楼梯",
   "block.sinodeco.wooden_table": "木桌",
   "tab.sinodeco.sinodeco": "华夏工缀"
 }

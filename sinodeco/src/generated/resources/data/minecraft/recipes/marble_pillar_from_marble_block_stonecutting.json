@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "sinodeco:marble_block"
+  },
+  "result": "sinodeco:marble_pillar"
+}
