@@ -14,6 +14,7 @@ import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.network.C2SDrawingPacket;
 import games.moegirl.sinocraft.sinobrush.network.S2CDrawingPacket;
 import games.moegirl.sinocraft.sinobrush.network.SBRNetworks;
+import games.moegirl.sinocraft.sinobrush.utility.CanvasStashHelper;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinocore.gui.WidgetScreenBase;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.EditBoxWidget;
@@ -44,6 +45,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private EditBoxWidget title;
     private CanvasWidget canvas;
 
+    private boolean isInited = false;
     private boolean isSaving = false;
     private int selectedColor = 0;
 
@@ -91,6 +93,27 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
                     SBRItems.INK_BOTTLE.get().getColor(ink),
                     XuanPaperItem.getExpend(paper));
         });
+
+        if (!isInited) {
+            var drawing = CanvasStashHelper.unstashCanvas(Minecraft.getInstance());
+            if (drawing != null) {
+                canvas.getDrawing().setWidth(drawing.getWidth());
+                canvas.getDrawing().setHeight(drawing.getHeight());
+                canvas.getDrawing().setPixels(drawing.getPixels());
+            }
+        }
+
+        isInited = true;
+    }
+
+    @Override
+    public void onClose() {
+        var drawing = new Drawing();
+        drawing.setWidth(canvas.getDrawing().getWidth());
+        drawing.setHeight(canvas.getDrawing().getHeight());
+        drawing.setPixels(canvas.getDrawing().getPixels());
+        CanvasStashHelper.stashCanvas(Minecraft.getInstance(), drawing);
+        super.onClose();
     }
 
     public int getSelectedColor() {
