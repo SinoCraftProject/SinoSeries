@@ -73,6 +73,8 @@ dependencies {
 
 //    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
 
+    modRuntimeOnly group: 'maven.modrinth', name: 'jei', version: project.mod_jei_forge_version
+
     subMod.each { Project mod ->
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
             compileOnly project(path: forgeMod.path, configuration: 'namedElements')
