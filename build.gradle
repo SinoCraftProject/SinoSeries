@@ -3,6 +3,7 @@ plugins {
     id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
     id 'com.github.johnrengelman.shadow' version "${shadow_plugin_version}" apply false
     id 'org.ajoberstar.grgit' version "${grgit_plugin_version}"
+    id 'me.shedaniel.unified-publishing' version "${unified_publishing_plugin_version}" apply false
 }
 
 apply from: 'scripts/helper.gradle'
@@ -14,6 +15,7 @@ allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'architectury-plugin'
     apply plugin: 'dev.architectury.loom'
+    apply plugin: 'me.shedaniel.unified-publishing'
 
     group = 'games.moegirl.sinocraft'
     version = project.sinoseries_version

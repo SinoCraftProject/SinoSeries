@@ -46,6 +46,20 @@ String getCommit(project) {
     return latestCommits.get(0).id.substring(0, 8)
 }
 
+String getPublishingVersion(Project project) {
+    var ENV = System.getenv()
+
+    String result = project.sinoseries_version
+
+    result += "+mc${project.minecraft_version}"
+
+    if (!ENV.SINOSERIES_RELEASE) {
+        println 'You haven\'t set SINOSERIES_RELEASE, do NOT use publish unified.'
+    }
+
+    return result
+}
+
 String getMavenVersion(Project project) {
     var ENV = System.getenv()
 
@@ -63,7 +77,7 @@ String getMavenVersion(Project project) {
         result += '-RELEASE'
     }
 
-    return result;
+    return result
 }
 
 List<Project> getProjectsStartsBy(String prefix) {
@@ -146,6 +160,7 @@ List<String> getFilesToMatchExpand() {
 ext.helpers = {
     reGenRunConfig = this.&reGenRunConfig
     getMavenVersion = this.&getMavenVersion
+    getPublishingVersion = this.&getPublishingVersion
     getPropertiesToExpand = this.&getPropertiesToExpand
     getFilesToMatchExpand = this.&getFilesToMatchExpand
 

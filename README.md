@@ -1,13 +1,13 @@
 # SinoSeries / 华夏系列
 Main repository of SinoSeries mods.
-华夏系列模组仓库。
+华夏系列模组主仓库。
 
 Current Minecraft Version: **1.20.1**  
 当前 Minecraft 版本：**1.20.1**  
 
 | 模组名称 | 英文名称 (Name) | 状态 (Status) |
 |------|-------------|-------------|
-| 华夏核心 | SinoCore    | ⚠️ WIP      |
+| 华夏核心 | SinoCore    | ✅ Ready     |
 | 华夏云墨 | SinoBrush   | ⚠️ WIP      |
 | 华夏工缀 | SinoDeco    | ⚠️ WIP      |
 
