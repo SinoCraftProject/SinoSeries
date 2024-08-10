@@ -1,30 +1,28 @@
 unifiedPublishing {
-    if (System.getenv('CURSEFORGE_TOKEN') && System.getenv('MODRINTH_TOKEN')) {
-        project {
-            displayName = "${parent.mod_name} Fabric ${project.sinoseries_version} for MC ${project.minecraft_version}"
-            version = helpers.getPublishingVersion(parent)
-            gameVersions = [project.minecraft_version]
-            gameLoaders = ['fabric']
-            releaseType = 'release'
+    project {
+        displayName = "${parent.mod_name} Fabric ${project.sinoseries_version} for MC ${project.minecraft_version}"
+        version = helpers.getPublishingVersion(parent)
+        gameVersions = [project.minecraft_version]
+        gameLoaders = ['fabric']
+        releaseType = 'release'
 
-            mainPublication tasks.remapJar
+        mainPublication tasks.remapJar
 
-            relations {
-                depends {
-                    curseforge = 'fabric-api'
-                    modrinth = 'fabric-api'
-                }
+        relations {
+            depends {
+                curseforge = 'fabric-api'
+                modrinth = 'fabric-api'
             }
+        }
 
-            curseforge {
-                token = System.getenv('CURSEFORGE_TOKEN')
-                id = parent.curseforge_project_id
-            }
+        curseforge {
+            token = Objects.requireNonNullElse(System.getenv('CURSEFORGE_TOKEN'), "")
+            id = parent.curseforge_project_id
+        }
 
-            modrinth {
-                token = System.getenv('MODRINTH_TOKEN')
-                id = parent.modrinth_project_id
-            }
+        modrinth {
+            token = Objects.requireNonNullElse(System.getenv('MODRINTH_TOKEN'), "")
+            id = parent.modrinth_project_id
         }
     }
 }
