@@ -7,12 +7,13 @@
         "IServerCommonPacketListenerImplAccessor",
         "ItemMixin",
         "ItemPropertiesExtension",
+        "advancement.ServerPlayerMixin",
         "data.AdvancementProviderMixin",
         "data.LootTableProviderMixin",
         "data.RecipeProviderExtension",
         "data.RecipeProviderMixin",
         "data.TagsProviderMixin",
-        "advancement.ServerPlayerMixin"
+        "event.game.crafting.CartographyTableMenuMixin"
     ],
     "client": [
     ],
