@@ -33,5 +33,5 @@ include 'sinotest:sinotest-fabric'
 
 include 'sinoseries-meta'
 include 'sinoseries-meta:sinoseries-meta-forge'
-include 'sinoseries-meta:sinoseries-meta-neoforge'
+//include 'sinoseries-meta:sinoseries-meta-neoforge'
 include 'sinoseries-meta:sinoseries-meta-fabric'

@@ -29,10 +29,13 @@ public class CanvasStashHelper {
     public static Drawing unstashCanvas(Minecraft minecraft) {
         try {
             var tag = NbtIo.read(getStashCanvas(minecraft));
-            return Drawing.fromTag(tag);
+            if (tag != null) {
+                return Drawing.fromTag(tag);
+            }
+            return null;
         } catch (IOException ex) {
             ex.printStackTrace();
-            return null;
         }
+        return null;
     }
 }

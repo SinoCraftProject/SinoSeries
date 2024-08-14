@@ -32,6 +32,17 @@ loom {
     }
 }
 
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+}
+
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
@@ -40,6 +51,8 @@ dependencies {
     modRuntimeOnly group: 'me.shedaniel', name: 'RoughlyEnoughItems-fabric', version: project.mod_rei_fabric_version
 
     subMod.each { Project mod ->
+        common(project(path: mod.path, configuration: 'namedElements')) { transitive false }
+
         helpers.getSubFabricMod(mod).each { Project fabricMod ->
             implementation project(path: fabricMod.path, configuration: 'namedElements')
 
@@ -51,22 +64,12 @@ dependencies {
 }
 
 processResources {
-    doFirst {
-        metaHelpers.injectFabricTransformers(project)
-    }
-
     Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project, true)
     List<String> filesToMatch = helpers.getFilesToMatchExpand()
 
     filesMatching(filesToMatch, (copy) -> {
         expand(propertiesToExpend)
     })
-}
-
-configureLaunch {
-    doLast {
-        metaHelpers.injectFabricTransformers(project)
-    }
 }
 
 publishing {

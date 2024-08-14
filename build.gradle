@@ -6,8 +6,7 @@ plugins {
     id 'me.shedaniel.unified-publishing' version "${unified_publishing_plugin_version}" apply false
 }
 
-apply from: 'scripts/helper.gradle'
-apply from: 'scripts/meta.gradle'
+apply from: 'gradle/scripts/helper.gradle'
 
 def ENV = System.getenv()
 
@@ -171,17 +170,25 @@ subMod.each { Project mod ->
         }
 
         configurations {
-            common
-            shadowCommon
+            common {
+                canBeResolved = true
+                canBeConsumed = false
+            }
+
             compileClasspath.extendsFrom common
             runtimeClasspath.extendsFrom common
-            developmentForge.extendsFrom common
             developmentFabric.extendsFrom common
-            developmentNeoForge.extendsFrom common
+
+            shadowBundle {
+                canBeResolved = true
+                canBeConsumed = false
+            }
         }
 
         shadowJar {
-            configurations = [project.configurations.shadowCommon]
+            exclude 'architectury.common.json'
+
+            configurations = [project.configurations.shadowBundle]
             archiveClassifier = 'dev-shadow'
         }
 
@@ -215,44 +222,6 @@ subMod.each { Project mod ->
                     from components.java
                 }
             }
-        }
-    }
-
-    configure(helpers.getSubFabricMod(mod)) { Project fabricMod ->
-        apply plugin: 'com.github.johnrengelman.shadow'
-
-        architectury {
-            platformSetupLoomIde()
-            fabric()
-        }
-
-        loom {
-            accessWidenerPath = mod.loom.accessWidenerPath
-
-            runConfigs.configureEach { config ->
-                ideConfigGenerated = false
-            }
-        }
-
-        dependencies {
-            modImplementation "net.fabricmc:fabric-loader:${fabricMod.fabric_loader_version}"
-            modApi "net.fabricmc.fabric-api:fabric-api:${fabricMod.fabric_api_version}"
-
-            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
-            shadowCommon(project(path: mod.path, configuration: 'transformProductionFabric')) { transitive = false }
-        }
-
-        shadowJar {
-            exclude 'architectury.common.json'
-
-            configurations = [fabricMod.configurations.shadowCommon]
-            archiveClassifier = 'dev-shadow'
-        }
-
-        processResources {
-            filesMatching(filesToMatch, (copy) -> {
-                expand(propertiesToExpendFabric)
-            })
         }
     }
 
@@ -302,15 +271,7 @@ subMod.each { Project mod ->
             forge "net.minecraftforge:forge:${mod.minecraft_version}-${forgeMod.forge_version}"
 
             common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
-            shadowCommon(project(path: mod.path, configuration: 'transformProductionForge')) { transitive = false }
-        }
-
-        shadowJar {
-            exclude 'fabric.mod.json'
-            exclude 'architectury.common.json'
-
-            configurations = [project.configurations.shadowCommon]
-            archiveClassifier = 'dev-shadow'
+            shadowBundle project(path: mod.path, configuration: 'transformProductionForge')
         }
 
         processResources {
@@ -320,47 +281,33 @@ subMod.each { Project mod ->
         }
     }
 
-    configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
+    configure(helpers.getSubFabricMod(mod)) { Project fabricMod ->
         apply plugin: 'com.github.johnrengelman.shadow'
 
         architectury {
             platformSetupLoomIde()
-            neoForge()
+            fabric()
         }
 
         loom {
-            neoForge {
-            }
+            accessWidenerPath = mod.loom.accessWidenerPath
 
             runConfigs.configureEach { config ->
                 ideConfigGenerated = false
             }
         }
 
-        sourceSets.main.resources {
-            srcDir(new File(mod.projectDir, 'src/main/resources'))
-            srcDir(new File(mod.projectDir, 'src/generated/resources'))
-        }
-
         dependencies {
-//            neoForge "net.neoforged:neoforge:${project.neoforge_version}"
-            neoForge "net.neoforged:forge:${mod.minecraft_version}-${project.neoforge_version}"
+            modImplementation "net.fabricmc:fabric-loader:${fabricMod.fabric_loader_version}"
+            modApi "net.fabricmc.fabric-api:fabric-api:${fabricMod.fabric_api_version}"
 
             common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
-            shadowCommon(project(path: mod.path, configuration: 'transformProductionNeoForge')) { transitive = false }
-        }
-
-        shadowJar {
-            exclude 'fabric.mod.json'
-            exclude 'architectury.common.json'
-
-            configurations = [project.configurations.shadowCommon]
-            archiveClassifier = 'dev-shadow'
+            shadowBundle project(path: mod.path, configuration: 'transformProductionFabric')
         }
 
         processResources {
             filesMatching(filesToMatch, (copy) -> {
-                expand(propertiesToExpend)
+                expand(propertiesToExpendFabric)
             })
         }
     }

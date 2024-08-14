@@ -16,8 +16,8 @@ void reGenRunConfig() {
     var dirs = [
             new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/client'),
             new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/server'),
-            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
-            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
+//            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
+//            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
             new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/client'),
             new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/server')
     ]
@@ -154,7 +154,7 @@ Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = 
 }
 
 List<String> getFilesToMatchExpand() {
-    return ['pack.mcmeta', '*/**/mods.toml', 'fabric.mod.json']
+    return ['pack.mcmeta', 'mods.toml', 'fabric.mod.json', 'neoforge.mods.toml', 'build_info.properties']
 }
 
 ext.helpers = {

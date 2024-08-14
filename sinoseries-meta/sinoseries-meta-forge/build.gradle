@@ -1,5 +1,3 @@
-import net.fabricmc.loom.configuration.accesswidener.AccessWidenerFile
-
 plugins {
     id 'architectury-plugin' version "${architect_plugin_version}"
     id 'dev.architectury.loom' version "${architectury_loom_version}"
@@ -16,15 +14,6 @@ loom {
         mixinConfig 'sinocore-forge.mixins.json'
 
         convertAccessWideners = true
-
-//        subMod.each { Project mod ->
-//            var file = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
-//            if (file.exists()) {
-//                var content = file.readBytes()
-//                addTransitiveAccessWideners([new AccessWidenerFile(file.toString(), mod.modid, content)])
-//                extraAccessWideners.add file.toString()
-//            }
-//        }
     }
 
     runs {
@@ -68,14 +57,25 @@ loom {
     }
 }
 
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+}
+
 dependencies {
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-//    modImplementation "com.ptsmods:devlogin:${project.mod_dev_login_version}"
 
     modRuntimeOnly group: 'maven.modrinth', name: 'jei', version: project.mod_jei_forge_version
 
     subMod.each { Project mod ->
+        common(project(path: mod.path, configuration: 'namedElements')) { transitive false }
+
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
             compileOnly project(path: forgeMod.path, configuration: 'namedElements')
 
@@ -87,17 +87,6 @@ dependencies {
 }
 
 processResources {
-    doFirst {
-        metaHelpers.injectForgeTransformers(project)
-
-        subMod.each { Project mod ->
-            File dir = helpers.getProjectGeneratedResourcesDir(mod)
-            if (!dir.exists()) {
-                dir.mkdirs()
-            }
-        }
-    }
-
     Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(project)
     List<String> filesToMatch = helpers.getFilesToMatchExpand()
 
@@ -108,8 +97,6 @@ processResources {
 
 configureLaunch {
     doLast {
-        metaHelpers.injectForgeTransformers(project)
-
         subMod.each { Project mod ->
             File dir = helpers.getProjectGeneratedResourcesDir(mod)
             if (!dir.exists()) {
