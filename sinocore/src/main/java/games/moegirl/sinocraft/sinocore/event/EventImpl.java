@@ -9,11 +9,8 @@ public class EventImpl<ARGS, HANDLER extends IEventHandler<ARGS>> implements IEv
 
     @Override
     public ARGS invoke(ARGS eventArgs) {
-        try {
-            for (var listener : listeners) {
-                listener.accept(eventArgs);
-            }
-        } catch (EventCancelException ignored) {
+        for (var listener : listeners) {
+            listener.accept(eventArgs);
         }
         return eventArgs;
     }

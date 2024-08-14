@@ -1,5 +1,5 @@
 package games.moegirl.sinocraft.sinocore.event;
 
 @FunctionalInterface
-public interface ICancellableEventHandler<ARGS> extends IEventHandler<ARGS>, ICancellable {
+public interface ICancellableEventHandler<ARGS extends ICancellableEventArgs> extends IEventHandler<ARGS> {
 }

@@ -1,9 +1,10 @@
 package games.moegirl.sinocraft.sinocore.event.game.args;
 
+import games.moegirl.sinocraft.sinocore.event.CancellableEventArgsBase;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
-public class CartographyCraftEventArgs {
+public class CartographyCraftEventArgs extends CancellableEventArgsBase {
     private ItemStack inputMap;
     private ItemStack inputOther;
     private ItemStack output;
