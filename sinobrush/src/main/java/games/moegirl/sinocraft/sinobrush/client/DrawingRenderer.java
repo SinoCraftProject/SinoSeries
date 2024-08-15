@@ -40,7 +40,7 @@ public class DrawingRenderer {
         poseStack.scale(0.0625F, 0.0625F, 0.0078125F);
 
         try (var ignored1 = GLSwitcher.blend().enable(); var ignored2 = GLSwitcher.depth().enable()) {
-            blitHandheldBackground(poseStack, buffer, 0, 0, drawing.getWidth(), drawing.getHeight(), combinedLight);
+//            blitHandheldBackground(poseStack, buffer, 0, 0, drawing.getWidth(), drawing.getHeight(), combinedLight);
             fillRect(poseStack, buffer, 0, 0, drawing.getWidth(), drawing.getHeight(),
                     ColorHelper.rgbToARGB(drawing.getPaperColor()), combinedLight);
             if (!drawing.isEmpty()) {
@@ -86,7 +86,7 @@ public class DrawingRenderer {
         buffer.vertex(poseStack.last().pose(), maxX, minY, 0).color(color).uv2(combinedLight).endVertex();
     }
 
-    public static final ResourceLocation HANDHELD_BACKGROUND = new ResourceLocation(SinoBrush.MODID, "paper/");
+    public static final ResourceLocation HANDHELD_BACKGROUND = new ResourceLocation(SinoBrush.MODID, "paper_backrgound");
 
     private static void blitHandheldBackground(PoseStack poseStack, MultiBufferSource bufferSource,
                                  int minX, int minY, int maxX, int maxY, int combinedLight) {

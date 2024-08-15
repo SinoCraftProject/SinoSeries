@@ -35,6 +35,7 @@ public class WidgetScreenBase<T extends WidgetMenuBase> extends AbstractContaine
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+        renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override

@@ -26,13 +26,13 @@ public abstract class CartographyTableMenuMixin extends AbstractContainerMenu {
     }
 
     // qyl27: setupResultSlot -> this.access.execute -> method_17382
-    @Inject(method = "method_17382", at = @At("TAIL"))
+    @Inject(method = "method_17382", at = @At("RETURN"))
     private void afterSetupResult(ItemStack mapInput, ItemStack otherSlotInput, ItemStack __,
                                   Level level, BlockPos blockPos, CallbackInfo ci) {
-        var output = resultContainer.getItem(2);
+        var output = resultContainer.getItem(CartographyTableMenu.RESULT_SLOT);
         var args = CraftingEvents.CARTOGRAPHY_CRAFT.invoke(new CartographyTableCraftEventArgs(mapInput, otherSlotInput, output));
         if (!args.isCancelled()) {
-            resultContainer.setItem(2, args.getOutput());
+            resultContainer.setItem(CartographyTableMenu.RESULT_SLOT, args.getOutput());
             broadcastChanges();
         }
     }

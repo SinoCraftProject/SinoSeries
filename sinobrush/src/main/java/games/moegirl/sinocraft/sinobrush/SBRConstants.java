@@ -1,10 +1,8 @@
 package games.moegirl.sinocraft.sinobrush;
 
-import net.minecraft.util.FastColor;
-
 public class SBRConstants {
-    public static final int COLOR_WHITE = FastColor.ARGB32.color(255, 255, 255, 255);
-    public static final int COLOR_BLACK = FastColor.ARGB32.color(255, 0, 0, 0);
+    public static final int COLOR_WHITE = 0xFFFFFF;
+    public static final int COLOR_BLACK = 0x000000;
 
     public static final int DRAWING_COLOR_LENGTH = 4;   // qyl27: Timicasto said the future is not a 4-bit canvas, but a colorful world!
     public static final byte DRAWING_COLOR_MIN = 0;

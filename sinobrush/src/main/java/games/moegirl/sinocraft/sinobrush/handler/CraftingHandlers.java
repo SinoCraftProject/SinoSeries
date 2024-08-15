@@ -13,7 +13,7 @@ public class CraftingHandlers {
                 var expand = XuanPaperItem.getExpend(input);
                 var other = e.getOtherInput();
                 if (other.is(SBRItems.XUAN_PAPER.get()) && expand == XuanPaperItem.getExpend(other)) {
-                    var output = input.copy();
+                    var output = input.copyWithCount(1);
                     XuanPaperItem.setExpend(output, expand + 1);
                     e.setOutput(output);
                 }

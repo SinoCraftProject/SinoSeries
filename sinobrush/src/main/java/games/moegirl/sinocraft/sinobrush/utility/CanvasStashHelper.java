@@ -11,8 +11,13 @@ public class CanvasStashHelper {
     private static File STASH_CANVAS;
 
     public static File getStashCanvas(Minecraft minecraft) {
+        var dir = new File(minecraft.gameDirectory, "sinoseries/sinobrush");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
         if (STASH_CANVAS == null) {
-            STASH_CANVAS = new File(minecraft.gameDirectory, "sinoseries/sinobrush/canvas.nbt");
+            STASH_CANVAS = new File(dir, "canvas.nbt");
         }
 
         return STASH_CANVAS;
