@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinobrush.drawing;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinocore.data.migratable.IDataMigratable;
-import games.moegirl.sinocraft.sinocore.nbt.IDataCompoundTagSerializable;
+import games.moegirl.sinocraft.sinocore.data.serializable.ICompoundTagSerializable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +12,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 
-public class Drawing implements IDataCompoundTagSerializable, IDataMigratable<Void, Void> {
+public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, Void> {
     public static final Drawing EMPTY;
 
     static {

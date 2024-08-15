@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable;
+package games.moegirl.sinocraft.sinocore.interfaces.injectable;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 

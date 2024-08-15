@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.network.fabric;
 
-import games.moegirl.sinocraft.sinocore.mixin.IServerCommonPacketListenerImplAccessor;
+import games.moegirl.sinocraft.sinocore.mixin.network.IServerCommonPacketListenerImplAccessor;
 import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
 import games.moegirl.sinocraft.sinocore.network.NetworkContext;
 import games.moegirl.sinocraft.sinocore.network.PacketTarget;

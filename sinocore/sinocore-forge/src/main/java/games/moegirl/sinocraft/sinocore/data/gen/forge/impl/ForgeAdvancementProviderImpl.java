@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinocore.data.gen.forge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.forge.ForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 
 import java.util.List;
 
-public class ForgeAdvancementProviderImpl extends ForgeAdvancementProvider implements IRenamedProvider {
+public class ForgeAdvancementProviderImpl extends ForgeAdvancementProvider implements IRenamedProviderBridge {
 
     private final String name;
 
@@ -16,7 +16,7 @@ public class ForgeAdvancementProviderImpl extends ForgeAdvancementProvider imple
     }
 
     @Override
-    public String getNewName() {
+    public String sino$getNewName() {
         return "Advancements: " + name;
     }
 }

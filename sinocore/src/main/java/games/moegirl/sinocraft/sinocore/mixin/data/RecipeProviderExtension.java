@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.mixin.data;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable.ISinoRecipeProvider;
+import games.moegirl.sinocraft.sinocore.interfaces.injectable.ISinoRecipeProvider;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;

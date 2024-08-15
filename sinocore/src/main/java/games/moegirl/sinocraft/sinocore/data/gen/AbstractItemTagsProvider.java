@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvider<Item> implements IRenamedProvider, ISinoDataProvider {
+public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvider<Item> implements IRenamedProviderBridge, ISinoDataProvider {
 
     protected static final TagKey<Item> FORGE_CHESTS_WOODEN = forgeTag("chests/wooden");
     protected static final TagKey<Item> FORGE_CHESTS_TRAPPED = forgeTag("chests/trapped");
@@ -49,7 +49,7 @@ public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvid
     }
 
     @Override
-    public String getNewName() {
+    public String sino$getNewName() {
         return "Tags for Item: " + modId;
     }
 

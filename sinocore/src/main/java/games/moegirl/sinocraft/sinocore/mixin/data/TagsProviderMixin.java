@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.mixin.data;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
 import net.minecraft.data.tags.TagsProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,8 +13,8 @@ public abstract class TagsProviderMixin {
     @Inject(method = "getName", at = @At("HEAD"), cancellable = true)
     public void injectGetName(CallbackInfoReturnable<String> cir) {
         TagsProvider<?> provider = (TagsProvider<?>) (Object) this;
-        if (provider instanceof IRenamedProvider mp) {
-            cir.setReturnValue(mp.getNewName());
+        if (provider instanceof IRenamedProviderBridge mp) {
+            cir.setReturnValue(mp.sino$getNewName());
         }
     }
 }

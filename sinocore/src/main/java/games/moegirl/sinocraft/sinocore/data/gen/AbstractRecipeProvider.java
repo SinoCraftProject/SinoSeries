@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class AbstractRecipeProvider extends RecipeProvider implements IRenamedProvider, ISinoDataProvider {
+public abstract class AbstractRecipeProvider extends RecipeProvider implements IRenamedProviderBridge, ISinoDataProvider {
 
     protected final String modId;
 
@@ -31,7 +31,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
     }
 
     @Override
-    public String getNewName() {
+    public String sino$getNewName() {
         return "Recipes: " + modId;
     }
 

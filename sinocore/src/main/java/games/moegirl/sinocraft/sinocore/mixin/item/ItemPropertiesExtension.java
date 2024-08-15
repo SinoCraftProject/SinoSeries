@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.mixin;
+package games.moegirl.sinocraft.sinocore.mixin.item;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable.ISinoItemProperties;
+import games.moegirl.sinocraft.sinocore.interfaces.injectable.ISinoItemProperties;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;

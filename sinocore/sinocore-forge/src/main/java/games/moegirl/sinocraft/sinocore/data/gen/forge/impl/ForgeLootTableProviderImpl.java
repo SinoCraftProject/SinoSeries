@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.forge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.forge.ForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.interfaces.IRenamedProvider;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ForgeLootTableProviderImpl extends LootTableProvider implements IRenamedProvider {
+public class ForgeLootTableProviderImpl extends LootTableProvider implements IRenamedProviderBridge {
 
     private final String modId;
     private ForgeLootTableProviderDelegate delegate;
@@ -39,7 +39,7 @@ public class ForgeLootTableProviderImpl extends LootTableProvider implements IRe
     }
 
     @Override
-    public String getNewName() {
+    public String sino$getNewName() {
         return "Loot Tables: " + modId;
     }
 }

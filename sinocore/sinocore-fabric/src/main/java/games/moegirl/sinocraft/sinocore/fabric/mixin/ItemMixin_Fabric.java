@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.fabric.mixin;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable.ISinoItem;
+import games.moegirl.sinocraft.sinocore.interfaces.injectable.ISinoItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;

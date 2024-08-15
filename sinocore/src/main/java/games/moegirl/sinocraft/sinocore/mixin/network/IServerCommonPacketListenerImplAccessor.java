@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.mixin;
+package games.moegirl.sinocraft.sinocore.mixin.network;
 
 import net.minecraft.network.Connection;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;

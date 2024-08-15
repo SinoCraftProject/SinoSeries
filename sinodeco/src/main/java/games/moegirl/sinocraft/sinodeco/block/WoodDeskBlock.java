@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinodeco.block;
 
-import games.moegirl.sinocraft.sinocore.utility.block.shape.BlockShapeHelper;
+import games.moegirl.sinocraft.sinocore.utility.shape.BlockShapeHelper;
+import games.moegirl.sinocraft.sinocore.utility.shape.VoxelShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -233,7 +234,7 @@ public class WoodDeskBlock extends Block {
         for (var i = 0; i < PARTS.length; i++) {
             for (var j = 0; j < PARTS[i].length; j++) {
                 if (PARTS[i][j] != null) {
-                    SHAPES[i][j] = BlockShapeHelper.or(Arrays.stream(PARTS[i][j])
+                    SHAPES[i][j] = VoxelShapeHelper.combine(Arrays.stream(PARTS[i][j])
                             .filter(Objects::nonNull)
                             .map(DeskPart::shape)
                             .toArray(VoxelShape[]::new));

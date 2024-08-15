@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.forge.mixin;
 
-import games.moegirl.sinocraft.sinocore.mixin_interfaces.injectable.ISinoItem;
+import games.moegirl.sinocraft.sinocore.interfaces.injectable.ISinoItem;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
