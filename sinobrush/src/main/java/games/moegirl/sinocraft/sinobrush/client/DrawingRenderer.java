@@ -15,8 +15,8 @@ public class DrawingRenderer {
     public static void renderInGui(GuiGraphics guiGraphics, int x, int y, int width, int height, Drawing drawing, float partialTick) {
         guiGraphics.fill(x, y, x + width, y + height, ColorHelper.rgbToARGB(drawing.getPaperColor()));
 
-        var pW = (int)Math.floor(160.0F / Math.max(1, drawing.getWidth()));
-        var pH = (int)Math.floor(160.0F / Math.max(1, drawing.getHeight()));
+        var pW = width / Math.max(1.0F, drawing.getWidth());
+        var pH = height / Math.max(1.0F, drawing.getHeight());
         if (!drawing.isEmpty()) {
             try (var ignored = GLSwitcher.blend().enable()) {
                 for (var i = 0; i < drawing.getWidth(); i++) {
@@ -56,18 +56,8 @@ public class DrawingRenderer {
         }
     }
 
-    private static void fillGuiRect(GuiGraphics guiGraphics, int minX, int minY, int maxX, int maxY, int color) {
+    private static void fillGuiRect(GuiGraphics guiGraphics, float minX, float minY, float maxX, float maxY, int color) {
         var matrix4f = guiGraphics.pose().last().pose();
-        if (minX < maxX) {
-            var temp = minX;
-            minX = maxX;
-            maxX = temp;
-        }
-        if (minY < maxY) {
-            var temp = minY;
-            minY = maxY;
-            maxY = temp;
-        }
         var buffer = guiGraphics.bufferSource().getBuffer(RenderType.guiOverlay());
         buffer.vertex(matrix4f, minX, minY, 0).color(color).endVertex();
         buffer.vertex(matrix4f, minX, maxY, 0).color(color).endVertex();
@@ -77,7 +67,7 @@ public class DrawingRenderer {
     }
 
     private static void fillRect(PoseStack poseStack, MultiBufferSource bufferSource,
-                                 int minX, int minY, int maxX, int maxY,
+                                 float minX, float minY, float maxX, float maxY,
                                  int color, int combinedLight) {
         var buffer = bufferSource.getBuffer(RenderType.textBackground());
         buffer.vertex(poseStack.last().pose(), minX, minY, 0).color(color).uv2(combinedLight).endVertex();
@@ -89,7 +79,7 @@ public class DrawingRenderer {
     public static final ResourceLocation HANDHELD_BACKGROUND = new ResourceLocation(SinoBrush.MODID, "paper_backrgound");
 
     private static void blitHandheldBackground(PoseStack poseStack, MultiBufferSource bufferSource,
-                                 int minX, int minY, int maxX, int maxY, int combinedLight) {
+                                               float minX, float minY, float maxX, float maxY, int combinedLight) {
         var buffer = bufferSource.getBuffer(RenderType.text(HANDHELD_BACKGROUND));
         var color = 0xFF000000;
         buffer.vertex(poseStack.last().pose(), minX, minY, 0).color(color).uv(0, 0).uv2(combinedLight).endVertex();

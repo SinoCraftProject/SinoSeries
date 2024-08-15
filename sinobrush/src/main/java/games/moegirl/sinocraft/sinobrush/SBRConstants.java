@@ -8,7 +8,7 @@ public class SBRConstants {
     public static final byte DRAWING_COLOR_MIN = 0;
     public static final byte DRAWING_COLOR_MAX = (byte)(Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2) - 1);
 
-    public static final int XUAN_PAPER_MAX_EXPEND = 4;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
+    public static final int XUAN_PAPER_MAX_EXPEND = 2;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
     public static final int DRAWING_MIN_LENGTH = 16;
     public static final int DRAWING_MAX_LENGTH = DRAWING_MIN_LENGTH << XUAN_PAPER_MAX_EXPEND;   // Todo: qyl27: Is it larger than max packet size?
 

@@ -11,8 +11,11 @@ public class CraftingHandlers {
             if (input.is(SBRItems.XUAN_PAPER.get())
                     && XuanPaperItem.canExpend(input)) {
                 var expand = XuanPaperItem.getExpend(input);
+                var color = SBRItems.XUAN_PAPER.get().getColor(input);
                 var other = e.getOtherInput();
-                if (other.is(SBRItems.XUAN_PAPER.get()) && expand == XuanPaperItem.getExpend(other)) {
+                if (other.is(SBRItems.XUAN_PAPER.get())
+                        && expand == XuanPaperItem.getExpend(other)
+                        && color == SBRItems.XUAN_PAPER.get().getColor(other)) {
                     var output = input.copyWithCount(1);
                     XuanPaperItem.setExpend(output, expand + 1);
                     e.setOutput(output);

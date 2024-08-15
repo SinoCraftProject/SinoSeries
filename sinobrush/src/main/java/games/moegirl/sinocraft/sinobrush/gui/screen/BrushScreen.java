@@ -81,7 +81,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         title = addEditBox("file_name");
 
         var rect = (RectEntry) widgets.getWidget("canvas");
-        canvas = new CanvasWidget(this, rect.getX() + leftPos, rect.getY() + topPos, rect.getWidth(), rect.getHeight(), this::isCanvasDrawable);
+        canvas = new CanvasWidget(this, rect.getX() + leftPos, rect.getY() + topPos, rect.getWidth(), rect.getHeight());
 
         addRenderableWidget(canvas);
         selectColor(15);
@@ -89,9 +89,11 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         menu.container.addListener(container -> {
             var ink = menu.container.getItem(BrushMenu.INK_SLOT);
             var paper = menu.container.getItem(BrushMenu.PAPER_SLOT);
-            updateState(SBRItems.XUAN_PAPER.get().getColor(paper),
-                    SBRItems.INK_BOTTLE.get().getColor(ink),
-                    XuanPaperItem.getExpend(paper));
+            canvas.getDrawing().setInkColor(SBRItems.INK_BOTTLE.get().getColor(ink));
+            canvas.getDrawing().setPaperColor(SBRItems.XUAN_PAPER.get().getColor(paper));
+            var size = SBRConstants.DRAWING_MIN_LENGTH << XuanPaperItem.getExpend(paper);
+            canvas.getDrawing().resize(size, size);
+            updateCanvas();
         });
 
         if (!isInited) {
@@ -100,6 +102,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
                 canvas.getDrawing().setWidth(drawing.getWidth());
                 canvas.getDrawing().setHeight(drawing.getHeight());
                 canvas.getDrawing().setPixels(drawing.getPixels());
+                updateCanvas();
             }
         }
 
@@ -116,15 +119,12 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
         super.onClose();
     }
 
-    public int getSelectedColor() {
-        return selectedColor;
+    private void updateCanvas() {
+        canvas.active = isCanvasDrawable();
     }
 
-    public void updateState(int paperColor, int inkColor, int paperExpend) {
-        canvas.getDrawing().setPaperColor(paperColor);
-        canvas.getDrawing().setInkColor(inkColor);
-        var size = SBRConstants.DRAWING_MIN_LENGTH << paperExpend;
-        canvas.getDrawing().resize(size, size);
+    public int getSelectedColor() {
+        return selectedColor;
     }
 
     private boolean isCanvasDrawable() {
@@ -254,11 +254,13 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private void beginSaving() {
         isSaving = true;
         btnBrush.active = false;
+        updateCanvas();
     }
 
     private void afterSaved() {
         isSaving = false;
         btnBrush.active = true;
+        updateCanvas();
     }
 
     private void sendErrorMessage(String message) {

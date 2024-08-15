@@ -162,10 +162,15 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
 
     public void resize(int w, int h) {
         var pixels = new byte[w * h];
-        for (var i = 0; i < getWidth(); i++) {
-            for (var j = 0; j < getHeight(); j++) {
-                var in = i * getWidth() + j;
-                if (in >= getPixels().length) {
+        // qyl27: Cut it!
+        for (var i = 0; i < w; i++) {
+            if (i >= getWidth()) {
+                break;
+            }
+
+            for (var j = 0; j < h; j++) {
+                var in = i * w + j;
+                if (j >= getHeight() || in >= getPixels().length) {
                     break;
                 }
 

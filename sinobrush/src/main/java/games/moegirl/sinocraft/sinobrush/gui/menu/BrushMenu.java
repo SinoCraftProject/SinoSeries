@@ -10,9 +10,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class BrushMenu extends WidgetMenuBase {
@@ -103,13 +106,8 @@ public class BrushMenu extends WidgetMenuBase {
     public void removed(Player player) {
         super.removed(player);
 
-        if (player instanceof ServerPlayer sp && sp.isAlive() && !sp.hasDisconnected()) {
-            var inv = player.getInventory();
-            inv.placeItemBackInInventory(container.getItem(INK_SLOT));
-            inv.placeItemBackInInventory(container.getItem(PAPER_SLOT));
-            inv.placeItemBackInInventory(container.getItem(DRAW_SLOT));
+        if (!player.level().isClientSide()) {
+            this.clearContainer(player, container);
         }
-
-        // Todo: qyl27: save canvas into item nbt to prevent content lost.
     }
 }

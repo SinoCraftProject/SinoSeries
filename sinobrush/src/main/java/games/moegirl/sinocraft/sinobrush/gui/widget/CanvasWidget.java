@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FastColor;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.function.BooleanSupplier;
@@ -14,15 +15,13 @@ import java.util.function.BooleanSupplier;
 public class CanvasWidget extends AbstractWidget {
 
     private final BrushScreen screen;
-    private final BooleanSupplier drawable;
 
     private Drawing drawing;
 
-    public CanvasWidget(BrushScreen screen, int x, int y, int width, int height, BooleanSupplier drawable) {
+    public CanvasWidget(BrushScreen screen, int x, int y, int width, int height) {
         super(x, y, width, height, Component.empty());
         this.screen = screen;
         this.drawing = new Drawing();
-        this.drawable = drawable;
     }
 
     public Drawing getDrawing() {
@@ -35,8 +34,10 @@ public class CanvasWidget extends AbstractWidget {
 
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        if (drawable.getAsBoolean()) {
-            DrawingRenderer.renderInGui(guiGraphics, getX(), getY(), getWidth(), getHeight(), getDrawing(), partialTick);
+        DrawingRenderer.renderInGui(guiGraphics, getX(), getY(), getWidth(), getHeight(), getDrawing(), partialTick);
+
+        if (!this.active) {
+            guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight(), FastColor.ARGB32.color(64, 200, 200, 200));
         }
     }
 
@@ -94,7 +95,7 @@ public class CanvasWidget extends AbstractWidget {
     protected void onDrag(double mouseX, double mouseY, double dragX, double dragY) {
         super.onDrag(mouseX, mouseY, dragX, dragY);
 
-        if (drawable.getAsBoolean() && !isDragging) {
+        if (this.active && !isDragging) {
             isDragging = true;
         }
     }
@@ -103,7 +104,7 @@ public class CanvasWidget extends AbstractWidget {
     public void onClick(double mouseX, double mouseY) {
         super.onClick(mouseX, mouseY);
 
-        if (drawable.getAsBoolean()) {
+        if (this.active) {
             if (leftMouseButton) {
                 if (altPressed) {
                     screen.selectColor(pickColor(mouseX, mouseY));
@@ -142,8 +143,8 @@ public class CanvasWidget extends AbstractWidget {
     }
 
     private void setPixel(double mouseX, double mouseY, int color) {
-        var pixelW = 160.0 / Math.max(1, drawing.getWidth());
-        var pixelH = 160.0 / Math.max(1, drawing.getHeight());
+        var pixelW = getWidth() / Math.max(1.0, drawing.getWidth());
+        var pixelH = getHeight() / Math.max(1.0, drawing.getHeight());
 
         var i = (int) Math.floor((mouseX - getX()) / pixelW);
         var j = (int) Math.floor((mouseY - getY()) / pixelH);
@@ -151,8 +152,8 @@ public class CanvasWidget extends AbstractWidget {
     }
 
     private byte pickColor(double mouseX, double mouseY) {
-        var pixelW = 160.0 / Math.max(1, drawing.getWidth());
-        var pixelH = 160.0 / Math.max(1, drawing.getHeight());
+        var pixelW = getWidth() / Math.max(1.0, drawing.getWidth());
+        var pixelH = getHeight() / Math.max(1.0, drawing.getHeight());
 
         var i = (int) Math.floor((mouseX - getX()) / pixelW);
         var j = (int) Math.floor((mouseY - getY()) / pixelH);

@@ -21,8 +21,8 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
 
     @Override
     public int getColor(ItemStack stack) {
-        if (!hasCustomColor(stack)) {
-            setColor(stack, SBRConstants.COLOR_WHITE);
+        if (stack.isEmpty() || !hasCustomColor(stack)) {
+            return SBRConstants.COLOR_WHITE;
         }
 
         return DyeableLeatherItem.super.getColor(stack);
