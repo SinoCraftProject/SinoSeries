@@ -5,7 +5,7 @@ public class EventFactory {
         return new EventImpl<>();
     }
 
-    public static <A> IEvent<A, ICancellableEventHandler<A>> createCancellableEvent(Class<A> argsType) {
+    public static <A extends ICancellableEventArgs> IEvent<A, ICancellableEventHandler<A>> createCancellableEvent(Class<A> argsType) {
         return new EventImpl<>();
     }
 }

@@ -1,13 +1,13 @@
 {
     "injected_interfaces": {
         "net/minecraft/class_1792": [
-            "games/moegirl/sinocraft/sinocore/mixin_interfaces/injectable/ISinoItem"
+            "games/moegirl/sinocraft/sinocore/interfaces/injectable/ISinoItem"
         ],
         "net/minecraft/class_1792$class_1793": [
-            "games/moegirl/sinocraft/sinocore/mixin_interfaces/injectable/ISinoItemProperties"
+            "games/moegirl/sinocraft/sinocore/interfaces/injectable/ISinoItemProperties"
         ],
         "net/minecraft/class_2446": [
-            "games/moegirl/sinocraft/sinocore/mixin_interfaces/injectable/ISinoRecipeProvider"
+            "games/moegirl/sinocraft/sinocore/interfaces/injectable/ISinoRecipeProvider"
         ]
     }
 }
