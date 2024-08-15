@@ -1,7 +1,7 @@
-package games.moegirl.sinocraft.sinobrush.data.advancement;
+package games.moegirl.sinocraft.sinobrush.data.gen.advancement;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinobrush.data.tag.SBRItemTags;
+import games.moegirl.sinocraft.sinobrush.data.gen.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.advancement.criterion.CustomStatTrigger;

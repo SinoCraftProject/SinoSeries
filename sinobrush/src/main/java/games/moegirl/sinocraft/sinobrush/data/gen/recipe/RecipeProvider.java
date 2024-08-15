@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinobrush.data.recipe;
+package games.moegirl.sinocraft.sinobrush.data.gen.recipe;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;

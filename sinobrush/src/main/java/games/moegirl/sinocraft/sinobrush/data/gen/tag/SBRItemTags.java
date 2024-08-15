@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinobrush.data.tag;
+package games.moegirl.sinocraft.sinobrush.data.gen.tag;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import net.minecraft.core.registries.Registries;

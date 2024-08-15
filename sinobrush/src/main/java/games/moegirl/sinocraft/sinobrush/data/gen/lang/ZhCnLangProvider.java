@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinobrush.data.lang;
+package games.moegirl.sinocraft.sinobrush.data.gen.lang;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;

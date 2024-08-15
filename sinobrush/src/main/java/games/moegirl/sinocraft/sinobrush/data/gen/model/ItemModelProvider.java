@@ -1,13 +1,10 @@
-package games.moegirl.sinocraft.sinobrush.data.model;
+package games.moegirl.sinocraft.sinobrush.data.gen.model;
 
-import games.moegirl.sinocraft.sinobrush.SinoBrush;
-import games.moegirl.sinocraft.sinobrush.data.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class ItemModelProvider extends AbstractItemModelProvider {

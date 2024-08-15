@@ -38,8 +38,7 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
             assert tag != null;
 
             var paper = tag.getCompound(SBRConstants.TagName.XUAN_PAPER);
-            var expends = paper.getInt(SBRConstants.TagName.XUAN_PAPER_EXPENDS);
-            return Math.min(SBRConstants.XUAN_PAPER_MAX_EXPEND, Math.max(expends, 0));
+            return paper.getInt(SBRConstants.TagName.XUAN_PAPER_EXPENDS);
         }
 
         return 0;
@@ -68,14 +67,6 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
     }
 
     @Override
-    public @NotNull ItemStack getDefaultInstance() {
-        var stack = new ItemStack(this);
-        setExpend(stack, 0);
-        setColor(stack, SBRConstants.COLOR_WHITE);
-        return stack;
-    }
-
-    @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltip, isAdvanced);
 
@@ -89,5 +80,13 @@ public class XuanPaperItem extends Item implements DyeableLeatherItem {
                         .withStyle(ChatFormatting.GRAY));
             }
         }
+    }
+
+    @Override
+    public @NotNull ItemStack getDefaultInstance() {
+        var stack = new ItemStack(this);
+        setExpend(stack, 0);
+        setColor(stack, SBRConstants.COLOR_WHITE);
+        return stack;
     }
 }

@@ -1,12 +1,12 @@
-package games.moegirl.sinocraft.sinobrush.data;
+package games.moegirl.sinocraft.sinobrush.data.gen;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
-import games.moegirl.sinocraft.sinobrush.data.advancement.AdvancementProvider;
-import games.moegirl.sinocraft.sinobrush.data.lang.ZhCnLangProvider;
-import games.moegirl.sinocraft.sinobrush.data.model.ItemModelProvider;
-import games.moegirl.sinocraft.sinobrush.data.recipe.RecipeProvider;
-import games.moegirl.sinocraft.sinobrush.data.tag.BlockTagProvider;
-import games.moegirl.sinocraft.sinobrush.data.tag.ItemTagProvider;
+import games.moegirl.sinocraft.sinobrush.data.gen.advancement.AdvancementProvider;
+import games.moegirl.sinocraft.sinobrush.data.gen.lang.ZhCnLangProvider;
+import games.moegirl.sinocraft.sinobrush.data.gen.model.ItemModelProvider;
+import games.moegirl.sinocraft.sinobrush.data.gen.recipe.RecipeProvider;
+import games.moegirl.sinocraft.sinobrush.data.gen.tag.BlockTagProvider;
+import games.moegirl.sinocraft.sinobrush.data.gen.tag.ItemTagProvider;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 
