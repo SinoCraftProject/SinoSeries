@@ -65,21 +65,20 @@ configurations {
 
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentFabric.extendsFrom common
+    developmentForge.extendsFrom common
 }
 
 dependencies {
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     modRuntimeOnly group: 'maven.modrinth', name: 'jei', version: project.mod_jei_forge_version
-
     subMod.each { Project mod ->
-        common(project(path: mod.path, configuration: 'namedElements')) { transitive false }
+        common(project(path: mod.path, configuration: 'namedElements')) { transitive true }
 
         helpers.getSubForgeMod(mod).each { Project forgeMod ->
-            compileOnly project(path: forgeMod.path, configuration: 'namedElements')
+            implementation project(path: forgeMod.path, configuration: 'namedElements')
 
-            if (forgeMod.modid != 'sinotest') {
+            if (mod.modid != 'sinotest') {
                 include project(path: forgeMod.path, configuration: 'namedElements')
             }
         }

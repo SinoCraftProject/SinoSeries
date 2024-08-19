@@ -56,7 +56,7 @@ dependencies {
         helpers.getSubFabricMod(mod).each { Project fabricMod ->
             implementation project(path: fabricMod.path, configuration: 'namedElements')
 
-            if (fabricMod.modid != 'sinotest') {
+            if (mod.modid != 'sinotest') {
                 include project(path: fabricMod.path, configuration: 'namedElements')
             }
         }

@@ -154,7 +154,11 @@ Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = 
 }
 
 List<String> getFilesToMatchExpand() {
-    return ['pack.mcmeta', 'mods.toml', 'fabric.mod.json', 'neoforge.mods.toml', 'build_info.properties']
+    return ['pack.mcmeta',
+            'META-INF/mods.toml',
+            'fabric.mod.json',
+            'META-INF/neoforge.mods.toml',
+            'build_info.properties']
 }
 
 ext.helpers = {
