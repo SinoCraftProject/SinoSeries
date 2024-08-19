@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -13,7 +13,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "false",
@@ -24,7 +24,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none"
+        "model": "sinodeco:block/wooden_table_waist_none"
       },
       "when": {
         "east": "false",
@@ -35,7 +35,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -47,7 +47,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none",
+        "model": "sinodeco:block/wooden_table_waist_none",
         "y": 90
       },
       "when": {
@@ -59,7 +59,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -71,7 +71,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none",
+        "model": "sinodeco:block/wooden_table_waist_none",
         "y": 180
       },
       "when": {
@@ -83,7 +83,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -95,7 +95,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none",
+        "model": "sinodeco:block/wooden_table_waist_none",
         "y": 270
       },
       "when": {
@@ -107,7 +107,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -118,7 +118,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left"
+        "model": "sinodeco:block/wooden_table_waist_left"
       },
       "when": {
         "east": "false",
@@ -129,7 +129,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -141,7 +141,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none",
+        "model": "sinodeco:block/wooden_table_waist_none",
         "y": 90
       },
       "when": {
@@ -153,7 +153,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -165,7 +165,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 180
       },
       "when": {
@@ -177,7 +177,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -188,7 +188,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "false",
@@ -199,7 +199,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none"
+        "model": "sinodeco:block/wooden_table_waist_none"
       },
       "when": {
         "east": "false",
@@ -210,7 +210,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -222,7 +222,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 90
       },
       "when": {
@@ -234,7 +234,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 270
       },
       "when": {
@@ -246,7 +246,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -257,7 +257,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left"
+        "model": "sinodeco:block/wooden_table_waist_left"
       },
       "when": {
         "east": "false",
@@ -268,7 +268,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -280,7 +280,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 90
       },
       "when": {
@@ -292,7 +292,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -303,7 +303,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left"
+        "model": "sinodeco:block/wooden_table_waist_left"
       },
       "when": {
         "east": "false",
@@ -314,7 +314,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -326,7 +326,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 90
       },
       "when": {
@@ -338,7 +338,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -351,7 +351,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -362,7 +362,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -373,7 +373,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right"
+        "model": "sinodeco:block/wooden_table_waist_right"
       },
       "when": {
         "east": "true",
@@ -384,7 +384,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 180
       },
       "when": {
@@ -396,7 +396,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -408,7 +408,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none",
+        "model": "sinodeco:block/wooden_table_waist_none",
         "y": 270
       },
       "when": {
@@ -420,7 +420,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -431,7 +431,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both"
+        "model": "sinodeco:block/wooden_table_waist_both"
       },
       "when": {
         "east": "true",
@@ -442,7 +442,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 180
       },
       "when": {
@@ -454,7 +454,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -465,7 +465,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -476,7 +476,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right"
+        "model": "sinodeco:block/wooden_table_waist_right"
       },
       "when": {
         "east": "true",
@@ -487,7 +487,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 270
       },
       "when": {
@@ -499,7 +499,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -510,7 +510,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -521,7 +521,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right"
+        "model": "sinodeco:block/wooden_table_waist_right"
       },
       "when": {
         "east": "true",
@@ -532,7 +532,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 270
       },
       "when": {
@@ -544,42 +544,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
-        "y": 180
-      },
-      "when": {
-        "east": "true",
-        "north": "false",
-        "south": "true",
-        "south_east": "false",
-        "west": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/wood_desk_top"
-      },
-      "when": {
-        "east": "true",
-        "north": "false",
-        "south": "true",
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both"
-      },
-      "when": {
-        "east": "true",
-        "north": "false",
-        "south": "true",
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -587,12 +552,47 @@
         "north": "false",
         "south": "true",
         "south_east": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/wooden_table_top"
+      },
+      "when": {
+        "east": "true",
+        "north": "false",
+        "south": "true",
         "west": "true"
       }
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_waist_both"
+      },
+      "when": {
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/wooden_table_leg",
+        "y": 180
+      },
+      "when": {
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "south_east": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -605,7 +605,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -616,7 +616,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both"
+        "model": "sinodeco:block/wooden_table_waist_both"
       },
       "when": {
         "east": "true",
@@ -627,7 +627,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -640,7 +640,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -651,7 +651,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both"
+        "model": "sinodeco:block/wooden_table_waist_both"
       },
       "when": {
         "east": "true",
@@ -662,7 +662,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -675,7 +675,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -686,7 +686,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both"
+        "model": "sinodeco:block/wooden_table_waist_both"
       },
       "when": {
         "east": "true",
@@ -697,7 +697,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -708,7 +708,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 90
       },
       "when": {
@@ -720,7 +720,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -732,7 +732,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_none",
+        "model": "sinodeco:block/wooden_table_waist_none",
         "y": 180
       },
       "when": {
@@ -744,7 +744,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -756,7 +756,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 270
       },
       "when": {
@@ -768,7 +768,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -779,7 +779,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 90
       },
       "when": {
@@ -791,7 +791,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -803,7 +803,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 180
       },
       "when": {
@@ -815,7 +815,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -826,7 +826,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 90
       },
       "when": {
@@ -838,7 +838,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -850,7 +850,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 180
       },
       "when": {
@@ -862,7 +862,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "false",
@@ -874,7 +874,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -885,7 +885,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 90
       },
       "when": {
@@ -897,7 +897,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 270
       },
       "when": {
@@ -909,7 +909,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -920,7 +920,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 90
       },
       "when": {
@@ -932,7 +932,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "false",
@@ -944,7 +944,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -957,7 +957,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -968,42 +968,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
-        "y": 90
-      },
-      "when": {
-        "east": "false",
-        "north": "true",
-        "south": "true",
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
-      },
-      "when": {
-        "east": "false",
-        "north": "true",
-        "north_west": "false",
-        "south": "true",
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/wood_desk_top"
-      },
-      "when": {
-        "east": "false",
-        "north": "true",
-        "south": "true",
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 90
       },
       "when": {
@@ -1015,7 +980,42 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg"
+      },
+      "when": {
+        "east": "false",
+        "north": "true",
+        "north_west": "false",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/wooden_table_top"
+      },
+      "when": {
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/wooden_table_waist_both",
+        "y": 90
+      },
+      "when": {
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1028,7 +1028,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "false",
@@ -1039,7 +1039,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 90
       },
       "when": {
@@ -1051,7 +1051,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1062,7 +1062,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 180
       },
       "when": {
@@ -1074,7 +1074,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1086,7 +1086,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 270
       },
       "when": {
@@ -1098,7 +1098,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1109,7 +1109,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_left",
+        "model": "sinodeco:block/wooden_table_waist_left",
         "y": 180
       },
       "when": {
@@ -1121,7 +1121,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1133,7 +1133,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_right",
+        "model": "sinodeco:block/wooden_table_waist_right",
         "y": 270
       },
       "when": {
@@ -1145,7 +1145,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1158,7 +1158,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1169,7 +1169,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 180
       },
       "when": {
@@ -1181,7 +1181,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1193,7 +1193,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1206,7 +1206,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1217,7 +1217,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 180
       },
       "when": {
@@ -1229,7 +1229,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1241,7 +1241,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1252,7 +1252,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 180
       },
       "when": {
@@ -1264,7 +1264,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1277,7 +1277,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1288,7 +1288,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 180
       },
       "when": {
@@ -1300,7 +1300,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1311,7 +1311,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 270
       },
       "when": {
@@ -1323,7 +1323,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1336,7 +1336,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1349,7 +1349,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1360,7 +1360,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 270
       },
       "when": {
@@ -1372,7 +1372,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1385,7 +1385,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1396,7 +1396,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 270
       },
       "when": {
@@ -1408,7 +1408,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1421,7 +1421,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1432,7 +1432,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_waist_both",
+        "model": "sinodeco:block/wooden_table_waist_both",
         "y": 270
       },
       "when": {
@@ -1444,7 +1444,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1455,7 +1455,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1467,7 +1467,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1480,7 +1480,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1493,7 +1493,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1506,7 +1506,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1517,7 +1517,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1529,7 +1529,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1542,7 +1542,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1555,7 +1555,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1566,7 +1566,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1578,7 +1578,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1591,7 +1591,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1604,7 +1604,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1615,7 +1615,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1627,7 +1627,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1640,7 +1640,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1651,7 +1651,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1663,7 +1663,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1676,7 +1676,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1689,7 +1689,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1700,7 +1700,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1712,7 +1712,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1725,7 +1725,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1736,7 +1736,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1748,7 +1748,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1761,7 +1761,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1772,7 +1772,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg"
+        "model": "sinodeco:block/wooden_table_leg"
       },
       "when": {
         "east": "true",
@@ -1784,7 +1784,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1795,7 +1795,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1808,7 +1808,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1821,7 +1821,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1834,7 +1834,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1845,7 +1845,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1858,7 +1858,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1871,7 +1871,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1882,7 +1882,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1895,7 +1895,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1908,7 +1908,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1919,7 +1919,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 90
       },
       "when": {
@@ -1932,7 +1932,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1943,7 +1943,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1956,7 +1956,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -1969,7 +1969,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -1980,7 +1980,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 180
       },
       "when": {
@@ -1993,7 +1993,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",
@@ -2004,7 +2004,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_leg",
+        "model": "sinodeco:block/wooden_table_leg",
         "y": 270
       },
       "when": {
@@ -2017,7 +2017,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/wood_desk_top"
+        "model": "sinodeco:block/wooden_table_top"
       },
       "when": {
         "east": "true",

@@ -17,7 +17,7 @@ public class SDBlocks {
         BLOCKS.register();
     }
 
-    public static final Supplier<Block> WOODEN_TABLE = BLOCKS.register("wooden_table", WoodDeskBlock::new);
+    public static final Supplier<Block> WOODEN_TABLE = BLOCKS.register("wooden_table", WoodenTableBlock::new);
 
     public static final Supplier<Block> MARBLE_BLOCK = BLOCKS.register("marble_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).instrument(NoteBlockInstrument.HARP).requiresCorrectToolForDrops().strength(0.8F)));
     public static final Supplier<Block> CHISELED_MARBLE = BLOCKS.register("chiseled_marble", () -> new Block(BlockBehaviour.Properties.copy(MARBLE_BLOCK.get())));
