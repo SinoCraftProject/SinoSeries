@@ -79,7 +79,7 @@ dependencies {
             implementation project(path: forgeMod.path, configuration: 'namedElements')
 
             if (mod.modid != 'sinotest') {
-                include project(path: forgeMod.path, configuration: 'namedElements')
+                include project(forgeMod.path)
             }
         }
     }

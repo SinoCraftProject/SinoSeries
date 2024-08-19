@@ -57,7 +57,7 @@ dependencies {
             implementation project(path: fabricMod.path, configuration: 'namedElements')
 
             if (mod.modid != 'sinotest') {
-                include project(path: fabricMod.path, configuration: 'namedElements')
+                include project(fabricMod.path)
             }
         }
     }
