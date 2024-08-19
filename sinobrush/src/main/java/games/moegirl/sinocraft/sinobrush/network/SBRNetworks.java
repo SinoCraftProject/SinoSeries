@@ -10,7 +10,7 @@ public class SBRNetworks {
     public static final INetworkChannel NETWORKS =  NetworkManager.getOrCreateChannel(SinoBrush.MODID);
 
     public static void register() {
-        NETWORKS.registerPacket(PacketFlow.CLIENTBOUND, S2CDrawingPacket.class);
-        NETWORKS.registerPacket(PacketFlow.SERVERBOUND, C2SDrawingPacket.class);
+        NETWORKS.registerPacket(PacketFlow.CLIENTBOUND, S2CDrawResultPacket.class);
+        NETWORKS.registerPacket(PacketFlow.SERVERBOUND, C2SDrawPacket.class);
     }
 }
