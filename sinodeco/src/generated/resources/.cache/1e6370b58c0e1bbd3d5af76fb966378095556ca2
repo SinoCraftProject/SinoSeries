@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-19T18:06:12.7593044	Forge Provider[sinodeco]: [Block States: sinodeco]
+// 1.20.1	2024-08-19T19:34:28.9550314	Forge Provider[sinodeco]: [Block States: sinodeco]
 1ed22fca974088782d16f9f78b0d65e4fa1174ad assets/sinodeco/blockstates/chiseled_marble.json
 ccad6d3bf6ee10be52ce326372889cb27696ae9d assets/sinodeco/blockstates/marble_block.json
 0efab8643d807018de96b5f049f31aae6b326fac assets/sinodeco/blockstates/marble_bricks.json
@@ -8,7 +8,7 @@ fcf61ee95f0bef4dd8a90b88b74739c8ad2c443e assets/sinodeco/blockstates/marble_stai
 5f349e4e5f84941e2413d4a56879e82065331815 assets/sinodeco/blockstates/smooth_marble.json
 0cabbde0d10ada2ad5ccb323fd21b9988898d1e7 assets/sinodeco/blockstates/smooth_marble_slab.json
 dc124fdb1638bf07ef1e16c67f3e6b38188d448b assets/sinodeco/blockstates/smooth_marble_stairs.json
-614b6bb3a9d91c2b21f974248180c94c73467774 assets/sinodeco/blockstates/wooden_table.json
+42f1a7e9238529e7b6247089a8a645ccd440a883 assets/sinodeco/blockstates/wooden_table.json
 4fae89435e3eb1c94c1dc3834c56e363f8cce2bb assets/sinodeco/models/block/chiseled_marble.json
 a68849b08e78d02c08af9ca4104bf8955b390632 assets/sinodeco/models/block/marble_block.json
 ab33b1f125eb04686bd5420b46f2a781de75235f assets/sinodeco/models/block/marble_bricks.json
