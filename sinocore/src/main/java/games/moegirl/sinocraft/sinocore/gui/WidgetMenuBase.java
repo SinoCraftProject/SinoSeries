@@ -12,6 +12,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public abstract class WidgetMenuBase extends AbstractContainerMenu {
 
     protected final Widgets widgets;
@@ -31,12 +33,42 @@ public abstract class WidgetMenuBase extends AbstractContainerMenu {
         return addSlot(slot);
     }
 
-    protected void addSlots(Container container, String name, int beginIndex, SlotStrategy<Container> slotType) {
+    private void addSlotInternal(SlotStrategy<Container> slotType, Container container, int slot, int x, int y) {
+        addSlot(slotType.createSlot(container, slot, x, y));
+    }
+
+    /**
+     * Add slots of a container.
+     * qyl27: Usually used to fill players inventory or containers contents in menu.
+     * @param container Container.
+     * @param name Widget name.
+     * @param beginIndex Begin index in container.
+     * @param slotStrategy Strategy of slot.
+     */
+    protected void addSlots(Container container, String name, int beginIndex, SlotStrategy<Container> slotStrategy) {
         SlotsEntry slots = (SlotsEntry) widgets.getWidget(name);
         for (int i = 0; i < slots.slotCount(); i++) {
             SlotEntry slotEntry = slots.getSlot(i);
-            Slot slot = slotType.createSlot(container, beginIndex + i, slotEntry.getX(), slotEntry.getY());
-            addSlot(slot);
+            addSlotInternal(slotStrategy, container, beginIndex + i, slotEntry.getX(), slotEntry.getY());
+        }
+    }
+
+    /**
+     * Add slots with a slot blocks operations.
+     * qyl27: It was usually used in a handheld container, players can't move the item out.
+     * @param container Container.
+     * @param name Widget name.
+     * @param beginIndex Begin index in container.
+     * @param defaultStrategy Strategy of slot.
+     * @param blocked Blocked index in container.
+     */
+    protected void addSlotsWithSlotBlocked(Container container, String name, int beginIndex,
+                                           SlotStrategy<Container> defaultStrategy, List<Integer> blocked) {
+        SlotsEntry slots = (SlotsEntry) widgets.getWidget(name);
+        for (int i = 0; i < slots.slotCount(); i++) {
+            SlotEntry slotEntry = slots.getSlot(i);
+            var Strategy = blocked.contains(i) ? SlotStrategy.blockAll() : defaultStrategy;
+            addSlotInternal(Strategy, container, beginIndex + i, slotEntry.getX(), slotEntry.getY());
         }
     }
 }

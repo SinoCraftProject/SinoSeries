@@ -46,6 +46,7 @@ public class SBRConstants {
 
         public static final String DESCRIPTION_ITEM_COLORED = "sinobrush.description.item.colored";
         public static final String DESCRIPTION_XUAN_PAPER_EXPENDED = "sinobrush.description.xuan_paper.expended";
+        public static final String DESCRIPTION_FILLED_XUAN_PAPER_SIZE = "sinobrush.description.filled_xuan_paper.size";
 
         public static final String HUD_FAN_PREFIX = "sinobrush.hud.fan.prefix";
 

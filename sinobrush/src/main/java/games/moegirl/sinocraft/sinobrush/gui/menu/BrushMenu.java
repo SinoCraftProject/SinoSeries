@@ -18,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class BrushMenu extends WidgetMenuBase {
 
     public static final int INK_SLOT = 0;
@@ -30,8 +32,9 @@ public class BrushMenu extends WidgetMenuBase {
         super(SBRMenu.BRUSH_PAPER.get(), id, new ResourceLocation("sinobrush", "textures/gui/brush"));
 
         // qyl27: notice! index of quick slot in player inventory is 0 ~ 8, so it should 0 ~ 8 in container also.
-        addSlots(inventory, "slot_items", 0, SlotStrategy.simple());
-        addSlots(inventory, "slots_inventory", 9, SlotStrategy.simple());
+//        var slot = buf.readVarInt();
+        addSlotsWithSlotBlocked(inventory, "slot_items", 0, SlotStrategy.simple(), List.of());
+        addSlotsWithSlotBlocked(inventory, "slots_inventory", 9, SlotStrategy.simple(), List.of());
         addSlot(container, "slot_ink", INK_SLOT, SlotStrategy.insertFilter(SBRItems.INK_BOTTLE));
         addSlot(container, "slot_paper", PAPER_SLOT, SlotStrategy.insertFilter(SBRItems.XUAN_PAPER));
         addSlot(container, "slot_drawing", DRAW_SLOT, SlotStrategy.onlyTake());

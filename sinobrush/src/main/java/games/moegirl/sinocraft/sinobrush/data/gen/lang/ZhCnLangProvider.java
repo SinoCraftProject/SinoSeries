@@ -31,8 +31,10 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.DESCRIPTION_FAN, "展此扇，上有淡墨河山");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN, "携此扇，无惧此生风雨");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把折扇");
+
         delegate.add(SBRConstants.Translation.DESCRIPTION_ITEM_COLORED, "已染色 (%1$s,%2$s,%3$s)");
         delegate.add(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, "已扩展 %1$s 次");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FILLED_XUAN_PAPER_SIZE, "宽 %1$s，高 %2$s");
 
         delegate.add(SBRConstants.Translation.HUD_FAN_PREFIX, "对方的折扇上写着：");
 

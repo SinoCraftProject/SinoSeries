@@ -45,7 +45,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private EditBoxWidget title;
     private CanvasWidget canvas;
 
-    private boolean isInited = false;
+    private boolean hasInitialized = false;
     private boolean isSaving = false;
     private int selectedColor = 0;
 
@@ -96,7 +96,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
             updateCanvas();
         });
 
-        if (!isInited) {
+        if (!hasInitialized) {
             var drawing = CanvasStashHelper.unstashCanvas(Minecraft.getInstance());
             if (drawing != null) {
                 canvas.getDrawing().setWidth(drawing.getWidth());
@@ -106,7 +106,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
             }
         }
 
-        isInited = true;
+        hasInitialized = true;
     }
 
     @Override

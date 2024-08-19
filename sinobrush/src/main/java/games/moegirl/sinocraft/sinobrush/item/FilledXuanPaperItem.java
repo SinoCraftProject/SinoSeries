@@ -41,7 +41,7 @@ public class FilledXuanPaperItem extends Item {
 
         tooltip.add(TooltipHelper.getColor(drawing.getPaperColor()));
         tooltip.add(Component
-                .translatable(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, drawing.getWidth(), drawing.getHeight())
+                .translatable(SBRConstants.Translation.DESCRIPTION_FILLED_XUAN_PAPER_SIZE, drawing.getWidth(), drawing.getHeight())
                 .withStyle(ChatFormatting.GRAY));
     }
 
