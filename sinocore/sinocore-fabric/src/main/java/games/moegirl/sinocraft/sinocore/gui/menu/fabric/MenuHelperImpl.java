@@ -1,6 +1,6 @@
-package games.moegirl.sinocraft.sinocore.utility.fabric;
+package games.moegirl.sinocraft.sinocore.gui.menu.fabric;
 
-import games.moegirl.sinocraft.sinocore.utility.MenuHelper;
+import games.moegirl.sinocraft.sinocore.gui.menu.IExtraDataMenuProvider;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -11,12 +11,11 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.jetbrains.annotations.Nullable;
 
 public class MenuHelperImpl {
-
-    public static void openMenu(ServerPlayer player, MenuHelper.ExtendedMenuProvider provider) {
+    public static void openMenuWithData(ServerPlayer player, IExtraDataMenuProvider provider) {
         player.openMenu(new ExtendedScreenHandlerFactory() {
             @Override
             public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-                provider.saveExtraData(buf);
+                provider.writeExtraData(buf);
             }
 
             @Override
@@ -31,5 +30,4 @@ public class MenuHelperImpl {
             }
         });
     }
-
 }
