@@ -177,7 +177,6 @@ subMod.each { Project mod ->
 
             compileClasspath.extendsFrom common
             runtimeClasspath.extendsFrom common
-            developmentFabric.extendsFrom common
 
             shadowBundle {
                 canBeResolved = true
