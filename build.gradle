@@ -45,6 +45,11 @@ allprojects {
             url = 'https://maven.shedaniel.me'
         }
 
+        maven {
+            name = 'Yuluo'
+            url = 'https://maven.yuluo.dev/repository/maven-public/'
+        }
+
         exclusiveContent {
             forRepository {
                 maven {

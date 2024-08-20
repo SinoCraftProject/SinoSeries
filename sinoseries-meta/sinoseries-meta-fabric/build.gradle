@@ -49,6 +49,7 @@ dependencies {
 
     modRuntimeOnly group: 'maven.modrinth', name: 'modmenu', version: project.mod_menu_fabric_version
     modRuntimeOnly group: 'me.shedaniel', name: 'RoughlyEnoughItems-fabric', version: project.mod_rei_fabric_version
+    modRuntimeOnly(group: 'cx.rain.mc.nbtedit', name: 'nbtedit-fabric', version: project.mod_nbtedit_version) { transitive false }
 
     subMod.each { Project mod ->
         common(project(path: mod.path, configuration: 'namedElements')) { transitive false }
