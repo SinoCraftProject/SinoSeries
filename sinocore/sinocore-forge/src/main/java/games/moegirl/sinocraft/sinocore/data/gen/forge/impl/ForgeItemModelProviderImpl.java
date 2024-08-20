@@ -72,7 +72,7 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
     private final Set<String> added = new HashSet<>();
     private boolean adding = false;
     /**
-     * Register item model.
+     * Register item baseModel.
      */
     @Override
     protected final void registerModels() {
@@ -175,7 +175,7 @@ public class ForgeItemModelProviderImpl extends ItemModelProvider {
 
     public void printExceptions() {
         if (!errModels.isEmpty()) {
-            logger.warn("Not found model in {}", getName());
+            logger.warn("Not found baseModel in {}", getName());
             errModels.forEach(pair -> logger.warn("  Key: {}, Path: {}", pair.getFirst(), pair.getSecond()));
         }
 

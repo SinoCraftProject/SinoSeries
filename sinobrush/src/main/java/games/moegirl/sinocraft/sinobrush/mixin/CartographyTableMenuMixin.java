@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.mixin;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
-import net.minecraft.world.Container;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;

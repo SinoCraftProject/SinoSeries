@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.mixin.event.game.crafting;
 
 import games.moegirl.sinocraft.sinocore.event.game.CraftingEvents;
-import games.moegirl.sinocraft.sinocore.event.game.args.crafting.CartographyTableCraftEventArgs;
+import games.moegirl.sinocraft.sinocore.event.game.args.crafting.CartographyTableCraftArgs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CartographyTableMenu;
@@ -30,7 +30,7 @@ public abstract class CartographyTableMenuMixin extends AbstractContainerMenu {
     private void afterSetupResult(ItemStack mapInput, ItemStack otherSlotInput, ItemStack __,
                                   Level level, BlockPos blockPos, CallbackInfo ci) {
         var output = resultContainer.getItem(CartographyTableMenu.RESULT_SLOT);
-        var args = CraftingEvents.CARTOGRAPHY_CRAFT.invoke(new CartographyTableCraftEventArgs(mapInput, otherSlotInput, output));
+        var args = CraftingEvents.CARTOGRAPHY_CRAFT.invoke(new CartographyTableCraftArgs(mapInput, otherSlotInput, output));
         if (!args.isCancelled()) {
             resultContainer.setItem(CartographyTableMenu.RESULT_SLOT, args.getOutput());
             broadcastChanges();

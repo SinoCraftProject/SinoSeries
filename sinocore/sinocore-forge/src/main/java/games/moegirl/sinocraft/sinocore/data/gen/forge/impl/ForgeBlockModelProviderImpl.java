@@ -117,7 +117,7 @@ public class ForgeBlockModelProviderImpl extends BlockModelProvider {
 
     public void printExceptions() {
         if (!errModels.isEmpty()) {
-            logger.warn("Not found model in {}", getName());
+            logger.warn("Not found baseModel in {}", getName());
             errModels.forEach(pair -> logger.warn("  Key: {}, Path: {}", pair.getFirst(), pair.getSecond()));
         }
         generatedModels.forEach((key, builder) -> {
