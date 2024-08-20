@@ -46,7 +46,7 @@ public class FanItem extends Item implements Vanishable {
     }
 
     public double getAttackSpeed() {
-        return -4;
+        return -0.8;
     }
 
     @Override
@@ -65,18 +65,21 @@ public class FanItem extends Item implements Vanishable {
         return slot == EquipmentSlot.MAINHAND ? defaultModifiers : super.getDefaultAttributeModifiers(slot);
     }
 
+    protected void appendTooltips(ItemStack stack, List<Component> tooltip) {
+        var lines = getLines(stack);
+        if (lines.isEmpty()) {
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN).withStyle(ChatFormatting.GRAY));
+        } else {
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltip.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
+        }
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-
-        var lines = getLines(stack);
-        if (lines.isEmpty()) {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN).withStyle(ChatFormatting.GRAY));
-        } else {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
-            tooltipComponents.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
-        }
+        this.appendTooltips(stack, tooltipComponents);
     }
 
     @Override

@@ -9,6 +9,7 @@
         "CartographyTableMenuMixin$Slot2"
     ],
     "client": [
+        "ItemFrameRendererMixin",
         "ItemInHandRendererMixin"
     ],
     "server": [

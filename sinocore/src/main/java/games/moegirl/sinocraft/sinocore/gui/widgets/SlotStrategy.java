@@ -13,6 +13,20 @@ import java.util.function.Supplier;
 
 public interface SlotStrategy<C extends Container> {
 
+    static SlotStrategy<Container> blockAll() {
+        return (container, slot, x, y) -> new Slot(container, slot, x, y) {
+            @Override
+            public boolean mayPickup(Player player) {
+                return false;
+            }
+
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+        };
+    }
+
     static SlotStrategy<Container> simple() {
         return (container, slot, x, y) -> new Slot(container, slot, x, y) {
             @Override

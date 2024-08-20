@@ -72,6 +72,8 @@ dependencies {
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     modRuntimeOnly group: 'maven.modrinth', name: 'jei', version: project.mod_jei_forge_version
+    modRuntimeOnly(group: 'cx.rain.mc.nbtedit', name: 'nbtedit-forge', version: project.mod_nbtedit_version) { transitive false }
+
     subMod.each { Project mod ->
         common(project(path: mod.path, configuration: 'namedElements')) { transitive true }
 

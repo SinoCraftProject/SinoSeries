@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinobrush.data.gen.lang;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
+import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
@@ -20,6 +21,9 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.addItem(SBRItems.INK_BOTTLE, "墨水瓶");
         delegate.addItem(SBRItems.BRUSH, "毛笔");
 
+        delegate.addCustomStat(SBRStats.DRAW_BY_BRUSH, "作画次数");
+        delegate.addCustomStat(SBRStats.UNFOLD_FAN, "展开折扇次数");
+
         delegate.addTab(SBRItems.SINO_BRUSH_TAB, "华夏云墨");
 
         delegate.add(SBRConstants.Translation.DRAWING_TITLE_LABEL, "画作 ");
@@ -31,8 +35,10 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.DESCRIPTION_FAN, "展此扇，上有淡墨河山");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN, "携此扇，无惧此生风雨");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把折扇");
+
         delegate.add(SBRConstants.Translation.DESCRIPTION_ITEM_COLORED, "已染色 (%1$s,%2$s,%3$s)");
         delegate.add(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, "已扩展 %1$s 次");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FILLED_XUAN_PAPER_SIZE, "宽 %1$s，高 %2$s");
 
         delegate.add(SBRConstants.Translation.HUD_FAN_PREFIX, "对方的折扇上写着：");
 
@@ -48,6 +54,7 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_INK, "落款失败：找不到墨水。");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_PAPER, "落款失败：找不到宣纸。");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "落款失败：请取走之前的作品。");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "落款失败：不用笔画画，你是怎么做到的？");
 
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "丹青描绘浮生，云墨书尽芳华");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "欢迎游玩《华夏云墨》");

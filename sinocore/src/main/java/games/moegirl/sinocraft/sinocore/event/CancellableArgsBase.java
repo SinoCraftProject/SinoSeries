@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.event;
 
-public abstract class CancellableEventArgsBase implements ICancellableEventArgs {
+public abstract class CancellableArgsBase implements ICancellableArgs {
     private boolean isCancelled = false;
 
     @Override

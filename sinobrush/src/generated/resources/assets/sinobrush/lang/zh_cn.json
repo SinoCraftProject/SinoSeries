@@ -15,6 +15,7 @@
   "sinobrush.advancement.unfold_fan.name": "侠肝义胆",
   "sinobrush.description.fan": "展此扇，上有淡墨河山",
   "sinobrush.description.fan.wrote": "一把折扇",
+  "sinobrush.description.filled_xuan_paper.size": "宽 %1$s，高 %2$s",
   "sinobrush.description.folded_fan": "携此扇，无惧此生风雨",
   "sinobrush.description.item.colored": "已染色 (%1$s,%2$s,%3$s)",
   "sinobrush.description.xuan_paper.expended": "已扩展 %1$s 次",
@@ -27,6 +28,7 @@
   "sinobrush.gui.brush.canvas_pasted": "已从剪贴板读取画布。",
   "sinobrush.gui.brush.canvas_saved": "画布内容已保存至 %1$s",
   "sinobrush.gui.brush.hint_name": "命名画作",
+  "sinobrush.gui.brush.save_failed_no_brush_on_hand": "落款失败：不用笔画画，你是怎么做到的？",
   "sinobrush.gui.brush.save_failed_no_ink": "落款失败：找不到墨水。",
   "sinobrush.gui.brush.save_failed_no_paper": "落款失败：找不到宣纸。",
   "sinobrush.gui.brush.save_failed_output_occupied": "落款失败：请取走之前的作品。",
@@ -36,5 +38,7 @@
   "sinobrush.gui.brush.tooltip_copy": "左键复制，右键粘贴",
   "sinobrush.gui.brush.tooltip_save": "保存画布到文件",
   "sinobrush.hud.fan.prefix": "对方的折扇上写着：",
+  "stat.sinobrush.draw_by_brush": "作画次数",
+  "stat.sinobrush.unfold_fan": "展开折扇次数",
   "tab.sinobrush.sinobrush": "华夏云墨"
 }

@@ -11,8 +11,8 @@ import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.gui.widget.CanvasWidget;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
-import games.moegirl.sinocraft.sinobrush.network.C2SDrawingPacket;
-import games.moegirl.sinocraft.sinobrush.network.S2CDrawingPacket;
+import games.moegirl.sinocraft.sinobrush.network.C2SDrawPacket;
+import games.moegirl.sinocraft.sinobrush.network.S2CDrawResultPacket;
 import games.moegirl.sinocraft.sinobrush.network.SBRNetworks;
 import games.moegirl.sinocraft.sinobrush.utility.CanvasStashHelper;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
@@ -45,7 +45,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private EditBoxWidget title;
     private CanvasWidget canvas;
 
-    private boolean isInited = false;
+    private boolean hasInitialized = false;
     private boolean isSaving = false;
     private int selectedColor = 0;
 
@@ -96,7 +96,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
             updateCanvas();
         });
 
-        if (!isInited) {
+        if (!hasInitialized) {
             var drawing = CanvasStashHelper.unstashCanvas(Minecraft.getInstance());
             if (drawing != null) {
                 canvas.getDrawing().setWidth(drawing.getWidth());
@@ -106,7 +106,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
             }
         }
 
-        isInited = true;
+        hasInitialized = true;
     }
 
     @Override
@@ -138,7 +138,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private void saveCanvas(Button button) {
         var drawing = canvas.getDrawing();
         drawing.setTitle(title.getValue());
-        C2SDrawingPacket packet = new C2SDrawingPacket(drawing);
+        C2SDrawPacket packet = new C2SDrawPacket(drawing, menu.brushSlot);
         SBRNetworks.NETWORKS.sendToServer(packet);
         beginSaving();
     }
@@ -230,20 +230,24 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     public void handleServiceData(int status) {
         if (isSaving) {
             switch (status) {
-                case S2CDrawingPacket.STATUS_SUCCEED: {
+                case S2CDrawResultPacket.STATUS_SUCCEED: {
                     sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_SAVE_SUCCESSFUL), true);
                     break;
                 }
-                case S2CDrawingPacket.STATUS_FAILED_PAPER: {
+                case S2CDrawResultPacket.STATUS_FAILED_PAPER: {
                     sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_PAPER), false);
                     break;
                 }
-                case S2CDrawingPacket.STATUS_FAILED_INK: {
+                case S2CDrawResultPacket.STATUS_FAILED_INK: {
                     sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_INK), false);
                     break;
                 }
-                case S2CDrawingPacket.STATUS_FAILED_DRAW: {
+                case S2CDrawResultPacket.STATUS_FAILED_DRAW: {
                     sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED), false);
+                    break;
+                }
+                case S2CDrawResultPacket.STATUS_NO_BRUSH: {
+                    sendMessage(Component.translatable(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND), false);
                     break;
                 }
             }

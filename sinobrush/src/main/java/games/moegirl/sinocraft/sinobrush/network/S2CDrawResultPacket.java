@@ -7,20 +7,21 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 
-public class S2CDrawingPacket implements Packet<NetworkContext> {
+public class S2CDrawResultPacket implements Packet<NetworkContext> {
 
     public static final int STATUS_SUCCEED = 0;
     public static final int STATUS_FAILED_PAPER = 1;
     public static final int STATUS_FAILED_INK = 2;
     public static final int STATUS_FAILED_DRAW = 3;
+    public static final int STATUS_NO_BRUSH = 4;
 
     private final int status;
 
-    S2CDrawingPacket(int status) {
+    S2CDrawResultPacket(int status) {
         this.status = status;
     }
 
-    public S2CDrawingPacket(FriendlyByteBuf buffer) {
+    public S2CDrawResultPacket(FriendlyByteBuf buffer) {
         status = buffer.readVarInt();
     }
 
@@ -38,19 +39,23 @@ public class S2CDrawingPacket implements Packet<NetworkContext> {
         }
     }
 
-    public static S2CDrawingPacket ok() {
-        return new S2CDrawingPacket(STATUS_SUCCEED);
+    public static S2CDrawResultPacket ok() {
+        return new S2CDrawResultPacket(STATUS_SUCCEED);
     }
 
-    public static S2CDrawingPacket noPaper() {
-        return new S2CDrawingPacket(STATUS_FAILED_PAPER);
+    public static S2CDrawResultPacket noPaper() {
+        return new S2CDrawResultPacket(STATUS_FAILED_PAPER);
     }
 
-    public static S2CDrawingPacket noInk() {
-        return new S2CDrawingPacket(STATUS_FAILED_INK);
+    public static S2CDrawResultPacket noInk() {
+        return new S2CDrawResultPacket(STATUS_FAILED_INK);
     }
 
-    public static S2CDrawingPacket hasDraw() {
-        return new S2CDrawingPacket(STATUS_FAILED_DRAW);
+    public static S2CDrawResultPacket hasDraw() {
+        return new S2CDrawResultPacket(STATUS_FAILED_DRAW);
+    }
+
+    public static S2CDrawResultPacket noBrush() {
+        return new S2CDrawResultPacket(STATUS_NO_BRUSH);
     }
 }

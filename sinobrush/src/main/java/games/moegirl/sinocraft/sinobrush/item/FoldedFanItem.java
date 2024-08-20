@@ -24,17 +24,13 @@ public class FoldedFanItem extends FanItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level,
-                                List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-
-
+    protected void appendTooltips(ItemStack stack, List<Component> tooltip) {
         var lines = getLines(stack);
         if (lines.isEmpty()) {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltipComponents.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
-            tooltipComponents.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltip.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
         }
     }
 
