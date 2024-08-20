@@ -46,7 +46,7 @@ public class FanItem extends Item implements Vanishable {
     }
 
     public double getAttackSpeed() {
-        return -4;
+        return -0.8;
     }
 
     @Override
