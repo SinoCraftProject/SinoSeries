@@ -19,7 +19,7 @@ public class ItemModelProvider extends AbstractItemModelProvider {
                 .texture("layer0", modLoc("item/brush"))
                 .override()
                 .predicate(mcLoc("damaged"), 1)
-                .model(delegate.getBuilder("item/inked_brush")
+                .model(delegate.withExistingParent("item/inked_brush", ItemModelProviderDelegateBase.GENERATED)
                         .texture("layer0", modLoc("item/inked_brush")));
 
         delegate.basicItem(SBRItems.INK_BOTTLE.get())

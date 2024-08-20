@@ -28,6 +28,7 @@
   "sinobrush.gui.brush.canvas_pasted": "已从剪贴板读取画布。",
   "sinobrush.gui.brush.canvas_saved": "画布内容已保存至 %1$s",
   "sinobrush.gui.brush.hint_name": "命名画作",
+  "sinobrush.gui.brush.save_failed_no_brush_on_hand": "落款失败：不用笔画画，你是怎么做到的？",
   "sinobrush.gui.brush.save_failed_no_ink": "落款失败：找不到墨水。",
   "sinobrush.gui.brush.save_failed_no_paper": "落款失败：找不到宣纸。",
   "sinobrush.gui.brush.save_failed_output_occupied": "落款失败：请取走之前的作品。",
