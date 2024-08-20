@@ -71,7 +71,7 @@ public class C2SDrawPacket implements Packet<NetworkContext> {
 
                 if (!player.isCreative()) {
                     var brush = player.getInventory().getItem(brushSlot);
-                    brush.setDamageValue(brush.getDamageValue() + 1);
+                    brush.hurtAndBreak(1, player, entity -> {});
                 }
 
                 ItemStack drawStack = new ItemStack(SBRItems.FILLED_XUAN_PAPER.get());
