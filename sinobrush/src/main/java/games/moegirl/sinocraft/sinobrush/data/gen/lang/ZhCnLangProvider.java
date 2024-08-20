@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinobrush.data.gen.lang;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
+import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
@@ -19,6 +20,9 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.addItem(SBRItems.FILLED_XUAN_PAPER, "填充过的宣纸");
         delegate.addItem(SBRItems.INK_BOTTLE, "墨水瓶");
         delegate.addItem(SBRItems.BRUSH, "毛笔");
+
+        delegate.addCustomStat(SBRStats.DRAW_BY_BRUSH, "作画次数");
+        delegate.addCustomStat(SBRStats.UNFOLD_FAN, "展开折扇次数");
 
         delegate.addTab(SBRItems.SINO_BRUSH_TAB, "华夏云墨");
 

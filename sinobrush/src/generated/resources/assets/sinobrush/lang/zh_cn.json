@@ -38,5 +38,7 @@
   "sinobrush.gui.brush.tooltip_copy": "左键复制，右键粘贴",
   "sinobrush.gui.brush.tooltip_save": "保存画布到文件",
   "sinobrush.hud.fan.prefix": "对方的折扇上写着：",
+  "stat.sinobrush.draw_by_brush": "作画次数",
+  "stat.sinobrush.unfold_fan": "展开折扇次数",
   "tab.sinobrush.sinobrush": "华夏云墨"
 }

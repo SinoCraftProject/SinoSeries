@@ -118,6 +118,11 @@ public class ForgeLanguageProviderDelegate extends LanguageProviderDelegateBase 
     }
 
     @Override
+    public void addCustomStat(ResourceLocation key, String value) {
+        add("stat." + key.toString().replace(":", "."), value);
+    }
+
+    @Override
     public void add(String key, String value) {
         provider.add(key, value);
     }

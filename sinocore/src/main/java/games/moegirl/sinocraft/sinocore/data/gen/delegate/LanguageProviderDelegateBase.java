@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.delegate;
 
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -46,6 +47,8 @@ public abstract class LanguageProviderDelegateBase extends ProviderDelegateBase<
     public abstract void addTab(ResourceKey<CreativeModeTab> key, String name);
 
     public abstract void addStatType(StatType<?> key, String value);
+
+    public abstract void addCustomStat(ResourceLocation key, String value);
 
     public abstract void add(String key, String value);
 }
