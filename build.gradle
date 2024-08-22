@@ -137,11 +137,8 @@ subMod.each { Project mod ->
                 accessWidenerPath = aw
             }
 
-            var commonFile = new File(mod.projectDir, 'src/main/resources/architectury.common.json')
-            if (commonFile.exists()) {
-                interfaceInjection {
-                    enableDependencyInterfaceInjection = true
-                }
+            interfaceInjection {
+                enableDependencyInterfaceInjection = true
             }
         }
 
@@ -197,6 +194,7 @@ subMod.each { Project mod ->
         }
 
         remapJar {
+            injectAccessWidener = true
             input.set shadowJar.archiveFile
             dependsOn shadowJar
         }
