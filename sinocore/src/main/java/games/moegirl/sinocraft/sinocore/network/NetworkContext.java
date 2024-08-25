@@ -3,10 +3,12 @@ package games.moegirl.sinocraft.sinocore.network;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.network.Connection;
 import net.minecraft.network.ConnectionProtocol;
+import net.minecraft.network.DisconnectionDetails;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 网络通信上下文
@@ -54,24 +56,24 @@ public record NetworkContext(Connection connection, ServerPlayer sender) impleme
 
     // region From PacketListener
 
-//    @Override
-//    public PacketFlow flow() {
-//        return connection.getReceiving();
-//    }
-//
-//    @Override
-//    public ConnectionProtocol protocol() {
-//        return ConnectionProtocol.PLAY;
-//    }
+    @Override
+    public @NotNull PacketFlow flow() {
+        return connection.getReceiving();
+    }
 
     @Override
-    public void onDisconnect(Component reason) {
-        SinoCore.LOGGER.warn("Connection interrupted: " + reason.getString());
+    public @NotNull ConnectionProtocol protocol() {
+        return ConnectionProtocol.PLAY;
+    }
+
+    @Override
+    public void onDisconnect(DisconnectionDetails details) {
+        SinoCore.LOGGER.warn("Connection interrupted: {}", details.reason().getString());
     }
 
     @Override
     public boolean isAcceptingMessages() {
-        return false;
+        return this.connection.isConnected();
     }
 
     // endregion

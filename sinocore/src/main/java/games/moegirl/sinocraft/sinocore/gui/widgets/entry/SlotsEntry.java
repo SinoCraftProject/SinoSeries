@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.Arrays;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public final class SlotsEntry extends AbstractWidgetEntry {
 
-    public static final Codec<SlotsEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<SlotsEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.STRING.optionalFieldOf("direction", "horizontal").forGetter(SlotsEntry::direction),
             Codec.INT.optionalFieldOf("size", 18).forGetter(SlotsEntry::getSize),
             Codec.either(Codec.INT, Codec.INT.listOf())

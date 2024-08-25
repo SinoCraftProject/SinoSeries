@@ -8,7 +8,8 @@ import games.moegirl.sinocraft.sinocore.utility.GLSwitcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class ImageButtonWidget extends ImageButton {
+public class ImageButtonWidget extends Button {
 
     private final ButtonEntry entry;
     private final Font font;
@@ -28,9 +29,8 @@ public class ImageButtonWidget extends ImageButton {
     private OnPress onLeftClick, onRightClick;
 
     public ImageButtonWidget(WidgetScreenBase<?> screen, ButtonEntry entry, OnPress onPress, Component tooltip) {
-        super(entry.getX() + screen.getLeftPos(), entry.getY() + screen.getTopPos(), entry.getWidth(), entry.getHeight(),
-                screen.getWidgets().getWidth(), screen.getWidgets().getHeight(), entry.getHeight(),
-                screen.getWidgets().getTexture(), 512, 512, onPress, tooltip);
+        super(entry.getX() + screen.getLeftPos(), entry.getY() + screen.getTopPos(),
+                entry.getWidth(), entry.getHeight(), tooltip, onPress, DEFAULT_NARRATION);
         this.entry = entry;
         this.font = screen.getFont();
         this.widgets = screen.getWidgets();
@@ -44,7 +44,7 @@ public class ImageButtonWidget extends ImageButton {
         List<String> textures;
         if (active) {
             if (isHovered) {
-                if (!Objects.equals(getMessage().getContents(), TranslatableContents.EMPTY)) {
+                if (!getMessage().getString().isBlank()) {
                     guiGraphics.renderTooltip(font, getMessage(), mouseX, mouseY);
                 }
                 if ((onLeftClick != null && clickedButton[0]) || (onRightClick != null && clickedButton[1])) {

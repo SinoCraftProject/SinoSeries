@@ -1,69 +1,45 @@
 package games.moegirl.sinocraft.sinocore.advancement.criterion;
 
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
-import games.moegirl.sinocraft.sinocore.SinoCore;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.Instance> {
 
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(SinoCore.MODID, "custom_stat");
-
     @Override
-    protected @NotNull Instance createInstance(JsonObject json, ContextAwarePredicate predicate,
-                                               DeserializationContext deserializationContext) {
-        var stat = new ResourceLocation(json.get("custom_stat").getAsString());
-        var higherThan = json.get("value_greater_than").getAsInt();
-        return new Instance(stat, higherThan, predicate);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getId() {
-        return ID;
+    public @NotNull Codec<CustomStatTrigger.Instance> codec() {
+        return Instance.CODEC;
     }
 
     public void trigger(ServerPlayer player) {
         this.trigger(player, instance -> instance.matches(player));
     }
 
-    @Override
-    public Codec<Instance> codec() {
-        return null;
-    }
-
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        @NotNull
-        private final ResourceLocation customStat;
-        private final int valueGreaterThan;
-
-        public Instance(@NotNull ResourceLocation customStat, int valueGreaterThan, ContextAwarePredicate predicate) {
-            super(ID, predicate);
-            this.customStat = customStat;
-            this.valueGreaterThan = valueGreaterThan;
-        }
-
-        public static Instance create(ResourceLocation stat, int greaterThan) {
-            return new Instance(stat, greaterThan, ContextAwarePredicate.ANY);
-        }
-
-        @Override
-        public @NotNull JsonObject serializeToJson(SerializationContext context) {
-            var json = super.serializeToJson(context);
-            json.addProperty("custom_stat", customStat.toString());
-            json.addProperty("value_greater_than", valueGreaterThan);
-            return json;
-        }
+    public record Instance(Optional<ContextAwarePredicate> player, ResourceLocation customStatId, int value) implements SimpleInstance {
+        public static final Codec<Instance> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(Instance::player),
+                        ResourceLocation.CODEC.fieldOf("customStatId").forGetter(Instance::customStatId),
+                        Codec.INT.fieldOf("value").forGetter(Instance::value)
+                ).apply(instance, Instance::new));
 
         public boolean matches(ServerPlayer player) {
-            if (!Stats.CUSTOM.contains(customStat)) {
+            if (!Stats.CUSTOM.contains(customStatId)) {
                 return false;
             }
 
-            return player.getStats().getValue(Stats.CUSTOM.get(customStat)) > valueGreaterThan;
+            return player.getStats().getValue(Stats.CUSTOM.get(customStatId)) > value;
+        }
+
+        @Override
+        public @NotNull Optional<ContextAwarePredicate> player() {
+            return player;
         }
     }
 }

@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Optional;
 
 public final class TextureEntry extends AbstractWidgetEntry {
 
-    public static final Codec<TextureEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<TextureEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.INT.listOf().fieldOf("uv").forGetter(e -> List.of(e.getTextureX(), e.getTextureY())),
             Codec.INT.listOf().fieldOf("size").forGetter(e -> List.of(e.getWidth(), e.getHeight())),
             Codec.INT.listOf().optionalFieldOf("uv_size").forGetter(TextureEntry::uvSize),

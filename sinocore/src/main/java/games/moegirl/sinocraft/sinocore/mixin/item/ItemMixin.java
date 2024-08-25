@@ -15,8 +15,6 @@ public abstract class ItemMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void injectConstructor(Item.Properties properties, CallbackInfo ci) {
-        // todo 获取注册时的 ModId
-        String currentMod = "???";
         properties.sino$getTabs().forEach(p -> RegistryManager
                 .obtainTab(p.getKey().location().getNamespace() /* currentMod */)
                 .tabItems(p.getKey())

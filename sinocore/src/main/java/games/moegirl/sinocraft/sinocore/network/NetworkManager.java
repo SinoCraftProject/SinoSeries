@@ -14,7 +14,7 @@ public class NetworkManager {
     private static final Map<ResourceLocation, INetworkChannel> CHANNEL_MAP = new HashMap<>();
 
     public static INetworkChannel getOrCreateChannel(String modId) {
-        return getOrCreateChannel(new ResourceLocation(modId, "default_network"));
+        return getOrCreateChannel(ResourceLocation.fromNamespaceAndPath(modId, "default_network"));
     }
 
     public static INetworkChannel getOrCreateChannel(ResourceLocation networkId) {
