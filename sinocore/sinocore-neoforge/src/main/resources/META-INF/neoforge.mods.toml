@@ -1,0 +1,43 @@
+modLoader = "javafml"
+loaderVersion = "${neoforge_loader_version_range}"
+license = "${sinoseries_license}"
+issueTrackerURL = "${sinoseries_issues}"
+
+[[mods]]
+modId = "${modid}"
+version = "${sinoseries_version}"
+displayName = "${mod_name}"
+#updateJSONURL="https://change.me.example.invalid/updates.json"
+displayURL = "${sinoseries_url}"
+logoFile="sinocore_logo.png"
+credits = "${sinoseries_credits}"
+authors = "${sinoseries_authors}"
+displayTest = "MATCH_VERSION"
+description = '''
+${mod_description}
+'''
+
+features={javaVersion="${neoforge_java_version_range}"}
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[mixins]]
+config="sinocore-common.mixin.json"
+
+[[mixins]]
+config="sinocore-neoforge.mixin.json"
+
+[[dependencies.${ modid }]]
+modId = "minecraft"
+type = "required"
+versionRange = "${neoforge_minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ modid }]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_version_range}"
+ordering = "NONE"
+side = "BOTH"

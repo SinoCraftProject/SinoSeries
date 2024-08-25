@@ -32,7 +32,7 @@ public interface IBlockLootTableSubProvider {
 
     LootItemCondition.Builder hasShears();
 
-    LootItemCondition.Builder hasSharesOrSilkTouch();
+    LootItemCondition.Builder hasShearsOrSilkTouch();
 
     LootItemCondition.Builder hasNoShearsOrSilkTouch();
 
@@ -120,7 +120,7 @@ public interface IBlockLootTableSubProvider {
         return createSelfDropWithConditionTable(block, hasSilkTouch(),
                 applyExplosionDecay(block, LootItem.lootTableItem(item)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)))
-                        .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+                        .apply(ApplyBonusCount.addOreBonusCount(Enchantments.FORTUNE))));
     }
 
     LootTable.Builder createMushroomBlockDrop(Block block, ItemLike item);

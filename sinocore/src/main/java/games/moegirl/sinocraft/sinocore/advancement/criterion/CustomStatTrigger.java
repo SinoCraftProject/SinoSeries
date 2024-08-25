@@ -1,17 +1,17 @@
 package games.moegirl.sinocraft.sinocore.advancement.criterion;
 
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.Instance> {
 
-    public static final ResourceLocation ID = new ResourceLocation(SinoCore.MODID, "custom_stat");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(SinoCore.MODID, "custom_stat");
 
     @Override
     protected @NotNull Instance createInstance(JsonObject json, ContextAwarePredicate predicate,
@@ -28,6 +28,11 @@ public class CustomStatTrigger extends SimpleCriterionTrigger<CustomStatTrigger.
 
     public void trigger(ServerPlayer player) {
         this.trigger(player, instance -> instance.matches(player));
+    }
+
+    @Override
+    public Codec<Instance> codec() {
+        return null;
     }
 
     public static class Instance extends AbstractCriterionTriggerInstance {

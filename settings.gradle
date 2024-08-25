@@ -2,9 +2,9 @@ pluginManagement {
     repositories {
         maven { url 'https://maven.architectury.dev/' }
         maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.neoforged.net/releases/' }
         gradlePluginPortal()
         mavenCentral()
-        maven { url 'https://maven.neoforged.net/releases/' }
         maven { url 'https://files.minecraftforge.net/maven/' }
     }
 }
@@ -12,26 +12,21 @@ pluginManagement {
 rootProject.name = 'sinoseries'
 
 include 'sinocore'
-include 'sinocore:sinocore-forge'
-//include 'sinocore:sinocore-neoforge'
+include 'sinocore:sinocore-neoforge'
 include 'sinocore:sinocore-fabric'
 
 include 'sinobrush'
-include 'sinobrush:sinobrush-forge'
-//include 'sinobrush:sinobrush-neoforge'
+include 'sinobrush:sinobrush-neoforge'
 include 'sinobrush:sinobrush-fabric'
 
 include 'sinodeco'
-include 'sinodeco:sinodeco-forge'
-//include 'sinodeco:sinodeco-neoforge'
+include 'sinodeco:sinodeco-neoforge'
 include 'sinodeco:sinodeco-fabric'
 
 include 'sinotest'
-include 'sinotest:sinotest-forge'
-//include 'sinotest:sinotest-neoforge'
+include 'sinotest:sinotest-neoforge'
 include 'sinotest:sinotest-fabric'
 
 include 'sinoseries-meta'
-include 'sinoseries-meta:sinoseries-meta-forge'
-//include 'sinoseries-meta:sinoseries-meta-neoforge'
-include 'sinoseries-meta:sinoseries-meta-fabric'
+include 'sinoseries-meta:sinoseries-neoforge-meta'
+include 'sinoseries-meta:sinoseries-fabric-meta'

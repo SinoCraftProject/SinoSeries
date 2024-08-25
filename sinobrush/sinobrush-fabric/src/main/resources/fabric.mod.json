@@ -27,10 +27,10 @@
         "sinobrush-common.mixins.json"
     ],
     "depends": {
-        "java": ">=17",
-        "minecraft": "~${minecraft_version}",
-        "fabricloader": ">=${fabric_loader_version}",
-        "fabric-api": "*",
-        "sinocore": ">=${sinoseries_version}"
+        "java": "${fabric_java_version_range}",
+        "minecraft": "${fabric_minecraft_version_range}",
+        "fabricloader": "${fabric_loader_version_range}",
+        "fabric-api": "${fabric_api_version_range}",
+        "sinocore": "${fabric_sinoseries_version_range}"
     }
 }

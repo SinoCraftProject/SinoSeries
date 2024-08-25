@@ -17,7 +17,7 @@ allprojects {
     apply plugin: 'me.shedaniel.unified-publishing'
 
     group = 'games.moegirl.sinocraft'
-    version = project.sinoseries_version
+    version = rootProject.sinoseries_version
 
     architectury {
         minecraft = rootProject.minecraft_version
@@ -65,16 +65,23 @@ allprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
 
         mappings loom.layered() {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${project.parchment_minecraft_version}:${project.parchment_version}@zip")
+            parchment("org.parchmentmc.data:parchment-${rootProject.parchment_minecraft_version}:${rootProject.parchment_version}@zip")
         }
     }
 
     java {
         withSourcesJar()
+
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 21
     }
 
     sourcesJar {
@@ -93,7 +100,7 @@ allprojects {
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = "UTF-8"
-        options.release = 17
+        options.release = 21
     }
 
     publishing {
@@ -115,8 +122,8 @@ allprojects {
         }
     }
 
-    // Fixme: qyl27: Due to an unknown issue that forge-like projects can't clean the output resources dir.
-    compileJava.dependsOn(clean)
+//    // Fixme: qyl27: Due to an unknown issue that forge-like projects can't clean the output resources dir.
+//    compileJava.dependsOn(clean)
 }
 
 subMod.each { Project mod ->
@@ -125,20 +132,24 @@ subMod.each { Project mod ->
     List<String> filesToMatch = helpers.getFilesToMatchExpand()
 
     configure(mod) {
-        version = project.sinoseries_version
+        version = rootProject.sinoseries_version
 
         architectury {
-            common(((String) mod.mod_platforms).split(','))
+            common(((String) rootProject.mod_platforms).split(','))
         }
 
         loom {
-            var aw = new File(mod.projectDir, "src/main/resources/${mod.modid}.accesswidener")
+            var aw = mod.file("src/main/resources/${mod.modid}.accesswidener")
             if (aw.exists()) {
                 accessWidenerPath = aw
             }
 
             interfaceInjection {
                 enableDependencyInterfaceInjection = true
+            }
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
             }
         }
 
@@ -163,11 +174,17 @@ subMod.each { Project mod ->
     configure(mod.subprojects) { Project sub ->
         apply plugin: 'com.github.johnrengelman.shadow'
 
-        version = project.sinoseries_version
+        version = rootProject.sinoseries_version
 
         loom {
+            accessWidenerPath = mod.loom.accessWidenerPath
+
             interfaceInjection {
                 enableDependencyInterfaceInjection = true
+            }
+
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
             }
         }
 
@@ -227,41 +244,10 @@ subMod.each { Project mod ->
         }
     }
 
-    configure(helpers.getSubForgeMod(mod)) { Project forgeMod ->
-        apply plugin: 'com.github.johnrengelman.shadow'
-
+    configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
         architectury {
             platformSetupLoomIde()
-            forge()
-        }
-
-        loom {
-            forge {
-                var aw = new File(forgeMod.projectDir, "src/main/resources/${mod.modid}-forge.accesswidener")
-                if (aw.exists()) {
-                    accessWidenerPath = aw
-                }
-
-                if (loom.accessWidenerPath.isPresent()) {
-                    convertAccessWideners = true
-                    extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-                }
-
-                var commonMixin = mod.file("/src/main/resources/${mod.modid}-common.mixins.json")
-                var forgeMixin = forgeMod.file("/src/main/resources/${mod.modid}-forge.mixins.json")
-
-                if (commonMixin.exists()) {
-                    mixinConfig "${mod.modid}-common.mixins.json"
-                }
-
-                if (forgeMixin.exists()) {
-                    mixinConfig "${mod.modid}-forge.mixins.json"
-                }
-            }
-
-            runConfigs.configureEach { config ->
-                ideConfigGenerated = false
-            }
+            neoForge()
         }
 
         sourceSets.main.resources {
@@ -270,10 +256,10 @@ subMod.each { Project mod ->
         }
 
         dependencies {
-            forge "net.minecraftforge:forge:${mod.minecraft_version}-${forgeMod.forge_version}"
+            neoForge "net.neoforged:neoforge:${neoForgeMod.neoforge_version}"
 
             common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
-            shadowBundle project(path: mod.path, configuration: 'transformProductionForge')
+            shadowBundle project(path: mod.path, configuration: 'transformProductionNeoForge')
         }
 
         processResources {
@@ -281,22 +267,18 @@ subMod.each { Project mod ->
                 expand(propertiesToExpend)
             })
         }
+
+        remapJar {
+            if (mod.loom.accessWidenerPath.present) {
+                atAccessWideners.add(mod.loom.accessWidenerPath.get().asFile.name)
+            }
+        }
     }
 
     configure(helpers.getSubFabricMod(mod)) { Project fabricMod ->
-        apply plugin: 'com.github.johnrengelman.shadow'
-
         architectury {
             platformSetupLoomIde()
             fabric()
-        }
-
-        loom {
-            accessWidenerPath = mod.loom.accessWidenerPath
-
-            runConfigs.configureEach { config ->
-                ideConfigGenerated = false
-            }
         }
 
         dependencies {

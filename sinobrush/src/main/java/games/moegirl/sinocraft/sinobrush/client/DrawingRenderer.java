@@ -97,10 +97,10 @@ public class DrawingRenderer {
     private static void fillGuiRect(GuiGraphics guiGraphics, float minX, float minY, float maxX, float maxY, int color) {
         var matrix4f = guiGraphics.pose().last().pose();
         var buffer = guiGraphics.bufferSource().getBuffer(RenderType.guiOverlay());
-        buffer.vertex(matrix4f, minX, minY, 0).color(color).endVertex();
-        buffer.vertex(matrix4f, minX, maxY, 0).color(color).endVertex();
-        buffer.vertex(matrix4f, maxX, maxY, 0).color(color).endVertex();
-        buffer.vertex(matrix4f, maxX, minY, 0).color(color).endVertex();
+        buffer.addVertex(matrix4f, minX, minY, 0).setColor(color);
+        buffer.addVertex(matrix4f, minX, maxY, 0).setColor(color);
+        buffer.addVertex(matrix4f, maxX, maxY, 0).setColor(color);
+        buffer.addVertex(matrix4f, maxX, minY, 0).setColor(color);
         guiGraphics.flush();
     }
 
@@ -108,21 +108,21 @@ public class DrawingRenderer {
                                  float minX, float minY, float maxX, float maxY,
                                  float zIndex,
                                  int color, int combinedLight) {
-        buffer.vertex(poseStack.last().pose(), minX, minY, zIndex).color(color).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), minX, maxY, zIndex).color(color).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, maxY, zIndex).color(color).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, minY, zIndex).color(color).uv2(combinedLight).endVertex();
+        buffer.addVertex(poseStack.last().pose(), minX, minY, zIndex).setColor(color).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), minX, maxY, zIndex).setColor(color).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, maxY, zIndex).setColor(color).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, minY, zIndex).setColor(color).setLight(combinedLight);
     }
 
-    public static final ResourceLocation HANDHELD_BACKGROUND = new ResourceLocation(SinoBrush.MODID, "paper_backrgound");
+    public static final ResourceLocation HANDHELD_BACKGROUND = ResourceLocation.fromNamespaceAndPath(SinoBrush.MODID, "paper_backrgound");
 
     private static void blitHandheldBackground(PoseStack poseStack, MultiBufferSource bufferSource,
                                                float minX, float minY, float maxX, float maxY, int combinedLight) {
         var buffer = bufferSource.getBuffer(RenderType.text(HANDHELD_BACKGROUND));
         var color = 0xFF000000;
-        buffer.vertex(poseStack.last().pose(), minX, minY, 0).color(color).uv(0, 0).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), minX, maxY, 0).color(color).uv(0, 1).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, maxY, 0).color(color).uv(1, 1).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, minY, 0).color(color).uv(1, 0).uv2(combinedLight).endVertex();
+        buffer.addVertex(poseStack.last().pose(), minX, minY, 0).setColor(color).setUv(0, 0).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), minX, maxY, 0).setColor(color).setUv(0, 1).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, maxY, 0).setColor(color).setUv(1, 1).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, minY, 0).setColor(color).setUv(1, 0).setLight(combinedLight);
     }
 }
