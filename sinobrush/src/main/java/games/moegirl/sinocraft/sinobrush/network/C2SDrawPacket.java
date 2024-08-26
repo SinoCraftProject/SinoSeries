@@ -7,7 +7,7 @@ import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
-import games.moegirl.sinocraft.sinocore.network.NetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.time.ZonedDateTime;
 
-public class C2SDrawPacket implements Packet<NetworkContext> {
+public class C2SDrawPacket implements Packet<PlayNetworkContext> {
 
     private final Drawing drawing;
     private final int brushSlot;
@@ -38,7 +38,7 @@ public class C2SDrawPacket implements Packet<NetworkContext> {
     }
 
     @Override
-    public void handle(NetworkContext handler) {
+    public void handle(PlayNetworkContext handler) {
         ServerPlayer player = handler.sender();
         if (player.containerMenu instanceof BrushMenu brushMenu) {
             Container container = brushMenu.container;

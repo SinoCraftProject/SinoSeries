@@ -8,6 +8,6 @@ public class ModelEventImpl implements ModelLoadingPlugin {
     @Override
     public void onInitializeModelLoader(Context pluginContext) {
         pluginContext.modifyModelAfterBake().register(((model, context) ->
-                ModelEvents.AFTER_BAKE.invoke(new AfterBakeArgs(context.loader(), context.id(), model)).model()));
+                ModelEvents.AFTER_BAKE.invoke(new AfterBakeArgs(context.loader(), context.topLevelId(), model)).model()));
     }
 }

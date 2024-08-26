@@ -1,10 +1,10 @@
 package games.moegirl.sinocraft.sinotest.network;
 
-import games.moegirl.sinocraft.sinocore.network.NetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 
-public class S2CHelloPacket implements Packet<NetworkContext> {
+public class S2CHelloPacket implements Packet<PlayNetworkContext> {
 
     private final String message;
 
@@ -22,7 +22,7 @@ public class S2CHelloPacket implements Packet<NetworkContext> {
     }
 
     @Override
-    public void handle(NetworkContext handler) {
+    public void handle(PlayNetworkContext handler) {
         TestNetwork.CHANNEL.sendToServer(new C2SHelloPacket("Client thread is " + Thread.currentThread().getName(), message));
     }
 }

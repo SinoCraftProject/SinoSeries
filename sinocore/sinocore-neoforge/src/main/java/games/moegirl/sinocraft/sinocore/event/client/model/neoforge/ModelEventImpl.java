@@ -5,7 +5,6 @@ import games.moegirl.sinocraft.sinocore.event.client.ModelEvents;
 import games.moegirl.sinocraft.sinocore.event.client.args.model.AfterBakeArgs;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

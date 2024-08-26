@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinotest.network;
 
-import games.moegirl.sinocraft.sinocore.network.NetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.OutgoingChatMessage;
@@ -8,7 +8,7 @@ import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 
-public class C2SHelloPacket implements Packet<NetworkContext> {
+public class C2SHelloPacket implements Packet<PlayNetworkContext> {
 
     private final String message1;
     private final String message2;
@@ -30,7 +30,7 @@ public class C2SHelloPacket implements Packet<NetworkContext> {
     }
 
     @Override
-    public void handle(NetworkContext handler) {
+    public void handle(PlayNetworkContext handler) {
         ServerPlayer sender = handler.sender();
         ChatType.Bound bind = ChatType.bind(ChatType.CHAT, sender);
         sender.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.system(message1)), false, bind);

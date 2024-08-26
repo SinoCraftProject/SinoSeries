@@ -1,13 +1,13 @@
 package games.moegirl.sinocraft.sinobrush.network;
 
 import games.moegirl.sinocraft.sinobrush.gui.screen.BrushScreen;
-import games.moegirl.sinocraft.sinocore.network.NetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 
-public class S2CDrawResultPacket implements Packet<NetworkContext> {
+public class S2CDrawResultPacket implements Packet<PlayNetworkContext> {
 
     public static final int STATUS_SUCCEED = 0;
     public static final int STATUS_FAILED_PAPER = 1;
@@ -31,7 +31,7 @@ public class S2CDrawResultPacket implements Packet<NetworkContext> {
     }
 
     @Override
-    public void handle(NetworkContext handler) {
+    public void handle(PlayNetworkContext handler) {
         Minecraft mc = Minecraft.getInstance();
         Screen screen = mc.screen;
         if (screen instanceof BrushScreen xp) {

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore;
+package games.moegirl.sinocraft.sinocore.data.gen.fabric;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.DatapackProviderDelegateBase;

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.network.neoforge;
 
 import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
-import games.moegirl.sinocraft.sinocore.network.NetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
 import games.moegirl.sinocraft.sinocore.network.PacketTarget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -45,28 +45,28 @@ public class ForgeNetworkChannelImpl implements INetworkChannel {
     }
 
     @Override
-    public <T extends Packet<NetworkContext>> void registerPacket(PacketFlow direction, Class<T> type, Function<FriendlyByteBuf, T> decoder) {
+    public <T extends Packet<PlayNetworkContext>> void registerPacket(PacketFlow direction, Class<T> type, Function<FriendlyByteBuf, T> decoder) {
         channel.messageBuilder(type, nextPacketId())
                 .encoder(Packet::write)
                 .decoder(decoder)
-                .consumerMainThread((p, ctx) -> p.handle(new NetworkContext(ctx.get().getNetworkManager(), ctx.get().getSender())))
+                .consumerMainThread((p, ctx) -> p.handle(new PlayNetworkContext(ctx.get().getNetworkManager(), ctx.get().getSender())))
                 .add();
     }
 
     @Override
-    public <T extends Packet<NetworkContext>> void send(T packet, ServerPlayer player) {
+    public <T extends Packet<PlayNetworkContext>> void send(T packet, ServerPlayer player) {
         channel.sendTo(packet, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override
-    public <T extends Packet<NetworkContext>> void send(T packet, PacketTarget target) {
+    public <T extends Packet<PlayNetworkContext>> void send(T packet, PacketTarget target) {
         target.send(packet);
         // Fixme: qyl27
 //        channel.send(toTarget(target), packet);
     }
 
     @Override
-    public <T extends Packet<NetworkContext>> void sendToServer(T packet) {
+    public <T extends Packet<PlayNetworkContext>> void sendToServer(T packet) {
         Minecraft instance = Minecraft.getInstance();
         ClientPacketListener connection = Objects.requireNonNull(instance).getConnection();
         channel.sendToServer(packet);

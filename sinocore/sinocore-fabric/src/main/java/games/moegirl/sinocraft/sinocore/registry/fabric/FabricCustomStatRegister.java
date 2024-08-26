@@ -32,7 +32,7 @@ public class FabricCustomStatRegister implements ICustomStatRegister {
 
     @Override
     public ResourceLocation register(String name, StatFormatter statFormatter) {
-        ResourceLocation statKey = new ResourceLocation(modId(), name);
+        ResourceLocation statKey = ResourceLocation.fromNamespaceAndPath(modId(), name);
         reg.register(name, Suppliers.ofInstance(statKey));
         Stats.CUSTOM.get(statKey, statFormatter);
         return statKey;

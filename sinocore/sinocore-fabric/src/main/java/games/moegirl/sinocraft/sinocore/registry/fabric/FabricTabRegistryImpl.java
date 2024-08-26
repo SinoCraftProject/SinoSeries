@@ -32,7 +32,7 @@ public class FabricTabRegistryImpl implements ITabRegistry {
     @Override
     public IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
-        ResourceLocation id = new ResourceLocation(modId, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
         GENERATORS.put(key, generator);
         return registerForRef(name, () -> FabricItemGroup.builder()
@@ -44,7 +44,7 @@ public class FabricTabRegistryImpl implements ITabRegistry {
 
     @Override
     public <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
-        ResourceLocation id = new ResourceLocation(modId, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
         return (IRegRef<CreativeModeTab, T>) new FabricRegRefImpl<>(Registry.registerForHolder(registry, key, supplier.get()));
     }
