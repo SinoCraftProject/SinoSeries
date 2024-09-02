@@ -56,12 +56,12 @@ public class FanItem extends Item {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(1, attacker, living -> living.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
     }
 
-    public Multimap<Attribute, AttributeModifier> getDefaultModifiers() {
-        return defaultModifiers;
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     protected void appendTooltips(ItemStack stack, List<Component> tooltip) {

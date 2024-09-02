@@ -4,12 +4,15 @@ import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.NeoForgeItemModel
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelFile;
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelResourceHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
-
-import java.nio.file.Path;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class NeoForgeItemModelResourceHelper implements IModelResourceHelper<NeoForgeItemModelBuilderWrapper> {
+
+    public static final ExistingFileHelper.ResourceType MODEL = new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, ".json", "models");
+    public static final ExistingFileHelper.ResourceType MODEL_WITH_EXTENSION = new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, "", "models");
 
     private final NeoForgeItemModelProviderImpl impl;
 
@@ -34,17 +37,12 @@ public class NeoForgeItemModelResourceHelper implements IModelResourceHelper<Neo
 
     @Override
     public IModelResourceHelper.IResourceType getModelResource() {
-        return new NeoForgeResourceTypeWrapper(ModelProvider.MODEL);
+        return new NeoForgeResourceTypeWrapper(MODEL);
     }
 
     @Override
     public IModelResourceHelper.IResourceType getModelWithExtensionResource() {
-        return new NeoForgeResourceTypeWrapper(ModelProvider.MODEL_WITH_EXTENSION);
-    }
-
-    @Override
-    public String getFolder() {
-        return impl.folder;
+        return new NeoForgeResourceTypeWrapper(MODEL_WITH_EXTENSION);
     }
 
     @Override
@@ -68,18 +66,8 @@ public class NeoForgeItemModelResourceHelper implements IModelResourceHelper<Neo
     }
 
     @Override
-    public Path getPath(NeoForgeItemModelBuilderWrapper model) {
-        return impl.getPath(model.getOrigin());
-    }
-
-    @Override
     public ResourceLocation blockLoc(ResourceLocation path) {
         return ResourceLocation.fromNamespaceAndPath(path.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + path.getPath());
     }
 
-    @Override
-    public ResourceLocation foldedLoc(ResourceLocation path) {
-        return path.getPath().contains("/") ? path :
-                ResourceLocation.fromNamespaceAndPath(path.getNamespace(), impl.folder + "/" + path.getPath());
-    }
 }

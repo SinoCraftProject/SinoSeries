@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinobrush.utility;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.item.ItemStack;
 
 public class ColorHelper {
     public static int rgbToARGB(int rgb) {
@@ -17,5 +19,14 @@ public class ColorHelper {
         var g = FastColor.ARGB32.green(inkColor);
         var b = FastColor.ARGB32.blue(inkColor);
         return FastColor.ARGB32.color(a, r, g, b);
+    }
+
+    public static int getColor(ItemStack stack) {
+        var component = stack.getComponents().get(DataComponents.DYED_COLOR);
+        if (component != null) {
+            return component.rgb();
+        }
+
+        return -1;
     }
 }

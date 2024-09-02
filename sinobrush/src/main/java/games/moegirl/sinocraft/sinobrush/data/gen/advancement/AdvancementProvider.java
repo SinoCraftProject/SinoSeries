@@ -15,8 +15,6 @@ import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.network.chat.Component;
 
-import java.util.Optional;
-
 public class AdvancementProvider extends AbstractAdvancementProvider {
     public AdvancementProvider(IDataGenContext context) {
         super(context);

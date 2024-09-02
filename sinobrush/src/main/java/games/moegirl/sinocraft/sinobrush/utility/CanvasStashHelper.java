@@ -6,18 +6,20 @@ import net.minecraft.nbt.NbtIo;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class CanvasStashHelper {
-    private static File STASH_CANVAS;
+    private static Path STASH_CANVAS;
 
-    public static File getStashCanvas(Minecraft minecraft) {
+    public static Path getStashCanvas(Minecraft minecraft) {
         var dir = new File(minecraft.gameDirectory, "sinoseries/sinobrush");
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
         if (STASH_CANVAS == null) {
-            STASH_CANVAS = new File(dir, "canvas.nbt");
+            STASH_CANVAS = new File(dir, "canvas.nbt").toPath();
         }
 
         return STASH_CANVAS;
