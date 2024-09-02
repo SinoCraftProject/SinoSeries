@@ -38,7 +38,7 @@ public interface IModelBuilder<T extends IModelBuilder<T>> extends IModelFile {
         if (tex.charAt(0) == '#') {
             return tex;
         }
-        return new ResourceLocation(tex).toString();
+        return ResourceLocation.parse(tex).toString();
     }
 
     default JsonArray serializeVector3f(Vector3f vec) {
@@ -107,8 +107,6 @@ public interface IModelBuilder<T extends IModelBuilder<T>> extends IModelFile {
 
         IElementBuilder<T> ambientOcclusion(boolean ao);
 
-        IElementBuilder<T> calculateNormals(boolean calc);
-
         T end();
     }
 
@@ -129,8 +127,6 @@ public interface IModelBuilder<T extends IModelBuilder<T>> extends IModelFile {
         IFaceBuilder<T> color(int color);
 
         IFaceBuilder<T> hasAmbientOcclusion(boolean ao);
-
-        IFaceBuilder<T> calculateNormals(boolean calc);
 
         IElementBuilder<T> end();
     }

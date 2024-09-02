@@ -27,7 +27,7 @@ public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvid
     protected final Map<TagKey<Block>, TagKey<Item>> tagsToCopy = new HashMap<>();
 
     public AbstractItemTagsProvider(IDataGenContext context, TagsProvider<Block> blockTagsProvider) {
-        super(context.getOutput(), Registries.ITEM, context.registriesFuture(), item -> item.builtInRegistryHolder().key());
+        super(context.getOutput(), Registries.ITEM, context.getRegistries(), item -> item.builtInRegistryHolder().key());
         this.modId = context.getModId();
         this.blockTags = blockTagsProvider.contentsGetter();
     }
@@ -44,8 +44,16 @@ public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvid
         }
     }
 
+    /**
+     * Use {@link AbstractItemTagsProvider#cTag} instead.
+     */
+    @Deprecated(forRemoval = true)
     protected static TagKey<Item> forgeTag(String name) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation("forge", name));
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", name));
+    }
+
+    protected static TagKey<Item> cTag(String name) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", name));
     }
 
     @Override

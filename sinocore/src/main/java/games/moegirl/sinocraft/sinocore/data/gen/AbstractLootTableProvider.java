@@ -4,9 +4,8 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
-import net.minecraft.resources.ResourceLocation;
 
-public abstract class AbstractLootTableProvider extends ForgeDataProviderBase<LootTableProviderDelegateBase> {
+public abstract class AbstractLootTableProvider extends NeoForgeDataProviderBase<LootTableProviderDelegateBase> {
 
     protected final String modId;
 

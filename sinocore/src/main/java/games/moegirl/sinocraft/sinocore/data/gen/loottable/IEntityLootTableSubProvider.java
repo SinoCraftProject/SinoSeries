@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.loottable;
 
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -14,8 +15,9 @@ import java.util.Map;
 
 public interface IEntityLootTableSubProvider {
 
-    EntityPredicate.Builder isEntityOnFire();
+    HolderLookup.Provider getRegistries();
 
+    EntityPredicate.Builder isEntityOnFire();
 
     // rename form createSheepTable
     LootTable.Builder createTableLikeSheep(ItemLike item);

@@ -25,8 +25,9 @@ public class DisplayInfoBuilder {
     public DisplayInfoBuilder() {
     }
 
-    public void setBackground(@Nullable ResourceLocation background) {
+    public DisplayInfoBuilder setBackground(@Nullable ResourceLocation background) {
         this.background = background;
+        return this;
     }
 
     public DisplayInfoBuilder setIcon(ItemStack icon) {

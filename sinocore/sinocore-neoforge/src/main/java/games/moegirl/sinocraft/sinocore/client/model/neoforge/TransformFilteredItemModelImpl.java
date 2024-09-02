@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 public class TransformFilteredItemModelImpl extends TransformFilteredItemModel implements BakedModel {
     public TransformFilteredItemModelImpl(BakedModel baseModel, List<ItemDisplayContext> except) {
         super(baseModel, except);

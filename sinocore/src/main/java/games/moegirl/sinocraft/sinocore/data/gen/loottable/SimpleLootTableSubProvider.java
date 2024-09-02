@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.loottable;
 
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
 
@@ -10,9 +11,9 @@ import java.util.function.BiConsumer;
 
 public class SimpleLootTableSubProvider implements LootTableSubProvider {
 
-    protected Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
+    protected Map<ResourceKey<LootTable>, LootTable.Builder> tables = new HashMap<>();
 
-    public void add(ResourceLocation name, LootTable.Builder table) {
+    public void add(ResourceKey<LootTable> name, LootTable.Builder table) {
         tables.put(name, table);
     }
 
@@ -21,7 +22,7 @@ public class SimpleLootTableSubProvider implements LootTableSubProvider {
     }
 
     @Override
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
         tables.forEach(output);
     }
 }

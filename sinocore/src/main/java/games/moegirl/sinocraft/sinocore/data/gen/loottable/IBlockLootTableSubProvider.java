@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinocore.data.gen.loottable;
 
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
@@ -25,6 +27,8 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.function.Function;
 
 public interface IBlockLootTableSubProvider {
+
+    HolderLookup.Provider getRegistries();
 
     LootItemCondition.Builder hasSilkTouch();
 
@@ -120,7 +124,7 @@ public interface IBlockLootTableSubProvider {
         return createSelfDropWithConditionTable(block, hasSilkTouch(),
                 applyExplosionDecay(block, LootItem.lootTableItem(item)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)))
-                        .apply(ApplyBonusCount.addOreBonusCount(Enchantments.FORTUNE))));
+                        .apply(ApplyBonusCount.addOreBonusCount(getRegistries().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE)))));
     }
 
     LootTable.Builder createMushroomBlockDrop(Block block, ItemLike item);

@@ -2,9 +2,9 @@ package games.moegirl.sinocraft.sinocore.data.gen.neoforge.model;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class UnexceptionalBlockModelBuilder extends BlockModelBuilder {
     }
 
     @Override
-    public BlockModelBuilder texture(String key, ResourceLocation texture) {
+    public @NotNull BlockModelBuilder texture(@NotNull String key, @NotNull ResourceLocation texture) {
         try {
             return super.texture(key, texture);
         } catch (IllegalArgumentException e) {

@@ -1,7 +1,8 @@
 package games.moegirl.sinocraft.sinocore.utility.neoforge;
 
 import games.moegirl.sinocraft.sinocore.utility.ModList;
-import net.minecraftforge.fml.ModContainer;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.javafmlmod.FMLModContainer;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,6 +11,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ModListImpl {
@@ -18,11 +20,11 @@ public class ModListImpl {
             .filter(f -> "union".equalsIgnoreCase(f.getScheme())).findFirst().orElseThrow();
 
     public static Optional<ModList.IModContainer> findModById(String modId) {
-        return net.minecraftforge.fml.ModList.get().getModContainerById(modId).map(ForgeModListImpl::new);
+        return net.neoforged.fml.ModList.get().getModContainerById(modId).map(ForgeModListImpl::new);
     }
 
     public static boolean isModExists(String modId) {
-        return net.minecraftforge.fml.ModList.get().isLoaded(modId);
+        return net.neoforged.fml.ModList.get().isLoaded(modId);
     }
 
     public static class ForgeModListImpl implements ModList.IModContainer {
@@ -60,16 +62,8 @@ public class ModListImpl {
 
         @Override
         public List<Path> getRootFiles() {
-            try {
-                Object modObject = container.getMod();
-                if (modObject == null) {
-                    return List.of(getResourcePathOnly(container));
-                } else {
-                    return List.of(getPathByClass(modObject.getClass()));
-                }
-            } catch (URISyntaxException e) {
-                return List.of(getResourcePathOnly(container));
-            }
+            // Fixme: qyl27: migrate to 1.21.
+            return List.of(getResourcePathOnly(container));
         }
 
         private Path getPathByClass(Class<?> mainClass) throws URISyntaxException {

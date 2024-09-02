@@ -3,3 +3,11 @@ accessible method net/minecraft/world/inventory/MenuType <init> (Lnet/minecraft/
 accessible method net/minecraft/world/inventory/AbstractContainerMenu addSlot (Lnet/minecraft/world/inventory/Slot;)Lnet/minecraft/world/inventory/Slot;
 accessible method net/minecraft/advancements/CriteriaTriggers register (Ljava/lang/String;Lnet/minecraft/advancements/CriterionTrigger;)Lnet/minecraft/advancements/CriterionTrigger;
 accessible field net/minecraft/server/network/ServerCommonPacketListenerImpl connection Lnet/minecraft/network/Connection;
+
+accessible field net/neoforged/neoforge/client/model/generators/ModelProvider MODEL Lnet/neoforged/neoforge/common/data/ExistingFileHelper$ResourceType;
+accessible field net/neoforged/neoforge/client/model/generators/ModelProvider MODEL_WITH_EXTENSION Lnet/neoforged/neoforge/common/data/ExistingFileHelper$ResourceType;
+accessible class net/neoforged/neoforge/common/data/internal/NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator
+accessible method net/neoforged/neoforge/common/data/internal/NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator <init> (Lnet/minecraft/data/advancements/AdvancementSubProvider;Ljava/util/List;)V
+accessible field net/neoforged/neoforge/client/model/generators/ModelProvider folder Ljava/lang/String;
+accessible method net/neoforged/neoforge/client/model/generators/ModelProvider getPath (Lnet/neoforged/neoforge/client/model/generators/ModelBuilder;)Ljava/nio/file/Path;
+accessible field net/neoforged/fml/javafmlmod/FMLModContainer modClasses Ljava/util/List;

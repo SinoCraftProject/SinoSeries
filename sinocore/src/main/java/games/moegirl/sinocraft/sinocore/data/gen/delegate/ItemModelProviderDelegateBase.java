@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.Block;
 public abstract class ItemModelProviderDelegateBase<T extends IItemModelBuilder<T>> 
         extends ProviderDelegateBase<ItemModelProviderDelegateBase<T>> implements IModelProvider<T> {
 
-    public static final ResourceLocation GENERATED = new ResourceLocation("minecraft", "item/generated");
-    public static final ResourceLocation HANDHELD = new ResourceLocation("minecraft", "item/handheld");
+    public static final ResourceLocation GENERATED = ResourceLocation.withDefaultNamespace("item/generated");
+    public static final ResourceLocation HANDHELD = ResourceLocation.withDefaultNamespace("item/handheld");
 
     protected ItemModelProviderDelegateBase(DataProvider provider) {
         super(provider);

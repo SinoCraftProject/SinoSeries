@@ -1,28 +1,29 @@
 package games.moegirl.sinocraft.sinotest.network;
 
+import games.moegirl.sinocraft.sinocore.network.NetworkManager;
 import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
+import games.moegirl.sinocraft.sinotest.SinoTest;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
-public class S2CHelloPacket implements Packet<PlayNetworkContext> {
+public record S2CHelloPacket(String message) implements CustomPacketPayload {
 
-    private final String message;
-
-    public S2CHelloPacket(String message) {
-        this.message = message;
-    }
-
-    public S2CHelloPacket(FriendlyByteBuf buffer) {
-        message = buffer.readUtf();
-    }
-
-    @Override
-    public void write(FriendlyByteBuf buffer) {
-        buffer.writeUtf(message);
-    }
+    public static final Type<S2CHelloPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(SinoTest.MODID, "hello"));
+    public static final StreamCodec<FriendlyByteBuf, S2CHelloPacket> CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING_UTF8, S2CHelloPacket::message,
+            S2CHelloPacket::new
+    );
 
     @Override
-    public void handle(PlayNetworkContext handler) {
-        TestNetwork.CHANNEL.sendToServer(new C2SHelloPacket("Client thread is " + Thread.currentThread().getName(), message));
+    public @NotNull Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
+
+    public void handle(PlayNetworkContext context) {
+        NetworkManager.sendToServer(new C2SHelloPacket("Client thread is " + Thread.currentThread().getName(), message));
     }
 }

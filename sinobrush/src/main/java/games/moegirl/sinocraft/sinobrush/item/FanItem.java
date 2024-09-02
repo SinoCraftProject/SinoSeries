@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FanItem extends Item implements Vanishable {
+public class FanItem extends Item {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public FanItem() {
@@ -36,8 +36,8 @@ public class FanItem extends Item implements Vanishable {
                 .sino$tab(SBRItems.SINO_BRUSH_TAB));
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", getDamage(), AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", getAttackSpeed(), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Attributes.ATTACK_DAMAGE, "Weapon modifier", getDamage(), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Attributes.ATTACK_SPEED, "Weapon modifier", getAttackSpeed(), AttributeModifier.Operation.ADDITION));
         defaultModifiers = builder.build();
     }
 
@@ -60,9 +60,8 @@ public class FanItem extends Item implements Vanishable {
         return true;
     }
 
-    @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-        return slot == EquipmentSlot.MAINHAND ? defaultModifiers : super.getDefaultAttributeModifiers(slot);
+    public Multimap<Attribute, AttributeModifier> getDefaultModifiers() {
+        return defaultModifiers;
     }
 
     protected void appendTooltips(ItemStack stack, List<Component> tooltip) {
@@ -76,9 +75,9 @@ public class FanItem extends Item implements Vanishable {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level,
-                                List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public void appendHoverText(ItemStack stack, TooltipContext context,
+                                List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         this.appendTooltips(stack, tooltipComponents);
     }
 

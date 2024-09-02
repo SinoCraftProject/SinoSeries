@@ -1,10 +1,12 @@
 package games.moegirl.sinocraft.sinocore.registry;
 
+import com.mojang.logging.LogUtils;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import org.slf4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,8 @@ import java.util.Map;
  */
 @SuppressWarnings("unchecked")
 public class RegistryManager {
+
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     private static final Map<String, Map<ResourceKey<?>, IRegistry<?>>> DEF_MAP = new HashMap<>();
     private static final Map<String, ITabRegistry> TAB_MAP = new HashMap<>();
@@ -37,7 +41,7 @@ public class RegistryManager {
      */
     public synchronized static <T> IRegistry<T> create(String modId, ResourceKey<Registry<T>> key) {
         if (Registries.CREATIVE_MODE_TAB.equals(key)) {
-            SinoCore.LOGGER.warn("Use obtainTab or createTab to add creative mod tab easier.");
+            LOGGER.warn("Use createTab to add creative mod tab easier.");
         }
 
         IRegistry<T> registry = _create(modId, key);
@@ -55,7 +59,7 @@ public class RegistryManager {
      */
     public synchronized static <T> IRegistry<T> obtain(String modId, ResourceKey<Registry<T>> key) {
         if (Registries.CREATIVE_MODE_TAB.equals(key)) {
-            SinoCore.LOGGER.warn("Use obtainTab or createTab to add creative mod tab easier.");
+            LOGGER.warn("Use obtainTab to add creative mod tab easier.");
         }
 
         return (IRegistry<T>) DEF_MAP

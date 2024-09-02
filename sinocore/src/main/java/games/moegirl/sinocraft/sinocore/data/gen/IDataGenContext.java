@@ -11,7 +11,7 @@ public interface IDataGenContext {
 
     PackOutput getOutput();
 
-    CompletableFuture<HolderLookup.Provider> registriesFuture();
+    CompletableFuture<HolderLookup.Provider> getRegistries();
 
     default Object getExistingFileHelper() {
         throw new IllegalStateException("ExistingFileHelper can only get from Forge platform.");

@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.neoforge;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.ForgeLootTableProviderDelegate;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.NeoForgeLootTableProviderDelegate;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -10,7 +10,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.FrogVariant;
@@ -35,8 +34,8 @@ import java.util.stream.Stream;
 public class AbstractLootTableProviderImpl {
 
     public static LootTableProviderDelegateBase createDelegate(IDataGenContext context) {
-        if (context instanceof ForgeDataGenContextImpl impl) {
-            return new ForgeLootTableProviderDelegate(impl);
+        if (context instanceof NeoForgeDataGenContextImpl impl) {
+            return new NeoForgeLootTableProviderDelegate(impl);
         }
         throw new ClassCastException("Can't cast " + context + " to ForgeDataGenContextImpl at Forge Platform. " +
                 "Use SinoCorePlatform#buildDataGeneratorContext to create this context. " +
@@ -75,6 +74,11 @@ public class AbstractLootTableProviderImpl {
         @Override
         public LootTable.Builder createSelfDropWithConditionTable(Block block, LootItemCondition.Builder conditionBuilder, LootPoolEntryContainer.Builder<?> alternativeBuilder) {
             return createSelfDropDispatchTable(block, conditionBuilder, alternativeBuilder);
+        }
+
+        @Override
+        public HolderLookup.Provider getRegistries() {
+            return this.registries;
         }
 
         @Override
@@ -335,6 +339,11 @@ public class AbstractLootTableProviderImpl {
 
         protected EntityLootTableSubProviderImpl(HolderLookup.Provider registries) {
             super(FeatureFlags.REGISTRY.allFlags(), registries);
+        }
+
+        @Override
+        public HolderLookup.Provider getRegistries() {
+            return this.registries;
         }
 
         @Override

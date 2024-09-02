@@ -28,7 +28,7 @@ public abstract class AbstractBlockTagsProvider extends IntrinsicHolderTagsProvi
     }
 
     public AbstractBlockTagsProvider(IDataGenContext context) {
-        super(context.getOutput(), Registries.BLOCK, context.registriesFuture(), block -> block.builtInRegistryHolder().key());
+        super(context.getOutput(), Registries.BLOCK, context.getRegistries(), block -> block.builtInRegistryHolder().key());
         this.modId = context.getModId();
     }
 
@@ -94,7 +94,15 @@ public abstract class AbstractBlockTagsProvider extends IntrinsicHolderTagsProvi
         }
     }
 
+    /**
+     * Use {@link AbstractBlockTagsProvider#cTag} instead.
+     */
+    @Deprecated(forRemoval = true)
     protected static TagKey<Block> forgeTag(String name) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation("forge", name));
+        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("forge", name));
+    }
+
+    protected static TagKey<Block> cTag(String name) {
+        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", name));
     }
 }

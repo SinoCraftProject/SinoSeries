@@ -6,7 +6,7 @@ import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 
 public class SinoCriteriaTriggers {
-    public static final CustomStatTrigger CUSTOM_STAT_TRIGGER = register(ResourceLocation.fromNamespaceAndPath(SinoCore.MODID, "custom_stat"), new CustomStatTrigger());
+    public static final PlayerCustomStatTrigger CUSTOM_STAT_TRIGGER = register(ResourceLocation.fromNamespaceAndPath(SinoCore.MODID, "custom_stat"), new PlayerCustomStatTrigger());
 
     public static void register() {
     }

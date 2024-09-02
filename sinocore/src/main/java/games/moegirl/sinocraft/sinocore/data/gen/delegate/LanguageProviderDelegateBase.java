@@ -32,10 +32,6 @@ public abstract class LanguageProviderDelegateBase extends ProviderDelegateBase<
 
     public abstract void addItemStack(ItemStack key, String name);
 
-    public abstract void addEnchantment(Supplier<? extends Enchantment> key, String name);
-
-    public abstract void addEnchantment(Enchantment key, String name);
-
     public abstract void addEffect(Supplier<? extends MobEffect> key, String name);
 
     public abstract void addEffect(MobEffect key, String name);

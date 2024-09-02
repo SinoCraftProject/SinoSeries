@@ -1,5 +1,6 @@
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.ZonedDateTime
 
 void reGenRunConfig() {
     if (gradle.startParameter.taskRequests.args.any { it.contains('ideaSyncTask') }) {
@@ -113,6 +114,8 @@ static List<Project> getSubFabricMod(Project project) {
 
 static Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = false) {
     var map = new HashMap<String, ?>(subMod.properties)
+
+    map.put('build_time', ZonedDateTime.now())
 
     var file = new File(subMod.projectDir, 'src/main/resources/mod_desc.txt')
     if (file.exists()) {

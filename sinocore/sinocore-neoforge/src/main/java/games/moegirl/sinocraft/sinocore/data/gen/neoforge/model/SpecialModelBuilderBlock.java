@@ -1,252 +1,252 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.model;
 
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.ForgeBlockModelProviderDelegate;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.ForgeBlockModelProviderImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.NeoForgeBlockModelProviderDelegate;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.NeoForgeBlockModelProviderImpl;
 import games.moegirl.sinocraft.sinocore.data.gen.model.IModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.model.ISpecialModelBuilder;
 import net.minecraft.resources.ResourceLocation;
 
-public class SpecialModelBuilderBlock implements ISpecialModelBuilder<ForgeBlockModelBuilderWrapper> {
+public class SpecialModelBuilderBlock implements ISpecialModelBuilder<NeoForgeBlockModelBuilderWrapper> {
 
-    private final ForgeBlockModelProviderImpl impl;
-    private final ForgeBlockModelProviderDelegate provider;
+    private final NeoForgeBlockModelProviderImpl impl;
+    private final NeoForgeBlockModelProviderDelegate provider;
 
-    public SpecialModelBuilderBlock(ForgeBlockModelProviderImpl impl, ForgeBlockModelProviderDelegate provider) {
+    public SpecialModelBuilderBlock(NeoForgeBlockModelProviderImpl impl, NeoForgeBlockModelProviderDelegate provider) {
         this.impl = impl;
         this.provider = provider;
     }
 
     @Override
-    public IModelProvider<ForgeBlockModelBuilderWrapper> getModelProvider() {
+    public IModelProvider<NeoForgeBlockModelBuilderWrapper> getModelProvider() {
         return provider;
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper crop(String name, ResourceLocation crop) {
-        return new ForgeBlockModelBuilderWrapper(impl.crop(name, crop));
+    public NeoForgeBlockModelBuilderWrapper crop(String name, ResourceLocation crop) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.crop(name, crop));
     }
     @Override
-    public ForgeBlockModelBuilderWrapper stairs(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.stairs(name, side, bottom, top));
-    }
-
-    @Override
-    public ForgeBlockModelBuilderWrapper stairsOuter(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.stairsOuter(name, side, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper stairs(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.stairs(name, side, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper stairsInner(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.stairsInner(name, side, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper stairsOuter(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.stairsOuter(name, side, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper slab(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.slab(name, side, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper stairsInner(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.stairsInner(name, side, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper slabTop(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.slabTop(name, side, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper slab(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.slab(name, side, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper button(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.button(name, texture));
+    public NeoForgeBlockModelBuilderWrapper slabTop(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.slabTop(name, side, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper buttonPressed(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.buttonPressed(name, texture));
+    public NeoForgeBlockModelBuilderWrapper button(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.button(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper buttonInventory(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.buttonInventory(name, texture));
+    public NeoForgeBlockModelBuilderWrapper buttonPressed(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.buttonPressed(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper pressurePlate(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.pressurePlate(name, texture));
+    public NeoForgeBlockModelBuilderWrapper buttonInventory(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.buttonInventory(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper pressurePlateDown(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.pressurePlateDown(name, texture));
+    public NeoForgeBlockModelBuilderWrapper pressurePlate(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.pressurePlate(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper sign(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.sign(name, texture));
+    public NeoForgeBlockModelBuilderWrapper pressurePlateDown(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.pressurePlateDown(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fencePost(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fencePost(name, texture));
+    public NeoForgeBlockModelBuilderWrapper sign(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.sign(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fenceSide(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fenceSide(name, texture));
+    public NeoForgeBlockModelBuilderWrapper fencePost(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fencePost(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fenceInventory(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fenceInventory(name, texture));
+    public NeoForgeBlockModelBuilderWrapper fenceSide(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fenceSide(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fenceGate(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fenceGate(name, texture));
+    public NeoForgeBlockModelBuilderWrapper fenceInventory(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fenceInventory(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fenceGateOpen(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fenceGateOpen(name, texture));
+    public NeoForgeBlockModelBuilderWrapper fenceGate(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fenceGate(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fenceGateWall(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fenceGateWall(name, texture));
+    public NeoForgeBlockModelBuilderWrapper fenceGateOpen(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fenceGateOpen(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper fenceGateWallOpen(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.fenceGateWallOpen(name, texture));
+    public NeoForgeBlockModelBuilderWrapper fenceGateWall(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fenceGateWall(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper wallPost(String name, ResourceLocation wall) {
-        return new ForgeBlockModelBuilderWrapper(impl.wallPost(name, wall));
+    public NeoForgeBlockModelBuilderWrapper fenceGateWallOpen(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.fenceGateWallOpen(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper wallSide(String name, ResourceLocation wall) {
-        return new ForgeBlockModelBuilderWrapper(impl.wallSide(name, wall));
+    public NeoForgeBlockModelBuilderWrapper wallPost(String name, ResourceLocation wall) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.wallPost(name, wall));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper wallSideTall(String name, ResourceLocation wall) {
-        return new ForgeBlockModelBuilderWrapper(impl.wallSideTall(name, wall));
+    public NeoForgeBlockModelBuilderWrapper wallSide(String name, ResourceLocation wall) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.wallSide(name, wall));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper wallInventory(String name, ResourceLocation wall) {
-        return new ForgeBlockModelBuilderWrapper(impl.wallInventory(name, wall));
+    public NeoForgeBlockModelBuilderWrapper wallSideTall(String name, ResourceLocation wall) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.wallSideTall(name, wall));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper panePost(String name, ResourceLocation pane, ResourceLocation edge) {
-        return new ForgeBlockModelBuilderWrapper(impl.panePost(name, pane, edge));
+    public NeoForgeBlockModelBuilderWrapper wallInventory(String name, ResourceLocation wall) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.wallInventory(name, wall));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper paneSide(String name, ResourceLocation pane, ResourceLocation edge) {
-        return new ForgeBlockModelBuilderWrapper(impl.paneSide(name, pane, edge));
+    public NeoForgeBlockModelBuilderWrapper panePost(String name, ResourceLocation pane, ResourceLocation edge) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.panePost(name, pane, edge));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper paneSideAlt(String name, ResourceLocation pane, ResourceLocation edge) {
-        return new ForgeBlockModelBuilderWrapper(impl.paneSideAlt(name, pane, edge));
+    public NeoForgeBlockModelBuilderWrapper paneSide(String name, ResourceLocation pane, ResourceLocation edge) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.paneSide(name, pane, edge));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper paneNoSide(String name, ResourceLocation pane) {
-        return new ForgeBlockModelBuilderWrapper(impl.paneNoSide(name, pane));
+    public NeoForgeBlockModelBuilderWrapper paneSideAlt(String name, ResourceLocation pane, ResourceLocation edge) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.paneSideAlt(name, pane, edge));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper paneNoSideAlt(String name, ResourceLocation pane) {
-        return new ForgeBlockModelBuilderWrapper(impl.paneNoSideAlt(name, pane));
+    public NeoForgeBlockModelBuilderWrapper paneNoSide(String name, ResourceLocation pane) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.paneNoSide(name, pane));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorBottomLeft(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorBottomLeft(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper paneNoSideAlt(String name, ResourceLocation pane) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.paneNoSideAlt(name, pane));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorBottomLeftOpen(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorBottomLeftOpen(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorBottomLeft(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorBottomLeft(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorBottomRight(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorBottomRight(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorBottomLeftOpen(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorBottomLeftOpen(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorBottomRightOpen(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorBottomRightOpen(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorBottomRight(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorBottomRight(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorTopLeft(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorTopLeft(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorBottomRightOpen(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorBottomRightOpen(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorTopLeftOpen(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorTopLeftOpen(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorTopLeft(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorTopLeft(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorTopRight(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorTopRight(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorTopLeftOpen(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorTopLeftOpen(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper doorTopRightOpen(String name, ResourceLocation bottom, ResourceLocation top) {
-        return new ForgeBlockModelBuilderWrapper(impl.doorTopRightOpen(name, bottom, top));
+    public NeoForgeBlockModelBuilderWrapper doorTopRight(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorTopRight(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper trapdoorBottom(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.trapdoorBottom(name, texture));
+    public NeoForgeBlockModelBuilderWrapper doorTopRightOpen(String name, ResourceLocation bottom, ResourceLocation top) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.doorTopRightOpen(name, bottom, top));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper trapdoorTop(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.trapdoorTop(name, texture));
+    public NeoForgeBlockModelBuilderWrapper trapdoorBottom(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.trapdoorBottom(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper trapdoorOpen(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.trapdoorOpen(name, texture));
+    public NeoForgeBlockModelBuilderWrapper trapdoorTop(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.trapdoorTop(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper trapdoorOrientableBottom(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.trapdoorOrientableBottom(name, texture));
+    public NeoForgeBlockModelBuilderWrapper trapdoorOpen(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.trapdoorOpen(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper trapdoorOrientableTop(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.trapdoorOrientableTop(name, texture));
+    public NeoForgeBlockModelBuilderWrapper trapdoorOrientableBottom(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.trapdoorOrientableBottom(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper trapdoorOrientableOpen(String name, ResourceLocation texture) {
-        return new ForgeBlockModelBuilderWrapper(impl.trapdoorOrientableOpen(name, texture));
+    public NeoForgeBlockModelBuilderWrapper trapdoorOrientableTop(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.trapdoorOrientableTop(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper torch(String name, ResourceLocation torch) {
-        return new ForgeBlockModelBuilderWrapper(impl.torch(name, torch));
+    public NeoForgeBlockModelBuilderWrapper trapdoorOrientableOpen(String name, ResourceLocation texture) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.trapdoorOrientableOpen(name, texture));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper torchWall(String name, ResourceLocation torch) {
-        return new ForgeBlockModelBuilderWrapper(impl.torchWall(name, torch));
+    public NeoForgeBlockModelBuilderWrapper torch(String name, ResourceLocation torch) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.torch(name, torch));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper carpet(String name, ResourceLocation wool) {
-        return new ForgeBlockModelBuilderWrapper(impl.carpet(name, wool));
+    public NeoForgeBlockModelBuilderWrapper torchWall(String name, ResourceLocation torch) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.torchWall(name, torch));
     }
 
     @Override
-    public ForgeBlockModelBuilderWrapper nested() {
-        return new ForgeBlockModelBuilderWrapper(impl.nested());
+    public NeoForgeBlockModelBuilderWrapper carpet(String name, ResourceLocation wool) {
+        return new NeoForgeBlockModelBuilderWrapper(impl.carpet(name, wool));
+    }
+
+    @Override
+    public NeoForgeBlockModelBuilderWrapper nested() {
+        return new NeoForgeBlockModelBuilderWrapper(impl.nested());
     }
 }

@@ -42,13 +42,13 @@ public abstract class AbstractCodecProvider implements ISinoDataProvider {
     }
 
     public AbstractCodecProvider(IDataGenContext context) {
-        this(context.getOutput(), context.registriesFuture(), context.getModId());
+        this(context.getOutput(), context.getRegistries(), context.getModId());
     }
 
     protected abstract void generateData();
 
     protected void add(String name, ConfiguredFeature<?, ?> feature) {
-        add(new ResourceLocation(modId, name), feature);
+        add(modLoc(name), feature);
     }
 
     protected void add(ResourceLocation name, ConfiguredFeature<?, ?> feature) {

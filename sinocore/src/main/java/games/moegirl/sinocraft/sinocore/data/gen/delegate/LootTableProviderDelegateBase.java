@@ -6,7 +6,10 @@ import games.moegirl.sinocraft.sinocore.data.gen.loottable.SimpleLootTableSubPro
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLootTableProvider;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ItemLike;
@@ -82,7 +85,7 @@ public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTabl
     }
 
     public void addFishing(String name, LootTable.Builder table) {
-        addLootTable(LootContextParamSets.FISHING, new ResourceLocation(modId, name), table);
+        addLootTable(LootContextParamSets.FISHING, ResourceLocation.fromNamespaceAndPath(modId, name), table);
     }
 
     public void addFishing(ResourceLocation name, LootTable.Builder table) {
@@ -90,7 +93,7 @@ public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTabl
     }
 
     public void addGift(String name, LootTable.Builder table) {
-        addLootTable(LootContextParamSets.GIFT, new ResourceLocation(modId, name), table);
+        addLootTable(LootContextParamSets.GIFT, ResourceLocation.fromNamespaceAndPath(modId, name), table);
     }
 
     public void addGift(ResourceLocation name, LootTable.Builder table) {
@@ -98,15 +101,19 @@ public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTabl
     }
 
     public void addLootTable(LootContextParamSet param, ResourceLocation name, LootTable.Builder loot) {
-        simple.computeIfAbsent(param, __ -> new SimpleLootTableSubProvider()).add(name, loot);
+        this.addLootTable(param, ResourceKey.create(Registries.LOOT_TABLE, name), loot);
+    }
+
+    public void addLootTable(LootContextParamSet param, ResourceKey<LootTable> key, LootTable.Builder loot) {
+        simple.computeIfAbsent(param, __ -> new SimpleLootTableSubProvider()).add(key, loot);
     }
 
     public IBlockLootTableSubProvider getBlocks() {
         return blocks;
     }
 
-    /// <editor-fold desc="Utility methods.">
-    /// todo 是否需要把这些移动到特定 SubProvider 中 ?
+    // <editor-fold desc="Utility methods.">
+    // todo 是否需要把这些移动到特定 SubProvider 中 ?
 
     public LootTable.Builder table(LootPool.Builder... pools) {
         LootTable.Builder builder = LootTable.lootTable();
@@ -144,5 +151,5 @@ public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTabl
                 .add(LootItem.lootTableItem(ingot).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))));
     }
 
-    /// </editor-fold>
+    // </editor-fold>
 }

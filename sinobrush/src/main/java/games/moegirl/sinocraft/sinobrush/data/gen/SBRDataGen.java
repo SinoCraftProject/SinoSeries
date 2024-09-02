@@ -16,7 +16,7 @@ public class SBRDataGen {
 
         register.put(ZhCnLangProvider::new);
 
-        var blockTagProvider = register.put(context -> new BlockTagProvider(context.getOutput(), context.registriesFuture()));
+        var blockTagProvider = register.put(context -> new BlockTagProvider(context.getOutput(), context.getRegistries()));
         register.put(context -> new ItemTagProvider(context, blockTagProvider.get()));
 
         register.put(AdvancementProvider::new);

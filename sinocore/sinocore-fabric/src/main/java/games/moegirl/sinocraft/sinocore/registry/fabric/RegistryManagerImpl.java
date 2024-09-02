@@ -3,6 +3,8 @@ package games.moegirl.sinocraft.sinocore.registry.fabric;
 import games.moegirl.sinocraft.sinocore.registry.*;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
 
@@ -20,7 +22,7 @@ public class RegistryManagerImpl {
     }
 
     public static IMenuRegistry _createMenu(String modId) {
-        return new FabricMenuRegistry(modId);
+        return new FabricMenuRegistry(modId, Registries.MENU);
     }
 
     public static IScreenRegistry _createScreen(String modId) {
