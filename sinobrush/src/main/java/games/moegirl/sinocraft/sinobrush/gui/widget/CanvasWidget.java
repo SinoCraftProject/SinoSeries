@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.gui.widget;
 
-import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
+import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
 import games.moegirl.sinocraft.sinobrush.gui.screen.BrushScreen;
 import games.moegirl.sinocraft.sinobrush.client.DrawingRenderer;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,25 +10,23 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.function.BooleanSupplier;
-
 public class CanvasWidget extends AbstractWidget {
 
     private final BrushScreen screen;
 
-    private Drawing drawing;
+    private MutableDrawing drawing;
 
     public CanvasWidget(BrushScreen screen, int x, int y, int width, int height) {
         super(x, y, width, height, Component.empty());
         this.screen = screen;
-        this.drawing = new Drawing();
+        this.drawing = new MutableDrawing();
     }
 
-    public Drawing getDrawing() {
+    public MutableDrawing getDrawing() {
         return drawing;
     }
 
-    public void setDrawing(Drawing drawing) {
+    public void setDrawing(MutableDrawing drawing) {
         this.drawing = drawing;
     }
 

@@ -8,9 +8,9 @@ public class SBRConstants {
     public static final byte DRAWING_COLOR_MIN = 0;
     public static final byte DRAWING_COLOR_MAX = (byte)(Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2) - 1);
 
-    public static final int XUAN_PAPER_MAX_EXPEND = 2;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
+    public static final int XUAN_PAPER_MAX_EXPEND = 2;  // 16 << 2 = 64 is large enough, we needn't more.
     public static final int DRAWING_MIN_LENGTH = 16;
-    public static final int DRAWING_MAX_LENGTH = DRAWING_MIN_LENGTH << XUAN_PAPER_MAX_EXPEND;   // Todo: qyl27: Is it larger than max packet size?
+    public static final int DRAWING_MAX_LENGTH = DRAWING_MIN_LENGTH << XUAN_PAPER_MAX_EXPEND;
 
     public static class TagName {
         public static final String DRAWING = "drawing";    // Compound
@@ -43,6 +43,7 @@ public class SBRConstants {
         public static final String DESCRIPTION_FAN = "sinobrush.description.fan";
         public static final String DESCRIPTION_FOLDED_FAN = "sinobrush.description.folded_fan";
         public static final String DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
+        public static final String DESCRIPTION_FOLDED_FAN_WROTE = "sinobrush.description.folded_fan.wrote";
 
         public static final String DESCRIPTION_ITEM_COLORED = "sinobrush.description.item.colored";
         public static final String DESCRIPTION_XUAN_PAPER_EXPENDED = "sinobrush.description.xuan_paper.expended";

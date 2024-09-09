@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
 import com.google.common.base.Suppliers;
 import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
-import games.moegirl.sinocraft.sinocore.registry.ICustomStatRegister;
+import games.moegirl.sinocraft.sinocore.registry.ICustomStatRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stat;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class NeoForgeCustomStatRegister implements ICustomStatRegister {
+public class NeoForgeCustomStatRegistry implements ICustomStatRegistry {
 
     private final DeferredRegister<ResourceLocation> reg;
     private final IEventBus bus;
@@ -24,7 +24,7 @@ public class NeoForgeCustomStatRegister implements ICustomStatRegister {
 
     private final Map<ResourceLocation, StatFormatter> stats = new HashMap<>();
 
-    public NeoForgeCustomStatRegister(String modId) {
+    public NeoForgeCustomStatRegistry(String modId) {
         reg = DeferredRegister.create(Registries.CUSTOM_STAT, modId);
         bus = SinoCoreNeoForge.getModBus();
         modid = modId;

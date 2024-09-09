@@ -29,8 +29,7 @@ public class FoldedFanItem extends FanItem {
         if (lines.isEmpty()) {
             tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
-            tooltip.addAll(lines.stream().map(l -> l.withStyle(ChatFormatting.GRAY)).toList());
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_WROTE).withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -40,7 +39,7 @@ public class FoldedFanItem extends FanItem {
 
         if (!player.getCooldowns().isOnCooldown(this)) {
             player.awardStat(SBRStats.UNFOLD_FAN);
-            return InteractionResultHolder.success(changeItemStack(player, stack, SBRItems.FAN.get(), 100));
+            return InteractionResultHolder.success(FanItem.transmute(player, stack, SBRItems.FAN.get(), 100));
         }
 
         return InteractionResultHolder.pass(stack);

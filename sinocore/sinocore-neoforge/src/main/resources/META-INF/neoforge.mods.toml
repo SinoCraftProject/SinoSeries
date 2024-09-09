@@ -7,7 +7,7 @@ issueTrackerURL = "${sinoseries_issues}"
 modId = "${modid}"
 version = "${sinoseries_version}"
 displayName = "${mod_name}"
-#updateJSONURL="https://change.me.example.invalid/updates.json"
+#updateJSONURL = "https://change.me.example.invalid/updates.json"
 displayURL = "${sinoseries_url}"
 logoFile="sinocore_logo.png"
 credits = "${sinoseries_credits}"
@@ -23,10 +23,10 @@ features={javaVersion="${neoforge_java_version_range}"}
 file="META-INF/accesstransformer.cfg"
 
 [[mixins]]
-config="sinocore-common.mixin.json"
+config="sinocore-common.mixins.json"
 
 [[mixins]]
-config="sinocore-neoforge.mixin.json"
+config="sinocore-neoforge.mixins.json"
 
 [[dependencies.${ modid }]]
 modId = "minecraft"

@@ -1,53 +1,52 @@
-package games.moegirl.sinocraft.sinocore.registry.neoforge;
+package games.moegirl.sinocraft.sinocore.registry.fabric;
 
-import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.TabItemGenerator;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class NeoForgeTabRegistryImpl implements ITabRegistry {
+public class FabricTabRegistry implements ITabRegistry {
 
     private final String modId;
-    private final IEventBus bus;
-    private final DeferredRegister<CreativeModeTab> dr;
+    private final Registry<CreativeModeTab> registry;
 
-    NeoForgeTabRegistryImpl(String modId) {
+    FabricTabRegistry(String modId) {
         this.modId = modId;
-        this.bus = SinoCoreNeoForge.getModBus();
-        this.dr = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modId);
+        registry = (Registry<CreativeModeTab>) BuiltInRegistries.REGISTRY.get(Registries.CREATIVE_MODE_TAB.location());
     }
 
     @Override
     public void register() {
-        dr.register(bus);
     }
 
     @Override
     public IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
-        IRegRef<CreativeModeTab, CreativeModeTab> ref = registerForRef(name, () -> CreativeModeTab.builder()
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
+        ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
+        GENERATORS.put(key, generator);
+        return registerForRef(name, () -> FabricItemGroup.builder()
                 .title(Component.translatable(ITabRegistry.buildDefaultTranslationKey(modId, name)))
                 .displayItems(generator)
                 .icon(generator::displayItem)
                 .build());
-        GENERATORS.put(ref.getKey(), generator);
-        return ref;
     }
 
     @Override
     public <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
-        return new NeoForgeRegRef<>(dr.register(name, supplier));
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
+        ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
+        return (IRegRef<CreativeModeTab, T>) new FabricRegRefImpl<>(Registry.registerForHolder(registry, key, supplier.get()));
     }
 
     @Override
@@ -57,19 +56,8 @@ public class NeoForgeTabRegistryImpl implements ITabRegistry {
         }
         return VANILLA_GENERATORS.computeIfAbsent(tab, __ -> {
             TabItemGenerator generator = TabItemGenerator.vanilla(tab);
-            bus.addListener(new Event(generator, tab));
+            ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> generator.accept(entries.getContext(), entries));
             return generator;
         });
-    }
-
-    record Event(TabItemGenerator generator,
-                 ResourceKey<CreativeModeTab> tab) implements Consumer<BuildCreativeModeTabContentsEvent> {
-
-        @Override
-        public void accept(BuildCreativeModeTabContentsEvent event) {
-            if (Objects.equals(tab, event.getTabKey())) {
-                generator.accept(event.getParameters(), event);
-            }
-        }
     }
 }

@@ -11,7 +11,7 @@ public class RegistryManagerImpl {
     }
 
     public static ITabRegistry _createTab(String modId) {
-        return new NeoForgeTabRegistryImpl(modId);
+        return new NeoForgeTabRegistry(modId);
     }
 
     public static IMenuRegistry _createMenu(String modId) {
@@ -27,10 +27,10 @@ public class RegistryManagerImpl {
     }
 
     public static IDataProviderRegistry _createDataProvider(String modId) {
-        return new NeoForgeDataProviderRegistryImpl();
+        return new NeoForgeDataProviderRegistry();
     }
 
-    public static ICustomStatRegister _createCustomStat(String modId) {
-        return new NeoForgeCustomStatRegister(modId);
+    public static ICustomStatRegistry _createCustomStat(String modId) {
+        return new NeoForgeCustomStatRegistry(modId);
     }
 }

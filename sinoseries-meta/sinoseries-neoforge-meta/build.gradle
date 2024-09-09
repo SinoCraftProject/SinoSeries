@@ -38,16 +38,6 @@ loom {
             }
         }
     }
-
-//    mods {
-//        subMod.each { Project mod ->
-//            helpers.getSubNeoForgeMod(mod).each { Project neoForgeMod ->
-//                "${mod.modid}" {
-//                    sourceSet neoForgeMod.sourceSets.main
-//                }
-//            }
-//        }
-//    }
 }
 
 configurations {

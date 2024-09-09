@@ -1,26 +1,54 @@
 package games.moegirl.sinocraft.sinobrush.drawing;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import games.moegirl.sinocraft.sinocore.data.migratable.IDataMigratable;
 import games.moegirl.sinocraft.sinocore.data.serializable.ICompoundTagSerializable;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 
-public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, Void> {
-    public static final Drawing EMPTY;
+public class MutableDrawing implements ICompoundTagSerializable, IDataMigratable<Void, Void> {
+    public static final MutableDrawing EMPTY = new MutableDrawing();
 
-    static {
-        EMPTY = new Drawing();
-        EMPTY.pixels = new byte[16 * 16];
-        EMPTY.xSize = 16;
-        EMPTY.ySize = 16;
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, MutableDrawing> STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public @NotNull MutableDrawing decode(RegistryFriendlyByteBuf buf) {
+            return new MutableDrawing(ByteBufCodecs.VAR_INT.decode(buf),
+                    ComponentSerialization.STREAM_CODEC.decode(buf),
+                    ComponentSerialization.STREAM_CODEC.decode(buf),
+                    ByteBufCodecs.VAR_LONG.decode(buf),
+                    ByteBufCodecs.BYTE_ARRAY.decode(buf),
+                    ByteBufCodecs.VAR_INT.decode(buf),
+                    ByteBufCodecs.VAR_INT.decode(buf),
+                    ByteBufCodecs.VAR_INT.decode(buf),
+                    ByteBufCodecs.VAR_INT.decode(buf));
+        }
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, MutableDrawing drawing) {
+            ByteBufCodecs.VAR_INT.encode(buf, drawing.getVersion().getVersion());
+            ComponentSerialization.STREAM_CODEC.encode(buf, drawing.getTitle());
+            ComponentSerialization.STREAM_CODEC.encode(buf, drawing.getAuthor());
+            ByteBufCodecs.VAR_LONG.encode(buf, drawing.getDate());
+            ByteBufCodecs.BYTE_ARRAY.encode(buf, drawing.getPixels());
+            ByteBufCodecs.VAR_INT.encode(buf, drawing.getWidth());
+            ByteBufCodecs.VAR_INT.encode(buf, drawing.getHeight());
+            ByteBufCodecs.VAR_INT.encode(buf, drawing.getPaperColor());
+            ByteBufCodecs.VAR_INT.encode(buf, drawing.getInkColor());
+        }
+    };
 
     private DrawingVersion version = DrawingVersion.latest();
 
@@ -31,11 +59,35 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
 
     private byte[] pixels = new byte[0];
 
-    private int xSize = SBRConstants.DRAWING_MIN_LENGTH;
-    private int ySize = SBRConstants.DRAWING_MIN_LENGTH;
+    private int width = SBRConstants.DRAWING_MIN_LENGTH;
+    private int height = SBRConstants.DRAWING_MIN_LENGTH;
 
     private int paperColor = SBRConstants.COLOR_WHITE;
     private int inkColor = SBRConstants.COLOR_BLACK;
+
+    public MutableDrawing() {
+        this(16, 16);
+    }
+
+    public MutableDrawing(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.pixels = new byte[width * height];
+    }
+
+    public MutableDrawing(int version, Component title, Component author,
+                   long date, byte[] pixels,
+                   int width, int height,
+                   int paperColor, int inkColor) {
+        this(width, height);
+        this.version = DrawingVersion.from(version);
+        this.title = title;
+        this.author = author;
+        this.date = date;
+        this.pixels = pixels;
+        this.paperColor = paperColor;
+        this.inkColor = inkColor;
+    }
 
     // <editor-fold desc="Getter and Setter.">
 
@@ -45,10 +97,6 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
 
     public void setVersion(DrawingVersion version) {
         this.version = version;
-    }
-
-    public void setVersion(int version) {
-        setVersion(DrawingVersion.from(version));
     }
 
     public Component getTitle() {
@@ -145,19 +193,19 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
     }
 
     public int getWidth() {
-        return xSize;
+        return width;
     }
 
     public void setWidth(int w) {
-        this.xSize = w;
+        this.width = w;
     }
 
     public int getHeight() {
-        return ySize;
+        return height;
     }
 
     public void setHeight(int h) {
-        this.ySize = h;
+        this.height = h;
     }
 
     public void resize(int w, int h) {
@@ -206,18 +254,18 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
     // </editor-fold>
 
     @Override
-    public void readFromCompound(CompoundTag tag) {
+    public void readFromCompound(CompoundTag tag, HolderLookup.Provider registries) {
         var version = tag.getInt(SBRConstants.TagName.DRAWING_VERSION);
         setVersion(DrawingVersion.from(version));
 
         var titleJson = tag.getString(SBRConstants.TagName.DRAWING_TITLE);
-        var title = Component.Serializer.fromJson(titleJson);
+        var title = Component.Serializer.fromJson(titleJson, registries);
         if (title != null) {
             setTitle(title);
         }
 
         var authorJson = tag.getString(SBRConstants.TagName.DRAWING_AUTHOR);
-        var author = Component.Serializer.fromJson(authorJson);
+        var author = Component.Serializer.fromJson(authorJson, registries);
         if (author != null) {
             setAuthor(author);
         }
@@ -248,12 +296,12 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
     }
 
     @Override
-    public CompoundTag writeToCompound() {
+    public CompoundTag writeToCompound(HolderLookup.Provider registries) {
         var tag = new CompoundTag();
 
         tag.putInt(SBRConstants.TagName.DRAWING_VERSION, getVersion().getVersion());
-        tag.putString(SBRConstants.TagName.DRAWING_TITLE, Component.Serializer.toJson(getTitle()));
-        tag.putString(SBRConstants.TagName.DRAWING_AUTHOR, Component.Serializer.toJson(getAuthor()));
+        tag.putString(SBRConstants.TagName.DRAWING_TITLE, Component.Serializer.toJson(getTitle(), registries));
+        tag.putString(SBRConstants.TagName.DRAWING_AUTHOR, Component.Serializer.toJson(getAuthor(), registries));
         tag.putLong(SBRConstants.TagName.DRAWING_DATE, getDate());
 
         var size = new CompoundTag();
@@ -281,9 +329,7 @@ public class Drawing implements ICompoundTagSerializable, IDataMigratable<Void, 
         return null;
     }
 
-    public static Drawing fromTag(CompoundTag tag) {
-        var drawing = new Drawing();
-        drawing.readFromCompound(tag);
-        return drawing;
+    public Drawing toImmutable() {
+        return new Drawing(version.getVersion(), title, author, date, pixels, width, height, paperColor, inkColor);
     }
 }

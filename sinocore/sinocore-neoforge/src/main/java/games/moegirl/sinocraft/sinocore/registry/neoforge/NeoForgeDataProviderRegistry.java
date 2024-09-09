@@ -15,12 +15,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class NeoForgeDataProviderRegistryImpl implements IDataProviderRegistry, Consumer<GatherDataEvent> {
+public class NeoForgeDataProviderRegistry implements IDataProviderRegistry, Consumer<GatherDataEvent> {
 
     private final List<Function<IDataGenContext, DataProvider>> providers = new ArrayList<>();
     private final List<Function<IDataGenContext, DataProvider>> providersNotRun = new ArrayList<>();
 
-    public NeoForgeDataProviderRegistryImpl() {
+    public NeoForgeDataProviderRegistry() {
         SinoCoreNeoForge.getModBus().addListener(this);
     }
 

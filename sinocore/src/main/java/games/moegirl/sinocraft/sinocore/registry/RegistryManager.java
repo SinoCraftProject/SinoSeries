@@ -2,7 +2,6 @@ package games.moegirl.sinocraft.sinocore.registry;
 
 import com.mojang.logging.LogUtils;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import games.moegirl.sinocraft.sinocore.SinoCore;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -19,13 +18,13 @@ public class RegistryManager {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final Map<String, Map<ResourceKey<?>, IRegistry<?>>> DEF_MAP = new HashMap<>();
+    private static final Map<String, Map<ResourceKey<?>, IRegistry<?>>> REGISTRY_MAP = new HashMap<>();
     private static final Map<String, ITabRegistry> TAB_MAP = new HashMap<>();
     private static final Map<String, IMenuRegistry> MENU_MAP = new HashMap<>();
     private static final Map<String, IScreenRegistry> SCREEN_MAP = new HashMap<>();
     private static final Map<String, ICommandRegistry> COMMAND_MAP = new HashMap<>();
     private static final Map<String, IDataProviderRegistry> DATA_PROVIDER_MAP = new HashMap<>();
-    private static final Map<String, ICustomStatRegister> CUSTOM_STAT_MAP = new HashMap<>();
+    private static final Map<String, ICustomStatRegistry> CUSTOM_STAT_MAP = new HashMap<>();
 
     /**
      * 创建一个新的注册器
@@ -45,7 +44,7 @@ public class RegistryManager {
         }
 
         IRegistry<T> registry = _create(modId, key);
-        DEF_MAP.computeIfAbsent(modId, __ -> new HashMap<>()).put(key, registry);
+        REGISTRY_MAP.computeIfAbsent(modId, __ -> new HashMap<>()).put(key, registry);
         return registry;
     }
 
@@ -62,7 +61,7 @@ public class RegistryManager {
             LOGGER.warn("Use obtainTab to add creative mod tab easier.");
         }
 
-        return (IRegistry<T>) DEF_MAP
+        return (IRegistry<T>) REGISTRY_MAP
                 .computeIfAbsent(modId, __ -> new HashMap<>())
                 .computeIfAbsent(key, __ -> _create(modId, key));
     }
@@ -122,9 +121,9 @@ public class RegistryManager {
     }
 
     /**
-     * 注册自定义记录
+     * 注册自定义统计信息
      */
-    public synchronized static ICustomStatRegister obtainCustomStat(String modId) {
+    public synchronized static ICustomStatRegistry obtainCustomStat(String modId) {
         return CUSTOM_STAT_MAP.computeIfAbsent(modId, RegistryManager::_createCustomStat);
     }
 
@@ -159,7 +158,7 @@ public class RegistryManager {
     }
 
     @ExpectPlatform
-    public static ICustomStatRegister _createCustomStat(String modId) {
+    public static ICustomStatRegistry _createCustomStat(String modId) {
         throw new AssertionError();
     }
 }

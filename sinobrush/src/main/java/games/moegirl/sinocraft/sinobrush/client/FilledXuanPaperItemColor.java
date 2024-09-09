@@ -11,9 +11,9 @@ public class FilledXuanPaperItemColor implements ItemColor {
         if (itemStack.is(SBRItems.FILLED_XUAN_PAPER.get())) {
             var drawing = FilledXuanPaperItem.getDrawing(itemStack);
             if (tintIndex == 0) {
-                return drawing.getPaperColor();
+                return drawing.paperColor();
             } else if (tintIndex == 1) {
-                return drawing.getInkColor();
+                return drawing.inkColor();
             }
         }
 

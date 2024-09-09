@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinobrush.stat;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
-import games.moegirl.sinocraft.sinocore.registry.ICustomStatRegister;
+import games.moegirl.sinocraft.sinocore.registry.ICustomStatRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import net.minecraft.resources.ResourceLocation;
 
 public class SBRStats {
-    public static ICustomStatRegister STATS = RegistryManager.obtainCustomStat(SinoBrush.MODID);
+    public static ICustomStatRegistry STATS = RegistryManager.obtainCustomStat(SinoBrush.MODID);
 
     public static void register() {
         STATS.register();

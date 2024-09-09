@@ -1,16 +1,21 @@
 package games.moegirl.sinocraft.sinobrush.network;
 
-import games.moegirl.sinocraft.sinobrush.SinoBrush;
-import games.moegirl.sinocraft.sinocore.network.INetworkChannel;
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
 import net.minecraft.network.protocol.PacketFlow;
 
 public class SBRNetworks {
 
-    public static final INetworkChannel NETWORKS =  NetworkManager.getOrCreateChannel(SinoBrush.MODID);
-
     public static void register() {
-        NETWORKS.registerPacket(PacketFlow.CLIENTBOUND, S2CDrawResultPacket.class);
-        NETWORKS.registerPacket(PacketFlow.SERVERBOUND, C2SDrawPacket.class);
+        NetworkManager.playPacket(S2CDrawResultPacket.TYPE)
+                .destination(PacketFlow.SERVERBOUND)
+                .codec(S2CDrawResultPacket.STREAM_CODEC)
+                .handler(S2CDrawResultPacket::handle)
+                .register();
+
+        NetworkManager.playPacket(C2SSaveDrawPacket.TYPE)
+                .destination(PacketFlow.SERVERBOUND)
+                .codec(C2SSaveDrawPacket.STREAM_CODEC)
+                .handler(C2SSaveDrawPacket::handle)
+                .register();
     }
 }

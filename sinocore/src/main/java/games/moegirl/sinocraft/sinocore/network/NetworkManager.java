@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.network;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import games.moegirl.sinocraft.sinocore.network.packet.SinoPlayPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -10,19 +11,20 @@ import net.minecraft.server.level.ServerPlayer;
  */
 public class NetworkManager {
 
-    public static <T extends CustomPacketPayload> SinoPacketBuilder<T> packet(CustomPacketPayload.Type<T> type) {
-        return new SinoPacketBuilder<>(type);
+    // Todo: qyl27: configuration and login packet support.
+    public static <T extends CustomPacketPayload> SinoPlayPacketBuilder<T> playPacket(CustomPacketPayload.Type<T> type) {
+        return new SinoPlayPacketBuilder<>(type);
     }
 
     /**
      * （服务端->客户端）将数据包发送到某玩家
      *
-     * @param packet 待发送数据包
+     * @param payload 待发送数据包
      * @param player 接收玩家
      * @param <T>    数据包类型
      */
     @ExpectPlatform
-    public static <T extends CustomPacketPayload> void send(T packet, ServerPlayer player) {
+    public static <T extends CustomPacketPayload> void send(T payload, ServerPlayer player) {
         throw new AssertionError();
     }
 
@@ -31,29 +33,29 @@ public class NetworkManager {
      * <p></p>
      * {@link PacketTarget} 通过 {@link PacketDistributor#with(Object)} 或 {@link PacketDistributor#noArg()} )} 获取
      *
-     * @param packet 待发送数据包
+     * @param payload 待发送数据包
      * @param target 接收目标
      * @param <T>    数据包类型
      * @see PacketDistributor
      */
     @ExpectPlatform
-    public static <T extends CustomPacketPayload> void send(T packet, PacketTarget target) {
+    public static <T extends CustomPacketPayload> void send(T payload, PacketTarget target) {
         throw new AssertionError();
     }
 
     /**
      * （客户端->服务端）将数据包发送到服务器
      *
-     * @param packet 数据包
+     * @param payload 数据包
      * @param <T>    数据包类型
      */
     @ExpectPlatform
-    public static <T extends CustomPacketPayload> void sendToServer(T packet) {
+    public static <T extends CustomPacketPayload> void sendToServer(T payload) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    static <T extends CustomPacketPayload> void register(SinoPacket<T> packet) {
+    static <T extends CustomPacketPayload> void register(SinoPlayPacket<T> packet) {
         throw new AssertionError();
     }
 }

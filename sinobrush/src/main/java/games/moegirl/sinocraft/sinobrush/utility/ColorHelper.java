@@ -22,7 +22,7 @@ public class ColorHelper {
     }
 
     public static int getColor(ItemStack stack) {
-        var component = stack.getComponents().get(DataComponents.DYED_COLOR);
+        var component = stack.get(DataComponents.DYED_COLOR);
         if (component != null) {
             return component.rgb();
         }

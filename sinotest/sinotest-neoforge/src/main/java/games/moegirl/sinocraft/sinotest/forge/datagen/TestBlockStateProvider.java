@@ -2,8 +2,8 @@ package games.moegirl.sinocraft.sinotest.forge.datagen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class TestBlockStateProvider extends BlockStateProvider {
 

@@ -1,10 +1,10 @@
-package games.moegirl.sinocraft.sinodeco.data.gen.forge;
+package games.moegirl.sinocraft.sinodeco.data.gen.neoforge;
 
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import games.moegirl.sinocraft.sinodeco.block.WoodenTableBlock;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper) {

@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.network;
 
 import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
-import net.minecraft.network.ConnectionProtocol;
-import net.minecraft.network.FriendlyByteBuf;
+import games.moegirl.sinocraft.sinocore.network.packet.SinoPlayPacket;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -11,33 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public class SinoPacketBuilder<T extends CustomPacketPayload> {
+public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
     private final CustomPacketPayload.Type<T> type;
 
-    private final Set<ConnectionProtocol> stages = new HashSet<>();
     private final Set<PacketFlow> destinations = new HashSet<>();
 
-    private StreamCodec<FriendlyByteBuf, T> codec;
+    private StreamCodec<RegistryFriendlyByteBuf, T> codec;
     private BiConsumer<T, PlayNetworkContext> handler;
 
-    public SinoPacketBuilder(CustomPacketPayload.Type<T> type) {
+    public SinoPlayPacketBuilder(CustomPacketPayload.Type<T> type) {
         this.type = type;
-    }
-
-    /**
-     * Add packet listing stage.
-     * Now accepts {@link ConnectionProtocol#PLAY} only.
-     * @param stage stage.
-     * @return Builder.
-     */
-    // Todo: qyl27: supports ConnectionProtocol.CONFIGURATION and ConnectionProtocol.LOGIN
-    public SinoPacketBuilder<T> stage(ConnectionProtocol stage) {
-        if (stage != ConnectionProtocol.PLAY) {
-            throw new UnsupportedOperationException("Not support for now, call qyl to do that!");
-        }
-
-        stages.add(stage);
-        return this;
     }
 
     /**
@@ -47,7 +30,7 @@ public class SinoPacketBuilder<T extends CustomPacketPayload> {
      * @param destination Packet target.
      * @return Builder.
      */
-    public SinoPacketBuilder<T> destination(PacketFlow destination) {
+    public SinoPlayPacketBuilder<T> destination(PacketFlow destination) {
         destinations.add(destination);
         return this;
     }
@@ -57,7 +40,7 @@ public class SinoPacketBuilder<T extends CustomPacketPayload> {
      * @param codec StreamCodec.
      * @return Builder.
      */
-    public SinoPacketBuilder<T> codec(StreamCodec<FriendlyByteBuf, T> codec) {
+    public SinoPlayPacketBuilder<T> codec(StreamCodec<RegistryFriendlyByteBuf, T> codec) {
         this.codec = codec;
         return this;
     }
@@ -67,7 +50,7 @@ public class SinoPacketBuilder<T extends CustomPacketPayload> {
      * @param handler Handler.
      * @return Builder.
      */
-    public SinoPacketBuilder<T> handler(BiConsumer<T, PlayNetworkContext> handler) {
+    public SinoPlayPacketBuilder<T> handler(BiConsumer<T, PlayNetworkContext> handler) {
         if (this.handler == null) {
             this.handler = handler;
         } else {
@@ -77,6 +60,6 @@ public class SinoPacketBuilder<T extends CustomPacketPayload> {
     }
 
     public void register() {
-        NetworkManager.register(new SinoPacket<>(type, stages, destinations, codec, handler));
+        NetworkManager.register(new SinoPlayPacket<>(type, destinations, codec, handler));
     }
 }

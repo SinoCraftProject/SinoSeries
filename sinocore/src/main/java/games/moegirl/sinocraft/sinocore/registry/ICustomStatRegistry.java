@@ -6,7 +6,7 @@ import net.minecraft.stats.StatFormatter;
 
 import java.util.Optional;
 
-public interface ICustomStatRegister {
+public interface ICustomStatRegistry {
     String modId();
 
     void register();

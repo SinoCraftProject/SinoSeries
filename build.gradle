@@ -247,6 +247,12 @@ subMod.each { Project mod ->
             neoForge()
         }
 
+        loom {
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
+        }
+
         sourceSets.main.resources {
             srcDir(new File(mod.projectDir, 'src/main/resources'))
             srcDir(new File(mod.projectDir, 'src/generated/resources'))
@@ -276,6 +282,12 @@ subMod.each { Project mod ->
         architectury {
             platformSetupLoomIde()
             fabric()
+        }
+
+        loom {
+            runConfigs.configureEach { config ->
+                ideConfigGenerated = false
+            }
         }
 
         dependencies {

@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
 import com.google.common.base.Suppliers;
-import games.moegirl.sinocraft.sinocore.registry.ICustomStatRegister;
+import games.moegirl.sinocraft.sinocore.registry.ICustomStatRegistry;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import net.minecraft.core.registries.Registries;
@@ -12,11 +12,11 @@ import net.minecraft.stats.Stats;
 
 import java.util.Optional;
 
-public class FabricCustomStatRegister implements ICustomStatRegister {
+public class FabricCustomStatRegistry implements ICustomStatRegistry {
 
     private final IRegistry<ResourceLocation> reg;
 
-    public FabricCustomStatRegister(String modId) {
+    public FabricCustomStatRegistry(String modId) {
         reg = RegistryManager._create(modId, Registries.CUSTOM_STAT);
     }
 
