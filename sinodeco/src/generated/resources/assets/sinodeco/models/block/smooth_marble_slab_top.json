@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "sinodeco:block/smooth_marble",
-    "side": "sinodeco:block/smooth_marble",
-    "top": "sinodeco:block/smooth_marble"
-  }
-}

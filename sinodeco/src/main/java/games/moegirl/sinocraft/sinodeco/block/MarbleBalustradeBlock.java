@@ -219,6 +219,10 @@ public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlo
     @Override
     public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
                                            LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
         return updateShape(state, pos, level);
     }
 

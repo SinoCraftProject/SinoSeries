@@ -7,6 +7,7 @@ import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDel
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -23,7 +24,8 @@ public class TestAdvancementProvider extends AbstractAdvancementProvider {
                         .display(new ItemStack(TestRegistry.TEST_ITEM_MC_TAB.get()),
                                 Component.literal("测试成就"),
                                 Component.literal("这是一个用于测试的成就"),
-                                null, AdvancementType.TASK, false, true, false))
+                                null, AdvancementType.TASK, false, true, false)
+                        .addCriterion("test", PlayerTrigger.TriggerInstance.tick()))
         );
     }
 }

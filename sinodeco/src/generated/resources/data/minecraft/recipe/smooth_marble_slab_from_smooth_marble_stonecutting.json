@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "sinodeco:smooth_marble"
+  },
+  "result": {
+    "count": 2,
+    "id": "sinodeco:smooth_marble_slab"
+  }
+}

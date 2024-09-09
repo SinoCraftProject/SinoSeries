@@ -27,7 +27,7 @@ public class RegistryManagerImpl {
     }
 
     public static IDataProviderRegistry _createDataProvider(String modId) {
-        return new NeoForgeDataProviderRegistry();
+        return new NeoForgeDataProviderRegistry(modId);
     }
 
     public static ICustomStatRegistry _createCustomStat(String modId) {

@@ -11,7 +11,7 @@ import java.util.List;
 public class NeoForgeLootTableProviderDelegate extends LootTableProviderDelegateBase {
 
     public NeoForgeLootTableProviderDelegate(NeoForgeDataGenContextImpl context) {
-        super(new NeoForgeLootTableProviderImpl(context), context.getModId());
+        super(new NeoForgeLootTableProviderImpl(context), context.getModId(), context.getRegistries());
         ((NeoForgeLootTableProviderImpl) getForgeProvider()).setDelegate(this);
     }
 

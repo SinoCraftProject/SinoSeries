@@ -27,6 +27,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTableProviderDelegateBase> {
@@ -39,10 +40,10 @@ public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTabl
     protected final Map<LootContextParamSet, SimpleLootTableSubProvider> simple = new HashMap<>();
     protected final String modId;
 
-    protected LootTableProviderDelegateBase(DataProvider provider, String modId) {
+    protected LootTableProviderDelegateBase(DataProvider provider, String modId, CompletableFuture<HolderLookup.Provider> registries) {
         super(provider);
-        this.blocks = AbstractLootTableProvider.createBlockSubProvider();
-        this.entities = AbstractLootTableProvider.createEntitySubProvider();
+        this.blocks = AbstractLootTableProvider.createBlockSubProvider(registries.getNow(null));
+        this.entities = AbstractLootTableProvider.createEntitySubProvider(registries.getNow(null));
         this.modId = modId;
     }
 

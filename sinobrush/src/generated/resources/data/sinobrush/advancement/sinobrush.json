@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "join_game": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "sinobrush:advancement/background.png",
+    "description": {
+      "translate": "sinobrush.advancement.root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "sinobrush:brush"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "sinobrush.advancement.root.name"
+    }
+  },
+  "requirements": [
+    [
+      "join_game"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

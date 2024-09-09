@@ -1,5 +1,5 @@
-// 1.20.1	2024-06-03T14:47:31.4928325	Advancements: sinobrush
-0008845a4eac8e4b5fb9e37bd1f65d8995a117be data/sinobrush/advancements/draw_on_paper.json
-896e7337ae29964017322337aed01438d9d6bae5 data/sinobrush/advancements/fan.json
-981cbb662bee2fb659125a265a1967f32d532c7b data/sinobrush/advancements/open_fan.json
-6cf18bc85588b9c5e2cc3da471e5ccc999b7dcdd data/sinobrush/advancements/sinobrush.json
+// 1.21.1	2024-09-09T22:44:21.8636008	Advancements: sinobrush
+7d6803839b42f7a44b02a0c0a7f9db50df607f98 data/sinobrush/advancement/draw_on_paper.json
+e343feeef5e05a236c3397af7bc5e509bacd375a data/sinobrush/advancement/fan.json
+c3368900e430575fbadf195945e15cac6acf5ef8 data/sinobrush/advancement/open_fan.json
+55a2ea402e079b78126a315730d1d575d8e483c1 data/sinobrush/advancement/sinobrush.json

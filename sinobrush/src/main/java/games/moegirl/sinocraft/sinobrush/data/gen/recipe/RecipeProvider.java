@@ -18,7 +18,7 @@ public class RecipeProvider extends AbstractRecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SBRItems.INK_BOTTLE.get(), 67)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SBRItems.INK_BOTTLE.get(), 6)
                 .pattern("BCB")
                 .pattern("BWB")
                 .pattern("BCB")
