@@ -24,8 +24,8 @@ public class FabricMenuRegistry extends FabricRegistryImpl<MenuType<?>> implemen
         }
 
         @Override
-        public void encode(RegistryFriendlyByteBuf stream, RegistryFriendlyByteBuf data) {
-            stream.writeBytes(data.array(), data.readerIndex(), data.readableBytes());
+        public void encode(RegistryFriendlyByteBuf buf, RegistryFriendlyByteBuf data) {
+            buf.writeBytes(data.array(), data.readerIndex(), data.readableBytes());
         }
     };
 
@@ -35,6 +35,6 @@ public class FabricMenuRegistry extends FabricRegistryImpl<MenuType<?>> implemen
 
     @Override
     public <T extends AbstractContainerMenu> IRegRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
-        return register(name, () -> new ExtendedScreenHandlerType<>(factory::create, STREAM_CODEC));
+        return register(name, () -> new ExtendedScreenHandlerType<T, RegistryFriendlyByteBuf>(factory::create, STREAM_CODEC));
     }
 }

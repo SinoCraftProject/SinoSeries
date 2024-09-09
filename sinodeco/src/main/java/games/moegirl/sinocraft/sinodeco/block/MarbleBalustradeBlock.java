@@ -206,7 +206,7 @@ public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlo
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         var up = state.getValue(UP);
         var north = state.getValue(NORTH) ? 1 : 0;
         var east = state.getValue(EAST) ? 1 : 0;

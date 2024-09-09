@@ -18,9 +18,6 @@ public class SinoBrush {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public SinoBrush() {
-    }
-
-    public void init() {
         SBRItems.register();
         SBRDataComponents.register();
         SBRMenu.register();
@@ -31,6 +28,9 @@ public class SinoBrush {
         RenderHandlers.register();
 
         SBRDataGen.register();
+    }
+
+    public void init() {
     }
 
     public void initClient() {

@@ -29,7 +29,7 @@ public class NetworkManagerImpl {
         PacketDistributor.sendToServer(payload);
     }
 
-    static <T extends CustomPacketPayload> void register(SinoPlayPacket<T> packet) {
+    public static <T extends CustomPacketPayload> void register(SinoPlayPacket<T> packet) {
         SinoCoreNeoForge.getModBus().addListener((Consumer<RegisterPayloadHandlersEvent>) event -> {
             register(event.registrar(SinoCore.VERSION), packet);
         });

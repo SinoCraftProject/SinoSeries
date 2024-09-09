@@ -55,7 +55,7 @@ dependencies {
     neoForge "net.neoforged:neoforge:${project.neoforge_version}"
 
     modRuntimeOnly group: 'maven.modrinth', name: 'jei', version: project.runtime_neoforge_jei_version
-    modRuntimeOnly(group: 'cx.rain.mc.nbtedit', name: 'nbtedit-forge', version: project.runtime_all_nbtedit_version) { transitive false }
+    modRuntimeOnly(group: 'cx.rain.mc.nbtedit', name: 'nbtedit-neoforge', version: project.runtime_all_nbtedit_version) { transitive false }
 
     subMod.each { Project mod ->
         common(project(path: mod.path, configuration: 'namedElements')) { transitive true }

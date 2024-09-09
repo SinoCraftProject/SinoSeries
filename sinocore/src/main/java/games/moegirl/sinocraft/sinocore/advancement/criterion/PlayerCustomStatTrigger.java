@@ -44,6 +44,6 @@ public class PlayerCustomStatTrigger extends SimpleCriterionTrigger<PlayerCustom
     }
 
     public static Criterion<Instance> awardCustomStat(ResourceLocation id, int value) {
-        return SinoCriteriaTriggers.CUSTOM_STAT_TRIGGER.createCriterion(new Instance(Optional.empty(), id, value));
+        return SinoCriteriaTriggers.CUSTOM_STAT_TRIGGER.get().createCriterion(new Instance(Optional.empty(), id, value));
     }
 }

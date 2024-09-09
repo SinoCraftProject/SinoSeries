@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public record C2SHelloPacket(String message1, String message2) implements CustomPacketPayload {
 
-    public static final Type<C2SHelloPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(SinoTest.MODID, "hello"));
+    public static final Type<C2SHelloPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(SinoTest.MODID, "hello2"));
     public static final StreamCodec<RegistryFriendlyByteBuf, C2SHelloPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8, C2SHelloPacket::message1,
             ByteBufCodecs.STRING_UTF8, C2SHelloPacket::message2,

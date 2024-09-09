@@ -33,6 +33,8 @@ public class SinoCore {
 
     public SinoCore() {
         LOGGER.info("Initializing SinoCore. Ver: {}, Build at: {}", VERSION, BUILD_TIME != null ? BUILD_TIME : "B.C. 3200");
+
+        SinoCriteriaTriggers.register();
     }
 
     public void init() {
@@ -40,8 +42,8 @@ public class SinoCore {
 
     /**
      * Something must be run in the Main Thread, we called it as setup.
+     * In Forge-like, it should be invoked in FMLCommonSetupEvent.
      */
     public void setup() {
-        SinoCriteriaTriggers.register();    // qyl27: Register CriteriaTriggers directly, not thread-safe.
     }
 }

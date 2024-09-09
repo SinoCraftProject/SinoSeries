@@ -9,14 +9,13 @@ public class SinoDeco {
     public static final String MODID = "sinodeco";
 
     public SinoDeco() {
-
-    }
-
-    public void init() {
         SDBlocks.register();
         SDBlockItems.register();
         SDItems.register();
 
         SDData.register();
+    }
+
+    public void init() {
     }
 }
