@@ -21,8 +21,8 @@ public class SinoBrush {
     }
 
     public void init() {
-        SBRItems.register();
         SBRDataComponents.register();
+        SBRItems.register();
         SBRMenu.register();
         SBRNetworks.register();
         SBRStats.register();
@@ -33,10 +33,7 @@ public class SinoBrush {
         SBRDataGen.register();
     }
 
-    public void setup() {
-    }
-
-    public void setupClient() {
+    public void initClient() {
         SBRScreen.register();
     }
 }

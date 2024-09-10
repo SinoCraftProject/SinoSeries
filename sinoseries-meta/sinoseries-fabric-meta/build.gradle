@@ -13,11 +13,15 @@ loom {
         client {
             configName = 'Fabric Client'
             runDir = 'run/client'
+
+            property 'fabric-tag-conventions-v2.missingTagTranslationWarning', 'VERBOSE'
         }
 
         server {
             configName = 'Fabric Server'
             runDir = 'run/server'
+
+            property 'fabric-tag-conventions-v2.missingTagTranslationWarning', 'VERBOSE'
         }
     }
 

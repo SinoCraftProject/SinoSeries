@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.registry.neoforge;
 import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
+import games.moegirl.sinocraft.sinocore.utility.neoforge.ModBusHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -34,7 +35,7 @@ public class NeoForgeRegistryImpl<T> implements IRegistry<T> {
     protected boolean registered;
 
     NeoForgeRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
-        this.bus = SinoCoreNeoForge.getModBus();
+        this.bus = ModBusHelper.getModBus(modId);
 
         this.modId = modId;
         this.key = key;

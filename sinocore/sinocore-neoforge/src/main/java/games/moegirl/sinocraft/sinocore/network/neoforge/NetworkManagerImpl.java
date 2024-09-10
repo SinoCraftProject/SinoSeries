@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
 import games.moegirl.sinocraft.sinocore.network.PacketTarget;
 import games.moegirl.sinocraft.sinocore.network.packet.SinoPlayPacket;
 import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
+import games.moegirl.sinocraft.sinocore.utility.neoforge.ModBusHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
@@ -30,9 +31,9 @@ public class NetworkManagerImpl {
     }
 
     public static <T extends CustomPacketPayload> void register(SinoPlayPacket<T> packet) {
-        SinoCoreNeoForge.getModBus().addListener((Consumer<RegisterPayloadHandlersEvent>) event -> {
-            register(event.registrar(SinoCore.VERSION), packet);
-        });
+        ModBusHelper.getModBus(packet.type().id().getNamespace())
+                .addListener((Consumer<RegisterPayloadHandlersEvent>) event ->
+                        register(event.registrar(SinoCore.VERSION), packet));
     }
 
     private static <T extends CustomPacketPayload> void register(PayloadRegistrar registrar, SinoPlayPacket<T> packet) {

@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IScreenRegistry;
+import games.moegirl.sinocraft.sinocore.utility.neoforge.ModBusHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
@@ -22,13 +23,18 @@ import java.util.function.Consumer;
 @SuppressWarnings("all")
 public class NeoForgeScreenRegistry implements IScreenRegistry {
 
-    private final IEventBus bus = SinoCoreNeoForge.getModBus();
+    private final IEventBus bus;
     private final List<Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
+
+    public NeoForgeScreenRegistry(String modId) {
+        bus = ModBusHelper.getModBus(modId);
+    }
 
     @Override
     public void register() {
         bus.addListener((Consumer<RegisterMenuScreensEvent>) event -> {
             for (Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>> screen : screens) {
+                System.out.println(1);
                 event.register(screen.getFirst().get(), new ScreenFactoryWrapper(screen.getSecond()));
             }
         });

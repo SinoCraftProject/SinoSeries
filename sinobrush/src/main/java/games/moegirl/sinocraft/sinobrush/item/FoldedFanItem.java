@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import games.moegirl.sinocraft.sinobrush.item.component.FanData;
+import games.moegirl.sinocraft.sinobrush.item.component.SBRDataComponents;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

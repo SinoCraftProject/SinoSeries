@@ -2,10 +2,12 @@ package games.moegirl.sinocraft.sinobrush.item.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import games.moegirl.sinocraft.sinocore.utility.data.DataComponentHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -40,5 +42,15 @@ public record FanData(List<Component> lines) {
 
     public FanData() {
         this(List.of());
+    }
+
+    public static final FanData DEFAULT = new FanData();
+
+    public static FanData get(ItemStack stack) {
+        return DataComponentHelper.get(stack, SBRDataComponents.FAN.get(),DEFAULT);
+    }
+
+    public static void set(ItemStack stack, FanData data) {
+        stack.set(SBRDataComponents.FAN.get(), data);
     }
 }

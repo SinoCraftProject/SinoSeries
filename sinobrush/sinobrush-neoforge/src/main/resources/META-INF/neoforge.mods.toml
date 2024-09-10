@@ -17,6 +17,9 @@ description = '''
 ${mod_description}
 '''
 
+[[mixins]]
+config = "sinobrush-common.mixins.json"
+
 [[dependencies.${ modid }]]
 modId = "minecraft"
 type = "required"

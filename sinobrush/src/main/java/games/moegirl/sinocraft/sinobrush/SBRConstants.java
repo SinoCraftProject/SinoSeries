@@ -1,10 +1,12 @@
 package games.moegirl.sinocraft.sinobrush;
 
-import games.moegirl.sinocraft.sinobrush.data.gen.tag.SBRItemTags;
+import net.minecraft.world.item.component.DyedItemColor;
 
 public class SBRConstants {
-    public static final int COLOR_WHITE = 0xFFFFFF;
-    public static final int COLOR_BLACK = 0x000000;
+    public static final int COLOR_WHITE = 0xFFFFFFFF;
+    public static final int COLOR_BLACK = 0xFF000000;
+    public static final DyedItemColor DEFAULT_COLOR_WHITE = new DyedItemColor(COLOR_WHITE, false);
+    public static final DyedItemColor DEFAULT_COLOR_BLACK = new DyedItemColor(COLOR_BLACK, false);
 
     public static final int DRAWING_COLOR_LENGTH = 4;   // qyl27: Timicasto said the future is not a 4-bit canvas, but a colorful world!
     public static final byte DRAWING_COLOR_MIN = 0;

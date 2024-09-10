@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinobrush.data.gen.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.component.FanData;
 import games.moegirl.sinocraft.sinobrush.item.component.SBRDataComponents;
 import net.minecraft.ChatFormatting;
@@ -28,7 +27,7 @@ public class FanItem extends Item {
     public FanItem() {
         super(new Properties()
                 .stacksTo(1)
-                .component(SBRDataComponents.FAN_DATA.get(), new FanData())
+                .component(SBRDataComponents.FAN.get(), new FanData())
                 .attributes(FanItem.createAttributes(0, -0.8F))
                 .sino$tab(SBRItems.SINO_BRUSH_TAB));
     }
@@ -89,18 +88,12 @@ public class FanItem extends Item {
     }
 
     public static List<Component> getLines(ItemStack stack) {
-        if (stack.is(SBRItemTags.FAN)) {
-            var data = stack.get(SBRDataComponents.FAN_DATA.get());
-            if (data != null) {
-                return data.lines();
-            }
-        }
-
-        return List.of();
+        var data = FanData.get(stack);
+        return data.lines();
     }
 
     public static void setLines(ItemStack stack, List<Component> lines) {
-        stack.set(SBRDataComponents.FAN_DATA.get(), new FanData(lines));
+        FanData.set(stack, new FanData(lines));
     }
 
     public static boolean hasLines(ItemStack stack) {

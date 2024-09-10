@@ -41,5 +41,7 @@
   "sinobrush.hud.fan.prefix": "对方的折扇上写着：",
   "stat.sinobrush.draw_by_brush": "作画次数",
   "stat.sinobrush.unfold_fan": "展开折扇次数",
-  "tab.sinobrush.sinobrush": "华夏云墨"
+  "tab.sinobrush.sinobrush": "华夏云墨",
+  "tag.item.sinobrush.fan": "折扇",
+  "tag.item.sinobrush.xuan_paper": "宣纸"
 }

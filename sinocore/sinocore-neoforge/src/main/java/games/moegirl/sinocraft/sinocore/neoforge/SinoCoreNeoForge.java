@@ -9,23 +9,16 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 @Mod(SinoCore.MODID)
 public class SinoCoreNeoForge {
 
-    private static IEventBus MOD_BUS;
-
     private final SinoCore mod;
 
     public SinoCoreNeoForge(IEventBus bus, ModContainer container) {
-        MOD_BUS = bus;
         mod = new SinoCore();
 
+        mod.init();
         bus.addListener(this::setup);
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        mod.init();
         event.enqueueWork(mod::setup);
-    }
-
-    public static IEventBus getModBus() {
-        return MOD_BUS;
     }
 }

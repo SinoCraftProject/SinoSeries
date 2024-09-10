@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinobrush.utility;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 
 public class ColorHelper {
     public static int rgbToARGB(int rgb) {
@@ -22,11 +23,7 @@ public class ColorHelper {
     }
 
     public static int getColor(ItemStack stack) {
-        var component = stack.get(DataComponents.DYED_COLOR);
-        if (component != null) {
-            return component.rgb();
-        }
-
-        return -1;
+        var component = stack.getOrDefault(DataComponents.DYED_COLOR, stack.getPrototype().getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(-1, false)));
+        return component.rgb();
     }
 }

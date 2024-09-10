@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.fabric;
 
+import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.client.FilledXuanPaperItemColor;
 import games.moegirl.sinocraft.sinobrush.client.NormalItemColor;
@@ -15,12 +16,11 @@ public class SinoBrushFabric implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
         mod.init();
-        mod.setup();
     }
 
     @Override
     public void onInitializeClient() {
-        mod.setupClient();
+        mod.initClient();
 
         ColorProviderRegistry.ITEM.register(new NormalItemColor(), SBRItems.XUAN_PAPER.get(), SBRItems.INK_BOTTLE.get());
         ColorProviderRegistry.ITEM.register(new FilledXuanPaperItemColor(), SBRItems.FILLED_XUAN_PAPER.get());

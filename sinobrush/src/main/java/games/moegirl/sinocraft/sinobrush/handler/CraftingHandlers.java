@@ -18,7 +18,7 @@ public class CraftingHandlers {
                         && expand == XuanPaperItem.getExpend(other)
                         && color == ColorHelper.getColor(other)) {
                     var output = input.copyWithCount(1);
-                    XuanPaperItem.setExpend(output, expand + 1);
+                    XuanPaperItem.expend(output);
                     e.setOutput(output);
                 }
             }

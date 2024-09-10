@@ -7,6 +7,7 @@ import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
+import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
@@ -83,7 +84,7 @@ public record C2SSaveDrawPacket(MutableDrawing drawing, EquipmentSlot brushSlot)
                 }
 
                 ItemStack drawStack = new ItemStack(SBRItems.FILLED_XUAN_PAPER.get());
-                FilledXuanPaperItem.setDrawing(drawStack, drawing.toImmutable());
+                Drawing.set(drawStack, drawing.toImmutable());
                 container.setItem(BrushMenu.DRAW_SLOT, drawStack);
                 player.awardStat(SBRStats.DRAW_BY_BRUSH);
                 NetworkManager.send(S2CDrawResultPacket.ok(), player);

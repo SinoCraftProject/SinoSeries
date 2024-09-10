@@ -2,12 +2,11 @@ package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
 import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegistry;
 import games.moegirl.sinocraft.sinocore.utility.Reference;
+import games.moegirl.sinocraft.sinocore.utility.neoforge.ModBusHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class NeoForgeDataProviderRegistry implements IDataProviderRegistry, Cons
     private final List<Function<IDataGenContext, DataProvider>> providersNotRun = new ArrayList<>();
 
     public NeoForgeDataProviderRegistry(String modId) {
-        ModList.get().getModContainerById(modId).get().getEventBus().addListener(this);
+        ModBusHelper.getModBus(modId).addListener(this);
     }
 
     @Override

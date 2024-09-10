@@ -6,11 +6,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.drawing.DrawingVersion;
 import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
+import games.moegirl.sinocraft.sinocore.utility.data.DataComponentHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
@@ -107,5 +109,15 @@ public record Drawing(int version, Component title, Component author,
 
     public byte getPixel(int x, int y) {
         return getPixel(x * width() + y);
+    }
+
+    public static final Drawing DEFAULT = new Drawing();
+
+    public static Drawing get(ItemStack stack) {
+        return DataComponentHelper.get(stack, SBRDataComponents.DRAWING.get(), DEFAULT);
+    }
+
+    public static void set(ItemStack stack, Drawing drawing) {
+        stack.set(SBRDataComponents.DRAWING.get(), drawing);
     }
 }

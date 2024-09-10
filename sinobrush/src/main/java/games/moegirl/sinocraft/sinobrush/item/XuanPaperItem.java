@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinobrush.item.component.Paper;
+import games.moegirl.sinocraft.sinobrush.item.component.PaperData;
 import games.moegirl.sinocraft.sinobrush.item.component.SBRDataComponents;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinobrush.utility.TooltipHelper;
@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.DyedItemColor;
 
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class XuanPaperItem extends Item {
     public XuanPaperItem() {
         super(new Item.Properties()
                 .stacksTo(64)
-                .component(SBRDataComponents.PAPER.get(), new Paper())
-                .component(DataComponents.DYED_COLOR, new DyedItemColor(SBRConstants.COLOR_WHITE, false))
+                .component(SBRDataComponents.PAPER.get(), new PaperData())
+                .component(DataComponents.DYED_COLOR, SBRConstants.DEFAULT_COLOR_WHITE)
                 .sino$tab(SBRItems.SINO_BRUSH_TAB));
     }
 
@@ -29,24 +28,12 @@ public class XuanPaperItem extends Item {
     }
 
     public static int getExpend(ItemStack stack) {
-        if (!stack.is(SBRItems.XUAN_PAPER.get())) {
-            return 0;
-        }
-
-        var paper = stack.get(SBRDataComponents.PAPER.get());
-        if (paper == null) {
-            return 0;
-        }
-
+        var paper = PaperData.get(stack);
         return paper.expands();
     }
 
     public static void setExpend(ItemStack stack, int expend) {
-        if (!stack.is(SBRItems.XUAN_PAPER.get())) {
-            return;
-        }
-
-        stack.set(SBRDataComponents.PAPER.get(), new Paper(expend));
+        PaperData.set(stack, new PaperData(expend));
     }
 
     public static void expend(ItemStack stack) {

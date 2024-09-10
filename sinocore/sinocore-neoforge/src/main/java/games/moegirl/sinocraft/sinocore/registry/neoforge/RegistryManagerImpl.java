@@ -19,7 +19,7 @@ public class RegistryManagerImpl {
     }
 
     public static IScreenRegistry _createScreen(String modId) {
-        return new NeoForgeScreenRegistry();
+        return new NeoForgeScreenRegistry(modId);
     }
 
     public static ICommandRegistry _createCommand(String modId) {

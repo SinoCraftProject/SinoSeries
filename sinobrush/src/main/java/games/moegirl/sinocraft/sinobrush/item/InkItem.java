@@ -8,14 +8,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.DyedItemColor;
 
 import java.util.List;
 
 public class InkItem extends Item {
     public InkItem() {
         super(new Properties()
-                .component(DataComponents.DYED_COLOR, new DyedItemColor(SBRConstants.COLOR_BLACK, false))
+                .component(DataComponents.DYED_COLOR, SBRConstants.DEFAULT_COLOR_BLACK)
                 .sino$tab(SBRItems.SINO_BRUSH_TAB)
                 .stacksTo(16));
     }

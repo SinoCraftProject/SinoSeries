@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.fabric.mixin;
+package games.moegirl.sinocraft.sinocore.fabric.mixin.client;
 
 import games.moegirl.sinocraft.sinocore.interfaces.injectable.ISinoItem;
 import net.fabricmc.api.EnvType;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Item.class)
-public abstract class ItemMixin_Fabric implements ISinoItem {
+public abstract class ItemMixin_Fabric_Client implements ISinoItem {
 
     @Inject(at = @At(value = "TAIL"), method = "<init>")
     private void afterConstructor(CallbackInfo ci) {

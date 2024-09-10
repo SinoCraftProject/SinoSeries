@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.registry.neoforge;
 
-import games.moegirl.sinocraft.sinocore.neoforge.SinoCoreNeoForge;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.TabItemGenerator;
+import games.moegirl.sinocraft.sinocore.utility.neoforge.ModBusHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -24,7 +24,7 @@ public class NeoForgeTabRegistry implements ITabRegistry {
 
     NeoForgeTabRegistry(String modId) {
         this.modId = modId;
-        this.bus = SinoCoreNeoForge.getModBus();
+        this.bus = ModBusHelper.getModBus(modId);
         this.dr = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modId);
     }
 
