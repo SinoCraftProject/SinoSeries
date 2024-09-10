@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface ISinoDataProvider extends DataProvider {
     default ResourceLocation loc(String namespace, String path) {
-        return new ResourceLocation(namespace, path);
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
 
     default ResourceLocation mcLoc(String name) {

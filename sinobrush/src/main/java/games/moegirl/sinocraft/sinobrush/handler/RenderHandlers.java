@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinobrush.handler;
 import games.moegirl.sinocraft.sinobrush.client.DrawingRenderer;
 import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
+import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import games.moegirl.sinocraft.sinocore.event.client.RenderEvents;
 
 public class RenderHandlers {
@@ -14,7 +15,7 @@ public class RenderHandlers {
 
             var item = args.itemStack();
             if (item.is(SBRItems.FILLED_XUAN_PAPER.get())) {
-                var drawing = FilledXuanPaperItem.getDrawing(item);
+                var drawing = Drawing.get(item);
                 DrawingRenderer.renderInFrame(args.poseStack(), args.multiBufferSource(), args.packedLight(), args.itemFrameEntity(), drawing);
                 args.cancel();
             }

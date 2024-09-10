@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "sinodeco:block/smooth_marble_top",
-    "side": "sinodeco:block/smooth_marble",
-    "top": "sinodeco:block/smooth_marble_top"
-  }
-}

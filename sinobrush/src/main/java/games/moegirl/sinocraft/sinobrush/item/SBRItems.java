@@ -19,7 +19,7 @@ public class SBRItems {
 
     public static Supplier<Item> FAN = ITEMS.register("fan", FanItem::new);
     public static Supplier<Item> FOLDED_FAN = ITEMS.register("folded_fan", FoldedFanItem::new);
-    public static Supplier<XuanPaperItem> XUAN_PAPER = ITEMS.register("xuan_paper", () -> new XuanPaperItem(new Item.Properties().sino$tab(SBRItems.SINO_BRUSH_TAB)));
+    public static Supplier<XuanPaperItem> XUAN_PAPER = ITEMS.register("xuan_paper", XuanPaperItem::new);
     public static Supplier<Item> FILLED_XUAN_PAPER = ITEMS.register("filled_xuan_paper", FilledXuanPaperItem::new);
     public static Supplier<InkItem> INK_BOTTLE = ITEMS.register("ink_bottle", InkItem::new);
     public static Supplier<Item> BRUSH = ITEMS.register("brush", BrushItem::new);

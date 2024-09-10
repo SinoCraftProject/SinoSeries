@@ -4,6 +4,7 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatType;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -32,10 +33,6 @@ public abstract class LanguageProviderDelegateBase extends ProviderDelegateBase<
 
     public abstract void addItemStack(ItemStack key, String name);
 
-    public abstract void addEnchantment(Supplier<? extends Enchantment> key, String name);
-
-    public abstract void addEnchantment(Enchantment key, String name);
-
     public abstract void addEffect(Supplier<? extends MobEffect> key, String name);
 
     public abstract void addEffect(MobEffect key, String name);
@@ -51,4 +48,8 @@ public abstract class LanguageProviderDelegateBase extends ProviderDelegateBase<
     public abstract void addCustomStat(ResourceLocation key, String value);
 
     public abstract void add(String key, String value);
+
+    public void addItemTag(TagKey<Item> tag, String value) {
+        add("tag.item." + tag.location().getNamespace() + "." + tag.location().getPath(), value);
+    }
 }

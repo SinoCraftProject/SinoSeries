@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.MapCodec;
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.AbstractWidgetEntry;
 import games.moegirl.sinocraft.sinocore.utility.Resources;
@@ -17,7 +18,7 @@ import java.util.*;
 @SuppressWarnings("UnreachableCode")
 public class WidgetLoader {
 
-    private static final Map<String, Codec<? extends AbstractWidgetEntry>> CODEC_MAP = new HashMap<>();
+    private static final Map<String, MapCodec<? extends AbstractWidgetEntry>> CODEC_MAP = new HashMap<>();
     private static final Map<Class<?>, String> CODEC_NAME_MAP = new HashMap<>();
 
     public static final Codec<AbstractWidgetEntry> WIDGET_CODEC = Codec.STRING.dispatch(AbstractWidgetEntry::getType, CODEC_MAP::get);
@@ -30,8 +31,8 @@ public class WidgetLoader {
     static {
         for (Class<?> subclass : AbstractWidgetEntry.class.getPermittedSubclasses()) {
             try {
-                Codec<? extends AbstractWidgetEntry> codec =
-                        (Codec<? extends AbstractWidgetEntry>) subclass.getField("CODEC").get(null);
+                MapCodec<? extends AbstractWidgetEntry> codec =
+                        (MapCodec<? extends AbstractWidgetEntry>) subclass.getField("CODEC").get(null);
                 String className = subclass.getSimpleName();
                 String name = className.substring(0, className.length() - "Entry".length()).toLowerCase(Locale.ROOT);
                 CODEC_MAP.put(name, codec);
@@ -52,18 +53,18 @@ public class WidgetLoader {
      */
     public static Widgets loadWidgets(ResourceLocation name) {
         if (!FORCE_RELOAD_WIDGETS && WIDGETS.containsKey(name)) return (WIDGETS.get(name));
-        ResourceLocation jsonFile = new ResourceLocation(name.getNamespace(), name.getPath() + ".json");
+        ResourceLocation jsonFile = ResourceLocation.fromNamespaceAndPath(name.getNamespace(), name.getPath() + ".json");
         Resource resource = Resources.getResourceManager()
                 .getResource(jsonFile)
                 .orElseThrow(() -> new RuntimeException("Failed to load widget " + name + ": " + jsonFile + " not found"));
         try (BufferedReader reader = resource.openAsReader()) {
             JsonElement jsonElement = JsonParser.parseReader(reader);
             Widgets widgets = Widgets.CODEC.decode(JsonOps.INSTANCE, jsonElement)
-                    .getOrThrow(false, err -> {
+                    .getOrThrow(err -> {
                         throw new RuntimeException("Failed to load widget " + name + ": " + err);
                     })
                     .getFirst();
-            widgets.setTexture(new ResourceLocation(name.getNamespace(), name.getPath() + ".png"));
+            widgets.setTexture(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), name.getPath() + ".png"));
             WIDGETS.put(name, widgets);
             return widgets;
         } catch (IOException e) {

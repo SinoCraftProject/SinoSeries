@@ -4,8 +4,8 @@ import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.data.gen.tag.SDItemTags;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
@@ -19,7 +19,7 @@ public class RecipeProvider extends AbstractRecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> writer) {
+    protected void buildRecipes(RecipeOutput writer) {
         {
             ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_BLOCK.get(), 2)
                     .requires(Items.CALCITE)

@@ -62,6 +62,6 @@ public interface IRegistry<T> {
      * @return TagKey
      */
     default TagKey<T> createTag(String name) {
-        return createTag(new ResourceLocation(modId(), name));
+        return createTag(ResourceLocation.fromNamespaceAndPath(modId(), name));
     }
 }

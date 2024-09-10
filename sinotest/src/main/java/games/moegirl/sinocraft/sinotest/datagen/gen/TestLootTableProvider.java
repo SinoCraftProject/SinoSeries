@@ -17,10 +17,11 @@ public class TestLootTableProvider extends AbstractLootTableProvider {
 
     @Override
     public void generateData(LootTableProviderDelegateBase delegate) {
-        IBlockLootTableSubProvider blocks = delegate.getBlocks();
-        delegate.addBlock(TestRegistry.TEST_BLOCK, blocks.createSelfDropWithConditionTable(TestRegistry.TEST_BLOCK.get(),
-                blocks.hasSilkTouch(),
-                LootItem.lootTableItem(TestRegistry.TEST_ITEM_MC_TAB.get())
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(3, 5)))));
+        // Todo: qyl27: fix it, broken in update to 1.21.
+//        IBlockLootTableSubProvider blocks = delegate.getBlocks();
+//        delegate.addBlock(TestRegistry.TEST_BLOCK, blocks.createSelfDropWithConditionTable(TestRegistry.TEST_BLOCK.get(),
+//                blocks.hasSilkTouch(),
+//                LootItem.lootTableItem(TestRegistry.TEST_ITEM_MC_TAB.get())
+//                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(3, 5)))));
     }
 }

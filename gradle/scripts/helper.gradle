@@ -1,5 +1,6 @@
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.ZonedDateTime
 
 void reGenRunConfig() {
     if (gradle.startParameter.taskRequests.args.any { it.contains('ideaSyncTask') }) {
@@ -14,12 +15,10 @@ void reGenRunConfig() {
     }
 
     var dirs = [
-            new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/client'),
-            new File(project(':sinoseries-meta:sinoseries-meta-forge').projectDir, 'run/server'),
-//            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
-//            new File(project(':sinoseries-meta:sinoseries-meta-neoforge').projectDir, 'run/server'),
-            new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/client'),
-            new File(project(':sinoseries-meta:sinoseries-meta-fabric').projectDir, 'run/server')
+            new File(project(':sinoseries-meta:sinoseries-neoforge-meta').projectDir, 'run/client'),
+            new File(project(':sinoseries-meta:sinoseries-neoforge-meta').projectDir, 'run/server'),
+            new File(project(':sinoseries-meta:sinoseries-fabric-meta').projectDir, 'run/client'),
+            new File(project(':sinoseries-meta:sinoseries-fabric-meta').projectDir, 'run/server')
     ]
     dirs.each {dir ->
         if (!dir.isDirectory()) {
@@ -27,7 +26,7 @@ void reGenRunConfig() {
         }
 
         if (!dir.exists()) {
-            dir.mkdirs();
+            dir.mkdirs()
         }
     }
 }
@@ -54,13 +53,13 @@ String getPublishingVersion(Project project) {
     result += "+mc${project.minecraft_version}"
 
     if (!ENV.SINOSERIES_RELEASE) {
-        println 'You haven\'t set SINOSERIES_RELEASE, do NOT use publish unified.'
+        println 'Hint: Not running in release mode, do NOT use publishUnified.'
     }
 
     return result
 }
 
-String getMavenVersion(Project project) {
+static String getMavenVersion(Project project) {
     var ENV = System.getenv()
 
     String result = project.sinoseries_version
@@ -80,25 +79,11 @@ String getMavenVersion(Project project) {
     return result
 }
 
-List<Project> getProjectsStartsBy(String prefix) {
-    var list = new ArrayList<Project>()
-
-    rootProject.childProjects.each {
-
-        if (it.value.name.startsWith(prefix)
-                && (!it.value.name.contains('meta'))) {
-            list.add(it.value)
-        }
-    }
-
-    return list
-}
-
 static List<Project> getChildProjectsEndsBy(Project parent, String suffix) {
     return parent.subprojects.stream().filter {it.path.endsWith(suffix)}.toList()
 }
 
-List<File> getProjectResourcesDirs(Project project) {
+static List<File> getProjectResourcesDirs(Project project) {
     var list = new ArrayList<File>()
 
     project.sourceSets.each {it ->
@@ -111,34 +96,26 @@ List<File> getProjectResourcesDirs(Project project) {
     return list
 }
 
-File getProjectGeneratedResourcesDir(Project project) {
+static File getProjectGeneratedResourcesDir(Project project) {
     return new File(project.projectDir, 'src/generated/resources')
 }
 
-ext.subMod = getProjectsStartsBy('sino')
-
-List<Project> getSubMod(Project project) {
+private List<Project> getSubMod(Project project) {
     return getChildProjectsEndsBy(project, '')
 }
 
-List<Project> getSubForgeMod(Project project) {
-    return getChildProjectsEndsBy(project, 'forge').stream()
-            .filter {it ->
-                !getChildProjectsEndsBy(project, 'neoforge').contains(it)
-            }
-            .toList()
-}
-
-List<Project> getSubNeoForgeMod(Project project) {
+static List<Project> getSubNeoForgeMod(Project project) {
     return getChildProjectsEndsBy(project, 'neoforge')
 }
 
-List<Project> getSubFabricMod(Project project) {
+static List<Project> getSubFabricMod(Project project) {
     return getChildProjectsEndsBy(project, 'fabric')
 }
 
-Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = false) {
+static Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = false) {
     var map = new HashMap<String, ?>(subMod.properties)
+
+    map.put('build_time', ZonedDateTime.now())
 
     var file = new File(subMod.projectDir, 'src/main/resources/mod_desc.txt')
     if (file.exists()) {
@@ -153,13 +130,22 @@ Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreakLine = 
     return map
 }
 
-List<String> getFilesToMatchExpand() {
+static List<String> getFilesToMatchExpand() {
     return ['pack.mcmeta',
             'META-INF/mods.toml',
             'fabric.mod.json',
             'META-INF/neoforge.mods.toml',
             'build_info.properties']
 }
+
+var subMods = new ArrayList<Project>()
+rootProject.childProjects.each {
+    if (it.value.name.startsWith('sino')
+            && (!it.value.name.contains('meta'))) {
+        subMods.add(it.value)
+    }
+}
+ext.subMod = subMods
 
 ext.helpers = {
     reGenRunConfig = this.&reGenRunConfig
@@ -172,7 +158,6 @@ ext.helpers = {
     getProjectGeneratedResourcesDir = this.&getProjectGeneratedResourcesDir
 
     getSubMod = this.&getSubMod
-    getSubForgeMod = this.&getSubForgeMod
     getSubNeoForgeMod = this.&getSubNeoForgeMod
     getSubFabricMod = this.&getSubFabricMod
 }

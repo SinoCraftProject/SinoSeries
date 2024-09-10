@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "test": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "description": "这是一个用于测试的成就",
+    "icon": {
+      "count": 1,
+      "id": "sinotest:test_item_mc_tab"
+    },
+    "show_toast": false,
+    "title": "测试成就"
+  },
+  "requirements": [
+    [
+      "test"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

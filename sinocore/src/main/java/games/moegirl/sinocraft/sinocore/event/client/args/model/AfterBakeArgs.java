@@ -2,14 +2,14 @@ package games.moegirl.sinocraft.sinocore.event.client.args.model;
 
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 
 public class AfterBakeArgs {
     private final ModelBakery modelBakery;
-    private final ResourceLocation id;
+    private final ModelResourceLocation id;
     private BakedModel model;
 
-    public AfterBakeArgs(ModelBakery modelBakery, ResourceLocation id, BakedModel model) {
+    public AfterBakeArgs(ModelBakery modelBakery, ModelResourceLocation id, BakedModel model) {
         this.modelBakery = modelBakery;
         this.id = id;
         this.model = model;
@@ -19,7 +19,7 @@ public class AfterBakeArgs {
         return modelBakery;
     }
 
-    public ResourceLocation id() {
+    public ModelResourceLocation id() {
         return id;
     }
 

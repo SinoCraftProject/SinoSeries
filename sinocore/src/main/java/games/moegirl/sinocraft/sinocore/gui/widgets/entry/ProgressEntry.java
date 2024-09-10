@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Optional;
 
 public final class ProgressEntry extends AbstractWidgetEntry {
 
-    public static final Codec<ProgressEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<ProgressEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
                     Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
                     Codec.STRING.optionalFieldOf("texture").forGetter(ProgressEntry::getTexture),

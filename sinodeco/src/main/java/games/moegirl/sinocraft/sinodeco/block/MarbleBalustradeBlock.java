@@ -206,7 +206,7 @@ public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlo
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         var up = state.getValue(UP);
         var north = state.getValue(NORTH) ? 1 : 0;
         var east = state.getValue(EAST) ? 1 : 0;
@@ -219,6 +219,10 @@ public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlo
     @Override
     public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
                                            LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
         return updateShape(state, pos, level);
     }
 
@@ -268,7 +272,7 @@ public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlo
     /// </editor-fold>
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 

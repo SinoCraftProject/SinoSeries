@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
@@ -13,7 +14,7 @@ import java.util.Optional;
  */
 public final class EditBoxEntry extends AbstractWidgetEntry {
 
-    public static final Codec<EditBoxEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<EditBoxEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
                     Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
                     Codec.STRING.optionalFieldOf("title").forGetter(EditBoxEntry::title),

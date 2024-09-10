@@ -33,7 +33,7 @@ public class TestRegistry {
         ITEMS = RegistryManager.obtain(MODID, Registries.ITEM);
         BLOCKS = RegistryManager.obtain(MODID, Registries.BLOCK);
         TABS = RegistryManager.obtainTab(MODID);
-        TEST_DATA = RegistryManager.obtain(MODID, ResourceKey.createRegistryKey(new ResourceLocation(MODID, "test_data")));
+        TEST_DATA = RegistryManager.obtain(MODID, ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(MODID, "test_data")));
 
         registerTabs();
         registerBlocks();
@@ -51,7 +51,7 @@ public class TestRegistry {
     }
 
     private static void registerItems() {
-        ResourceKey<CreativeModeTab> BUILDING_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("building_blocks"));
+        ResourceKey<CreativeModeTab> BUILDING_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.withDefaultNamespace("building_blocks"));
 
         TEST_ITEM_MOD_TAB = ITEMS.register("test_item_mod_tab", () ->
                 new Item(new Item.Properties().sino$tab(TEST_TAB, true)));

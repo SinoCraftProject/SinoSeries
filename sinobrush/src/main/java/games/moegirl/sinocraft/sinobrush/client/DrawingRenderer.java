@@ -4,22 +4,20 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
-import games.moegirl.sinocraft.sinobrush.drawing.Drawing;
+import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
+import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinocore.utility.GLSwitcher;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.ItemFrame;
-import net.minecraft.world.item.MapItem;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 public class DrawingRenderer {
     public static void renderInGui(GuiGraphics guiGraphics, int x, int y, int width, int height,
-                                   Drawing drawing, float partialTick) {
+                                   MutableDrawing drawing, float partialTick) {
         guiGraphics.fill(x, y, x + width, y + height, ColorHelper.rgbToARGB(drawing.getPaperColor()));
 
         var pW = width / Math.max(1, drawing.getWidth());
@@ -74,19 +72,19 @@ public class DrawingRenderer {
 
     private static void render(PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight,
                                float width, float height, float backZ, float foreZ, Drawing drawing) {
-        var pW = width / Math.max(1, drawing.getWidth());
-        var pH = height / Math.max(1, drawing.getHeight());
+        var pW = width / Math.max(1, drawing.width());
+        var pH = height / Math.max(1, drawing.height());
 
         var buffer = bufferSource.getBuffer(RenderType.textBackground());
         try (var ignored1 = GLSwitcher.blend().enable(); var ignored2 = GLSwitcher.depth().enable()) {
             fillRect(poseStack, buffer, 0, 0, width, height, backZ,
-                    ColorHelper.rgbToARGB(drawing.getPaperColor()), combinedLight);
+                    ColorHelper.rgbToARGB(drawing.paperColor()), combinedLight);
             if (!drawing.isEmpty()) {
-                for (var i = 0; i < drawing.getWidth(); i++) {
-                    for (var j = 0; j < drawing.getHeight(); j++) {
+                for (var i = 0; i < drawing.width(); i++) {
+                    for (var j = 0; j < drawing.height(); j++) {
                         var pX = i * pW;
                         var pY = j * pH;
-                        var color = ColorHelper.pixelColorToARGB(drawing.getPixel(i, j), drawing.getInkColor());
+                        var color = ColorHelper.pixelColorToARGB(drawing.getPixel(i, j), drawing.inkColor());
                         fillRect(poseStack, buffer, pX, pY, pX + pW, pY + pH, foreZ, color, combinedLight);
                     }
                 }
@@ -97,10 +95,10 @@ public class DrawingRenderer {
     private static void fillGuiRect(GuiGraphics guiGraphics, float minX, float minY, float maxX, float maxY, int color) {
         var matrix4f = guiGraphics.pose().last().pose();
         var buffer = guiGraphics.bufferSource().getBuffer(RenderType.guiOverlay());
-        buffer.vertex(matrix4f, minX, minY, 0).color(color).endVertex();
-        buffer.vertex(matrix4f, minX, maxY, 0).color(color).endVertex();
-        buffer.vertex(matrix4f, maxX, maxY, 0).color(color).endVertex();
-        buffer.vertex(matrix4f, maxX, minY, 0).color(color).endVertex();
+        buffer.addVertex(matrix4f, minX, minY, 0).setColor(color);
+        buffer.addVertex(matrix4f, minX, maxY, 0).setColor(color);
+        buffer.addVertex(matrix4f, maxX, maxY, 0).setColor(color);
+        buffer.addVertex(matrix4f, maxX, minY, 0).setColor(color);
         guiGraphics.flush();
     }
 
@@ -108,21 +106,21 @@ public class DrawingRenderer {
                                  float minX, float minY, float maxX, float maxY,
                                  float zIndex,
                                  int color, int combinedLight) {
-        buffer.vertex(poseStack.last().pose(), minX, minY, zIndex).color(color).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), minX, maxY, zIndex).color(color).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, maxY, zIndex).color(color).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, minY, zIndex).color(color).uv2(combinedLight).endVertex();
+        buffer.addVertex(poseStack.last().pose(), minX, minY, zIndex).setColor(color).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), minX, maxY, zIndex).setColor(color).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, maxY, zIndex).setColor(color).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, minY, zIndex).setColor(color).setLight(combinedLight);
     }
 
-    public static final ResourceLocation HANDHELD_BACKGROUND = new ResourceLocation(SinoBrush.MODID, "paper_backrgound");
+    public static final ResourceLocation HANDHELD_BACKGROUND = ResourceLocation.fromNamespaceAndPath(SinoBrush.MODID, "paper_backrgound");
 
     private static void blitHandheldBackground(PoseStack poseStack, MultiBufferSource bufferSource,
                                                float minX, float minY, float maxX, float maxY, int combinedLight) {
         var buffer = bufferSource.getBuffer(RenderType.text(HANDHELD_BACKGROUND));
         var color = 0xFF000000;
-        buffer.vertex(poseStack.last().pose(), minX, minY, 0).color(color).uv(0, 0).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), minX, maxY, 0).color(color).uv(0, 1).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, maxY, 0).color(color).uv(1, 1).uv2(combinedLight).endVertex();
-        buffer.vertex(poseStack.last().pose(), maxX, minY, 0).color(color).uv(1, 0).uv2(combinedLight).endVertex();
+        buffer.addVertex(poseStack.last().pose(), minX, minY, 0).setColor(color).setUv(0, 0).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), minX, maxY, 0).setColor(color).setUv(0, 1).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, maxY, 0).setColor(color).setUv(1, 1).setLight(combinedLight);
+        buffer.addVertex(poseStack.last().pose(), maxX, minY, 0).setColor(color).setUv(1, 0).setLight(combinedLight);
     }
 }

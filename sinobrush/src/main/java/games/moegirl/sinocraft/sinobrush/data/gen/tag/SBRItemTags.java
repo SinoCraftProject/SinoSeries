@@ -7,7 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class SBRItemTags {
-    public static final TagKey<Item> FAN = TagKey.create(Registries.ITEM, new ResourceLocation(SinoBrush.MODID, "fan"));
-    public static final TagKey<Item> XUAN_PAPER = TagKey.create(Registries.ITEM, new ResourceLocation(SinoBrush.MODID, "xuan_paper"));
+    public static final TagKey<Item> FAN = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SinoBrush.MODID, "fan"));
+    public static final TagKey<Item> XUAN_PAPER = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SinoBrush.MODID, "xuan_paper"));
 
 }

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -22,9 +22,9 @@ public interface IMenuRegistry extends IRegistry<MenuType<?>> {
          *
          * @param id        Menu ID
          * @param inventory {@link Inventory}
-         * @param buf       由客户端传入的额外信息 {@link FriendlyByteBuf}
+         * @param buf       由客户端传入的额外信息 {@link RegistryFriendlyByteBuf}
          * @return {@link AbstractContainerMenu} 对象
          */
-        T create(int id, Inventory inventory, FriendlyByteBuf buf);
+        T create(int id, Inventory inventory, RegistryFriendlyByteBuf buf);
     }
 }

@@ -106,7 +106,7 @@ public class ModList {
         }
 
         default ResourceLocation modLoc(String name) {
-            return new ResourceLocation(this.getId(), name);
+            return ResourceLocation.fromNamespaceAndPath(this.getId(), name);
         }
 
         /**

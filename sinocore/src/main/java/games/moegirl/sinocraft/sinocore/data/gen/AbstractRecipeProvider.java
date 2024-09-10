@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen;
 
 import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -15,19 +16,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class AbstractRecipeProvider extends RecipeProvider implements IRenamedProviderBridge, ISinoDataProvider {
 
     protected final String modId;
 
-    public AbstractRecipeProvider(PackOutput output, String modId) {
-        super(output);
+    public AbstractRecipeProvider(PackOutput output, String modId, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
         this.modId = modId;
     }
 
     public AbstractRecipeProvider(IDataGenContext context) {
-        this(context.getOutput(), context.getModId());
+        this(context.getOutput(), context.getModId(), context.getRegistries());
     }
 
     @Override
@@ -42,47 +44,48 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
 
     // region Recipes
 
-    public static void oreCooking(Consumer<FinishedRecipe> recipeOutput,
-                                  RecipeSerializer<? extends AbstractCookingRecipe> serializer,
-                                  List<ItemLike> ingredients, RecipeCategory category, ItemLike result,
-                                  float experience, int cookingTime, String group, String suffix) {
+    public static <T extends AbstractCookingRecipe> void oreCooking(
+            RecipeOutput recipeOutput, ItemLike result, float experience, int cookingTime, List<ItemLike> ingredients,
+            RecipeSerializer<T> serializer, AbstractCookingRecipe.Factory<T> factory,
+            RecipeCategory category, String group, String suffix) {
         for (ItemLike itemlike : ingredients) {
-            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), category, result, experience, cookingTime, serializer)
+            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), category, result, experience, cookingTime, serializer, factory)
                     .group(group)
                     .unlockedBy(getHasName(itemlike), has(itemlike))
                     .save(recipeOutput, getItemName(result) + suffix + "_" + getItemName(itemlike));
         }
     }
 
-    public static void smeltingResultFromBase(Consumer<FinishedRecipe> recipeOutput, ItemLike result, ItemLike ingredient) {
+    public static void smeltingResultFromBase(RecipeOutput recipeOutput, ItemLike result, ItemLike ingredient) {
         SimpleCookingRecipeBuilder
                 .smelting(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, result, 0.1f, 200)
                 .unlockedBy(getHasName(ingredient), has(ingredient))
                 .save(recipeOutput);
     }
 
-    public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> recipeOutput, RecipeCategory unpackedCategory,
+    public static void nineBlockStorageRecipes(RecipeOutput recipeOutput, RecipeCategory unpackedCategory,
                                                ItemLike unpacked, RecipeCategory packedCategory, ItemLike packed,
                                                String packedName, @Nullable String packedGroup, String unpackedName,
                                                @Nullable String unpackedGroup) {
         ShapelessRecipeBuilder.shapeless(unpackedCategory, unpacked, 9)
                 .requires(packed).group(unpackedGroup)
                 .unlockedBy(getHasName(packed), has(packed))
-                .save(recipeOutput, new ResourceLocation(unpackedName));
+                .save(recipeOutput, ResourceLocation.parse(unpackedName));
         ShapedRecipeBuilder.shaped(packedCategory, packed)
                 .group(packedGroup).unlockedBy(getHasName(unpacked), has(unpacked))
                 .define('#', unpacked)
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
-                .save(recipeOutput, new ResourceLocation(packedName));
+                .save(recipeOutput, ResourceLocation.parse(packedName));
     }
 
-    public static void simpleCookingRecipe(Consumer<FinishedRecipe> recipeOutput, String cookingMethod,
-                                           RecipeSerializer<? extends AbstractCookingRecipe> cookingSerializer,
-                                           int cookingTime, ItemLike material, ItemLike result, float experience) {
+    public static <T extends AbstractCookingRecipe> void simpleCookingRecipe(
+            RecipeOutput recipeOutput, String cookingMethod,
+            ItemLike result, float experience, int cookingTime, ItemLike material,
+            RecipeSerializer<T> serializer, AbstractCookingRecipe.Factory<T> factory) {
         SimpleCookingRecipeBuilder
-                .generic(Ingredient.of(material), RecipeCategory.FOOD, result, experience, cookingTime, cookingSerializer)
+                .generic(Ingredient.of(material), RecipeCategory.FOOD, result, experience, cookingTime, serializer, factory)
                 .unlockedBy(getHasName(material), has(material))
                 .save(recipeOutput, getItemName(result) + "_from_" + cookingMethod);
     }
@@ -104,7 +107,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
     // region CriterionInstances
 
     public static EnterBlockTrigger.TriggerInstance insideOf(Block block) {
-        return new EnterBlockTrigger.TriggerInstance(ContextAwarePredicate.ANY, block, StatePropertiesPredicate.ANY);
+        return new EnterBlockTrigger.TriggerInstance(Optional.empty(), Optional.of(block.builtInRegistryHolder()), Optional.empty());
     }
 
     public static InventoryChangeTrigger.TriggerInstance has(MinMaxBounds.Ints count, ItemLike item) {
@@ -116,8 +119,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
     }
 
     public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate... predicates) {
-        return new InventoryChangeTrigger.TriggerInstance(
-                ContextAwarePredicate.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, predicates);
+        return new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, Arrays.stream(predicates).toList());
     }
 
     // endregion

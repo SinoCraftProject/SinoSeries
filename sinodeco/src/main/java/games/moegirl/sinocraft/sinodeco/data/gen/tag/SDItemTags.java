@@ -7,5 +7,5 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class SDItemTags {
-    public static final TagKey<Item> MARBLE_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(SinoDeco.MODID, "marble_blocks"));
+    public static final TagKey<Item> MARBLE_BLOCKS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(SinoDeco.MODID, "marble_blocks"));
 }

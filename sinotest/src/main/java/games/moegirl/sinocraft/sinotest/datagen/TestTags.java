@@ -16,6 +16,6 @@ public class TestTags {
     public static final TagKey<Item> TEST_ITEM_TAG = tag(Registries.ITEM, "test_item");
 
     public static <T> TagKey<T> tag(ResourceKey<Registry<T>> registry, String name) {
-        return TagKey.create(registry, new ResourceLocation(SinoTest.MODID, name));
+        return TagKey.create(registry, ResourceLocation.fromNamespaceAndPath(SinoTest.MODID, name));
     }
 }

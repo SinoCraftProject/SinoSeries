@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinocore.registry.fabric;
 import games.moegirl.sinocraft.sinocore.registry.*;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
 
@@ -16,7 +17,7 @@ public class RegistryManagerImpl {
     }
 
     public static ITabRegistry _createTab(String modId) {
-        return new FabricTabRegistryImpl(modId);
+        return new FabricTabRegistry(modId);
     }
 
     public static IMenuRegistry _createMenu(String modId) {
@@ -40,7 +41,7 @@ public class RegistryManagerImpl {
         };
     }
 
-    public static ICustomStatRegister _createCustomStat(String modId) {
-        return new FabricCustomStatRegister(modId);
+    public static ICustomStatRegistry _createCustomStat(String modId) {
+        return new FabricCustomStatRegistry(modId);
     }
 }

@@ -1,0 +1,31 @@
+{
+  "parent": "sinobrush:fan",
+  "criteria": {
+    "open_fan": {
+      "conditions": {
+        "customStatId": "sinobrush:unfold_fan",
+        "value": 1
+      },
+      "trigger": "sinocore:custom_stat"
+    }
+  },
+  "display": {
+    "background": "sinobrush:advancement/background.png",
+    "description": {
+      "translate": "sinobrush.advancement.unfold_fan.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "sinobrush:fan"
+    },
+    "title": {
+      "translate": "sinobrush.advancement.unfold_fan.name"
+    }
+  },
+  "requirements": [
+    [
+      "open_fan"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

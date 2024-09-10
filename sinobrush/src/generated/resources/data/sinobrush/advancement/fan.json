@@ -1,0 +1,34 @@
+{
+  "parent": "sinobrush:sinobrush",
+  "criteria": {
+    "got_fan": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#sinobrush:fan"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "sinobrush:advancement/background.png",
+    "description": {
+      "translate": "sinobrush.advancement.fan.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "sinobrush:folded_fan"
+    },
+    "title": {
+      "translate": "sinobrush.advancement.fan.name"
+    }
+  },
+  "requirements": [
+    [
+      "got_fan"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

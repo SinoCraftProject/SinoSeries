@@ -314,7 +314,7 @@ public class WoodenTableBlock extends Block {
     /// </editor-fold>
 
     public WoodenTableBlock() {
-        super(Properties.copy(Blocks.OAK_PLANKS)
+        super(Properties.ofFullCopy(Blocks.OAK_PLANKS)
                 .forceSolidOn()
                 .dynamicShape()
                 .strength(2.5f)

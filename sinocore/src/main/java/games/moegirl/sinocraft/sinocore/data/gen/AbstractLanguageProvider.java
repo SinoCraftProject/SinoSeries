@@ -2,9 +2,8 @@ package games.moegirl.sinocraft.sinocore.data.gen;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
-import net.minecraft.resources.ResourceLocation;
 
-public abstract class AbstractLanguageProvider extends ForgeDataProviderBase<LanguageProviderDelegateBase> {
+public abstract class AbstractLanguageProvider extends NeoForgeDataProviderBase<LanguageProviderDelegateBase> {
 
     protected final String modId;
 

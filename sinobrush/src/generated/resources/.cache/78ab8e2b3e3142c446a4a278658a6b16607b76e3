@@ -1,9 +1,9 @@
-// 1.20.1	2024-05-31T17:30:28.5225554	Recipes: sinobrush
-fa70929e165f76c9060a44bb8585b1a5b8dfc534 data/sinobrush/advancements/recipes/misc/brush.json
-175503232ef85ca1e0abfaeb3d982f39c90acaa1 data/sinobrush/advancements/recipes/misc/folded_fan.json
-e7a87ab777d3748bcf7e47cba26a0d15ab733c4d data/sinobrush/advancements/recipes/misc/ink_bottle.json
-8c7aaa69ca8ef3b30d479da9b4f3c6ee375ffb4e data/sinobrush/advancements/recipes/misc/xuan_paper.json
-cbc2756c5151414e4336f9c87dc32f7195d26515 data/sinobrush/recipes/brush.json
-3f8e3c32503a873b1acebeb15df485e7d03cb2a8 data/sinobrush/recipes/folded_fan.json
-6a5d5169346be46c447fa273cbf39ab309d19975 data/sinobrush/recipes/ink_bottle.json
-fa4a52b9dd16da6e911b50959f20772a1bed4333 data/sinobrush/recipes/xuan_paper.json
+// 1.21.1	2024-09-09T22:44:21.8646002	Recipes: sinobrush
+2f98cc7ed1392d217cae590075eb3e753ba58fbf data/sinobrush/advancement/recipes/misc/brush.json
+be244caaf552c14cb5a527de36d7777729c2c270 data/sinobrush/advancement/recipes/misc/folded_fan.json
+41bbf475d47a0c714c60cb1ecb8610958c149e5a data/sinobrush/advancement/recipes/misc/ink_bottle.json
+8ba51a97485b1bc38be5dc6268fc91c52a82c373 data/sinobrush/advancement/recipes/misc/xuan_paper.json
+15abdf4fc95c9e63b52d4a93473e38e6e3542b34 data/sinobrush/recipe/brush.json
+8276a18e162341f01c914a8d246fce8cb9ef4975 data/sinobrush/recipe/folded_fan.json
+7206ac50923be747996c23b17ae93c24bcb981f2 data/sinobrush/recipe/ink_bottle.json
+dfdbd38986be4729ac549592ed2f0c7ceb346bbc data/sinobrush/recipe/xuan_paper.json

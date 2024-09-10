@@ -7,7 +7,7 @@ import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 
 public class SBRScreen {
 
-    public static IScreenRegistry SCREENS = RegistryManager.obtainScreen(SinoBrush.MODID);
+    public static final IScreenRegistry SCREENS = RegistryManager.obtainScreen(SinoBrush.MODID);
 
     public static void register() {
         SCREENS.register(SBRMenu.BRUSH_PAPER, BrushScreen::new);

@@ -1,16 +1,20 @@
 package games.moegirl.sinocraft.sinobrush;
 
+import net.minecraft.world.item.component.DyedItemColor;
+
 public class SBRConstants {
-    public static final int COLOR_WHITE = 0xFFFFFF;
-    public static final int COLOR_BLACK = 0x000000;
+    public static final int COLOR_WHITE = 0xFFFFFFFF;
+    public static final int COLOR_BLACK = 0xFF000000;
+    public static final DyedItemColor DEFAULT_COLOR_WHITE = new DyedItemColor(COLOR_WHITE, false);
+    public static final DyedItemColor DEFAULT_COLOR_BLACK = new DyedItemColor(COLOR_BLACK, false);
 
     public static final int DRAWING_COLOR_LENGTH = 4;   // qyl27: Timicasto said the future is not a 4-bit canvas, but a colorful world!
     public static final byte DRAWING_COLOR_MIN = 0;
     public static final byte DRAWING_COLOR_MAX = (byte)(Math.pow(SBRConstants.DRAWING_COLOR_LENGTH, 2) - 1);
 
-    public static final int XUAN_PAPER_MAX_EXPEND = 2;  // Here is always log_2(DRAWING_MAX_LENGTH / DRAWING_MIN_LENGTH)
+    public static final int XUAN_PAPER_MAX_EXPEND = 2;  // 16 << 2 = 64 is large enough, we needn't more.
     public static final int DRAWING_MIN_LENGTH = 16;
-    public static final int DRAWING_MAX_LENGTH = DRAWING_MIN_LENGTH << XUAN_PAPER_MAX_EXPEND;   // Todo: qyl27: Is it larger than max packet size?
+    public static final int DRAWING_MAX_LENGTH = DRAWING_MIN_LENGTH << XUAN_PAPER_MAX_EXPEND;
 
     public static class TagName {
         public static final String DRAWING = "drawing";    // Compound
@@ -43,6 +47,7 @@ public class SBRConstants {
         public static final String DESCRIPTION_FAN = "sinobrush.description.fan";
         public static final String DESCRIPTION_FOLDED_FAN = "sinobrush.description.folded_fan";
         public static final String DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
+        public static final String DESCRIPTION_FOLDED_FAN_WROTE = "sinobrush.description.folded_fan.wrote";
 
         public static final String DESCRIPTION_ITEM_COLORED = "sinobrush.description.item.colored";
         public static final String DESCRIPTION_XUAN_PAPER_EXPENDED = "sinobrush.description.xuan_paper.expended";
@@ -72,5 +77,8 @@ public class SBRConstants {
         public static final String ADVANCEMENT_FAN_DESC = "sinobrush.advancement.fan.description";
         public static final String ADVANCEMENT_UNFOLD_FAN_NAME = "sinobrush.advancement.unfold_fan.name";
         public static final String ADVANCEMENT_UNFOLD_FAN_DESC = "sinobrush.advancement.unfold_fan.description";
+
+        public static final String TAG_FAN = "tag.item.sinobrush.fan";
+        public static final String TAG_XUAN_PAPER = "tag.item.sinobrush.xuan_paper";
     }
 }

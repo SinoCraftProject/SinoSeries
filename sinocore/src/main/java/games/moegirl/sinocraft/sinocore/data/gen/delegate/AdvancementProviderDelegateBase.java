@@ -4,6 +4,8 @@ import games.moegirl.sinocraft.sinocore.data.gen.advancement.AdvancementTree;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.DisplayInfoBuilder;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.IAdvancementGenerator;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,21 +23,19 @@ public abstract class AdvancementProviderDelegateBase extends ProviderDelegateBa
 
     public abstract void addAdvancement(IAdvancementGenerator generator);
 
-    public void addAdvancementTree(Function<Consumer<Advancement>, AdvancementTree> tree) {
+    public void addAdvancementTree(Function<Consumer<AdvancementHolder>, AdvancementTree> tree) {
         addAdvancement((registries, saver, context) -> tree.apply(saver));
     }
 
-    public InventoryChangeTrigger.TriggerInstance triggerGotItems(ItemLike... items) {
+    public Criterion<InventoryChangeTrigger.TriggerInstance> triggerGotItems(ItemLike... items) {
         return InventoryChangeTrigger.TriggerInstance.hasItems(items);
     }
 
-    public InventoryChangeTrigger.TriggerInstance triggerGotItems(TagKey<Item> tag) {
-        return InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate(tag,
-                null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
-                EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, null, NbtPredicate.ANY));
+    public Criterion<InventoryChangeTrigger.TriggerInstance> triggerGotItems(TagKey<Item> tag) {
+        return InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(tag));
     }
 
     public DisplayInfoBuilder display(ResourceLocation background) {
-        return new DisplayInfoBuilder(background);
+        return new DisplayInfoBuilder().setBackground(background);
     }
 }

@@ -4,7 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.BlockModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ProviderDelegateBase;
 
-public abstract class AbstractBlockModelProvider extends ForgeDataProviderBase {
+public abstract class AbstractBlockModelProvider extends NeoForgeDataProviderBase {
     protected final String modId;
 
     public AbstractBlockModelProvider(IDataGenContext context) {

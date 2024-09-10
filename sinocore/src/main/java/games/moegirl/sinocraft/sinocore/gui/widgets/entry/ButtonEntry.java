@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinocore.gui.widgets.entry;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public final class ButtonEntry extends AbstractWidgetEntry {
 
-    public static final Codec<ButtonEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<ButtonEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                     Codec.INT.listOf().fieldOf("position").forGetter(b -> List.of(b.getX(), b.getY())),
                     Codec.INT.listOf().fieldOf("size").forGetter(b -> List.of(b.getWidth(), b.getHeight())),
                     Codec.either(Codec.STRING, Codec.STRING.listOf())

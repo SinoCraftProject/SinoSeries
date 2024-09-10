@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "sinodeco:block/marble_block_top",
-    "side": "sinodeco:block/marble_block",
-    "top": "sinodeco:block/marble_block_top"
-  }
-}

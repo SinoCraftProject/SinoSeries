@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinobrush.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.client.DrawingRenderer;
+import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -49,7 +49,7 @@ public abstract class ItemInHandRendererMixin {
     private void beforeRenderMap(PoseStack poseStack, MultiBufferSource buffer, int combinedLight,
                                  ItemStack stack, CallbackInfo ci) {
         if (stack.is(SBRItems.FILLED_XUAN_PAPER.get())) {
-            var drawing = FilledXuanPaperItem.getDrawing(stack);
+            var drawing = Drawing.get(stack);
             DrawingRenderer.renderInHand(poseStack, buffer, combinedLight, drawing);
             ci.cancel();
         }

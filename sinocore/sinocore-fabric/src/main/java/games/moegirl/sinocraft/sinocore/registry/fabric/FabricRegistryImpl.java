@@ -50,7 +50,7 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
 
     @Override
     public <R extends T> IRegRef<T, R> register(String name, Supplier<? extends R> supplier) {
-        ResourceLocation id = new ResourceLocation(modId, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<T> eKey = ResourceKey.create(key, id);
         FabricRegRefImpl<T, T> ref = new FabricRegRefImpl<>(Registry.registerForHolder(registry, eKey, supplier.get()));
         elementReferences.add(ref);

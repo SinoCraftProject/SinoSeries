@@ -4,9 +4,9 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.HolderLookup;
 
-public abstract class AbstractLootTableProvider extends ForgeDataProviderBase<LootTableProviderDelegateBase> {
+public abstract class AbstractLootTableProvider extends NeoForgeDataProviderBase<LootTableProviderDelegateBase> {
 
     protected final String modId;
 
@@ -26,12 +26,12 @@ public abstract class AbstractLootTableProvider extends ForgeDataProviderBase<Lo
     }
 
     @ExpectPlatform
-    public static IBlockLootTableSubProvider createBlockSubProvider() {
+    public static IBlockLootTableSubProvider createBlockSubProvider(HolderLookup.Provider registries) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static IEntityLootTableSubProvider createEntitySubProvider() {
+    public static IEntityLootTableSubProvider createEntitySubProvider(HolderLookup.Provider registries) {
         throw new AssertionError();
     }
 }

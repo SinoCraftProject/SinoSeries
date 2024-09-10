@@ -2,9 +2,8 @@ package games.moegirl.sinocraft.sinocore.data.gen;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
-import net.minecraft.resources.ResourceLocation;
 
-public abstract class AbstractAdvancementProvider extends ForgeDataProviderBase<AdvancementProviderDelegateBase> {
+public abstract class AbstractAdvancementProvider extends NeoForgeDataProviderBase<AdvancementProviderDelegateBase> {
 
     protected final String modId;
 

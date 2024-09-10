@@ -1,0 +1,31 @@
+{
+  "parent": "sinobrush:sinobrush",
+  "criteria": {
+    "draw_on_paper": {
+      "conditions": {
+        "customStatId": "sinobrush:draw_by_brush",
+        "value": 1
+      },
+      "trigger": "sinocore:custom_stat"
+    }
+  },
+  "display": {
+    "background": "sinobrush:advancement/background.png",
+    "description": {
+      "translate": "sinobrush.advancement.brush.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "sinobrush:filled_xuan_paper"
+    },
+    "title": {
+      "translate": "sinobrush.advancement.brush.name"
+    }
+  },
+  "requirements": [
+    [
+      "draw_on_paper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
