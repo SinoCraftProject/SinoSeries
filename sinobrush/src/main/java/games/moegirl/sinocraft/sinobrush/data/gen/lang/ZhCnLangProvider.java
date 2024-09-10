@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.data.gen.lang;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
+import games.moegirl.sinocraft.sinobrush.data.gen.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
@@ -65,5 +66,8 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_DESC, "传说，说书人深湖在 TeaCon 演讲时就用过这把扇子\n他浪迹天地，无长剑在手\n三寸惊堂木，将故事传颂");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_NAME, "侠肝义胆");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_DESC, "此展折扇，此任平生不惧风与雪");
+
+        delegate.addItemTag(SBRItemTags.FAN, "折扇");
+        delegate.addItemTag(SBRItemTags.XUAN_PAPER, "宣纸");
     }
 }

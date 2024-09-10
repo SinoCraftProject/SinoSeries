@@ -13,15 +13,16 @@ public class SinoBrushNeoForge {
     private final SinoBrush mod = new SinoBrush();
 
     public SinoBrushNeoForge(IEventBus bus, ModContainer modContainer) {
+        mod.init();
         bus.addListener(this::setup);
         bus.addListener(this::clientSetup);
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        mod.init();
+        mod.setup();
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
-        mod.initClient();
+        mod.setupClient();
     }
 }

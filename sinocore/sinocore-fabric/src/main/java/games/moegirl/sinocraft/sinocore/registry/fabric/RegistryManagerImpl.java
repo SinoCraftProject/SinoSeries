@@ -21,7 +21,7 @@ public class RegistryManagerImpl {
     }
 
     public static IMenuRegistry _createMenu(String modId) {
-        return new FabricMenuRegistry(modId, Registries.MENU);
+        return new FabricMenuRegistry(modId);
     }
 
     public static IScreenRegistry _createScreen(String modId) {

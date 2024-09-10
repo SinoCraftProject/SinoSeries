@@ -1,5 +1,7 @@
 package games.moegirl.sinocraft.sinobrush;
 
+import games.moegirl.sinocraft.sinobrush.data.gen.tag.SBRItemTags;
+
 public class SBRConstants {
     public static final int COLOR_WHITE = 0xFFFFFF;
     public static final int COLOR_BLACK = 0x000000;
@@ -73,5 +75,8 @@ public class SBRConstants {
         public static final String ADVANCEMENT_FAN_DESC = "sinobrush.advancement.fan.description";
         public static final String ADVANCEMENT_UNFOLD_FAN_NAME = "sinobrush.advancement.unfold_fan.name";
         public static final String ADVANCEMENT_UNFOLD_FAN_DESC = "sinobrush.advancement.unfold_fan.description";
+
+        public static final String TAG_FAN = "tag.item.sinobrush.fan";
+        public static final String TAG_XUAN_PAPER = "tag.item.sinobrush.xuan_paper";
     }
 }

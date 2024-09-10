@@ -5,6 +5,7 @@ import games.moegirl.sinocraft.sinocore.gui.menu.IExtraDataMenuProvider;
 import games.moegirl.sinocraft.sinocore.gui.menu.MenuHelper;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -30,7 +31,7 @@ public class BrushItem extends Item {
             var slot = usedHand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
             MenuHelper.openMenuWithData(sp, new IExtraDataMenuProvider() {
                 @Override
-                public void writeExtraData(FriendlyByteBuf buf) {
+                public void writeExtraData(RegistryFriendlyByteBuf buf) {
                     buf.writeEnum(slot);
                 }
 

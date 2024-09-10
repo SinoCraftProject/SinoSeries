@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,7 +19,7 @@ public class MenuHelperImpl {
         player.openMenu(new ExtendedScreenHandlerFactory<byte[]>() {
             @Override
             public byte[] getScreenOpeningData(ServerPlayer player) {
-                var buf = new FriendlyByteBuf(Unpooled.buffer());
+                var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), player.registryAccess());
                 provider.writeExtraData(buf);
                 byte[] bytes = ByteBufUtil.getBytes(buf);
                 buf.release();
