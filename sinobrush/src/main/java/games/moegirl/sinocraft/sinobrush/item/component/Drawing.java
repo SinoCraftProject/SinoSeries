@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.drawing.DrawingVersion;
 import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
-import games.moegirl.sinocraft.sinocore.utility.data.DataComponentHelper;
+import games.moegirl.sinocraft.sinocore.helper.data.DataComponentHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;

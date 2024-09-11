@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.utility.data;
+package games.moegirl.sinocraft.sinocore.helper.data;
 
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;

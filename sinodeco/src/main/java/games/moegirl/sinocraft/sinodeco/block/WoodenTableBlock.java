@@ -1,7 +1,8 @@
 package games.moegirl.sinocraft.sinodeco.block;
 
-import games.moegirl.sinocraft.sinocore.utility.shape.BlockShapeHelper;
-import games.moegirl.sinocraft.sinocore.utility.shape.VoxelShapeHelper;
+import games.moegirl.sinocraft.sinocore.helper.BoolHelper;
+import games.moegirl.sinocraft.sinocore.helper.shape.BlockShapeHelper;
+import games.moegirl.sinocraft.sinocore.helper.shape.VoxelShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -21,7 +22,7 @@ import java.util.*;
 
 public class WoodenTableBlock extends Block {
 
-    /// <editor-fold desc="Connections.">
+    // <editor-fold desc="Connections.">
 
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
@@ -97,9 +98,9 @@ public class WoodenTableBlock extends Block {
         level.setBlock(pos, state, Block.UPDATE_ALL);
     }
 
-    /// </editor-fold>
+    // </editor-fold>
 
-    /// <editor-fold desc="Shapes.">
+    // <editor-fold desc="Shapes.">
 
     public static final DeskPart[][][] PARTS = new DeskPart[16][16][];
     public static final VoxelShape[][] SHAPES = new VoxelShape[16][16];
@@ -253,31 +254,7 @@ public class WoodenTableBlock extends Block {
         }
     }
 
-    private int compressBool(boolean b1, boolean b2, boolean b3, boolean b4) {
-        var result = b1 ? 1 : 0;
-        result <<= 1;
-        result += b2 ? 1 : 0;
-        result <<= 1;
-        result += b3 ? 1 : 0;
-        result <<= 1;
-        result += b4 ? 1 : 0;
-        return result;
-    }
 
-    private int compressBool(boolean b1, boolean b2) {
-        var result = b1 ? 1 : 0;
-        result <<= 1;
-        result += b2 ? 1 : 0;
-        return result;
-    }
-
-    private int countBool(boolean b1, boolean b2, boolean b3, boolean b4) {
-        var result = b1 ? 1 : 0;
-        result += b2 ? 1 : 0;
-        result += b3 ? 1 : 0;
-        result += b4 ? 1 : 0;
-        return result;
-    }
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -290,28 +267,38 @@ public class WoodenTableBlock extends Block {
         boolean southEast = state.getValue(SOUTH_EAST);
         boolean southWest = state.getValue(SOUTH_WEST);
 
-        var neighbor = compressBool(north, east, south, west);
+        var neighbor = BoolHelper.compressBool(north, east, south, west);
         var extra = 0;
 
-        var neighborCount = countBool(north, east, south, west);
+        var neighborCount = BoolHelper.countBool(north, east, south, west);
         if (neighborCount == 4) {
-            extra = compressBool(northWest, northEast, southEast, southWest);
+            extra = BoolHelper.compressBool(northWest, northEast, southEast, southWest);
         } else if (neighborCount == 3) {
             if (!north) {
-                extra = compressBool(southEast, southWest);
+                extra = BoolHelper.compressBool(southEast, southWest);
             } else if (!east) {
-                extra = compressBool(northWest, southWest);
+                extra = BoolHelper.compressBool(northWest, southWest);
             } else if (!south) {
-                extra = compressBool(northWest, northEast);
+                extra = BoolHelper.compressBool(northWest, northEast);
             } else if (!west) {
-                extra = compressBool(northEast, southEast);
+                extra = BoolHelper.compressBool(northEast, southEast);
+            }
+        } else if (neighborCount == 2) {
+            if (north && east) {
+                extra = northEast ? 0 : 1;
+            } else if (north && west) {
+                extra = northWest ? 0 : 1;
+            } else if (south && east) {
+                extra = southEast ? 0 : 1;
+            } else if (south && west) {
+                extra = southWest ? 0 : 1;
             }
         }
 
         return SHAPES[neighbor][extra];
     }
 
-    /// </editor-fold>
+    // </editor-fold>
 
     public WoodenTableBlock() {
         super(Properties.ofFullCopy(Blocks.OAK_PLANKS)

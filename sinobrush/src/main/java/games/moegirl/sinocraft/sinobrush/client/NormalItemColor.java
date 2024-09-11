@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.client;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinocore.utility.data.DataComponentHelper;
+import games.moegirl.sinocraft.sinocore.helper.data.DataComponentHelper;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;

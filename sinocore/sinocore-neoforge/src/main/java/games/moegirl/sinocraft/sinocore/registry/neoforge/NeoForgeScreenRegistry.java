@@ -34,7 +34,6 @@ public class NeoForgeScreenRegistry implements IScreenRegistry {
     public void register() {
         bus.addListener((Consumer<RegisterMenuScreensEvent>) event -> {
             for (Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>> screen : screens) {
-                System.out.println(1);
                 event.register(screen.getFirst().get(), new ScreenFactoryWrapper(screen.getSecond()));
             }
         });

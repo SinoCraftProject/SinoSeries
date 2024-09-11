@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodeco.block;
 
-import games.moegirl.sinocraft.sinocore.utility.shape.BlockShapeHelper;
+import games.moegirl.sinocraft.sinocore.helper.shape.BlockShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;

@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.utility.shape;
+package games.moegirl.sinocraft.sinocore.helper.shape;
 
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
