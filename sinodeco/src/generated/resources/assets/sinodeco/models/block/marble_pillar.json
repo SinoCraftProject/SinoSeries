@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sinodeco:block/marble_pillar_top",
+    "side": "sinodeco:block/marble_pillar"
+  }
+}

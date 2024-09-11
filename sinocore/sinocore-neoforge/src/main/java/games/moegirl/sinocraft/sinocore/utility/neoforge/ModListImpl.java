@@ -3,16 +3,20 @@ package games.moegirl.sinocraft.sinocore.utility.neoforge;
 import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.javafmlmod.FMLModContainer;
+import net.neoforged.fml.loading.FMLLoader;
 
+import java.io.FileInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.spi.FileSystemProvider;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.zip.ZipInputStream;
 
 public class ModListImpl {
 
@@ -62,19 +66,27 @@ public class ModListImpl {
 
         @Override
         public List<Path> getRootFiles() {
-            // Fixme: qyl27: migrate to 1.21.
-            return List.of(getResourcePathOnly(container));
+            var layer = FMLLoader.getGameLayer().findModule(container.getModInfo().getOwningFile().moduleName()).orElseThrow();
+            return container.getModInfo().getOwningFile().getFile().getScanResult().getClasses()
+                    .stream()
+                    .map(d -> Class.forName(layer, d.clazz().getClassName()))
+                    .map(this::getPathByClass)
+                    .toList();
         }
 
-        private Path getPathByClass(Class<?> mainClass) throws URISyntaxException {
-            URI uri = mainClass.getProtectionDomain().getCodeSource().getLocation().toURI();
-            FileSystem fs;
-            if ("file".equalsIgnoreCase(uri.getScheme())) {
-                fs = FileSystems.getFileSystem(uri);
-            } else {
-                fs = UFSP.getFileSystem(uri);
+        private Path getPathByClass(Class<?> mainClass) {
+            try {
+                var uri = mainClass.getProtectionDomain().getCodeSource().getLocation().toURI();
+                FileSystem fs;
+                if ("file".equalsIgnoreCase(uri.getScheme())) {
+                    fs = FileSystems.getFileSystem(uri);
+                } else {
+                    fs = UFSP.getFileSystem(uri);
+                }
+                return fs.getPath("/");
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
             }
-            return fs.getPath("/");
         }
 
         private Path getResourcePathOnly(ModContainer container) {
