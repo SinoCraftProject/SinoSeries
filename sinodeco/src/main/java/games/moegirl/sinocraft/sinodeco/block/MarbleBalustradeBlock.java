@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinodeco.block;
 
+import games.moegirl.sinocraft.sinocore.helper.BoolHelper;
 import games.moegirl.sinocraft.sinocore.helper.shape.BlockShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -256,11 +257,9 @@ public class MarbleBalustradeBlock extends Block implements SimpleWaterloggedBlo
         var south = canConnectTo(southBlock, southBlock.isFaceSturdy(level, southPos, Direction.SOUTH), Direction.SOUTH);
         var west = canConnectTo(westBlock, westBlock.isFaceSturdy(level, westPos, Direction.WEST), Direction.WEST);
 
-        var blC = north ? 1 : 0;
-        blC += east ? 1 : 0;
-        blC += south ? 1 : 0;
-        blC += west ? 1 : 0;
-        var up = ((north && south) || (east && west)) && blC != 3 ? (upBlock.isAir() ? 0 : 1) : 2;
+        var up = upBlock.isAir()
+                ? (north && south && !east && !west) || (!north && !south && east && west) ? 0 : 2
+                : 1;
 
         return state.setValue(UP, up)
                 .setValue(NORTH, north)
