@@ -120,9 +120,10 @@ static Map<String, ?> getPropertiesToExpand(Project subMod, boolean replaceBreak
     var file = new File(subMod.projectDir, 'src/main/resources/mod_desc.txt')
     if (file.exists()) {
         var desc = Files.readString(file.toPath())
-        desc = desc.replace('\r', '')
         if (replaceBreakLine) {
-            desc = desc.replace('\n', '\\n')
+            desc = desc.replace('\r\n', '\\n')
+        } else {
+            desc = desc.replace('\r\n', '\n')
         }
         map.put('mod_description', desc)
     }
