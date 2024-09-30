@@ -9,11 +9,9 @@ import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
 import games.moegirl.sinocraft.sinobrush.gui.widget.CanvasWidget;
-import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.network.C2SSaveDrawPacket;
 import games.moegirl.sinocraft.sinobrush.network.S2CDrawResultPacket;
-import games.moegirl.sinocraft.sinobrush.network.SBRNetworks;
 import games.moegirl.sinocraft.sinobrush.utility.CanvasStashHelper;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinocore.gui.WidgetScreenBase;
@@ -24,7 +22,6 @@ import games.moegirl.sinocraft.sinocore.network.NetworkManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -139,7 +136,7 @@ public class BrushScreen extends WidgetScreenBase<BrushMenu> {
     private void saveCanvas(Button button) {
         var drawing = canvas.getDrawing();
         drawing.setTitle(title.getValue());
-        C2SSaveDrawPacket packet = new C2SSaveDrawPacket(drawing, menu.brushSlot);
+        C2SSaveDrawPacket packet = new C2SSaveDrawPacket(drawing, menu.brushSlotId);
         NetworkManager.sendToServer(packet);
         beginSaving();
     }

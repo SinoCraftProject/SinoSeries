@@ -28,11 +28,11 @@ public class BrushItem extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         if (!level.isClientSide() && player instanceof ServerPlayer sp) {
-            var slot = usedHand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+            var slot = usedHand == InteractionHand.MAIN_HAND ? player.getInventory().selected : Inventory.SLOT_OFFHAND;
             MenuHelper.openMenuWithData(sp, new IExtraDataMenuProvider() {
                 @Override
                 public void writeExtraData(RegistryFriendlyByteBuf buf) {
-                    buf.writeEnum(slot);
+                    buf.writeVarInt(slot);
                 }
 
                 @Override

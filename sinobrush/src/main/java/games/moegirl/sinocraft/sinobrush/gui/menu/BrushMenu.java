@@ -7,7 +7,6 @@ import games.moegirl.sinocraft.sinocore.gui.widgets.SlotStrategy;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,14 +22,14 @@ public class BrushMenu extends WidgetMenuBase {
 
     public final SimpleContainer container = new SimpleContainer(3);
 
-    public final EquipmentSlot brushSlot;
+    public final int brushSlotId;
 
-    public BrushMenu(int id, Inventory inventory, EquipmentSlot slot) {
+    public BrushMenu(int id, Inventory inventory, int slotId) {
         super(SBRMenu.BRUSH_PAPER.get(), id, ResourceLocation.fromNamespaceAndPath("sinobrush", "textures/gui/brush"));
 
         // qyl27: notice! index of quick slot in player inventory is 0 ~ 8, so it should 0 ~ 8 in container also.
-        brushSlot = slot;
-        addSlotsWithSlotBlocked(inventory, "slot_items", 0, SlotStrategy.simple(), List.of(brushSlot.getIndex()));
+        brushSlotId = slotId;
+        addSlotsWithSlotBlocked(inventory, "slot_items", 0, SlotStrategy.simple(), List.of(brushSlotId));
         addSlots(inventory, "slots_inventory", 9, SlotStrategy.simple());
         addSlot(container, "slot_ink", INK_SLOT, SlotStrategy.insertFilter(SBRItems.INK_BOTTLE));
         addSlot(container, "slot_paper", PAPER_SLOT, SlotStrategy.insertFilter(SBRItems.XUAN_PAPER));
@@ -38,7 +37,7 @@ public class BrushMenu extends WidgetMenuBase {
     }
 
     public BrushMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        this(id, inventory, buf.readEnum(EquipmentSlot.class));
+        this(id, inventory, buf.readVarInt());
     }
 
     public boolean isDrawable() {
@@ -103,7 +102,7 @@ public class BrushMenu extends WidgetMenuBase {
 
     @Override
     public boolean stillValid(Player player) {
-        return player.isAlive() && player.getItemBySlot(brushSlot).is(SBRItems.BRUSH.get());
+        return player.isAlive() && player.getInventory().getItem(brushSlotId).is(SBRItems.BRUSH.get());
     }
 
     @Override
