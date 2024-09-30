@@ -28,8 +28,8 @@ public class FanItem extends Item {
         super(new Properties()
                 .stacksTo(1)
                 .component(SBRDataComponents.FAN.get(), new FanData())
-                .attributes(FanItem.createAttributes(0, -0.8F))
-                .sino$tab(SBRItems.SINO_BRUSH_TAB));
+//                .sino$tab(SBRItems.SINO_BRUSH_TAB)
+                .attributes(FanItem.createAttributes(0, -0.8F)));
     }
 
     public static ItemAttributeModifiers createAttributes(float attackDamage, float attackSpeed) {
