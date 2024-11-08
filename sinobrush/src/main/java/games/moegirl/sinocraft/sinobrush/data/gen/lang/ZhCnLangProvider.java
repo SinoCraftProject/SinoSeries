@@ -27,7 +27,7 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
 
         delegate.addTab(SBRItems.SINO_BRUSH_TAB, "华夏云墨");
 
-        delegate.add(SBRConstants.Translation.DRAWING_TITLE_LABEL, "画作 ");
+        delegate.add(SBRConstants.Translation.DRAWING_TITLE_LABEL, "字画 ");
         delegate.add(SBRConstants.Translation.DRAWING_TITLE_UNKNOWN, "未命名");
         delegate.add(SBRConstants.Translation.DRAWING_AUTHOR_LABEL, "作者：");
         delegate.add(SBRConstants.Translation.DRAWING_AUTHOR_UNKNOWN, "佚名");
@@ -44,18 +44,18 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
 
         delegate.add(SBRConstants.Translation.HUD_FAN_PREFIX, "对方的折扇上写着：");
 
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_SAVE, "保存画布到文件");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_SAVE, "保存画布为图片");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_COPY, "左键复制，右键粘贴");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_BRUSH, "落款并署名");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_CLEAR, "清空画布");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_HINT_NAME, "命名画作");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_CANVAS_COPIED, "已将画布复制到剪贴板。");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_CANVAS_PASTED, "已从剪贴板读取画布。");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_CANVAS_SAVED, "画布内容已保存至 %1$s");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_SUCCESSFUL, "已落款。");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_INK, "落款失败：找不到墨水。");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_PAPER, "落款失败：找不到宣纸。");
-        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "落款失败：请取走之前的作品。");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_HINT_NAME, "命名字画");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_CANVAS_COPIED, "已将画布复制到剪贴板");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_CANVAS_PASTED, "已从剪贴板读取画布");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_CANVAS_SAVED, "画布图片已保存至 %1$s");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_SUCCESSFUL, "已落款");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_INK, "落款失败：找不到墨水");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_PAPER, "落款失败：找不到宣纸");
+        delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "落款失败：请取走之前的作品");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "落款失败：不用笔画画，你是怎么做到的？");
 
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "丹青描绘浮生，云墨书尽芳华");

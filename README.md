@@ -2,8 +2,8 @@
 华夏系列模组主仓库。  
 Main repository of SinoSeries mods.  
 
-当前 Minecraft 版本：**1.20.1**  
-Current Minecraft Version: **1.20.1**  
+当前 Minecraft 版本：**1.21.1**  
+Current Minecraft Version: **1.21.1**  
 
 | 模组名称 (Name)      | 状态 (Status) | Links                                                                                                               |
 |------------------|-------------|---------------------------------------------------------------------------------------------------------------------|
@@ -11,13 +11,9 @@ Current Minecraft Version: **1.20.1**
 | 华夏云墨 (SinoBrush) | ⚠️ WIP      |                                                                                                                     |
 | 华夏工缀 (SinoDeco)  | ⚠️ WIP      |                                                                                                                     |
 
-## Documents / 模组文档
-[SinoSeries 文档](https://docs.sino.moegirl.games/)
+## Wiki / 模组文档
+官方文档：[Official wiki](https://docs.sino.moegirl.games/)
 
-## License / 许可协议
-参见本仓库的  [LICENSE](https://github.com/SinoCraftProject/SinoSeries/blob/main/LICENSE) 文件。  
-See [LICENSE](https://github.com/SinoCraftProject/SinoSeries/blob/main/LICENSE) of this repository.  
-
-## Discuss & Issues / 讨论和问题
-讨论：[GitHub Discussions](https://github.com/orgs/SinoCraftProject/discussions)  
-问题：[Issues](https://github.com/SinoCraftProject/SinoSeries/issues)
+## Discussions & Issues / 讨论和问题
+特性讨论、建议：[Discussions](https://github.com/orgs/SinoCraftProject/discussions)  
+问题反馈：[Issues](https://github.com/SinoCraftProject/SinoSeries/issues)
