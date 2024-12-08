@@ -15,8 +15,8 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
 
     @Override
     public void generateData(LanguageProviderDelegateBase delegate) {
-        delegate.addItem(SBRItems.FAN, "折扇（展开）");
-        delegate.addItem(SBRItems.FOLDED_FAN, "折扇（收起）");
+        delegate.addItem(SBRItems.FAN, "展开的折扇");
+        delegate.addItem(SBRItems.FOLDED_FAN, "折扇");
         delegate.addItem(SBRItems.XUAN_PAPER, "宣纸");
         delegate.addItem(SBRItems.FILLED_XUAN_PAPER, "填充过的宣纸");
         delegate.addItem(SBRItems.INK_BOTTLE, "墨水瓶");

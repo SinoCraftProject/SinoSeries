@@ -58,10 +58,11 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "Sign failed: Take the previous calligraphy first");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "Sign failed: Why you want write without a writing brush?");
 
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "丹青描绘浮生，云墨书尽芳华");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "欢迎游玩《华夏云墨》");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_NAME, "纸上描眉目，不辨妍或媸");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC, "在纸上着墨");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "SinoBrush");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "The painting that used color to depict all walks of life,\n" +
+                "while retained black and white to render the beauty of ages.");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_NAME, "Writing on the paper");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC, "Sketching those features onto the paper\nNot distinguishing between fairness or homeliness");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_NAME, "踏遍山海");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_DESC, "传说，说书人深湖在 TeaCon 演讲时就用过这把扇子\n他浪迹天地，无长剑在手\n三寸惊堂木，将故事传颂");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_NAME, "侠肝义胆");
