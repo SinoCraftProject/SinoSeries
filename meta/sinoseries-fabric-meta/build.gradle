@@ -1,0 +1,52 @@
+plugins {
+    id 'architectury-plugin' version "${architect_plugin_version}"
+    id 'dev.architectury.loom' version "${architectury_loom_version}"
+}
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+loom {
+    runs {
+        client {
+            configName = 'Fabric Client'
+            runDir = 'run/client'
+
+            property 'fabric-tag-conventions-v2.missingTagTranslationWarning', 'VERBOSE'
+        }
+
+        server {
+            configName = 'Fabric Server'
+            runDir = 'run/server'
+
+            property 'fabric-tag-conventions-v2.missingTagTranslationWarning', 'VERBOSE'
+        }
+    }
+
+    mods {
+        project.rootProject.ext.platformFabric.each { Project p ->
+            "${p.parent.modid}" {
+                sourceSet p.sourceSets.main
+            }
+        }
+    }
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    modRuntimeOnly group: 'maven.modrinth', name: 'modmenu', version: project.runtime_fabric_mod_menu_version
+    modRuntimeOnly group: 'me.shedaniel', name: 'RoughlyEnoughItems-fabric', version: project.runtime_fabric_rei_version
+    modRuntimeOnly(group: 'cx.rain.mc.nbtedit', name: 'nbtedit-fabric', version: project.runtime_all_nbtedit_version) { transitive false }
+
+    rootProject.ext.platformFabric.each { Project p ->
+        implementation project(path: p.path, configuration: 'namedElements')
+
+        if (p.parent.modid != 'sinotest') {
+            include project(p.path)
+        }
+    }
+}

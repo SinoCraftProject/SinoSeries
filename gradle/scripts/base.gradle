@@ -1,0 +1,111 @@
+import org.codehaus.groovy.runtime.MethodClosure
+
+import java.nio.file.Files
+import java.nio.file.Path
+import java.time.ZonedDateTime
+
+String getVersion(Project project) {
+    if (!project.hasProperty('mod_version')) {
+        return ext.sinoVersion
+    }
+
+    return "${project.minecraft_version}-${project.mod_version}"
+}
+
+String getBuildVersion(Project project) {
+    String result = getVersion(project)
+    def ENV = System.getenv()
+
+    if (ENV.SINOSERIES_RELEASE) {
+        result += '-RELEASE'
+    } else {
+        if (ENV.GITHUB_RUN_NUMBER) {
+            result += "-${ENV.GITHUB_RUN_NUMBER}"
+        }
+
+        result += '-SNAPSHOT'
+
+        if (ENV.CI) {
+            if (ENV.GITHUB_REF_NAME) {
+                var ref = ENV.GITHUB_REF_NAME.toString().replace('/', '-')
+                result += "+${ref}"
+            }
+        } else {
+            result += "+${ext.gitCommitHash}"
+        }
+    }
+
+    return result
+}
+
+void refreshRunConfig() {
+    if (gradle.startParameter.taskRequests.args.any { it.contains('ideaSyncTask') }) {
+        Path ideaCache = Path.of("${rootProject.projectDir}/.idea/runConfigurations")
+        if (Files.isDirectory(ideaCache)) {
+            logger.lifecycle('Clearing IDEA run configurations')
+
+            Files.walk(ideaCache, 1)
+                    .filter { Files.isRegularFile(it) }
+                    .forEach { Files.delete(it) }
+        }
+    }
+
+    subMetaProjects.each { Project p ->
+        p.file('run/client').mkdirs()
+        p.file('run/server').mkdirs()
+    }
+
+    commonModProjects.each { Project p ->
+        p.file('src/generated/resources').mkdirs()
+    }
+}
+
+Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false) {
+    var map = new HashMap<String, ?>(p.properties)
+
+    if (!p.hasProperty('mod_version')) {
+        map.put('mod_version', rootProject.sinoseries_version)
+    }
+
+    map.put('build_time', ZonedDateTime.now())
+
+    var file = p.file('src/main/resources/mod_desc.txt')
+    if (file.exists()) {
+        var desc = Files.readString(file.toPath()).replace('\r\n', '\n').replace('\r', '') // We use LF by default
+        if (escapeBreakLine) {
+            desc = desc.replace('\n', '\\n')
+        }
+        map.put('mod_description', desc)
+    }
+
+    return map
+}
+
+ext {
+    sinoVersion = "${rootProject.minecraft_version}-${rootProject.sinoseries_version}" as String
+    getVersion = this.&getVersion as MethodClosure
+    getBuildVersion = this.&getBuildVersion as MethodClosure
+
+    expandingFilesMatch = [
+            'build_info.properties',
+            'pack.mcmeta',
+            'META-INF/mods.toml',
+            'fabric.mod.json',
+            'META-INF/neoforge.mods.toml'
+    ]
+    getExpandingProperties = this.&getPropertiesToExpand as MethodClosure
+
+    gitCommitHash = 'git rev-parse --short HEAD'.execute().getText().trim()
+    modPlatforms = rootProject.mod_platforms.trim().split(',')
+
+    subProjects = rootProject.subprojects.toList() as List<Project>
+    subModProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') }.toList() as List<Project>
+    commonModProjects = rootProject.childProjects.values().findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') } as List<Project>
+    platformForge = subModProjects.findAll { Project p -> p.name.contains('forge') }
+    platformNeoForge = subModProjects.findAll { Project p -> p.name.contains('neoforge') }
+    platformFabric = subModProjects.findAll { Project p -> p.name.contains('fabric') }
+    platformProjects = platformForge + platformNeoForge + platformFabric
+    subMetaProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && p.name.endsWith('-meta') }.toList() as List<Project>
+
+    refreshRunConfig = this.&refreshRunConfig as MethodClosure
+}

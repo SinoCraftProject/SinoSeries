@@ -1,35 +1,19 @@
 plugins {
     id 'architectury-plugin' version "${architect_plugin_version}" apply false
     id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
-    id 'com.github.johnrengelman.shadow' version "${shadow_plugin_version}" apply false
-    id 'org.ajoberstar.grgit' version "${grgit_plugin_version}"
+    id 'com.gradleup.shadow' version "${shadow_plugin_version}" apply false
     id 'me.shedaniel.unified-publishing' version "${unified_publishing_plugin_version}" apply false
 }
 
-apply from: 'gradle/scripts/helper.gradle'
+apply from: 'gradle/scripts/base.gradle'
+
+logger.lifecycle("Syncing SinoSeries. Build version: ${ext.getBuildVersion(rootProject)}")
+
+// <editor-fold desc="Common">
 
 def ENV = System.getenv()
 
-logger.lifecycle("Syncing SinoSeries. Build version: ${helpers.getBuildVersion(rootProject)}")
-
 allprojects {
-    apply plugin: 'maven-publish'
-    apply plugin: 'architectury-plugin'
-    apply plugin: 'dev.architectury.loom'
-    apply plugin: 'me.shedaniel.unified-publishing'
-
-    group = 'games.moegirl.sinocraft'
-
-    architectury {
-        minecraft = rootProject.minecraft_version
-    }
-
-    loom {
-        silentMojangMappingsLicense()
-        setEnableTransitiveAccessWideners true
-        setEnableModProvidedJavadoc true
-    }
-
     repositories {
         maven {
             name = 'ParchmentMC'
@@ -64,6 +48,30 @@ allprojects {
             }
         }
     }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'me.shedaniel.unified-publishing'
+
+    group = 'games.moegirl.sinocraft'
+
+    architectury {
+        minecraft = rootProject.minecraft_version
+    }
+
+    loom {
+        silentMojangMappingsLicense()
+        setEnableTransitiveAccessWideners true
+        setEnableModProvidedJavadoc true
+
+        interfaceInjection {
+            enableDependencyInterfaceInjection = true
+        }
+    }
 
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
@@ -89,18 +97,18 @@ allprojects {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 
-    sourceSets.main.resources {
-        srcDir 'src/main/resources'
-        srcDir 'src/generated/resources'
-    }
-
     processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         exclude('mod_desc.txt')
+
+        Map<String, ?> propertiesToExpend = rootProject.ext.getExpandingProperties(project, project.name.contains('fabric'))
+        filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
+            expand(propertiesToExpend)
+        })
     }
 
     tasks.withType(JavaCompile).configureEach {
-        options.encoding = "UTF-8"
+        options.encoding = 'UTF-8'
         options.release = 21
     }
 
@@ -130,66 +138,75 @@ allprojects {
     }
 }
 
-subMod.each { Project mod ->
-    Map<String, ?> propertiesToExpend = helpers.getPropertiesToExpand(mod)
-    Map<String, ?> propertiesToExpendFabric = helpers.getPropertiesToExpand(mod, true)
-    List<String> filesToMatch = helpers.getFilesToMatchExpand()
-
-    configure(mod) {
-        architectury {
-            common(((String) rootProject.mod_platforms).split(','))
-        }
-
-        version = helpers.getVersion(project)
-
+ext.subModProjects.each { Project p ->
+    configure(p) {
         loom {
-            var aw = mod.file("src/main/resources/${mod.modid}.accesswidener")
-            if (aw.exists()) {
-                accessWidenerPath = aw
-            }
-
-            interfaceInjection {
-                enableDependencyInterfaceInjection = true
-            }
-
             runConfigs.configureEach { config ->
                 ideConfigGenerated = false
             }
         }
 
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    version = rootProject.ext.getBuildVersion(p)
+                    from components.java
+                }
+            }
+        }
+    }
+}
+
+ext.commonModProjects.each { Project p ->
+    configure(p) {
+        architectury {
+            common(rootProject.ext.modPlatforms)
+        }
+
+        version = rootProject.ext.getVersion(p)
+
+        if (project.hasProperty('mod_version')) {
+            rootProject.logger.lifecycle("Project ${p.name} will use self-version string: ${version}")
+        }
+
+        loom {
+            var aw = p.file("src/main/resources/${p.modid}.accesswidener")
+            if (aw.exists()) {
+                accessWidenerPath = aw
+            }
+        }
+
+        sourceSets.main.resources {
+            srcDir 'src/main/resources'
+            srcDir 'src/generated/resources'
+        }
+
         dependencies {
             // qyl27: Use fabric-loader in order to use EnvType class.
-            modImplementation "net.fabricmc:fabric-loader:${mod.fabric_loader_version}"
+            modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
-            if (!mod.name.startsWith('sinocore')) {
+            if (p.name != 'sinocore') {
                 api project(path: ':sinocore', configuration: 'namedElements')
             }
 
             compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
         }
-
-        processResources {
-            filesMatching(filesToMatch, (copy) -> {
-                expand(propertiesToExpend)
-            })
-        }
     }
+}
 
-    configure(mod.subprojects) { Project sub ->
-        apply plugin: 'com.github.johnrengelman.shadow'
+// </editor-fold>
 
-        version = mod.version
+
+// <editor-fold desc="Platform">
+
+ext.platformProjects.each { Project p ->
+    configure(p) {
+        apply plugin: 'com.gradleup.shadow'
+
+        version = p.parent.version
 
         loom {
-            accessWidenerPath = mod.loom.accessWidenerPath
-
-            interfaceInjection {
-                enableDependencyInterfaceInjection = true
-            }
-
-            runConfigs.configureEach { config ->
-                ideConfigGenerated = false
-            }
+            accessWidenerPath = p.parent.loom.accessWidenerPath
         }
 
         configurations {
@@ -221,33 +238,27 @@ subMod.each { Project mod ->
         }
 
         sourcesJar {
-            var commonSources = mod.sourcesJar
+            var commonSources = p.parent.sourcesJar
             dependsOn commonSources
             from commonSources.archiveFile.map { zipTree(it) }
         }
 
         components.java {
-            withVariantsFromConfiguration(sub.configurations.shadowRuntimeElements) {
+            withVariantsFromConfiguration(p.configurations.shadowRuntimeElements) {
                 skip()
             }
         }
 
         dependencies {
-            if (!mod.name.startsWith('sinocore')) {
+            if (!p.name.startsWith('sinocore')) {
                 api project(path: ':sinocore', configuration: 'namedElements')
             }
         }
-
-        publishing {
-            publications {
-                mavenJava(MavenPublication) {
-                    from components.java
-                }
-            }
-        }
     }
+}
 
-    configure(helpers.getSubNeoForgeMod(mod)) { Project neoForgeMod ->
+ext.platformNeoForge.each { Project p ->
+    configure(p) {
         architectury {
             platformSetupLoomIde()
             neoForge()
@@ -260,31 +271,27 @@ subMod.each { Project mod ->
         }
 
         sourceSets.main.resources {
-            srcDir(new File(mod.projectDir, 'src/main/resources'))
-            srcDir(new File(mod.projectDir, 'src/generated/resources'))
+            srcDir p.parent.file('src/main/resources')
+            srcDir p.parent.file('src/generated/resources')
         }
 
         dependencies {
-            neoForge "net.neoforged:neoforge:${neoForgeMod.neoforge_version}"
+            neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
 
-            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
-            shadowBundle project(path: mod.path, configuration: 'transformProductionNeoForge')
-        }
-
-        processResources {
-            filesMatching(filesToMatch, (copy) -> {
-                expand(propertiesToExpend)
-            })
+            common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
+            shadowBundle project(path: p.parent.path, configuration: 'transformProductionNeoForge')
         }
 
         remapJar {
-            if (mod.loom.accessWidenerPath.present) {
-                atAccessWideners.add(mod.loom.accessWidenerPath.get().asFile.name)
+            if (p.parent.loom.accessWidenerPath.present) {
+                atAccessWideners.add(p.parent.loom.accessWidenerPath.get().asFile.name)
             }
         }
     }
+}
 
-    configure(helpers.getSubFabricMod(mod)) { Project fabricMod ->
+ext.platformFabric.each { Project p ->
+    configure(p) {
         architectury {
             platformSetupLoomIde()
             fabric()
@@ -297,25 +304,52 @@ subMod.each { Project mod ->
         }
 
         dependencies {
-            modImplementation "net.fabricmc:fabric-loader:${fabricMod.fabric_loader_version}"
-            modApi "net.fabricmc.fabric-api:fabric-api:${fabricMod.fabric_api_version}"
+            modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+            modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
-            common(project(path: mod.path, configuration: 'namedElements')) { transitive = false }
-            shadowBundle project(path: mod.path, configuration: 'transformProductionFabric')
-        }
-
-        processResources {
-            filesMatching(filesToMatch, (copy) -> {
-                expand(propertiesToExpendFabric)
-            })
+            common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
+            shadowBundle project(path: p.parent.path, configuration: 'transformProductionFabric')
         }
     }
 }
 
-loom {
-    runConfigs.configureEach { config ->
-        ideConfigGenerated = false
+// </editor-fold>
+
+// <editor-fold desc="Meta">
+
+ext.subMetaProjects.each { Project p ->
+    configure(p) {
+        version = rootProject.version
+
+        configurations {
+            common {
+                canBeResolved = true
+                canBeConsumed = false
+            }
+
+            compileClasspath.extendsFrom common
+            runtimeClasspath.extendsFrom common
+            developmentNeoForge.extendsFrom common
+            developmentFabric.extendsFrom common
+        }
+
+        dependencies {
+            rootProject.ext.subModProjects.each { Project m ->
+                common(project(path: m.path, configuration: 'namedElements')) { transitive true }
+            }
+        }
+
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    version = rootProject.ext.getBuildVersion(p)
+                    from components.java
+                }
+            }
+        }
     }
 }
 
-helpers.reGenRunConfig()
+// </editor-fold>
+
+ext.refreshRunConfig()
