@@ -21,7 +21,7 @@ public class SinoCore {
         ZonedDateTime buildTime;
         try {
             properties.load(SinoCore.class.getResourceAsStream("/build_info.properties"));
-            version = properties.getProperty("mod_version") + "+mc" + properties.getProperty("minecraft_version");
+            version = properties.getProperty("full_version");
             buildTime = ZonedDateTime.parse(properties.getProperty("build_time"));
         } catch (Exception ignored) {
             version = "Unknown";

@@ -100,11 +100,6 @@ subprojects {
     processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         exclude('mod_desc.txt')
-
-        Map<String, ?> propertiesToExpend = rootProject.ext.getExpandingProperties(project, project.name.contains('fabric'))
-        filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
-            expand(propertiesToExpend)
-        })
     }
 
     tasks.withType(JavaCompile).configureEach {
@@ -224,6 +219,13 @@ ext.platformProjects.each { Project p ->
             }
         }
 
+        processResources {
+            var props = rootProject.ext.getExpandingProperties(p.parent, project.name.contains('fabric'))
+            filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
+                expand(props)
+            })
+        }
+
         shadowJar {
             exclude 'architectury.common.json'
 
@@ -232,6 +234,8 @@ ext.platformProjects.each { Project p ->
         }
 
         remapJar {
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
             injectAccessWidener = true
             input.set shadowJar.archiveFile
             dependsOn shadowJar
@@ -319,7 +323,7 @@ ext.platformFabric.each { Project p ->
 
 ext.subMetaProjects.each { Project p ->
     configure(p) {
-        version = rootProject.version
+        version = rootProject.ext.sinoVersion
 
         configurations {
             common {
@@ -337,6 +341,13 @@ ext.subMetaProjects.each { Project p ->
             rootProject.ext.subModProjects.each { Project m ->
                 common(project(path: m.path, configuration: 'namedElements')) { transitive true }
             }
+        }
+
+        processResources {
+            var props = rootProject.ext.getExpandingProperties(p.parent, project.name.contains('fabric'))
+            filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
+                expand(props)
+            })
         }
 
         publishing {

@@ -67,6 +67,7 @@ Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false)
         map.put('mod_version', rootProject.sinoseries_version)
     }
 
+    map.put('full_version', getBuildVersion(p))
     map.put('build_time', ZonedDateTime.now())
 
     var file = p.file('src/main/resources/mod_desc.txt')
