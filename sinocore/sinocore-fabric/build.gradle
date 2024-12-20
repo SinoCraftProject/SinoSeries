@@ -1,7 +1,7 @@
 unifiedPublishing {
     project {
         displayName = "${parent.mod_name} Fabric ${project.sinoseries_version} for MC ${project.minecraft_version}"
-        version = helpers.getPublishingVersion(parent)
+        version = helpers.getVersion(parent)
         gameVersions = [project.minecraft_version]
         gameLoaders = ['fabric']
         releaseType = 'release'

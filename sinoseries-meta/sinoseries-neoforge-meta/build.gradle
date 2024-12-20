@@ -93,7 +93,7 @@ configureLaunch {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            version = helpers.getMavenVersion(project)
+            version = helpers.getBuildVersion(project)
             from components.java
         }
     }

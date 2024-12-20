@@ -45,26 +45,21 @@ String getCommit(project) {
     return latestCommits.get(0).id.substring(0, 8)
 }
 
-String getPublishingVersion(Project project) {
-    var ENV = System.getenv()
-
+static String getVersion(Project project) {
     String result = project.sinoseries_version
-
-    result += "+mc${project.minecraft_version}"
-
-    if (!ENV.SINOSERIES_RELEASE) {
-        println 'Hint: Not running in release mode, do NOT use publishUnified.'
+    if (project.hasProperty('mod_version')) {
+        result = project.mod_version
+        project.logger.lifecycle("Project ${project.name} will use self-version string: ${result}")
     }
 
+    result += "+mc${project.minecraft_version}"
     return result
 }
 
-static String getMavenVersion(Project project) {
+static String getBuildVersion(Project project) {
     var ENV = System.getenv()
 
-    String result = project.sinoseries_version
-
-    result += "+mc${project.minecraft_version}"
+    String result = getVersion(project)
 
     if (!ENV.SINOSERIES_RELEASE) {
         result += "${ENV.GITHUB_RUN_NUMBER ? '-' + ENV.GITHUB_RUN_NUMBER : ''}"
@@ -150,8 +145,8 @@ ext.subMod = subMods
 
 ext.helpers = {
     reGenRunConfig = this.&reGenRunConfig
-    getMavenVersion = this.&getMavenVersion
-    getPublishingVersion = this.&getPublishingVersion
+    getVersion = this.&getVersion
+    getBuildVersion = this.&getBuildVersion
     getPropertiesToExpand = this.&getPropertiesToExpand
     getFilesToMatchExpand = this.&getFilesToMatchExpand
 

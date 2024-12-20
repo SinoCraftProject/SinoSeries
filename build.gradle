@@ -10,6 +10,8 @@ apply from: 'gradle/scripts/helper.gradle'
 
 def ENV = System.getenv()
 
+logger.lifecycle("Syncing SinoSeries. Build version: ${helpers.getBuildVersion(rootProject)}")
+
 allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'architectury-plugin'
@@ -17,7 +19,6 @@ allprojects {
     apply plugin: 'me.shedaniel.unified-publishing'
 
     group = 'games.moegirl.sinocraft'
-    version = rootProject.sinoseries_version
 
     architectury {
         minecraft = rootProject.minecraft_version
@@ -121,6 +122,12 @@ allprojects {
             }
         }
     }
+
+    tasks.publishUnified.doFirst {
+        if (!ENV.SINOSERIES_RELEASE) {
+            println 'Hint: Not running in release mode, do NOT use publishUnified.'
+        }
+    }
 }
 
 subMod.each { Project mod ->
@@ -129,11 +136,11 @@ subMod.each { Project mod ->
     List<String> filesToMatch = helpers.getFilesToMatchExpand()
 
     configure(mod) {
-        version = rootProject.sinoseries_version
-
         architectury {
             common(((String) rootProject.mod_platforms).split(','))
         }
+
+        version = helpers.getVersion(project)
 
         loom {
             var aw = mod.file("src/main/resources/${mod.modid}.accesswidener")
@@ -171,7 +178,7 @@ subMod.each { Project mod ->
     configure(mod.subprojects) { Project sub ->
         apply plugin: 'com.github.johnrengelman.shadow'
 
-        version = rootProject.sinoseries_version
+        version = mod.version
 
         loom {
             accessWidenerPath = mod.loom.accessWidenerPath
@@ -234,7 +241,6 @@ subMod.each { Project mod ->
         publishing {
             publications {
                 mavenJava(MavenPublication) {
-                    version = helpers.getMavenVersion(sub)
                     from components.java
                 }
             }
@@ -312,5 +318,4 @@ loom {
     }
 }
 
-logger.lifecycle("Building SinoSeries Ver: ${helpers.getMavenVersion(project)}")
 helpers.reGenRunConfig()
