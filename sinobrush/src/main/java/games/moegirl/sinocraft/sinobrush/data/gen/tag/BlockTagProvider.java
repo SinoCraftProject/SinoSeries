@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.data.gen.tag;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractBlockTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.tag.AbstractBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 

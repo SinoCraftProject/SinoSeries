@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.data.gen.delegate;
 
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.IBlockLootTableSubProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.IEntityLootTableSubProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.loottable.SimpleLootTableSubProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractLootTableProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loot.IBlockLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loot.IEntityLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loot.SimpleLootTableSubProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.loot.AbstractLootTableProvider;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.core.HolderLookup;

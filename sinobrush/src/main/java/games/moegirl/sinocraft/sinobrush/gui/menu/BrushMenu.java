@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinobrush.gui.menu;
 
 import games.moegirl.sinocraft.sinobrush.gui.SBRMenu;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
-import games.moegirl.sinocraft.sinocore.gui.WidgetMenuBase;
+import games.moegirl.sinocraft.sinocore.gui.AbstractWidgetMenu;
 import games.moegirl.sinocraft.sinocore.gui.widgets.SlotStrategy;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class BrushMenu extends WidgetMenuBase {
+public class BrushMenu extends AbstractWidgetMenu {
 
     public static final int INK_SLOT = 0;
     public static final int PAPER_SLOT = 1;

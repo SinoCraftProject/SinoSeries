@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodeco.data.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractRecipeProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.recipe.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.data.gen.tag.SDItemTags;
@@ -10,8 +10,6 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.function.Consumer;
 
 public class RecipeProvider extends AbstractRecipeProvider {
     public RecipeProvider(IDataGenContext context) {

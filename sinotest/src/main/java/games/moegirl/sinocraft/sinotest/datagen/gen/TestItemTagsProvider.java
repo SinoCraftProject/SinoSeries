@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.tag.AbstractItemTagsProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinotest.datagen.TestTags;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;

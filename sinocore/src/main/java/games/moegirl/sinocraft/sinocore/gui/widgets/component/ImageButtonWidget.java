@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.gui.widgets.component;
 
-import games.moegirl.sinocraft.sinocore.gui.WidgetScreenBase;
+import games.moegirl.sinocraft.sinocore.gui.AbstractWidgetScreen;
 import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.ButtonEntry;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
@@ -9,14 +9,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class ImageButtonWidget extends Button {
 
@@ -28,7 +25,7 @@ public class ImageButtonWidget extends Button {
     @Nullable
     private OnPress onLeftClick, onRightClick;
 
-    public ImageButtonWidget(WidgetScreenBase<?> screen, ButtonEntry entry, OnPress onPress, Component tooltip) {
+    public ImageButtonWidget(AbstractWidgetScreen<?> screen, ButtonEntry entry, OnPress onPress, Component tooltip) {
         super(entry.getX() + screen.getLeftPos(), entry.getY() + screen.getTopPos(),
                 entry.getWidth(), entry.getHeight(), tooltip, onPress, DEFAULT_NARRATION);
         this.entry = entry;

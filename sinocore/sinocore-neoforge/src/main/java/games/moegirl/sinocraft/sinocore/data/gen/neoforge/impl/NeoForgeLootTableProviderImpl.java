@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.util.ProblemReporter;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class NeoForgeLootTableProviderImpl extends LootTableProvider implements IRenamedProviderBridge {
+public class NeoForgeLootTableProviderImpl extends LootTableProvider implements ISinoRenamedProviderBridge {
 
     private final String modId;
     private NeoForgeLootTableProviderDelegate delegate;

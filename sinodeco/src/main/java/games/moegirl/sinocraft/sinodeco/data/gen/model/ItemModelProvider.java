@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodeco.data.gen.model;
 
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractItemModelProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.model.AbstractItemModelProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;

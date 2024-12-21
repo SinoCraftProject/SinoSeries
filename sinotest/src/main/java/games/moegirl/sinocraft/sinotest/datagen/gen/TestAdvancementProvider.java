@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractAdvancementProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.advancement.AbstractAdvancementProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.AdvancementTree;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;

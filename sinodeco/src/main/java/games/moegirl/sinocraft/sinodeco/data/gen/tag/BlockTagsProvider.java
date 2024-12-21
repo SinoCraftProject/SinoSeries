@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinodeco.data.gen.tag;
 
-import games.moegirl.sinocraft.sinocore.data.gen.AbstractBlockTagsProvider;
+import games.moegirl.sinocraft.sinocore.data.gen.tag.AbstractBlockTagsProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import net.minecraft.core.HolderLookup;

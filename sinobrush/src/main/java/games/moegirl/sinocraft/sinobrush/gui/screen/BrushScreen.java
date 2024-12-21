@@ -14,7 +14,7 @@ import games.moegirl.sinocraft.sinobrush.network.C2SSaveDrawPacket;
 import games.moegirl.sinocraft.sinobrush.network.S2CDrawResultPacket;
 import games.moegirl.sinocraft.sinobrush.utility.CanvasStashHelper;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
-import games.moegirl.sinocraft.sinocore.gui.WidgetScreenBase;
+import games.moegirl.sinocraft.sinocore.gui.AbstractWidgetScreen;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.EditBoxWidget;
 import games.moegirl.sinocraft.sinocore.gui.widgets.component.ImageButtonWidget;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.RectEntry;
@@ -35,7 +35,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 
-public class BrushScreen extends WidgetScreenBase<BrushMenu> {
+public class BrushScreen extends AbstractWidgetScreen<BrushMenu> {
 
     private Button btnBrush;
     private final ImageButtonWidget[] colorButtons = new ImageButtonWidget[16];

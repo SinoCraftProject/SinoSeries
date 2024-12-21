@@ -13,16 +13,15 @@
         "issues": "${sinoseries_issues}"
     },
     "license": "${sinoseries_license}",
-    "icon": "assets/modid/icon.png",
     "environment": "*",
     "entrypoints": {
     },
     "mixins": [
     ],
     "depends": {
-        "java": ">=17",
-        "minecraft": "~${minecraft_version}",
-        "fabricloader": ">=${fabric_loader_version}",
-        "fabric-api": "*"
+        "java": "${fabric_java_version_range}",
+        "minecraft": "${fabric_minecraft_version_range}",
+        "fabricloader": "${fabric_loader_version_range}",
+        "fabric-api": "${fabric_api_version_range}"
     }
 }

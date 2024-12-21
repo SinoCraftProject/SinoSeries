@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.mixin.data;
 
-import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.minecraft.data.loot.LootTableProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ public class LootTableProviderMixin {
     @Inject(method = "getName", at = @At("HEAD"), cancellable = true)
     public void injectGetName(CallbackInfoReturnable<String> cir) {
         LootTableProvider provider = (LootTableProvider) (Object) this;
-        if (provider instanceof IRenamedProviderBridge mp) {
+        if (provider instanceof ISinoRenamedProviderBridge mp) {
             cir.setReturnValue(mp.sino$getNewName());
         }
     }

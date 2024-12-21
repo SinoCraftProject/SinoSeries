@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
-import games.moegirl.sinocraft.sinocore.interfaces.bridge.IRenamedProviderBridge;
+import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 
 import java.util.List;
 
-public class NeoForgeAdvancementProviderImpl extends AdvancementProvider implements IRenamedProviderBridge {
+public class NeoForgeAdvancementProviderImpl extends AdvancementProvider implements ISinoRenamedProviderBridge {
 
     private final String name;
 
