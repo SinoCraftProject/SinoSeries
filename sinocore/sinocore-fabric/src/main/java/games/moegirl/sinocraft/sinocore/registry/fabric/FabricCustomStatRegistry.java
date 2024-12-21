@@ -17,7 +17,7 @@ public class FabricCustomStatRegistry implements ICustomStatRegistry {
     private final IRegistry<ResourceLocation> reg;
 
     public FabricCustomStatRegistry(String modId) {
-        reg = RegistryManager._create(modId, Registries.CUSTOM_STAT);
+        reg = RegistryManagerImpl._create(modId, Registries.CUSTOM_STAT);
     }
 
     @Override

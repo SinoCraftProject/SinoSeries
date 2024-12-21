@@ -78,7 +78,7 @@ public interface ITabRegistry {
      * @return CreativeModeTab 的语言键
      */
     static String buildDefaultTranslationKey(String modId, String name) {
-        return "tab." + modId + "." + name;
+        return "itemGroup." + modId + "." + name;
     }
 
     static String buildDefaultTranslationKey(ResourceKey<CreativeModeTab> name) {

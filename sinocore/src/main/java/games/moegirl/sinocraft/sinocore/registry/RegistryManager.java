@@ -128,37 +128,37 @@ public class RegistryManager {
     }
 
     @ExpectPlatform
-    public static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
+    static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static ITabRegistry _createTab(String modId) {
+    static ITabRegistry _createTab(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static IDataProviderRegistry _createDataProvider(String modId) {
+    static IDataProviderRegistry _createDataProvider(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static IMenuRegistry _createMenu(String modId) {
+    static IMenuRegistry _createMenu(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static IScreenRegistry _createScreen(String modId) {
+    static IScreenRegistry _createScreen(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static ICommandRegistry _createCommand(String modId) {
+    static ICommandRegistry _createCommand(String modId) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static ICustomStatRegistry _createCustomStat(String modId) {
+    static ICustomStatRegistry _createCustomStat(String modId) {
         throw new AssertionError();
     }
 }

@@ -29,9 +29,9 @@ String getBuildVersion(Project project) {
             if (ENV.GITHUB_REF_NAME) {
                 var ref = ENV.GITHUB_REF_NAME.toString().replace('/', '-')
                 result += "+${ref}"
+            } else {
+                result += "+${ext.gitCommitHash}"
             }
-        } else {
-            result += "+${ext.gitCommitHash}"
         }
     }
 
