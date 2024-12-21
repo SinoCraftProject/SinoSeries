@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 public class RegisterColorHandlersListener {
     @SubscribeEvent
     public static void onRegisterColorHandlersEvent(RegisterColorHandlersEvent.Item event) {
-        event.register(new NormalItemColor(), SBRItems.XUAN_PAPER.get(), SBRItems.INK_BOTTLE.get());
-        event.register(new FilledXuanPaperItemColor(), SBRItems.FILLED_XUAN_PAPER.get());
+//        event.register(new NormalItemColor(), SBRItems.XUAN_PAPER.get(), SBRItems.INK_BOTTLE.get());
+//        event.register(new FilledXuanPaperItemColor(), SBRItems.FILLED_XUAN_PAPER.get());
     }
 }

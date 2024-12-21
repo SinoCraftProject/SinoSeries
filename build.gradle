@@ -191,7 +191,6 @@ ext.commonModProjects.each { Project p ->
 
 // </editor-fold>
 
-
 // <editor-fold desc="Platform">
 
 ext.platformProjects.each { Project p ->
@@ -321,7 +320,7 @@ ext.platformFabric.each { Project p ->
 
 // <editor-fold desc="Meta">
 
-ext.subMetaProjects.each { Project p ->
+ext.metaProjects.each { Project p ->
     configure(p) {
         version = rootProject.ext.sinoVersion
 
@@ -333,12 +332,10 @@ ext.subMetaProjects.each { Project p ->
 
             compileClasspath.extendsFrom common
             runtimeClasspath.extendsFrom common
-            developmentNeoForge.extendsFrom common
-            developmentFabric.extendsFrom common
         }
 
         dependencies {
-            rootProject.ext.subModProjects.each { Project m ->
+            rootProject.ext.commonModProjects.each { Project m ->
                 common(project(path: m.path, configuration: 'namedElements')) { transitive true }
             }
         }
@@ -360,6 +357,9 @@ ext.subMetaProjects.each { Project p ->
         }
     }
 }
+
+//
+//developmentFabric.extendsFrom common
 
 // </editor-fold>
 

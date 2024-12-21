@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinobrush;
 import com.mojang.logging.LogUtils;
 import games.moegirl.sinocraft.sinobrush.data.gen.SBRDataGen;
 import games.moegirl.sinocraft.sinobrush.gui.SBRMenu;
-import games.moegirl.sinocraft.sinobrush.gui.SBRScreen;
 import games.moegirl.sinocraft.sinobrush.handler.CraftingHandlers;
 import games.moegirl.sinocraft.sinobrush.handler.RenderHandlers;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
@@ -17,10 +16,7 @@ public class SinoBrush {
     public static final String MODID = "sinobrush";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public SinoBrush() {
-    }
-
-    public void init() {
+    public static void init() {
         SBRDataComponents.register();
         SBRItems.register();
         SBRMenu.register();
@@ -31,9 +27,5 @@ public class SinoBrush {
         RenderHandlers.register();
 
         SBRDataGen.register();
-    }
-
-    public void initClient() {
-        SBRScreen.register();
     }
 }

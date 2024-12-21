@@ -50,7 +50,7 @@ void refreshRunConfig() {
         }
     }
 
-    subMetaProjects.each { Project p ->
+    metaProjects.each { Project p ->
         p.file('run/client').mkdirs()
         p.file('run/server').mkdirs()
     }
@@ -102,11 +102,13 @@ ext {
     subProjects = rootProject.subprojects.toList() as List<Project>
     subModProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') }.toList() as List<Project>
     commonModProjects = rootProject.childProjects.values().findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') } as List<Project>
-    platformForge = subModProjects.findAll { Project p -> p.name.contains('forge') }
-    platformNeoForge = subModProjects.findAll { Project p -> p.name.contains('neoforge') }
-    platformFabric = subModProjects.findAll { Project p -> p.name.contains('fabric') }
+    platformForge = subModProjects.findAll { Project p -> p.name.contains('-forge') }
+    platformNeoForge = subModProjects.findAll { Project p -> p.name.contains('-neoforge') }
+    platformFabric = subModProjects.findAll { Project p -> p.name.contains('-fabric') }
     platformProjects = platformForge + platformNeoForge + platformFabric
-    subMetaProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && p.name.endsWith('-meta') }.toList() as List<Project>
+    metaProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && p.name.endsWith('-meta') }.toList() as List<Project>
+    metaNeoForge = metaProjects.findAll { Project p -> p.name.contains('-neoforge') }
+    metaFabric = metaProjects.findAll { Project p -> p.name.contains('-fabric') }
 
     refreshRunConfig = this.&refreshRunConfig as MethodClosure
 }

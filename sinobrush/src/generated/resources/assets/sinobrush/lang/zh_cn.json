@@ -5,6 +5,7 @@
   "item.sinobrush.folded_fan": "折扇",
   "item.sinobrush.ink_bottle": "墨水瓶",
   "item.sinobrush.xuan_paper": "宣纸",
+  "itemGroup.sinobrush.sinobrush": "华夏云墨",
   "sinobrush.advancement.brush.desc": "在纸上着墨",
   "sinobrush.advancement.brush.name": "纸上描眉目，不辨妍或媸",
   "sinobrush.advancement.fan.description": "传说，说书人深湖在 TeaCon 演讲时就用过这把扇子\n他浪迹天地，无长剑在手\n三寸惊堂木，将故事传颂",
@@ -41,7 +42,6 @@
   "sinobrush.hud.fan.prefix": "对方的折扇上写着：",
   "stat.sinobrush.draw_by_brush": "作画次数",
   "stat.sinobrush.unfold_fan": "展开折扇次数",
-  "tab.sinobrush.sinobrush": "华夏云墨",
   "tag.item.sinobrush.fan": "折扇",
   "tag.item.sinobrush.xuan_paper": "宣纸"
 }

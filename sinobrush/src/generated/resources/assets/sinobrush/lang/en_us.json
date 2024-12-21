@@ -5,6 +5,7 @@
   "item.sinobrush.folded_fan": "Folding Fan (Folded)",
   "item.sinobrush.ink_bottle": "Ink Bottle",
   "item.sinobrush.xuan_paper": "Xuan Paper",
+  "itemGroup.sinobrush.sinobrush": "SinoBrush",
   "sinobrush.advancement.brush.desc": "Sketching those features onto the paper\nNot distinguishing between fairness or homeliness",
   "sinobrush.advancement.brush.name": "Writing on the paper",
   "sinobrush.advancement.fan.description": "传说，说书人深湖在 TeaCon 演讲时就用过这把扇子\n他浪迹天地，无长剑在手\n三寸惊堂木，将故事传颂",
@@ -41,7 +42,6 @@
   "sinobrush.hud.fan.prefix": "对方的折扇上写着：",
   "stat.sinobrush.draw_by_brush": "Times of writing with brush",
   "stat.sinobrush.unfold_fan": "Times of unfolding the fan",
-  "tab.sinobrush.sinobrush": "SinoBrush",
   "tag.item.sinobrush.fan": "Folding Fan",
   "tag.item.sinobrush.xuan_paper": "Xuan Paper"
 }

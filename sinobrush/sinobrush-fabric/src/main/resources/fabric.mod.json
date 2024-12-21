@@ -20,7 +20,7 @@
             "games.moegirl.sinocraft.sinobrush.fabric.SinoBrushFabric"
         ],
         "client": [
-            "games.moegirl.sinocraft.sinobrush.fabric.SinoBrushFabric"
+            "games.moegirl.sinocraft.sinobrush.fabric.SinoBrushFabricClient"
         ]
     },
     "mixins": [

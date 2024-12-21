@@ -10,10 +10,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class FabricScreenRegistry implements IScreenRegistry {
 
     private final List<Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
@@ -30,6 +32,7 @@ public class FabricScreenRegistry implements IScreenRegistry {
         screens.add(Pair.of(menuType, screenFactory));
     }
 
+    @SuppressWarnings("rawtypes")
     static class ScreenFactoryWrapper implements MenuScreens.ScreenConstructor {
 
         private final IScreenFactory factory;
@@ -39,7 +42,7 @@ public class FabricScreenRegistry implements IScreenRegistry {
         }
 
         @Override
-        public Screen create(AbstractContainerMenu menu, Inventory inventory, Component title) {
+        public @NotNull Screen create(AbstractContainerMenu menu, Inventory inventory, Component title) {
             return factory.create(menu, inventory, title);
         }
 
