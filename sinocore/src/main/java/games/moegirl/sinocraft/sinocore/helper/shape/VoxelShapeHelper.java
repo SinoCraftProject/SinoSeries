@@ -17,6 +17,8 @@ public class VoxelShapeHelper {
         if (shapes.length > 1) {
             var first = shapes[0];
             return Arrays.stream(shapes).reduce(first, Shapes::or);
+        } else if (shapes.length == 0) {
+            return Shapes.empty();
         } else {
             return shapes[0];
         }

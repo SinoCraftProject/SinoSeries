@@ -19,11 +19,18 @@ public class SinoClientNeoForge {
     private static BlockColors blockColors;
 
     static void registerItemColor(ItemColor color, ItemLike... items) {
+        if (itemColors == null) {
+            throw new IllegalStateException("Call ClientRegister in your FMLClientInitializationEvent.");
+        }
+
         itemColors.register(color, items);
-        System.out.println(items.length);
     }
 
     static void registerBlockColor(BlockColor color, Block... blocks) {
+        if (blockColors == null) {
+            throw new IllegalStateException("Call ClientRegister in your FMLClientInitializationEvent.");
+        }
+
         blockColors.register(color, blocks);
     }
 

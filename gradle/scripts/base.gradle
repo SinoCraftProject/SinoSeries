@@ -63,8 +63,8 @@ void refreshRunConfig() {
 Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false) {
     var map = new HashMap<String, ?>(p.properties)
 
-    if (!p.hasProperty('mod_version')) {
-        map.put('mod_version', rootProject.sinoseries_version)
+    if (!p.parent.hasProperty('mod_version')) {
+        map.put('mod_version', rootProject.ext.sinoVersion)
     }
 
     map.put('full_version', getBuildVersion(p))
