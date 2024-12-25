@@ -211,18 +211,16 @@ public class NeoForgeItemModelProviderImpl extends ItemModelProvider {
 
     protected ItemModelBuilder withBlockParent(Block block) {
         var name = BuiltInRegistries.BLOCK.getKey(block);
-        assert name != null;
         return withExistingParent(name.getPath(), blockLoc(name));
     }
 
-    protected ItemModelBuilder withBlockParent(IRegRef<Block, ?> block) {
+    protected ItemModelBuilder withBlockParent(IRegRef<Block> block) {
         var name = block.getId();
         return withExistingParent(name.getPath(), blockLoc(name));
     }
 
     protected void generated(ItemLike item) {
         ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.asItem());
-        assert key != null;
         String path = key.getPath();
         withExistingParent(path, GENERATED).texture("layer0", modLoc("item/" + path));
     }

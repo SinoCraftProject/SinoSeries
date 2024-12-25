@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.network;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import games.moegirl.sinocraft.sinocore.network.packet.SinoPlayPacket;
+import games.moegirl.sinocraft.sinocore.network.packet.PlayPacketBuilder;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -12,8 +12,8 @@ import net.minecraft.server.level.ServerPlayer;
 public class NetworkManager {
 
     // Todo: qyl27: configuration and login packet support.
-    public static <T extends CustomPacketPayload> SinoPlayPacketBuilder<T> playPacket(CustomPacketPayload.Type<T> type) {
-        return new SinoPlayPacketBuilder<>(type);
+    public static <T extends CustomPacketPayload> PlayPacketBuilder<T> playPacket(CustomPacketPayload.Type<T> type) {
+        return new PlayPacketBuilder<>(type);
     }
 
     /**
@@ -51,11 +51,6 @@ public class NetworkManager {
      */
     @ExpectPlatform
     public static <T extends CustomPacketPayload> void sendToServer(T payload) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    static <T extends CustomPacketPayload> void register(SinoPlayPacket<T> packet) {
         throw new AssertionError();
     }
 }

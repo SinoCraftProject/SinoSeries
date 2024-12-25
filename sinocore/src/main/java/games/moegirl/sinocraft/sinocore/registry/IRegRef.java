@@ -10,14 +10,13 @@ import java.util.function.Supplier;
 /**
  * 已注册的游戏元素的引用
  *
- * @param <T> 元素类型
- * @param <O> 实际类型
+ * @param <O> 元素类型
  */
-public interface IRegRef<T, O extends T> extends Supplier<O>, IOptional<O> {
+public interface IRegRef<O> extends Supplier<O>, IOptional<O> {
 
-    ResourceKey<T> getKey();
+    ResourceKey<O> getKey();
 
     ResourceLocation getId();
 
-    Holder<T> getHolder();
+    Holder<O> getHolder();
 }

@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 public class NeoForgeScreenRegistry implements IScreenRegistry {
 
     private final IEventBus bus;
-    private final List<Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
+    private final List<Pair<IRegRef<MenuType<?>>, IScreenFactory<?>>> screens = new ArrayList<>();
 
     public NeoForgeScreenRegistry(String modId) {
         bus = ModBusHelper.getModBus(modId);
@@ -33,14 +33,14 @@ public class NeoForgeScreenRegistry implements IScreenRegistry {
     @Override
     public void register() {
         bus.addListener((Consumer<RegisterMenuScreensEvent>) event -> {
-            for (Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>> screen : screens) {
+            for (Pair<IRegRef<MenuType<?>>, IScreenFactory<?>> screen : screens) {
                 event.register(screen.getFirst().get(), new ScreenFactoryWrapper(screen.getSecond()));
             }
         });
     }
 
     @Override
-    public <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>, ?> menuType, IScreenFactory<T> screenFactory) {
+    public <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>> menuType, IScreenFactory<T> screenFactory) {
         screens.add(Pair.of(menuType, screenFactory));
     }
 

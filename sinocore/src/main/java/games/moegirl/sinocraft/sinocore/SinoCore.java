@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore;
 
 import com.mojang.logging.LogUtils;
-import games.moegirl.sinocraft.sinocore.advancement.criterion.SinoCriteriaTriggers;
+import games.moegirl.sinocraft.sinocore.advancement.criterion.SCCriteriaTriggers;
 import org.slf4j.Logger;
 
 import java.time.ZonedDateTime;
@@ -34,7 +34,7 @@ public class SinoCore {
     public SinoCore() {
         LOGGER.info("Initializing SinoCore. Ver: {}, Build at: {}", VERSION, BUILD_TIME != null ? BUILD_TIME : "B.C. 3200");
 
-        SinoCriteriaTriggers.register();
+        SCCriteriaTriggers.register();
     }
 
     public void init() {

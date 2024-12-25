@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import org.jetbrains.annotations.NotNull;
 
-public class FabricMenuRegistry extends FabricRegistryImpl<MenuType<?>> implements IMenuRegistry {
+public class FabricMenuRegistry extends FabricRegistry<MenuType<?>> implements IMenuRegistry {
     public static final StreamCodec<RegistryFriendlyByteBuf, byte[]> STREAM_CODEC = new StreamCodec<>() {
         @Override
         public byte @NotNull [] decode(RegistryFriendlyByteBuf buf) {
@@ -32,7 +32,7 @@ public class FabricMenuRegistry extends FabricRegistryImpl<MenuType<?>> implemen
     }
 
     @Override
-    public <T extends AbstractContainerMenu> IRegRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
+    public <T extends AbstractContainerMenu> IRegRef<MenuType<?>> register(String name, MenuFactory<T> factory) {
         return register(name, () -> new ExtendedScreenHandlerType<>((id, inventory, data) ->
                 factory.create(id, inventory, new RegistryFriendlyByteBuf(Unpooled.wrappedBuffer(data), inventory.player.registryAccess())), STREAM_CODEC));
     }

@@ -34,9 +34,9 @@ public class NeoForgeTabRegistry implements ITabRegistry {
     }
 
     @Override
-    public IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
+    public IRegRef<CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
-        IRegRef<CreativeModeTab, CreativeModeTab> ref = registerForRef(name, () -> CreativeModeTab.builder()
+        IRegRef<CreativeModeTab> ref = registerForRef(name, () -> CreativeModeTab.builder()
                 .title(Component.translatable(ITabRegistry.buildDefaultTranslationKey(modId, name)))
                 .displayItems(generator)
                 .icon(generator::displayItem)
@@ -46,7 +46,7 @@ public class NeoForgeTabRegistry implements ITabRegistry {
     }
 
     @Override
-    public <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
+    public <T extends CreativeModeTab> IRegRef<CreativeModeTab> registerForRef(String name, Supplier<? extends T> supplier) {
         return new NeoForgeRegRef<>(dr.register(name, supplier));
     }
 

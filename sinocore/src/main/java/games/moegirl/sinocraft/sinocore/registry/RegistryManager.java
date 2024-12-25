@@ -92,6 +92,7 @@ public class RegistryManager {
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
      */
+    @SuppressWarnings("JavadocReference")
     public synchronized static IMenuRegistry obtainMenu(String modId) {
         return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
     }

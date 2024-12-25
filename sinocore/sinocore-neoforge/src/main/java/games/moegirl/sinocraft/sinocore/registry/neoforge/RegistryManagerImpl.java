@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceKey;
 public class RegistryManagerImpl {
 
     public static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
-        return new NeoForgeRegistryImpl<>(modId, key);
+        return new NeoForgeRegistry<>(modId, key);
     }
 
     public static ITabRegistry _createTab(String modId) {

@@ -31,7 +31,7 @@ public abstract class ItemModelProviderDelegateBase<T extends IItemModelBuilder<
 
     public abstract T basicItem(ResourceLocation item);
 
-    public abstract T withBlockParent(IRegRef<Block, ?> block);
+    public abstract T withBlockParent(IRegRef<Block> block);
 
     public abstract void generated(ItemLike item);
 

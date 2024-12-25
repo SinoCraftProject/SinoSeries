@@ -13,7 +13,7 @@ public interface IScreenRegistry {
 
     void register();
 
-    <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>, ?> menuType, IScreenFactory<T> screenFactory);
+    <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>> menuType, IScreenFactory<T> screenFactory);
 
     interface IScreenFactory<T extends AbstractContainerMenu> {
 

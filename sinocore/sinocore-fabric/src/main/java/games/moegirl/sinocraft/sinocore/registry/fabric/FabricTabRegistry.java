@@ -20,6 +20,7 @@ public class FabricTabRegistry implements ITabRegistry {
     private final String modId;
     private final Registry<CreativeModeTab> registry;
 
+    @SuppressWarnings("unchecked")
     FabricTabRegistry(String modId) {
         this.modId = modId;
         registry = (Registry<CreativeModeTab>) BuiltInRegistries.REGISTRY.get(Registries.CREATIVE_MODE_TAB.location());
@@ -30,7 +31,7 @@ public class FabricTabRegistry implements ITabRegistry {
     }
 
     @Override
-    public IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name) {
+    public IRegRef<CreativeModeTab> registerForRef(String name) {
         TabItemGenerator generator = new TabItemGenerator();
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
@@ -43,10 +44,10 @@ public class FabricTabRegistry implements ITabRegistry {
     }
 
     @Override
-    public <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier) {
+    public <T extends CreativeModeTab> IRegRef<CreativeModeTab> registerForRef(String name, Supplier<? extends T> supplier) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
-        return (IRegRef<CreativeModeTab, T>) new FabricRegRefImpl<>(Registry.registerForHolder(registry, key, supplier.get()));
+        return new FabricRegRef<>(Registry.registerForHolder(registry, key, supplier.get()));
     }
 
     @Override

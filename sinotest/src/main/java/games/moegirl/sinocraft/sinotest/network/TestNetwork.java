@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 
 public class TestNetwork {
 
-    public static IRegRef<Item, TestNetworkItem> ITEM;
+    public static IRegRef<TestNetworkItem> ITEM;
 
     public static void registerAll() {
 

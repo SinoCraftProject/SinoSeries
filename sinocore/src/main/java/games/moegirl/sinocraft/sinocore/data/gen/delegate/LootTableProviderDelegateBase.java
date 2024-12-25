@@ -72,7 +72,7 @@ public class LootTableProviderDelegateBase extends ProviderDelegateBase<LootTabl
     }
 
     public void addBlocks(IRegistry<Block> register) {
-        for (IRegRef<Block, ?> entry : register.getEntries()) {
+        for (IRegRef<Block> entry : register.getEntries()) {
             blocks.add(entry.get());
         }
     }

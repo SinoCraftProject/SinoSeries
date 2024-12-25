@@ -7,16 +7,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class NeoForgeRegRef<T, O extends T> implements IRegRef<T, O> {
+public class NeoForgeRegRef<O> implements IRegRef<O> {
 
-    private final DeferredHolder<T, O> obj;
+    private final DeferredHolder<O, O> obj;
 
-    public NeoForgeRegRef(DeferredHolder<T, O> obj) {
+    public NeoForgeRegRef(DeferredHolder<O, O> obj) {
         this.obj = obj;
     }
 
     @Override
-    public ResourceKey<T> getKey() {
+    public ResourceKey<O> getKey() {
         return obj.getKey();
     }
 
@@ -26,7 +26,7 @@ public class NeoForgeRegRef<T, O extends T> implements IRegRef<T, O> {
     }
 
     @Override
-    public Holder<T> getHolder() {
+    public Holder<O> getHolder() {
         return obj.getDelegate();
     }
 

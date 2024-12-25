@@ -16,16 +16,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class FabricRegistryImpl<T> implements IRegistry<T> {
+public class FabricRegistry<T> implements IRegistry<T> {
 
     final String modId;
     final ResourceKey<Registry<T>> key;
     Registry<T> registry;
     Supplier<Registry<T>> sup;
-    final List<IRegRef<T, ?>> elementReferences = new ArrayList<>();
-    final List<IRegRef<T, ?>> elementView = Collections.unmodifiableList(elementReferences);
+    final List<IRegRef<T>> elementReferences = new ArrayList<>();
+    final List<IRegRef<T>> elementView = Collections.unmodifiableList(elementReferences);
 
-    FabricRegistryImpl(String modId, ResourceKey<Registry<T>> key) {
+    @SuppressWarnings("unchecked")
+    FabricRegistry(String modId, ResourceKey<Registry<T>> key) {
         this.modId = modId;
         this.key = key;
 
@@ -48,13 +49,14 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     public void register() {
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <R extends T> IRegRef<T, R> register(String name, Supplier<? extends R> supplier) {
+    public <R extends T> IRegRef<R> register(String name, Supplier<? extends R> supplier) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<T> eKey = ResourceKey.create(key, id);
-        FabricRegRefImpl<T, T> ref = new FabricRegRefImpl<>(Registry.registerForHolder(registry, eKey, supplier.get()));
+        FabricRegRef<T> ref = new FabricRegRef<>(Registry.registerForHolder(registry, eKey, supplier.get()));
         elementReferences.add(ref);
-        return (IRegRef<T, R>) ref;
+        return (IRegRef<R>) ref;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class FabricRegistryImpl<T> implements IRegistry<T> {
     }
 
     @Override
-    public Iterable<IRegRef<T, ?>> getEntries() {
+    public Iterable<IRegRef<T>> getEntries() {
         return elementView;
     }
 }

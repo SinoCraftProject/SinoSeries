@@ -13,7 +13,7 @@ public interface IMenuRegistry extends IRegistry<MenuType<?>> {
      * @param name 注册名，实际为 modid:name
      * @return 对象引用
      */
-    <T extends AbstractContainerMenu> IRegRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory);
+    <T extends AbstractContainerMenu> IRegRef<MenuType<?>> register(String name, MenuFactory<T> factory);
 
     interface MenuFactory<T extends AbstractContainerMenu> {
 

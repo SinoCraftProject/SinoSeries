@@ -9,8 +9,8 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public record SinoPlayPacket<T extends CustomPacketPayload>(CustomPacketPayload.Type<T> type,
-                                                            Set<PacketFlow> destinations,
-                                                            StreamCodec<RegistryFriendlyByteBuf, T> codec,
-                                                            BiConsumer<T, PlayNetworkContext> handler) {
+public record PlayPacket<T extends CustomPacketPayload>(CustomPacketPayload.Type<T> type,
+                                                        Set<PacketFlow> destinations,
+                                                        StreamCodec<RegistryFriendlyByteBuf, T> codec,
+                                                        BiConsumer<T, PlayNetworkContext> handler) {
 }

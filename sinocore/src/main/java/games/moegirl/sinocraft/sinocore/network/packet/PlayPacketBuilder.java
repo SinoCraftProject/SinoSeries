@@ -1,7 +1,7 @@
-package games.moegirl.sinocraft.sinocore.network;
+package games.moegirl.sinocraft.sinocore.network.packet;
 
+import games.moegirl.sinocraft.sinocore.network.NetworkManager;
 import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
-import games.moegirl.sinocraft.sinocore.network.packet.SinoPlayPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
+public class PlayPacketBuilder<T extends CustomPacketPayload> {
     private final CustomPacketPayload.Type<T> type;
 
     private final Set<PacketFlow> destinations = new HashSet<>();
@@ -19,7 +19,7 @@ public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
     private StreamCodec<RegistryFriendlyByteBuf, T> codec;
     private BiConsumer<T, PlayNetworkContext> handler;
 
-    public SinoPlayPacketBuilder(CustomPacketPayload.Type<T> type) {
+    public PlayPacketBuilder(CustomPacketPayload.Type<T> type) {
         this.type = type;
     }
 
@@ -30,7 +30,7 @@ public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
      * @param destination Packet target.
      * @return Builder.
      */
-    public SinoPlayPacketBuilder<T> destination(PacketFlow destination) {
+    public PlayPacketBuilder<T> destination(PacketFlow destination) {
         destinations.add(destination);
         return this;
     }
@@ -40,7 +40,7 @@ public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
      * @param codec StreamCodec.
      * @return Builder.
      */
-    public SinoPlayPacketBuilder<T> codec(StreamCodec<RegistryFriendlyByteBuf, T> codec) {
+    public PlayPacketBuilder<T> codec(StreamCodec<RegistryFriendlyByteBuf, T> codec) {
         this.codec = codec;
         return this;
     }
@@ -50,7 +50,7 @@ public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
      * @param handler Handler.
      * @return Builder.
      */
-    public SinoPlayPacketBuilder<T> handler(BiConsumer<T, PlayNetworkContext> handler) {
+    public PlayPacketBuilder<T> handler(BiConsumer<T, PlayNetworkContext> handler) {
         if (this.handler == null) {
             this.handler = handler;
         } else {
@@ -60,6 +60,6 @@ public class SinoPlayPacketBuilder<T extends CustomPacketPayload> {
     }
 
     public void register() {
-        NetworkManager.register(new SinoPlayPacket<>(type, destinations, codec, handler));
+        PacketManager.register(new PlayPacket<>(type, destinations, codec, handler));
     }
 }

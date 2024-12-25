@@ -8,14 +8,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.network.IContainerFactory;
 
-public class NeoForgeMenuRegistry extends NeoForgeRegistryImpl<MenuType<?>> implements IMenuRegistry {
+public class NeoForgeMenuRegistry extends NeoForgeRegistry<MenuType<?>> implements IMenuRegistry {
 
     NeoForgeMenuRegistry(String modId) {
         super(modId, Registries.MENU);
     }
 
     @Override
-    public <T extends AbstractContainerMenu> IRegRef<MenuType<?>, ?> register(String name, MenuFactory<T> factory) {
+    public <T extends AbstractContainerMenu> IRegRef<MenuType<?>> register(String name, MenuFactory<T> factory) {
         return register(name, () -> new MenuType<>((IContainerFactory<T>) factory::create, FeatureFlagSet.of()));
     }
 }

@@ -4,18 +4,19 @@ import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
-public class FabricRegRefImpl<T, O extends T> implements IRegRef<T, O> {
+public class FabricRegRef<O> implements IRegRef<O> {
 
     private final Holder.Reference<O> obj;
 
-    public FabricRegRefImpl(Holder.Reference<O> obj) {
+    public FabricRegRef(Holder.Reference<O> obj) {
         this.obj = obj;
     }
 
     @Override
-    public ResourceKey<T> getKey() {
-        return (ResourceKey<T>) obj.key();
+    public ResourceKey<O> getKey() {
+        return obj.key();
     }
 
     @Override
@@ -24,8 +25,8 @@ public class FabricRegRefImpl<T, O extends T> implements IRegRef<T, O> {
     }
 
     @Override
-    public Holder<T> getHolder() {
-        return (Holder<T>) obj;
+    public Holder<O> getHolder() {
+        return obj;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class FabricRegRefImpl<T, O extends T> implements IRegRef<T, O> {
     }
 
     @Override
-    public O get() {
+    public @NotNull O get() {
         return obj.value();
     }
 }

@@ -33,7 +33,7 @@ public interface ITabRegistry {
      * @param name 注册名
      * @return CreativeModeTab 的引用
      */
-    IRegRef<CreativeModeTab, CreativeModeTab> registerForRef(String name);
+    IRegRef<CreativeModeTab> registerForRef(String name);
 
     /**
      * 注册一个默认的 CreativeModeTab 并返回其 Key
@@ -51,7 +51,7 @@ public interface ITabRegistry {
      * @param name 注册名
      * @return CreativeModeTab 的引用
      */
-    <T extends CreativeModeTab> IRegRef<CreativeModeTab, T> registerForRef(String name, Supplier<? extends T> supplier);
+    <T extends CreativeModeTab> IRegRef<CreativeModeTab> registerForRef(String name, Supplier<? extends T> supplier);
 
     /**
      * 注册一个自定义 CreativeModeTab 并返回其 Key

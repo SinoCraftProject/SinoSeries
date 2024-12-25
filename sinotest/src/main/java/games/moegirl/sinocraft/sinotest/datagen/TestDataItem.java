@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class TestDataItem extends Item {
 
-    public static IRegRef<Item, TestDataItem> TEST_ITEM_DATA;
+    public static IRegRef<TestDataItem> TEST_ITEM_DATA;
 
     public static void registerAll() {
         TEST_ITEM_DATA = TestRegistry.ITEMS.register("test_data", TestDataItem::new);

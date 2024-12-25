@@ -134,7 +134,7 @@ public class NeoForgeItemModelProviderDelegate extends ItemModelProviderDelegate
     }
 
     @Override
-    public NeoForgeItemModelBuilderWrapper withBlockParent(IRegRef<Block, ?> block) {
+    public NeoForgeItemModelBuilderWrapper withBlockParent(IRegRef<Block> block) {
         return new NeoForgeItemModelBuilderWrapper(impl.withBlockParent(block));
     }
 

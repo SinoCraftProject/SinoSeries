@@ -18,17 +18,17 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class FabricScreenRegistry implements IScreenRegistry {
 
-    private final List<Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>>> screens = new ArrayList<>();
+    private final List<Pair<IRegRef<MenuType<?>>, IScreenFactory<?>>> screens = new ArrayList<>();
 
     @Override
     public void register() {
-        for (Pair<IRegRef<MenuType<?>, ?>, IScreenFactory<?>> screen : screens) {
+        for (Pair<IRegRef<MenuType<?>>, IScreenFactory<?>> screen : screens) {
             MenuScreens.register(screen.getFirst().get(), new ScreenFactoryWrapper(screen.getSecond()));
         }
     }
 
     @Override
-    public <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>, ?> menuType, IScreenFactory<T> screenFactory) {
+    public <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>> menuType, IScreenFactory<T> screenFactory) {
         screens.add(Pair.of(menuType, screenFactory));
     }
 

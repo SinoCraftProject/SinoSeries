@@ -3,7 +3,6 @@ package games.moegirl.sinocraft.sinocore.registry.fabric;
 import games.moegirl.sinocraft.sinocore.registry.*;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
 
@@ -13,7 +12,7 @@ import java.util.function.Supplier;
 public class RegistryManagerImpl {
 
     public static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
-        return new FabricRegistryImpl<>(modId, key);
+        return new FabricRegistry<>(modId, key);
     }
 
     public static ITabRegistry _createTab(String modId) {
