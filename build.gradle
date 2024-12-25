@@ -116,18 +116,18 @@ subprojects {
 
                 def releaseUrl = 'https://maven.yuluo.dev/repository/maven-releases/'
                 def snapshotUrl = 'https://maven.yuluo.dev/repository/maven-snapshots/'
-                url = ENV.SINOSERIES_RELEASE ? releaseUrl : snapshotUrl
+                url = ENV.MOD_RELEASE ? releaseUrl : snapshotUrl
 
                 credentials {
-                    username System.getenv('SINOSERIES_MAVEN_USER')
-                    password System.getenv('SINOSERIES_MAVEN_PASS')
+                    username Objects.requireNonNullElse(System.getenv('MOD_MAVEN_USER'), '')
+                    password Objects.requireNonNullElse(System.getenv('MOD_MAVEN_PASS'), '')
                 }
             }
         }
     }
 
     tasks.publishUnified.doFirst {
-        if (!ENV.SINOSERIES_RELEASE) {
+        if (!ENV.MOD_RELEASE) {
             println 'Hint: Not running in release mode, do NOT use publishUnified.'
         }
     }
@@ -257,6 +257,9 @@ ext.platformProjects.each { Project p ->
                 api project(path: ':sinocore', configuration: 'namedElements')
             }
         }
+
+        parent.publish.dependsOn(publish)
+        parent.publishUnified.dependsOn(publishUnified)
     }
 }
 

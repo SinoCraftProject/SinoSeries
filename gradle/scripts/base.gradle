@@ -16,7 +16,7 @@ String getBuildVersion(Project project) {
     String result = getVersion(project)
     def ENV = System.getenv()
 
-    if (ENV.SINOSERIES_RELEASE) {
+    if (ENV.MOD_RELEASE) {
         result += '-RELEASE'
     } else {
         if (ENV.GITHUB_RUN_NUMBER) {
