@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "sinodeco:block/peach_pressure_plate"
+    },
+    "powered=true": {
+      "model": "sinodeco:block/peach_pressure_plate_down"
+    }
+  }
+}

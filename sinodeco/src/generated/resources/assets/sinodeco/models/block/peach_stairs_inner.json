@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "sinodeco:block/peach_planks",
+    "side": "sinodeco:block/peach_planks",
+    "top": "sinodeco:block/peach_planks"
+  }
+}

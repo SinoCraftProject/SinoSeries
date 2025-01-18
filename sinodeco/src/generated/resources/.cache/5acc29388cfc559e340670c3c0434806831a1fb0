@@ -1,2 +1,19 @@
-// 1.21.1	2024-09-09T22:41:38.1923162	Tags for Item: sinodeco
+// 1.21.1	2025-01-18T15:17:03.234469	Tags for Item: sinodeco
+c22e934be0751df68da0da15752d05247adaf4f2 data/minecraft/tags/item/boats.json
+310b2d3246335e378f0db4ed72f4556cba74b3ec data/minecraft/tags/item/chest_boats.json
+5d64c2a1e3730e4a5b9fd6e88e12029883fe4994 data/minecraft/tags/item/fence_gates.json
+c6ffb4c6ff913bdd820669c191765d4b302379c1 data/minecraft/tags/item/hanging_signs.json
+0563d86813c9290bee7c7c1cb77ce9fed67e74cc data/minecraft/tags/item/leaves.json
+40a8387366f2fbe921d67dda410f5e701d02313b data/minecraft/tags/item/logs_that_burn.json
+23dc049dcbff9ae31908a09547a8ddfe2b2dba1f data/minecraft/tags/item/planks.json
+fd0f3a9eb7d611b6eb589e334762d5fcf5dda382 data/minecraft/tags/item/saplings.json
+c03dcb000790b9f72180fe94a8e8eacba857e0f1 data/minecraft/tags/item/signs.json
+61d77c68bc8a0aa9060c1273e0c602f503a27904 data/minecraft/tags/item/wooden_buttons.json
+1215d6e693b2ae19d5ac262eff3976534e41b361 data/minecraft/tags/item/wooden_doors.json
+7a2ee6337164a4a392871c57854a3e0277993eaf data/minecraft/tags/item/wooden_fences.json
+339112575b59e113d723661120d3eb5904300fe3 data/minecraft/tags/item/wooden_pressure_plates.json
+f90287f85f031e57142220856e481d79ff758619 data/minecraft/tags/item/wooden_slabs.json
+88f58e97492448e435f17fcf802c5783b058d438 data/minecraft/tags/item/wooden_stairs.json
+e6812f5478cd4fee8334f3a772d6d66f604ba62d data/minecraft/tags/item/wooden_trapdoors.json
 638ab0989f3523f4fcada71ceed71d482a9cfe1c data/sinodeco/tags/item/marble_blocks.json
+0b0ca3da0c6e67ea8d68fb54f48b752db766bed3 data/sinodeco/tags/item/peach_logs.json

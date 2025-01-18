@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sinodeco:item/peach_hanging_sign"
+  }
+}

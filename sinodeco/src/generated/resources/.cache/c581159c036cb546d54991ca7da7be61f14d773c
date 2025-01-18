@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-09T22:41:38.1883191	Item Models: sinodeco
+// 1.21.1	2025-01-18T15:38:49.8534256	Item Models: sinodeco
 fe490000e61f30f6fc83e31b876d3c49e582e115 assets/sinodeco/models/item/chiseled_marble.json
 5a71ec3cffdfa2e0815d6b97d64846de3b6ed4d0 assets/sinodeco/models/item/marble_balustrade.json
 5cefa7c5824ea4859af3b0f35db0d3a9588c5ae3 assets/sinodeco/models/item/marble_block.json
@@ -6,7 +6,27 @@ fe490000e61f30f6fc83e31b876d3c49e582e115 assets/sinodeco/models/item/chiseled_ma
 3a0586f6fc48f72f747ab5e77a8b1c269b492714 assets/sinodeco/models/item/marble_pillar.json
 42ac0c317b4d2d53f8b4a4ac1d7eec1545ad0951 assets/sinodeco/models/item/marble_slab.json
 cf9bb2c4e30581106bcd2cf53e7feb4fc206a149 assets/sinodeco/models/item/marble_stairs.json
+0bcda29185e3796724dab28e92ffe74fadafb634 assets/sinodeco/models/item/peach_boat.json
+8e22cf449d5de77902a063e61ec8f31abac4c5e3 assets/sinodeco/models/item/peach_button.json
+eb095a616a998872939c8459ef3752056bf5147b assets/sinodeco/models/item/peach_chest.json
+a5e6eaf9ce177831fb546846aea6d95cb4313878 assets/sinodeco/models/item/peach_chest_boat.json
+2f22b6df4f6db71d2fb0a170b80e9eae1680223f assets/sinodeco/models/item/peach_door.json
+6ee7c96e7c506a89de81d1a168d6c8b0f4bb45e0 assets/sinodeco/models/item/peach_fence.json
+04ea10c6f9580bd015fcb4bcc6f361efc12caf4a assets/sinodeco/models/item/peach_fence_gate.json
+a455948d4f2e1d2f8a3db022f9a1291ec517e7ab assets/sinodeco/models/item/peach_hanging_sign.json
+accd6c46af553b8b41cdfbe80cc44dc48f09f34d assets/sinodeco/models/item/peach_leaves.json
+0ef5992eae525463a3de571e5d66604ca733af63 assets/sinodeco/models/item/peach_log.json
+597be870fe80d1c65b195269c9a8085613d87fb9 assets/sinodeco/models/item/peach_planks.json
+4bb21943ae3693f506d700bb8c21b3fd64600dae assets/sinodeco/models/item/peach_pressure_plate.json
+fb8568354df345f23657caa5a5e15dc214715478 assets/sinodeco/models/item/peach_sapling.json
+ee30d121c8e2a46a99edad56e71f3af206e27b05 assets/sinodeco/models/item/peach_sign.json
+3a43d25fab061f7434658684ea51c52ff56257ac assets/sinodeco/models/item/peach_slab.json
+f222bdcaa4995448c4339deb5c7c69d98c1853a8 assets/sinodeco/models/item/peach_stairs.json
+eee620b977f716b75b5f06ebbb7955fdcacd0efc assets/sinodeco/models/item/peach_trapdoor.json
+54e1e0c30c5c6784d211c2fc2e283817dac6b8f7 assets/sinodeco/models/item/peach_wood.json
 d3bca20c46d90358953d83a01a2a7b7f193c7d43 assets/sinodeco/models/item/smooth_marble.json
 315e8c195e235b08ca9dc572cfbad9614b004295 assets/sinodeco/models/item/smooth_marble_slab.json
 ed7fa3086649eccc476011a19b937dcc19f84300 assets/sinodeco/models/item/smooth_marble_stairs.json
+259f3f21ea883d1d26bbfb65972ed8476c4d5b43 assets/sinodeco/models/item/stripped_peach_log.json
+dfc8aafa8375b7af8f16854df3fd2e3543b3beae assets/sinodeco/models/item/stripped_peach_wood.json
 6ed052a57be7d0e3309bc18ef9c87a2a135170bc assets/sinodeco/models/item/wooden_table.json

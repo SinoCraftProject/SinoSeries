@@ -3,6 +3,7 @@ package games.moegirl.sinocraft.sinodeco.data.gen.neoforge;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import games.moegirl.sinocraft.sinodeco.block.WoodenTableBlock;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -13,8 +14,46 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        tableModels(SDBlocks.WOODEN_TABLE.get());
+
         {
-            var builder = getMultipartBuilder(SDBlocks.WOODEN_TABLE.get());
+            simpleBlock(SDBlocks.MARBLE_BLOCK.get(), models().cubeColumn("marble_block", modLoc("block/marble_block"), modLoc("block/marble_block_top")));
+            simpleBlock(SDBlocks.CHISELED_MARBLE.get(), models().cubeColumn("chiseled_marble", modLoc("block/chiseled_marble"), modLoc("block/chiseled_marble_top")));
+            axisBlock(SDBlocks.MARBLE_PILLAR.get(), modLoc("block/marble_pillar"), modLoc("block/marble_pillar_top"));
+            stairsBlock(SDBlocks.MARBLE_STAIRS.get(), modLoc("block/marble_block"), modLoc("block/marble_block_top"), modLoc("block/marble_block_top"));
+            slabBlock(SDBlocks.MARBLE_SLAB.get(), modLoc("block/marble_block"), modLoc("block/marble_block"));
+            simpleBlock(SDBlocks.SMOOTH_MARBLE.get());
+            stairsBlock(SDBlocks.SMOOTH_MARBLE_STAIRS.get(), modLoc("block/smooth_marble"), modLoc("block/smooth_marble_top"), modLoc("block/smooth_marble_top"));
+            slabBlock(SDBlocks.SMOOTH_MARBLE_SLAB.get(), modLoc("block/smooth_marble"), modLoc("block/smooth_marble"));
+            simpleBlock(SDBlocks.MARBLE_BRICKS.get());
+        }
+
+        {
+            var planks = modLoc("block/peach_planks");
+//            simpleBlock(SDBlocks.PEACH_LEAVES.get()); // Todo: texture
+//            simpleBlock(SDBlocks.PEACH_SAPLING.get());    // Todo: texture
+            logBlock(SDBlocks.PEACH_LOG.get());
+            simpleBlock(SDBlocks.PEACH_WOOD.get(), models().cubeAll("peach_wood", modLoc("block/peach_log")));
+            logBlock(SDBlocks.STRIPPED_PEACH_LOG.get());
+            simpleBlock(SDBlocks.STRIPPED_PEACH_WOOD.get(), models().cubeAll("peach_wood", modLoc("block/stripped_peach_log")));
+            simpleBlock(SDBlocks.PEACH_PLANKS.get());
+            stairsBlock(SDBlocks.PEACH_STAIRS.get(), planks);
+            slabBlock(SDBlocks.PEACH_SLAB.get(), planks, planks);
+            models().withExistingParent("peach_fence_inventory", mcLoc("block/fence_inventory")).texture("texture", planks);
+            fenceBlock(SDBlocks.PEACH_FENCE.get(), planks);
+            fenceGateBlock(SDBlocks.PEACH_FENCE_GATE.get(), planks);
+//            doorBlock(SDBlocks.PEACH_DOOR.get(), modLoc("block/peach_door_bottom"), modLoc("block/peach_door_top"));  // Todo: texture
+//            trapdoorBlock(SDBlocks.PEACH_TRAPDOOR.get(), modLoc("block/peach_trapdoor"), true);   // Todo: texture
+            pressurePlateBlock(SDBlocks.PEACH_PRESSURE_PLATE.get(), planks);
+            models().withExistingParent("peach_button_inventory", mcLoc("block/button_inventory")).texture("texture", planks);
+            buttonBlock(SDBlocks.PEACH_BUTTON.get(), planks);
+            signBlock(SDBlocks.PEACH_SIGN.get(), SDBlocks.PEACH_WALL_SIGN.get(), modLoc("entity/signs/peach"));
+        }
+    }
+
+    private void tableModels(Block block) {
+        {
+            var builder = getMultipartBuilder(block);
 
             for (var i = 0; i < WoodenTableBlock.PARTS.length; i++) {
                 var north = (i & 0b1000) != 0;
@@ -48,18 +87,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     }
                 }
             }
-        }
-
-        {
-            simpleBlock(SDBlocks.MARBLE_BLOCK.get(), models().cubeColumn("marble_block", modLoc("block/marble_block"), modLoc("block/marble_block_top")));
-            simpleBlock(SDBlocks.CHISELED_MARBLE.get(), models().cubeColumn("chiseled_marble", modLoc("block/chiseled_marble"), modLoc("block/chiseled_marble_top")));
-            axisBlock(SDBlocks.MARBLE_PILLAR.get(), modLoc("block/marble_pillar"), modLoc("block/marble_pillar_top"));
-            stairsBlock(SDBlocks.MARBLE_STAIRS.get(), modLoc("block/marble_block"), modLoc("block/marble_block_top"), modLoc("block/marble_block_top"));
-            slabBlock(SDBlocks.MARBLE_SLAB.get(), modLoc("block/marble_block"), modLoc("block/marble_block"));
-            simpleBlock(SDBlocks.SMOOTH_MARBLE.get());
-            stairsBlock(SDBlocks.SMOOTH_MARBLE_STAIRS.get(), modLoc("block/smooth_marble"), modLoc("block/smooth_marble_top"), modLoc("block/smooth_marble_top"));
-            slabBlock(SDBlocks.SMOOTH_MARBLE_SLAB.get(), modLoc("block/smooth_marble"), modLoc("block/smooth_marble"));
-            simpleBlock(SDBlocks.MARBLE_BRICKS.get());
         }
     }
 }

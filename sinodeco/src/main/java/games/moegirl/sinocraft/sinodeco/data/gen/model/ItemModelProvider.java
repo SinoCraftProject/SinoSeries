@@ -15,7 +15,13 @@ public class ItemModelProvider extends AbstractItemModelProvider {
     @Override
     public void generateModels(ItemModelProviderDelegateBase<?> delegate) {
         delegate.blockItem(SDBlocks.MARBLE_BALUSTRADE.get(), "inventory");
-
         delegate.skipItem(SDBlockItems.MARBLE_BALUSTRADE.get());
+
+        delegate.basicItem(SDBlockItems.PEACH_SIGN.get());
+        delegate.basicItem(SDBlockItems.PEACH_HANGING_SIGN.get());
+        delegate.skipItem(SDBlockItems.PEACH_FENCE.get());
+        delegate.withExistingParent("peach_fence", modLoc("block/peach_fence_inventory"));
+        delegate.skipItem(SDBlockItems.PEACH_BUTTON.get());
+        delegate.withExistingParent("peach_button", modLoc("block/peach_button_inventory"));
     }
 }
