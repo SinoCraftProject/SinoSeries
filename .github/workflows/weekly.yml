@@ -48,6 +48,7 @@ jobs:
           prerelease: true
           generate_release_notes: true
           preserve_order: true
+          tag_name: ${{ github.ref_name }}
           name: "SinoSeries Weekly build #${{ github.run_number }}"
           files: |
             release/meta/*.jar
