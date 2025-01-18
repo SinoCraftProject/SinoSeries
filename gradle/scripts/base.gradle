@@ -28,7 +28,8 @@ String getBuildVersion(Project project) {
         if (ENV.CI) {
             if (ENV.GITHUB_REF_NAME) {
                 var ref = ENV.GITHUB_REF_NAME.toString().replace('/', '-')
-                result += "+${ref}"
+                var sha = ENV.GITHUB_SHA.toString().substring(0, 8)
+                result += "+${ref}+${sha}"
             } else {
                 result += "+${ext.gitCommitHash}"
             }
