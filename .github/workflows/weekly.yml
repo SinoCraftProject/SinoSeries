@@ -1,4 +1,4 @@
-name: Weekly updates
+name: Weekly snapshots
 
 on:
   schedule:
@@ -36,10 +36,10 @@ jobs:
           mv sinobrush/sinobrush-fabric/build/libs/sinobrush-*.[0-9].jar release
           mv sinodeco/sinodeco-neoforge/build/libs/sinodeco-*.[0-9].jar release
           mv sinodeco/sinodeco-fabric/build/libs/sinodeco-*.[0-9].jar release
-          zip release/* mods.zip
-          mkdir meta
-          mv meta/sinoseries-neoforge-meta/build/libs/sinoseries-*.[0-9].jar meta
-          mv meta/sinoseries-fabric-meta/build/libs/sinoseries-*.[0-9].jar meta
+          zip release/mods.zip release/*
+          mkdir release/meta
+          mv meta/sinoseries-neoforge-meta/build/libs/sinoseries-*.[0-9].jar release/meta
+          mv meta/sinoseries-fabric-meta/build/libs/sinoseries-*.[0-9].jar release/meta
 
       - name: Publish
         uses: softprops/action-gh-release@v2
@@ -50,5 +50,5 @@ jobs:
           preserve_order: true
           name: "SinoSeries Weekly build #${{ github.run_number }}"
           files: |
-            meta/*.jar
-            mods.zip
+            release/meta/*.jar
+            release/mods.zip
