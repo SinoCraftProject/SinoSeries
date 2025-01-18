@@ -1,0 +1,52 @@
+name: Weekly updates
+
+on:
+  schedule:
+    - cron: "0 20 * * 5"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 21
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Collect
+        run: |
+          mkdir release
+          mv sinocore/sinocore-neoforge/build/libs/sinocore-*.[0-9].jar release
+          mv sinocore/sinocore-fabric/build/libs/sinocore-*.[0-9].jar release
+          mv sinobrush/sinobrush-neoforge/build/libs/sinobrush-*.[0-9].jar release
+          mv sinobrush/sinobrush-fabric/build/libs/sinobrush-*.[0-9].jar release
+          mv sinodeco/sinodeco-neoforge/build/libs/sinodeco-*.[0-9].jar release
+          mv sinodeco/sinodeco-fabric/build/libs/sinodeco-*.[0-9].jar release
+          zip release/* mods.zip
+          mkdir meta
+          mv meta/sinoseries-neoforge-meta/build/libs/sinoseries-*.[0-9].jar meta
+          mv meta/sinoseries-fabric-meta/build/libs/sinoseries-*.[0-9].jar meta
+
+      - name: Publish
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          prerelease: true
+          generate_release_notes: true
+          preserve_order: true
+          name: "SinoSeries Weekly build #${{ github.run_number }}"
+          files: |
+            meta/*.jar
+            mods.zip

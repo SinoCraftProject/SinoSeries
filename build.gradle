@@ -149,6 +149,13 @@ ext.subModProjects.each { Project p ->
                 }
             }
         }
+
+        processResources {
+            var props = rootProject.ext.getExpandingProperties(p.parent, project.name.contains('fabric'))
+            filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
+                expand(props)
+            })
+        }
     }
 }
 

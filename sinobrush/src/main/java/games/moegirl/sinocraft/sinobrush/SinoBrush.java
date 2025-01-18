@@ -17,6 +17,8 @@ public class SinoBrush {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static void init() {
+        LOGGER.info("SinoBrush ver {}, build at {}", SBRVersion.VERSION, SBRVersion.BUILD_TIME.toString());
+
         SBRDataComponents.register();
         SBRItems.register();
         SBRMenu.register();
