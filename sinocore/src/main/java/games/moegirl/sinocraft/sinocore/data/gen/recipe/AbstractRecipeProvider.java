@@ -3,12 +3,16 @@ package games.moegirl.sinocraft.sinocore.data.gen.recipe;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.ISinoDataProvider;
 import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -113,16 +117,28 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
         return new EnterBlockTrigger.TriggerInstance(Optional.empty(), Optional.of(block.builtInRegistryHolder()), Optional.empty());
     }
 
-    public static InventoryChangeTrigger.TriggerInstance has(MinMaxBounds.Ints count, ItemLike item) {
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(MinMaxBounds.Ints count, ItemLike item) {
         return inventoryTrigger(ItemPredicate.Builder.item().of(item).withCount(count));
     }
 
-    public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate.Builder... items) {
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(ItemLike itemLike) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(itemLike));
+    }
+
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(ItemLike... items) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(items));
+    }
+
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(TagKey<Item> tag) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(tag));
+    }
+
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate.Builder... items) {
         return inventoryTrigger(Arrays.stream(items).map(ItemPredicate.Builder::build).toArray(ItemPredicate[]::new));
     }
 
-    public static InventoryChangeTrigger.TriggerInstance inventoryTrigger(ItemPredicate... predicates) {
-        return new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, Arrays.stream(predicates).toList());
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
+        return CriteriaTriggers.INVENTORY_CHANGED.createCriterion(new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, List.of(predicates)));
     }
 
     // endregion

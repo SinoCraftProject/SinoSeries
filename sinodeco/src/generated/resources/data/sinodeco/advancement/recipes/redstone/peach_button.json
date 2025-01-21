@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sinodeco:marble_bricks"
+        "recipe": "sinodeco:peach_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "m": {
+    "material": {
       "conditions": {
         "items": [
           {
-            "items": "sinodeco:marble_block"
+            "items": "sinodeco:peach_planks"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "m"
+      "material"
     ]
   ],
   "rewards": {
     "recipes": [
-      "sinodeco:marble_bricks"
+      "sinodeco:peach_button"
     ]
   }
 }

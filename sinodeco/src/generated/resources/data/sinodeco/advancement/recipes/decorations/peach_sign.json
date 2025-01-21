@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sinodeco:marble_bricks"
+        "recipe": "sinodeco:peach_sign"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -11,7 +11,17 @@
       "conditions": {
         "items": [
           {
-            "items": "sinodeco:marble_block"
+            "items": "sinodeco:peach_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "s": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
           }
         ]
       },
@@ -21,12 +31,13 @@
   "requirements": [
     [
       "has_the_recipe",
-      "m"
+      "m",
+      "s"
     ]
   ],
   "rewards": {
     "recipes": [
-      "sinodeco:marble_bricks"
+      "sinodeco:peach_sign"
     ]
   }
 }

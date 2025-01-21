@@ -1,9 +1,9 @@
-// 1.21.1	2024-09-09T22:44:21.8646002	Recipes: sinobrush
+// 1.21.1	2025-01-21T15:53:02.5795703	Recipes: sinobrush
 2f98cc7ed1392d217cae590075eb3e753ba58fbf data/sinobrush/advancement/recipes/misc/brush.json
 be244caaf552c14cb5a527de36d7777729c2c270 data/sinobrush/advancement/recipes/misc/folded_fan.json
 41bbf475d47a0c714c60cb1ecb8610958c149e5a data/sinobrush/advancement/recipes/misc/ink_bottle.json
 8ba51a97485b1bc38be5dc6268fc91c52a82c373 data/sinobrush/advancement/recipes/misc/xuan_paper.json
 15abdf4fc95c9e63b52d4a93473e38e6e3542b34 data/sinobrush/recipe/brush.json
-8276a18e162341f01c914a8d246fce8cb9ef4975 data/sinobrush/recipe/folded_fan.json
+6b7cc85232e62c64b90a10d160b735777bbd45b7 data/sinobrush/recipe/folded_fan.json
 7206ac50923be747996c23b17ae93c24bcb981f2 data/sinobrush/recipe/ink_bottle.json
 dfdbd38986be4729ac549592ed2f0c7ceb346bbc data/sinobrush/recipe/xuan_paper.json

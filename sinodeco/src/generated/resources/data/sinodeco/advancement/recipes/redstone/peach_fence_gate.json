@@ -3,15 +3,25 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sinodeco:marble_bricks"
+        "recipe": "sinodeco:peach_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "m": {
+    "s": {
       "conditions": {
         "items": [
           {
-            "items": "sinodeco:marble_block"
+            "items": "minecraft:stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "w": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sinodeco:peach_planks"
           }
         ]
       },
@@ -21,12 +31,13 @@
   "requirements": [
     [
       "has_the_recipe",
-      "m"
+      "w",
+      "s"
     ]
   ],
   "rewards": {
     "recipes": [
-      "sinodeco:marble_bricks"
+      "sinodeco:peach_fence_gate"
     ]
   }
 }

@@ -2,16 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "sinodeco:marble_block"
+    "#": {
+      "item": "sinodeco:peach_planks"
     }
   },
   "pattern": [
-    "SS",
-    "SS"
+    "###"
   ],
   "result": {
-    "count": 4,
-    "id": "sinodeco:marble_bricks"
+    "count": 6,
+    "id": "sinodeco:peach_slab"
   }
 }

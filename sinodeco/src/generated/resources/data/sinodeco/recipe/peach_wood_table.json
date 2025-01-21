@@ -1,25 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "sinoseries:sinobrush",
+  "group": "tables",
   "key": {
-    "I": {
-      "item": "minecraft:iron_nugget"
-    },
     "P": {
-      "item": "minecraft:paper"
+      "item": "sinodeco:peach_planks"
     },
     "S": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "SPP",
-    "SPP",
-    "ISS"
+    "PPP",
+    "S S",
+    "S S"
   ],
   "result": {
     "count": 1,
-    "id": "sinobrush:folded_fan"
+    "id": "sinodeco:peach_wood_table"
   }
 }

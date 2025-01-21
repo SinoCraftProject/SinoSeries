@@ -2,6 +2,7 @@ package games.moegirl.sinocraft.sinodeco.data.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.recipe.AbstractRecipeProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.recipe.CommonRecipes;
 import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.data.gen.tag.SDItemTags;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -9,7 +10,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public class RecipeProvider extends AbstractRecipeProvider {
     public RecipeProvider(IDataGenContext context) {
@@ -25,32 +25,15 @@ public class RecipeProvider extends AbstractRecipeProvider {
                     .requires(Items.QUARTZ)
                     .unlockedBy("has_quartz", has(Items.QUARTZ))
                     .save(writer);
-            chiseled(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.CHISELED_MARBLE.get(), SDBlockItems.MARBLE_BLOCK.get());
-            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_PILLAR.get())
-                    .pattern("#")
-                    .pattern("#")
-                    .define('#', SDBlockItems.MARBLE_BLOCK.get())
-                    .unlockedBy("has_marble_blocks", has(SDItemTags.MARBLE_BLOCKS))
-                    .save(writer);
-            stairBuilder(SDBlockItems.MARBLE_STAIRS.get(), Ingredient.of(SDItemTags.MARBLE_BLOCKS))
-                    .unlockedBy("has_marble_blocks", has(SDItemTags.MARBLE_BLOCKS))
-                    .save(writer);
-            slabBuilder(RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_SLAB.get(), Ingredient.of(SDItemTags.MARBLE_BLOCKS))
-                    .unlockedBy("has_marble_blocks", has(SDItemTags.MARBLE_BLOCKS))
-                    .save(writer);
-            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_BRICKS.get())
-                    .pattern("##")
-                    .pattern("##")
-                    .define('#', SDBlockItems.MARBLE_BLOCK.get())
-                    .unlockedBy("has_marble_blocks", has(SDItemTags.MARBLE_BLOCKS))
-                    .save(writer);
-            stairBuilder(SDBlockItems.SMOOTH_MARBLE_STAIRS.get(), Ingredient.of(SDBlockItems.SMOOTH_MARBLE.get()))
-                    .unlockedBy("has_smooth_marble_block", has(SDBlockItems.SMOOTH_MARBLE.get()))
-                    .save(writer);
-            slabBuilder(RecipeCategory.BUILDING_BLOCKS, SDBlockItems.SMOOTH_MARBLE_SLAB.get(), Ingredient.of(SDBlockItems.SMOOTH_MARBLE.get()))
-                    .unlockedBy("has_smooth_marble_block", has(SDBlockItems.SMOOTH_MARBLE.get()))
-                    .save(writer);
-            wall(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_BALUSTRADE.get(), SDBlockItems.MARBLE_BLOCK.get());
+
+            CommonRecipes.chiseledBuilder(SDBlockItems.CHISELED_MARBLE.get(), SDBlockItems.MARBLE_BLOCK.get()).save(writer);
+            CommonRecipes.pillarBuilder(SDBlockItems.MARBLE_PILLAR.get(), SDBlockItems.MARBLE_BLOCK.get()).save(writer);
+            CommonRecipes.stairsBuilder(SDBlockItems.MARBLE_STAIRS.get(), SDItemTags.MARBLE_BLOCKS).save(writer);
+            CommonRecipes.slabBuilder(SDBlockItems.MARBLE_SLAB.get(), SDItemTags.MARBLE_BLOCKS).save(writer);
+            CommonRecipes.bricksBuilder(SDBlockItems.MARBLE_BRICKS.get(), SDBlockItems.MARBLE_BLOCK.get()).save(writer);
+            CommonRecipes.stairsBuilder(SDBlockItems.SMOOTH_MARBLE_STAIRS.get(), SDBlockItems.SMOOTH_MARBLE.get()).save(writer);
+            CommonRecipes.slabBuilder(SDBlockItems.SMOOTH_MARBLE_SLAB.get(), SDBlockItems.SMOOTH_MARBLE.get()).save(writer);
+            CommonRecipes.wallBuilder(SDBlockItems.MARBLE_BALUSTRADE.get(), SDBlockItems.MARBLE_BLOCK.get()).save(writer);
 
             smeltingResultFromBase(writer, SDBlockItems.SMOOTH_MARBLE.get(), SDBlockItems.MARBLE_BLOCK.get());
 
@@ -62,6 +45,32 @@ public class RecipeProvider extends AbstractRecipeProvider {
             stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.SMOOTH_MARBLE_STAIRS.get(), SDBlockItems.SMOOTH_MARBLE.get());
             stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.SMOOTH_MARBLE_SLAB.get(), SDBlockItems.SMOOTH_MARBLE.get(), 2);
             stonecutterResultFromBase(writer, RecipeCategory.BUILDING_BLOCKS, SDBlockItems.MARBLE_BALUSTRADE.get(), SDBlockItems.MARBLE_BLOCK.get());
+        }
+
+        {
+            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SDBlockItems.PEACH_WOOD_TABLE.get())
+                    .pattern("PPP")
+                    .pattern("S S")
+                    .pattern("S S")
+                    .define('P', SDBlockItems.PEACH_PLANKS.get())
+                    .define('S', Items.STICK)
+                    .unlockedBy("planks", has(SDBlockItems.PEACH_PLANKS.get()))
+                    .group("tables")
+                    .save(writer);
+
+            CommonRecipes.logsToWoodBuilder(SDBlockItems.PEACH_WOOD.get(), SDBlockItems.PEACH_LOG.get());
+            CommonRecipes.logsToWoodBuilder(SDBlockItems.STRIPPED_PEACH_WOOD.get(), SDBlockItems.STRIPPED_PEACH_LOG.get());
+            CommonRecipes.logsToPlanksBuilder(SDBlockItems.PEACH_PLANKS.get(), SDItemTags.PEACH_LOGS, 4);
+            CommonRecipes.stairsBuilder(SDBlockItems.PEACH_STAIRS.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.slabBuilder(SDBlockItems.PEACH_SLAB.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.fenceBuilder(SDBlockItems.PEACH_FENCE.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.fenceGateBuilder(SDBlockItems.PEACH_FENCE_GATE.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.doorBuilder(SDBlockItems.PEACH_DOOR.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.trapdoorBuilder(SDBlockItems.PEACH_TRAPDOOR.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.pressurePlateBuilder(SDBlockItems.PEACH_PRESSURE_PLATE.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);;
+            CommonRecipes.buttonBuilder(SDBlockItems.PEACH_BUTTON.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.signBuilder(SDBlockItems.PEACH_SIGN.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
+            CommonRecipes.hangingSignBuilder(SDBlockItems.PEACH_HANGING_SIGN.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
         }
     }
 }
