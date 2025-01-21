@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "sinodeco:block/peach_log"
+    "all": "sinodeco:block/stripped_peach_log"
   }
 }

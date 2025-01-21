@@ -11,7 +11,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -27,7 +26,8 @@ public class SDBlocks {
         BLOCKS.register();
     }
 
-    public static final IRegRef<Block> WOODEN_TABLE = BLOCKS.register("wooden_table", WoodenTableBlock::new);
+//    public static final IRegRef<Block> WOODEN_TABLE = BLOCKS.register("wooden_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> PEACH_WOOD_TABLE = BLOCKS.register("peach_wood_table", WoodenTableBlock::new);
 
     public static final IRegRef<Block> MARBLE_BLOCK = BLOCKS.register("marble_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).instrument(NoteBlockInstrument.HARP).requiresCorrectToolForDrops().strength(0.8F)));
     public static final IRegRef<Block> CHISELED_MARBLE = BLOCKS.register("chiseled_marble", () -> new Block(BlockBehaviour.Properties.ofFullCopy(MARBLE_BLOCK.get())));

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "sinodeco:block/peach_door_bottom",
+    "top": "sinodeco:block/peach_door_top"
+  }
+}

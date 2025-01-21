@@ -5,17 +5,10 @@ import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import games.moegirl.sinocraft.sinodeco.SinoDeco;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
-import games.moegirl.sinocraft.sinodeco.block.abstracted.SDButtonBlock;
-import games.moegirl.sinocraft.sinodeco.block.abstracted.SDPressurePlateBlock;
-import games.moegirl.sinocraft.sinodeco.block.abstracted.SDStairBlock;
-import games.moegirl.sinocraft.sinodeco.block.abstracted.SDTrapdoorBlock;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
@@ -26,7 +19,7 @@ public class SDBlockItems {
         ITEMS.register();
     }
 
-    public static final Supplier<Item> WOODEN_TABLE = ITEMS.register("wooden_table", () -> new BlockItem(SDBlocks.WOODEN_TABLE.get(), decoTab()));
+    public static final Supplier<Item> PEACH_WOOD_TABLE = ITEMS.register("peach_wood_table", () -> new BlockItem(SDBlocks.PEACH_WOOD_TABLE.get(), decoTab()));
 
     public static final IRegRef<Item> MARBLE_BLOCK = ITEMS.register("marble_block", () -> new BlockItem(SDBlocks.MARBLE_BLOCK.get(), decoTab()));
     public static final IRegRef<Item> CHISELED_MARBLE = ITEMS.register("chiseled_marble", () -> new BlockItem(SDBlocks.CHISELED_MARBLE.get(), decoTab()));

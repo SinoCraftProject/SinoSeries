@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "sinodeco:block/peach_wood"
+      "model": "sinodeco:block/stripped_peach_wood"
     }
   }
 }

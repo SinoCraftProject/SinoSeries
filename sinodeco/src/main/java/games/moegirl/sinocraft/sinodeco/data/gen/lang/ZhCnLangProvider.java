@@ -13,7 +13,7 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
 
     @Override
     public void generateData(LanguageProviderDelegateBase delegate) {
-        delegate.addBlock(SDBlocks.WOODEN_TABLE.get(), "木桌");
+        delegate.addBlock(SDBlocks.PEACH_WOOD_TABLE.get(), "桃木桌");
 
         delegate.addBlock(SDBlocks.MARBLE_BLOCK.get(), "大理石块");
         delegate.addBlock(SDBlocks.CHISELED_MARBLE.get(), "雕纹大理石块");

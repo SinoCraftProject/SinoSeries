@@ -61,7 +61,7 @@ public class WoodenTableBlock extends Block {
             }
 
             visited.add(p);
-            if (!isDeskBlock(level, p)) {
+            if (!isSameBlock(level, p)) {
                 continue;
             }
 
@@ -70,9 +70,9 @@ public class WoodenTableBlock extends Block {
         }
     }
 
-    private boolean isDeskBlock(Level level, BlockPos pos) {
+    private boolean isSameBlock(Level level, BlockPos pos) {
         if (level.isLoaded(pos)) {
-            return level.getBlockState(pos).getBlock() instanceof WoodenTableBlock;
+            return level.getBlockState(pos).getBlock() == this;
         }
         return false;
     }
@@ -90,7 +90,7 @@ public class WoodenTableBlock extends Block {
                 if (x == 0 && z == 0) {
                     continue;
                 }
-                state = state.setValue(CONNECTION_PROPERTIES[cursor], isDeskBlock(level, neighbor));
+                state = state.setValue(CONNECTION_PROPERTIES[cursor], isSameBlock(level, neighbor));
                 cursor += 1;
             }
         }
@@ -253,8 +253,6 @@ public class WoodenTableBlock extends Block {
             this(name, rotate, shape, condition, true);
         }
     }
-
-
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

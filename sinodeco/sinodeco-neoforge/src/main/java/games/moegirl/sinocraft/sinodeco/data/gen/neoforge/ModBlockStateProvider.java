@@ -2,7 +2,9 @@ package games.moegirl.sinocraft.sinodeco.data.gen.neoforge;
 
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import games.moegirl.sinocraft.sinodeco.block.WoodenTableBlock;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -12,9 +14,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         super(output, modid, exFileHelper);
     }
 
+    protected ResourceLocation key(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
+    }
+
+    protected String path(Block block) {
+        return key(block).getPath();
+    }
+
     @Override
     protected void registerStatesAndModels() {
-        tableModels(SDBlocks.WOODEN_TABLE.get());
+        tableModels(SDBlocks.PEACH_WOOD_TABLE.get(), modLoc("block/peach_wood_table"));
 
         {
             simpleBlock(SDBlocks.MARBLE_BLOCK.get(), models().cubeColumn("marble_block", modLoc("block/marble_block"), modLoc("block/marble_block_top")));
@@ -35,15 +45,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
             logBlock(SDBlocks.PEACH_LOG.get());
             simpleBlock(SDBlocks.PEACH_WOOD.get(), models().cubeAll("peach_wood", modLoc("block/peach_log")));
             logBlock(SDBlocks.STRIPPED_PEACH_LOG.get());
-            simpleBlock(SDBlocks.STRIPPED_PEACH_WOOD.get(), models().cubeAll("peach_wood", modLoc("block/stripped_peach_log")));
+            simpleBlock(SDBlocks.STRIPPED_PEACH_WOOD.get(), models().cubeAll("stripped_peach_wood", modLoc("block/stripped_peach_log")));
             simpleBlock(SDBlocks.PEACH_PLANKS.get());
             stairsBlock(SDBlocks.PEACH_STAIRS.get(), planks);
             slabBlock(SDBlocks.PEACH_SLAB.get(), planks, planks);
             models().withExistingParent("peach_fence_inventory", mcLoc("block/fence_inventory")).texture("texture", planks);
             fenceBlock(SDBlocks.PEACH_FENCE.get(), planks);
             fenceGateBlock(SDBlocks.PEACH_FENCE_GATE.get(), planks);
-//            doorBlock(SDBlocks.PEACH_DOOR.get(), modLoc("block/peach_door_bottom"), modLoc("block/peach_door_top"));  // Todo: texture
-//            trapdoorBlock(SDBlocks.PEACH_TRAPDOOR.get(), modLoc("block/peach_trapdoor"), true);   // Todo: texture
+            doorBlock(SDBlocks.PEACH_DOOR.get(), modLoc("block/peach_door_bottom"), modLoc("block/peach_door_top"));  // Todo: texture
+            trapdoorBlock(SDBlocks.PEACH_TRAPDOOR.get(), modLoc("block/peach_trapdoor"), true);   // Todo: texture
             pressurePlateBlock(SDBlocks.PEACH_PRESSURE_PLATE.get(), planks);
             models().withExistingParent("peach_button_inventory", mcLoc("block/button_inventory")).texture("texture", planks);
             buttonBlock(SDBlocks.PEACH_BUTTON.get(), planks);
@@ -51,39 +61,42 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void tableModels(Block block) {
-        {
-            var builder = getMultipartBuilder(block);
+    private void tableModels(Block block, ResourceLocation texture) {
+        var builder = getMultipartBuilder(block);
 
-            for (var i = 0; i < WoodenTableBlock.PARTS.length; i++) {
-                var north = (i & 0b1000) != 0;
-                var east = (i & 0b0100) != 0;
-                var south = (i & 0b0010) != 0;
-                var west = (i & 0b0001) != 0;
+        models().withExistingParent("block/" + path(block), modLoc("block/wooden_table"))
+                .texture("0", texture);
 
-                var extras = WoodenTableBlock.PARTS[i];
-                for (var parts : extras) {
-                    if (parts == null) {
+        for (var i = 0; i < WoodenTableBlock.PARTS.length; i++) {
+            var north = (i & 0b1000) != 0;
+            var east = (i & 0b0100) != 0;
+            var south = (i & 0b0010) != 0;
+            var west = (i & 0b0001) != 0;
+
+            var extras = WoodenTableBlock.PARTS[i];
+            for (var parts : extras) {
+                if (parts == null) {
+                    continue;
+                }
+
+                for (var p : parts) {
+                    if (p == null) {
                         continue;
                     }
 
-                    for (var p : parts) {
-                        if (p == null) {
-                            continue;
-                        }
+                    var part = builder.part()
+                            .modelFile(models()
+                                    .withExistingParent("block/" + path(block) + "_" + p.name(), modLoc("block/wooden_table_" + p.name()))
+                                    .texture("0", texture))
+                            .rotationY(p.rotate())
+                            .addModel()
+                            .condition(WoodenTableBlock.NORTH, north)
+                            .condition(WoodenTableBlock.EAST, east)
+                            .condition(WoodenTableBlock.SOUTH, south)
+                            .condition(WoodenTableBlock.WEST, west);
 
-                        var part = builder.part()
-                                .modelFile(models().getExistingFile(modLoc("block/wooden_table_" + p.name())))
-                                .rotationY(p.rotate())
-                                .addModel()
-                                .condition(WoodenTableBlock.NORTH, north)
-                                .condition(WoodenTableBlock.EAST, east)
-                                .condition(WoodenTableBlock.SOUTH, south)
-                                .condition(WoodenTableBlock.WEST, west);
-
-                        if (p.condition() != null) {
-                            part.condition(p.condition(), p.conditionValue());
-                        }
+                    if (p.condition() != null) {
+                        part.condition(p.condition(), p.conditionValue());
                     }
                 }
             }

@@ -13,7 +13,7 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
 
     @Override
     public void generateData(LanguageProviderDelegateBase delegate) {
-        delegate.addBlock(SDBlocks.WOODEN_TABLE.get(), "Wooden Table");
+        delegate.addBlock(SDBlocks.PEACH_WOOD_TABLE.get(), "Peach Wood Table");
 
         delegate.addBlock(SDBlocks.MARBLE_BLOCK.get(), "Marble Block");
         delegate.addBlock(SDBlocks.CHISELED_MARBLE.get(), "Chiseled Marble Block");
