@@ -1,0 +1,6 @@
+{
+  "parent": "sinodeco:block/wooden_table_leg",
+  "textures": {
+    "0": "sinodeco:block/warped_wood_table"
+  }
+}

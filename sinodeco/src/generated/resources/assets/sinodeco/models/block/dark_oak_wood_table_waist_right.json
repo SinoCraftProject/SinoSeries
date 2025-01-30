@@ -1,0 +1,6 @@
+{
+  "parent": "sinodeco:block/wooden_table_waist_right",
+  "textures": {
+    "0": "sinodeco:block/dark_oak_wood_table"
+  }
+}

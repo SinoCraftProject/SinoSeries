@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
 public class RecipeProvider extends AbstractRecipeProvider {
@@ -48,16 +49,21 @@ public class RecipeProvider extends AbstractRecipeProvider {
         }
 
         {
-            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SDBlockItems.PEACH_WOOD_TABLE.get())
-                    .pattern("PPP")
-                    .pattern("S S")
-                    .pattern("S S")
-                    .define('P', SDBlockItems.PEACH_PLANKS.get())
-                    .define('S', Items.STICK)
-                    .unlockedBy("planks", has(SDBlockItems.PEACH_PLANKS.get()))
-                    .group("tables")
-                    .save(writer);
+            table(SDBlockItems.ACACIA_WOOD_TABLE.get(), Items.ACACIA_PLANKS, writer);
+            table(SDBlockItems.BAMBOO_WOOD_TABLE.get(), Items.BAMBOO_PLANKS, writer);
+            table(SDBlockItems.BIRCH_WOOD_TABLE.get(), Items.BIRCH_PLANKS, writer);
+            table(SDBlockItems.CHERRY_WOOD_TABLE.get(), Items.CHERRY_PLANKS, writer);
+            table(SDBlockItems.CRIMSON_WOOD_TABLE.get(), Items.CRIMSON_PLANKS, writer);
+            table(SDBlockItems.DARK_OAK_WOOD_TABLE.get(), Items.DARK_OAK_PLANKS, writer);
+            table(SDBlockItems.JUNGLE_WOOD_TABLE.get(), Items.JUNGLE_PLANKS, writer);
+            table(SDBlockItems.MANGROVE_WOOD_TABLE.get(), Items.MANGROVE_PLANKS, writer);
+            table(SDBlockItems.OAK_WOOD_TABLE.get(), Items.OAK_PLANKS, writer);
+            table(SDBlockItems.SPRUCE_WOOD_TABLE.get(), Items.SPRUCE_PLANKS, writer);
+            table(SDBlockItems.WARPED_WOOD_TABLE.get(), Items.WARPED_PLANKS, writer);
+            table(SDBlockItems.PEACH_WOOD_TABLE.get(), SDBlockItems.PEACH_PLANKS.get(), writer);
+        }
 
+        {
             CommonRecipes.logsToWoodBuilder(SDBlockItems.PEACH_WOOD.get(), SDBlockItems.PEACH_LOG.get());
             CommonRecipes.logsToWoodBuilder(SDBlockItems.STRIPPED_PEACH_WOOD.get(), SDBlockItems.STRIPPED_PEACH_LOG.get());
             CommonRecipes.logsToPlanksBuilder(SDBlockItems.PEACH_PLANKS.get(), SDItemTags.PEACH_LOGS, 4);
@@ -72,5 +78,17 @@ public class RecipeProvider extends AbstractRecipeProvider {
             CommonRecipes.signBuilder(SDBlockItems.PEACH_SIGN.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
             CommonRecipes.hangingSignBuilder(SDBlockItems.PEACH_HANGING_SIGN.get(), SDBlockItems.PEACH_PLANKS.get()).save(writer);
         }
+    }
+
+    private void table(Item result, Item planks, RecipeOutput writer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result)
+                .pattern("PPP")
+                .pattern("S S")
+                .pattern("S S")
+                .define('P', planks)
+                .define('S', Items.STICK)
+                .unlockedBy("planks", has(planks))
+                .group("tables")
+                .save(writer);
     }
 }

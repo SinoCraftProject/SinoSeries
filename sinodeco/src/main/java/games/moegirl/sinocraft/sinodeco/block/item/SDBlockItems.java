@@ -19,6 +19,17 @@ public class SDBlockItems {
         ITEMS.register();
     }
 
+    public static final Supplier<Item> ACACIA_WOOD_TABLE = ITEMS.register("acacia_wood_table", () -> new BlockItem(SDBlocks.ACACIA_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> BAMBOO_WOOD_TABLE = ITEMS.register("bamboo_wood_table", () -> new BlockItem(SDBlocks.BAMBOO_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> BIRCH_WOOD_TABLE = ITEMS.register("birch_wood_table", () -> new BlockItem(SDBlocks.BIRCH_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> CHERRY_WOOD_TABLE = ITEMS.register("cherry_wood_table", () -> new BlockItem(SDBlocks.CHERRY_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> CRIMSON_WOOD_TABLE = ITEMS.register("crimson_wood_table", () -> new BlockItem(SDBlocks.CRIMSON_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> DARK_OAK_WOOD_TABLE = ITEMS.register("dark_oak_wood_table", () -> new BlockItem(SDBlocks.DARK_OAK_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> JUNGLE_WOOD_TABLE = ITEMS.register("jungle_wood_table", () -> new BlockItem(SDBlocks.JUNGLE_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> MANGROVE_WOOD_TABLE = ITEMS.register("mangrove_wood_table", () -> new BlockItem(SDBlocks.MANGROVE_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> OAK_WOOD_TABLE = ITEMS.register("oak_wood_table", () -> new BlockItem(SDBlocks.OAK_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> SPRUCE_WOOD_TABLE = ITEMS.register("spruce_wood_table", () -> new BlockItem(SDBlocks.SPRUCE_WOOD_TABLE.get(), decoTab()));
+    public static final Supplier<Item> WARPED_WOOD_TABLE = ITEMS.register("warped_wood_table", () -> new BlockItem(SDBlocks.WARPED_WOOD_TABLE.get(), decoTab()));
     public static final Supplier<Item> PEACH_WOOD_TABLE = ITEMS.register("peach_wood_table", () -> new BlockItem(SDBlocks.PEACH_WOOD_TABLE.get(), decoTab()));
 
     public static final IRegRef<Item> MARBLE_BLOCK = ITEMS.register("marble_block", () -> new BlockItem(SDBlocks.MARBLE_BLOCK.get(), decoTab()));

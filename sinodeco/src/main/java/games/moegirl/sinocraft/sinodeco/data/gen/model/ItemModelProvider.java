@@ -14,7 +14,6 @@ public class ItemModelProvider extends AbstractItemModelProvider {
 
     @Override
     public void generateModels(ItemModelProviderDelegateBase<?> delegate) {
-        delegate.blockItem(SDBlocks.PEACH_WOOD_TABLE.get());
         delegate.blockItem(SDBlocks.MARBLE_BALUSTRADE.get(), "inventory");
 
         delegate.basicItem(SDBlockItems.PEACH_DOOR.get());

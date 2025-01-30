@@ -1,11 +1,20 @@
-// 1.21.1	2025-01-21T11:32:04.0879679	Item Models: sinodeco
+// 1.21.1	2025-01-30T16:29:20.7541733	Item Models: sinodeco
+babf002af2ca8952759135eb82cc5bcc32c1e4e4 assets/sinodeco/models/item/acacia_wood_table.json
+2dda1131353db769a8c2c667f2c72db8cf22a388 assets/sinodeco/models/item/bamboo_wood_table.json
+91763e55d0868a18f382d3e1f8428f0824c34271 assets/sinodeco/models/item/birch_wood_table.json
+9f0fc0a89950414bfc68249962416286dd8c3874 assets/sinodeco/models/item/cherry_wood_table.json
 fe490000e61f30f6fc83e31b876d3c49e582e115 assets/sinodeco/models/item/chiseled_marble.json
+98ea6959d5aca03bf3dce7f3ed6327a50325bb09 assets/sinodeco/models/item/crimson_wood_table.json
+795ead9e7c06b45a4a7ec223b3270999dbc80b69 assets/sinodeco/models/item/dark_oak_wood_table.json
+4c1884ea9845325076948a5cb322de3f1aa9312a assets/sinodeco/models/item/jungle_wood_table.json
+5c539c91ca397c9c6f44e7284fd899a1c817938b assets/sinodeco/models/item/mangrove_wood_table.json
 5a71ec3cffdfa2e0815d6b97d64846de3b6ed4d0 assets/sinodeco/models/item/marble_balustrade.json
 5cefa7c5824ea4859af3b0f35db0d3a9588c5ae3 assets/sinodeco/models/item/marble_block.json
 962471e274de93dcf717039f7c2e1a483eaeb431 assets/sinodeco/models/item/marble_bricks.json
 3a0586f6fc48f72f747ab5e77a8b1c269b492714 assets/sinodeco/models/item/marble_pillar.json
 42ac0c317b4d2d53f8b4a4ac1d7eec1545ad0951 assets/sinodeco/models/item/marble_slab.json
 cf9bb2c4e30581106bcd2cf53e7feb4fc206a149 assets/sinodeco/models/item/marble_stairs.json
+f28ff876e71c524db365217036471b19bd75f275 assets/sinodeco/models/item/oak_wood_table.json
 0bcda29185e3796724dab28e92ffe74fadafb634 assets/sinodeco/models/item/peach_boat.json
 8e22cf449d5de77902a063e61ec8f31abac4c5e3 assets/sinodeco/models/item/peach_button.json
 eb095a616a998872939c8459ef3752056bf5147b assets/sinodeco/models/item/peach_chest.json
@@ -28,5 +37,7 @@ e0e55d4e1c4d7acc86749b8d75890d0a45b3685d assets/sinodeco/models/item/peach_trapd
 d3bca20c46d90358953d83a01a2a7b7f193c7d43 assets/sinodeco/models/item/smooth_marble.json
 315e8c195e235b08ca9dc572cfbad9614b004295 assets/sinodeco/models/item/smooth_marble_slab.json
 ed7fa3086649eccc476011a19b937dcc19f84300 assets/sinodeco/models/item/smooth_marble_stairs.json
+e91752e8e638ef071ef869d3bac0dd35f56893b8 assets/sinodeco/models/item/spruce_wood_table.json
 259f3f21ea883d1d26bbfb65972ed8476c4d5b43 assets/sinodeco/models/item/stripped_peach_log.json
 dfc8aafa8375b7af8f16854df3fd2e3543b3beae assets/sinodeco/models/item/stripped_peach_wood.json
+475d3e9c7621f0eebb8be02c8afb1f18ca5bc1ff assets/sinodeco/models/item/warped_wood_table.json

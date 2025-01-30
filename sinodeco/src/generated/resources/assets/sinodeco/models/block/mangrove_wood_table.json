@@ -1,0 +1,7 @@
+{
+  "parent": "sinodeco:block/wooden_table",
+  "textures": {
+    "0": "sinodeco:block/mangrove_wood_table",
+    "particle": "sinodeco:block/mangrove_wood_table_particle"
+  }
+}

@@ -27,6 +27,17 @@ public class SDBlocks {
     }
 
 //    public static final IRegRef<Block> WOODEN_TABLE = BLOCKS.register("wooden_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> ACACIA_WOOD_TABLE = BLOCKS.register("acacia_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> BAMBOO_WOOD_TABLE = BLOCKS.register("bamboo_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> BIRCH_WOOD_TABLE = BLOCKS.register("birch_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> CHERRY_WOOD_TABLE = BLOCKS.register("cherry_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> CRIMSON_WOOD_TABLE = BLOCKS.register("crimson_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> DARK_OAK_WOOD_TABLE = BLOCKS.register("dark_oak_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> JUNGLE_WOOD_TABLE = BLOCKS.register("jungle_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> MANGROVE_WOOD_TABLE = BLOCKS.register("mangrove_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> OAK_WOOD_TABLE = BLOCKS.register("oak_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> SPRUCE_WOOD_TABLE = BLOCKS.register("spruce_wood_table", WoodenTableBlock::new);
+    public static final IRegRef<Block> WARPED_WOOD_TABLE = BLOCKS.register("warped_wood_table", WoodenTableBlock::new);
     public static final IRegRef<Block> PEACH_WOOD_TABLE = BLOCKS.register("peach_wood_table", WoodenTableBlock::new);
 
     public static final IRegRef<Block> MARBLE_BLOCK = BLOCKS.register("marble_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).instrument(NoteBlockInstrument.HARP).requiresCorrectToolForDrops().strength(0.8F)));

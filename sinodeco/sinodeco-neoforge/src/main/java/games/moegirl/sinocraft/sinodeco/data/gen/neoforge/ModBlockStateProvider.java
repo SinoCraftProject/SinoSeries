@@ -24,6 +24,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        tableModels(SDBlocks.ACACIA_WOOD_TABLE.get(), modLoc("block/acacia_wood_table"));
+        tableModels(SDBlocks.BAMBOO_WOOD_TABLE.get(), modLoc("block/bamboo_wood_table"));
+        tableModels(SDBlocks.BIRCH_WOOD_TABLE.get(), modLoc("block/birch_wood_table"));
+        tableModels(SDBlocks.CHERRY_WOOD_TABLE.get(), modLoc("block/cherry_wood_table"));
+        tableModels(SDBlocks.CRIMSON_WOOD_TABLE.get(), modLoc("block/crimson_wood_table"));
+        tableModels(SDBlocks.DARK_OAK_WOOD_TABLE.get(), modLoc("block/dark_oak_wood_table"));
+        tableModels(SDBlocks.JUNGLE_WOOD_TABLE.get(), modLoc("block/jungle_wood_table"));
+        tableModels(SDBlocks.MANGROVE_WOOD_TABLE.get(), modLoc("block/mangrove_wood_table"));
+        tableModels(SDBlocks.OAK_WOOD_TABLE.get(), modLoc("block/oak_wood_table"));
+        tableModels(SDBlocks.SPRUCE_WOOD_TABLE.get(), modLoc("block/spruce_wood_table"));
+        tableModels(SDBlocks.WARPED_WOOD_TABLE.get(), modLoc("block/warped_wood_table"));
         tableModels(SDBlocks.PEACH_WOOD_TABLE.get(), modLoc("block/peach_wood_table"));
 
         {
@@ -65,7 +76,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         var builder = getMultipartBuilder(block);
 
         models().withExistingParent("block/" + path(block), modLoc("block/wooden_table"))
-                .texture("0", texture);
+                .texture("0", texture)
+                .texture("particle", modLoc(texture.getPath() + "_particle"));
 
         for (var i = 0; i < WoodenTableBlock.PARTS.length; i++) {
             var north = (i & 0b1000) != 0;
