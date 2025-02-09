@@ -168,7 +168,7 @@ ext.commonModProjects.each { Project p ->
         version = rootProject.ext.getVersion(p)
 
         if (project.hasProperty('mod_version')) {
-            rootProject.logger.lifecycle("Project ${p.name} will use self-version string: ${version}")
+            rootProject.logger.lifecycle("Project ${p.name} will use independent version string: ${version}")
         }
 
         loom {
