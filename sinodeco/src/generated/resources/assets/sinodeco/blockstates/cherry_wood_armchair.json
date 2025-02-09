@@ -2,7 +2,8 @@
   "multipart": [
     {
       "apply": {
-        "model": "sinodeco:block/cherry_wood_armchair"
+        "model": "sinodeco:block/cherry_wood_armchair",
+        "y": 180
       },
       "when": {
         "facing": "south"
@@ -11,7 +12,7 @@
     {
       "apply": {
         "model": "sinodeco:block/cherry_wood_armchair",
-        "y": 90
+        "y": 270
       },
       "when": {
         "facing": "west"
@@ -19,8 +20,7 @@
     },
     {
       "apply": {
-        "model": "sinodeco:block/cherry_wood_armchair",
-        "y": 180
+        "model": "sinodeco:block/cherry_wood_armchair"
       },
       "when": {
         "facing": "north"
@@ -29,7 +29,7 @@
     {
       "apply": {
         "model": "sinodeco:block/cherry_wood_armchair",
-        "y": 270
+        "y": 90
       },
       "when": {
         "facing": "east"

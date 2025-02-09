@@ -143,9 +143,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         for (var i = 0; i < 4; i++) {
             var direction = Direction.from2DDataValue(i);
+            var p = (i + 2) % 4;
             builder.part()
                     .modelFile(model)
-                    .rotationY(i * 90)
+                    .rotationY(p * 90)
                     .addModel()
                     .condition(HorizontalDirectionalBlock.FACING, direction)
                     .end();

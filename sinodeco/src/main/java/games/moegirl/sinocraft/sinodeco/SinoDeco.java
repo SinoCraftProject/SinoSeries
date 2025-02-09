@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.data.gen.SDData;
+import games.moegirl.sinocraft.sinodeco.entity.SDEntities;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
 import org.slf4j.Logger;
 
@@ -17,7 +18,12 @@ public class SinoDeco {
         SDBlocks.register();
         SDBlockItems.register();
         SDItems.register();
+        SDEntities.register();
 
         SDData.register();
+    }
+
+    public static void initClient() {
+
     }
 }

@@ -1,6 +1,8 @@
 package games.moegirl.sinocraft.sinodeco.block;
 
 import com.mojang.serialization.MapCodec;
+import games.moegirl.sinocraft.sinodeco.entity.DummyChairEntity;
+import games.moegirl.sinocraft.sinodeco.entity.SDEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +28,7 @@ public class WoodenArmchairBlock extends HorizontalDirectionalBlock {
                 .forceSolidOn()
                 .dynamicShape()
                 .strength(2.5f)
+                .noCollission() // Todo: shape
                 .noOcclusion());
     }
 
@@ -58,7 +62,17 @@ public class WoodenArmchairBlock extends HorizontalDirectionalBlock {
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                         Player player, BlockHitResult hitResult) {
-        // Todo: sit on it.
-        return super.useWithoutItem(state, level, pos, player, hitResult);
+        var entities = level.getEntitiesOfClass(DummyChairEntity.class, new AABB(pos));
+        if (!entities.isEmpty()) {
+            return InteractionResult.FAIL;
+        }
+
+        var chair = new DummyChairEntity(SDEntities.DUMMY_CHAIR.get(), level);
+        chair.setPos(pos.getCenter());
+        chair.setYRot(state.getValue(FACING).toYRot());
+        level.addFreshEntity(chair);
+        player.startRiding(chair);
+
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 }

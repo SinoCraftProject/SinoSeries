@@ -7,6 +7,7 @@ import games.moegirl.sinocraft.sinodeco.SinoDeco;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.phys.Vec3;
 
 public class SDEntities {
     public static final IRegistry<EntityType<?>> ENTITY_TYPES = RegistryManager.obtain(SinoDeco.MODID, Registries.ENTITY_TYPE);
@@ -17,9 +18,9 @@ public class SDEntities {
     }
 
     public static final IRegRef<EntityType<DummyChairEntity>> DUMMY_CHAIR = ENTITY_TYPES.register("dummy_chair", () -> EntityType.Builder.of(DummyChairEntity::new, MobCategory.MISC)
-            .sized(1, 1)
+            .sized(0.6F, 0.6F)
+            .passengerAttachments(new Vec3(0, 0, 0))
             .fireImmune()
-            .noSave()
             .noSummon()
             .build("dummy_chair"));
 }
