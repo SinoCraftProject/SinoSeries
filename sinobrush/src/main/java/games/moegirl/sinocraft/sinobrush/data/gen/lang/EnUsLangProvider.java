@@ -33,16 +33,14 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.DRAWING_AUTHOR_UNKNOWN, "Anonymous");
         delegate.add(SBRConstants.Translation.DRAWING_DATE_LABEL, "Date of Completion %2$s/%3$s/%1$s %4$s:%5$s:%6$s");
 
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN, "展此扇，上有淡墨河山");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN, "携此扇，无惧此生风雨");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把折扇");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_WROTE, "一把折扇，上面写着一些字");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_1, "Unfold this fan, and mountains and rivers emerge in soft ink.");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_2, "Carry this fan, and fear no storms of life.");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_EMPTY, "A folding fan.");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "A folding fan, inscribed with some words: %s");
 
         delegate.add(SBRConstants.Translation.DESCRIPTION_ITEM_COLORED, "Dyed (%1$s,%2$s,%3$s)");
         delegate.add(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, "Expended %1$s times");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FILLED_XUAN_PAPER_SIZE, "Width: %1$s, Height: %2$s");
-
-        delegate.add(SBRConstants.Translation.HUD_FAN_PREFIX, "对方的折扇上写着：");
 
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_SAVE, "Save the canvas to an image");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_COPY, "Left click to copy, right click to paste");
@@ -59,14 +57,13 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "Sign failed: Why you want write without a writing brush?");
 
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "SinoBrush");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "The painting that used color to depict all walks of life,\n" +
-                "while retained black and white to render the beauty of ages.");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_NAME, "Writing on the paper");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC, "Sketching those features onto the paper\nNot distinguishing between fairness or homeliness");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_NAME, "踏遍山海");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_DESC, "传说，说书人深湖在 TeaCon 演讲时就用过这把扇子\n他浪迹天地，无长剑在手\n三寸惊堂木，将故事传颂");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_NAME, "侠肝义胆");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_DESC, "此展折扇，此任平生不惧风与雪");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "Painting Lives by Brush, Writing Elegance in Ink.");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_NAME, "Brushing Grace Upon Paper, no matter Fair or Faint");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC, "Let ink dance upon the canvas of paper");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_NAME, "Traversing Mountains and Seas");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_DESC, "Legend has it that the storyteller Taoism Deeplake once wielded this very fan at TeaCon.\nHe roamed the world, no sword in hand,\nAlone, he carried his tales across time.");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_NAME, "Chivalrous Heart and Righteous Spirit");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_UNFOLD_FAN_DESC, "With this folding fan in hand,\nI shall face neither wind nor snow with fear.");
 
         delegate.addItemTag(SBRItemTags.FAN, "Folding Fan");
         delegate.addItemTag(SBRItemTags.XUAN_PAPER, "Xuan Paper");

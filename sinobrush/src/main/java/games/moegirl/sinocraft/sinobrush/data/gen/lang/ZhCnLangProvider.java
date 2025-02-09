@@ -33,16 +33,14 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.DRAWING_AUTHOR_UNKNOWN, "佚名");
         delegate.add(SBRConstants.Translation.DRAWING_DATE_LABEL, "着墨日期：%1$s年 %2$s月 %3$s日 %4$s:%5$s:%6$s");
 
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN, "展此扇，上有淡墨河山");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN, "携此扇，无惧此生风雨");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把折扇");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_WROTE, "一把折扇，上面写着一些字");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_1, "展此扇，上有淡墨河山");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_2, "携此扇，无惧此生风雨");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_EMPTY, "一把折扇");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把折扇，上面写着：%s");
 
         delegate.add(SBRConstants.Translation.DESCRIPTION_ITEM_COLORED, "已染色 (%1$s,%2$s,%3$s)");
         delegate.add(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, "已扩展 %1$s 次");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FILLED_XUAN_PAPER_SIZE, "宽 %1$s，高 %2$s");
-
-        delegate.add(SBRConstants.Translation.HUD_FAN_PREFIX, "对方的折扇上写着：");
 
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_SAVE, "保存画布为图片");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_COPY, "左键复制，右键粘贴");
@@ -58,8 +56,8 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "落款失败：请取走之前的作品");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "落款失败：不用笔画画，你是怎么做到的？");
 
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "丹青描绘浮生，云墨书尽芳华");
-        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "欢迎游玩《华夏云墨》");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "华夏云墨");
+        delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "丹青描绘浮生，云墨书尽芳华");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_NAME, "纸上描眉目，不辨妍或媸");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_BRUSH_DESC, "在纸上着墨");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_FAN_NAME, "踏遍山海");

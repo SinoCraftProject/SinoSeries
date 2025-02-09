@@ -1,8 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SBRConstants;
-import games.moegirl.sinocraft.sinobrush.item.component.FanData;
-import games.moegirl.sinocraft.sinobrush.item.component.SBRDataComponents;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -11,10 +9,8 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -29,9 +25,9 @@ public class FoldedFanItem extends FanItem {
     protected void appendTooltips(ItemStack stack, List<Component> tooltip) {
         var lines = getLines(stack);
         if (lines.isEmpty()) {
-            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_2).withStyle(ChatFormatting.GRAY));
         } else {
-            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_WROTE).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(SBRConstants.Translation.DESCRIPTION_FAN_WROTE).withStyle(ChatFormatting.GRAY));
         }
     }
 

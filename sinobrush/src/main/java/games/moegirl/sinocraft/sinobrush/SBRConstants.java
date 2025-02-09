@@ -44,16 +44,14 @@ public class SBRConstants {
         public static final String DRAWING_AUTHOR_UNKNOWN = "sinobrush.drawing.author.unknown";
         public static final String DRAWING_DATE_LABEL = "sinobrush.drawing.date.label";
 
-        public static final String DESCRIPTION_FAN = "sinobrush.description.fan";
-        public static final String DESCRIPTION_FOLDED_FAN = "sinobrush.description.folded_fan";
+        public static final String DESCRIPTION_FOLDED_FAN_1 = "sinobrush.description.folded_fan.1";
+        public static final String DESCRIPTION_FOLDED_FAN_2 = "sinobrush.description.folded_fan.2";
+        public static final String DESCRIPTION_FAN_EMPTY = "sinobrush.description.fan.empty";
         public static final String DESCRIPTION_FAN_WROTE = "sinobrush.description.fan.wrote";
-        public static final String DESCRIPTION_FOLDED_FAN_WROTE = "sinobrush.description.folded_fan.wrote";
 
         public static final String DESCRIPTION_ITEM_COLORED = "sinobrush.description.item.colored";
         public static final String DESCRIPTION_XUAN_PAPER_EXPENDED = "sinobrush.description.xuan_paper.expended";
         public static final String DESCRIPTION_FILLED_XUAN_PAPER_SIZE = "sinobrush.description.filled_xuan_paper.size";
-
-        public static final String HUD_FAN_PREFIX = "sinobrush.hud.fan.prefix";
 
         public static final String GUI_BRUSH_TOOLTIP_SAVE = "sinobrush.gui.brush.tooltip_save";
         public static final String GUI_BRUSH_TOOLTIP_COPY = "sinobrush.gui.brush.tooltip_copy";

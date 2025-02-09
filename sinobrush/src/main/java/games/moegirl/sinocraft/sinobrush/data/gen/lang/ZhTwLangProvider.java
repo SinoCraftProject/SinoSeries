@@ -33,16 +33,14 @@ public class ZhTwLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.DRAWING_AUTHOR_UNKNOWN, "佚名");
         delegate.add(SBRConstants.Translation.DRAWING_DATE_LABEL, "著墨日期：%1$s年 %2$s月 %3$s日 %4$s:%5$s:%6$s");
 
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN, "展此扇，上有淡墨河山");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN, "攜此扇，無懼此生風雨");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把摺扇");
-        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_WROTE, "一把摺扇，上面寫著一些字");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_1, "展此扇，上有淡墨河山");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FOLDED_FAN_2, "攜此扇，無懼此生風雨");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_EMPTY, "一把摺扇");
+        delegate.add(SBRConstants.Translation.DESCRIPTION_FAN_WROTE, "一把摺扇，上面寫著一些字");
 
         delegate.add(SBRConstants.Translation.DESCRIPTION_ITEM_COLORED, "已染色 (%1$s,%2$s,%3$s)");
         delegate.add(SBRConstants.Translation.DESCRIPTION_XUAN_PAPER_EXPENDED, "已擴展 %1$s 次");
         delegate.add(SBRConstants.Translation.DESCRIPTION_FILLED_XUAN_PAPER_SIZE, "寬 %1$s，高 %2$s");
-
-        delegate.add(SBRConstants.Translation.HUD_FAN_PREFIX, "對方的摺扇上寫著：");
 
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_SAVE, "保存畫布為圖片");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_TOOLTIP_COPY, "左鍵複製，右鍵黏貼");
