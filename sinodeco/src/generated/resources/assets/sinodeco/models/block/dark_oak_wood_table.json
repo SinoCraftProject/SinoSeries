@@ -2,6 +2,6 @@
   "parent": "sinodeco:block/wooden_table",
   "textures": {
     "0": "sinodeco:block/dark_oak_wood_table",
-    "particle": "sinodeco:block/dark_oak_wood_table_particle"
+    "particle": "sinodeco:block/dark_oak_wood_particle"
   }
 }

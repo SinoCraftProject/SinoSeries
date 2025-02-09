@@ -1,6 +1,7 @@
 {
   "parent": "sinodeco:block/wooden_table_leg",
   "textures": {
-    "0": "sinodeco:block/acacia_wood_table"
+    "0": "sinodeco:block/acacia_wood_table",
+    "particle": "sinodeco:block/acacia_wood_particle"
   }
 }

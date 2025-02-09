@@ -1,6 +1,7 @@
 {
   "parent": "sinodeco:block/wooden_table_waist_left",
   "textures": {
-    "0": "sinodeco:block/birch_wood_table"
+    "0": "sinodeco:block/birch_wood_table",
+    "particle": "sinodeco:block/birch_wood_particle"
   }
 }

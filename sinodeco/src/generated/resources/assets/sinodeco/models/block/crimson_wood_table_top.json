@@ -1,6 +1,7 @@
 {
   "parent": "sinodeco:block/wooden_table_top",
   "textures": {
-    "0": "sinodeco:block/crimson_wood_table"
+    "0": "sinodeco:block/crimson_wood_table",
+    "particle": "sinodeco:block/crimson_wood_particle"
   }
 }

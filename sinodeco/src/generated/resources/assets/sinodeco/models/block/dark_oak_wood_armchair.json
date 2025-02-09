@@ -1,6 +1,7 @@
 {
   "parent": "sinodeco:block/wooden_armchair",
   "textures": {
-    "2": "sinodeco:block/dark_oak_wood_armchair"
+    "0": "sinodeco:block/dark_oak_wood_armchair",
+    "particle": "sinodeco:block/dark_oak_wood_particle"
   }
 }

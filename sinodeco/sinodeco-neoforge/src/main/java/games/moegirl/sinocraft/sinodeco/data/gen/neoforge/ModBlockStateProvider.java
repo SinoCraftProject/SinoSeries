@@ -26,31 +26,31 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        tableModels(SDBlocks.ACACIA_WOOD_TABLE.get(), modLoc("block/acacia_wood_table"));
-        tableModels(SDBlocks.BAMBOO_WOOD_TABLE.get(), modLoc("block/bamboo_wood_table"));
-        tableModels(SDBlocks.BIRCH_WOOD_TABLE.get(), modLoc("block/birch_wood_table"));
-        tableModels(SDBlocks.CHERRY_WOOD_TABLE.get(), modLoc("block/cherry_wood_table"));
-        tableModels(SDBlocks.CRIMSON_WOOD_TABLE.get(), modLoc("block/crimson_wood_table"));
-        tableModels(SDBlocks.DARK_OAK_WOOD_TABLE.get(), modLoc("block/dark_oak_wood_table"));
-        tableModels(SDBlocks.JUNGLE_WOOD_TABLE.get(), modLoc("block/jungle_wood_table"));
-        tableModels(SDBlocks.MANGROVE_WOOD_TABLE.get(), modLoc("block/mangrove_wood_table"));
-        tableModels(SDBlocks.OAK_WOOD_TABLE.get(), modLoc("block/oak_wood_table"));
-        tableModels(SDBlocks.SPRUCE_WOOD_TABLE.get(), modLoc("block/spruce_wood_table"));
-        tableModels(SDBlocks.WARPED_WOOD_TABLE.get(), modLoc("block/warped_wood_table"));
-        tableModels(SDBlocks.PEACH_WOOD_TABLE.get(), modLoc("block/peach_wood_table"));
+        tableModels(SDBlocks.ACACIA_WOOD_TABLE.get(), "acacia_wood");
+        tableModels(SDBlocks.BAMBOO_WOOD_TABLE.get(), "bamboo_wood");
+        tableModels(SDBlocks.BIRCH_WOOD_TABLE.get(), "birch_wood");
+        tableModels(SDBlocks.CHERRY_WOOD_TABLE.get(), "cherry_wood");
+        tableModels(SDBlocks.CRIMSON_WOOD_TABLE.get(), "crimson_wood");
+        tableModels(SDBlocks.DARK_OAK_WOOD_TABLE.get(), "dark_oak_wood");
+        tableModels(SDBlocks.JUNGLE_WOOD_TABLE.get(), "jungle_wood");
+        tableModels(SDBlocks.MANGROVE_WOOD_TABLE.get(), "mangrove_wood");
+        tableModels(SDBlocks.OAK_WOOD_TABLE.get(), "oak_wood");
+        tableModels(SDBlocks.SPRUCE_WOOD_TABLE.get(), "spruce_wood");
+        tableModels(SDBlocks.WARPED_WOOD_TABLE.get(), "warped_wood");
+        tableModels(SDBlocks.PEACH_WOOD_TABLE.get(), "peach_wood");
 
-        armchairModels(SDBlocks.ACACIA_WOOD_ARMCHAIR.get(), modLoc("block/acacia_wood_armchair"));
-        armchairModels(SDBlocks.BAMBOO_WOOD_ARMCHAIR.get(), modLoc("block/bamboo_wood_armchair"));
-        armchairModels(SDBlocks.BIRCH_WOOD_ARMCHAIR.get(), modLoc("block/birch_wood_armchair"));
-        armchairModels(SDBlocks.CHERRY_WOOD_ARMCHAIR.get(), modLoc("block/cherry_wood_armchair"));
-        armchairModels(SDBlocks.CRIMSON_WOOD_ARMCHAIR.get(), modLoc("block/crimson_wood_armchair"));
-        armchairModels(SDBlocks.DARK_OAK_WOOD_ARMCHAIR.get(), modLoc("block/dark_oak_wood_armchair"));
-        armchairModels(SDBlocks.JUNGLE_WOOD_ARMCHAIR.get(), modLoc("block/jungle_wood_armchair"));
-        armchairModels(SDBlocks.MANGROVE_WOOD_ARMCHAIR.get(), modLoc("block/mangrove_wood_armchair"));
-        armchairModels(SDBlocks.OAK_WOOD_ARMCHAIR.get(), modLoc("block/oak_wood_armchair"));
-        armchairModels(SDBlocks.SPRUCE_WOOD_ARMCHAIR.get(), modLoc("block/spruce_wood_armchair"));
-        armchairModels(SDBlocks.WARPED_WOOD_ARMCHAIR.get(), modLoc("block/warped_wood_armchair"));
-        armchairModels(SDBlocks.PEACH_WOOD_ARMCHAIR.get(), modLoc("block/peach_wood_armchair"));
+        armchairModels(SDBlocks.ACACIA_WOOD_ARMCHAIR.get(), "acacia_wood");
+        armchairModels(SDBlocks.BAMBOO_WOOD_ARMCHAIR.get(), "bamboo_wood");
+        armchairModels(SDBlocks.BIRCH_WOOD_ARMCHAIR.get(), "birch_wood");
+        armchairModels(SDBlocks.CHERRY_WOOD_ARMCHAIR.get(), "cherry_wood");
+        armchairModels(SDBlocks.CRIMSON_WOOD_ARMCHAIR.get(), "crimson_wood");
+        armchairModels(SDBlocks.DARK_OAK_WOOD_ARMCHAIR.get(), "dark_oak_wood");
+        armchairModels(SDBlocks.JUNGLE_WOOD_ARMCHAIR.get(), "jungle_wood");
+        armchairModels(SDBlocks.MANGROVE_WOOD_ARMCHAIR.get(), "mangrove_wood");
+        armchairModels(SDBlocks.OAK_WOOD_ARMCHAIR.get(), "oak_wood");
+        armchairModels(SDBlocks.SPRUCE_WOOD_ARMCHAIR.get(), "spruce_wood");
+        armchairModels(SDBlocks.WARPED_WOOD_ARMCHAIR.get(), "warped_wood");
+        armchairModels(SDBlocks.PEACH_WOOD_ARMCHAIR.get(), "peach_wood");
 
         {
             simpleBlock(SDBlocks.MARBLE_BLOCK.get(), models().cubeColumn("marble_block", modLoc("block/marble_block"), modLoc("block/marble_block_top")));
@@ -87,12 +87,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void tableModels(Block block, ResourceLocation texture) {
+    private void tableModels(Block block, String woodType) {
         var builder = getMultipartBuilder(block);
 
+        var texture = modLoc("block/" + woodType + "_table");
+        var particle = modLoc("block/" + woodType + "_particle");
         models().withExistingParent("block/" + path(block), modLoc("block/wooden_table"))
                 .texture("0", texture)
-                .texture("particle", modLoc(texture.getPath() + "_particle"));
+                .texture("particle", particle);
 
         for (var i = 0; i < WoodenTableBlock.PARTS.length; i++) {
             var north = (i & 0b1000) != 0;
@@ -114,7 +116,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     var part = builder.part()
                             .modelFile(models()
                                     .withExistingParent("block/" + path(block) + "_" + p.name(), modLoc("block/wooden_table_" + p.name()))
-                                    .texture("0", texture))
+                                    .texture("0", texture)
+                                    .texture("particle", particle))
                             .rotationY(p.rotate())
                             .addModel()
                             .condition(WoodenTableBlock.NORTH, north)
@@ -130,9 +133,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void armchairModels(Block block, ResourceLocation texture) {
+    private void armchairModels(Block block, String woodType) {
         var model = models()
-                .withExistingParent("block/" + path(block), modLoc("block/wooden_armchair")).texture("2", texture);
+                .withExistingParent("block/" + path(block), modLoc("block/wooden_armchair"))
+                .texture("0", modLoc("block/" + woodType + "_armchair"))
+                .texture("particle", modLoc("block/" + woodType + "_particle"));
 
         var builder = getMultipartBuilder(block);
 
