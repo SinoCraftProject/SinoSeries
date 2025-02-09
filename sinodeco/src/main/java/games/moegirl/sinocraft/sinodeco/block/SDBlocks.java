@@ -40,6 +40,19 @@ public class SDBlocks {
     public static final IRegRef<Block> WARPED_WOOD_TABLE = BLOCKS.register("warped_wood_table", WoodenTableBlock::new);
     public static final IRegRef<Block> PEACH_WOOD_TABLE = BLOCKS.register("peach_wood_table", WoodenTableBlock::new);
 
+    public static final IRegRef<Block> ACACIA_WOOD_ARMCHAIR = BLOCKS.register("acacia_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> BAMBOO_WOOD_ARMCHAIR = BLOCKS.register("bamboo_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> BIRCH_WOOD_ARMCHAIR = BLOCKS.register("birch_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> CHERRY_WOOD_ARMCHAIR = BLOCKS.register("cherry_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> CRIMSON_WOOD_ARMCHAIR = BLOCKS.register("crimson_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> DARK_OAK_WOOD_ARMCHAIR = BLOCKS.register("dark_oak_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> JUNGLE_WOOD_ARMCHAIR = BLOCKS.register("jungle_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> MANGROVE_WOOD_ARMCHAIR = BLOCKS.register("mangrove_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> OAK_WOOD_ARMCHAIR = BLOCKS.register("oak_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> SPRUCE_WOOD_ARMCHAIR = BLOCKS.register("spruce_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> WARPED_WOOD_ARMCHAIR = BLOCKS.register("warped_wood_armchair", WoodenArmchairBlock::new);
+    public static final IRegRef<Block> PEACH_WOOD_ARMCHAIR = BLOCKS.register("peach_wood_armchair", WoodenArmchairBlock::new);
+
     public static final IRegRef<Block> MARBLE_BLOCK = BLOCKS.register("marble_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).instrument(NoteBlockInstrument.HARP).requiresCorrectToolForDrops().strength(0.8F)));
     public static final IRegRef<Block> CHISELED_MARBLE = BLOCKS.register("chiseled_marble", () -> new Block(BlockBehaviour.Properties.ofFullCopy(MARBLE_BLOCK.get())));
     public static final IRegRef<RotatedPillarBlock> MARBLE_PILLAR = BLOCKS.register("marble_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(MARBLE_BLOCK.get())));

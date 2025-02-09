@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "sinodeco:block/peach_wood_armchair"
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/peach_wood_armchair",
+        "y": 90
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/peach_wood_armchair",
+        "y": 180
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "sinodeco:block/peach_wood_armchair",
+        "y": 270
+      },
+      "when": {
+        "facing": "east"
+      }
+    }
+  ]
+}

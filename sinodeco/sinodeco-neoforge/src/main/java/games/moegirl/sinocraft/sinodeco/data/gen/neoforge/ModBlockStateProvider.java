@@ -2,10 +2,12 @@ package games.moegirl.sinocraft.sinodeco.data.gen.neoforge;
 
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
 import games.moegirl.sinocraft.sinodeco.block.WoodenTableBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -36,6 +38,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
         tableModels(SDBlocks.SPRUCE_WOOD_TABLE.get(), modLoc("block/spruce_wood_table"));
         tableModels(SDBlocks.WARPED_WOOD_TABLE.get(), modLoc("block/warped_wood_table"));
         tableModels(SDBlocks.PEACH_WOOD_TABLE.get(), modLoc("block/peach_wood_table"));
+
+        armchairModels(SDBlocks.ACACIA_WOOD_ARMCHAIR.get(), modLoc("block/acacia_wood_armchair"));
+        armchairModels(SDBlocks.BAMBOO_WOOD_ARMCHAIR.get(), modLoc("block/bamboo_wood_armchair"));
+        armchairModels(SDBlocks.BIRCH_WOOD_ARMCHAIR.get(), modLoc("block/birch_wood_armchair"));
+        armchairModels(SDBlocks.CHERRY_WOOD_ARMCHAIR.get(), modLoc("block/cherry_wood_armchair"));
+        armchairModels(SDBlocks.CRIMSON_WOOD_ARMCHAIR.get(), modLoc("block/crimson_wood_armchair"));
+        armchairModels(SDBlocks.DARK_OAK_WOOD_ARMCHAIR.get(), modLoc("block/dark_oak_wood_armchair"));
+        armchairModels(SDBlocks.JUNGLE_WOOD_ARMCHAIR.get(), modLoc("block/jungle_wood_armchair"));
+        armchairModels(SDBlocks.MANGROVE_WOOD_ARMCHAIR.get(), modLoc("block/mangrove_wood_armchair"));
+        armchairModels(SDBlocks.OAK_WOOD_ARMCHAIR.get(), modLoc("block/oak_wood_armchair"));
+        armchairModels(SDBlocks.SPRUCE_WOOD_ARMCHAIR.get(), modLoc("block/spruce_wood_armchair"));
+        armchairModels(SDBlocks.WARPED_WOOD_ARMCHAIR.get(), modLoc("block/warped_wood_armchair"));
+        armchairModels(SDBlocks.PEACH_WOOD_ARMCHAIR.get(), modLoc("block/peach_wood_armchair"));
 
         {
             simpleBlock(SDBlocks.MARBLE_BLOCK.get(), models().cubeColumn("marble_block", modLoc("block/marble_block"), modLoc("block/marble_block_top")));
@@ -112,6 +127,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     }
                 }
             }
+        }
+    }
+
+    private void armchairModels(Block block, ResourceLocation texture) {
+        var model = models()
+                .withExistingParent("block/" + path(block), modLoc("block/wooden_armchair")).texture("2", texture);
+
+        var builder = getMultipartBuilder(block);
+
+        for (var i = 0; i < 4; i++) {
+            var direction = Direction.from2DDataValue(i);
+            builder.part()
+                    .modelFile(model)
+                    .rotationY(i * 90)
+                    .addModel()
+                    .condition(HorizontalDirectionalBlock.FACING, direction)
+                    .end();
         }
     }
 }

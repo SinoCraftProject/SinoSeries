@@ -32,6 +32,19 @@ public class SDBlockItems {
     public static final Supplier<Item> WARPED_WOOD_TABLE = ITEMS.register("warped_wood_table", () -> new BlockItem(SDBlocks.WARPED_WOOD_TABLE.get(), decoTab()));
     public static final Supplier<Item> PEACH_WOOD_TABLE = ITEMS.register("peach_wood_table", () -> new BlockItem(SDBlocks.PEACH_WOOD_TABLE.get(), decoTab()));
 
+    public static final Supplier<Item> ACACIA_WOOD_ARMCHAIR = ITEMS.register("acacia_wood_armchair", () -> new BlockItem(SDBlocks.ACACIA_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> BAMBOO_WOOD_ARMCHAIR = ITEMS.register("bamboo_wood_armchair", () -> new BlockItem(SDBlocks.BAMBOO_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> BIRCH_WOOD_ARMCHAIR = ITEMS.register("birch_wood_armchair", () -> new BlockItem(SDBlocks.BIRCH_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> CHERRY_WOOD_ARMCHAIR = ITEMS.register("cherry_wood_armchair", () -> new BlockItem(SDBlocks.CHERRY_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> CRIMSON_WOOD_ARMCHAIR = ITEMS.register("crimson_wood_armchair", () -> new BlockItem(SDBlocks.CRIMSON_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> DARK_OAK_WOOD_ARMCHAIR = ITEMS.register("dark_oak_wood_armchair", () -> new BlockItem(SDBlocks.DARK_OAK_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> JUNGLE_WOOD_ARMCHAIR = ITEMS.register("jungle_wood_armchair", () -> new BlockItem(SDBlocks.JUNGLE_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> MANGROVE_WOOD_ARMCHAIR = ITEMS.register("mangrove_wood_armchair", () -> new BlockItem(SDBlocks.MANGROVE_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> OAK_WOOD_ARMCHAIR = ITEMS.register("oak_wood_armchair", () -> new BlockItem(SDBlocks.OAK_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> SPRUCE_WOOD_ARMCHAIR = ITEMS.register("spruce_wood_armchair", () -> new BlockItem(SDBlocks.SPRUCE_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> WARPED_WOOD_ARMCHAIR = ITEMS.register("warped_wood_armchair", () -> new BlockItem(SDBlocks.WARPED_WOOD_ARMCHAIR.get(), decoTab()));
+    public static final Supplier<Item> PEACH_WOOD_ARMCHAIR = ITEMS.register("peach_wood_armchair", () -> new BlockItem(SDBlocks.PEACH_WOOD_ARMCHAIR.get(), decoTab()));
+
     public static final IRegRef<Item> MARBLE_BLOCK = ITEMS.register("marble_block", () -> new BlockItem(SDBlocks.MARBLE_BLOCK.get(), decoTab()));
     public static final IRegRef<Item> CHISELED_MARBLE = ITEMS.register("chiseled_marble", () -> new BlockItem(SDBlocks.CHISELED_MARBLE.get(), decoTab()));
     public static final IRegRef<Item> MARBLE_PILLAR = ITEMS.register("marble_pillar", () -> new BlockItem(SDBlocks.MARBLE_PILLAR.get(), decoTab()));
