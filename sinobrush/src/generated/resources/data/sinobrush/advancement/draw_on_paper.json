@@ -10,7 +10,6 @@
     }
   },
   "display": {
-    "background": "sinobrush:advancement/background.png",
     "description": {
       "translate": "sinobrush.advancement.brush.desc"
     },

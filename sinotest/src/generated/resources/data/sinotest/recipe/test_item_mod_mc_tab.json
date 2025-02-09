@@ -31,6 +31,7 @@
     }
   ],
   "result": {
-    "item": "sinotest:test_item_mod_mc_tab"
+    "count": 1,
+    "id": "sinotest:test_item_mod_mc_tab"
   }
 }

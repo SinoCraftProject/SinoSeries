@@ -15,34 +15,29 @@ public class AdvancementTree {
     protected AdvancementHolder root;
     protected Deque<AdvancementHolder> cursor = new ArrayDeque<>();
 
-    public AdvancementTree(Consumer<AdvancementHolder> saver) {
+    public AdvancementTree(Consumer<AdvancementHolder> saver, ResourceLocation rootId, Advancement.Builder advancement) {
         this.saver = saver;
-    }
-
-    public AdvancementTree root(ResourceLocation id, Advancement.Builder advancement) {
-        if (root != null) {
-            throw new IllegalStateException("There should only one root.");
-        }
-
-        root = advancement.save(saver, id.toString());
+        root = advancement.build(rootId);
+        saver.accept(root);
         cursor.push(root);
-        return this;
     }
 
     public AdvancementTree child(ResourceLocation id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
-        advancement.save(saver, id.toString());
+        var holder = advancement.build(id);
+        saver.accept(holder);
         return this;
     }
 
-    public AdvancementTree push(ResourceLocation id, Advancement.Builder advancement) {
+    public AdvancementTree branch(ResourceLocation id, Advancement.Builder advancement) {
         advancement.parent(cursor.getFirst());
-        var adv = advancement.save(saver, id.toString());
-        cursor.push(adv);
+        var holder = advancement.build(id);
+        saver.accept(holder);
+        cursor.push(holder);
         return this;
     }
 
-    public AdvancementTree pop() {
+    public AdvancementTree endBranch() {
         cursor.pop();
         return this;
     }

@@ -19,13 +19,12 @@ public class TestAdvancementProvider extends AbstractAdvancementProvider {
 
     @Override
     public void generateData(AdvancementProviderDelegateBase delegate) {
-        delegate.addAdvancementTree(saver -> new AdvancementTree(saver)
-                .root(modLoc("test_adv"), Advancement.Builder.advancement()
-                        .display(new ItemStack(TestRegistry.TEST_ITEM_MC_TAB.get()),
-                                Component.literal("测试成就"),
-                                Component.literal("这是一个用于测试的成就"),
-                                null, AdvancementType.TASK, false, true, false)
-                        .addCriterion("test", PlayerTrigger.TriggerInstance.tick()))
+        delegate.addAdvancementTree(saver -> new AdvancementTree(saver, modLoc("test_adv"), Advancement.Builder.advancement()
+                .display(new ItemStack(TestRegistry.TEST_ITEM_MC_TAB.get()),
+                        Component.literal("测试成就"),
+                        Component.literal("这是一个用于测试的成就"),
+                        null, AdvancementType.TASK, false, true, false)
+                .addCriterion("test", PlayerTrigger.TriggerInstance.tick()))
         );
     }
 }

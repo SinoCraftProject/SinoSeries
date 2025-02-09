@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "sinotest:test_item_mc_tab"
-            ]
+            "items": "sinotest:test_item_mc_tab"
           }
         ]
       },
@@ -30,6 +28,5 @@
     "recipes": [
       "sinotest:test_item_mod_mc_tab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
