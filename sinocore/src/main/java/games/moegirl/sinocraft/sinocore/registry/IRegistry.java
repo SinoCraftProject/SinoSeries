@@ -7,21 +7,25 @@ import net.minecraft.tags.TagKey;
 import java.util.function.Supplier;
 
 /**
- * 用于注册元素的注册表类型
+ * SinoCore 注册表
  *
  * @param <T> 元素类型
  */
 public interface IRegistry<T> {
 
     /**
-     * 获取当前 Mod Id
+     * 当前 Mod Id
      *
      * @return Mod id
      */
     String modId();
 
     /**
-     * 向 MC 注册该注册表修改
+     * 进行注册
+     * <ul>
+     *     <li>Forge / NeoForge：在 Mod 主类里调用</li>
+     *     <li>Fabric：在 {@code ModInitializer#onInitialize} 中调用</li>
+     * </ul>
      */
     void register();
 
@@ -29,6 +33,7 @@ public interface IRegistry<T> {
      * 向该注册表注册内容
      *
      * @param name 注册名，实际为 modid:name
+     * @param <R>  实际元素类型（Extends &lt;T&gt;）
      * @return 对象引用
      */
     <R extends T> IRegRef<R> register(String name, Supplier<? extends R> supplier);

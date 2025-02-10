@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 注册管理器
+ * SinoCore 注册表管理器
  */
 @SuppressWarnings("unchecked")
 public class RegistryManager {
@@ -27,25 +27,35 @@ public class RegistryManager {
     private static final Map<String, ICustomStatRegistry> CUSTOM_STAT_MAP = new HashMap<>();
 
     /**
-     * 创建一个新的注册器
+     * 创建一个新的 SinoCore 注册表
      * <ul>
      *     <li>对于 Forge 和 NeoForge，将创建一个新 DeferredRegister</li>
      *     <li>对于 Fabric，只是创建一个新 IRegistry 实例</li>
      * </ul>
      *
-     * @param modId 对应 mod id
-     * @param key   注册类型注册表的键
-     * @param <T>   注册类型
-     * @return 新注册表引用
+     * @param modId modid
+     * @param key   注册表类型
+     * @param <T>   对象类型
+     * @return SinoCore 注册表
      */
     public synchronized static <T> IRegistry<T> create(String modId, ResourceKey<Registry<T>> key) {
-        if (Registries.CREATIVE_MODE_TAB.equals(key)) {
-            LOGGER.warn("Use createTab to add creative mod tab easier.");
-        }
-
         IRegistry<T> registry = _create(modId, key);
         REGISTRY_MAP.computeIfAbsent(modId, __ -> new HashMap<>()).put(key, registry);
         return registry;
+    }
+
+    /**
+     * 创建用于 CreativeModeTab 的 SinoCore 注册表
+     * <p>
+     * 在 {@code create} 方法中创建的 IRegistry 也可以用于注册 CreativeModeTab ，<br/>
+     * 但该方法创建的注册器可以向创建的 Tab 添加物品
+     * </p>
+     *
+     * @param modId modid
+     * @return CreativeModeTab SinoCore 注册表
+     */
+    public synchronized static ITabRegistry createTab(String modId) {
+        return TAB_MAP.computeIfAbsent(modId, RegistryManager::_createTab);
     }
 
     /**
@@ -55,7 +65,9 @@ public class RegistryManager {
      * @param key   注册类型注册表的键
      * @param <T>   注册类型
      * @return 最后一个或新注册表引用
+     * @deprecated Use {@link RegistryManager#create}
      */
+    @Deprecated(forRemoval = true)
     public synchronized static <T> IRegistry<T> obtain(String modId, ResourceKey<Registry<T>> key) {
         if (Registries.CREATIVE_MODE_TAB.equals(key)) {
             LOGGER.warn("Use obtainTab to add creative mod tab easier.");
@@ -70,13 +82,15 @@ public class RegistryManager {
      * 获取该 mod 最后一个专用于注册 CreativeModeTab 的注册器，如果不存在则创建一个新对象
      *
      * <p>
-     *
+     * <p>
      * {@code create} 与 {@code obtain} 方法创建的 IRegistry 也可以用于注册 CreativeModeTab，但该方法创建的注册器可以向创建的
      * Tab 添加物品
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
+     * @deprecated Use {@link RegistryManager#createTab}
      */
+    @Deprecated(forRemoval = true)
     public synchronized static ITabRegistry obtainTab(String modId) {
         return TAB_MAP.computeIfAbsent(modId, RegistryManager::_createTab);
     }
@@ -85,13 +99,15 @@ public class RegistryManager {
      * 获取该 mod 最后一个专用于注册 Menu 的注册器，如果不存在则创建一个新对象
      *
      * <p>
-     *
+     * <p>
      * {@code create} 与 {@code obtain} 方法创建的 IRegistry 也可以用于注册 {@link net.minecraft.world.inventory.MenuType}，
      * 但 {@link net.minecraft.world.inventory.MenuType.MenuSupplier} 是私有的，无法创建
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
+     * @deprecated Use {@link RegistryManager#create}
      */
+    @Deprecated(forRemoval = true)
     @SuppressWarnings("JavadocReference")
     public synchronized static IMenuRegistry obtainMenu(String modId) {
         return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
@@ -102,7 +118,9 @@ public class RegistryManager {
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
+     * @deprecated Use {@link RegistryManager#create}
      */
+    @Deprecated(forRemoval = true)
     public synchronized static IScreenRegistry obtainScreen(String modId) {
         return SCREEN_MAP.computeIfAbsent(modId, RegistryManager::_createScreen);
     }
@@ -112,18 +130,29 @@ public class RegistryManager {
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
+     * @deprecated Use {@link RegistryManager#create}
      */
+    @Deprecated(forRemoval = true)
     public synchronized static ICommandRegistry obtainCommand(String modId) {
         return COMMAND_MAP.computeIfAbsent(modId, RegistryManager::_createCommand);
     }
 
+    /**
+     * @param modId ModId
+     * @return IDataProviderRegistry
+     * @deprecated Use {@link RegistryManager#create}
+     */
+    @Deprecated(forRemoval = true)
     public synchronized static IDataProviderRegistry obtainDataProvider(String modId) {
         return DATA_PROVIDER_MAP.computeIfAbsent(modId, RegistryManager::_createDataProvider);
     }
 
     /**
      * 注册自定义统计信息
+     *
+     * @deprecated Use {@link RegistryManager#create}
      */
+    @Deprecated(forRemoval = true)
     public synchronized static ICustomStatRegistry obtainCustomStat(String modId) {
         return CUSTOM_STAT_MAP.computeIfAbsent(modId, RegistryManager::_createCustomStat);
     }

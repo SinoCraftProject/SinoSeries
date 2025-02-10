@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 /**
- * CreativeModeTab 注册接口
+ * CreativeModeTab SinoCore 注册表
  */
 public interface ITabRegistry {
 
