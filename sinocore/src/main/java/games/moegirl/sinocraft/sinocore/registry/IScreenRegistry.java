@@ -9,8 +9,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
 public interface IScreenRegistry {
-    // Todo: qyl27: can it extends IRegistry?
-
     void register();
 
     <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>> menuType, IScreenFactory<T> screenFactory);

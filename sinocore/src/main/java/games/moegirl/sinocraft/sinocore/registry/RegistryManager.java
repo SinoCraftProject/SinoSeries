@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * SinoCore 注册表管理器
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "JavadocReference"})
 public class RegistryManager {
 
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -52,10 +52,64 @@ public class RegistryManager {
      * </p>
      *
      * @param modId modid
-     * @return CreativeModeTab SinoCore 注册表
+     * @return Tab 注册表
      */
     public synchronized static ITabRegistry createTab(String modId) {
         return TAB_MAP.computeIfAbsent(modId, RegistryManager::_createTab);
+    }
+
+    /**
+     * 创建用于 Menu 的 SinoCore 注册表
+     * <p>
+     * 在 {@code create} 方法中创建的 IRegistry 也可以用于注册 {@link net.minecraft.world.inventory.MenuType}，<br/>
+     * 但 {@link net.minecraft.world.inventory.MenuType.MenuSupplier} 是私有的。
+     * </p>
+     *
+     * @param modId modid
+     * @return Menu 注册表
+     */
+    public synchronized static IMenuRegistry createMenu(String modId) {
+        return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
+    }
+
+    /**
+     * 创建用于 Screen 的 SinoCore 注册表
+     *
+     * @param modId modid
+     * @return Screen 注册表
+     */
+    public synchronized static IScreenRegistry createScreen(String modId) {
+        return SCREEN_MAP.computeIfAbsent(modId, RegistryManager::_createScreen);
+    }
+
+    /**
+     * 创建用于 Command 的 SinoCore 注册表
+     *
+     * @param modId modid
+     * @return Command 注册表
+     */
+    public synchronized static ICommandRegistry createCommand(String modId) {
+        return COMMAND_MAP.computeIfAbsent(modId, RegistryManager::_createCommand);
+    }
+
+    /**
+     * 创建用于 DataProvider 的 SinoCore 注册表
+     *
+     * @param modId modid
+     * @return DataProvider 注册表
+     */
+    public synchronized static IDataProviderRegistry createDataProvider(String modId) {
+        return DATA_PROVIDER_MAP.computeIfAbsent(modId, RegistryManager::_createDataProvider);
+    }
+
+    /**
+     * 创建用于自定义统计信息的 SinoCore 注册表
+     *
+     * @param modId modid
+     * @return 自定义统计信息注册表
+     */
+    public synchronized static ICustomStatRegistry createCustomStat(String modId) {
+        return CUSTOM_STAT_MAP.computeIfAbsent(modId, RegistryManager::_createCustomStat);
     }
 
     /**
@@ -105,10 +159,9 @@ public class RegistryManager {
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#create}
+     * @deprecated Use {@link RegistryManager#createMenu}
      */
     @Deprecated(forRemoval = true)
-    @SuppressWarnings("JavadocReference")
     public synchronized static IMenuRegistry obtainMenu(String modId) {
         return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
     }
@@ -118,7 +171,7 @@ public class RegistryManager {
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#create}
+     * @deprecated Use {@link RegistryManager#createScreen}
      */
     @Deprecated(forRemoval = true)
     public synchronized static IScreenRegistry obtainScreen(String modId) {
@@ -130,7 +183,7 @@ public class RegistryManager {
      *
      * @param modId 对应 mod id
      * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#create}
+     * @deprecated Use {@link RegistryManager#createCommand}
      */
     @Deprecated(forRemoval = true)
     public synchronized static ICommandRegistry obtainCommand(String modId) {
@@ -140,7 +193,7 @@ public class RegistryManager {
     /**
      * @param modId ModId
      * @return IDataProviderRegistry
-     * @deprecated Use {@link RegistryManager#create}
+     * @deprecated Use {@link RegistryManager#createDataProvider}
      */
     @Deprecated(forRemoval = true)
     public synchronized static IDataProviderRegistry obtainDataProvider(String modId) {
@@ -150,7 +203,7 @@ public class RegistryManager {
     /**
      * 注册自定义统计信息
      *
-     * @deprecated Use {@link RegistryManager#create}
+     * @deprecated Use {@link RegistryManager#createCustomStat}
      */
     @Deprecated(forRemoval = true)
     public synchronized static ICustomStatRegistry obtainCustomStat(String modId) {
