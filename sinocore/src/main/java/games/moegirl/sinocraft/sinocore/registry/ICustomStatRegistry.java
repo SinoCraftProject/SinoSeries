@@ -6,14 +6,10 @@ import net.minecraft.stats.StatFormatter;
 
 import java.util.Optional;
 
-public interface ICustomStatRegistry {
-    String modId();
-
-    void register();
-
+public interface ICustomStatRegistry extends IRegistryBase<ResourceLocation> {
     ResourceLocation register(String name, StatFormatter statFormatter);
 
-    ResourceLocation register(String name);
-
-    Optional<Stat<?>> get(ResourceLocation key);
+    default ResourceLocation register(String name) {
+        return register(name, StatFormatter.DEFAULT);
+    }
 }

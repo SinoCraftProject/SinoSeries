@@ -8,9 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 /**
- * CreativeModeTab SinoCore 注册表
+ * CreativeModeTab 注册表
  */
-public interface ITabRegistry {
+public interface ITabRegistry extends IRegistryBase<CreativeModeTab> {
 
     /**
      * 所有非通过该接口创建的 Tab 物品添加器
@@ -21,11 +21,6 @@ public interface ITabRegistry {
      * 所有通过该接口创建的 Tab 物品添加器
      */
     Map<ResourceKey<CreativeModeTab>, TabItemGenerator> GENERATORS = new ConcurrentHashMap<>();
-
-    /**
-     * 将 CreativeModeTab 修改注册到 MC
-     */
-    void register();
 
     /**
      * 注册一个默认的 CreativeModeTab 并返回其引用

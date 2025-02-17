@@ -6,7 +6,7 @@ import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import net.minecraft.resources.ResourceLocation;
 
 public class SBRStats {
-    public static ICustomStatRegistry STATS = RegistryManager.obtainCustomStat(SinoBrush.MODID);
+    public static ICustomStatRegistry STATS = RegistryManager.createCustomStat(SinoBrush.MODID);
 
     public static void register() {
         STATS.register();

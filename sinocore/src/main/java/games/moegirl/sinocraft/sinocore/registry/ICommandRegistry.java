@@ -5,11 +5,11 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 
-public interface ICommandRegistry {
+public interface ICommandRegistry extends IRegistrable<ICommandRegistry.Command> {
 
-    void registerCommands();
+    void register();
 
-    void registerCommand(Command command);
+    void register(Command command);
 
     interface Command {
 

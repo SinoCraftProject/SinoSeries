@@ -10,8 +10,19 @@ public class FabricCommandRegister implements ICommandRegistry {
 
     private final List<Command> commands = new ArrayList<>();
 
+    private final String modId;
+
+    public FabricCommandRegister(String modId) {
+        this.modId = modId;
+    }
+
     @Override
-    public void registerCommands() {
+    public String modId() {
+        return modId;
+    }
+
+    @Override
+    public void register() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             for (Command command : commands) {
                 command.register(dispatcher, registryAccess, environment);
@@ -20,7 +31,7 @@ public class FabricCommandRegister implements ICommandRegistry {
     }
 
     @Override
-    public void registerCommand(Command command) {
+    public void register(Command command) {
         commands.add(command);
     }
 }

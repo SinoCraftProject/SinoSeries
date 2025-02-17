@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
 public class SDBlocks {
-    public static final IRegistry<Block> BLOCKS = RegistryManager.obtain(SinoDeco.MODID, Registries.BLOCK);
+    public static final IRegistry<Block> BLOCKS = RegistryManager.create(SinoDeco.MODID, Registries.BLOCK);
 
     public static void register() {
         BLOCKS.register();

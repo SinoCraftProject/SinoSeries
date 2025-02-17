@@ -8,9 +8,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
-public interface IScreenRegistry {
-    void register();
-
+/**
+ * Screen 注册表 <br/>
+ *
+ * <b>注意：{@link net.minecraft.client.gui.screens.Screen} 只能在客户端访问</b>
+ */
+public interface IScreenRegistry extends IRegistrable<Screen> {
     <T extends AbstractContainerMenu> void register(IRegRef<MenuType<?>> menuType, IScreenFactory<T> screenFactory);
 
     interface IScreenFactory<T extends AbstractContainerMenu> {
@@ -19,7 +22,7 @@ public interface IScreenRegistry {
             assert mc.player != null;
             T menu = type.create(windowId, mc.player.getInventory());
             Screen screen = this.create(menu, mc.player.getInventory(), title);
-            mc.player.containerMenu = ((MenuAccess<?>)screen).getMenu();
+            mc.player.containerMenu = ((MenuAccess<?>) screen).getMenu();
             mc.setScreen(screen);
         }
 

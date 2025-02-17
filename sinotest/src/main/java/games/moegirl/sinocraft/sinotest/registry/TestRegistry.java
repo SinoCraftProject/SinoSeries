@@ -30,10 +30,10 @@ public class TestRegistry {
     public static IRegRef<BlockItem> TEST_BLOCK_ITEM;
 
     public static void registerAll() {
-        ITEMS = RegistryManager.obtain(MODID, Registries.ITEM);
-        BLOCKS = RegistryManager.obtain(MODID, Registries.BLOCK);
-        TABS = RegistryManager.obtainTab(MODID);
-        TEST_DATA = RegistryManager.obtain(MODID, ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(MODID, "test_data")));
+        ITEMS = RegistryManager.create(MODID, Registries.ITEM);
+        BLOCKS = RegistryManager.create(MODID, Registries.BLOCK);
+        TABS = RegistryManager.createTab(MODID);
+        TEST_DATA = RegistryManager.create(MODID, ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(MODID, "test_data")));
 
         registerTabs();
         registerBlocks();

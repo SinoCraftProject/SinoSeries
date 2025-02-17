@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinotest.datagen;
 
+import games.moegirl.sinocraft.sinocore.data.gen.DataGeneratorManager;
 import games.moegirl.sinocraft.sinocore.data.gen.ForgeProvider;
-import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegistry;
-import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenerator;
 import games.moegirl.sinocraft.sinotest.SinoTest;
 import games.moegirl.sinocraft.sinotest.datagen.gen.*;
 
@@ -16,7 +16,7 @@ public class TestDatagen {
     }
 
     private static void registerProvider() {
-        IDataProviderRegistry register = RegistryManager.obtainDataProvider(SinoTest.MODID);
+        IDataGenerator register = DataGeneratorManager.createDataGenerator(SinoTest.MODID);
         register.put(TestEnLanguageProvider::new);
         register.put(TestZhLanguageProvider::new);
         register.put(TestAdvancementProvider::new);

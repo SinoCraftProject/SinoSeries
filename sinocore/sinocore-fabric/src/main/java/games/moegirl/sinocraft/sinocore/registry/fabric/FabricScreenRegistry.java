@@ -20,6 +20,17 @@ public class FabricScreenRegistry implements IScreenRegistry {
 
     private final List<Pair<IRegRef<MenuType<?>>, IScreenFactory<?>>> screens = new ArrayList<>();
 
+    private final String modId;
+
+    public FabricScreenRegistry(String modId) {
+        this.modId = modId;
+    }
+
+    @Override
+    public String modId() {
+        return modId;
+    }
+
     @Override
     public void register() {
         for (Pair<IRegRef<MenuType<?>>, IScreenFactory<?>> screen : screens) {

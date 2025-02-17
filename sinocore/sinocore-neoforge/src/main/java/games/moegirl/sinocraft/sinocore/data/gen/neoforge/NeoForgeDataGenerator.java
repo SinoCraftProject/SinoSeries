@@ -1,8 +1,8 @@
-package games.moegirl.sinocraft.sinocore.registry.neoforge;
+package games.moegirl.sinocraft.sinocore.data.gen.neoforge;
 
 import games.moegirl.sinocraft.sinocore.SinoCorePlatform;
 import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
-import games.moegirl.sinocraft.sinocore.registry.IDataProviderRegistry;
+import games.moegirl.sinocraft.sinocore.data.gen.IDataGenerator;
 import games.moegirl.sinocraft.sinocore.utility.Reference;
 import games.moegirl.sinocraft.sinocore.utility.neoforge.ModBusHelper;
 import net.minecraft.data.DataGenerator;
@@ -15,12 +15,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class NeoForgeDataProviderRegistry implements IDataProviderRegistry, Consumer<GatherDataEvent> {
+public class NeoForgeDataGenerator implements IDataGenerator, Consumer<GatherDataEvent> {
 
     private final List<Function<IDataGenContext, DataProvider>> providers = new ArrayList<>();
     private final List<Function<IDataGenContext, DataProvider>> providersNotRun = new ArrayList<>();
 
-    public NeoForgeDataProviderRegistry(String modId) {
+    public NeoForgeDataGenerator(String modId) {
         ModBusHelper.getModBus(modId).addListener(this);
     }
 

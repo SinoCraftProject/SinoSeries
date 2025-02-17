@@ -13,17 +13,27 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class FabricTabRegistry implements ITabRegistry {
 
     private final String modId;
     private final Registry<CreativeModeTab> registry;
+    private final Map<ResourceLocation, IRegRef<CreativeModeTab>> refs = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     FabricTabRegistry(String modId) {
         this.modId = modId;
         registry = (Registry<CreativeModeTab>) BuiltInRegistries.REGISTRY.get(Registries.CREATIVE_MODE_TAB.location());
+    }
+
+    @Override
+    public String modId() {
+        return modId;
     }
 
     @Override
@@ -47,7 +57,9 @@ public class FabricTabRegistry implements ITabRegistry {
     public <T extends CreativeModeTab> IRegRef<CreativeModeTab> registerForRef(String name, Supplier<? extends T> supplier) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
-        return new FabricRegRef<>(Registry.registerForHolder(registry, key, supplier.get()));
+        var ref = new FabricRegRef<>(Registry.registerForHolder(registry, key, supplier.get()));
+        refs.put(ResourceLocation.fromNamespaceAndPath(modId, name), ref);
+        return ref;
     }
 
     @Override
@@ -60,5 +72,20 @@ public class FabricTabRegistry implements ITabRegistry {
             ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> generator.accept(entries.getContext(), entries));
             return generator;
         });
+    }
+
+    @Override
+    public Registry<CreativeModeTab> getRegistry() {
+        return registry;
+    }
+
+    @Override
+    public Iterable<IRegRef<CreativeModeTab>> getEntries() {
+        return refs.values();
+    }
+
+    @Override
+    public Optional<IRegRef<CreativeModeTab>> get(ResourceLocation id) {
+        return Optional.ofNullable(refs.get(id));
     }
 }

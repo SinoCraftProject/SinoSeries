@@ -9,7 +9,7 @@ import net.minecraft.core.registries.Registries;
 
 @SuppressWarnings("all")
 public class SCCriteriaTriggers {
-    public static final IRegistry<CriterionTrigger<?>> TRIGGERS = RegistryManager.obtain(SinoCore.MODID, Registries.TRIGGER_TYPE);
+    public static final IRegistry<CriterionTrigger<?>> TRIGGERS = RegistryManager.create(SinoCore.MODID, Registries.TRIGGER_TYPE);
 
     public static final IRegRef<PlayerCustomStatTrigger> CUSTOM_STAT_TRIGGER = TRIGGERS.register("custom_stat", PlayerCustomStatTrigger::new);
 

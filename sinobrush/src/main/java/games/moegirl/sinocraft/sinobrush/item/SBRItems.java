@@ -12,8 +12,8 @@ import net.minecraft.world.item.Item;
 import java.util.function.Supplier;
 
 public class SBRItems {
-    public static IRegistry<Item> ITEMS = RegistryManager.obtain(SinoBrush.MODID, Registries.ITEM);
-    public static ITabRegistry TABS = RegistryManager.obtainTab(SinoBrush.MODID);
+    public static IRegistry<Item> ITEMS = RegistryManager.create(SinoBrush.MODID, Registries.ITEM);
+    public static ITabRegistry TABS = RegistryManager.createTab(SinoBrush.MODID);
 
     public static ResourceKey<CreativeModeTab> SINO_BRUSH_TAB = TABS.register("sinobrush");
 

@@ -23,11 +23,7 @@ public class RegistryManagerImpl {
     }
 
     public static ICommandRegistry _createCommand(String modId) {
-        return new NeoForgeCommandRegister();
-    }
-
-    public static IDataProviderRegistry _createDataProvider(String modId) {
-        return new NeoForgeDataProviderRegistry(modId);
+        return new NeoForgeCommandRegister(modId);
     }
 
     public static ICustomStatRegistry _createCustomStat(String modId) {

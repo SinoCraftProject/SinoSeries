@@ -1,13 +1,8 @@
 package games.moegirl.sinocraft.sinocore.registry.fabric;
 
 import games.moegirl.sinocraft.sinocore.registry.*;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.core.Registry;
-import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class RegistryManagerImpl {
 
@@ -24,20 +19,11 @@ public class RegistryManagerImpl {
     }
 
     public static IScreenRegistry _createScreen(String modId) {
-        return new FabricScreenRegistry();
+        return new FabricScreenRegistry(modId);
     }
 
     public static ICommandRegistry _createCommand(String modId) {
-        return new FabricCommandRegister();
-    }
-
-    public static IDataProviderRegistry _createDataProvider(String modId) {
-        return new IDataProviderRegistry() {
-            @Override
-            public <T extends DataProvider> Supplier<T> put(Function<IDataGenContext, ? extends T> builder, boolean run) {
-                return () -> null;
-            }
-        };
+        return new FabricCommandRegister(modId);
     }
 
     public static ICustomStatRegistry _createCustomStat(String modId) {

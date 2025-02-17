@@ -10,7 +10,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.phys.Vec3;
 
 public class SDEntities {
-    public static final IRegistry<EntityType<?>> ENTITY_TYPES = RegistryManager.obtain(SinoDeco.MODID, Registries.ENTITY_TYPE);
+    public static final IRegistry<EntityType<?>> ENTITY_TYPES = RegistryManager.create(SinoDeco.MODID, Registries.ENTITY_TYPE);
 
     public static void register() {
         // Todo: register

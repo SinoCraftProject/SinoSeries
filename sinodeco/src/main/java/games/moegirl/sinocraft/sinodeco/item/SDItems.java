@@ -11,8 +11,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
 public class SDItems {
-    public static final IRegistry<Item> ITEMS = RegistryManager.obtain(SinoDeco.MODID, Registries.ITEM);
-    public static final ITabRegistry TABS = RegistryManager.obtainTab(SinoDeco.MODID);
+    public static final IRegistry<Item> ITEMS = RegistryManager.create(SinoDeco.MODID, Registries.ITEM);
+    public static final ITabRegistry TABS = RegistryManager.createTab(SinoDeco.MODID);
 
     public static final ResourceKey<CreativeModeTab> SINO_DECO_TAB = TABS.register("sinodeco");
 

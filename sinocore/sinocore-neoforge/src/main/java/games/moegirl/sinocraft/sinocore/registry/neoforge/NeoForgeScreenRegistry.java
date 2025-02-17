@@ -23,11 +23,18 @@ import java.util.function.Consumer;
 @SuppressWarnings("all")
 public class NeoForgeScreenRegistry implements IScreenRegistry {
 
+    private final String modId;
     private final IEventBus bus;
     private final List<Pair<IRegRef<MenuType<?>>, IScreenFactory<?>>> screens = new ArrayList<>();
 
     public NeoForgeScreenRegistry(String modId) {
-        bus = ModBusHelper.getModBus(modId);
+        this.modId = modId;
+        this.bus = ModBusHelper.getModBus(modId);
+    }
+
+    @Override
+    public String modId() {
+        return modId;
     }
 
     @Override

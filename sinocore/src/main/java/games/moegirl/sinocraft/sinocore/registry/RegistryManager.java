@@ -1,5 +1,6 @@
 package games.moegirl.sinocraft.sinocore.registry;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.logging.LogUtils;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Registry;
@@ -7,24 +8,54 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * SinoCore 注册表管理器
  */
-@SuppressWarnings({"unchecked", "JavadocReference"})
+@SuppressWarnings({"JavadocReference"})
 public class RegistryManager {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final Map<String, Map<ResourceKey<?>, IRegistry<?>>> REGISTRY_MAP = new HashMap<>();
-    private static final Map<String, ITabRegistry> TAB_MAP = new HashMap<>();
-    private static final Map<String, IMenuRegistry> MENU_MAP = new HashMap<>();
-    private static final Map<String, IScreenRegistry> SCREEN_MAP = new HashMap<>();
-    private static final Map<String, ICommandRegistry> COMMAND_MAP = new HashMap<>();
-    private static final Map<String, IDataProviderRegistry> DATA_PROVIDER_MAP = new HashMap<>();
-    private static final Map<String, ICustomStatRegistry> CUSTOM_STAT_MAP = new HashMap<>();
+    // Map<String modId, Map<ResourceKey<?> registryId, List<IRegistrable<?>> registries>>
+    private static final Map<String, Map<ResourceKey<?>, List<IRegistryBase<?>>>> REGISTRIES = new ConcurrentHashMap<>();
+
+    private static final Map<String, List<IScreenRegistry>> SCREEN_MAP = new HashMap<>();
+    private static final Map<String, List<ICommandRegistry>> COMMAND_MAP = new ConcurrentHashMap<>();
+
+    private static <T, U extends IRegistryBase<T>> U appendRegistry(String modId, ResourceKey<Registry<T>> key, U registry) {
+        REGISTRIES.computeIfAbsent(modId, __ -> new HashMap<>())
+                .computeIfAbsent(key, __ -> new ArrayList<>())
+                .add(registry);
+        return registry;
+    }
+
+    private static <T, U extends IRegistrable<T>> U appendRegistrable(Map<String, List<U>> map, String modId, U registrable) {
+        map.computeIfAbsent(modId, __ -> new ArrayList<>())
+                .add(registrable);
+        return registrable;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, U extends IRegistryBase<T>> List<U> getRegistries(String modId, ResourceKey<Registry<T>> key) {
+        if (!REGISTRIES.containsKey(modId)) {
+            return ImmutableList.of();
+        }
+
+        var map = REGISTRIES.get(modId);
+        if (!map.containsKey(key)) {
+            return ImmutableList.of();
+        }
+
+        return new ImmutableList.Builder<U>()
+                .addAll((List<U>) map.get(key))
+                .build();
+    }
 
     /**
      * 创建一个新的 SinoCore 注册表
@@ -39,9 +70,7 @@ public class RegistryManager {
      * @return SinoCore 注册表
      */
     public synchronized static <T> IRegistry<T> create(String modId, ResourceKey<Registry<T>> key) {
-        IRegistry<T> registry = _create(modId, key);
-        REGISTRY_MAP.computeIfAbsent(modId, __ -> new HashMap<>()).put(key, registry);
-        return registry;
+        return appendRegistry(modId, key, _create(modId, key));
     }
 
     /**
@@ -55,7 +84,7 @@ public class RegistryManager {
      * @return Tab 注册表
      */
     public synchronized static ITabRegistry createTab(String modId) {
-        return TAB_MAP.computeIfAbsent(modId, RegistryManager::_createTab);
+        return appendRegistry(modId, Registries.CREATIVE_MODE_TAB, _createTab(modId));
     }
 
     /**
@@ -69,37 +98,7 @@ public class RegistryManager {
      * @return Menu 注册表
      */
     public synchronized static IMenuRegistry createMenu(String modId) {
-        return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
-    }
-
-    /**
-     * 创建用于 Screen 的 SinoCore 注册表
-     *
-     * @param modId modid
-     * @return Screen 注册表
-     */
-    public synchronized static IScreenRegistry createScreen(String modId) {
-        return SCREEN_MAP.computeIfAbsent(modId, RegistryManager::_createScreen);
-    }
-
-    /**
-     * 创建用于 Command 的 SinoCore 注册表
-     *
-     * @param modId modid
-     * @return Command 注册表
-     */
-    public synchronized static ICommandRegistry createCommand(String modId) {
-        return COMMAND_MAP.computeIfAbsent(modId, RegistryManager::_createCommand);
-    }
-
-    /**
-     * 创建用于 DataProvider 的 SinoCore 注册表
-     *
-     * @param modId modid
-     * @return DataProvider 注册表
-     */
-    public synchronized static IDataProviderRegistry createDataProvider(String modId) {
-        return DATA_PROVIDER_MAP.computeIfAbsent(modId, RegistryManager::_createDataProvider);
+        return appendRegistry(modId, Registries.MENU, _createMenu(modId));
     }
 
     /**
@@ -109,105 +108,27 @@ public class RegistryManager {
      * @return 自定义统计信息注册表
      */
     public synchronized static ICustomStatRegistry createCustomStat(String modId) {
-        return CUSTOM_STAT_MAP.computeIfAbsent(modId, RegistryManager::_createCustomStat);
+        return appendRegistry(modId, Registries.CUSTOM_STAT, _createCustomStat(modId));
     }
 
     /**
-     * 获取该 mod 最后一个该类型注册器，如果不存在则创建一个新对象
+     * 创建用于 Screen 的 SinoCore 注册表
      *
-     * @param modId 对应 mod id
-     * @param key   注册类型注册表的键
-     * @param <T>   注册类型
-     * @return 最后一个或新注册表引用
-     * @deprecated Use {@link RegistryManager#create}
+     * @param modId modid
+     * @return Screen 注册表
      */
-    @Deprecated(forRemoval = true)
-    public synchronized static <T> IRegistry<T> obtain(String modId, ResourceKey<Registry<T>> key) {
-        if (Registries.CREATIVE_MODE_TAB.equals(key)) {
-            LOGGER.warn("Use obtainTab to add creative mod tab easier.");
-        }
-
-        return (IRegistry<T>) REGISTRY_MAP
-                .computeIfAbsent(modId, __ -> new HashMap<>())
-                .computeIfAbsent(key, __ -> _create(modId, key));
+    public synchronized static IScreenRegistry createScreen(String modId) {
+        return appendRegistrable(SCREEN_MAP, modId, RegistryManager._createScreen(modId));
     }
 
     /**
-     * 获取该 mod 最后一个专用于注册 CreativeModeTab 的注册器，如果不存在则创建一个新对象
+     * 创建用于 Command 的 SinoCore 注册表
      *
-     * <p>
-     * <p>
-     * {@code create} 与 {@code obtain} 方法创建的 IRegistry 也可以用于注册 CreativeModeTab，但该方法创建的注册器可以向创建的
-     * Tab 添加物品
-     *
-     * @param modId 对应 mod id
-     * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#createTab}
+     * @param modId modid
+     * @return Command 注册表
      */
-    @Deprecated(forRemoval = true)
-    public synchronized static ITabRegistry obtainTab(String modId) {
-        return TAB_MAP.computeIfAbsent(modId, RegistryManager::_createTab);
-    }
-
-    /**
-     * 获取该 mod 最后一个专用于注册 Menu 的注册器，如果不存在则创建一个新对象
-     *
-     * <p>
-     * <p>
-     * {@code create} 与 {@code obtain} 方法创建的 IRegistry 也可以用于注册 {@link net.minecraft.world.inventory.MenuType}，
-     * 但 {@link net.minecraft.world.inventory.MenuType.MenuSupplier} 是私有的，无法创建
-     *
-     * @param modId 对应 mod id
-     * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#createMenu}
-     */
-    @Deprecated(forRemoval = true)
-    public synchronized static IMenuRegistry obtainMenu(String modId) {
-        return MENU_MAP.computeIfAbsent(modId, RegistryManager::_createMenu);
-    }
-
-    /**
-     * 注册 Screen 与 Menu 的关联关系
-     *
-     * @param modId 对应 mod id
-     * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#createScreen}
-     */
-    @Deprecated(forRemoval = true)
-    public synchronized static IScreenRegistry obtainScreen(String modId) {
-        return SCREEN_MAP.computeIfAbsent(modId, RegistryManager::_createScreen);
-    }
-
-    /**
-     * 注册指令
-     *
-     * @param modId 对应 mod id
-     * @return 最后一个或新注册器
-     * @deprecated Use {@link RegistryManager#createCommand}
-     */
-    @Deprecated(forRemoval = true)
-    public synchronized static ICommandRegistry obtainCommand(String modId) {
-        return COMMAND_MAP.computeIfAbsent(modId, RegistryManager::_createCommand);
-    }
-
-    /**
-     * @param modId ModId
-     * @return IDataProviderRegistry
-     * @deprecated Use {@link RegistryManager#createDataProvider}
-     */
-    @Deprecated(forRemoval = true)
-    public synchronized static IDataProviderRegistry obtainDataProvider(String modId) {
-        return DATA_PROVIDER_MAP.computeIfAbsent(modId, RegistryManager::_createDataProvider);
-    }
-
-    /**
-     * 注册自定义统计信息
-     *
-     * @deprecated Use {@link RegistryManager#createCustomStat}
-     */
-    @Deprecated(forRemoval = true)
-    public synchronized static ICustomStatRegistry obtainCustomStat(String modId) {
-        return CUSTOM_STAT_MAP.computeIfAbsent(modId, RegistryManager::_createCustomStat);
+    public synchronized static ICommandRegistry createCommand(String modId) {
+        return appendRegistrable(COMMAND_MAP, modId, RegistryManager._createCommand(modId));
     }
 
     @ExpectPlatform
@@ -217,11 +138,6 @@ public class RegistryManager {
 
     @ExpectPlatform
     static ITabRegistry _createTab(String modId) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    static IDataProviderRegistry _createDataProvider(String modId) {
         throw new AssertionError();
     }
 

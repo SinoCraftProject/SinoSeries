@@ -8,7 +8,7 @@ import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
 import net.minecraft.world.inventory.MenuType;
 
 public class SBRMenu {
-    public static IMenuRegistry MENU_TYPES = RegistryManager.obtainMenu(SinoBrush.MODID);
+    public static IMenuRegistry MENU_TYPES = RegistryManager.createMenu(SinoBrush.MODID);
 
     public static final IRegRef<MenuType<?>> BRUSH_PAPER = MENU_TYPES.register("brush", BrushMenu::new);
 

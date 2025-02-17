@@ -9,21 +9,17 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class FabricRegistry<T> implements IRegistry<T> {
 
-    final String modId;
-    final ResourceKey<Registry<T>> key;
-    Registry<T> registry;
-    Supplier<Registry<T>> sup;
-    final List<IRegRef<T>> elementReferences = new ArrayList<>();
-    final List<IRegRef<T>> elementView = Collections.unmodifiableList(elementReferences);
+    protected final String modId;
+    protected final ResourceKey<Registry<T>> key;
+    protected Registry<T> registry;
+    protected final Supplier<Registry<T>> sup;
+    protected final Map<ResourceLocation, IRegRef<T>> elements = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     FabricRegistry(String modId, ResourceKey<Registry<T>> key) {
@@ -55,13 +51,8 @@ public class FabricRegistry<T> implements IRegistry<T> {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modId, name);
         ResourceKey<T> eKey = ResourceKey.create(key, id);
         FabricRegRef<T> ref = new FabricRegRef<>(Registry.registerForHolder(registry, eKey, supplier.get()));
-        elementReferences.add(ref);
+        elements.putIfAbsent(ResourceLocation.fromNamespaceAndPath(modId, name), ref);
         return (IRegRef<R>) ref;
-    }
-
-    @Override
-    public TagKey<T> createTag(ResourceLocation name) {
-        return TagKey.create(key, name);
     }
 
     @Override
@@ -71,6 +62,11 @@ public class FabricRegistry<T> implements IRegistry<T> {
 
     @Override
     public Iterable<IRegRef<T>> getEntries() {
-        return elementView;
+        return elements.values();
+    }
+
+    @Override
+    public Optional<IRegRef<T>> get(ResourceLocation id) {
+        return Optional.ofNullable(elements.get(id));
     }
 }

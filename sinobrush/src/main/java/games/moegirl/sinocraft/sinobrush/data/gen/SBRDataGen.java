@@ -11,11 +11,11 @@ import games.moegirl.sinocraft.sinobrush.data.gen.recipe.RecipeProvider;
 import games.moegirl.sinocraft.sinobrush.data.gen.tag.BlockTagProvider;
 import games.moegirl.sinocraft.sinobrush.data.gen.tag.ItemTagProvider;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
-import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGeneratorManager;
 
 public class SBRDataGen {
     public static void register() {
-        var register = RegistryManager.obtainDataProvider(SinoBrush.MODID);
+        var register = DataGeneratorManager.createDataGenerator(SinoBrush.MODID);
 
         register.put(ZhCnLangProvider::new);
         register.put(ZhHkLangProvider::new);

@@ -13,21 +13,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class NeoForgeRegistry<T> implements IRegistry<T> {
 
-    private final IEventBus bus;
-
-    final ResourceKey<Registry<T>> key;
-    final String modId;
-    final List<IRegRef<T>> elementReferences = new ArrayList<>();
-    final List<IRegRef<T>> elementView = Collections.unmodifiableList(elementReferences);
-
+    protected final IEventBus bus;
+    protected final String modId;
+    protected final Map<ResourceLocation, IRegRef<T>> elements = new HashMap<>();
     protected DeferredRegister<T> dr;
     protected boolean registered;
 
@@ -35,7 +29,6 @@ public class NeoForgeRegistry<T> implements IRegistry<T> {
         this.bus = ModBusHelper.getModBus(modId);
 
         this.modId = modId;
-        this.key = key;
         this.dr = DeferredRegister.create(key, modId);
 
         if (!BuiltInRegistries.REGISTRY.containsKey(key.location())) {
@@ -63,13 +56,8 @@ public class NeoForgeRegistry<T> implements IRegistry<T> {
     @Override
     public <R extends T> IRegRef<R> register(String name, Supplier<? extends R> supplier) {
         NeoForgeRegRef<T> ref = new NeoForgeRegRef<>(dr.register(name, supplier));
-        elementReferences.add(ref);
+        elements.put(ResourceLocation.fromNamespaceAndPath(modId, name), ref);
         return (IRegRef<R>) ref;
-    }
-
-    @Override
-    public TagKey<T> createTag(ResourceLocation name) {
-        return dr.createTagKey(name);
     }
 
     @Override
@@ -79,6 +67,11 @@ public class NeoForgeRegistry<T> implements IRegistry<T> {
 
     @Override
     public Iterable<IRegRef<T>> getEntries() {
-        return elementView;
+        return elements.values();
+    }
+
+    @Override
+    public Optional<IRegRef<T>> get(ResourceLocation id) {
+        return Optional.ofNullable(elements.get(id));
     }
 }

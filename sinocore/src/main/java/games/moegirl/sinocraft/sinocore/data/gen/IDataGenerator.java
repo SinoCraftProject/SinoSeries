@@ -1,12 +1,11 @@
-package games.moegirl.sinocraft.sinocore.registry;
+package games.moegirl.sinocraft.sinocore.data.gen;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
 import net.minecraft.data.DataProvider;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public interface IDataProviderRegistry {
+public interface IDataGenerator {
 
     <T extends DataProvider> Supplier<T> put(Function<IDataGenContext, ? extends T> builder, boolean run);
 
