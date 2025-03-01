@@ -21,18 +21,23 @@ allprojects {
         }
 
         maven {
-            name = 'NeoForge'
+            name = 'NeoForged'
             url = 'https://maven.neoforged.net/releases/'
+        }
+
+        maven {
+            name = 'FabricMC'
+            url = 'https://maven.fabricmc.net/'
+        }
+
+        maven {
+            name = 'MinecraftForge'
+            url = 'https://maven.minecraftforge.net/'
         }
 
         maven {
             name = 'Shedaniel'
             url = 'https://maven.shedaniel.me'
-        }
-
-        maven {
-            name = 'Yuluo'
-            url = 'https://maven.yuluo.dev/repository/maven-public/'
         }
 
         exclusiveContent {
@@ -46,6 +51,11 @@ allprojects {
             filter {
                 includeGroup "maven.modrinth"
             }
+        }
+
+        maven {
+            name = 'Yuluo'
+            url = 'https://maven.yuluo.dev/repository/maven-public/'
         }
     }
 }
