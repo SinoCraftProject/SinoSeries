@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinotest.network;
 
-import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.ServerPlayNetworkContext;
 import games.moegirl.sinocraft.sinotest.SinoTest;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.ChatType;
@@ -27,8 +27,8 @@ public record C2SHelloPacket(String message1, String message2) implements Custom
         return TYPE;
     }
 
-    public void handle(PlayNetworkContext context) {
-        ServerPlayer sender = context.sender();
+    public void handle(ServerPlayNetworkContext context) {
+        ServerPlayer sender = context.getPlayer();
         ChatType.Bound bind = ChatType.bind(ChatType.CHAT, sender);
         sender.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.system(message1)), false, bind);
         sender.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.system(message2)), false, bind);

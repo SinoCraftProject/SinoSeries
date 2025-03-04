@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinotest.network;
 
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
-import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.ClientPlayNetworkContext;
 import games.moegirl.sinocraft.sinotest.SinoTest;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -23,7 +23,7 @@ public record S2CHelloPacket(String message) implements CustomPacketPayload {
         return TYPE;
     }
 
-    public void handle(PlayNetworkContext context) {
+    public void handle(ClientPlayNetworkContext context) {
         NetworkManager.sendToServer(new C2SHelloPacket("Client thread is " + Thread.currentThread().getName(), message));
     }
 }

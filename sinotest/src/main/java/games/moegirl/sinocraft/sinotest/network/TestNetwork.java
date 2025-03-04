@@ -13,15 +13,13 @@ public class TestNetwork {
     public static void registerAll() {
 
         NetworkManager.playPacket(C2SHelloPacket.TYPE)
-                .destination(PacketFlow.SERVERBOUND)
                 .codec(C2SHelloPacket.STREAM_CODEC)
-                .handler(C2SHelloPacket::handle)
+                .serverHandler(C2SHelloPacket::handle)
                 .register();
 
         NetworkManager.playPacket(S2CHelloPacket.TYPE)
-                .destination(PacketFlow.CLIENTBOUND)
                 .codec(S2CHelloPacket.STREAM_CODEC)
-                .handler(S2CHelloPacket::handle)
+                .clientHandler(S2CHelloPacket::handle)
                 .register();
 
         ITEM = TestRegistry.ITEMS.register("test_network", TestNetworkItem::new);

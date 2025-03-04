@@ -7,15 +7,13 @@ public class SBRNetworks {
 
     public static void register() {
         NetworkManager.playPacket(S2CDrawResultPacket.TYPE)
-                .destination(PacketFlow.CLIENTBOUND)
                 .codec(S2CDrawResultPacket.STREAM_CODEC)
-                .handler(S2CDrawResultPacket::handle)
+                .clientHandler(S2CDrawResultPacket::handle)
                 .register();
 
         NetworkManager.playPacket(C2SSaveDrawPacket.TYPE)
-                .destination(PacketFlow.SERVERBOUND)
                 .codec(C2SSaveDrawPacket.STREAM_CODEC)
-                .handler(C2SSaveDrawPacket::handle)
+                .serverHandler(C2SSaveDrawPacket::handle)
                 .register();
     }
 }

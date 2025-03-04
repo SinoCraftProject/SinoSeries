@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinobrush.network;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.gui.screen.BrushScreen;
-import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.ClientPlayNetworkContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -40,7 +40,7 @@ public record S2CDrawResultPacket(Status status) implements CustomPacketPayload 
         FAILED_MISSING_BRUSH
     }
 
-    public void handle(PlayNetworkContext handler) {
+    public void handle(ClientPlayNetworkContext context) {
         Minecraft mc = Minecraft.getInstance();
         Screen screen = mc.screen;
         if (screen instanceof BrushScreen xp) {

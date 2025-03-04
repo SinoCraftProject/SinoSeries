@@ -4,14 +4,13 @@ import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
-import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinobrush.utility.ColorHelper;
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
-import games.moegirl.sinocraft.sinocore.network.context.PlayNetworkContext;
+import games.moegirl.sinocraft.sinocore.network.context.ServerPlayNetworkContext;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -48,8 +47,8 @@ public record C2SSaveDrawPacket(MutableDrawing drawing, int brushSlot) implement
         return TYPE;
     }
 
-    public void handle(PlayNetworkContext handler) {
-        ServerPlayer player = handler.sender();
+    public void handle(ServerPlayNetworkContext handler) {
+        ServerPlayer player = handler.getPlayer();
         if (player != null && player.containerMenu instanceof BrushMenu brushMenu) {
             Container container = brushMenu.container;
             ItemStack paperStack = container.getItem(BrushMenu.PAPER_SLOT);
