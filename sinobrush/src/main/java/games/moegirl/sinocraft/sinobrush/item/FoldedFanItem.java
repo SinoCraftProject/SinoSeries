@@ -40,6 +40,6 @@ public class FoldedFanItem extends FanItem {
             return InteractionResultHolder.success(FanItem.transmute(player, stack, SBRItems.FAN.get(), 100));
         }
 
-        return InteractionResultHolder.pass(stack);
+        return super.use(level, player, usedHand);
     }
 }

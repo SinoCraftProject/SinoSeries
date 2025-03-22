@@ -1,0 +1,11 @@
+{
+  "width": 256,
+  "height": 256,
+  "widgets": {
+    "background": {
+      "type": "texture",
+      "uv": [0, 28],
+      "size": [256, 181]
+    }
+  }
+}
