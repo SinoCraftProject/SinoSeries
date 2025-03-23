@@ -75,6 +75,14 @@ public class FanItem extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         var stack = player.getItemInHand(usedHand);
 
+        if (player.isShiftKeyDown()) {
+            if (level.isClientSide) {
+                ((Runnable) () -> net.minecraft.client.Minecraft.getInstance().setScreen(
+                        new games.moegirl.sinocraft.sinobrush.gui.screen.FanScreen(getLines(stack)))).run();
+            }
+            return InteractionResultHolder.success(stack);
+        }
+
         if (!player.getCooldowns().isOnCooldown(this)) {
             return InteractionResultHolder.success(transmute(player, stack, SBRItems.FOLDED_FAN.get(), 100));
         }

@@ -1,13 +1,15 @@
 package games.moegirl.sinocraft.sinobrush.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.item.FanItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.gui.widgets.WidgetLoader;
 import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
+import games.moegirl.sinocraft.sinocore.utility.config.Configs;
+import games.moegirl.sinocraft.sinocore.utility.config.IConfigVisitor;
 import net.minecraft.Util;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,6 +21,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 
+import java.io.IOException;
 import java.util.List;
 
 public class FanRenderer {
@@ -75,18 +78,18 @@ public class FanRenderer {
         return y;
     }
 
-    public static void renderInHud(GuiGraphics guiGraphics, DeltaTracker partialTick) {
+    public static void renderInHud(GuiGraphics guiGraphics) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (stack.is(SBRItems.FAN.get())) {
-                renderInHud(guiGraphics, partialTick, stack);
+                renderInHud(guiGraphics, stack);
                 return;
             }
 
             stack = player.getItemInHand(InteractionHand.OFF_HAND);
             if (stack.is(SBRItems.FAN.get())) {
-                renderInHud(guiGraphics, partialTick, stack);
+                renderInHud(guiGraphics, stack);
                 return;
             }
 
@@ -94,18 +97,31 @@ public class FanRenderer {
             for (int i = 0; i < 9; i++) {
                 stack = inventory.getItem(i);
                 if (stack.is(SBRItems.FAN.get())) {
-                    renderInHud(guiGraphics, partialTick, stack);
+                    renderInHud(guiGraphics, stack);
                     return;
                 }
             }
         }
     }
 
-    private static void renderInHud(GuiGraphics guiGraphics, DeltaTracker partialTick, ItemStack stack) {
+    private static void renderInHud(GuiGraphics guiGraphics, ItemStack stack) {
+        int x = 0, y = 0;
+        float scale = 0.5f;
+        try {
+            Configs clientConfigs = SinoBrush.CONFIGURATIONS.getClientConfigs();
+            IConfigVisitor fanHud = clientConfigs.getObject("FanHUD");
+            x = fanHud.getInteger("x", 0);
+            y = fanHud.getInteger("y", 0);
+            scale = fanHud.getFloat("scale", 0.5f);
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+
         List<Component> lines = FanItem.getLines(stack);
         PoseStack pose = guiGraphics.pose();
         pose.pushPose();
-        pose.scale(0.5f, 0.5f, 1);
+        pose.translate(x, y, 0);
+        pose.scale(scale, scale, 1);
         renderInGui(guiGraphics, Minecraft.getInstance().font, 0, 0, lines, -1, 0);
         pose.popPose();
     }

@@ -21,6 +21,6 @@ public class RenderHandlers {
             }
         });
 
-        RenderEvents.BEFORE_RENDER_HUD.register(args -> FanRenderer.renderInHud(args.guiGraphics(), args.partialTick()));
+        RenderEvents.BEFORE_RENDER_HUD.register(args -> FanRenderer.renderInHud(args.guiGraphics()));
     }
 }
