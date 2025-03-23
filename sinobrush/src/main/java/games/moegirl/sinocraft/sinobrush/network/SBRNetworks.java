@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.network;
 
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
-import net.minecraft.network.protocol.PacketFlow;
 
 public class SBRNetworks {
 
@@ -14,6 +13,11 @@ public class SBRNetworks {
         NetworkManager.playPacket(C2SSaveDrawPacket.TYPE)
                 .codec(C2SSaveDrawPacket.STREAM_CODEC)
                 .serverHandler(C2SSaveDrawPacket::handle)
+                .register();
+
+        NetworkManager.playPacket(C2SSaveFanLines.TYPE)
+                .codec(C2SSaveFanLines.STREAM_CODEC)
+                .serverHandler(C2SSaveFanLines::handle)
                 .register();
     }
 }
