@@ -1,7 +1,6 @@
 package games.moegirl.sinocraft.sinobrush.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import games.moegirl.sinocraft.sinobrush.item.FanItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.gui.widgets.WidgetLoader;
@@ -13,12 +12,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
@@ -35,22 +31,6 @@ public class FanRenderer {
 
     public static void renderInGui(GuiGraphics guiGraphics, Font font, int x, int y,
                                    List<Component> lines, int currentLine, long focusedTime) {
-//        guiGraphics.fill(x, y, x + width, y + height, ColorHelper.rgbToARGB(drawing.getPaperColor()));
-//
-//        var pW = width / Math.max(1, drawing.getWidth());
-//        var pH = height / Math.max(1, drawing.getHeight());
-//        if (!drawing.isEmpty()) {
-//            try (var ignored = GLSwitcher.blend().enable()) {
-//                for (var i = 0; i < drawing.getWidth(); i++) {
-//                    for (var j = 0; j < drawing.getHeight(); j++) {
-//                        var pX = x + (i * pW);
-//                        var pY = y + (j * pH);
-//                        var color = drawing.getPixel(i, j);
-//                        fillGuiRect(guiGraphics, pX, pY, pX + pW, pY + pH, ColorHelper.pixelColorToARGB(color, drawing.getInkColor()));
-//                    }
-//                }
-//            }
-//        }
         TextureEntry background = (TextureEntry) TEXTURE.getWidget("background");
         guiGraphics.blit(TEXTURE.getTexture(), x, y,
                 background.getWidth(), background.getHeight(),
@@ -128,29 +108,5 @@ public class FanRenderer {
         pose.scale(0.5f, 0.5f, 1);
         renderInGui(guiGraphics, Minecraft.getInstance().font, 0, 0, lines, -1, 0);
         pose.popPose();
-    }
-
-    private static int getLightVal(ItemFrame itemFrame, int glowLightVal, int regularLightVal) {
-        return itemFrame.getType() == EntityType.GLOW_ITEM_FRAME ? glowLightVal : regularLightVal;
-    }
-
-    private static void fillGuiRect(GuiGraphics guiGraphics, float minX, float minY, float maxX, float maxY, int color) {
-        var matrix4f = guiGraphics.pose().last().pose();
-        var buffer = guiGraphics.bufferSource().getBuffer(RenderType.guiOverlay());
-        buffer.addVertex(matrix4f, minX, minY, 0).setColor(color);
-        buffer.addVertex(matrix4f, minX, maxY, 0).setColor(color);
-        buffer.addVertex(matrix4f, maxX, maxY, 0).setColor(color);
-        buffer.addVertex(matrix4f, maxX, minY, 0).setColor(color);
-        guiGraphics.flush();
-    }
-
-    private static void fillRect(PoseStack poseStack, VertexConsumer buffer,
-                                 float minX, float minY, float maxX, float maxY,
-                                 float zIndex,
-                                 int color, int combinedLight) {
-        buffer.addVertex(poseStack.last().pose(), minX, minY, zIndex).setColor(color).setLight(combinedLight);
-        buffer.addVertex(poseStack.last().pose(), minX, maxY, zIndex).setColor(color).setLight(combinedLight);
-        buffer.addVertex(poseStack.last().pose(), maxX, maxY, zIndex).setColor(color).setLight(combinedLight);
-        buffer.addVertex(poseStack.last().pose(), maxX, minY, zIndex).setColor(color).setLight(combinedLight);
     }
 }
