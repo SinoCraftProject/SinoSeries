@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.handler;
 
 import games.moegirl.sinocraft.sinobrush.client.DrawingRenderer;
-import games.moegirl.sinocraft.sinobrush.item.FilledXuanPaperItem;
+import games.moegirl.sinocraft.sinobrush.client.FanRenderer;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
 import games.moegirl.sinocraft.sinocore.event.client.RenderEvents;
@@ -20,5 +20,7 @@ public class RenderHandlers {
                 args.cancel();
             }
         });
+
+        RenderEvents.BEFORE_RENDER_HUD.register(args -> FanRenderer.renderInHud(args.guiGraphics(), args.partialTick()));
     }
 }

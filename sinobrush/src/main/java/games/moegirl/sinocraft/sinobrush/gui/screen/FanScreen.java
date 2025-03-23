@@ -1,30 +1,22 @@
 package games.moegirl.sinocraft.sinobrush.gui.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import games.moegirl.sinocraft.sinobrush.client.FanRenderer;
 import games.moegirl.sinocraft.sinobrush.network.Common2FanLines;
-import games.moegirl.sinocraft.sinocore.gui.widgets.WidgetLoader;
-import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FanScreen extends Screen {
-    public static final int MAX_DISPLAY_LINES = 21;
+import static games.moegirl.sinocraft.sinobrush.client.FanRenderer.MAX_DISPLAY_LINES;
+import static games.moegirl.sinocraft.sinobrush.client.FanRenderer.TEXTURE;
 
-    public static final Widgets TEXTURE = WidgetLoader.loadWidgets(ResourceLocation.parse("sinobrush:textures/gui/fan"));
-    public static final float[] LINE_X = {231, 223, 213, 203, 191, 181, 165, 152, 138, 117, 102, 89, 77, 67, 56, 46, 37, 28, 20, 14, 9,};
-    public static final float[] LINE_Y = {64, 54, 43, 35, 27, 22, 17, 13, 10, 11, 13, 18, 22, 28, 34, 43, 52, 62, 72, 83, 95,};
-    public static final float[] LINE_R = {45, 41, 35, 30, 25, 22, 14, 9, 4, -6, -13, -19, -23, -26, -30, -35, -39, -45, -50, -55, -58,};
+public class FanScreen extends Screen {
 
     private int leftPos, topPos;
     private final int imageWidth, imageHeight;
@@ -49,59 +41,17 @@ public class FanScreen extends Screen {
 
     @Override
     protected void renderMenuBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        TextureEntry background = (TextureEntry) TEXTURE.getWidget("background");
-        guiGraphics.blit(TEXTURE.getTexture(), leftPos + x, topPos + y, imageWidth, imageHeight,
-                background.getTextureX(), background.getTextureY(),
-                background.getTextureWidth(), background.getTextureHeight(),
-                TEXTURE.getWidth(), TEXTURE.getHeight());
+//        TextureEntry background = (TextureEntry) TEXTURE.getWidget("background");
+//        guiGraphics.blit(TEXTURE.getTexture(), leftPos + x, topPos + y, imageWidth, imageHeight,
+//                background.getTextureX(), background.getTextureY(),
+//                background.getTextureWidth(), background.getTextureHeight(),
+//                TEXTURE.getWidth(), TEXTURE.getHeight());
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        PoseStack pose = guiGraphics.pose();
-        for (int i = 0; i < MAX_DISPLAY_LINES; i++) {
-            if (i >= lines.size() && currentLine != i)
-                continue;
-
-            float x = leftPos + LINE_X[i];
-            float y = topPos + LINE_Y[i];
-            float r = (float) Math.toRadians(LINE_R[i]);
-            pose.pushPose();
-            pose.translate(x, y, 0);
-            pose.scale(0.6f, 0.6f, 1);
-            pose.mulPose(new Matrix4f().rotate(r, 0, 0, 1));
-            int ny = 0;
-            // 文本内容
-            if (i < lines.size()) {
-                ny = drawCharacters(guiGraphics, lines.get(i).getString());
-            }
-            // 编辑标记
-            if (currentLine == i) {
-                drawAppendChar(guiGraphics, ny);
-            }
-            pose.translate(-x, -y, 0);
-            pose.popPose();
-        }
-    }
-
-    private int drawCharacters(GuiGraphics guiGraphics, String line) {
-        int y = 0;
-        for (char c : line.toCharArray()) {
-            String s = String.valueOf(c);
-            int w = font.width(s);
-            int h = font.wordWrapHeight(s, w);
-            guiGraphics.drawString(font, s, 0, y, 0x414141, false);
-            y += h;
-        }
-        return y;
-    }
-
-    private void drawAppendChar(GuiGraphics guiGraphics, int y) {
-        boolean show = (Util.getMillis() - focusedTime) / 300L % 2L == 0L;
-        if (show) {
-            guiGraphics.drawString(this.font, "_", 0, y, 0x414141);
-        }
+        FanRenderer.renderInGui(guiGraphics, font, leftPos, topPos, lines, currentLine, focusedTime);
     }
 
     @Override
