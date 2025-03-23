@@ -40,18 +40,21 @@ public class FanScreen extends Screen {
     }
 
     @Override
-    protected void renderMenuBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-//        TextureEntry background = (TextureEntry) TEXTURE.getWidget("background");
-//        guiGraphics.blit(TEXTURE.getTexture(), leftPos + x, topPos + y, imageWidth, imageHeight,
-//                background.getTextureX(), background.getTextureY(),
-//                background.getTextureWidth(), background.getTextureHeight(),
-//                TEXTURE.getWidth(), TEXTURE.getHeight());
-    }
-
-    @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         FanRenderer.renderInGui(guiGraphics, font, leftPos, topPos, lines, currentLine, focusedTime);
+    }
+
+    private void moveCursorLeft() {
+        if (currentLine != -1) {
+            currentLine = (currentLine + 1) % MAX_DISPLAY_LINES;
+        }
+    }
+
+    private void moveCursorRight() {
+        if (currentLine != -1) {
+            currentLine = (MAX_DISPLAY_LINES + currentLine - 1) % MAX_DISPLAY_LINES;
+        }
     }
 
     @Override
@@ -69,11 +72,16 @@ public class FanScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == GLFW.GLFW_KEY_LEFT || keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) {
-            currentLine = (currentLine + 1) % MAX_DISPLAY_LINES;
+        if (keyCode == GLFW.GLFW_KEY_LEFT) {
+            moveCursorLeft();
+            return true;
+        } else if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) {
+            if (currentLine != MAX_DISPLAY_LINES - 1) {
+                moveCursorLeft();
+            }
             return true;
         } else if (keyCode == GLFW.GLFW_KEY_RIGHT) {
-            currentLine = (MAX_DISPLAY_LINES + currentLine - 1) % MAX_DISPLAY_LINES;
+            moveCursorRight();
             return true;
         } else if (keyCode == GLFW.GLFW_KEY_BACKSPACE && currentLine != -1) {
             Component component = getComponentAt(currentLine);
@@ -81,6 +89,8 @@ public class FanScreen extends Screen {
             if (!content.isEmpty()) {
                 lines.set(currentLine, Component.literal(content.substring(0, content.length() - 1)));
                 isChanged = true;
+            } else if (currentLine > 0){
+                moveCursorRight();
             }
             return true;
         }
@@ -91,7 +101,9 @@ public class FanScreen extends Screen {
     public boolean charTyped(char codePoint, int modifiers) {
         if (currentLine >= 0) {
             if (codePoint == '\n') {
-                currentLine = (currentLine + 1) % MAX_DISPLAY_LINES;
+                if (currentLine != MAX_DISPLAY_LINES - 1) {
+                    moveCursorLeft();
+                }
             } else {
                 Component component = getComponentAt(currentLine);
                 lines.set(currentLine, Component.literal(component.getString() + codePoint));
