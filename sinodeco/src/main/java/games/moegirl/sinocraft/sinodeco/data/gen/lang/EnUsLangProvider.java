@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
+import games.moegirl.sinocraft.sinodeco.data.gen.tag.SDItemTags;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
 
 public class EnUsLangProvider extends AbstractLanguageProvider {
@@ -59,5 +60,8 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
         delegate.addBlock(SDBlocks.PEACH_CHEST.get(), "Peach Chest");
         delegate.addItem(SDItems.PEACH_BOAT.get(), "Peach Boat");
         delegate.addItem(SDItems.PEACH_CHEST_BOAT.get(), "Peach Boat with Chest");
+
+        delegate.addItemTag(SDItemTags.PEACH_LOGS, "Peach Logs");
+        delegate.addItemTag(SDItemTags.MARBLE_BLOCKS, "Marble Blocks");
     }
 }

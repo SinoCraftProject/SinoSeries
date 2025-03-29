@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
+import games.moegirl.sinocraft.sinodeco.data.gen.tag.SDItemTags;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
 
 public class ZhCnLangProvider extends AbstractLanguageProvider {
@@ -59,5 +60,8 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.addBlock(SDBlocks.PEACH_CHEST.get(), "桃木匣");
         delegate.addItem(SDItems.PEACH_BOAT.get(), "桃木船");
         delegate.addItem(SDItems.PEACH_CHEST_BOAT.get(), "桃木运输船");
+
+        delegate.addItemTag(SDItemTags.PEACH_LOGS, "桃木原木");
+        delegate.addItemTag(SDItemTags.MARBLE_BLOCKS, "大理石方块");
     }
 }

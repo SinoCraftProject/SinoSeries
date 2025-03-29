@@ -16,7 +16,7 @@ public class NeoForgeDataGenerator extends DataGenerator implements Consumer<Gat
     @Override
     public void accept(DataGenContext context) {
         var generator = context.getGenerator();
-        providers.forEach((builder, run) -> generator.addProvider(run, builder.apply(context)));
+        providers.forEach(builder -> generator.addProvider(true, builder.apply(context)));
     }
 
     @Override
