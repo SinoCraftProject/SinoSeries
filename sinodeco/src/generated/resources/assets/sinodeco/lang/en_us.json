@@ -41,5 +41,7 @@
   "block.sinodeco.warped_wood_table": "Warped Table",
   "item.sinodeco.peach_boat": "Peach Boat",
   "item.sinodeco.peach_chest_boat": "Peach Boat with Chest",
-  "itemGroup.sinodeco.sinodeco": "SinoDeco"
+  "itemGroup.sinodeco.sinodeco": "SinoDeco",
+  "tag.item.sinodeco.marble_blocks": "Marble Blocks",
+  "tag.item.sinodeco.peach_logs": "Peach Logs"
 }
