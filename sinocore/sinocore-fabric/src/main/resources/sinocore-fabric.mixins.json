@@ -7,7 +7,8 @@
     ],
     "client": [
         "client.ItemMixin_Fabric_Client",
-        "event.client.render.ItemFrameRendererMixin"
+        "event.client.render.ItemFrameRendererMixin",
+        "client.GuiMixin"
     ],
     "server": [
     ],

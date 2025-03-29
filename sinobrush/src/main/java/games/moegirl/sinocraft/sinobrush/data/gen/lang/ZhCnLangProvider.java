@@ -55,6 +55,10 @@ public class ZhCnLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_PAPER, "落款失败：找不到宣纸");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "落款失败：请取走之前的作品");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "落款失败：不用笔画画，你是怎么做到的？");
+        delegate.add(SBRConstants.Translation.GUI_FAN_SETTING_HUD_POSITION, "设置 HUD 位置");
+        delegate.add(SBRConstants.Translation.GUI_FAN_SETTING_HUD_HINT, "拖动调整位置，滚动滚轮调整大小");
+        delegate.add(SBRConstants.Translation.GUI_SETTING_HIDE, "隐藏");
+        delegate.add(SBRConstants.Translation.GUI_SETTING_SHOW, "显示");
 
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "华夏云墨");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "丹青描绘浮生，云墨书尽芳华");

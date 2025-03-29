@@ -55,6 +55,10 @@ public class ZhTwLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_PAPER, "落款失敗：找不到宣紙");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_OUTPUT_OCCUPIED, "落款失敗：請取走之前的作品");
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "落款失敗：不用筆畫畫，你是怎麼做到的？");
+        delegate.add(SBRConstants.Translation.GUI_FAN_SETTING_HUD_POSITION, "設定 HUD 位置");
+        delegate.add(SBRConstants.Translation.GUI_FAN_SETTING_HUD_HINT, "拖動調整位置，滾動滾輪調整大小");
+        delegate.add(SBRConstants.Translation.GUI_SETTING_HIDE, "隱藏");
+        delegate.add(SBRConstants.Translation.GUI_SETTING_SHOW, "顯示");
 
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "丹青描繪浮生，雲墨書盡芳華");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "歡迎遊玩《華夏雲墨》");
