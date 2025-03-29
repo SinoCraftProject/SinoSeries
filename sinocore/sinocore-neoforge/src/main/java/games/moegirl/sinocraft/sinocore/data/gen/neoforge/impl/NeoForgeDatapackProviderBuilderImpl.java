@@ -1,15 +1,15 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.DataProviderBuilderBase;
 import net.minecraft.core.RegistrySetBuilder;
 
 public class NeoForgeDatapackProviderBuilderImpl
         extends DataProviderBuilderBase<NeoForgeDatapackProviderDelegate, NeoForgeDatapackBuiltinEntriesProviderImpl> {
 
-    private final IDataGenContext context;
+    private final DataGenContext context;
 
-    public NeoForgeDatapackProviderBuilderImpl(IDataGenContext context) {
+    public NeoForgeDatapackProviderBuilderImpl(DataGenContext context) {
         this.context = context;
     }
 

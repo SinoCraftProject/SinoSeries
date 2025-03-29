@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodeco.data.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.recipe.AbstractRecipeProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.recipe.CommonRecipes;
 import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.data.gen.tag.SDItemTags;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
 public class RecipeProvider extends AbstractRecipeProvider {
-    public RecipeProvider(IDataGenContext context) {
+    public RecipeProvider(DataGenContext context) {
         super(context);
     }
 

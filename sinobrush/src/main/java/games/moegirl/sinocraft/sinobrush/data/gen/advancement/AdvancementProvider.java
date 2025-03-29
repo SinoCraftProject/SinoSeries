@@ -6,7 +6,7 @@ import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.advancement.criterion.PlayerCustomStatTrigger;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.AbstractAdvancementProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.AdvancementTree;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
 import net.minecraft.advancements.Advancement;
@@ -15,7 +15,7 @@ import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.network.chat.Component;
 
 public class AdvancementProvider extends AbstractAdvancementProvider {
-    public AdvancementProvider(IDataGenContext context) {
+    public AdvancementProvider(DataGenContext context) {
         super(context);
     }
 

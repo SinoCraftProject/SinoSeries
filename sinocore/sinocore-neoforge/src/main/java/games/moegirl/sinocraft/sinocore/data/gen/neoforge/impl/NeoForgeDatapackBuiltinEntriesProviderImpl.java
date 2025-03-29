@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import net.minecraft.core.RegistrySetBuilder;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 
@@ -10,7 +10,7 @@ public class NeoForgeDatapackBuiltinEntriesProviderImpl extends DatapackBuiltinE
 
     private final String name;
 
-    public NeoForgeDatapackBuiltinEntriesProviderImpl(IDataGenContext context, RegistrySetBuilder builder, String name) {
+    public NeoForgeDatapackBuiltinEntriesProviderImpl(DataGenContext context, RegistrySetBuilder builder, String name) {
         super(context.getOutput(), context.getRegistries(), builder, Set.of(context.getModId()));
         this.name = name;
     }

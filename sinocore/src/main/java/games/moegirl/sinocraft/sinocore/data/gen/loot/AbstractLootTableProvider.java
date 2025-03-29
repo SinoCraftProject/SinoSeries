@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.loot;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.NeoForgeDataProviderBase;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
 import net.minecraft.core.HolderLookup;
@@ -11,7 +11,7 @@ public abstract class AbstractLootTableProvider extends NeoForgeDataProviderBase
 
     protected final String modId;
 
-    public AbstractLootTableProvider(IDataGenContext context) {
+    public AbstractLootTableProvider(DataGenContext context) {
         super(createDelegate(context));
         modId = context.getModId();
     }
@@ -22,7 +22,7 @@ public abstract class AbstractLootTableProvider extends NeoForgeDataProviderBase
     }
 
     @ExpectPlatform
-    public static LootTableProviderDelegateBase createDelegate(IDataGenContext context) {
+    public static LootTableProviderDelegateBase createDelegate(DataGenContext context) {
         throw new AssertionError();
     }
 

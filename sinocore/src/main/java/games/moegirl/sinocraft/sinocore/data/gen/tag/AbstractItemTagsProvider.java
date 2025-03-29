@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.tag;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.ISinoDataProvider;
 import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.minecraft.core.HolderLookup;
@@ -29,7 +29,7 @@ public abstract class AbstractItemTagsProvider extends IntrinsicHolderTagsProvid
     protected final CompletableFuture<TagLookup<Block>> blockTags;
     protected final Map<TagKey<Block>, TagKey<Item>> tagsToCopy = new HashMap<>();
 
-    public AbstractItemTagsProvider(IDataGenContext context, TagsProvider<Block> blockTagsProvider) {
+    public AbstractItemTagsProvider(DataGenContext context, TagsProvider<Block> blockTagsProvider) {
         super(context.getOutput(), Registries.ITEM, context.getRegistries(), item -> item.builtInRegistryHolder().key());
         this.modId = context.getModId();
         this.blockTags = blockTagsProvider.contentsGetter();

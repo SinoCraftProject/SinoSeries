@@ -7,7 +7,7 @@ public abstract class AbstractLanguageProvider extends NeoForgeDataProviderBase<
 
     protected final String modId;
 
-    public AbstractLanguageProvider(IDataGenContext context, String locale) {
+    public AbstractLanguageProvider(DataGenContext context, String locale) {
         super(createDelegate(context, locale));
         this.modId = context.getModId();
     }
@@ -18,7 +18,7 @@ public abstract class AbstractLanguageProvider extends NeoForgeDataProviderBase<
     }
 
     @ExpectPlatform
-    public static LanguageProviderDelegateBase createDelegate(IDataGenContext context, String locale) {
+    public static LanguageProviderDelegateBase createDelegate(DataGenContext context, String locale) {
         throw new AssertionError();
     }
 }

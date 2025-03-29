@@ -1,14 +1,11 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.DatapackProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.utility.Functions;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class NeoForgeDatapackProviderDelegate extends DatapackProviderDelegateBase {
@@ -17,7 +14,7 @@ public class NeoForgeDatapackProviderDelegate extends DatapackProviderDelegateBa
     private List<Entry> entries = new ArrayList<>();
     private Entry lastEntry = null;
 
-    public NeoForgeDatapackProviderDelegate(IDataGenContext context) {
+    public NeoForgeDatapackProviderDelegate(DataGenContext context) {
         super(new NeoForgeDatapackProviderBuilderImpl(context));
     }
 

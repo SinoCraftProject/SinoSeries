@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.AbstractAdvancementProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.AdvancementTree;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class TestAdvancementProvider extends AbstractAdvancementProvider {
 
-    public TestAdvancementProvider(IDataGenContext context) {
+    public TestAdvancementProvider(DataGenContext context) {
         super(context);
     }
 

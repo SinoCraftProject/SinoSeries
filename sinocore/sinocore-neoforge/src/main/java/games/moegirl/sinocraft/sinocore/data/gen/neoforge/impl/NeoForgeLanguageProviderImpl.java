@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
 public class NeoForgeLanguageProviderImpl extends LanguageProvider {
     private NeoForgeLanguageProviderDelegate delegate;
 
-    NeoForgeLanguageProviderImpl(IDataGenContext context, String locale) {
+    NeoForgeLanguageProviderImpl(DataGenContext context, String locale) {
         super(context.getOutput(), context.getModId(), locale);
     }
 

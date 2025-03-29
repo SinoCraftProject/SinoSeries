@@ -1,14 +1,14 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinotest.datagen.TestLangKeys;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 
 public class TestZhLanguageProvider extends AbstractLanguageProvider {
 
-    public TestZhLanguageProvider(IDataGenContext context) {
+    public TestZhLanguageProvider(DataGenContext context) {
         super(context, "zh_cn");
     }
 

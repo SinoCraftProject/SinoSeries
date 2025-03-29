@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.advancement.IAdvancementGenerator;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.AdvancementProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.advancements.AdvancementSubProvider;
@@ -17,9 +17,9 @@ import java.util.function.Consumer;
 public class NeoForgeAdvancementProviderDelegate extends AdvancementProviderDelegateBase {
 
     private final List<AdvancementProvider.AdvancementGenerator> generators = new ArrayList<>();
-    private final NeoForgeDataGenContextImpl context;
+    private final NeoForgeDataGenContext context;
 
-    public NeoForgeAdvancementProviderDelegate(NeoForgeDataGenContextImpl context) {
+    public NeoForgeAdvancementProviderDelegate(NeoForgeDataGenContext context) {
         super(new NeoForgeAdvancementProviderBuilder(context));
         this.context = context;
     }

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.recipe;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.ISinoDataProvider;
 import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -35,7 +35,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider implements I
         this.modId = modId;
     }
 
-    public AbstractRecipeProvider(IDataGenContext context) {
+    public AbstractRecipeProvider(DataGenContext context) {
         this(context.getOutput(), context.getModId(), context.getRegistries());
     }
 

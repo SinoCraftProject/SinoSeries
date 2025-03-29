@@ -1,14 +1,14 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.DataProviderBuilderBase;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 
 public class NeoForgeAdvancementProviderBuilder
         extends DataProviderBuilderBase<NeoForgeAdvancementProviderDelegate, NeoForgeAdvancementProviderImpl> {
 
-    private final NeoForgeDataGenContextImpl context;
+    private final NeoForgeDataGenContext context;
 
-    public NeoForgeAdvancementProviderBuilder(NeoForgeDataGenContextImpl context) {
+    public NeoForgeAdvancementProviderBuilder(NeoForgeDataGenContext context) {
         this.context = context;
     }
 

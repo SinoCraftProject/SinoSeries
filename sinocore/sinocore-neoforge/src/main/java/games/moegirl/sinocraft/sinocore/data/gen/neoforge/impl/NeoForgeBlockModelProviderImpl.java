@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.UnexceptionalBlockModelBuilder;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.WeakCheckModelFile;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
@@ -25,7 +25,7 @@ public class NeoForgeBlockModelProviderImpl extends BlockModelProvider {
     private NeoForgeBlockModelProviderDelegate delegate;
 
     @SafeVarargs
-    public NeoForgeBlockModelProviderImpl(NeoForgeDataGenContextImpl context, boolean strict, IRegistry<? extends Block>... modRegisters) {
+    public NeoForgeBlockModelProviderImpl(NeoForgeDataGenContext context, boolean strict, IRegistry<? extends Block>... modRegisters) {
         super(context.getOutput(), context.getModId(), context.getExistingFileHelper());
         this.modRegisters = modRegisters;
         this.strict = strict;

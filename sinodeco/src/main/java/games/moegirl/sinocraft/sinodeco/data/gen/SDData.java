@@ -11,16 +11,16 @@ import games.moegirl.sinocraft.sinodeco.data.gen.tag.ItemTagsProvider;
 
 public class SDData {
     public static void register() {
-        var register = DataGeneratorManager.createDataGenerator(SinoDeco.MODID);
+        DataGeneratorManager.createDataGenerator(SinoDeco.MODID, (gen) -> {
+            gen.put(ForgeProvider::new);
+            gen.put(ItemModelProvider::new);
 
-        register.put(ForgeProvider::new);
-        register.put(ItemModelProvider::new);
+            var blockProvider = gen.put(BlockTagsProvider::new);
+            gen.put(context -> new ItemTagsProvider(context, blockProvider.get()));
+            gen.put(RecipeProvider::new);
 
-        var blockProvider = register.put(BlockTagsProvider::new);
-        register.put(context -> new ItemTagsProvider(context, blockProvider.get()));
-        register.put(RecipeProvider::new);
-
-        register.put(ZhCnLangProvider::new);
-        register.put(EnUsLangProvider::new);
+            gen.put(ZhCnLangProvider::new);
+            gen.put(EnUsLangProvider::new);
+        });
     }
 }

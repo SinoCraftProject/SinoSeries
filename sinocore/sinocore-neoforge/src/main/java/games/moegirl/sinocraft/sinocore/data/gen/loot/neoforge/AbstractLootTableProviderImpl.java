@@ -1,8 +1,8 @@
 package games.moegirl.sinocraft.sinocore.data.gen.loot.neoforge;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.NeoForgeLootTableProviderDelegate;
 import games.moegirl.sinocraft.sinocore.data.gen.loot.IBlockLootTableSubProvider;
 import games.moegirl.sinocraft.sinocore.data.gen.loot.IEntityLootTableSubProvider;
@@ -34,8 +34,8 @@ import java.util.stream.Stream;
 
 public class AbstractLootTableProviderImpl {
 
-    public static LootTableProviderDelegateBase createDelegate(IDataGenContext context) {
-        if (context instanceof NeoForgeDataGenContextImpl impl) {
+    public static LootTableProviderDelegateBase createDelegate(DataGenContext context) {
+        if (context instanceof NeoForgeDataGenContext impl) {
             return new NeoForgeLootTableProviderDelegate(impl);
         }
         throw new ClassCastException("Can't cast " + context + " to ForgeDataGenContextImpl at Forge Platform. " +

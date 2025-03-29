@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.NeoForgeItemModelBuilderWrapper;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.NeoForgeItemModelResourceHelper;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.SpecialModelBuilderItem;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
@@ -17,7 +17,7 @@ public class NeoForgeItemModelProviderDelegate extends ItemModelProviderDelegate
     private final NeoForgeItemModelProviderImpl impl;
 
     @SafeVarargs
-    public NeoForgeItemModelProviderDelegate(NeoForgeDataGenContextImpl context, IRegistry<Item>... registries) {
+    public NeoForgeItemModelProviderDelegate(NeoForgeDataGenContext context, IRegistry<Item>... registries) {
         super(new NeoForgeItemModelProviderImpl(context, false, registries));
         impl = getForgeProvider();
         impl.setDelegate(this);

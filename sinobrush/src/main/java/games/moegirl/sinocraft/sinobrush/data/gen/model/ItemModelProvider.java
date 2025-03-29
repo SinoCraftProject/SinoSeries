@@ -2,14 +2,14 @@ package games.moegirl.sinocraft.sinobrush.data.gen.model;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.data.gen.model.AbstractItemModelProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import net.minecraft.world.item.Item;
 
 public class ItemModelProvider extends AbstractItemModelProvider {
     @SafeVarargs
-    public ItemModelProvider(IDataGenContext context, IRegistry<Item>... registries) {
+    public ItemModelProvider(DataGenContext context, IRegistry<Item>... registries) {
         super(context, registries);
     }
 

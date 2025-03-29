@@ -7,7 +7,6 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -33,7 +32,7 @@ public abstract class AbstractBiomeModifierProvider implements ISinoDataProvider
         this.modId = modId;
     }
 
-    public AbstractBiomeModifierProvider(IDataGenContext context) {
+    public AbstractBiomeModifierProvider(DataGenContext context) {
         this(context.getOutput(), context.getModId());
     }
 

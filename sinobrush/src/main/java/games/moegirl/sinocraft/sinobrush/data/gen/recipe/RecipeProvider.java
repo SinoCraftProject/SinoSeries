@@ -2,7 +2,7 @@ package games.moegirl.sinocraft.sinobrush.data.gen.recipe;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.data.gen.recipe.AbstractRecipeProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 public class RecipeProvider extends AbstractRecipeProvider {
     public static final String GROUP = "sinoseries:sinobrush";
 
-    public RecipeProvider(IDataGenContext context) {
+    public RecipeProvider(DataGenContext context) {
         super(context);
     }
 

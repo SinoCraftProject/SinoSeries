@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.loot.LootTableProvider;
@@ -17,7 +17,7 @@ public class NeoForgeLootTableProviderImpl extends LootTableProvider implements 
     private final String modId;
     private NeoForgeLootTableProviderDelegate delegate;
 
-    public NeoForgeLootTableProviderImpl(NeoForgeDataGenContextImpl context) {
+    public NeoForgeLootTableProviderImpl(NeoForgeDataGenContext context) {
         super(context.getOutput(), Set.of(), new ArrayList<>(), context.getRegistries());
         modId = context.getModId();
     }

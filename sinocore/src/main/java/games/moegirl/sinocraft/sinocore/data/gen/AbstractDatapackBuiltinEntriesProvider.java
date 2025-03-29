@@ -7,7 +7,7 @@ public abstract class AbstractDatapackBuiltinEntriesProvider extends NeoForgeDat
 
     protected final String modId;
 
-    public AbstractDatapackBuiltinEntriesProvider(IDataGenContext context) {
+    public AbstractDatapackBuiltinEntriesProvider(DataGenContext context) {
         super(createDelegate(context));
         this.modId = context.getModId();
     }
@@ -18,7 +18,7 @@ public abstract class AbstractDatapackBuiltinEntriesProvider extends NeoForgeDat
     }
 
     @ExpectPlatform
-    public static DatapackProviderDelegateBase createDelegate(IDataGenContext context) {
+    public static DatapackProviderDelegateBase createDelegate(DataGenContext context) {
         throw new AssertionError();
     }
 }

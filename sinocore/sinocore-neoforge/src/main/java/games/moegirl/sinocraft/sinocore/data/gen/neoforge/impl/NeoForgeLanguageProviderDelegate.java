@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,7 +13,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -22,7 +21,7 @@ public class NeoForgeLanguageProviderDelegate extends LanguageProviderDelegateBa
 
     private final NeoForgeLanguageProviderImpl provider;
 
-    public NeoForgeLanguageProviderDelegate(IDataGenContext context, String locale) {
+    public NeoForgeLanguageProviderDelegate(DataGenContext context, String locale) {
         super(new NeoForgeLanguageProviderImpl(context, locale));
         provider = getForgeProvider();
         provider.setDelegate(this);

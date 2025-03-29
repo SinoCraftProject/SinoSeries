@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinodeco.data.gen.neoforge;
 
 import games.moegirl.sinocraft.sinocore.data.gen.ForgeProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinodeco.SinoDeco;
 import net.minecraft.data.DataProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -16,7 +16,7 @@ public class SDNeoForgeProvider implements ForgeProvider.IForgeProviders {
     }
 
     @Override
-    public @NotNull List<DataProvider> allProviders(IDataGenContext context) {
+    public @NotNull List<DataProvider> allProviders(DataGenContext context) {
         return List.of(
                 new ModBlockStateProvider(context.getOutput(), context.getModId(), (ExistingFileHelper) context.getExistingFileHelper())
         );

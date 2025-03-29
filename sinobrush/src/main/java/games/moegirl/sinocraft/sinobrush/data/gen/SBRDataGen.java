@@ -15,19 +15,20 @@ import games.moegirl.sinocraft.sinocore.data.gen.DataGeneratorManager;
 
 public class SBRDataGen {
     public static void register() {
-        var register = DataGeneratorManager.createDataGenerator(SinoBrush.MODID);
+        DataGeneratorManager.createDataGenerator(SinoBrush.MODID, gen -> {
+            gen.put(ZhCnLangProvider::new);
+            gen.put(ZhHkLangProvider::new);
+            gen.put(ZhTwLangProvider::new);
+            gen.put(EnUsLangProvider::new);
 
-        register.put(ZhCnLangProvider::new);
-        register.put(ZhHkLangProvider::new);
-        register.put(ZhTwLangProvider::new);
-        register.put(EnUsLangProvider::new);
+            var blockTagProvider = gen.put(context -> new BlockTagProvider(context.getOutput(), context.getRegistries()));
+            gen.put(context -> new ItemTagProvider(context, blockTagProvider.get()));
 
-        var blockTagProvider = register.put(context -> new BlockTagProvider(context.getOutput(), context.getRegistries()));
-        register.put(context -> new ItemTagProvider(context, blockTagProvider.get()));
+            gen.put(AdvancementProvider::new);
+            gen.put(RecipeProvider::new);
 
-        register.put(AdvancementProvider::new);
-        register.put(RecipeProvider::new);
+            gen.put(context -> new ItemModelProvider(context, SBRItems.ITEMS));
+        });
 
-        register.put(context -> new ItemModelProvider(context, SBRItems.ITEMS));
     }
 }

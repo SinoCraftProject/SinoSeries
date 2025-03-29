@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.model;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.NeoForgeDataProviderBase;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ItemModelProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.ProviderDelegateBase;
@@ -13,7 +13,7 @@ public abstract class AbstractItemModelProvider extends NeoForgeDataProviderBase
     protected final String modId;
 
     @SafeVarargs
-    public AbstractItemModelProvider(IDataGenContext context, IRegistry<Item>... registries) {
+    public AbstractItemModelProvider(DataGenContext context, IRegistry<Item>... registries) {
         super(createDelegate(context, registries));
         this.modId = context.getModId();
     }
@@ -32,7 +32,7 @@ public abstract class AbstractItemModelProvider extends NeoForgeDataProviderBase
 
     @SafeVarargs
     @ExpectPlatform
-    public static ItemModelProviderDelegateBase<?> createDelegate(IDataGenContext context, IRegistry<Item>... registries) {
+    public static ItemModelProviderDelegateBase<?> createDelegate(DataGenContext context, IRegistry<Item>... registries) {
         throw new AssertionError();
     }
 }

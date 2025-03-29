@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.BlockModelProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.NeoForgeBlockModelBuilderWrapper;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.NeoForgeBlockModelResourceHelper;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.SpecialModelBuilderBlock;
@@ -15,7 +15,7 @@ public class NeoForgeBlockModelProviderDelegate extends BlockModelProviderDelega
     private final NeoForgeBlockModelProviderImpl impl;
 
     @SafeVarargs
-    public NeoForgeBlockModelProviderDelegate(NeoForgeDataGenContextImpl context, IRegistry<Block>... registries) {
+    public NeoForgeBlockModelProviderDelegate(NeoForgeDataGenContext context, IRegistry<Block>... registries) {
         super(new NeoForgeBlockModelProviderImpl(context, false, registries));
         impl = getForgeProvider();
         impl.setDelegate(this);

@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.fabric;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import net.minecraft.core.HolderLookup;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
@@ -19,7 +19,7 @@ public class SinoCorePlatformImpl {
         return FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 
-    public static IDataGenContext buildDataGeneratorContext(Object object, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public static DataGenContext buildDataGeneratorContext(Object object, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         throw new IllegalStateException("DataProvider only for forge platform.");
     }
 }

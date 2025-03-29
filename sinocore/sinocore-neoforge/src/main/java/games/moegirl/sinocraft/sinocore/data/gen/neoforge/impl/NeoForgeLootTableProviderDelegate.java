@@ -1,8 +1,7 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
-import net.minecraft.core.HolderLookup;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class NeoForgeLootTableProviderDelegate extends LootTableProviderDelegateBase {
 
-    public NeoForgeLootTableProviderDelegate(NeoForgeDataGenContextImpl context) {
+    public NeoForgeLootTableProviderDelegate(NeoForgeDataGenContext context) {
         super(new NeoForgeLootTableProviderImpl(context), context.getModId(), context.getRegistries());
         ((NeoForgeLootTableProviderImpl) getForgeProvider()).setDelegate(this);
     }

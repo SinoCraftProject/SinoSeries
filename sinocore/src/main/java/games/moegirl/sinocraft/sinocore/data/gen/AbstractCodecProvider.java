@@ -41,7 +41,7 @@ public abstract class AbstractCodecProvider implements ISinoDataProvider {
         this.modId = modId;
     }
 
-    public AbstractCodecProvider(IDataGenContext context) {
+    public AbstractCodecProvider(DataGenContext context) {
         this(context.getOutput(), context.getRegistries(), context.getModId());
     }
 

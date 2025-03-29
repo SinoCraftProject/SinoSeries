@@ -3,7 +3,7 @@ package games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
-import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContextImpl;
+import games.moegirl.sinocraft.sinocore.data.gen.neoforge.NeoForgeDataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.UnexceptionalItemModelBuilder;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.model.WeakCheckModelFile;
 import games.moegirl.sinocraft.sinocore.registry.IRegRef;
@@ -37,7 +37,7 @@ public class NeoForgeItemModelProviderImpl extends ItemModelProvider {
 
     // default strict is false
     @SafeVarargs
-    public NeoForgeItemModelProviderImpl(NeoForgeDataGenContextImpl context, boolean strict, IRegistry<? extends ItemLike>... modRegisters) {
+    public NeoForgeItemModelProviderImpl(NeoForgeDataGenContext context, boolean strict, IRegistry<? extends ItemLike>... modRegisters) {
         super(context.getOutput(), context.getModId(), context.getExistingFileHelper());
         this.modRegisters = modRegisters;
         this.strict = strict;

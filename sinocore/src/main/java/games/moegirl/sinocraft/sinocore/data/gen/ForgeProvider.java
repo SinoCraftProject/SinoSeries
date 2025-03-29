@@ -4,7 +4,6 @@ import games.moegirl.sinocraft.sinocore.utility.Functions;
 import games.moegirl.sinocraft.sinocore.utility.ModList;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +25,7 @@ public class ForgeProvider implements ISinoDataProvider {
     private final List<DataProvider> providers;
     private final String name;
 
-    public ForgeProvider(IDataGenContext context) {
+    public ForgeProvider(DataGenContext context) {
         this.providers = new ArrayList<>();
         initDataProviders(context);
         this.modId = context.getModId();
@@ -35,7 +34,7 @@ public class ForgeProvider implements ISinoDataProvider {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    private void initDataProviders(IDataGenContext context) {
+    private void initDataProviders(DataGenContext context) {
         try {
             ModList.findModById(context.getModId()).stream()
                     .flatMap(ModList.IModContainer::walkClasses)
@@ -72,6 +71,6 @@ public class ForgeProvider implements ISinoDataProvider {
 
         String getModId();
 
-        List<DataProvider> allProviders(IDataGenContext context);
+        List<DataProvider> allProviders(DataGenContext context);
     }
 }

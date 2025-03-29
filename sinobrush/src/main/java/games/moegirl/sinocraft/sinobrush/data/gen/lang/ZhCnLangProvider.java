@@ -5,11 +5,11 @@ import games.moegirl.sinocraft.sinobrush.data.gen.tag.SBRItemTags;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.stat.SBRStats;
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractLanguageProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LanguageProviderDelegateBase;
 
 public class ZhCnLangProvider extends AbstractLanguageProvider {
-    public ZhCnLangProvider(IDataGenContext context) {
+    public ZhCnLangProvider(DataGenContext context) {
         super(context, "zh_cn");
     }
 

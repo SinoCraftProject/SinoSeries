@@ -1,29 +1,16 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.AbstractDatapackBuiltinEntriesProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.DatapackProviderDelegateBase;
-import games.moegirl.sinocraft.sinotest.datagen.TestKeys;
-import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RandomBlockMatchTest;
-
-import java.util.List;
 
 public class TestFeatureProvider extends AbstractDatapackBuiltinEntriesProvider {
 
     private Holder<ConfiguredFeature<?, ?>> TEST_FEATURE;
 
-    public TestFeatureProvider(IDataGenContext context) {
+    public TestFeatureProvider(DataGenContext context) {
         super(context);
     }
 

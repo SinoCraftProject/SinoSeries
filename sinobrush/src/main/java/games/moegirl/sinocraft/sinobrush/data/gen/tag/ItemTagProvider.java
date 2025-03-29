@@ -2,13 +2,13 @@ package games.moegirl.sinocraft.sinobrush.data.gen.tag;
 
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.data.gen.tag.AbstractItemTagsProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.block.Block;
 
 public class ItemTagProvider extends AbstractItemTagsProvider {
-    public ItemTagProvider(IDataGenContext context, TagsProvider<Block> blockTagsProvider) {
+    public ItemTagProvider(DataGenContext context, TagsProvider<Block> blockTagsProvider) {
         super(context, blockTagsProvider);
     }
 

@@ -1,18 +1,16 @@
 package games.moegirl.sinocraft.sinodeco.data.gen.tag;
 
 import games.moegirl.sinocraft.sinocore.data.gen.tag.AbstractItemTagsProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
-import games.moegirl.sinocraft.sinodeco.block.SDBlocks;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinodeco.block.item.SDBlockItems;
 import games.moegirl.sinocraft.sinodeco.item.SDItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
 public class ItemTagsProvider extends AbstractItemTagsProvider {
-    public ItemTagsProvider(IDataGenContext context, TagsProvider<Block> blockTagsProvider) {
+    public ItemTagsProvider(DataGenContext context, TagsProvider<Block> blockTagsProvider) {
         super(context, blockTagsProvider);
     }
 

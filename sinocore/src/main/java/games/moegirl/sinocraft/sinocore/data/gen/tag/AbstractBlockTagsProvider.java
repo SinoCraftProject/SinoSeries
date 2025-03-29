@@ -1,6 +1,6 @@
 package games.moegirl.sinocraft.sinocore.data.gen.tag;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.ISinoDataProvider;
 import games.moegirl.sinocraft.sinocore.interfaces.bridge.ISinoRenamedProviderBridge;
 import net.minecraft.core.HolderLookup;
@@ -30,7 +30,7 @@ public abstract class AbstractBlockTagsProvider extends IntrinsicHolderTagsProvi
         this.modId = modId;
     }
 
-    public AbstractBlockTagsProvider(IDataGenContext context) {
+    public AbstractBlockTagsProvider(DataGenContext context) {
         super(context.getOutput(), Registries.BLOCK, context.getRegistries(), block -> block.builtInRegistryHolder().key());
         this.modId = context.getModId();
     }

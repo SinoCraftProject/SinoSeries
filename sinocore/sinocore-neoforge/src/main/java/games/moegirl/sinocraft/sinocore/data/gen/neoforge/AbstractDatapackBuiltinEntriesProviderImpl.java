@@ -1,13 +1,13 @@
 package games.moegirl.sinocraft.sinocore.data.gen.neoforge;
 
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.DatapackProviderDelegateBase;
 import games.moegirl.sinocraft.sinocore.data.gen.neoforge.impl.NeoForgeDatapackProviderDelegate;
 
 public class AbstractDatapackBuiltinEntriesProviderImpl {
 
-    public static DatapackProviderDelegateBase createDelegate(IDataGenContext context) {
-        if (context instanceof NeoForgeDataGenContextImpl impl) {
+    public static DatapackProviderDelegateBase createDelegate(DataGenContext context) {
+        if (context instanceof NeoForgeDataGenContext impl) {
             return new NeoForgeDatapackProviderDelegate(impl);
         }
         throw new ClassCastException("Can't cast " + context + " to ForgeDataGenContextImpl at Forge Platform. " +

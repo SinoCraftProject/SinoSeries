@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.tag.AbstractItemTagsProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinotest.datagen.TestTags;
 import games.moegirl.sinocraft.sinotest.registry.TestRegistry;
 import net.minecraft.core.HolderLookup;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 
 public class TestItemTagsProvider extends AbstractItemTagsProvider {
 
-    public TestItemTagsProvider(IDataGenContext context, TagsProvider<Block> blockTagsProvider) {
+    public TestItemTagsProvider(DataGenContext context, TagsProvider<Block> blockTagsProvider) {
         super(context, blockTagsProvider);
     }
 

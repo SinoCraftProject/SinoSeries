@@ -1,12 +1,12 @@
 package games.moegirl.sinocraft.sinotest.datagen.gen;
 
 import games.moegirl.sinocraft.sinocore.data.gen.loot.AbstractLootTableProvider;
-import games.moegirl.sinocraft.sinocore.data.gen.IDataGenContext;
+import games.moegirl.sinocraft.sinocore.data.gen.DataGenContext;
 import games.moegirl.sinocraft.sinocore.data.gen.delegate.LootTableProviderDelegateBase;
 
 public class TestLootTableProvider extends AbstractLootTableProvider {
 
-    public TestLootTableProvider(IDataGenContext context) {
+    public TestLootTableProvider(DataGenContext context) {
         super(context);
     }
 
