@@ -35,7 +35,7 @@ public class FanScreen extends Screen {
 
     public FanScreen(List<Component> lines) {
         super(Component.literal("fan"));
-        TextureEntry background = (TextureEntry) TEXTURE.getWidget("background");
+        TextureEntry background = (TextureEntry) TEXTURE.get().getWidget("background");
         imageWidth = background.getWidth();
         imageHeight = background.getHeight();
         this.lines = new ArrayList<>(lines);

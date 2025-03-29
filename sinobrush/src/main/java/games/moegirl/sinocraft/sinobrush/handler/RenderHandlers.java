@@ -4,7 +4,12 @@ import games.moegirl.sinocraft.sinobrush.client.DrawingRenderer;
 import games.moegirl.sinocraft.sinobrush.client.FanRenderer;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
+import games.moegirl.sinocraft.sinocore.client.model.TransformFilteredItemModel;
+import games.moegirl.sinocraft.sinocore.event.client.ModelEvents;
 import games.moegirl.sinocraft.sinocore.event.client.RenderEvents;
+import net.minecraft.world.item.ItemDisplayContext;
+
+import java.util.List;
 
 public class RenderHandlers {
     public static void register() {
@@ -22,5 +27,15 @@ public class RenderHandlers {
         });
 
         RenderEvents.BEFORE_RENDER_HUD.register(args -> FanRenderer.renderInHud(args.guiGraphics()));
+
+        RenderEvents.CUSTOM_ITEM_RENDERER.register(args ->
+                args.register().register(new FanRenderer(), SBRItems.FAN.get()));
+
+        ModelEvents.AFTER_BAKE.register(args -> {
+            if (FanRenderer.MODEL_FAN.equals(args.id())) {
+                FanRenderer.DEFAULT_FAN_MODEL = args.model();
+                args.setModel(TransformFilteredItemModel.create(args.model(), List.of(ItemDisplayContext.values())));
+            }
+        });
     }
 }
