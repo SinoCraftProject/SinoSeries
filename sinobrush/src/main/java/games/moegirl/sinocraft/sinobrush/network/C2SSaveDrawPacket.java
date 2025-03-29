@@ -4,6 +4,7 @@ import games.moegirl.sinocraft.sinobrush.SBRConstants;
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
 import games.moegirl.sinocraft.sinobrush.drawing.MutableDrawing;
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
+import games.moegirl.sinocraft.sinobrush.item.BrushItem;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.XuanPaperItem;
 import games.moegirl.sinocraft.sinobrush.item.component.Drawing;
@@ -47,9 +48,9 @@ public record C2SSaveDrawPacket(MutableDrawing drawing, int brushSlot) implement
         return TYPE;
     }
 
-    public void handle(ServerPlayNetworkContext handler) {
+    public void serverHandle(ServerPlayNetworkContext handler) {
         ServerPlayer player = handler.getPlayer();
-        if (player != null && player.containerMenu instanceof BrushMenu brushMenu) {
+        if (player.containerMenu instanceof BrushMenu brushMenu) {
             Container container = brushMenu.container;
             ItemStack paperStack = container.getItem(BrushMenu.PAPER_SLOT);
             ItemStack inkSlot = container.getItem(BrushMenu.INK_SLOT);
@@ -78,10 +79,8 @@ public record C2SSaveDrawPacket(MutableDrawing drawing, int brushSlot) implement
                 inkSlot.shrink(1);
                 container.setItem(BrushMenu.INK_SLOT, inkSlot);
 
-                if (!player.isCreative()) {
-                    var brush = player.getInventory().getItem(brushSlot);
-                    brush.hurtAndBreak(1, player, brushSlot == Inventory.SLOT_OFFHAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND);
-                }
+                var brush = player.getInventory().getItem(brushSlot);
+                BrushItem.damage(brush, player, brushSlot == Inventory.SLOT_OFFHAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND);
 
                 ItemStack drawStack = new ItemStack(SBRItems.FILLED_XUAN_PAPER.get());
                 Drawing.set(drawStack, drawing.toImmutable());

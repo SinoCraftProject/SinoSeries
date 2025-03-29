@@ -1,9 +1,12 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.gui.menu.BrushMenu;
+import games.moegirl.sinocraft.sinobrush.network.Common2FanLines;
 import games.moegirl.sinocraft.sinocore.gui.menu.IExtraDataMenuProvider;
 import games.moegirl.sinocraft.sinocore.gui.menu.MenuHelper;
+import games.moegirl.sinocraft.sinocore.network.NetworkManager;
 import io.netty.buffer.Unpooled;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,11 +28,25 @@ public class BrushItem extends Item {
                 .durability(127));
     }
 
+    public static void damage(ItemStack stack, Player player, EquipmentSlot slot) {
+        if (!player.isCreative()) {
+            stack.hurtAndBreak(1, player, slot);
+        }
+    }
+
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        if (!level.isClientSide() && player instanceof ServerPlayer sp) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+            // Fan editing.
+            var offHand = player.getOffhandItem();
+            if (usedHand == InteractionHand.MAIN_HAND && offHand.is(SBRItems.FAN.get())) {
+                NetworkManager.send(new Common2FanLines(FanItem.getLines(offHand)), serverPlayer);
+                return InteractionResultHolder.success(player.getItemInHand(usedHand));
+            }
+
+            // Brush.
             var slot = usedHand == InteractionHand.MAIN_HAND ? player.getInventory().selected : Inventory.SLOT_OFFHAND;
-            MenuHelper.openMenuWithData(sp, new IExtraDataMenuProvider() {
+            MenuHelper.openMenuWithData(serverPlayer, new IExtraDataMenuProvider() {
                 @Override
                 public void writeExtraData(RegistryFriendlyByteBuf buf) {
                     buf.writeVarInt(slot);
@@ -42,6 +59,7 @@ public class BrushItem extends Item {
             });
             return InteractionResultHolder.success(player.getItemInHand(usedHand));
         }
-        return super.use(level, player, usedHand);
+
+        return InteractionResultHolder.pass(player.getItemInHand(usedHand));
     }
 }

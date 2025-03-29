@@ -12,12 +12,13 @@ public class SBRNetworks {
 
         NetworkManager.playPacket(C2SSaveDrawPacket.TYPE)
                 .codec(C2SSaveDrawPacket.STREAM_CODEC)
-                .serverHandler(C2SSaveDrawPacket::handle)
+                .serverHandler(C2SSaveDrawPacket::serverHandle)
                 .register();
 
-        NetworkManager.playPacket(C2SSaveFanLines.TYPE)
-                .codec(C2SSaveFanLines.STREAM_CODEC)
-                .serverHandler(C2SSaveFanLines::handle)
+        NetworkManager.playPacket(Common2FanLines.TYPE)
+                .codec(Common2FanLines.STREAM_CODEC)
+                .serverHandler(Common2FanLines::serverHandle)
+                .clientHandler(Common2FanLines::clientHandle)
                 .register();
     }
 }

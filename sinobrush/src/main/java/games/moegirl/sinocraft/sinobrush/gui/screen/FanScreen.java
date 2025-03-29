@@ -1,7 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.gui.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import games.moegirl.sinocraft.sinobrush.network.C2SSaveFanLines;
+import games.moegirl.sinocraft.sinobrush.network.Common2FanLines;
 import games.moegirl.sinocraft.sinocore.gui.widgets.WidgetLoader;
 import games.moegirl.sinocraft.sinocore.gui.widgets.Widgets;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
@@ -29,18 +29,16 @@ public class FanScreen extends Screen {
     private int leftPos, topPos;
     private final int imageWidth, imageHeight;
     private final List<Component> lines;
-    private final InteractionHand hand;
     private int currentLine = -1;
     private long focusedTime = 0;
     private boolean isChanged = false;
 
-    public FanScreen(InteractionHand hand, List<Component> lines) {
+    public FanScreen(List<Component> lines) {
         super(Component.literal("fan"));
         TextureEntry background = (TextureEntry) TEXTURE.getWidget("background");
         imageWidth = background.getWidth();
         imageHeight = background.getHeight();
         this.lines = new ArrayList<>(lines);
-        this.hand = hand;
     }
 
     @Override
@@ -164,7 +162,7 @@ public class FanScreen extends Screen {
     @Override
     public void onClose() {
         if (isChanged) {
-            NetworkManager.sendToServer(new C2SSaveFanLines(hand, lines));
+            NetworkManager.sendToServer(new Common2FanLines(lines));
         }
         super.onClose();
     }
