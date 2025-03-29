@@ -70,15 +70,19 @@ public class NetworkManagerImpl {
                     var codec = packet.getCodec();
                     var registrar = event.registrar(SinoCore.VERSION);
 
-                    var clientHandler = packet.getClientHandler();
-                    if (clientHandler != null) {
-                        registrar.configurationToClient(type, codec, (p, context) -> clientHandler.accept(p, new ClientConfigurationNetworkContext(context.connection(), Minecraft.getInstance())));
-                    }
 
+                    var clientHandler = packet.getClientHandler();
                     var serverHandler = packet.getServerHandler();
-                    if (serverHandler != null) {
-                        registrar.configurationToServer(type, codec, (p, context) -> serverHandler.accept(p, new ServerConfigurationNetworkContext(context.connection(), Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer()))));
-                    }
+                    registrar.configurationBidirectional(type, codec, (p, context) -> {
+                        if (context.flow().isClientbound() && clientHandler != null) {
+                            clientHandler.accept(p, new ClientConfigurationNetworkContext(context.connection(), Minecraft.getInstance()));
+                            return;
+                        }
+
+                        if (context.flow().isServerbound() && serverHandler != null) {
+                            serverHandler.accept(p, new ServerConfigurationNetworkContext(context.connection(), Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer())));
+                        }
+                    });
                 });
     }
 }
