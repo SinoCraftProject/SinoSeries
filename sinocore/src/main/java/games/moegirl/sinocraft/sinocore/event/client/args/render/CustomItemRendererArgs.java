@@ -6,7 +6,6 @@ import net.minecraft.world.item.Item;
 public record CustomItemRendererArgs(RendererRegister register) {
 
     public interface RendererRegister {
-
         void register(BlockEntityWithoutLevelRenderer renderer, Item... items);
     }
 }
