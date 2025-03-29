@@ -6,6 +6,7 @@ import games.moegirl.sinocraft.sinobrush.client.FanRenderer;
 import games.moegirl.sinocraft.sinobrush.network.Common2FanLines;
 import games.moegirl.sinocraft.sinocore.gui.widgets.entry.TextureEntry;
 import games.moegirl.sinocraft.sinocore.network.NetworkManager;
+import games.moegirl.sinocraft.sinocore.utility.config.Configs;
 import games.moegirl.sinocraft.sinocore.utility.config.IConfigVisitor;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
@@ -32,6 +33,7 @@ public class FanScreen extends Screen {
     private boolean isChanged = false;
     private Button fanHudChangeButton;
     private boolean isFanHudChanging = false;
+    private Button fanHideButton;
 
     public FanScreen(List<Component> lines) {
         super(Component.literal("fan"));
@@ -46,16 +48,23 @@ public class FanScreen extends Screen {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
 
-        Component title = Component.translatable(SBRConstants.Translation.GUI_FAN_SETTING_HUD_POSITION);
-        int btnWidth = font.width(title) + 20;
+        Component titlePosition = Component.translatable(SBRConstants.Translation.GUI_FAN_SETTING_HUD_POSITION);
+        Component titleHide = Component.translatable(isHudShow() ? SBRConstants.Translation.GUI_SETTING_HIDE : SBRConstants.Translation.GUI_SETTING_SHOW);
+        int btnWidth = font.width(titlePosition) + 20;
         if (fanHudChangeButton == null) {
-            fanHudChangeButton = Button.builder(title, this::setHudPosition)
+            fanHudChangeButton = Button.builder(titlePosition, this::setHudPosition)
                     .pos(leftPos + imageWidth - btnWidth, topPos + imageHeight - 20)
                     .size(btnWidth, 20)
                     .build();
             addRenderableWidget(fanHudChangeButton);
+            fanHideButton = Button.builder(titleHide, this::setHudHide)
+                    .pos(leftPos + imageWidth - btnWidth, topPos + imageHeight - 40)
+                    .size(btnWidth, 20)
+                    .build();
+            addRenderableWidget(fanHideButton);
         } else {
             fanHudChangeButton.setPosition(leftPos + imageWidth - btnWidth, topPos + imageHeight - 20);
+            fanHideButton.setPosition(leftPos + imageWidth - btnWidth, topPos + imageHeight - 40);
         }
     }
 
@@ -63,7 +72,7 @@ public class FanScreen extends Screen {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         if (isFanHudChanging) {
-            FanRenderer.renderInHud(guiGraphics);
+            FanRenderer.renderInHud(guiGraphics, true);
             MutableComponent hint = Component.translatable(SBRConstants.Translation.GUI_FAN_SETTING_HUD_HINT);
             int tw = font.width(hint);
             int th = font.wordWrapHeight(hint, tw);
@@ -87,7 +96,28 @@ public class FanScreen extends Screen {
 
     private void setHudPosition(Button button) {
         button.visible = false;
+        fanHideButton.visible = false;
         isFanHudChanging = true;
+    }
+
+    private void setHudHide(Button button) {
+        try {
+            IConfigVisitor configs = SinoBrush.CONFIGURATIONS.getClientConfigs().getObject("FanHUD");
+            boolean isShow = configs.flipBoolean("show", true);
+            Component titleHide = Component.translatable(isShow ? SBRConstants.Translation.GUI_SETTING_HIDE : SBRConstants.Translation.GUI_SETTING_SHOW);
+            button.setMessage(titleHide);
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    private boolean isHudShow() {
+        try {
+            return SinoBrush.CONFIGURATIONS.getClientConfigs().getObject("FanHUD").getBoolean("show", true);
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+            return true;
+        }
     }
 
     @Override
@@ -110,6 +140,7 @@ public class FanScreen extends Screen {
                 // 切换状态
                 isFanHudChanging = false;
                 fanHudChangeButton.visible = true;
+                fanHideButton.visible = true;
                 // 保存扇 HUD 位置
                 try {
                     SinoBrush.CONFIGURATIONS.getClientConfigs().save();

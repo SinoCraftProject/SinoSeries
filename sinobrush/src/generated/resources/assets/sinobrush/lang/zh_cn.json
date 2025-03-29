@@ -41,6 +41,8 @@
   "sinobrush.gui.brush.tooltip_save": "保存画布为图片",
   "sinobrush.gui.fan.setting_hud_hint": "拖动调整位置，滚动滚轮调整大小",
   "sinobrush.gui.fan.setting_hud_position": "设置 HUD 位置",
+  "sinobrush.gui.setting_display": "显示",
+  "sinobrush.gui.setting_hide": "隐藏",
   "stat.sinobrush.draw_by_brush": "作画次数",
   "stat.sinobrush.unfold_fan": "展开折扇次数",
   "tag.item.sinobrush.fan": "折扇",

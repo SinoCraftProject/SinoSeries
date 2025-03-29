@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class JsonVisitor implements IConfigVisitor {
+public record JsonVisitor(JsonObject json) implements IConfigVisitor {
 
     public static JsonVisitor create(Path path) throws IOException {
         if (!Files.isRegularFile(path)) {
@@ -18,16 +18,6 @@ public class JsonVisitor implements IConfigVisitor {
         }
     }
 
-    private final JsonObject json;
-
-    public JsonVisitor(JsonObject json) {
-        this.json = json;
-    }
-
-    public JsonObject getJson() {
-        return json;
-    }
-
     @Override
     public int getInteger(String key, int defaultValue) {
         return json.has(key) ? json.get(key).getAsInt() : defaultValue;
@@ -36,6 +26,11 @@ public class JsonVisitor implements IConfigVisitor {
     @Override
     public float getFloat(String key, float defaultValue) {
         return json.has(key) ? json.get(key).getAsFloat() : defaultValue;
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return json.has(key) && json.get(key).getAsBoolean();
     }
 
     @Override
@@ -56,6 +51,11 @@ public class JsonVisitor implements IConfigVisitor {
 
     @Override
     public void setFloat(String name, float value) {
+        json.addProperty(name, value);
+    }
+
+    @Override
+    public void setBoolean(String name, boolean value) {
         json.addProperty(name, value);
     }
 

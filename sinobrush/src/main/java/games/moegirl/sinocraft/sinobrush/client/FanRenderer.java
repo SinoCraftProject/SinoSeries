@@ -148,18 +148,18 @@ public class FanRenderer extends BlockEntityWithoutLevelRenderer {
         return y;
     }
 
-    public static void renderInHud(GuiGraphics guiGraphics) {
+    public static void renderInHud(GuiGraphics guiGraphics, boolean mustShow) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (stack.is(SBRItems.FAN.get())) {
-                renderInHud(guiGraphics, stack);
+                renderInHud(guiGraphics, stack, mustShow);
                 return;
             }
 
             stack = player.getItemInHand(InteractionHand.OFF_HAND);
             if (stack.is(SBRItems.FAN.get())) {
-                renderInHud(guiGraphics, stack);
+                renderInHud(guiGraphics, stack, mustShow);
                 return;
             }
 
@@ -167,14 +167,14 @@ public class FanRenderer extends BlockEntityWithoutLevelRenderer {
             for (int i = 0; i < 9; i++) {
                 stack = inventory.getItem(i);
                 if (stack.is(SBRItems.FAN.get())) {
-                    renderInHud(guiGraphics, stack);
+                    renderInHud(guiGraphics, stack, mustShow);
                     return;
                 }
             }
         }
     }
 
-    private static void renderInHud(GuiGraphics guiGraphics, ItemStack stack) {
+    public static void renderInHud(GuiGraphics guiGraphics, ItemStack stack, boolean mustShow) {
         int x = 0, y = 0;
         float scale = 0.5f;
         try {
@@ -183,16 +183,19 @@ public class FanRenderer extends BlockEntityWithoutLevelRenderer {
             x = fanHud.getInteger("x", 0);
             y = fanHud.getInteger("y", 0);
             scale = fanHud.getFloat("scale", 0.5f);
+            mustShow |= fanHud.getBoolean("show", true);
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
 
-        List<Component> lines = FanItem.getLines(stack);
-        PoseStack pose = guiGraphics.pose();
-        pose.pushPose();
-        pose.translate(x, y, 0);
-        pose.scale(scale, scale, 1);
-        renderInGui(guiGraphics, Minecraft.getInstance().font, 0, 0, lines, -1, 0);
-        pose.popPose();
+        if (mustShow) {
+            List<Component> lines = FanItem.getLines(stack);
+            PoseStack pose = guiGraphics.pose();
+            pose.pushPose();
+            pose.translate(x, y, 0);
+            pose.scale(scale, scale, 1);
+            renderInGui(guiGraphics, Minecraft.getInstance().font, 0, 0, lines, -1, 0);
+            pose.popPose();
+        }
     }
 }

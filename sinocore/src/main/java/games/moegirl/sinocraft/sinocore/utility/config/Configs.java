@@ -31,6 +31,11 @@ public class Configs implements IConfigVisitor {
     }
 
     @Override
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return visitor.getBoolean(key, defaultValue);
+    }
+
+    @Override
     public IConfigVisitor getObject(String key) {
         return visitor.getObject(key);
     }
@@ -43,6 +48,11 @@ public class Configs implements IConfigVisitor {
     @Override
     public void setFloat(String name, float value) {
         visitor.setFloat(name, value);
+    }
+
+    @Override
+    public void setBoolean(String name, boolean value) {
+        visitor.setBoolean(name, value);
     }
 
     @Override

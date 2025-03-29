@@ -1,12 +1,14 @@
 package games.moegirl.sinocraft.sinobrush.client;
 
 import games.moegirl.sinocraft.sinobrush.gui.SBRScreen;
+import games.moegirl.sinocraft.sinobrush.handler.RenderHandlers;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinocore.client.ClientRegister;
 
 public class SinoBrushClient {
     public static void initClient() {
         SBRScreen.register();
+        RenderHandlers.register();
     }
 
     public static void setupClient() {

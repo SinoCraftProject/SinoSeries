@@ -57,6 +57,8 @@ public class EnUsLangProvider extends AbstractLanguageProvider {
         delegate.add(SBRConstants.Translation.GUI_BRUSH_SAVE_FAILED_NO_BRUSH_ON_HAND, "Sign failed: Why you want write without a writing brush?");
         delegate.add(SBRConstants.Translation.GUI_FAN_SETTING_HUD_POSITION, "Setting HUD position");
         delegate.add(SBRConstants.Translation.GUI_FAN_SETTING_HUD_HINT, "Drag to set position, scroll to set size.");
+        delegate.add(SBRConstants.Translation.GUI_SETTING_HIDE, "hide");
+        delegate.add(SBRConstants.Translation.GUI_SETTING_SHOW, "display");
 
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_NAME, "SinoBrush");
         delegate.add(SBRConstants.Translation.ADVANCEMENT_ROOT_DESC, "Painting Lives by Brush, Writing Elegance in Ink.");

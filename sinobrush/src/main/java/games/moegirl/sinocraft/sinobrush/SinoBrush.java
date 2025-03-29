@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import games.moegirl.sinocraft.sinobrush.data.gen.SBRDataGen;
 import games.moegirl.sinocraft.sinobrush.gui.SBRMenu;
 import games.moegirl.sinocraft.sinobrush.handler.CraftingHandlers;
-import games.moegirl.sinocraft.sinobrush.handler.RenderHandlers;
 import games.moegirl.sinocraft.sinobrush.item.SBRItems;
 import games.moegirl.sinocraft.sinobrush.item.component.SBRDataComponents;
 import games.moegirl.sinocraft.sinobrush.network.SBRNetworks;
@@ -28,7 +27,6 @@ public class SinoBrush {
         SBRStats.register();
 
         CraftingHandlers.register();
-        RenderHandlers.register();
 
         SBRDataGen.register();
     }

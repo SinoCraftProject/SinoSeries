@@ -41,6 +41,8 @@
   "sinobrush.gui.brush.tooltip_save": "Save the canvas to an image",
   "sinobrush.gui.fan.setting_hud_hint": "Drag to set position, scroll to set size.",
   "sinobrush.gui.fan.setting_hud_position": "Setting HUD position",
+  "sinobrush.gui.setting_display": "display",
+  "sinobrush.gui.setting_hide": "hide",
   "stat.sinobrush.draw_by_brush": "Times of writing with brush",
   "stat.sinobrush.unfold_fan": "Times of unfolding the fan",
   "tag.item.sinobrush.fan": "Folding Fan",
