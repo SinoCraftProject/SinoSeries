@@ -1,4 +1,4 @@
-package games.moegirl.sinocraft.sinocore.neoforge.mixin;
+package games.moegirl.sinocraft.sinocore.neoforge.mixin.client;
 
 import games.moegirl.sinocraft.sinocore.interfaces.injectable.ISinoItem;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -13,18 +13,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.Consumer;
 
 @Mixin(Item.class)
-public abstract class ItemMixin_NeoForge implements ISinoItem {
+public abstract class ItemMixin_NeoForge_Client implements ISinoItem {
 
     @Inject(at = @At(value = "TAIL"), method = "initializeClient", remap = false)
     private void afterInitClient(Consumer<IClientItemExtensions> consumer, CallbackInfo ci) {
-        var renderer = sino$getCustomRender();
-        if (renderer != null) {
-            consumer.accept(new IClientItemExtensions() {
-                @Override
-                public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                    return renderer;
-                }
-            });
+        var client = sino$getClientItem();
+        if (client != null) {
+            var renderer = client.sino$getCustomRender();
+            if (renderer != null) {
+                consumer.accept(new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return renderer;
+                    }
+                });
+            }
         }
     }
 }

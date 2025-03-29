@@ -4,9 +4,9 @@
     "package": "games.moegirl.sinocraft.sinocore.neoforge.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-      "ItemMixin_NeoForge"
     ],
     "client": [
+        "client.ItemMixin_NeoForge_Client"
     ],
     "server": [
     ],

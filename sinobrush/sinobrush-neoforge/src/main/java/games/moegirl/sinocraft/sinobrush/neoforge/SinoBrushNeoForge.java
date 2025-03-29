@@ -11,12 +11,12 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 public class SinoBrushNeoForge {
     public SinoBrushNeoForge(IEventBus bus, ModContainer modContainer) {
         SinoBrush.init();
-        SinoBrushClient.initClient();
 
         bus.addListener(this::setupClient);
     }
 
     private void setupClient(FMLClientSetupEvent event) {
+        SinoBrushClient.initClient();
         SinoBrushClient.setupClient();
     }
 }

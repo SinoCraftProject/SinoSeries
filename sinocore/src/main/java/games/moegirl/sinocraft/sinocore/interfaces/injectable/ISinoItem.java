@@ -1,9 +1,9 @@
 package games.moegirl.sinocraft.sinocore.interfaces.injectable;
 
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import games.moegirl.sinocraft.sinocore.client.item.ISinoClientItem;
 
 public interface ISinoItem {
-    default BlockEntityWithoutLevelRenderer sino$getCustomRender() {
+    default ISinoClientItem sino$getClientItem() {
         return null;
     }
 }
