@@ -29,4 +29,8 @@ public class RegistryManagerImpl {
     public static ICustomStatRegistry _createCustomStat(String modId) {
         return new FabricCustomStatRegistry(modId);
     }
+
+    public static IKeyRegistry _createKey(String modId) {
+        return new FabricKeyRegistry(modId);
+    }
 }

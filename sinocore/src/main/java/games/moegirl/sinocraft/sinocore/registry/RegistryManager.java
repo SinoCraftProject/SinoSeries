@@ -27,6 +27,7 @@ public class RegistryManager {
 
     private static final Map<String, List<IScreenRegistry>> SCREEN_MAP = new HashMap<>();
     private static final Map<String, List<ICommandRegistry>> COMMAND_MAP = new ConcurrentHashMap<>();
+    private static final Map<String, List<IKeyRegistry>> KEY_MAP = new ConcurrentHashMap<>();
 
     private static <T, U extends IRegistryBase<T>> U appendRegistry(String modId, ResourceKey<Registry<T>> key, U registry) {
         REGISTRIES.computeIfAbsent(modId, __ -> new HashMap<>())
@@ -131,6 +132,13 @@ public class RegistryManager {
         return appendRegistrable(COMMAND_MAP, modId, RegistryManager._createCommand(modId));
     }
 
+    /**
+     * 创建用于 KeyMapping 的 SinoCore 注册表
+     */
+    public synchronized static IKeyRegistry createKey(String modId) {
+        return appendRegistrable(KEY_MAP, modId, RegistryManager._createKey(modId));
+    }
+
     @ExpectPlatform
     static <T> IRegistry<T> _create(String modId, ResourceKey<Registry<T>> key) {
         throw new AssertionError();
@@ -158,6 +166,11 @@ public class RegistryManager {
 
     @ExpectPlatform
     static ICustomStatRegistry _createCustomStat(String modId) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    static IKeyRegistry _createKey(String modId) {
         throw new AssertionError();
     }
 }

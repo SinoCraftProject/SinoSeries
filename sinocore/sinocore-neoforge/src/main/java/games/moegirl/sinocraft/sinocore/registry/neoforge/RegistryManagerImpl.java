@@ -29,4 +29,8 @@ public class RegistryManagerImpl {
     public static ICustomStatRegistry _createCustomStat(String modId) {
         return new NeoForgeCustomStatRegistry(modId);
     }
+
+    public static IKeyRegistry _createKey(String modId) {
+        return new NeoForgeKeyRegistry(modId);
+    }
 }

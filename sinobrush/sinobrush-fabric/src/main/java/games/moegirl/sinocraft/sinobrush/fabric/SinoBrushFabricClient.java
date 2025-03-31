@@ -7,7 +7,6 @@ public class SinoBrushFabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        SinoBrushClient.initClient();
         SinoBrushClient.setupClient();
     }
 }

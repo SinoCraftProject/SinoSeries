@@ -1,6 +1,7 @@
 package games.moegirl.sinocraft.sinobrush.item;
 
 import games.moegirl.sinocraft.sinobrush.SinoBrush;
+import games.moegirl.sinocraft.sinocore.registry.IRegRef;
 import games.moegirl.sinocraft.sinocore.registry.IRegistry;
 import games.moegirl.sinocraft.sinocore.registry.ITabRegistry;
 import games.moegirl.sinocraft.sinocore.registry.RegistryManager;
@@ -17,7 +18,7 @@ public class SBRItems {
 
     public static ResourceKey<CreativeModeTab> SINO_BRUSH_TAB = TABS.register("sinobrush");
 
-    public static Supplier<Item> FAN = ITEMS.register("fan", FanItem::new);
+    public static IRegRef<Item> FAN = ITEMS.register("fan", FanItem::new);
     public static Supplier<Item> FOLDED_FAN = ITEMS.register("folded_fan", FoldedFanItem::new);
     public static Supplier<XuanPaperItem> XUAN_PAPER = ITEMS.register("xuan_paper", XuanPaperItem::new);
     public static Supplier<Item> FILLED_XUAN_PAPER = ITEMS.register("filled_xuan_paper", FilledXuanPaperItem::new);
