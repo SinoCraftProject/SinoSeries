@@ -1,0 +1,57 @@
+plugins {
+    id 'architectury-plugin'
+    id 'dev.architectury.loom'
+}
+
+archivesBaseName = "sino-meta-fabric"
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+loom {
+    runs {
+        client {
+            configName = 'Fabric Client'
+            runDir = 'run/client'
+
+            vmArg '-XX:+IgnoreUnrecognizedVMOptions'
+            vmArg '-XX:+AllowEnhancedClassRedefinition'
+
+            property 'fabric-tag-conventions-v2.missingTagTranslationWarning', 'VERBOSE'
+            property 'file.encoding', 'COMPAT'
+        }
+
+        server {
+            configName = 'Fabric Server'
+            runDir = 'run/server'
+
+            vmArg '-XX:+IgnoreUnrecognizedVMOptions'
+            vmArg '-XX:+AllowEnhancedClassRedefinition'
+
+            property 'fabric-tag-conventions-v2.missingTagTranslationWarning', 'VERBOSE'
+            property 'file.encoding', 'COMPAT'
+        }
+    }
+
+    mods {
+        getRootProject().ext.fabricProjects.each { Project p ->
+            "${p.parent.modid}" {
+                sourceSet p.sourceSets.main
+            }
+        }
+    }
+}
+
+dependencies {
+    modRuntimeOnly(libs.bundles.fabric.runtime) { transitive = false }
+
+    getRootProject().ext.fabricProjects.each { Project p ->
+        implementation(project(path: p.path, configuration: 'namedElements')) { transitive = false }
+
+        if (p.parent.modid != 'sinotest') {
+            include project(p.path)
+        }
+    }
+}

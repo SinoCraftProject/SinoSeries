@@ -56,7 +56,7 @@ void refreshRunConfig() {
         p.file('run/server').mkdirs()
     }
 
-    commonModProjects.each { Project p ->
+    commonProjects.each { Project p ->
         p.file('src/generated/resources').mkdirs()
     }
 }
@@ -100,13 +100,12 @@ ext {
     gitCommitHash = 'git rev-parse --short HEAD'.execute().getText().trim()
     modPlatforms = rootProject.mod_platforms.trim().split(',')
 
-    subProjects = rootProject.subprojects.toList() as List<Project>
-    commonModProjects = rootProject.childProjects.values().findAll { Project p -> p.name.startsWith('mod-') } as List<Project>
-    platformNeoForge = commonModProjects.collectMany {Project c -> c.childProjects.values().findAll { Project p -> p.name == 'neoforge' }}
-    platformFabric = commonModProjects.collectMany {Project c -> c.childProjects.values().findAll { Project p -> p.name == 'fabric' }}
-    platformProjects = platformNeoForge + platformFabric
-    subModProjects = platformProjects + commonModProjects
-    metaProjects = [project(':meta'), project(':meta:neoforge'), project(':meta:fabric')]
+    commonProjects = rootProject.childProjects.values().findAll { Project p -> p.name.startsWith('mod-') } as List<Project>
+    neoforgeProjects = commonProjects.collectMany {Project c -> c.childProjects.values().findAll { Project p -> p.name.contains('neoforge')}}
+    fabricProjects = commonProjects.collectMany {Project c -> c.childProjects.values().findAll { Project p -> p.name.contains('fabric')}}
+    platformProjects = neoforgeProjects + fabricProjects
+    modProjects = commonProjects + platformProjects
+    metaProjects = [project(':mod-meta:meta-neoforge'), project(':mod-meta:meta-fabric')]
 
     refreshRunConfig = this.&refreshRunConfig as MethodClosure
 }

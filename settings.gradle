@@ -12,21 +12,21 @@ pluginManagement {
 rootProject.name = 'sinoseries'
 
 include ':mod-sinocore'
-include ':mod-sinocore:neoforge'
-include ':mod-sinocore:fabric'
+include ':mod-sinocore:sinocore-neoforge'
+include ':mod-sinocore:sinocore-fabric'
 
 include ':mod-sinobrush'
-include ':mod-sinobrush:neoforge'
-include ':mod-sinobrush:fabric'
+include ':mod-sinobrush:sinobrush-neoforge'
+include ':mod-sinobrush:sinobrush-fabric'
 
 include ':mod-sinodeco'
-include ':mod-sinodeco:neoforge'
-include ':mod-sinodeco:fabric'
+include ':mod-sinodeco:sinodeco-neoforge'
+include ':mod-sinodeco:sinodeco-fabric'
 
 include ':mod-sinotest'
-include ':mod-sinotest:neoforge'
-include ':mod-sinotest:fabric'
+include ':mod-sinotest:sinotest-neoforge'
+include ':mod-sinotest:sinotest-fabric'
 
-include ':meta'
-include ':meta:neoforge'
-include ':meta:fabric'
+include ':mod-meta'
+include ':mod-meta:meta-neoforge'
+include ':mod-meta:meta-fabric'

@@ -1,0 +1,58 @@
+plugins {
+    id 'architectury-plugin'
+    id 'dev.architectury.loom'
+}
+
+archivesBaseName = "sino-meta-fabric"
+
+loom {
+    runs {
+        client {
+            configName = 'NeoForge Client'
+            runDir = 'run/client'
+
+            vmArg '-XX:+IgnoreUnrecognizedVMOptions'
+            vmArg '-XX:+AllowEnhancedClassRedefinition'
+
+            property 'file.encoding', 'COMPAT'
+        }
+
+        server {
+            configName = 'NeoForge Server'
+            runDir = 'run/server'
+
+            vmArg '-XX:+IgnoreUnrecognizedVMOptions'
+            vmArg '-XX:+AllowEnhancedClassRedefinition'
+
+            property 'file.encoding', 'COMPAT'
+        }
+
+        getRootProject().ext.commonProjects.each { Project p ->
+            "data_${p.modid}" {
+                data()
+
+                ideConfigGenerated = true
+                configName = "Data Generator ${p.modid}"
+
+                programArgs '--all', '--mod', "${p.modid}",
+                        '--output', p.file('src/generated/resources').absolutePath
+
+                getRootProject().ext.commonProjects.each { Project m ->
+                    programArgs '--existing', m.file('src/main/resources').absolutePath
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    modRuntimeOnly(libs.bundles.neoforge.runtime) { transitive = false }
+
+    getRootProject().ext.neoforgeProjects.each { Project p ->
+        implementation(project(path: p.path, configuration: 'namedElements')) { transitive = false }
+
+        if (p.parent.modid != 'sinotest') {
+            include project(p.path)
+        }
+    }
+}

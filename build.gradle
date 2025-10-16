@@ -60,98 +60,99 @@ allprojects {
     }
 }
 
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven-publish'
-    apply plugin: 'architectury-plugin'
-    apply plugin: 'dev.architectury.loom'
-    apply plugin: 'me.shedaniel.unified-publishing'
-
-    group = 'games.moegirl.sinocraft'
-
-    architectury {
-        minecraft = rootProject.minecraft_version
-    }
-
-    loom {
-        silentMojangMappingsLicense()
-        setEnableTransitiveAccessWideners true
-        setEnableModProvidedJavadoc true
-
-        interfaceInjection {
-            enableDependencyInterfaceInjection = true
-        }
-    }
-
-    dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-
-        mappings loom.layered() {
-            officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${rootProject.parchment_minecraft_version}:${rootProject.parchment_version}@zip")
-        }
-    }
-
-    java {
-        withSourcesJar()
-
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        it.options.release = 21
-    }
-
-    sourcesJar {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    }
-
-    processResources {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        exclude('mod_desc.txt')
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = 'UTF-8'
-        options.release = 21
-    }
-
-    publishing {
-        repositories {
-            mavenLocal()
-
-            maven {
-                name = 'YuluoMaven'
-
-                def releaseUrl = 'https://maven.yuluo.dev/repository/maven-releases/'
-                def snapshotUrl = 'https://maven.yuluo.dev/repository/maven-snapshots/'
-                url = ENV.MOD_RELEASE ? releaseUrl : snapshotUrl
-
-                credentials {
-                    username Objects.requireNonNullElse(System.getenv('MOD_MAVEN_USER'), '')
-                    password Objects.requireNonNullElse(System.getenv('MOD_MAVEN_PASS'), '')
-                }
-            }
-        }
-    }
-
-    tasks.publishUnified.doFirst {
-        if (!ENV.MOD_RELEASE) {
-            println 'Hint: Running in debug mode, do NOT use publishUnified.'
-        }
-    }
-}
-
-ext.subModProjects.each { Project p ->
+ext.modProjects.each { Project p ->
     configure(p) {
+        apply plugin: 'java'
+        apply plugin: 'maven-publish'
+        apply plugin: 'architectury-plugin'
+        apply plugin: 'dev.architectury.loom'
+        apply plugin: 'me.shedaniel.unified-publishing'
+
+        group = 'games.moegirl.sinocraft'
+
+        architectury {
+            minecraft = libs.versions.minecraft.get()
+        }
+
         loom {
-            runConfigs.configureEach { config ->
+            silentMojangMappingsLicense()
+            setEnableTransitiveAccessWideners true
+            setEnableModProvidedJavadoc true
+
+            interfaceInjection {
+                enableDependencyInterfaceInjection = true
+            }
+
+            runConfigs.configureEach {
                 ideConfigGenerated = false
             }
         }
 
+        dependencies {
+            minecraft libs.minecraft
+
+            mappings loom.layered() {
+                officialMojangMappings()
+                parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
+            }
+        }
+
+        java {
+            withSourcesJar()
+
+            sourceCompatibility = JavaVersion.VERSION_21
+            targetCompatibility = JavaVersion.VERSION_21
+        }
+
+        tasks.withType(JavaCompile).configureEach {
+            it.options.release = 21
+        }
+
+        sourcesJar {
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        }
+
+        var generateModMetadataTask = tasks.register('generateModMetadata', ProcessResources) {
+            var props = getRootProject().ext.getExpandingProperties(p.parent, p.name.contains('fabric'))
+            expand props
+            from 'src/main/templates'
+            into 'build/generated/sources/modMetadata'
+        }
+
+        processResources {
+            dependsOn(generateModMetadataTask)
+
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+            exclude('mod_desc.txt')
+        }
+
+        sourceSets.main.resources {
+            srcDir generateModMetadataTask
+        }
+
+        tasks.withType(JavaCompile).configureEach {
+            options.encoding = 'UTF-8'
+            options.release = 21
+        }
+
         publishing {
+            repositories {
+                mavenLocal()
+
+                maven {
+                    name = 'YuluoMaven'
+
+                    def releaseUrl = 'https://maven.yuluo.dev/repository/maven-releases/'
+                    def snapshotUrl = 'https://maven.yuluo.dev/repository/maven-snapshots/'
+                    url = ENV.MOD_RELEASE ? releaseUrl : snapshotUrl
+
+                    credentials {
+                        username Objects.requireNonNullElse(System.getenv('MOD_MAVEN_USER'), '')
+                        password Objects.requireNonNullElse(System.getenv('MOD_MAVEN_PASS'), '')
+                    }
+                }
+            }
+
             publications {
                 mavenJava(MavenPublication) {
                     version = rootProject.ext.getBuildVersion(p)
@@ -160,17 +161,18 @@ ext.subModProjects.each { Project p ->
             }
         }
 
-        processResources {
-            var props = rootProject.ext.getExpandingProperties(p.parent, project.name.contains('fabric'))
-            filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
-                expand(props)
-            })
+        tasks.publishUnified.doFirst {
+            if (!ENV.MOD_RELEASE) {
+                println 'Hint: Running in debug mode, do NOT use publishUnified.'
+            }
         }
     }
 }
 
-ext.commonModProjects.each { Project p ->
+ext.commonProjects.each { Project p ->
     configure(p) {
+        archivesBaseName = p.name.substring(4)
+
         architectury {
             common(rootProject.ext.modPlatforms)
         }
@@ -194,14 +196,14 @@ ext.commonModProjects.each { Project p ->
         }
 
         dependencies {
-            // qyl27: Use fabric-loader in order to use EnvType class.
-            modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+            // qyl27: Use fabric-loader in order to reduce the EnvType class warn.
+            modImplementation libs.fabric.loader
 
-            if (p.name != 'sinocore') {
+            if (p.name != 'mod-sinocore') {
                 api project(path: ':mod-sinocore', configuration: 'namedElements')
             }
 
-            compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+//            compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
         }
     }
 }
@@ -216,6 +218,10 @@ ext.platformProjects.each { Project p ->
 
         version = p.parent.version
 
+        architectury {
+            platformSetupLoomIde()
+        }
+
         loom {
             accessWidenerPath = p.parent.loom.accessWidenerPath
         }
@@ -228,6 +234,8 @@ ext.platformProjects.each { Project p ->
 
             compileClasspath.extendsFrom common
             runtimeClasspath.extendsFrom common
+            developmentNeoForge.extendsFrom common
+            developmentFabric.extendsFrom common
 
             shadowBundle {
                 canBeResolved = true
@@ -235,11 +243,12 @@ ext.platformProjects.each { Project p ->
             }
         }
 
-        processResources {
-            var props = rootProject.ext.getExpandingProperties(p.parent, project.name.contains('fabric'))
-            filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
-                expand(props)
-            })
+        dependencies {
+            common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
+
+            if (!p.parent.name.startsWith('mod-sinocore')) {
+                api project(path: ':mod-sinocore', configuration: 'namedElements')
+            }
         }
 
         shadowJar {
@@ -269,28 +278,15 @@ ext.platformProjects.each { Project p ->
             }
         }
 
-        dependencies {
-            if (!p.name.startsWith('sinocore')) {
-                api project(path: ':mod-sinocore', configuration: 'namedElements')
-            }
-        }
-
         parent.publish.dependsOn(publish)
         parent.publishUnified.dependsOn(publishUnified)
     }
 }
 
-ext.platformNeoForge.each { Project p ->
+ext.neoforgeProjects.each { Project p ->
     configure(p) {
         architectury {
-            platformSetupLoomIde()
             neoForge()
-        }
-
-        loom {
-            runConfigs.configureEach { config ->
-                ideConfigGenerated = false
-            }
         }
 
         sourceSets.main.resources {
@@ -299,9 +295,8 @@ ext.platformNeoForge.each { Project p ->
         }
 
         dependencies {
-            neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
+            neoForge libs.neoforge
 
-            common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
             shadowBundle project(path: p.parent.path, configuration: 'transformProductionNeoForge')
         }
 
@@ -313,24 +308,16 @@ ext.platformNeoForge.each { Project p ->
     }
 }
 
-ext.platformFabric.each { Project p ->
+ext.fabricProjects.each { Project p ->
     configure(p) {
         architectury {
-            platformSetupLoomIde()
             fabric()
         }
 
-        loom {
-            runConfigs.configureEach { config ->
-                ideConfigGenerated = false
-            }
-        }
-
         dependencies {
-            modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-            modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+            modImplementation libs.fabric.loader
+            modApi libs.fabric.api
 
-            common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
             shadowBundle project(path: p.parent.path, configuration: 'transformProductionFabric')
         }
     }
@@ -344,35 +331,9 @@ ext.metaProjects.each { Project p ->
     configure(p) {
         version = rootProject.ext.sinoVersion
 
-        configurations {
-            common {
-                canBeResolved = true
-                canBeConsumed = false
-            }
-
-            compileClasspath.extendsFrom common
-            runtimeClasspath.extendsFrom common
-        }
-
         dependencies {
-            rootProject.ext.commonModProjects.each { Project m ->
-                common(project(path: m.path, configuration: 'namedElements')) { transitive true }
-            }
-        }
-
-        processResources {
-            var props = rootProject.ext.getExpandingProperties(p.parent, project.name.contains('fabric'))
-            filesMatching(rootProject.ext.expandingFilesMatch as List<String>, { FileCopyDetails copy ->
-                expand(props)
-            })
-        }
-
-        publishing {
-            publications {
-                mavenJava(MavenPublication) {
-                    version = rootProject.ext.getBuildVersion(p)
-                    from components.java
-                }
+            rootProject.ext.commonProjects.each { Project m ->
+                common(project(path: m.path, configuration: 'namedElements')) { transitive = false }
             }
         }
     }
