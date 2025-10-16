@@ -1,13 +1,13 @@
 plugins {
-    id 'architectury-plugin' version "${architect_plugin_version}" apply false
-    id 'dev.architectury.loom' version "${architectury_loom_version}" apply false
-    id 'com.gradleup.shadow' version "${shadow_plugin_version}" apply false
-    id 'me.shedaniel.unified-publishing' version "${unified_publishing_plugin_version}" apply false
+    id 'architectury-plugin' version '3.4-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.11-SNAPSHOT' apply false
+    id 'com.gradleup.shadow' version '8.3.+' apply false
+    id 'me.shedaniel.unified-publishing' version '0.1.+' apply false
 }
 
 apply from: 'gradle/scripts/base.gradle'
 
-logger.lifecycle("Syncing SinoSeries. Build version: ${ext.getBuildVersion(rootProject)}")
+logger.lifecycle("Project SinoSeries. Build version: ${ext.getBuildVersion(rootProject)}")
 
 // <editor-fold desc="Common">
 
@@ -138,7 +138,7 @@ subprojects {
 
     tasks.publishUnified.doFirst {
         if (!ENV.MOD_RELEASE) {
-            println 'Hint: Not running in release mode, do NOT use publishUnified.'
+            println 'Hint: Running in debug mode, do NOT use publishUnified.'
         }
     }
 }
@@ -198,7 +198,7 @@ ext.commonModProjects.each { Project p ->
             modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
             if (p.name != 'sinocore') {
-                api project(path: ':sinocore', configuration: 'namedElements')
+                api project(path: ':mod-sinocore', configuration: 'namedElements')
             }
 
             compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
@@ -271,7 +271,7 @@ ext.platformProjects.each { Project p ->
 
         dependencies {
             if (!p.name.startsWith('sinocore')) {
-                api project(path: ':sinocore', configuration: 'namedElements')
+                api project(path: ':mod-sinocore', configuration: 'namedElements')
             }
         }
 
@@ -377,9 +377,6 @@ ext.metaProjects.each { Project p ->
         }
     }
 }
-
-//
-//developmentFabric.extendsFrom common
 
 // </editor-fold>
 

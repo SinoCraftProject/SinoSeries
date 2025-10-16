@@ -101,15 +101,12 @@ ext {
     modPlatforms = rootProject.mod_platforms.trim().split(',')
 
     subProjects = rootProject.subprojects.toList() as List<Project>
-    subModProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') }.toList() as List<Project>
-    commonModProjects = rootProject.childProjects.values().findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') } as List<Project>
-    platformForge = subModProjects.findAll { Project p -> p.name.contains('-forge') }
-    platformNeoForge = subModProjects.findAll { Project p -> p.name.contains('-neoforge') }
-    platformFabric = subModProjects.findAll { Project p -> p.name.contains('-fabric') }
-    platformProjects = platformForge + platformNeoForge + platformFabric
-    metaProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && p.name.endsWith('-meta') }.toList() as List<Project>
-    metaNeoForge = metaProjects.findAll { Project p -> p.name.contains('-neoforge') }
-    metaFabric = metaProjects.findAll { Project p -> p.name.contains('-fabric') }
+    commonModProjects = rootProject.childProjects.values().findAll { Project p -> p.name.startsWith('mod-') } as List<Project>
+    platformNeoForge = commonModProjects.collectMany {Project c -> c.childProjects.values().findAll { Project p -> p.name == 'neoforge' }}
+    platformFabric = commonModProjects.collectMany {Project c -> c.childProjects.values().findAll { Project p -> p.name == 'fabric' }}
+    platformProjects = platformNeoForge + platformFabric
+    subModProjects = platformProjects + commonModProjects
+    metaProjects = [project(':meta'), project(':meta:neoforge'), project(':meta:fabric')]
 
     refreshRunConfig = this.&refreshRunConfig as MethodClosure
 }
