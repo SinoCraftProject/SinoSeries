@@ -70,7 +70,7 @@ subprojects {
     group = 'games.moegirl.sinocraft'
 
     architectury {
-        minecraft = rootProject.minecraft_version
+        minecraft = libs.versions.minecraft.get()
     }
 
     loom {
@@ -84,11 +84,11 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        minecraft "com.mojang:minecraft:${libs.versions.minecraft.get()}"
 
         mappings loom.layered() {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${rootProject.parchment_minecraft_version}:${rootProject.parchment_version}@zip")
+            parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
         }
     }
 
@@ -195,7 +195,7 @@ ext.commonModProjects.each { Project p ->
 
         dependencies {
             // qyl27: Use fabric-loader in order to use EnvType class.
-            modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+            modImplementation libs.fabric.loader
 
             if (p.name != 'sinocore') {
                 api project(path: ':sinocore', configuration: 'namedElements')
@@ -299,7 +299,7 @@ ext.platformNeoForge.each { Project p ->
         }
 
         dependencies {
-            neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
+            neoForge libs.neoforge
 
             common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
             shadowBundle project(path: p.parent.path, configuration: 'transformProductionNeoForge')
@@ -327,8 +327,8 @@ ext.platformFabric.each { Project p ->
         }
 
         dependencies {
-            modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-            modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+            modImplementation libs.fabric.loader
+            modApi libs.fabric.api
 
             common(project(path: p.parent.path, configuration: 'namedElements')) { transitive = false }
             shadowBundle project(path: p.parent.path, configuration: 'transformProductionFabric')

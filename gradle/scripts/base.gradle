@@ -9,7 +9,7 @@ String getVersion(Project project) {
         return ext.sinoVersion
     }
 
-    return "${project.minecraft_version}-${project.mod_version}"
+    return "${libs.versions.minecraft.get()}-${project.mod_version}"
 }
 
 String getBuildVersion(Project project) {
@@ -84,7 +84,7 @@ Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false)
 }
 
 ext {
-    sinoVersion = "${rootProject.minecraft_version}-${rootProject.sinoseries_version}" as String
+    sinoVersion = "${libs.versions.minecraft.get()}-${rootProject.sinoseries_version}" as String
     getVersion = this.&getVersion as MethodClosure
     getBuildVersion = this.&getBuildVersion as MethodClosure
 

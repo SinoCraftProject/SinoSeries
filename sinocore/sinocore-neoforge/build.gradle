@@ -1,8 +1,8 @@
 unifiedPublishing {
     project {
-        displayName = "${parent.mod_name} NeoForge ${project.parent.mod_version} for MC ${project.minecraft_version}"
+        displayName = "${parent.mod_name} NeoForge ${project.parent.mod_version} for MC ${libs.versions.minecraft.get()}"
         version = project.version
-        gameVersions = [project.minecraft_version]
+        gameVersions = [libs.versions.minecraft.get()]
         gameLoaders = ['neoforge']
         releaseType = 'release'
 
