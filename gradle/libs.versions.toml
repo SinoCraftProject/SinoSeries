@@ -43,10 +43,11 @@ neoforge-patchouli = { module = 'maven.modrinth:patchouli', version.ref = 'modri
 neoforge-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-neoforge', version.ref = 'maven-yuluodev-nbtedit' }
 
 # XXX: JiJ dependencies is not supported for fabric mods on runtime.
+# Upstream: https://github.com/FabricMC/fabric-loom/issues/1242
 fabric-rei = { module = 'me.shedaniel:RoughlyEnoughItems-fabric', version.ref = 'maven-shedaniel-rei' }
 fabric-modmenu = { module = 'maven.modrinth:modmenu', version.ref = 'modrinth-fabric-modmenu' }
 fabric-patchouli = { module = 'vazkii.patchouli:Patchouli', version.ref = 'maven-blamejared-patchouli' }
-fabric-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-fabric', version.ref = 'maven-yuluodev-nbtedit' }   # Broken...
+fabric-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-fabric', version.ref = 'maven-yuluodev-nbtedit' }   # XXX: qyl breaks it...
 
 [bundles]
 neoforge-runtime = ['neoforge-jei', 'neoforge-patchouli', 'neoforge-nbtedit']
