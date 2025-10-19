@@ -7,7 +7,6 @@ jetbrains-annotations = '23.0.0'
 minecraft = '1.21.1'
 parchment_minecraft = '1.21.1'
 parchment_mappings = '2024.11.17'
-forge = '52.1.5'
 fabric-loader = '0.17.3'
 fabric-api = '0.116.7+1.21.1'
 neoforge = '21.1.211'
@@ -18,10 +17,10 @@ neoforge = '21.1.211'
 modrinth-neoforge-jei = 'PNRK73MX'
 modrinth-neoforge-patchouli = '1.21.1-92-neoforge'
 modrinth-fabric-modmenu = '11.0.1'
-modrinth-fabric-patchouli = '1.21.1-92-fabric'
 
-maven-shedaniel-rei = '16.0.754'
+maven-shedaniel-rei = '16.0.799'
 maven-yuluodev-nbtedit = '5.2.11+mc1.21.1'
+maven-blamejared-patchouli = '1.21.1-92-FABRIC'
 
 [libraries]
 
@@ -42,11 +41,13 @@ neoforge = { module ='net.neoforged:neoforge', version.ref = 'neoforge' }
 neoforge-jei = { module = 'maven.modrinth:jei', version.ref = 'modrinth-neoforge-jei' }
 neoforge-patchouli = { module = 'maven.modrinth:patchouli', version.ref = 'modrinth-neoforge-patchouli' }
 neoforge-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-neoforge', version.ref = 'maven-yuluodev-nbtedit' }
+
+# XXX: JiJ dependencies is not supported for fabric mods on runtime.
 fabric-rei = { module = 'me.shedaniel:RoughlyEnoughItems-fabric', version.ref = 'maven-shedaniel-rei' }
 fabric-modmenu = { module = 'maven.modrinth:modmenu', version.ref = 'modrinth-fabric-modmenu' }
-fabric-patchouli = { module = 'maven.modrinth:patchouli', version.ref = 'modrinth-fabric-patchouli' }
-fabric-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-fabric', version.ref = 'maven-yuluodev-nbtedit' }
+fabric-patchouli = { module = 'vazkii.patchouli:Patchouli', version.ref = 'maven-blamejared-patchouli' }
+fabric-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-fabric', version.ref = 'maven-yuluodev-nbtedit' }   # Broken...
 
 [bundles]
 neoforge-runtime = ['neoforge-jei', 'neoforge-patchouli', 'neoforge-nbtedit']
-fabric-runtime = ['fabric-rei', 'fabric-modmenu', 'fabric-modmenu', 'fabric-patchouli', 'fabric-nbtedit']
+fabric-runtime = ['fabric-modmenu', 'fabric-rei', 'fabric-patchouli']

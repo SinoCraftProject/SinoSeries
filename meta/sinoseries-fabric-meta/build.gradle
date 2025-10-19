@@ -42,7 +42,10 @@ dependencies {
     modImplementation libs.fabric.loader
     modApi libs.fabric.api
 
-    modRuntimeOnly(libs.bundles.fabric.runtime) { transitive = false }
+    modRuntimeOnly(libs.bundles.fabric.runtime) {
+        exclude group: 'com.terraformersmc', module: 'modmenu'
+        exclude group: 'net.fabricmc', module: 'fabric-api'
+    }
 
     rootProject.ext.platformFabric.each { Project p ->
         implementation project(path: p.path, configuration: 'namedElements')

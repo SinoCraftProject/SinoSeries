@@ -45,7 +45,7 @@ configurations {
 dependencies {
     neoForge libs.neoforge
 
-    modRuntimeOnly(libs.bundles.neoforge.runtime) { transitive = false }
+    modRuntimeOnly libs.bundles.neoforge.runtime
 
     rootProject.ext.platformNeoForge.each { Project p ->
         implementation project(path: p.path, configuration: 'namedElements')

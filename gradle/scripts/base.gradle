@@ -4,12 +4,18 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.time.ZonedDateTime
 
+ext {
+    minecraftVersion = libs.versions.minecraft.get()
+    sinoVersion = "${minecraftVersion}-${rootProject.sinoseries_version}".toString()
+    modPlatforms = rootProject.mod_platforms.trim().split(',')
+}
+
 String getVersion(Project project) {
     if (!project.hasProperty('mod_version')) {
         return ext.sinoVersion
     }
 
-    return "${libs.versions.minecraft.get()}-${project.mod_version}"
+    return "${minecraftVersion}-${project.mod_version}"
 }
 
 String getBuildVersion(Project project) {
@@ -68,6 +74,7 @@ Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false)
         map.put('mod_version', rootProject.ext.sinoVersion)
     }
 
+    map.put('minecraft_version', ext.minecraftVersion)
     map.put('full_version', getBuildVersion(p))
     map.put('build_time', ZonedDateTime.now())
 
@@ -84,7 +91,6 @@ Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false)
 }
 
 ext {
-    sinoVersion = "${libs.versions.minecraft.get()}-${rootProject.sinoseries_version}" as String
     getVersion = this.&getVersion as MethodClosure
     getBuildVersion = this.&getBuildVersion as MethodClosure
 
@@ -98,7 +104,6 @@ ext {
     getExpandingProperties = this.&getPropertiesToExpand as MethodClosure
 
     gitCommitHash = 'git rev-parse --short HEAD'.execute().getText().trim()
-    modPlatforms = rootProject.mod_platforms.trim().split(',')
 
     subProjects = rootProject.subprojects.toList() as List<Project>
     subModProjects = rootProject.subprojects.findAll { Project p -> p.name.startsWith('sino') && !p.name.contains('meta') }.toList() as List<Project>
