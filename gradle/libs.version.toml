@@ -1,0 +1,52 @@
+[versions]
+# common
+lombok = '1.18.42'
+jetbrains-annotations = '23.0.0'
+
+# minecraft
+minecraft = '1.21.1'
+parchment = '2024.11.17'
+parchment_minecraft = '1.21.1'
+forge = '52.1.5'
+fabric-loader = '0.17.3'
+fabric-api = '0.116.7+1.21.1'
+neoforge = '21.1.211'
+
+# compile deps
+
+# runtime deps
+modrinth-neoforge-jei = 'PNRK73MX'
+modrinth-neoforge-patchouli = '1.21.1-92-neoforge'
+modrinth-fabric-modmenu = '11.0.1'
+modrinth-fabric-patchouli = '1.21.1-92-fabric'
+
+maven-shedaniel-rei = '16.0.754'
+maven-yuluodev-nbtedit = '5.2.11+mc1.21.1'
+
+[libraries]
+
+# common
+lombok = { module = 'org.projectlombok:lombok', version.ref = 'lombok' }
+jetbrains-annotations = { module = 'org.jetbrains:annotations', version.ref = 'jetbrains-annotations' }
+
+# minecraft
+minecraft = { module = 'com.mojang:minecraft', version.ref = 'minecraft' }
+fabric-loader = { module = 'net.fabricmc:fabric-loader', version.ref = 'fabric-loader' }
+fabric-api = { module = 'net.fabricmc.fabric-api:fabric-api', version.ref = 'fabric-api' }
+neoforge = { module ='net.neoforged:neoforge', version.ref = 'neoforge' }
+
+# compile deps
+
+
+# runtime deps
+neoforge-jei = { module = 'maven.modrinth:jei', version.ref = 'modrinth-neoforge-jei' }
+neoforge-patchouli = { module = 'maven.modrinth:patchouli', version.ref = 'modrinth-neoforge-patchouli' }
+neoforge-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-neoforge', version.ref = 'maven-yuluodev-nbtedit' }
+fabric-rei = { module = 'me.shedaniel:RoughlyEnoughItems-fabric', version.ref = 'maven-shedaniel-rei' }
+fabric-modmenu = { module = 'maven.modrinth:modmenu', version.ref = 'modrinth-fabric-modmenu' }
+fabric-patchouli = { module = 'maven.modrinth:patchouli', version.ref = 'modrinth-fabric-patchouli' }
+fabric-nbtedit = { module = 'cx.rain.mc.nbtedit:nbtedit-fabric', version.ref = 'maven-yuluodev-nbtedit' }
+
+[bundles]
+neoforge-runtime = ['neoforge-jei', 'neoforge-patchouli', 'neoforge-nbtedit']
+fabric-runtime = ['fabric-rei', 'fabric-modmenu', 'fabric-modmenu', 'fabric-patchouli', 'fabric-nbtedit']
