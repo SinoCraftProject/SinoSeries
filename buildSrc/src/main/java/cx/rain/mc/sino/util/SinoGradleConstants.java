@@ -1,4 +1,4 @@
-package cx.rain.mc.sino.utility;
+package cx.rain.mc.sino.util;
 
 public class SinoGradleConstants {
     public static final String PROPERTY_MODID = "modid";

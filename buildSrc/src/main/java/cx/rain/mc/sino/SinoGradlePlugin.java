@@ -1,6 +1,6 @@
 package cx.rain.mc.sino;
 
-import cx.rain.mc.sino.utility.SinoGradleConstants;
+import cx.rain.mc.sino.util.SinoGradleConstants;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.jetbrains.annotations.NotNull;

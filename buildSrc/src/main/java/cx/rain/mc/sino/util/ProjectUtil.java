@@ -1,4 +1,4 @@
-package cx.rain.mc.sino.utility;
+package cx.rain.mc.sino.util;
 
 import org.gradle.api.Project;
 import org.jetbrains.annotations.NotNull;
