@@ -68,8 +68,15 @@ void refreshRunConfig() {
 }
 
 Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false) {
-    var map = new HashMap<String, ?>(p.properties)
+    var map = new HashMap<String, ?>()
 
+    map.put('modid', p.properties.modid)
+    map.put('mod_name', p.properties.mod_name)
+    map.put('mod_version', p.properties.mod_version)
+    map.put('curseforge_project_id', p.properties.curseforge_project_id)
+    map.put('modrinth_project_id', p.properties.modrinth_project_id)
+
+    map.putAll(p.properties)
     if (!p.parent.hasProperty('mod_version')) {
         map.put('mod_version', rootProject.ext.sinoVersion)
     }
@@ -88,6 +95,14 @@ Map<String, ?> getPropertiesToExpand(Project p, boolean escapeBreakLine = false)
     }
 
     return map
+}
+
+boolean isMod(Project p) {
+    return p.properties.containsKey('modid')
+}
+
+boolean isModPlatform(Project p) {
+    return isMod(p) && p.properties.containsKey('platform')
 }
 
 ext {
